@@ -274,3 +274,11 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+# MacOS
+.DS_Store*
+
+#.idea
+.iws
+workspace.xml
+tasks.xml

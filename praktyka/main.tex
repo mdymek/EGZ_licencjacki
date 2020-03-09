@@ -1,0 +1,405 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[MeX]{polski}
+\usepackage{rotating}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\usepackage{xparse}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{minted}
+
+\NewDocumentCommand{\newframedtheorem}{O{}momo}{%
+\IfNoValueTF{#3}
+{%
+\IfNoValueTF{#5}
+{\newtheorem{#2}{#4}}
+{\newtheorem{#2}{#4}[#5]}%
+}
+{\newtheorem{#2}[#3]{#4}}
+\tcolorboxenvironment{#2}{#1}%
+}
+
+\newframedtheorem{theorem}{Twierdzenie}[section]
+\newframedtheorem{definition}[theorem]{Definicja}
+
+
+
+
+\renewcommand{\figurename}{Załącznik}
+
+\begin{document}
+
+    \begin{titlepage}
+
+        \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+        \center
+
+        \textsc{\LARGE Uniwerystet Jagielloński}\\[1.5cm]
+
+        \HRule \\[0.4cm]
+        %        { \huge \bfseries ETL}\\[0.4cm]
+        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.5cm]
+        \textsc{\large na kierunku Informatyka}\\[0.5cm]
+        \HRule \\[1.0cm]
+
+        \Large% \emph{Autorzy:}\\
+        Małgorzata \textsc{Dymek}\\[1.5cm]
+
+        \includegraphics[scale=0.27]{uj.jpg}\\[4cm]
+
+        {\large Rok akademicki 2019/2020}\\
+
+        \vfill
+    \end{titlepage}
+
+    \tableofcontents
+
+    \newpage
+
+
+    \begin{center}{\LARGE Matematyczne podstawy informatyki}\end{center}
+
+    \section{Zasada indukcji matematycznej.}
+
+    Przykład: $2^1 + 2^2 + \cdots + 2^n = 2^{n+1} - 2$, Nierówność Bernoulliego
+    $dla ~ h \geq -1 ~~ (1+h)^2 \geq 1 + n*h, ~~ \forall n \in \mathbb{N}^{+}$, $1 + 2 + \cdots + n = \frac{n(n+1)}{2} \forall n \in \mathbb{N}$
+
+    \newpage
+
+    \section{Porządki częściowe i liniowe. Elementy największe, najmniejsze, maksymalne i minimalne.}
+
+    Przykłady - sprawdź czy porządek: $xRy \Leftrightarrow x | y$
+
+    \newpage
+
+    \section{Relacja równoważności i zbiór ilorazowy.}
+
+    Przykład: $xRy ~ \Leftrightarrow x \equiv_3 y$.
+
+    \newpage
+
+    \section{Metody dowodzenia twierdzeń: wprost, nie wprost, przez kontrapozycję.}
+
+    \newpage
+
+    \section{Metody numeryczne rozwiązywania równań nieliniowych: bisekcji, siecznych, Newtona.}
+
+    \newpage
+
+    \section{Rozwiązywanie układów równań liniowych: metoda eliminacji Gaussa, metody iteracyjne Jacobiego i Gaussa-Seidla.}
+
+    \subsection{Metoda eliminacji Gaussa}
+
+    Obliczając rząd macierzy metodą Gaussa należy za pomocą operacji elementarnych na wierszach sprowadzić macierz do
+    macierzy schodkowej. Wtedy wszystkie niezerowe wiersze są liniowo niezależne i można łatwo odczytać rząd macierzy.
+
+    \begin{align*}
+        \begin{bmatrix}
+            1 & -1 & 2 & 2\\
+            2 & -2 & 1 & 0\\
+            -1 & 2 & 1 & -2\\
+            2 & -1 & 4 & 0
+        \end{bmatrix}
+        \stackrel{w_2 - 2w_1, w_3 + w_1, w_4 - 2w_1}{\sim}
+        \begin{bmatrix}
+            1 & -1 & 2 & 2\\
+            0 & 0 & -3 & -4\\
+            0 & 1 & 3 & 0\\
+            0 & 1 & 0 & -4
+        \end{bmatrix}
+        \stackrel{w_2 \leftrightarrow w_3}{\sim}
+        \begin{bmatrix}
+            1 & -1 & 2 & 2\\
+            0 & 1 & 3 & 0\\
+            0 & 0 & -3 & -4\\
+            0 & 1 & 0 & -4
+        \end{bmatrix}
+        \sim
+    \end{align*}
+
+    \begin{align*}
+        \stackrel{w4 - w_2}{\sim}
+        \begin{bmatrix}
+            1 & -1 & 2 & 2\\
+            0 & 1 & 3 & 0\\
+            0 & 0 & -3 & -4\\
+            0 & 0 & -3 & -4
+        \end{bmatrix}
+        \stackrel{w4 - w_3}{\sim}
+        \begin{bmatrix}
+            1 & -1 & 2 & 2\\
+            0 & 1 & 3 & 0\\
+            0 & 0 & -3 & -4\\
+            0 & 0 & 0 & 0
+        \end{bmatrix}
+    \end{align*}
+
+    \hfill \\
+    \begin{center}{\large Metody iteracyjne}\end{center}
+    Ogólna postać metody iteracyjnej:
+    \begin{align*}
+        Ax = b
+    \end{align*}
+    \begin{align*}
+        Qx^{n+1} = (Q - A)x^n + b = \tilde{b}
+    \end{align*}
+
+    \begin{align*}
+        x^0 = (0,0,0)
+    \end{align*}
+    \begin{align*}
+        \begin{bmatrix}
+            5 & -2 & 3\\
+            2 & 4 & 2\\
+            2 & -1 & -4\\
+        \end{bmatrix}
+        \begin{bmatrix}
+            x_1\\
+            x_2\\
+            x_3\\
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            10\\
+            0\\
+            0\\
+        \end{bmatrix}
+    \end{align*}
+    \begin{align*}
+        \left\{\begin{matrix}
+                   5x_1 + (-2)x_2 + 3x_3 = 10\\
+                   2x_1 + 4x_2 + 2x_3 = 0\\
+                   2x_1 + (-1)x_2 + (-4)x_3 = 0\\
+        \end{matrix}\right.
+    \end{align*}
+
+    \subsection{Metoda iteracyjna Jacobiego}
+
+    \subsubsection{Algebraicznie}
+    \begin{align*}
+        \left\{\begin{matrix}
+                   x^{N+1}_1 = \frac{1}{5}(10 + 2x^N_2 - 3x^N_3)\\
+                   x^{N+1}_2 = \frac{1}{4}(-2x^N_1 - 2x^N_3)\\
+                   x^{N+1}_3 = -\frac{1}{4}(x^N_2 - 2x^N_1)
+        \end{matrix}\right.
+    \end{align*}
+
+    \subsubsection{Macierzowo}
+    \begin{align*}
+        Q = D ~~ \text{(diagonalna)}
+    \end{align*}
+
+    \subsection{Metoda iteracyjna Gaussa-Seidla}
+    \subsubsection{Algebraicznie}
+    \begin{align*}
+        \left\{\begin{matrix}
+                   x^{N+1}_1 = \frac{1}{5}(10 + 2x^N_2 - 3x^N_3)\\
+                   x^{N+1}_2 = \frac{1}{4}(-2x^N_1 - 2x^{N+1}_3)\\
+                   x^{N+1}_3 = -\frac{1}{4}(x^{N+1}_2 - 2x^{N+1}_1)
+        \end{matrix}\right.
+    \end{align*}
+
+    \subsubsection{Macierzowo}
+    \begin{align*}
+        Q = L + D ~~ \text{(diagonalna i dolnotrójkątna)}
+    \end{align*}
+
+
+    \newpage
+
+    \section{Wartości i wektory własne macierzy: numeryczne algorytmy ich wyznaczania.}
+
+    \newpage
+
+    \section{Interpolacja wielomianowa: metody Lagrange'a i Hermite'a. Efekt Rungego.}
+
+    \newpage
+
+    \section{Zmienne losowe dyskretne. Definicje i najważniejsze rozkłady.}
+
+    \newpage
+
+    \section{Zmienne losowe ciągłe. Definicje i najważniejsze rozkłady.}
+
+    \newpage
+
+    \section{Łancuchy Markowa. Rozkład stacjonarny.}
+
+    \newpage
+
+    \section{Testy statystyczne: test z, test t-Studenta, test chi-kwadrat.}
+
+    \newpage
+
+    \section{Wzór Bayesa i jego interpretacja.}
+
+    \newpage
+
+    \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
+    \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
+
+    \newpage
+
+    \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
+
+    \newpage
+
+    \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
+
+    \newpage
+
+    \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
+
+    \newpage
+
+    \section{Cykl Hamiltona, obwód Eulera, liczba chromatyczna - definicje i twierdzenia.}
+
+    \newpage
+
+    \section{Algorytm Forda-Fulkersona wyznaczania maksymalnego przepływu.}
+    \section{Rozwiązywanie równan rekurencyjnych przy użyciu funkcji tworzących (generujących) oraz przy użyciu równania charakterystycznego.}
+
+    \newpage
+
+    \section{Ciąg i granica ciągu liczbowego, granica funkcji.}
+
+    \newpage
+
+    \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
+
+    \newpage
+
+    \section{Ekstrema funkcji jednej zmiennej. Definicje i twierdzenia.}
+
+    \newpage
+
+    \section{Całka Riemanna funkcji jednej zmiennej.}
+
+    \newpage
+
+    \section{Pochodne cząstkowe funkcji wielu zmiennych; różniczkowalność i różniczka funkcji.}
+
+    \newpage
+
+    \section{Ekstrema funkcji wielu zmiennych. Definicje i twierdzenia.}
+
+    \newpage
+
+    \section{Twierdzenie o zmianie zmiennych w rachunku całkowym; współrzędne walcowe i sferyczne.}
+
+    \newpage
+
+    \begin{center}
+    {\LARGE Teoretyczne podstawy informatyki}
+    \end{center}
+
+    \section{Metody dowodzenia poprawności pętli.}
+    \section{Odwrotna Notacja Polska: definicja, własności, zalety i wady, algorytmy.}
+    \section{Modele obliczen: maszyna Turinga.}
+    \section{Modele obliczen: automat skończony, automat ze stosem.}
+
+    \newpage
+
+    \section{Złożoność obliczeniowa - definicja notacji: $O, \Omega, \Theta$.}
+
+    \newpage
+
+    \section{Złożoność obliczeniowa - pesymistyczna i średnia.}
+
+    \newpage
+
+    \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
+    \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
+    \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
+
+    \newpage
+
+    \section{Algorytmy sortowania QuickSort i MergeSort: metody wyboru pivota w QS; złożoności.}
+
+    \newpage
+
+    \section{Algorytm sortowania bez porównań (sortowanie przez zliczanie, sortowanie kubełkowe oraz sortowanie pozycyjne).}
+
+    \newpage
+
+    \section{Reprezentacja drzewa binarnego za pomocą porządków (preorder, inorder, postorder).}
+
+    \newpage
+
+    \section{Algorytmy wyszukiwania następnika i poprzednika w drzewach BST; usuwanie węzła.}
+    \section{B-drzewa: operacje i ich złożoność.}
+    \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
+    \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
+    \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
+    \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
+    \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
+    \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
+    \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
+    \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
+    \section{Problemy P, NP, NP-zupełne i zależności między nimi. Hipoteza P vs. NP.}
+    \section{Automat minimalny, wybrany algorytm minimalizacji.}
+    \section{Lemat o pompowaniu dla języków regularnych.}
+    \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
+    \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
+    \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
+    \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
+
+
+    {\Large Wytwarzanie oprogramowania}
+
+    \section{Reprezentacja liczb całkowitych; arytmetyka.}
+    \section{Reprezentacja liczb rzeczywistych; arytmetyka zmiennopozycyjna.}
+    \section{Różnice w wywołaniu funkcji statycznych, niestatycznych i wirtualnych w C++.}
+    \section{Sposoby przekazywania parametrów do funkcji (przez wartość, przez referencję). Zalety i wady.}
+    \section{Wskaźniki, arytmetyka wskaźników, różnica między wskaźnikiem a referencją w C++.}
+    \section{Podstawowe założenia paradygmatu obiektowego: dziedziczenie, abstrakcja, enkapsulacja, polimorfizm.}
+    \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
+    \section{Programowanie generyczne na podstawie szablonów w języku C++.}
+    \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
+    \section{Obsługa sytuacji wyjątkowych w C++.}
+    \section{Obsługa plików w języku C.}
+    \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
+    \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
+    \section{Klasyfikacja testów.}
+    \section{Model Scrum: struktura zespołu, proces wytwarzania oprogramowania, korzyści modelu.}
+    \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
+    \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
+    \section{Wzorce architektury systemów.}
+
+    {\Large Inżynieria systemów}
+
+    \section{Relacyjny model danych, normalizacja relacji (w szczególności algorytm doprowadzenia relacji do postaci Boyce’a-Codda), przykłady.}
+    \section{Indeksowanie w bazach danych: drzewa B+, tablice o organizacji indeksowej, indeksy haszowe, mapy binarne.}
+    \section{Podstawowe cechy transakcji (ACID). Metody sterowania współbieżnością transakcji, poziomy izolacji transakcji, przykłady.}
+    \section{Złączenia, grupowanie, podzapytania w języku SQL.}
+    \section{Szeregowalność harmonogramów w bazach danych.}
+    \section{Definicja cyfrowego układu kombinacyjnego - przykłady układów kombinacyjnych i ich implementacje.}
+    \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
+    \section{Minimalizacja funkcji logicznych.}
+    \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
+    \section{Schemat blokowy komputera (maszyna von Neumanna).}
+    \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}
+    \section{Muteks, semafor, monitor jako narzędzia synchronizacji procesów.}
+    \section{Pamięć wirtualna i mechanizm stronicowania.}
+    \section{Systemy plikowe - organizacja fizyczna i logiczna (na przykładzie wybranego systemu uniksopodobnego).}
+    \section{Model ISO OSI. Przykłady protokołów w poszczególnych warstwach.}
+    \section{Adresowanie w protokołach IPv4 i IPv6.}
+    \section{Najważniejsze procesy zachodzące w sieci komputerowej od momentu wpisania adresu strony WWW do wyświetlenia strony w przeglądarce (komunikat HTTP, segment TCP, system DNS, pakiet IP, ARP, ramka).}
+    \section{Działanie przełączników Ethernet, sieci VLAN, protokół STP.}
+    \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
+    \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
+    \section{Wirtualne sieci prywatne, protokół IPsec.}
+
+
+\end{document}
