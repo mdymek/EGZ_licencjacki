@@ -1,0 +1,1 @@
+# EGZ_licencjacki
