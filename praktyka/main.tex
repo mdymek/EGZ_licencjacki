@@ -16,7 +16,11 @@
 \usepackage{amssymb}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{graphics/}}
 \usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows,positioning,calc}
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -31,8 +35,7 @@
 
 \newframedtheorem{theorem}{Twierdzenie}[section]
 \newframedtheorem{definition}[theorem]{Definicja}
-
-
+\newframedtheorem{exercise}[theorem]{Zadanie}
 
 
 \renewcommand{\figurename}{Załącznik}
@@ -232,10 +235,272 @@
 
     \section{Zmienne losowe ciągłe. Definicje i najważniejsze rozkłady.}
 
+    \subsection{Rozkład jednostajny}
+    \begin{exercise}
+        Zmienna losowa X ma rozkład jednostajny na odcinku [2, 6]. Wykonaj
+        polecenia:
+        \begin{enumerate}
+            \item zapisz wzór na gęstość zmiennej losowej X
+            \item oblicz prawdopodobieństwo zdarzenia że $X\in[3,3.5]$
+            \item oblicz prawdopodobieństwo zdarzenia że $X \in (3,3.5)$
+        \end{enumerate}
+    \end{exercise}
+    Rozwiązanie:
+
+    \begin{enumerate}
+        \item wzór na gęstość zmiennej losowej X to
+        \begin{align*}
+            \chi_{[2,6]}(x) = \left\{\begin{matrix}
+                                         \frac{1}{4} ~~ \text{gdy} ~ x \in [2,6]  \\
+                                         0 ~~ \text{gdy} ~ x \notin [2,6]  \\
+            \end{matrix}\right.
+        \end{align*}
+        \item prawdopodobieństwo zdarzenia, że $X \in [3, 3.5]$ to
+        \begin{align*}
+            P(X \in [3, 3.5]) = \int_3^{3.5} \frac{1}{4} dx = \frac{1}{4} (3.5 - 4) = \frac{1}{8}
+        \end{align*}
+        \item prawdopodobieństwo zdarzenia że $X \in {3, 3.5}$ to
+        \begin{align*}
+            P(X \in (3, 3.5)) = P(X \in [3, 3.5]) = \frac{1}{8}
+        \end{align*}
+    \end{enumerate}
+
+    \subsection{Rozkład wykładniczy}
+    \begin{exercise}
+        Zmienna losowa X ma rozkład wykładniczy z parametrem $\lambda = 1$. Wykonaj
+        polecenia:
+        \begin{enumerate}
+            \item narysuj gęstość/ zapisz wzór na gęstość zmiennej losowej X
+            \item na powyższym rysunku przedstaw prawdopodobieństwo zdarzenia że $X\in[0,1]$
+            \item oblicz prawdopodobieństwo zdarzenia że $X \in [0,1]$
+        \end{enumerate}
+    \end{exercise}
+    Rozwiązanie:\\
+
+
+    \textbf{Punkty 1 i 2}:
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{10_2.png}
+    \end{figure}
+
+    \textbf{Punkt 3} - prawdopodobieństwo zdarzenia że $X \in [0,1]$ wynosi
+    \begin{align*}
+        P(X \in [0,1]) = \int_0^1 f(x) dx = \int_0^1 e^{-x} dx = [-e^{-x}]_{x=0}^{x=1} = 1 - e^{-1}
+    \end{align*}
+
+
+    \subsection{Rozkład normalny}
+    \begin{exercise}
+        Zmienna losowa X ma rozkład normalny o parametrach $\mu = 0$ oraz $\sigma = 1$. Podaj prawdopodobieństwo, że
+        X osiąga wartości dodatnie.
+    \end{exercise}
+    Rozwiązanie:\\
+
+    Wykres tej funkcji jest parzysty, a pole calego wykresu wynosi 1 więc z połowy jest $\frac{1}{2}$.
+    \begin{align*}
+        P(X > 0) =  \int_o^{\infty} f(x)dx = \frac{1}{2}
+    \end{align*}
+
+    \subsection{Rozkład Gamma, Wzór Gamma-Poisona}
+    \begin{exercise}
+        Kompilacja programu składa się z 3 części przetwarzanych przez kompilator sekwencyjnie,jedna po drugiej.
+        Czas przetwarzania każdej z części ma rozkład wykładniczy ze średnim czasem 5 minut, niezależnym od
+        czasu przetwarzania pozostałych części.
+        \begin{enumerate}
+            \item oblicz wartość oczekiwaną i wariancję całkowitego czasu kompilacji
+            \item oblicz prawdopodobieństwo, że cały proces kompilacji zostanie przeprowadzony w
+            czasie mniejszym niż 12 minut.
+        \end{enumerate}
+    \end{exercise}
+    Rozwiązanie:\\
+
+    Całkowity czas kompilacji opisuje zmienna losowa o rozkładzie $Gamma(T \sim \Gamma(\alpha = 3, \lambda = \frac{1}{5}))$.
+    Wartość oczekiwana i wariancja całkowitego czasu kompilacji to
+    \begin{align*}
+        E(X) = \frac{\alpha}{\lambda} = \frac{3}{\frac{1}{5}} = 15
+    \end{align*}
+    \begin{align*}
+        Var(x) = \frac{\alpha}{\lambda^2} = \frac{3}{\frac{1}{25}}= 75
+    \end{align*}
+
+    Prawdopodobieństwo, że cały proces kompilacji zostanie przeprowadzony w
+    czasie mniejszym niż 12 minut liczymy korzystając z formuły Gamma-Poisona.
+    \begin{align*}
+        P(T < t) = P(X \geq \alpha),
+    \end{align*}
+    gdzie $X \sim Poisson(\lambda*t = \frac{1}{5} * 12 = 2.4)$ oraz $\alpha = 3$, $t = 12$. Mamy więc:
+    \begin{align*}
+        P(T < 12) = P (X \geq 3) = 1 - P(0) - P(1) - P(2) = 1 - F_X(2) = 1 - 0.5697 = 0.43
+    \end{align*}
+
     \newpage
 
     \section{Łancuchy Markowa. Rozkład stacjonarny.}
+    \begin{exercise}
+        W pewnym mieście każdy dzień jest słoneczny albo deszczowy. Po dniu słonecznym dzień słoneczny
+        następuje z prawdopodobieństwem 0.7, a po dniu deszczowym z prawdopodobieństwem 0.4.
+        \begin{enumerate}
+            \item Narysuj łańcuch markowa oraz wyznacz macierz przejścia dla niego.
+            \item W poniedziałek padało. Stwórz prognozę na wtorek, środę i czwartek.
+            \item Meteorolodzy przewidują 80\% szans na deszcz w poniedziałek. Stwórz prognozę na wtorek, środę i czwartek.
+            \item Znajdź rozkład stacjonarny.
+        \end{enumerate}
+    \end{exercise}
 
+    \begin{enumerate}
+        \item Łańcuch Markowa:
+        \begin{center}
+            \begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=3cm]
+                \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+                \node[state]    (S)                     {$S$};
+                \node[state]    (D)[right of=S]   {$D$};
+                \path
+                (S) edge[loop left]     node{$0.7$}         (S)
+                edge[bend left,above]      node{$0.3$}      (D)
+                (D) edge[loop right]    node{$0.4$}     (D)
+                edge[bend left,below]     node{$0.6$}         (S);
+            \end{tikzpicture}
+
+            Macierz przejść:
+            \begin{align*}
+                \begin{bmatrix}
+                    0.7 & 0.3\\
+                    0.4 & 0.6
+                \end{bmatrix}
+            \end{align*}
+        \end{center}
+        \item \hfill \\
+        Wtorek:
+        \begin{align*}
+            \begin{bmatrix}
+                0 & 1
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.4 & 0.6
+            \end{bmatrix}
+        \end{align*}
+        Środa:
+        \begin{align*}
+            \begin{bmatrix}
+                0.4 & 0.6
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.52 & 0.48
+            \end{bmatrix}
+        \end{align*}
+        Czwartek:
+        \begin{align*}
+            \begin{bmatrix}
+                0.52 & 0.48
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.556 & 0.444
+            \end{bmatrix}
+        \end{align*}
+        \item \hfill \\
+        Wtorek:
+        \begin{align*}
+            \begin{bmatrix}
+                0.2 & 0.8
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.46 & 0.54
+            \end{bmatrix}
+        \end{align*}
+        Środa:
+        \begin{align*}
+            \begin{bmatrix}
+                0.46 & 0.54
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.538 & 0.462
+            \end{bmatrix}
+        \end{align*}
+        Czwartek:
+        \begin{align*}
+            \begin{bmatrix}
+                0.538 & 0.462
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.5614 & 0.4386
+            \end{bmatrix}
+        \end{align*}
+        \item Macierz przejść:
+        \begin{align*}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+        \end{align*}
+        Rozwiązujemy układ równań:
+        \begin{align*}
+            \left\{\begin{matrix}
+                       \pi P = \pi\\
+                       \pi_1 + \pi_2 = 1
+            \end{matrix}\right.
+        \end{align*}
+        \begin{align*}
+            \pi P =
+            \begin{bmatrix}
+                \pi_1 & \pi_2
+            \end{bmatrix}
+            \begin{bmatrix}
+                0.7 & 0.3\\
+                0.4 & 0.6
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0.7\pi_1 + 0.4\pi_2 & 0.3\pi_1 + 0.6\pi_2
+            \end{bmatrix}
+        \end{align*}
+        \begin{align*}
+            \left\{\begin{matrix}
+                       0.7\pi_1 + 0.4\pi_2 = \pi_1\\
+                       0.3\pi_1 + 0.6\pi_2 = \pi_2\\
+                       \pi_1 + \pi_2 = 1
+            \end{matrix}\right.
+        \end{align*}
+        Stąd otrzymujemy
+        \begin{align*}
+            \begin{bmatrix}
+                \pi_1 & \pi_2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                \frac{4}{7} & \frac{3}{7}
+            \end{bmatrix}
+        \end{align*}
+    \end{enumerate}
     \newpage
 
     \section{Testy statystyczne: test z, test t-Studenta, test chi-kwadrat.}
