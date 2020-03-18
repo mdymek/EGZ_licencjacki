@@ -540,7 +540,7 @@
 
     Następnie używamy wzoru:
     \begin{equation*}
-        Z = \frac{p_{1} - p_{2}}{\sqrt{\bar{p}(1-\bar{p})(\frac{1}{n_{1} + \frac{1}{n_{2}}})}}
+        Z = \frac{p_{1} - p_{2}}{\sqrt{\bar{p}(1-\bar{p})(\frac{1}{n_{1}} + \frac{1}{n_{2}})}}
     \end{equation*}
     \begin{equation*}
         Z = \frac{\frac{1}{50} - \frac{3}{100}}{\sqrt{\frac{11}{450}(1-\frac{11}{450})(\frac{1}{500} + \frac{1}{400})}} = \frac{-\frac{1}{100}}{\sqrt{\frac{4829}{45000000}}} \approx -0.9653
@@ -551,6 +551,53 @@
     W naszej hipotezie mamy pytanie o równość więc bierzemy pod uwagę obie końcówki przedziału (?). Mamy sprawdzić prawdziwość naszej hipotezy na 5\% poziomie istotności, więc na każdą końcówkę mamy po 2.5\%.
 
     0.1685 $<$ 2.5 więc możemy odrzucić hipotezę zerową twierdząc, że jakość wyrobów obu producentów jest różna
+
+
+    \subsection{T-testy}
+    \begin{exercise}
+        Posiadacz konta internetowego, w długim okresie czasu, w trakcie logowania pisze swój login i hasło z przerwami pomiędzy kolejnymi wciśnięciami klawiszy wynoszącymi 0.2s. Pewnego dnia zarejestrowane logowanie na to konto z prawidłowym hasłem, przy czym czasy odstępów pomiędzy wciśnięciami kolejnych klawiszy wynosiły:
+
+        .24, .22, .26, .34, .35, .32, .33, .29, .19, .36, .30, .15, .17, .20, .28, .40, .37, .27 sekund
+
+        Na 5\% poziomie ufności zweryfikuj, czy dane te mogą być dowodem na nieautoryzowany dostęp do konta?
+    \end{exercise}
+
+    $H_{0}$: Dostęp do konta jest autoryzowany
+
+    $H_{a}$: Dostęp do konta jest nieautoryzowany
+
+    Korzystamy ze wzoru:
+    \begin{equation*}
+        T = \frac{\bar{x} - \mu_{0}}{\sigma}\sqrt{n}
+    \end{equation*}
+
+    gdzie:
+    \begin{itemize}
+        \item $\bar{x}$ - średnia z badanej próby
+        \item $\mu_{0}$ - zakładana średnia
+        \item $\sigma$ - odchylenie standardowe z próby
+        \item n - wielkość próby
+    \end{itemize}
+
+    W naszym przypadku:
+
+    \begin{gather}
+        \bar{x} \approx 0.28 \\
+        \mu_{0} = 0.2 \\
+        \sigma \approx 0.07324 \\
+        n = 18
+    \end{gather}
+
+    Podstawiając do wzoru mamy:
+    \begin{equation*}
+        T = \frac{0.28 - 0.2}{0.07324}\sqrt{18} \approx 4.63423341
+    \end{equation*}
+
+    Ilość naszych stopni swobody to n-1 więc w naszym przypadku 17
+
+    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopnom swobody i jest to \textbf{2.11}
+
+    Ponieważ 4.63423341 $>$ 2.11 niemamy podstawy aby odrzucić hipoteze zerową
 
     \newpage
 
