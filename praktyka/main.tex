@@ -510,7 +510,7 @@
         \item T-testów używamy do porównywania dwóch \textbf{małych} (n < 30) prób testowych ze sobą
         \begin{itemize}
             \item Próby mogą być niezależne - np. wyniki sprawdzianów w dwóch grupach
-            \item Mogą byc również zależne (dotyczyć jednej i tej samej grupy) - np. waga przed zastosowaniem diety i po
+            \item Mogą być również zależne (dotyczyć jednej i tej samej grupy) - np. waga przed zastosowaniem diety i po
             \item Może również służyć do porównywania próby do zadanej wartości (np. średniej) - podobnie jak Z-testy (?)
         \end{itemize}
         \item Chi-kwadrat używamy do ustalania \texttt{goodness of fit} dla próbki względem populacji lub do zbadania niezależności
@@ -595,14 +595,14 @@
 
     Ilość naszych stopni swobody to n-1 więc w naszym przypadku 17 \\
 
-    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopnom swobody i jest to \textbf{2.11} \\
+    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopniom swobody i jest to \textbf{2.11} \\
 
-    Ponieważ 4.63423341 $>$ 2.11 niemamy podstawy aby odrzucić hipoteze zerową
+    Ponieważ 4.63423341 $>$ 2.11 nie mamy podstawy aby odrzucić hipotezę zerową
 
 
     \subsection{Testy Chi-kwadrat}
     \begin{exercise}
-        Producent kostki do gry deklaruje, że oczka na jego \texttt{niesprawiedliwej} kostce wypadają z nastepującym prawdopodobieństwem:
+        Producent kostki do gry deklaruje, że oczka na jego \texttt{niesprawiedliwej} kostce wypadają z następującym prawdopodobieństwem:
         \begin{itemize}
             \item 1 oczko - $\frac{1}{2}$
             \item 2 oczka - $\frac{1}{4}$
@@ -620,10 +620,10 @@
             \item 5 oczek - 2 razy
             \item 6 oczek - 14 razy
         \end{itemize}
-        Przeprowaź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i  rozstrzygnij na poziomie 5\% istotności czy producent ma rację
+        Przeprowadź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i  rozstrzygnij na poziomie 5\% istotności czy producent ma rację
     \end{exercise}
 
-    Wyliczamy wartości oczekiwane dla każdego przedziału i zgodnie z \texttt{rule of thumb} wrazie potrzeby je łączymy tak, aby dla każdego z nich wartość była $\geq$ 5
+    Wyliczamy wartości oczekiwane dla każdego przedziału i zgodnie z \texttt{rule of thumb} w razie potrzeby je łączymy tak, aby dla każdego z nich wartość była $\geq$ 5
 
     \begin{table}[]
         \begin{tabular}{|c|c|c|c|c|c|}
@@ -659,9 +659,35 @@
 
 
     \section{Wzór Bayesa i jego interpretacja.}
-    
+    \begin{exercise}
+        W firmie IT 20\% wytwarzanych modułów przechodzi specjalny proces inspekcji. Z danych historycznych wiadomo, że każdy moduł poddany inspekcji nie ma defektów z prawdopodobieństwem 0.95. Dla modułu nie poddanego procesowi inspekcji prawdopodobieństwo to wynosi jedynie 0.7. Klient znalazł defekt w module. Jakie jest prawdopodobieństwo, że moduł ten przeszedł przez proces inspekcji?
+    \end{exercise}
+
+    Korzystamy oczywiście ze wzoru Bayesa:
+    \begin{equation*}
+        P(A|B) = \frac{P(B|A)P(A)}{P(B)} ~ ~ ~ ~ \text{przy $P(B) > 0$}
+    \end{equation*} \\
+
+    I - moduł przeszedł przez inspekcję \\
+    D - moduł ma defekt \\
+
+    $P(I) = \frac{20}{100} = \frac{1}{5} ~ ~ ~ ~ P(\bar{I}) = \frac{4}{5}$ \\
+
+    $P(\bar{D}|I) = \frac{95}{100} = \frac{19}{20} ~ ~ ~ ~ P(D|I) = \frac{1}{20}$ \\
+
+    $P(\bar{D}|\bar{I}) = \frac{70}{100} = \frac{7}{10} ~ ~ ~ ~ P(D|\bar{I}) = \frac{3}{10}$ \\
+
+    \begin{equation*}
+        P(I|D) = \frac{P(D|I)\cdot P(I)}{P(D)} = \frac{P(D|I)\cdot P(I)}{P(D|I)\cdot P(I) + P(D|\bar{I})\cdot P(\bar{I})} = \frac{\frac{1}{20}\cdot \frac{1}{5}}{\frac{1}{20}\cdot \frac{1}{5} + \frac{3}{10}\cdot \frac{4}{5}} = \frac{1}{25}
+    \end{equation*}
+
+    Prawdopodobieństwo że moduł, w którym znalazł się defekt przeszedł proces inspekcji wynosi $\frac{1}{25}$.
 
     \newpage
+
+
+
+
 
     \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
     \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
