@@ -504,6 +504,53 @@
     \newpage
 
     \section{Testy statystyczne: test z, test t-Studenta, test chi-kwadrat.}
+    Generalnie:
+    \begin{itemize}
+        \item Z-testów używamy do sprawdzenia czy testowana próba pasuje do zadanej populacji lub do porównywania dwóch \textbf{dużych} (n > 30) prób
+        \item T-testów używamy do porównywania dwóch \textbf{małych} (n < 30) prób testowych ze sobą
+        \begin{itemize}
+            \item Próby mogą być niezależne - np. wyniki sprawdzianów w dwóch grupach
+            \item Mogą byc również zależne (dotyczyć jednej i tej samej grupy) - np. waga przed zastosowaniem diety i po
+            \item Może również służyć do porównywania próby do zadanej wartości (np. średniej) - podobnie jak Z-testy (?)
+        \end{itemize}
+        \item Chi-kwadrat używamy do ustalania \texttt{goodness of fit} dla próbki względem populacji
+    \end{itemize}
+
+    \subsection{Z-test}
+    \begin{exercise}
+        Inżynier jakości znajduje 10 wadliwych produktów w próbie 500 egzemplarzy pewnego komponentu od wytwórcy A. Wśród 400 egzemplarzy od wytwórcy B znajduje 12 wadliwych. Firma komputerowa, korzystająca z tych komponentów twierdzi, że jakość wyrobów od obu producentów jest taka sama. Sprawdź, czy na 5\% poziomie istotności istnieją wystarczające dowody do odrzucenia tego twierdzenia.
+    \end{exercise}
+
+    $H_{0}$: Jakość wyrobów obu producentów jest taka sama
+
+    $H_{a}$: Jakość wyrobów obu producentów jest różna
+
+    Obliczamy proporcje dla obu prób:
+    \begin{equation*}
+        p_{1} = \frac{10}{500} = \frac{1}{50}
+    \end{equation*}
+    \begin{equation*}
+        p_{2} = \frac{12}{400} = \frac{3}{100}
+    \end{equation*}
+
+    oraz proporcję dla \texttt{próby połączonej}:
+    \begin{equation*}
+        \bar{p} = \frac{10 + 12}{500 + 400} = \frac{11}{450}
+    \end{equation*}
+
+    Następnie używamy wzoru:
+    \begin{equation*}
+        Z = \frac{p_{1} - p_{2}}{\sqrt{\bar{p}(1-\bar{p})(\frac{1}{n_{1} + \frac{1}{n_{2}}})}}
+    \end{equation*}
+    \begin{equation*}
+        Z = \frac{\frac{1}{50} - \frac{3}{100}}{\sqrt{\frac{11}{450}(1-\frac{11}{450})(\frac{1}{500} + \frac{1}{400})}} = \frac{-\frac{1}{100}}{\sqrt{\frac{4829}{45000000}}} \approx -0.9653
+    \end{equation*}
+
+    Odczytujemy z tablic dla Z-testów wartość dla \texttt{-0.9653} i jest to \textbf{0.1685}
+
+    W naszej hipotezie mamy pytanie o równość więc bierzemy pod uwagę obie końcówki przedziału (?). Mamy sprawdzić prawdziwość naszej hipotezy na 5\% poziomie istotności, więc na każdą końcówkę mamy po 2.5\%.
+
+    0.1685 $<$ 2.5 więc możemy odrzucić hipotezę zerową twierdząc, że jakość wyrobów obu producentów jest różna
 
     \newpage
 
