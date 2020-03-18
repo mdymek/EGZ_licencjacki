@@ -513,7 +513,7 @@
             \item Mogą byc również zależne (dotyczyć jednej i tej samej grupy) - np. waga przed zastosowaniem diety i po
             \item Może również służyć do porównywania próby do zadanej wartości (np. średniej) - podobnie jak Z-testy (?)
         \end{itemize}
-        \item Chi-kwadrat używamy do ustalania \texttt{goodness of fit} dla próbki względem populacji
+        \item Chi-kwadrat używamy do ustalania \texttt{goodness of fit} dla próbki względem populacji lub do zbadania niezależności
     \end{itemize}
 
     \subsection{Z-test}
@@ -521,9 +521,9 @@
         Inżynier jakości znajduje 10 wadliwych produktów w próbie 500 egzemplarzy pewnego komponentu od wytwórcy A. Wśród 400 egzemplarzy od wytwórcy B znajduje 12 wadliwych. Firma komputerowa, korzystająca z tych komponentów twierdzi, że jakość wyrobów od obu producentów jest taka sama. Sprawdź, czy na 5\% poziomie istotności istnieją wystarczające dowody do odrzucenia tego twierdzenia.
     \end{exercise}
 
-    $H_{0}$: Jakość wyrobów obu producentów jest taka sama
+    $H_{0}$: Jakość wyrobów obu producentów jest taka sama \\
 
-    $H_{a}$: Jakość wyrobów obu producentów jest różna
+    $H_{a}$: Jakość wyrobów obu producentów jest różna \\
 
     Obliczamy proporcje dla obu prób:
     \begin{equation*}
@@ -544,27 +544,27 @@
     \end{equation*}
     \begin{equation*}
         Z = \frac{\frac{1}{50} - \frac{3}{100}}{\sqrt{\frac{11}{450}(1-\frac{11}{450})(\frac{1}{500} + \frac{1}{400})}} = \frac{-\frac{1}{100}}{\sqrt{\frac{4829}{45000000}}} \approx -0.9653
-    \end{equation*}
+    \end{equation*} \\
 
-    Odczytujemy z tablic dla Z-testów wartość dla \texttt{-0.9653} i jest to \textbf{0.1685}
+    Odczytujemy z tablic dla Z-testów wartość dla \texttt{-0.9653} i jest to \textbf{0.1685} \\
 
-    W naszej hipotezie mamy pytanie o równość więc bierzemy pod uwagę obie końcówki przedziału (?). Mamy sprawdzić prawdziwość naszej hipotezy na 5\% poziomie istotności, więc na każdą końcówkę mamy po 2.5\%.
+    W naszej hipotezie mamy pytanie o równość więc bierzemy pod uwagę obie końcówki przedziału (?). Mamy sprawdzić prawdziwość naszej hipotezy na 5\% poziomie istotności, więc na każdą końcówkę mamy po 2.5\%. \\
 
     0.1685 $<$ 2.5 więc możemy odrzucić hipotezę zerową twierdząc, że jakość wyrobów obu producentów jest różna
 
 
     \subsection{T-testy}
     \begin{exercise}
-        Posiadacz konta internetowego, w długim okresie czasu, w trakcie logowania pisze swój login i hasło z przerwami pomiędzy kolejnymi wciśnięciami klawiszy wynoszącymi 0.2s. Pewnego dnia zarejestrowane logowanie na to konto z prawidłowym hasłem, przy czym czasy odstępów pomiędzy wciśnięciami kolejnych klawiszy wynosiły:
+        Posiadacz konta internetowego, w długim okresie czasu, w trakcie logowania pisze swój login i hasło z przerwami pomiędzy kolejnymi wciśnięciami klawiszy wynoszącymi 0.2s. Pewnego dnia zarejestrowane logowanie na to konto z prawidłowym hasłem, przy czym czasy odstępów pomiędzy wciśnięciami kolejnych klawiszy wynosiły: \\
 
-        .24, .22, .26, .34, .35, .32, .33, .29, .19, .36, .30, .15, .17, .20, .28, .40, .37, .27 sekund
+        .24, .22, .26, .34, .35, .32, .33, .29, .19, .36, .30, .15, .17, .20, .28, .40, .37, .27 sekund \\
 
         Na 5\% poziomie ufności zweryfikuj, czy dane te mogą być dowodem na nieautoryzowany dostęp do konta?
-    \end{exercise}
+    \end{exercise} 
 
-    $H_{0}$: Dostęp do konta jest autoryzowany
+    $H_{0}$: Dostęp do konta jest autoryzowany \\
 
-    $H_{a}$: Dostęp do konta jest nieautoryzowany
+    $H_{a}$: Dostęp do konta jest nieautoryzowany \\
 
     Korzystamy ze wzoru:
     \begin{equation*}
@@ -593,15 +593,73 @@
         T = \frac{0.28 - 0.2}{0.07324}\sqrt{18} \approx 4.63423341
     \end{equation*}
 
-    Ilość naszych stopni swobody to n-1 więc w naszym przypadku 17
+    Ilość naszych stopni swobody to n-1 więc w naszym przypadku 17 \\
 
-    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopnom swobody i jest to \textbf{2.11}
+    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopnom swobody i jest to \textbf{2.11} \\
 
     Ponieważ 4.63423341 $>$ 2.11 niemamy podstawy aby odrzucić hipoteze zerową
 
+
+    \subsection{Testy Chi-kwadrat}
+    \begin{exercise}
+        Producent kostki do gry deklaruje, że oczka na jego \texttt{niesprawiedliwej} kostce wypadają z nastepującym prawdopodobieństwem:
+        \begin{itemize}
+            \item 1 oczko - $\frac{1}{2}$
+            \item 2 oczka - $\frac{1}{4}$
+            \item 3 oczka - $\frac{1}{25}$
+            \item 4 oczka - $\frac{1}{50}$
+            \item 5 oczek - $\frac{1}{25}$
+            \item 6 oczek - $\frac{3}{20}$
+        \end{itemize}
+        Dla 100 rzutów zaobserwowano natomiast nastepujące wyniki:
+        \begin{itemize}
+            \item 1 oczko - 55 razy
+            \item 2 oczka - 20 razy
+            \item 3 oczka - 6 razy
+            \item 4 oczka - 3 razy
+            \item 5 oczek - 2 razy
+            \item 6 oczek - 14 razy
+        \end{itemize}
+        Przeprowaź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i  rozstrzygnij na poziomie 5\% istotności czy producent ma rację
+    \end{exercise}
+
+    Wyliczamy wartości oczekiwane dla każdego przedziału i zgodnie z \texttt{rule of thumb} wrazie potrzeby je łączymy tak, aby dla każdego z nich wartość była $\geq$ 5
+
+    \begin{table}[]
+        \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        n & $Obs_{n}$ & $Exp_{n}$ & x                  & $Obs_{x}$           & $Exp_{x}$           \\ \hline
+        1 & 55        & 50        & 1                  & 55                  & 50                  \\ \hline
+        2 & 20        & 25        & 2                  & 20                  & 25                  \\ \hline
+        3 & 6         & 4         & \multirow{3}{*}{3} & \multirow{3}{*}{11} & \multirow{3}{*}{10} \\ \cline{1-3}
+        4 & 3         & 2         &                    &                     &                     \\ \cline{1-3}
+        5 & 2         & 4         &                    &                     &                     \\ \hline
+        6 & 14        & 15        & 4                  & 14                  & 15                  \\ \hline
+        \end{tabular}
+    \end{table}
+
+    Następnie aby obliczyć $\chi^{2}$ stosujemy następujący wzór (N to liczba naszych x):
+    \begin{equation*}
+        \chi^{2} = \sum_{x=1}^{N} \frac{(Obs_{x} - Exp_{x})^{2}}{Exp_{x}}
+    \end{equation*}
+
+    W naszym przypadku $\chi^{2} \approx 1.6666$ \\
+
+    Stopnie swobody obliczamy ze wzoru \textbf{N -1}, gdzie N to liczba naszych x-ów. W naszym przypadku liczba stopni swobody jest więc równa \textbf{3}. \\
+
+    Następnie odczytujemy z tablicy $\chi^{2}$ wartość dla 5\% istotności przy 3 stopniach swobody. Jest ona równa \textbf{7.82} \\
+
+    1.6666 $<$ 7.82 stąd nie mamy więc podstawy do odrzucenia hipotezy zerowej
+
     \newpage
 
+
+
+
+
+
     \section{Wzór Bayesa i jego interpretacja.}
+    
 
     \newpage
 
