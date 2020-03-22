@@ -520,12 +520,12 @@
     Algorytm jest podobny jak przy interpolacji Newtona. Kolumnę wypełnia się wszystkimi wartościami węzłów (jeżeli węzeł jest $k$-krotny, to umieszczamy go w tabeli $k$ razy)\\\\
     \begin{tabular}{|l|l|}
     \hline
-    x_i    & f(x_i) \\ \hline
-    x_0    & f(x_0) \\ \hline
-    x_1    & f(x_1) \\ \hline
-    x_2    & f(x_2) \\ \hline
-    \vdots & \ddots \\ \hline
-    x_n    & f(x_n) \\ \hline
+    $x_i$    & $f(x_i)$ \\ \hline
+    $x_0$    & $f(x_0)$ \\ \hline
+    $x_1$    & $f(x_1)$ \\ \hline
+    $x_2$    & $f(x_2)$ \\ \hline
+    $\vdots$ & $\ddots$ \\ \hline
+    $x_n$    & $f(x_n)$ \\ \hline
     \end{tabular}
     \\\\
     
@@ -540,7 +540,7 @@
     $x_1$  & $f(x_1)$ & \multicolumn{1}{c|}{$f'(x_1)$}    & \multicolumn{1}{c|}{$f[x_0,x_1,x_1]$}      \\ \hline
     $x_1$  & $f(x_1)$ & \multicolumn{1}{c|}{$f'(x_1)$}    & \multicolumn{1}{c|}{$\frac{f''(x_1)}{2!}$} \\ \hline
     $x_2$  & $f(x_2)$ & \multicolumn{1}{c|}{$f[x_1,x_2]$} & \multicolumn{1}{c|}{$f[x_1,x_1,x_2]$}      \\ \hline
-    \vdots & \vdots   & \multicolumn{1}{c|}{\vdots}       &                                            \\ \hline
+    $\vdots$ & $\vdots$   & \multicolumn{1}{c|}{$\vdots$}       &                                            \\ \hline
     $x_n$ & $f(x_n)$ & \multicolumn{1}{c|}{$f[x_{n-1},x_n]$} & \multicolumn{1}{c|}{$f[x_{n-2},x_{n-1},x_n]$} \\ \hline
     \end{tabular}\\\\
     
@@ -553,7 +553,7 @@
       \multicolumn{1}{c|}{$f[x_{i-1}]$} &
       \multicolumn{1}{c|}{$f[x_{i-2},x_{i-1},x_i]$} &
       \multicolumn{1}{c|}{$f[x_{i-3},x_{i-2},x_{i-1},x_i]$} &
-      \multicolumn{1}{c|}{\dots} &
+      \multicolumn{1}{c|}{$\dots$} &
       \multicolumn{1}{c|}{$f[x_{i-n},\dots,x_i]$} \\ \hline
     $x_0$ &
       $f(x_0)$ &
@@ -585,17 +585,17 @@
        \\ \cline{1-6}
     \vdots &
       \vdots &
-      \multicolumn{1}{c|}{\vdots} &
-      \multicolumn{1}{c|}{\vdots} &
-      \multicolumn{1}{c|}{\vdots} &
-      \multicolumn{1}{c|}{\ddots} &
+      \multicolumn{1}{c|}{$\vdots$} &
+      \multicolumn{1}{c|}{$\vdots$} &
+      \multicolumn{1}{c|}{$\vdots$} &
+      \multicolumn{1}{c|}{$\ddots$} &
        \\ \hline
     $x_n$ &
       $f(x_n)$ &
       \multicolumn{1}{c|}{$f[x_{n-1},x_n]$} &
       \multicolumn{1}{c|}{$f[x_{n-2},x_{n-1},x_n]$} &
       \multicolumn{1}{c|}{$f[x_{n-3},x_{n-2},x_{n-1},x_n]$} &
-      \multicolumn{1}{c|}{\dots} &
+      \multicolumn{1}{c|}{$\dots$} &
       \multicolumn{1}{c|}{$f[x_0,\dots,x_n]$} \\ \hline
     \end{tabular}\\\\
     
