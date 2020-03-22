@@ -465,6 +465,156 @@
     \newpage
 
     \section{Interpolacja wielomianowa: metody Lagrange'a i Hermite'a. Efekt Rungego.}
+    
+    \subsection{Interpolacja wielomianowa}
+    
+    Interpolacja wielomianowa jest metodą numeryczną przybliżania funkcji. 
+    Wielomian p o możłiwie najniższym stopniu interpoluje wartości $y_k$ w węzłąch $x_k$ gdy dla danych $n+1$ punktów $(x_i, y_i)$
+    \begin{align*}
+        p(x_i)=y_i  \quad (0\leq i \leq n)
+    \end{align*}
+    Jeśli są to wartości pewnej funkcji $f$ to mówimy też że $p$ interpoluje $f$.
+    
+    \subsection{Wzór interpolacyjny Lagrange'a}
+    
+    Wyrażamy wielomian $p$ jako sumę
+    \begin{align*}
+        p(x)=\sum _{k=0}^{n}y_{i}l_k(x)
+    \end{align*}
+    w której $l_k$ są wielomianami zależnymi od węzłów $x_0,x_1, \dots x_n$ ale nie od wartości $y_0,y_1, \dots ,y_n$. Gdyby jedna z nich, mianowicie $y_i$, była równa 1, a pozostałe by znikały, to mielibyśmy równość
+    \begin{align*}
+        \delta_{ij} = p_n(x_j)=\sum _{k=0}^{n}y_{i}l_k(x_j)=\sum _{k=0}^{n}\delta_k l_k (x_j)=l_i(x_j) \quad (0 \leq j \leq n)
+    \end{align*}
+    
+    ($\delta_ij$ jest deltą Kroneckera). Łatwo znaleźć wielomian $l_i$ o tej własności. Jego zerami są wszystkie węzły oprócz $x_i$, czyli dla pewniej stałej c jest 
+    \begin{align*}
+        l_i(x)=c(x-x_0)\dots(x-x_{i-1})(x-x_{i+1})\dots(x-x_n)
+    \end{align*}
+    a $c$ wynika z warunku $l_i(x_i)=1$:
+    \begin{align*}
+        l_i(x)=\prod _{j=0\land j\neq i}^{n}{\frac {x-x_{j}}{x_{i}-x_{j}}}. \quad (0 \leq i \leq n).
+    \end{align*}
+    
+    Zatem wzór interpolacyjny Lagrange'a ma postać:
+
+    \begin{align*}
+        w(x)=\sum _{i=0}^{n}y_{i}\prod _{j=0\land j\neq i}^{n}{\frac {x-x_{j}}{x_{i}-x_{j}}}.
+    \end{align*}
+    
+    \subsection{Interpolacja Hermite’a}
+    
+    Interpolacja umożliwiająca znalezienie wielomianu przybliżającego według wartości
+    \begin{align*}
+         y_{1}=f(x_{1}),y_{2}=f(x_{2}),\dots ,y_{n}=f(x_{n})
+    \end{align*}
+    na $n$ zadanych węzłach $x_{1},x_{2},\dots ,x_{n}$ oraz na wartościach pochodnych na wybranych węzłach
+    
+    \begin{align*}
+        f'(x_{1}),f''(x_{1}),\dots ,f^{(k_{1})}(x_{1}),\dots ,f'(x_{n}),\dots ,f^{(k_{n})}(x_{n}).
+    \end{align*}
+    
+    Węzeł zadany bez pochodnej jest węzłem pojedynczym, a węzeł z zadanymi pochodnymi $1,2,\dots ,k$ jest węzłem $k+1$-krotnym.
+    
+    \subsubsection{Algorytm}
+    
+    Algorytm jest podobny jak przy interpolacji Newtona. Kolumnę wypełnia się wszystkimi wartościami węzłów (jeżeli węzeł jest $k$-krotny, to umieszczamy go w tabeli $k$ razy)\\\\
+    \begin{tabular}{|l|l|}
+    \hline
+    x_i    & f(x_i) \\ \hline
+    x_0    & f(x_0) \\ \hline
+    x_1    & f(x_1) \\ \hline
+    x_2    & f(x_2) \\ \hline
+    \vdots & \ddots \\ \hline
+    x_n    & f(x_n) \\ \hline
+    \end{tabular}
+    \\\\
+    
+    Następnie dopisuje się do każdej kolumny kolejne różnice dzielone, z tym wyjątkiem, że przy węzłach $k$-krotnych, $k>1$, gdzie, de facto, nie można obliczyć różnicy dzielonej, podstawia się wartości kolejnych pochodnych na węzłach podzielone przez silnię z liczby tych samych węzłów. (W tabeli przedstawiony jest $3$-krotny węzeł $x_{1}$).\\\\
+    
+    
+    \begin{tabular}{|c|c|cc}
+    \hline
+    $x_i$ & $f(x_i)$ & \multicolumn{1}{c|}{$f[x_{i-1}]$}     & \multicolumn{1}{c|}{$f[x_{i-2},x_{i-1},x_i]$} \\ \hline
+    $x_0$  & $f(x_0)$ &                                   &                                            \\ \cline{1-3}
+    $x_1$  & $f(x_1)$ & \multicolumn{1}{c|}{$f[x_0,x_1]$} &                                            \\ \hline
+    $x_1$  & $f(x_1)$ & \multicolumn{1}{c|}{$f'(x_1)$}    & \multicolumn{1}{c|}{$f[x_0,x_1,x_1]$}      \\ \hline
+    $x_1$  & $f(x_1)$ & \multicolumn{1}{c|}{$f'(x_1)$}    & \multicolumn{1}{c|}{$\frac{f''(x_1)}{2!}$} \\ \hline
+    $x_2$  & $f(x_2)$ & \multicolumn{1}{c|}{$f[x_1,x_2]$} & \multicolumn{1}{c|}{$f[x_1,x_1,x_2]$}      \\ \hline
+    \vdots & \vdots   & \multicolumn{1}{c|}{\vdots}       &                                            \\ \hline
+    $x_n$ & $f(x_n)$ & \multicolumn{1}{c|}{$f[x_{n-1},x_n]$} & \multicolumn{1}{c|}{$f[x_{n-2},x_{n-1},x_n]$} \\ \hline
+    \end{tabular}\\\\
+    
+    Tabelę uzupełnia się do końca jak przy interpolacji Newtona, uznając ciągłe pochodne na węzłach wielokrotnych jako różnice dzielone rzędu drugiego.\\\\
+    
+    \begin{tabular}{|c|c|cccll}
+    \hline
+    $x_i$ &
+      $f(x_i)$ &
+      \multicolumn{1}{c|}{$f[x_{i-1}]$} &
+      \multicolumn{1}{c|}{$f[x_{i-2},x_{i-1},x_i]$} &
+      \multicolumn{1}{c|}{$f[x_{i-3},x_{i-2},x_{i-1},x_i]$} &
+      \multicolumn{1}{c|}{\dots} &
+      \multicolumn{1}{c|}{$f[x_{i-n},\dots,x_i]$} \\ \hline
+    $x_0$ &
+      $f(x_0)$ &
+       &
+       &
+      \multicolumn{1}{l}{} &
+       &
+       \\ \cline{1-3}
+    $x_1$ &
+      $f(x_1)$ &
+      \multicolumn{1}{c|}{$f[x_0,x_1]$} &
+       &
+      \multicolumn{1}{l}{} &
+       &
+       \\ \cline{1-4}
+    $x_1$ &
+      $f(x_1)$ &
+      \multicolumn{1}{c|}{$f'(x_1)$} &
+      \multicolumn{1}{c|}{$f[x_0,x_1,x_1]$} &
+      \multicolumn{1}{l}{} &
+       &
+       \\ \cline{1-5}
+    $x_1$ &
+      $f(x_1)$ &
+      \multicolumn{1}{c|}{$f'(x_1)$} &
+      \multicolumn{1}{c|}{$\frac{f''(x_1)}{2!}$} &
+      \multicolumn{1}{c|}{$f[x_0,x_1,x_1,x_1]$} &
+       &
+       \\ \cline{1-6}
+    \vdots &
+      \vdots &
+      \multicolumn{1}{c|}{\vdots} &
+      \multicolumn{1}{c|}{\vdots} &
+      \multicolumn{1}{c|}{\vdots} &
+      \multicolumn{1}{c|}{\ddots} &
+       \\ \hline
+    $x_n$ &
+      $f(x_n)$ &
+      \multicolumn{1}{c|}{$f[x_{n-1},x_n]$} &
+      \multicolumn{1}{c|}{$f[x_{n-2},x_{n-1},x_n]$} &
+      \multicolumn{1}{c|}{$f[x_{n-3},x_{n-2},x_{n-1},x_n]$} &
+      \multicolumn{1}{c|}{\dots} &
+      \multicolumn{1}{c|}{$f[x_0,\dots,x_n]$} \\ \hline
+    \end{tabular}\\\\
+    
+    Definiując $a_{i}$ jako wartości na przekątnej, $i=1,2,3,\dots ,m$, gdzie $m$ to suma krotności węzłów, otrzymuje się wielomian:
+    
+    \begin{align*}
+        w(x)=\sum _{i=0}^{m}a_{i}\prod _{j=0}^{i-1}(x-{\bar {x}}_{j}),
+    \end{align*}
+    
+    gdzie ${\bar {x}}_{i}={x_{1},x_{1},\dots ,x_{1},x_{2},x_{2},\dots ,x_{2},\dots ,x_{n}},$ przy czym każdy $k$-krotny węzeł występuje $k$ razy.
+    
+    
+    \subsection{Efekt Rungego}
+    
+    Efekt Rungego - pogorszenie jakości interpolacji wielomianowej, mimo zwiększenia liczby jej węzłów. Początkowo ze wzrostem liczby węzłów n przybliżenie poprawia się, jednak po dalszym wzroście n, zaczyna się pogarszać, co jest szczególnie widoczne na końcach przedziałów.
+
+    Takie zachowanie się wielomianu interpolującego jest zjawiskiem typowym dla interpolacji za pomocą wielomianów wysokich stopni przy stałych odległościach węzłów. Występuje ono również, jeśli interpolowana funkcja jest nieciągła albo odbiega znacząco od funkcji gładkiej.
+    
+    Aby uniknąć tego efektu, stosuje się interpolację z węzłami coraz gęściej upakowanymi na krańcach przedziału interpolacji. Np. węzłami interpolacji n-punktowej wielomianowej powinny być miejsca zerowe wielomianu Czebyszewa n-tego stopnia.
 
     \newpage
 
