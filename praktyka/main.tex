@@ -825,11 +825,63 @@
     \newpage
 
     \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
+    \subsection{Liczby Stirlinga I rodzaju}
+    Uzasadnij, że C(4,2)=11\newline 
+    Mamy następujące permutacje dwucyklowe zbioru $\{1, 2, 3, 4\}$ \newline
 
+    \begin{center}
+    \begin{tabular}{ c c c }
+        (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)\\
+        (1)(2 3 4), (1)(2 4 3), (2)(1 3 4)\\
+        (2)(1 4 3), (3)(1 2 4), (3)(1 4 2)\\
+        (4)(1 2 3), (4)(1 3 2) 
+    \end{tabular}
+    \end{center}
+    
+    \subsection{Liczby Stirlinga II rodzaju}
+    Uzasadnij, że S(4,2) = 7 \newline
+    Zbiór $\{1,2,3,4\}$ możemy podzielić na dwa bloki w następujący sposób
+    
+    \begin{center}
+    \begin{tabular}{ c c c }
+        \{1\}, \{2, 3, 4\} ; \{2\}, \{1, 3, 4\} ; \{3\}, \{1, 2, 4\} \\
+        \{4\}, \{1, 2, 3\} ; \{1, 2\}, \{3, 4\} ; \{1, 3\}, \{2, 4\} \\
+        \{1, 4\}, \{2, 3\}
+    \end{tabular}
+    \end{center}
     \newpage
 
     \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
-
+    \subsection{Funkcja Eulera}
+    
+    \begin{itemize}
+        \item $\varphi(2025) = \varphi(3^4 \cdot 5^2) = \varphi(3^4) \cdot \varphi(5^2) = 3^3 \cdot 2 \cdot 5 \cdot 4 = 1080$
+        \item $\varphi(1001) = \varphi(7\cdot11\cdot13) = \varphi(7) \cdot \varphi(11) \cdot \varphi(13) = 6 \cdot 10 \cdot12 = 660$
+        \item $\varphi(1980) = \varphi(2^2 \cdot 3^2 \cdot 5 \cdot 11) = \varphi(2^2) \cdot \varphi(3^2) \cdot \varphi (5) \cdot \varphi(11) = 2 \cdot 3 \cdot 2 \cdot 4 \cdot 10 = 480$
+    \end{itemize}
+    
+    \subsection{Twierdzenie Fermata}
+    
+    \subsection{Twierdzenie Eulera}
+    \begin{itemize}
+        \item Oblicz $2^{64} \pmod {99}$\newline
+        NWD(2,99)=1 zatem możemy stosować Twierdzenie Eulera
+        
+        $\varphi(99) = \varphi(11\cdot 3^2) = \varphi(11) \cdot \varphi(3^2) = 10 \cdot 3 \cdot 2 = 60$
+        
+        Zatem z Twierdzenia Eulera\newline
+        $2^{60} \equiv 1 \pmod {99}$\newline
+        $2^{64} = 2^{60} \cdot 2^4 \equiv 2^4 \pmod {99} = 16$
+        
+        \item Oblicz $99^{400}\pmod {10^3}$\newline
+        NWD(99,1000)=1 zatem możemy stosować Twierdzenie Eulera
+        
+        $\varphi(10^3) = \varphi(2^3 \cdot 5^3) = \varphi(2^3) \cdot \varphi(5^3) = 2^2 \cdot 5^2 \cdot 4 = 400$
+        
+        Zatem z Twierdzenia Eulera\newline
+        $99^{400} \equiv 1 \pmod {10^3}$
+        
+    \end{itemize}
     \newpage
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
