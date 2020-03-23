@@ -881,7 +881,54 @@
     \newpage
 
     \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
+    \begin{definition}
+        \textbf{Funkcja Eulera (Tocjent)}
+        
+         Funkcja przypisująca każdej liczbie naturalnej liczbę liczb względnie pierwszych z nią i nie większych od niej.\newline $\sum_{m|n}^{} \varphi(m) = n$\newline
+         
+         \textbf{Własności}
+         \begin{enumerate}
+         \item $\varphi (n) \leq n - 1$  dla każdego $n>1$
+         \item $\varphi (p) \leq p - 1$ dla każdego p będącego liczbą pierwszą
+         \item $\varphi (mn) = \varphi (m)\varphi(n)$ jeśli NWD(m,n) = 1 (m i n względnie pierwsze)
+         \item $\varphi(p^{k}) = p^{k-1} \cdot (p-1)$ jeśli p jest liczbą pierwszą
+         \item $\varphi(n) = n  
+         \left (  1 - \frac{1}{p_1}\right)
+         \left (  1 - \frac{1}{p_2}\right)
+         \cdots
+         \left (  1 - \frac{1}{p_n}\right)$
+         gdzie $p_1, p_2, ..., p_n$ są czynnikami pierwszymi liczby n
+         \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
+         \end{enumerate}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Małe Twierdzenie Fermata}
+    
+    Jeżeli p jest liczbą pierwszą, to dla dowolnej liczby całkowitej a, liczba $a^{p}-a$ jest podzielna przez p.\newline 
+    \begin{enumerate}
+    \item $a^{p-a} \equiv 0 \pmod p$\newline
+    \end{enumerate}
+    
+    Jeśli p jest liczbą pierwszą, a a jest taką liczbą całkowitą, że liczby a i p są względnie pierwsze to $a^{p-1} - 1$ dzieli się przez p.\newline
+    
+    \begin{enumerate}
+    \item$a^{p-1} - 1 \equiv \pmod p$
+    \item$a^{p-1} \equiv 1 \pmod p$
+    \end{enumerate}
 
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Twierdzenie Eulera}
+    
+    Jeżeli $m \in \mathbb{Z_{+}}$ oraz $a \in \mathbb{Z}$ są liczbami względnie pierwszymi to m dzieli liczbę $a^{\varphi(m)} - 1$, gdzie $\varphi (m)$ oznacza wartość funkcji Eulera.
+    
+    \begin{enumerate}
+    \item $a^{\varphi (m)} \equiv 1 \pmod m$\newline
+    \end{enumerate}
+    
+    \end{definition}
     \newpage
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
