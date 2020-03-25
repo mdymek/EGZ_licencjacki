@@ -226,24 +226,25 @@
     \newpage
 
     \section{Interpolacja wielomianowa: metody Lagrange'a i Hermite'a. Efekt Rungego.}
-    
+
     \subsection{Wzór interpolacyjny Lagrange'a}
-    \begin{exercise}Znaleźć wielomiany $l_i$ i wzór Lagrange'a dla $n=3$ i punktów 
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    x & 5 & -7  & -6  & 0    \\ \hline
-    y & 1 & -23 & -54 & -954 \\ \hline
-    \end{tabular}
+    \begin{exercise}
+        Znaleźć wielomiany $l_i$ i wzór Lagrange'a dla $n=3$ i punktów
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            x & 5 & -7 & -6 & 0    \\ \hline
+            y & 1 & -23 & -54 & -954 \\ \hline
+        \end{tabular}
     \end{exercise}
     Rozwiązanie:
     Wielomiany $l_i$ wyrażają się przez węzły tak:
     \begin{enumerate}
-        \item 
+        \item
         \begin{align*}
             l_0(x)=\frac{(x+7)(x+6)x}{(5+7)(5+6)\cdot5}=\frac{1}{660}(x+7)(x+6)x,
         \end{align*}
         \begin{align*}
-              l_1(x)=\frac{(x-5)(x+6)x}{(-7-5)(-7+6)(-7)}=-\frac{1}{84}(x-5)(x+6)x,
+            l_1(x)=\frac{(x-5)(x+6)x}{(-7-5)(-7+6)(-7)}=-\frac{1}{84}(x-5)(x+6)x,
         \end{align*}
         \begin{align*}
             l_2(x)=\frac{(x-5)(x+7)x}{(-6-5)(-6+7)(-6)}=\frac{1}{66}(x-5)(x+7)x,
@@ -251,48 +252,51 @@
         \begin{align*}
             l_3(x)=\frac{(x-5)(x+7)(x+6)}{(0-5)(0+7)(0+6)}=-\frac{1}{210}(x-5)(x+7)(x+6).
         \end{align*}
-        
-        
+
+
         \item
         Stąd wynika, że
         \begin{align*}
             p(x)=l_0(x)-23l_1(x)-54l_2(x)-954l_3(x).
         \end{align*}
     \end{enumerate}
-    
+
     \subsection{Interpolacja Hermite’a}
-    \begin{exercise} Należy znaleźć wielomian interpolacyjny, przybliżający funkcję o zadanych węzłach dwukrotnych:
-    ${\begin{array}{lcl}x_{1}=1&,&x_{2}=3\\f(x_{1})=3&,&f(x_{2})=5\\f'(x_{1})=2&,&f'(x_{2})=6\end{array}}$
+    \begin{exercise}
+        Należy znaleźć wielomian interpolacyjny, przybliżający funkcję o zadanych węzłach dwukrotnych:
+        ${\begin{array}{lcl}
+              x_{1}=1&,&x_{2}=3\\f(x_{1})=3&,&f(x_{2})=5\\f'(x_{1})=2&,&f'(x_{2})=6
+        \end{array}}$
     \end{exercise}
 
     Rozwiązanie:
     Zapisuje się wartości w tabeli:\\\\
     \begin{tabular}{|c|c|}
-    \hline
-    $x_i$ & $f(x_i)$ \\ \hline
-    $1$ & $3$ \\ \hline
-    $1$ & $3$ \\ \hline
-    $3$ & $5$ \\ \hline
-    $3$ & $5$ \\ \hline
+        \hline
+        $x_i$ & $f(x_i)$ \\ \hline
+        $1$ & $3$ \\ \hline
+        $1$ & $3$ \\ \hline
+        $3$ & $5$ \\ \hline
+        $3$ & $5$ \\ \hline
     \end{tabular}\\\\
     Następnie w miejsce powtarzającego się węzła wstawia się wartości pochodnej, a w pozostałe miejsca (w tym przypadku jedno) wstawia się odpowiednią różnicę dzieloną:\\\\
-    
+
     \begin{tabular}{|c|c|l|}
-    \hline
-    $x_i$ & $f(x_i)$ & $R_2(x_i)$ \\ \hline
-    $1$ & $3$ & $-$ \\ \hline
-    $1$ & $3$ & $2$ \\ \hline
-    $3$ & $5$ & $1$ \\ \hline
-    $3$ & $5$ & $6$ \\ \hline
+        \hline
+        $x_i$ & $f(x_i)$ & $R_2(x_i)$ \\ \hline
+        $1$ & $3$ & $-$ \\ \hline
+        $1$ & $3$ & $2$ \\ \hline
+        $3$ & $5$ & $1$ \\ \hline
+        $3$ & $5$ & $6$ \\ \hline
     \end{tabular}\\\\
     Następnie uzupełnia się do końca tabelę:\\\\
     \begin{tabular}{|c|c|l|l|l|}
-    \hline
-    $x_i$ & $f(x_i)$ & $R_2(x_i)$ & $R_3(x_i)$ & $R_4(x_i)$ \\ \hline
-    $1$ & $3$ & $-$ & $-$ & $-$ \\ \hline
-    $1$ & $3$ & $2$ & $-$ & $-$ \\ \hline
-    $3$ & $5$ & $1$ & $-\frac{1}{2}$ & $-$ \\ \hline
-    $3$ & $5$ & $6$ & $-\frac{5}{2}$ & $-\frac{3}{2}$ \\ \hline
+        \hline
+        $x_i$ & $f(x_i)$ & $R_2(x_i)$ & $R_3(x_i)$ & $R_4(x_i)$ \\ \hline
+        $1$ & $3$ & $-$ & $-$ & $-$ \\ \hline
+        $1$ & $3$ & $2$ & $-$ & $-$ \\ \hline
+        $3$ & $5$ & $1$ & $-\frac{1}{2}$ & $-$ \\ \hline
+        $3$ & $5$ & $6$ & $-\frac{5}{2}$ & $-\frac{3}{2}$ \\ \hline
     \end{tabular}\\\\
     Zatem otrzymuje się wielomian:
     \begin{align*}
@@ -300,65 +304,68 @@
     \end{align*}
     Łatwo sprawdzić, że interpoluje on dane punkty:
     \begin{align*}
-    w(1)=\frac{3}{2}-8+\frac{27}{2}-4=3
+        w(1)=\frac{3}{2}-8+\frac{27}{2}-4=3
     \end{align*}
     \begin{align*}
-    w'(1)={\frac {9}{2}}-16+{\frac {27}{2}}=2
+        w'(1)={\frac {9}{2}}-16+{\frac {27}{2}}=2
     \end{align*}
     \begin{align*}
-    w(3)={\frac {3}{2}}\cdot 27-8\cdot 9+{\frac {27}{2}}\cdot 3-4=5
+        w(3)={\frac {3}{2}}\cdot 27-8\cdot 9+{\frac {27}{2}}\cdot 3-4=5
     \end{align*}
     \begin{align*}
-    w'(3)={\frac {9}{2}}\cdot 9-16\cdot 3+{\frac {27}{2}}=6.
+        w'(3)={\frac {9}{2}}\cdot 9-16\cdot 3+{\frac {27}{2}}=6.
     \end{align*}
 
-    
+
     \newpage
 
     \section{Zmienne losowe dyskretne. Definicje i najważniejsze rozkłady.}
-    
+
     \subsection{Rozkład dwumianowy}
-    \begin{exercise} Zmienna losowa X ma rozkład dwumianowy $(X \sim Bin(n,p))$ gdzie $n$ - ilość prób, $p$ - prawdopodobieństwo sukcesu. Ponadto wiemy, że $E(X) = np$ oraz $Var(X)=np(1-p)$
+    \begin{exercise}
+        Zmienna losowa X ma rozkład dwumianowy $(X \sim Bin(n,p))$ gdzie $n$ - ilość prób, $p$ - prawdopodobieństwo sukcesu. Ponadto wiemy, że $E(X) = np$ oraz $Var(X)=np(1-p)$
     \end{exercise}
     Rozwiązanie:
     Mamy $X \sim Bin (n=4, p=\frac{1}{2})$ oraz $k=2$, więc
-            \begin{align*}
-                P(X=2)={{4}\choose{2}} \left(\frac{1}{2}\right) ^2 \left(\frac{1}{2}\right)^2=6\cdot\frac{1}{4} \cdot \frac{1}{4}=\frac{3}{8},
-            \end{align*}
-            \begin{align*}
-                E(X)=4\cdot\frac{1}{2}=2, \quad Var(X)=2\cdot\frac{1}{2}=1.
-            \end{align*}
-    
+    \begin{align*}
+        P(X=2)={{4}\choose{2}} \left(\frac{1}{2}\right) ^2 \left(\frac{1}{2}\right)^2=6\cdot\frac{1}{4} \cdot \frac{1}{4}=\frac{3}{8},
+    \end{align*}
+    \begin{align*}
+        E(X)=4\cdot\frac{1}{2}=2, \quad Var(X)=2\cdot\frac{1}{2}=1.
+    \end{align*}
+
     \subsection{Rozkład geometryczny}
-    \begin{exercise} Zmienna losowa X ma rozkład geometryczny z $p = \frac{1}{2}$. Wzór na prawdopodobieństwo $P(X=k)=(1-p)^{(k-1)}$ oraz mamy $E(X)=\frac{1}{p}, Var(X)=\frac{1-p}{p^2}$. Prawdopodobieństwo że pierwszy orzeł wypadnie w 4 rzucie:
+    \begin{exercise}
+        Zmienna losowa X ma rozkład geometryczny z $p = \frac{1}{2}$. Wzór na prawdopodobieństwo $P(X=k)=(1-p)^{(k-1)}$ oraz mamy $E(X)=\frac{1}{p}, Var(X)=\frac{1-p}{p^2}$. Prawdopodobieństwo że pierwszy orzeł wypadnie w 4 rzucie:
     \end{exercise}
-        \begin{align*}
-            P(X=4)=\left( 1-\frac{1}{2}\right)^{(4-1)}\frac{1}{2}=\left(\frac{1}{2}\right)^3\frac{1}{2}=\frac{1}{2},
-        \end{align*}
-        \begin{align*}
-            E(X)=\frac{1}{\frac{1}{2}}=2, \quad Var(X)=\frac{1-\frac{1}{2}}{\left(\frac{1}{2}\right)^2}=2.
-        \end{align*}
-    
+    \begin{align*}
+        P(X=4)=\left( 1-\frac{1}{2}\right)^{(4-1)}\frac{1}{2}=\left(\frac{1}{2}\right)^3\frac{1}{2}=\frac{1}{2},
+    \end{align*}
+    \begin{align*}
+        E(X)=\frac{1}{\frac{1}{2}}=2, \quad Var(X)=\frac{1-\frac{1}{2}}{\left(\frac{1}{2}\right)^2}=2.
+    \end{align*}
+
     \subsection{Rozkład Poissona}
-    \begin{exercise} Zmienna losowa X ma rozkład Posissona z parametrem $\lambda = 2,4$. Prawdopodobieństwo, że student będzie nieobecny w ciągu semestru:
+    \begin{exercise}
+        Zmienna losowa X ma rozkład Posissona z parametrem $\lambda = 2,4$. Prawdopodobieństwo, że student będzie nieobecny w ciągu semestru:
     \end{exercise}
     \begin{enumerate}
         \item mniej niż 2 razy:
-            \begin{align*}
-                P(X<2)=P(X=0)+P(X=1)=\\\\
-                =e^{-2,4}\cdot\frac{2,4^0}{0!}+e^{-2,4}\cdot\frac{2,4^1}{1!}=e^{-2,4}+2,4\cdot e^{-2,4}.
-            \end{align*}
+        \begin{align*}
+            P(X<2)=P(X=0)+P(X=1)=\\\\
+            =e^{-2,4}\cdot\frac{2,4^0}{0!}+e^{-2,4}\cdot\frac{2,4^1}{1!}=e^{-2,4}+2,4\cdot e^{-2,4}.
+        \end{align*}
         \item więcej niż 5 razy (jedenminus prawdopodobieństwo zdarzenia przeciwnego):
         \begin{align*}
             P(X>5)=1-P(X=0)-P(X=1)-P(X=2)-P(X=3)-P(X=4)-P(X=5)=
         \end{align*}
         \begin{align*}
-             =1-e^{-2,4}-e^{-2,4}\cdot2,4-\frac{e^{-2,4}\cdot2,4^2}{2}-\frac{e^{-2,4}\cdot2,4^3}{6}-\frac{e^{-2,4}\cdot2,4^4}{24}-\frac{e^{-2,4}\cdot2,4^5}{120}.
+            =1-e^{-2,4}-e^{-2,4}\cdot2,4-\frac{e^{-2,4}\cdot2,4^2}{2}-\frac{e^{-2,4}\cdot2,4^3}{6}-\frac{e^{-2,4}\cdot2,4^4}{24}-\frac{e^{-2,4}\cdot2,4^5}{120}.
         \end{align*}
-           
+
     \end{enumerate}
-    
-    
+
+
 
     \newpage
 
@@ -689,7 +696,7 @@
         .24, .22, .26, .34, .35, .32, .33, .29, .19, .36, .30, .15, .17, .20, .28, .40, .37, .27 sekund \\
 
         Na 5\% poziomie ufności zweryfikuj, czy dane te mogą być dowodem na nieautoryzowany dostęp do konta?
-    \end{exercise} 
+    \end{exercise}
 
     $H_{0}$: Dostęp do konta jest autoryzowany \\
 
@@ -749,7 +756,7 @@
             \item 5 oczek - 2 razy
             \item 6 oczek - 14 razy
         \end{itemize}
-        Przeprowadź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i  rozstrzygnij na poziomie 5\% istotności czy producent ma rację
+        Przeprowadź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i rozstrzygnij na poziomie 5\% istotności czy producent ma rację
     \end{exercise}
 
     Wyliczamy wartości oczekiwane dla każdego przedziału i zgodnie z \texttt{rule of thumb} w razie potrzeby je łączymy tak, aby dla każdego z nich wartość była $\geq$ 5
@@ -757,14 +764,14 @@
     \begin{table}[H]
         \centering
         \begin{tabular}{|c|c|c|c|c|c|}
-        \hline
-        n & $Obs_{n}$ & $Exp_{n}$ & x                  & $Obs_{x}$           & $Exp_{x}$           \\ \hline
-        1 & 55        & 50        & 1                  & 55                  & 50                  \\ \hline
-        2 & 20        & 25        & 2                  & 20                  & 25                  \\ \hline
-        3 & 6         & 4         & \multirow{3}{*}{3} & \multirow{3}{*}{11} & \multirow{3}{*}{10} \\ \cline{1-3}
-        4 & 3         & 2         &                    &                     &                     \\ \cline{1-3}
-        5 & 2         & 4         &                    &                     &                     \\ \hline
-        6 & 14        & 15        & 4                  & 14                  & 15                  \\ \hline
+            \hline
+            n & $Obs_{n}$ & $Exp_{n}$ & x & $Obs_{x}$           & $Exp_{x}$           \\ \hline
+            1 & 55 & 50 & 1 & 55 & 50                  \\ \hline
+            2 & 20 & 25 & 2 & 20 & 25                  \\ \hline
+            3 & 6 & 4 & \multirow{3}{*}{3} & \multirow{3}{*}{11} & \multirow{3}{*}{10} \\ \cline{1-3}
+            4 & 3 & 2 & & &                     \\ \cline{1-3}
+            5 & 2 & 4 & & &                     \\ \hline
+            6 & 14 & 15 & 4 & 14 & 15                  \\ \hline
         \end{tabular}
     \end{table}
 
@@ -841,6 +848,440 @@
     \newpage
 
     \section{Algorytm Forda-Fulkersona wyznaczania maksymalnego przepływu.}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.3,-25.2) circle (3);
+            \draw (12.3,-25.2) node {$s$};
+            \draw [black] (12.3,-25.2) circle (2.4);
+            \draw [black] (24.7,-10.7) circle (3);
+            \draw (24.7,-10.7) node {$A$};
+            \draw [black] (44.8,-10.7) circle (3);
+            \draw (44.8,-10.7) node {$B$};
+            \draw [black] (34,-25.2) circle (3);
+            \draw (34,-25.2) node {$C$};
+            \draw [black] (24.7,-39.6) circle (3);
+            \draw (24.7,-39.6) node {$D$};
+            \draw [black] (44.8,-39.6) circle (3);
+            \draw (44.8,-39.6) node {$E$};
+            \draw [black] (56.8,-25.2) circle (3);
+            \draw (56.8,-25.2) node {$t$};
+            \draw [black] (56.8,-25.2) circle (2.4);
+            \draw [black] (14.25,-22.92) -- (22.75,-12.98);
+            \fill [black] (22.75,-12.98) -- (21.85,-13.26) -- (22.61,-13.91);
+            \draw (19.05,-19.39) node [right] {$9$};
+            \draw [black] (27.7,-10.7) -- (41.8,-10.7);
+            \fill [black] (41.8,-10.7) -- (41,-10.2) -- (41,-11.2);
+            \draw (34.75,-11.2) node [below] {$7$};
+            \draw [black] (46.71,-13.01) -- (54.89,-22.89);
+            \fill [black] (54.89,-22.89) -- (54.76,-21.95) -- (53.99,-22.59);
+            \draw (50.25,-19.38) node [left] {$6$};
+            \draw [black] (26.32,-13.23) -- (32.38,-22.67);
+            \fill [black] (32.38,-22.67) -- (32.37,-21.73) -- (31.53,-22.27);
+            \draw (28.73,-19.26) node [left] {$3$};
+            \draw [black] (43.01,-13.11) -- (35.79,-22.79);
+            \fill [black] (35.79,-22.79) -- (36.67,-22.45) -- (35.87,-21.85);
+            \draw (38.82,-16.56) node [left] {$4$};
+            \draw [black] (26.33,-37.08) -- (32.37,-27.72);
+            \fill [black] (32.37,-27.72) -- (31.52,-28.12) -- (32.36,-28.66);
+            \draw (29.97,-33.71) node [right] {$3$};
+            \draw [black] (14.26,-27.47) -- (22.74,-37.33);
+            \fill [black] (22.74,-37.33) -- (22.6,-36.39) -- (21.84,-37.05);
+            \draw (17.95,-33.85) node [left] {$9$};
+            \draw [black] (27.7,-39.6) -- (41.8,-39.6);
+            \fill [black] (41.8,-39.6) -- (41,-39.1) -- (41,-40.1);
+            \draw (34.75,-40.1) node [below] {$6$};
+            \draw [black] (46.72,-37.3) -- (54.88,-27.5);
+            \fill [black] (54.88,-27.5) -- (53.98,-27.8) -- (54.75,-28.44);
+            \draw (51.35,-33.84) node [right] {$8$};
+            \draw [black] (37,-25.2) -- (53.8,-25.2);
+            \fill [black] (53.8,-25.2) -- (53,-24.7) -- (53,-25.7);
+            \draw (45.4,-25.7) node [below] {$9$};
+            \draw [black] (35.8,-27.6) -- (43,-37.2);
+            \fill [black] (43,-37.2) -- (42.92,-36.26) -- (42.12,-36.86);
+            \draw (38.82,-33.8) node [left] {$2$};
+        \end{tikzpicture}
+    \end{center}
+
+    Weźmy sobie taką sieć przepływową. Chcemy wyznaczyć jej maksymalny przepływ. Musimy zacząć od jakiegoś (dowolnego)
+    przepływu. Szukamy ścieżki rozszerzającej, która połączy źródło s z ujściem t.\\
+
+    Na przykład może to być ścieżka: $P = \{ s  \rightarrow A \rightarrow B \rightarrow t \}$.\\
+
+    Na ścieżce p znajdują się trzy kanały sieci rezydualnej: $(s,A), (A,B) i (B,t)$. Przepustowość rezydualna $c_f(p)$
+    ścieżki jest równa najmniejszej przepustowości rezydualnej jej kanałów, czyli przepustowości kanału $(B \rightarrow t)$,
+    dla którego $c_f (B,t) = 6$. Zatem wzdłuż krawędzi ścieżki przepływ można zwiększyć o 6 jednostek, o tyle rośnie
+    również przepływ sieciowy, czyli $|f_{nowy}| = |f_{stary}| + c_f(p) = 0 + 6 = 6$.\\
+
+    \textbf{Budujemy sieć rezydualną}. Zwiększenie przepływu w kanale sieci pierwotnej o $c_f(p)$ odpowiada
+    zmniejszeniu przepustowości rezydualnej tego kanału. Jednocześnie wraz z pojawieniem się przepływu w kanale sieci
+    pierwotnej powstaje kanał przeciwny w sieci rezydualnej o przepustowości rezydualnej równej przepływowi.\\
+
+    Przepustowość rezydualna kanału $(s,A)$ wynosi 3 – oznacza to, iż kanałem tym można wciąż jeszcze przesłać trzy
+    dodatkowe jednostki przepływu. W sieci rezydualnej pojawia się kanał przeciwny $(A,s)$ o przepustowości rezydualnej
+    $c_f(A,s) = 6$.\\
+
+    Kanał $(A,B)$ może jeszcze przesłać 1 dodatkową jednostkę przepływu. Również tutaj pojawił się kanał przeciwny o
+    przepustowości rezydualnej równej 6.\\
+
+    Kanał $(B,t)$ przestał istnieć w sieci rezydualnej, ponieważ osiągnął już swoją maksymalną przepustowość – 6
+    jednostek przepływu. Nie może on być dalej wykorzystywany do powiększania przepływu. Na jego miejscu mamy
+    jednak kanał przeciwny z przepustowością rezydualną równą 6.\\
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.3,-25.2) circle (3);
+            \draw (12.3,-25.2) node {$s$};
+            \draw [black] (12.3,-25.2) circle (2.4);
+            \draw [black] (24.7,-10.7) circle (3);
+            \draw (24.7,-10.7) node {$A$};
+            \draw [black] (44.8,-10.7) circle (3);
+            \draw (44.8,-10.7) node {$B$};
+            \draw [black] (34,-25.2) circle (3);
+            \draw (34,-25.2) node {$C$};
+            \draw [black] (24.7,-39.6) circle (3);
+            \draw (24.7,-39.6) node {$D$};
+            \draw [black] (44.8,-39.6) circle (3);
+            \draw (44.8,-39.6) node {$E$};
+            \draw [black] (56.8,-25.2) circle (3);
+            \draw (56.8,-25.2) node {$t$};
+            \draw [black] (56.8,-25.2) circle (2.4);
+            \draw [black] (12.953,-22.276) arc (162.51949:116.40821:17.599);
+            \fill [black] (21.91,-11.8) -- (20.97,-11.71) -- (21.42,-12.6);
+            \draw (15.82,-14.68) node [left] {$3$};
+            \draw [black] (27.312,-9.232) arc (114.53889:65.46111:17.909);
+            \fill [black] (42.19,-9.23) -- (41.67,-8.44) -- (41.25,-9.35);
+            \draw (34.75,-7.11) node [above] {$1$};
+            \draw [black] (26.32,-13.23) -- (32.38,-22.67);
+            \fill [black] (32.38,-22.67) -- (32.37,-21.73) -- (31.53,-22.27);
+            \draw (28.73,-19.26) node [left] {$3$};
+            \draw [black] (43.01,-13.11) -- (35.79,-22.79);
+            \fill [black] (35.79,-22.79) -- (36.67,-22.45) -- (35.87,-21.85);
+            \draw (38.82,-16.56) node [left] {$4$};
+            \draw [black] (26.33,-37.08) -- (32.37,-27.72);
+            \fill [black] (32.37,-27.72) -- (31.52,-28.12) -- (32.36,-28.66);
+            \draw (29.97,-33.71) node [right] {$3$};
+            \draw [black] (14.26,-27.47) -- (22.74,-37.33);
+            \fill [black] (22.74,-37.33) -- (22.6,-36.39) -- (21.84,-37.05);
+            \draw (17.95,-33.85) node [left] {$9$};
+            \draw [black] (27.7,-39.6) -- (41.8,-39.6);
+            \fill [black] (41.8,-39.6) -- (41,-39.1) -- (41,-40.1);
+            \draw (34.75,-40.1) node [below] {$6$};
+            \draw [black] (46.72,-37.3) -- (54.88,-27.5);
+            \fill [black] (54.88,-27.5) -- (53.98,-27.8) -- (54.75,-28.44);
+            \draw (51.35,-33.84) node [right] {$8$};
+            \draw [black] (37,-25.2) -- (53.8,-25.2);
+            \fill [black] (53.8,-25.2) -- (53,-24.7) -- (53,-25.7);
+            \draw (45.4,-25.7) node [below] {$9$};
+            \draw [black] (35.8,-27.6) -- (43,-37.2);
+            \fill [black] (43,-37.2) -- (42.92,-36.26) -- (42.12,-36.86);
+            \draw (38.82,-33.8) node [left] {$2$};
+            \draw [black] (41.8,-10.7) -- (27.7,-10.7);
+            \fill [black] (27.7,-10.7) -- (28.5,-11.2) -- (28.5,-10.2);
+            \draw (34.75,-11.2) node [below] {$6$};
+            \draw [black] (22.75,-12.98) -- (14.25,-22.92);
+            \fill [black] (14.25,-22.92) -- (15.15,-22.64) -- (14.39,-21.99);
+            \draw (19.05,-19.39) node [right] {$6$};
+            \draw [black] (54.89,-22.89) -- (46.71,-13.01);
+            \fill [black] (46.71,-13.01) -- (46.84,-13.95) -- (47.61,-13.31);
+            \draw (51.35,-16.52) node [right] {$6$};
+        \end{tikzpicture}
+    \end{center}
+
+    W nowej sieci rezydualnej szukamy kolejnej ścieżki rozszerzającej:
+
+    \begin{align*}
+        P = \{ s \rightarrow A \rightarrow C \rightarrow t \}, ~~~ c_f(p) = 3.
+    \end{align*}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.3,-25.2) circle (3);
+            \draw (12.3,-25.2) node {$s$};
+            \draw [black] (12.3,-25.2) circle (2.4);
+            \draw [black] (24.7,-10.7) circle (3);
+            \draw (24.7,-10.7) node {$A$};
+            \draw [black] (44.8,-10.7) circle (3);
+            \draw (44.8,-10.7) node {$B$};
+            \draw [black] (34,-25.2) circle (3);
+            \draw (34,-25.2) node {$C$};
+            \draw [black] (24.7,-39.6) circle (3);
+            \draw (24.7,-39.6) node {$D$};
+            \draw [black] (44.8,-39.6) circle (3);
+            \draw (44.8,-39.6) node {$E$};
+            \draw [black] (56.8,-25.2) circle (3);
+            \draw (56.8,-25.2) node {$t$};
+            \draw [black] (56.8,-25.2) circle (2.4);
+            \draw [black] (27.312,-9.232) arc (114.53889:65.46111:17.909);
+            \fill [black] (42.19,-9.23) -- (41.67,-8.44) -- (41.25,-9.35);
+            \draw (34.75,-7.11) node [above] {$1$};
+            \draw [black] (43.01,-13.11) -- (35.79,-22.79);
+            \fill [black] (35.79,-22.79) -- (36.67,-22.45) -- (35.87,-21.85);
+            \draw (38.82,-16.56) node [left] {$4$};
+            \draw [black] (26.33,-37.08) -- (32.37,-27.72);
+            \fill [black] (32.37,-27.72) -- (31.52,-28.12) -- (32.36,-28.66);
+            \draw (29.97,-33.71) node [right] {$3$};
+            \draw [black] (14.26,-27.47) -- (22.74,-37.33);
+            \fill [black] (22.74,-37.33) -- (22.6,-36.39) -- (21.84,-37.05);
+            \draw (17.95,-33.85) node [left] {$9$};
+            \draw [black] (27.7,-39.6) -- (41.8,-39.6);
+            \fill [black] (41.8,-39.6) -- (41,-39.1) -- (41,-40.1);
+            \draw (34.75,-40.1) node [below] {$6$};
+            \draw [black] (46.72,-37.3) -- (54.88,-27.5);
+            \fill [black] (54.88,-27.5) -- (53.98,-27.8) -- (54.75,-28.44);
+            \draw (51.35,-33.84) node [right] {$8$};
+            \draw [black] (36.746,-23.997) arc (110.22113:69.77887:25.036);
+            \fill [black] (54.05,-24) -- (53.48,-23.25) -- (53.13,-24.19);
+            \draw (45.4,-21.95) node [above] {$6$};
+            \draw [black] (35.8,-27.6) -- (43,-37.2);
+            \fill [black] (43,-37.2) -- (42.92,-36.26) -- (42.12,-36.86);
+            \draw (38.82,-33.8) node [left] {$2$};
+            \draw [black] (41.8,-10.7) -- (27.7,-10.7);
+            \fill [black] (27.7,-10.7) -- (28.5,-11.2) -- (28.5,-10.2);
+            \draw (34.75,-11.2) node [below] {$6$};
+            \draw [black] (22.75,-12.98) -- (14.25,-22.92);
+            \fill [black] (14.25,-22.92) -- (15.15,-22.64) -- (14.39,-21.99);
+            \draw (19.05,-19.39) node [right] {$9$};
+            \draw [black] (54.89,-22.89) -- (46.71,-13.01);
+            \fill [black] (46.71,-13.01) -- (46.84,-13.95) -- (47.61,-13.31);
+            \draw (51.35,-16.52) node [right] {$6$};
+            \draw [black] (32.38,-22.67) -- (26.32,-13.23);
+            \fill [black] (26.32,-13.23) -- (26.33,-14.17) -- (27.17,-13.63);
+            \draw (29.97,-16.64) node [right] {$3$};
+            \draw [black] (53.8,-25.2) -- (37,-25.2);
+            \fill [black] (37,-25.2) -- (37.8,-25.7) -- (37.8,-24.7);
+            \draw (45.4,-25.7) node [below] {$3$};
+        \end{tikzpicture}
+    \end{center}
+
+    \noindent Przepływ zwiększamy:
+    \begin{align*}
+        |f| = 6 + 3 = 9
+    \end{align*}
+    i modyfikujemy przepustowości rezydualne krawędzi ścieżki rozszerzającej otrzymując nową sieć rezydualną. Znikają z
+    niej kanały $(s,A)$ i $(A,C)$ – wykorzystały już swój potencjał zwiększania przepływu.\\
+
+    \noindent Szukamy kolejnej ścieżki rozszerzającej:
+    \begin{align*}
+        P = \{ s \rightarrow D \rightarrow E \rightarrow t \}, ~~ c_f(p) = 6
+    \end{align*}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.3,-25.2) circle (3);
+            \draw (12.3,-25.2) node {$s$};
+            \draw [black] (12.3,-25.2) circle (2.4);
+            \draw [black] (24.7,-10.7) circle (3);
+            \draw (24.7,-10.7) node {$A$};
+            \draw [black] (44.8,-10.7) circle (3);
+            \draw (44.8,-10.7) node {$B$};
+            \draw [black] (34,-25.2) circle (3);
+            \draw (34,-25.2) node {$C$};
+            \draw [black] (24.7,-39.6) circle (3);
+            \draw (24.7,-39.6) node {$D$};
+            \draw [black] (44.8,-39.6) circle (3);
+            \draw (44.8,-39.6) node {$E$};
+            \draw [black] (56.8,-25.2) circle (3);
+            \draw (56.8,-25.2) node {$t$};
+            \draw [black] (56.8,-25.2) circle (2.4);
+            \draw [black] (27.312,-9.232) arc (114.53889:65.46111:17.909);
+            \fill [black] (42.19,-9.23) -- (41.67,-8.44) -- (41.25,-9.35);
+            \draw (34.75,-7.11) node [above] {$1$};
+            \draw [black] (43.01,-13.11) -- (35.79,-22.79);
+            \fill [black] (35.79,-22.79) -- (36.67,-22.45) -- (35.87,-21.85);
+            \draw (38.82,-16.56) node [left] {$4$};
+            \draw [black] (26.33,-37.08) -- (32.37,-27.72);
+            \fill [black] (32.37,-27.72) -- (31.52,-28.12) -- (32.36,-28.66);
+            \draw (29.97,-33.71) node [right] {$3$};
+            \draw [black] (21.79,-38.893) arc (-109.65577:-168.88001:14.303);
+            \fill [black] (21.79,-38.89) -- (21.2,-38.15) -- (20.87,-39.1);
+            \draw (15.22,-36.2) node [left] {$6$};
+            \draw [black] (46.72,-37.3) -- (54.88,-27.5);
+            \fill [black] (54.88,-27.5) -- (53.98,-27.8) -- (54.75,-28.44);
+            \draw (50.25,-30.96) node [left] {$2$};
+            \draw [black] (36.746,-23.997) arc (110.22113:69.77887:25.036);
+            \fill [black] (54.05,-24) -- (53.48,-23.25) -- (53.13,-24.19);
+            \draw (45.4,-21.95) node [above] {$6$};
+            \draw [black] (35.8,-27.6) -- (43,-37.2);
+            \fill [black] (43,-37.2) -- (42.92,-36.26) -- (42.12,-36.86);
+            \draw (38.82,-33.8) node [left] {$2$};
+            \draw [black] (41.8,-10.7) -- (27.7,-10.7);
+            \fill [black] (27.7,-10.7) -- (28.5,-11.2) -- (28.5,-10.2);
+            \draw (34.75,-11.2) node [below] {$6$};
+            \draw [black] (22.75,-12.98) -- (14.25,-22.92);
+            \fill [black] (14.25,-22.92) -- (15.15,-22.64) -- (14.39,-21.99);
+            \draw (19.05,-19.39) node [right] {$9$};
+            \draw [black] (54.89,-22.89) -- (46.71,-13.01);
+            \fill [black] (46.71,-13.01) -- (46.84,-13.95) -- (47.61,-13.31);
+            \draw (51.35,-16.52) node [right] {$6$};
+            \draw [black] (32.38,-22.67) -- (26.32,-13.23);
+            \fill [black] (26.32,-13.23) -- (26.33,-14.17) -- (27.17,-13.63);
+            \draw (29.97,-16.64) node [right] {$3$};
+            \draw [black] (53.8,-25.2) -- (37,-25.2);
+            \fill [black] (37,-25.2) -- (37.8,-25.7) -- (37.8,-24.7);
+            \draw (45.4,-25.7) node [below] {$3$};
+            \draw [black] (22.74,-37.33) -- (14.26,-27.47);
+            \fill [black] (14.26,-27.47) -- (14.4,-28.41) -- (15.16,-27.75);
+            \draw (19.05,-30.95) node [right] {$3$};
+            \draw [black] (41.8,-39.6) -- (27.7,-39.6);
+            \fill [black] (27.7,-39.6) -- (28.5,-40.1) -- (28.5,-39.1);
+            \draw (34.75,-40.1) node [below] {$6$};
+            \draw [black] (56.777,-28.193) arc (-7.032:-72.57915:13.039);
+            \fill [black] (47.74,-39.04) -- (48.65,-39.28) -- (48.35,-38.32);
+            \draw (54.41,-36.38) node [right] {$6$};
+        \end{tikzpicture}
+    \end{center}
+
+    W nowej sieci rezydualnej zniknął kanał $(D,E)$.
+
+    Wciąż jednakże możemy znaleźć nową ścieżkę rozszerzającą:
+    \begin{align*}
+        P = \{ s  \rightarrow  D \rightarrow C  \rightarrow t \}, ~~~ c_f(p) = 3
+    \end{align*}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.3,-25.2) circle (3);
+            \draw (12.3,-25.2) node {$s$};
+            \draw [black] (12.3,-25.2) circle (2.4);
+            \draw [black] (24.7,-10.7) circle (3);
+            \draw (24.7,-10.7) node {$A$};
+            \draw [black] (44.8,-10.7) circle (3);
+            \draw (44.8,-10.7) node {$B$};
+            \draw [black] (34,-25.2) circle (3);
+            \draw (34,-25.2) node {$C$};
+            \draw [black] (24.7,-39.6) circle (3);
+            \draw (24.7,-39.6) node {$D$};
+            \draw [black] (44.8,-39.6) circle (3);
+            \draw (44.8,-39.6) node {$E$};
+            \draw [black] (56.8,-25.2) circle (3);
+            \draw (56.8,-25.2) node {$t$};
+            \draw [black] (56.8,-25.2) circle (2.4);
+            \draw [black] (27.312,-9.232) arc (114.53889:65.46111:17.909);
+            \fill [black] (42.19,-9.23) -- (41.67,-8.44) -- (41.25,-9.35);
+            \draw (34.75,-7.11) node [above] {$1$};
+            \draw [black] (43.01,-13.11) -- (35.79,-22.79);
+            \fill [black] (35.79,-22.79) -- (36.67,-22.45) -- (35.87,-21.85);
+            \draw (38.82,-16.56) node [left] {$4$};
+            \draw [black] (46.72,-37.3) -- (54.88,-27.5);
+            \fill [black] (54.88,-27.5) -- (53.98,-27.8) -- (54.75,-28.44);
+            \draw (50.25,-30.96) node [left] {$2$};
+            \draw [black] (36.698,-23.892) arc (112.14231:67.85769:23.089);
+            \fill [black] (54.1,-23.89) -- (53.55,-23.13) -- (53.17,-24.05);
+            \draw (45.4,-21.69) node [above] {$3$};
+            \draw [black] (35.8,-27.6) -- (43,-37.2);
+            \fill [black] (43,-37.2) -- (42.92,-36.26) -- (42.12,-36.86);
+            \draw (38.82,-33.8) node [left] {$2$};
+            \draw [black] (41.8,-10.7) -- (27.7,-10.7);
+            \fill [black] (27.7,-10.7) -- (28.5,-11.2) -- (28.5,-10.2);
+            \draw (34.75,-11.2) node [below] {$6$};
+            \draw [black] (22.75,-12.98) -- (14.25,-22.92);
+            \fill [black] (14.25,-22.92) -- (15.15,-22.64) -- (14.39,-21.99);
+            \draw (19.05,-19.39) node [right] {$9$};
+            \draw [black] (54.89,-22.89) -- (46.71,-13.01);
+            \fill [black] (46.71,-13.01) -- (46.84,-13.95) -- (47.61,-13.31);
+            \draw (51.35,-16.52) node [right] {$6$};
+            \draw [black] (32.38,-22.67) -- (26.32,-13.23);
+            \fill [black] (26.32,-13.23) -- (26.33,-14.17) -- (27.17,-13.63);
+            \draw (29.97,-16.64) node [right] {$3$};
+            \draw [black] (53.8,-25.2) -- (37,-25.2);
+            \fill [black] (37,-25.2) -- (37.8,-25.7) -- (37.8,-24.7);
+            \draw (45.4,-25.7) node [below] {$6$};
+            \draw [black] (22.74,-37.33) -- (14.26,-27.47);
+            \fill [black] (14.26,-27.47) -- (14.4,-28.41) -- (15.16,-27.75);
+            \draw (19.05,-30.95) node [right] {$9$};
+            \draw [black] (41.8,-39.6) -- (27.7,-39.6);
+            \fill [black] (27.7,-39.6) -- (28.5,-40.1) -- (28.5,-39.1);
+            \draw (34.75,-40.1) node [below] {$6$};
+            \draw [black] (56.777,-28.193) arc (-7.032:-72.57915:13.039);
+            \fill [black] (47.74,-39.04) -- (48.65,-39.28) -- (48.35,-38.32);
+            \draw (54.41,-36.38) node [right] {$6$};
+            \draw [black] (32.37,-27.72) -- (26.33,-37.08);
+            \fill [black] (26.33,-37.08) -- (27.18,-36.68) -- (26.34,-36.14);
+            \draw (28.73,-31.09) node [left] {$3$};
+        \end{tikzpicture}
+    \end{center}
+
+    Przepływ zwiększamy:
+    \begin{align*}
+        |f| = 15 + 3 = 18.
+    \end{align*}
+
+    Po zmodyfikowaniu sieci rezydualnej otrzymujemy nową sieć rezydualną. W tej sieci rezydualnej \textbf{nie znajdziemy już
+    żadnej nowej ścieżki rozszerzającej} – ze źródła s nie wychodzi żaden kanał. Oznacza to zakończenie algorytmu, zatem
+    znaleźliśmy przepływ maksymalny. Aby otrzymać sieć przepływową wystarczy od przepustowości kanałów odjąć
+    otrzymane przepustowości rezydualne – dla nieistniejących kanałów ich przepustowość rezydualna wynosi 0.\\
+
+    \noindent Poniżej nasza sieć przepływowa z uzyskanym maksymalnym przepływem:
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.3,-25.2) circle (3);
+            \draw (12.3,-25.2) node {$s$};
+            \draw [black] (12.3,-25.2) circle (2.4);
+            \draw [black] (24.7,-10.7) circle (3);
+            \draw (24.7,-10.7) node {$A$};
+            \draw [black] (44.8,-10.7) circle (3);
+            \draw (44.8,-10.7) node {$B$};
+            \draw [black] (34,-25.2) circle (3);
+            \draw (34,-25.2) node {$C$};
+            \draw [black] (24.7,-39.6) circle (3);
+            \draw (24.7,-39.6) node {$D$};
+            \draw [black] (44.8,-39.6) circle (3);
+            \draw (44.8,-39.6) node {$E$};
+            \draw [black] (56.8,-25.2) circle (3);
+            \draw (56.8,-25.2) node {$t$};
+            \draw [black] (56.8,-25.2) circle (2.4);
+            \draw [black] (27.7,-10.7) -- (41.8,-10.7);
+            \fill [black] (41.8,-10.7) -- (41,-10.2) -- (41,-11.2);
+            \draw (34.75,-10.2) node [above] {$6/7$};
+            \draw [black] (43.01,-13.11) -- (35.79,-22.79);
+            \fill [black] (35.79,-22.79) -- (36.67,-22.45) -- (35.87,-21.85);
+            \draw (38.82,-16.56) node [left] {$0/4$};
+            \draw [black] (46.72,-37.3) -- (54.88,-27.5);
+            \fill [black] (54.88,-27.5) -- (53.98,-27.8) -- (54.75,-28.44);
+            \draw (50.25,-30.96) node [left] {$6/8$};
+            \draw [black] (37,-25.2) -- (53.8,-25.2);
+            \fill [black] (53.8,-25.2) -- (53,-24.7) -- (53,-25.7);
+            \draw (45.4,-24.7) node [above] {$6/9$};
+            \draw [black] (35.8,-27.6) -- (43,-37.2);
+            \fill [black] (43,-37.2) -- (42.92,-36.26) -- (42.12,-36.86);
+            \draw (38.82,-33.8) node [left] {$0/2$};
+            \draw [black] (14.25,-22.92) -- (22.75,-12.98);
+            \fill [black] (22.75,-12.98) -- (21.85,-13.26) -- (22.61,-13.91);
+            \draw (17.95,-16.51) node [left] {$9/9$};
+            \draw [black] (46.71,-13.01) -- (54.89,-22.89);
+            \fill [black] (54.89,-22.89) -- (54.76,-21.95) -- (53.99,-22.59);
+            \draw (51.35,-16.52) node [right] {$6/6$};
+            \draw [black] (26.32,-13.23) -- (32.38,-22.67);
+            \fill [black] (32.38,-22.67) -- (32.37,-21.73) -- (31.53,-22.27);
+            \draw (28.73,-19.26) node [left] {$3/3$};
+            \draw [black] (26.33,-37.08) -- (32.37,-27.72);
+            \fill [black] (32.37,-27.72) -- (31.52,-28.12) -- (32.36,-28.66);
+            \draw (28.73,-31.09) node [left] {$3/3$};
+            \draw [black] (14.26,-27.47) -- (22.74,-37.33);
+            \fill [black] (22.74,-37.33) -- (22.6,-36.39) -- (21.84,-37.05);
+            \draw (17.95,-33.85) node [left] {$9/9$};
+            \draw [black] (27.7,-39.6) -- (41.8,-39.6);
+            \fill [black] (41.8,-39.6) -- (41,-39.1) -- (41,-40.1);
+            \draw (34.75,-40.1) node [below] {$6/6$};
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{align*}
+        |f| = 18
+    \end{align*}
+
+
+
+    \newpage
+
     \section{Rozwiązywanie równan rekurencyjnych przy użyciu funkcji tworzących (generujących) oraz przy użyciu równania charakterystycznego.}
 
     \newpage
