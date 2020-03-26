@@ -1237,7 +1237,106 @@
 
     \newpage
 
-    \section{Rozwiązywanie równan rekurencyjnych przy użyciu funkcji tworzących (generujących) oraz przy użyciu równania charakterystycznego.}
+    \section{Rozwiązywanie równań rekurencyjnych przy użyciu funkcji tworzących (generujących) oraz przy użyciu
+    równania charakterystycznego.}
+
+    \begin{definition}
+        \textbf{Liniowym równaniem rekurencyjnym rzędu r} (o stałych współczynnikach) nazywamy równanie postaci:
+        \begin{align*}
+            x_{n+r} = c_1 x_{n+r-1} +  \cdots + c_r x_n + f(n)
+        \end{align*}
+        w którym $c_i  \in \mathbb{R}, c_r \neq 0$  oraz $f:  \mathbb{N} \rightarrow \mathbb{R}$ jest dowolną funkcją.
+        Jeśli funkcja f jest stale równa zero, to powyższe równanie nazywamy \textbf{jednorodnym}.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Rozwiązaniem szczególnym} równania nazywamy dowolny ciąg $(x_n)$ spełniający zależność rekurencyjną.
+        Dla każdego równania jednorodnego rozwiązanie szczególnym jest ciąg stały równy zero.
+
+        \textbf{Rozwiązaniem ogólnym} równania nazywamy wzór ogólny (zależny od pewnych parametrów) pozwalający
+        wyznaczyć wszystkie rozwiązania szczególne.
+    \end{definition}
+
+    \subsection{Funkcje tworzące.}
+    \begin{definition}
+        \textbf{Funkcją tworzącą} (generujacą) ciągu $(a_n)$ nazywamy szereg
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n x^n.
+        \end{align*}
+        Jest to tylko inny zapis ciągu (wyraz $a_n$ to współczynnik przy $x^n$) - nie interesują nas kwestie zbieżności,
+        podstawiania wartości za x, ciągłości/różniczkowalności funkcji określonej takim szeregiem itd.
+
+        Jeżeli jednak funkcja tworząca pewnego ciągu "wygląda" jak zbieżny szereg określający funkcję znaną z analizy
+        to możemy używać skróconego zapisu, np. $\sum_{n=0}^{\infty} \frac{1}{n!} x^n = e^x$.
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Operacje na funkcjach tworzących}.
+        \begin{enumerate}
+            \item Funkcje tworzące można \textbf{dodawać,odejmować i mnożyć przez liczbę} - odpowiadają temu operacje
+            dodawania, odejmowania i mnożenia przez liczbę wyrazów ciągu.
+            \item \textbf{Mnożeniu dwóch funkcji tworzących} odpowiada operacja "splotu", tzn. jeśli
+            $A(x) =  \sum_{n=0}^{\infty} a_n x^n$ i $B(x) = \sum_{n=0}^{\infty} b_n x^n$, to
+            $A(x) * B(x) = \sum_{n=0}^{\infty} c_n x^n$, gdzie $c_n = \sum_{k=0}^n a_k b_{n-k}$.
+            \item Jeśli funkcja tworząca A(x) ma "element odwrotny", tzn. taką funkcję tworzącą B(x) dla której
+            $A(x) * B(x) = 1$, to mówimy że A(x) jest \textbf{odwracalna} i piszemy $\frac{1}{A(x)} = B(x)$.
+            \item \textbf{Mnożeniu funkcji} tworzącej \textbf{przez x} odpowiada przesunięcie ciągu (dopisanie na początek
+            wyrazu zerowego). Operajcją odwrotną jest odjęcie wyrazu zerowego i podzielenie przez x.
+            \item Funkcje tworzące można \textbf{różniczkować} według wzoru:
+            \begin{align*}
+                (\sum_{n=0}^{\infty} a_n x^n)' = \sum_{n=1}^{\infty} n a_n x^{n-1} = \sum_{n=0}^{\infty} (n+1) a_{n+1} x^n
+            \end{align*}
+            \item Zachodzą wzory na \textbf{pochodne} znane z analizy, np. $(A(x) * B(x))' = A'(x)B(x) + A(x)B'(x)$.
+            \item Operacja \textbf{"całkowania"} (odwrotna do różniczkowania):
+            \begin{align*}
+                \int (\sum_{n=0}^{\infty} a_n x^n) = \sum_{n=0}^{\infty} \frac{a_n}{n+1} x^{n+1} = \sum_{n=0}^{\infty} \frac{a_n - 1}{n} x^n
+            \end{align*}
+            Wyraz $a_n$ można "odzyskać" z funkcji tworzącej A(x) wykonując jej n-krotne różniczkowanie.
+        \end{enumerate}
+    \end{theorem}
+
+    \begin{theorem}
+        Dla dowolnej liczby naturalnej $m \geq 1$ zachodzi wzór:
+        \begin{align*}
+            \frac{1}{(1-x)^m} ~ = ~ \sum_{n=0}^{\infty} \binom{n+m-1}{n} x^n.
+        \end{align*}
+
+        Dla dowolneego $\alpha \in \mathbb{R}$ oraz $|x| < 1$ zachodzi wzór:
+        \begin{align*}
+            (1+x)^{\alpha} ~ - ~ \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n
+        \end{align*}
+    \end{theorem}
+
+    \subsection{Równanie charakterystyczne.}
+    \begin{definition}
+        \textbf{Równanie charakterystyczne} równania rekurencyjnego. Weźmy równanie rekurencyjne jednorodne
+        \begin{align*}
+            a_n = A a_{n-1} + B a_{n-2}
+        \end{align*}
+        gdzie dane są współczynniki A, B. Załóżmy, że ma ono rozwiązanie postaci $a_n = t^n$. Podstawiając otrzymujemy:
+        \begin{align*}
+            t^n = A t^{n-1} + B t^{n-2}.
+        \end{align*}
+        Dzielimy obie strony przez $t^{n-2}$:
+        \begin{align*}
+            t^2 = A t^1 + B
+        \end{align*}
+        \begin{align*}
+            t^2 - A t^1 - B = 0.
+        \end{align*}
+        Równanie to nazywamy równaniem charakterystycznym równania rekurencyjnego. W tym przypadku jest to równanie kwadratowe.
+
+        Jeżeli nie ma ono pierwiastków podwójnych, wówczas:
+        \begin{align*}
+            a_n = C r_1^n + D r_2^n.
+        \end{align*}
+        Jeżeli ma pierwiastki podwójne, to:
+        \begin{align*}
+            a_n = (C + Dn) r_1^n.
+        \end{align*}
+        C i D są dowolnymi stałymi a $r_{1}$ i $r_{2}$ są pierwiastkami równania charakterystycznego. Jeżeli dane jest
+        $a_{1}$ i $a_{2}$ wówczas można łatwo ułożyć układ równań i otrzymać ich wartość.
+    \end{definition}
 
     \newpage
 
