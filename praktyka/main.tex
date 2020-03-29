@@ -682,11 +682,11 @@
         Z = \frac{\frac{1}{50} - \frac{3}{100}}{\sqrt{\frac{11}{450}(1-\frac{11}{450})(\frac{1}{500} + \frac{1}{400})}} = \frac{-\frac{1}{100}}{\sqrt{\frac{4829}{45000000}}} \approx \textbf{\color[HTML]{00ca1f}-0.9653}
     \end{equation*} \\
 
-    W naszej hipotezie mamy pytanie o równość więc bierzemy pod uwagę obie końcówki przedziału. Mamy sprawdzić prawdziwość naszej hipotezy na 5\% poziomie istotności, więc na każdą końcówkę mamy po 2.5\%. \\
+    W naszej hipotezie mamy pytanie o równość, więc bierzemy pod uwagę obie końcówki przedziału. Mamy sprawdzić prawdziwość naszej hipotezy na 5\% poziomie istotności, więc na każdą końcówkę mamy po 2.5\%. \\
 
     Odczytujemy z tablic dla Z-testów (tablica rozkładu normalnego) wartość dla \texttt{1 - 0.025 = 0.975} i jest to \textbf{\color[HTML]{b30eff}1.959964} \\
 
-    Następnie odczytujemy z tablic (lub wyliczamy jeżeli nie mamy tablic z wartościami dla x $<$ 0.5) wartość dla \texttt{0.025} i jest to \textbf{\color[HTML]{b30eff}-1.959964} (po prostu wartość przeciwna do poprzedniej ponieważ funkcja gęstości rozkładu normalnego jest symetryczna względem środka)
+    Następnie odczytujemy z tablic (lub wyliczamy, jeżeli nie mamy tablic z wartościami dla x $<$ 0.5) wartość dla \texttt{0.025} i jest to \textbf{\color[HTML]{b30eff}-1.959964} (po prostu wartość przeciwna do poprzedniej, ponieważ funkcja gęstości rozkładu normalnego jest symetryczna względem środka)
 
     \begin{figure}[H]
         \center
@@ -738,14 +738,14 @@
 
     Ilość naszych stopni swobody to n-1 więc w naszym przypadku 17 \\
 
-    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopniom swobody i jest to \textbf{\color[HTML]{b30eff}2.11} oraz wyliczamy tą wartośc dla drugiego krańca przedziału (podobnie jak w poprzednim przypadku rozkład t-studenta ma symetryczny wykres względem środka) która jest równa \textbf{\color[HTML]{b30eff}-2.11} \\
+    Odczytujemy z tablic rozkładu t-studenta wartość odpowiadającą 2.5\% poziomowi ufności (5\%/2) oraz 17 stopniom swobody i jest to \textbf{\color[HTML]{b30eff}2.11} oraz wyliczamy tę wartość dla drugiego krańca przedziału (podobnie jak w poprzednim przypadku rozkład t-studenta ma symetryczny wykres względem środka), która jest równa \textbf{\color[HTML]{b30eff}-2.11} \\
 
     \begin{figure}[H]
         \center
         \includegraphics[width=0.7\linewidth]{t-test.png}
     \end{figure}
 
-    Ponieważ 4.63423341 $>$ 2.11 mamy podstawy aby odrzucić hipotezę zerową i przyjąć hipotezę alternatywną
+    Ponieważ 4.63423341 $>$ 2.11 mamy podstawy, aby odrzucić hipotezę zerową i przyjąć hipotezę alternatywną
 
 
     \subsection{Testy Chi-kwadrat}
@@ -768,7 +768,7 @@
             \item 5 oczek - 2 razy
             \item 6 oczek - 14 razy
         \end{itemize}
-        Przeprowadź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i rozstrzygnij na poziomie 5\% istotności czy producent ma rację
+        Przeprowadź test zgodności (\texttt{goodness of fit}) $\chi^{2}$ i rozstrzygnij na poziomie 5\% istotności, czy producent ma rację
     \end{exercise}
 
     Wyliczamy wartości oczekiwane dla każdego przedziału i zgodnie z \texttt{rule of thumb} w razie potrzeby je łączymy tak, aby dla każdego z nich wartość była $\geq$ 5
@@ -787,14 +787,14 @@
         \end{tabular}
     \end{table}
 
-    Następnie aby obliczyć $\chi^{2}$ stosujemy następujący wzór (N to liczba naszych x):
+    Następnie, aby obliczyć $\chi^{2}$ stosujemy następujący wzór (N to liczba naszych x):
     \begin{equation*}
         \chi^{2} = \sum_{x=1}^{N} \frac{(Obs_{x} - Exp_{x})^{2}}{Exp_{x}}
     \end{equation*}
 
     W naszym przypadku $\chi^{2} \approx 1.6666$ \\
 
-    Stopnie swobody obliczamy ze wzoru \textbf{N -1}, gdzie N to liczba naszych x-ów. W naszym przypadku liczba stopni swobody jest więc równa \textbf{3}. \\
+    Stopnie swobody obliczamy ze wzoru \textbf{N - 1}, gdzie N to liczba naszych x-ów. W naszym przypadku liczba stopni swobody jest więc równa \textbf{3}. \\
 
     Następnie odczytujemy z tablicy $\chi^{2}$ wartość dla 5\% istotności przy 3 stopniach swobody. Jest ona równa \textbf{7.82} \\
 
@@ -830,7 +830,7 @@
         P(I|D) = \frac{P(D|I)\cdot P(I)}{P(D)} = \frac{P(D|I)\cdot P(I)}{P(D|I)\cdot P(I) + P(D|\bar{I})\cdot P(\bar{I})} = \frac{\frac{1}{20}\cdot \frac{1}{5}}{\frac{1}{20}\cdot \frac{1}{5} + \frac{3}{10}\cdot \frac{4}{5}} = \frac{1}{25}
     \end{equation*}
 
-    Prawdopodobieństwo że moduł, w którym znalazł się defekt przeszedł proces inspekcji wynosi $\frac{1}{25}$.
+    Prawdopodobieństwo, że moduł, w którym znalazł się defekt przeszedł proces inspekcji wynosi $\frac{1}{25}$.
 
     \newpage
 
