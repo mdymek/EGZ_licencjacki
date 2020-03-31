@@ -1491,10 +1491,186 @@
 
     \section{Pochodne cząstkowe funkcji wielu zmiennych; różniczkowalność i różniczka funkcji.}
 
+    \begin{itemize}
+        \item  Korzystając z definicji zbadać, czy istnieją pochodne cząstkowe rzędu pierwszego podanych funkcji
+    
+        $f(x,y) = x \cdot \sin{xy}, (x_0, y_0) = (\pi,1)$\newline
+        \newline
+        \begin{equation}
+        \begin{aligned}
+        \frac{\partial f}{\partial x}(\pi, 1)  \stackrel{def}{=} lim_{\Delta x \rightarrow 0} \frac{f(\pi + \Delta x, 1) - f(\pi, 1)}{\Delta x} = \\
+        lim_{\Delta x \rightarrow 0} \frac{(\pi + \Delta x ) \sin{((\pi + \Delta x))} - \pi \sin{(\pi)}}{\Delta x} = \\
+        lim_{\Delta x \rightarrow 0} \left[ (\pi + \Delta x) \frac{-sin \Delta x}{\Delta x} \right] = - \pi
+        \end{aligned}
+        \end{equation}
+        
+        \item Obliczyć pochodne cząskowe pierwszego rzędu podanych funkcji
+        
+        $f(x,y) = e^{x^2 \sin y}$\newline
+        \newline
+        \begin{equation}
+            \begin{aligned}
+            \frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \left( e^{x^2 \sin y} \right ) = \left( e^{x^2 \sin y} \right) \cdot 2x \sin y
+            \end{aligned}
+        \end{equation}
+        \begin{equation}
+            \begin{aligned}
+            \frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \left( e^{x^2 \sin y} \right ) = \left( e^{x^2 \sin y} \right) \cdot x^2 \cos y
+            \end{aligned}
+        \end{equation}
+        
+        \item Obliczyć pochodne cząstkowe drugiego rzędu podanych funkcji
+        
+        $f(x,y) = xy + \frac{x^2}{y^3}$
+        
+        Początkowo wyliczamy pochodne pierwszego rzędu
+        \begin{equation}
+        \begin{aligned}
+        \frac{\partial f}{\partial x} = \frac{\partial }{\partial x} \left( xy + \frac{x^2}{y^3}\right ) = y + \frac{2x}{y^3}
+        \end{aligned}
+        \end{equation}
+        
+        \begin{equation}
+        \begin{aligned}
+         \frac{\partial f}{\partial y} = \frac{\partial }{\partial y} \left( xy + \frac{x^2}{y^3}\right ) = x + \frac{3x^2}{y^4}
+         \end{aligned}
+        \end{equation}
+        
+        Następnie wyliczamy pochodne cząstkowe drugiego rzędu
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial f }{\partial x^2} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial x} \right ) = \frac{\partial}{ \partial x} \left( y + \frac{2x}{y^3} \right) = \frac{2}{y^3}
+            \end{aligned}
+        \end{equation}
+        
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial f }{\partial x \partial y} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial y} \right) = \frac{\partial}{\partial x} \left( x - \frac{3x^2}{y^4} \right) = 1 - \frac{6x}{y^4}
+            \end{aligned}
+        \end{equation}
+        
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial f }{\partial y \partial x} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial x} \right) = \frac{\partial}{\partial y} \left( y + \frac{2x}{y^3} \right) = 1 - \frac{6x}{y^4}
+            \end{aligned}
+        \end{equation}
+        
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial f }{\partial y^2} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial y} \right) = \frac{\partial}{\partial y} \left( x - \frac{3x^2}{y^4} \right) = \frac{12x^2}{y^5}
+            \end{aligned}
+        \end{equation}
+        
+        \item Korzystajc z definicji zbadać różniczkowalnośc podanych funkcji we wskazanych punktach \newline
+        $f(x,y) = x^2 - y^2$
+        w punkcie $(x_0, y_0) = (1, -2)$
+        
+        Korzystając z definicji, wiemy, żę funkcja jest różniczkowalna jeżeli zachodzi poniższa równość
+        \begin{equation}
+            \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{f(x_0 + \Delta x, y_0 + \Delta y) - f(x_0, y_0) - \frac{\partial f}{\partial x} (x_0, y_0) \Delta x - \frac{\partial f}{\partial y} (x_0, y_0) \Delta y}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = 0
+        \end{equation}
+        
+        Najpierw policzymy potrzebne pochodne cząstkowe we wskazanych punktach\newline
+        
+        $\frac{\partial f}{\partial x} = \frac{\partial }{\partial x} (x^2 - y^2) = 2x \; \; \; \; \; \frac{\partial f}{\partial x} (1,-2) = 2x | _{(1,-2)} = 2 \\$ \newline
+        $\frac{\partial f}{\partial y} = \frac{\partial}{\partial y} (x^2 - y^2) = 2y \; \; \; \; \; \frac{\partial f}{\partial y} (1, -2) = 2y | _{(1,-2)} = 4$
+        
+         Następnie sprawdzimy równość z definicji
+         
+         \begin{equation}
+         \begin{aligned}
+            \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(1 + \Delta x)^2 - (-2 + \Delta y)^2 - (1 - 4) - 2 \Delta x - 4 \Delta y }{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
+            = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{1 + 2 \Delta x + (\Delta x)^2 - (4 - 4 \Delta y + (\Delta y)^2) - 2 \Delta x - 4 \Delta y}{ \sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
+            = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(\Delta x)^2 - (\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(\Delta x)^2 + (\Delta y)^2 - 2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
+            = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \left[ \sqrt{(\Delta x)^2 + (\Delta y)^2} \right] - \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} \\
+            \end{aligned}
+        \end{equation}
+        
+        $ \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \left[ \sqrt{(\Delta x)^2 + (\Delta y)^2} \right] = 0$\newline
+        
+        Oraz z twierdzenia o trzech ciągach\newline
+        \\
+        $\lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = 0 $\newline
+        \\
+        Zatem cała granica wynosi 0 oraz funkcja jest różniczkowalna w punkcie (1,-2).
+        
+        
+        
+    \end{itemize}
+   
     \newpage
 
     \section{Ekstrema funkcji wielu zmiennych. Definicje i twierdzenia.}
+\begin{itemize}
+            \item Zbadać czy podana funkcja ma ekstrema lokalne oraz jeśli tak to podać je\\
+            
+            $f(x,y) = 3(x-1)^2 + 4(y+2)^2 = 3(x^2 - 2x +1) + 4(y^2 + 4y + 4) =\\ = 3x^2 - 6x + 3 + 4y^2 + 16y + 4$\\
+            
+            Korzystamy z warunku wystarczającego na istnienie ekstremum lokalnego funkcji dwóch zmiennych
+            
+            Najpierw liczymy pochodne cząstkowe
+            
+            \begin{equation}
+                \begin{aligned}
+                    \frac{\partial f}{\partial x} (x,y) = \frac{\partial }{\partial x} \left( 3x^2 - 6x + 3 + 4y^2 + 16y + 4 \right) = 6x - 6 \\
+                    \\
+                    \frac{\partial f}{\partial y} (x,y) = \frac{\partial }{\partial y} \left( 3x^2 - 6x + 3 + 4y^2 + 16y + 4 \right) = 8y + 16
+                \end{aligned}
+            \end{equation}
+            
+            Funkcja f może mieć ekstrema tylko w miejscu zerowania się pochodnych
+            
+            \begin{equation}
+                \begin{aligned}
+                    \left \{ \begin{array}{lr}
+                                        \frac{\partial f}{\partial x} (x_0, y_0 ) = 0 \\
+                                        \\
+                                        \frac{\partial f}{\partial y} (x_0, y_0) = 0
+                    \end{array} \right.
+                    \\
+                    \\
+                    \left \{ \begin{array}{lr}
+                                        6x_0 - 6 = 0 \\
+                                        \\
+                                        8y_0 + 16 = 0
+                    \end{array}\right.
+                \end{aligned}
+            \end{equation}
+            
+            Zatem punkt zerowania się pochodnych, w którym funkcja może mieć ekstrema to $P(x_0,y_0) = P(1,-2)$
+            
+            Wyliczamy pochodne cząstkowe drugiego rzędu oraz badamy znak macierzy Jacobi'ego
+            
+            \begin{equation}
+                \begin{aligned}
+                det \begin{bmatrix}
+                           \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
+                           \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
+                \end{bmatrix}
+                                \end{aligned}
+            \end{equation}
+            \newpage
+         
+                 $\frac{\partial f}{\partial x^2} (x,y) = \frac{\partial}{\partial x} \left( 6x - 6 \right) = 6$
+                 \\
+                 
+                $\frac{\partial f}{\partial x \partial y} (x,y)  =  \frac{\partial}{\partial x} \left( 8y + 16 \right) = 0$
+                \\
+                
+                $\frac{\partial f}{\partial y \partial x} (x,y) = \frac{\partial}{\partial y} \left( 6x - 6 \right) = 0$
+                \\
+                
+                $\frac{\partial f}{\partial y^2} (x,y)  = \frac{\partial}{\partial x} \left( 8y + 16 \right) = 8$
+                \\
+                
+                $ det \begin{bmatrix}
+                     6 & 0 \\
+                     0 & 8
+                    \end{bmatrix} = 6 \cdot 8 = 48 > 0$ \\
+                    
+                Zatem funkcja f ma ekstremum lokalne w punkcie (1,-2) oraz $\frac{\partial f}{\partial x^2}(x_0, y_0) > 0$ zatem jest to minimum lokalne właściwe.
 
+        \end{itemize}
     \newpage
 
     \section{Twierdzenie o zmianie zmiennych w rachunku całkowym; współrzędne walcowe i sferyczne.}
