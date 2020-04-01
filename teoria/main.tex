@@ -2096,7 +2096,243 @@
 
     \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
     \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
+    \begin{definition}
+        Lista jest abstrakcyjną strukturą danych (ADT), która posiada następujące właściwości
+        \begin{itemize}
+            \item Przechowuje elementy \textbf{tego samego typu}
+            \item Wykorzystuje pamięć w sposób \textbf{dynamiczny lub statyczny}
+            \item Dostęp do danych jest \textbf{sekwencyjny}
+            \item Elementy w liście sa \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście 
+            \begin{itemize}
+                \item element ai znajduje się na pozycji ‘i’
+                \item element ai poprzedza ai+1 dla i=1,2,...,n-1
+                \item element ai następuje po ai-1 dla i=2,...,n
+            \end{itemize}
+            \item Wyróżnia się dwa podstawowe sposoby implementacji listy jako ADT
+            \begin{itemize}
+                \item Tablica
+                \item Lista wiązana
+            \end{itemize}
+        \end{itemize}
+        \end{definition}
+        
+        \begin{definition}
+            W sensie matematycznym lista jest skończonym ciągiem elementów ustalonego typu
+        Node: $a1, a2, . . . , an, , n \geq 0$
+        przy czym Node, zwany typem bazowym, może być np. typem \textbf{klasy, struktury, int,
+        string} itp.
+        \end{definition}
+        
+        \subsection{Implementacja za pomocą tablic (array)}
+        Tablica wykorzystuje pamięć w sposób \textbf{statyczny}. Oznacza to, że ma z góry określony rozmiar oraz pewna jej część może być niewykorzystana. Tablica posiada zmienne wskazujące na jej maksymalny rozmiar, ilość zajętych miejsc. Indeksowanie elementów zazwyczaj zaczyna się od 0 i kończy na maxsize-1.
+        
+
+        \subsection{Implementacja za pomocą Listy Wiązanej (Linked List)}\\
+        Rozróznia się dwa podstawowe rodzaje:
+        \begin{enumerate}
+            \item Lista wiązana \textbf{jednokierunkowa} \\
+            Z każdego elementu możliwe jest przejście do jego następnika NEXT
+            \item Lista wiązana \textbf{dwukierunkowa} \\
+            Z każdego elementu możliwe jest przejscie do jego następnika NEXT i poprzednika PREV
+        \end{enumerate}
+        
+        W liście wiązanej wyróżnia się dwie podstawowe zmienne typu Node potrzebne do jej obsługi
+        
+        \begin{enumerate}
+            \item HEAD
+            \item TAIL
+        \end{enumerate}
+        
+        Dodatkowo, lista wiązana jest \textbf{cykliczna} jeżeli
+        
+        \begin{enumerate}
+            \item{$next(TAIL) \rightarrow HEAD$}
+            \item{$prev(HEAD) \rightarrow TAIL$}
+        \end{enumerate}
+        
+        Pojedynczy element listy jest klasą lub strukturą, zwyczajowo nazywa się Node (węzeł). Przechowuje pole data o pożądanym typie danych oraz wskaźnik (wskaźniki) na element następny (i poprzedni).
+        \\
+        Przykład implementacji struktury Node w C++
+        
+        \begin{verbatim}
+        struct Node { 
+            int data; 
+            struct Node* next; 
+            struct Node* prev;
+        }; 
+        \end{verbatim}
+        \newpage
+        Przykład implementacji klasy Node w Java
+        
+        \begin{verbatim}
+        class Node<E> { 
+            E data; 
+            Node<E> next;
+            Node<E> prev;
+        }; 
+        \end{verbatim}
+        
+        \\
+        
+        Przykład implementacji klasy LinkedList w Java
+        \begin{verbatim}
+        class LinkedList<E> { 
+            Node<E> head; // head of the list
+            Node<E> tail; // tail of the list
+            int counter = 0;
+            ...
+        }
+        \end{verbatim}
+    
+        Operacje i złożoności
+        
+        \begin{enumerate}
+            \item
+\begin{verbatim}
+CREATE(l: List)
+\end{verbatim}
+            Tworzy nową listę \\
+            O(1) - czas stały
+            \item
+\begin{verbatim}
+APPEND(l: List; d: Data)
+\end{verbatim}
+            Dodaje na końcu  listy l rekord d \\
+            O(1) - czas stały
+            \item
+\begin{verbatim}
+INSERT(l: List; d: Data; i: Integer)
+\end{verbatim}
+            Dodaje rekord d do określonego miejsce i w liście l \\
+            O(n) - czas liniowy
+            \item 
+\begin{verbatim}
+FIND(l: List; i: Integer)
+\end{verbatim}
+            Znajduje i-ty w kolejności rekord z listy \\
+            O(min(i, n)) - czas liniowy
+            \item
+\begin{verbatim}
+DELETE(l: List; i: Integer)
+\end{verbatim}
+            Usuwa -ity w kolejności rekord z listy \\
+            O(min(i, n)) - czas liniowy
+            \item
+\begin{verbatim}
+MAKENULL(l: List)
+\end{verbatim}
+            Czyści listę, usuwając wszystkie rekordy \\
+            O(1) - czas stały
+        \end{enumerate}
+\newpage
     \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
+    \subsection{Kolejka}
+    \begin{definition}
+        Kolejka FIFO (First In First Out). 
+
+    Jest to lista, w której
+    \begin{itemize}
+        \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}
+        \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}\\
+        \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki
+        \begin{itemize}
+            \item Tablica cykliczna
+            \item Lista wiązana
+        \end{itemize}
+    \end{itemize}
+    \end{definition}
+
+Operacje i złożoności
+\begin{enumerate}
+\item
+\begin{verbatim}
+Create()
+\end{verbatim}
+Tworzy pustą kolejkę
+\item
+\begin{verbatim}
+isEmpty()
+\end{verbatim}
+Sprawdza czy kolejka pusta
+\item
+\begin{verbatim}
+Enqueue(x)    
+\end{verbatim}
+Wstawia nowy element x
+\item
+\begin{verbatim}
+Front()
+\end{verbatim}
+Odczytuje pierwszy element w kolejce
+\item 
+\begin{verbatim}
+Dequeue()
+\end{verbatim}
+Usuwa pierwszy element w kolejce i go zwraca 
+\end{enumerate}
+
+\subsection{Sposoby implementacji kolejki}\\
+
+Na początku zauważmy, że \textbf{nieefektywną} realizacją kolejki w tablicy jest przyjęcie, że
+początek kolejki \textbf{front} będzie zawsze równy 0, a \textbf{rear} będzie indeksem do pierwszego
+wolnego elementu tablicy.\\
+
+
+Najbardziej \textbf{efektywnym} rozwiązaniem jest reprezentacja kolejki w \textbf{tablicy cyklicznej}.
+Operacje wstawiania i usuwania zwiększają pozycje końca i początku kolejki o 1 modulo
+rozmiar tablicy, wykorzystując metodę:
+\begin{verbatim}
+private int Add (int i){
+    return (i+1) % maxSize; // reszta z dzielenia
+} 
+\end{verbatim}
+
+\subsection{Kolejka Priorytetowa}
+\begin{definition} Kolejka Priorytetowa\\
+Jest to lista, w której
+\begin{itemize}
+    \item Usuwany jest zawsze element o największej (najmniejszej) wartości
+\end{itemize}
+\end{definition}
+
+Operacje
+\begin{enumerate}
+    \item
+\begin{verbatim}
+Insert(x, q)
+\end{verbatim}
+Wstawienie elementu ‘x’ do kolejki q
+\item
+\begin{verbatim}
+Max(Q)
+\end{verbatim}
+Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
+\item
+\begin{verbatim}
+Min(Q)
+\end{verbatim}
+Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
+\item
+\begin{verbatim}
+Delete_Max(Q)
+\end{verbatim}
+Usunięcie największego elementu z kolejki q
+\item
+\begin{verbatim}
+Delete_Min(Q)
+\end{verbatim}
+Usunięcie największego elementu z kolejki q
+\end{enumerate}
+
+
+\subsection{ Sposoby implementacji kolejki priorytetowej }
+\begin{itemize}
+    \item Lista - Tablica Nieuporządkowana
+    NIEEFEKTYWNA!
+    \item Lista - Tablica Uporządkowana Rosnąco (Malejąco)
+    NIEEFEKTYWNA!
+    \item Kopiec Max (Min)
+\end{itemize}
 
     \newpage
 
