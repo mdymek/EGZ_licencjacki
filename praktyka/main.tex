@@ -833,15 +833,193 @@
     Prawdopodobieństwo, że moduł, w którym znalazł się defekt przeszedł proces inspekcji wynosi $\frac{1}{25}$.
 
     \newpage
-
-
-
-
-
+    
     \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
-    \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
+    \begin{exercise}
+    Oblicz element odwrotny do $\mathrm{7}$ w $Z_{19}$.
+    %11
+    \end{exercise}
+    
+    $ NWD(7, 19) = 1 $, zatem element odwrotny istnieje
+    $$19 / 7 = 2 \;r\; 5$$
+    $$7 / 5 = 1 \;r\; 2$$
+    $$5 / 2 = 2\; r\; 1$$
+	Zatem:
+    $$5 = 19 - 2  * 7$$
+    $$2 = 7 - 5 = 7 - (19 - 2 * 7) = -19 + 3 * 7$$
+    $$1 = 5 - 2 * 2 = 19 - 2 * 7 - 2 * (-19 + 3 * 7) = \mathbf{3} * 19 \mathbf{- 8} * 7$$
+    Współczynnik przy 7: $-8$. $-8\; mod\; 19 = 11$\\
+    Liczbą odwrotną do 7 w $Z_{19}$ jest 11
+    \begin{exercise}
+    Oblicz współczynniki Bézouta dla $\mathrm{240}$ i $\mathrm{46}$.
+    \end{exercise}
+    
+    $$240 / 46 = 5 \;r\; 10$$
+    $$46 / 10 = 4 \;r\; 6$$
+    $$10 / 6 = 1 \;r\; 4$$
+    $$6 / 4 = 1 \;r\; 2$$
+    $$4 / 2 = 2 \;r\; 0$$
+    
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $i$ &  $r_i$& $d_i$ &       $x_i$   &       $y_i$       \\
+    \hline
+    0   &   240 &   -   &       1       &       0           \\
+    \hline
+    1   &   46  &   5   &       0       &       1           \\
+    \hline
+    2   &   10  &   4   & 1 - 5 * 0 = 1 & 0 - 5 * 1 = -5    \\
+    \hline
+    3   &   6   &   1   & 0 - 4 * 1 = -4& 1 - 4 * -5 = 21   \\
+    \hline
+    4   &   4   &   1   & 1 - 1 * -4 = 5& -5 - 1 * 21 = -26 \\
+    \hline
+    5   &   2   &   2   &-4 - 1 * 5 = -9& 21 - 1 * -26 = 47 \\
+    \hline
+    
+    \end{tabular}
+    \end{table}
+    
+    $$-9 * 240 + 47 * 46 = 2 = NWD(240, 46)$$
+    Współczynniki Bézouta wynoszą -9 i 47.\\
+    
+    \begin{exercise}
+    Pokaż, że jeśli $a, b \in \mathbb{N}$ i $d = NWD(a, b)$ to $\exists m, n : d = ma + nb$.
+    \end{exercise}
+    
+    Mamy zbiór $S = \{ma + nb \; | \; m, n \in \mathbb{Z}, ma + nb > 0\}$. $S$ nie jest puste, zatem (z zasady dobrego uporządkowania) istnieje jego najmniejszy element $d$.
+    
+    Pokażmy, że $d$ jest dzielnikiem $a$.
+    $$a = dq + r$$
+    $$r = a - dq$$
+    $$r = a - q(ma + nb)$$
+    $$r = (1 - qm)a - qnb$$
+    $$r = am' + bn'$$
+    Zatem $r = 0$ lub $r \in S$. Skoro $r$ jest resztą z dzielenia $a$ przez $d$, to $r < d$. $d$ jest najmniejszym elementem $S$, zatem $r = 0$, zatem $d | a$. Analogiczne rozumowanie możemy przeprowadzić dla $b$.
+    
+    Pokażmy, że $d = NWD(a, b)$. Niech $c$ będzie wspólnym dzielnikiem $a$ i $b$. Zatem $a = cq_1$ i $b = cq_2$.
+    $$d = ma + nb$$
+    $$d = cq_1a + cq_2b$$
+    $$d = c(q_1a + q_2b)$$
+    Zatem $c | d$, zatem $c \leq d$, zatem $d = NWD(a, b)$
+    
+\section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
 
-    \newpage
+    \begin{exercise}
+    Udowodnij, że każdy ortogonalny układ wektorów jest liniowo niezależny.
+    \end{exercise}
+    
+    Mamy układ wektorów ortogonalnych  $x_1, x_2 ,\dots, x_n$. Zatem $$\forall i,j: i \neq j \; x_i \cdot x_j = 0$$ oraz $$\forall i \; x_i \cdot x_i > 0$$
+    Istnieją skalary $a_1, a_2 ,\dots, a_n$, takie, że: $$a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0$$
+    Powyższe równanie pomnóżmy skalarnie przez $x_1$. 
+    $$a_1 * x_1 \cdot x_1 + a_2 * x_2 \cdot x_1 + \ldots + a_n * x_n \cdot x_1 = 0$$
+    $$a_1 * x_1 \cdot x_1 + 0 + \ldots + 0 = 0$$
+    $$a_1 * x_1 \cdot x_1 = 0$$
+    Skoro $x_1 \cdot x_1 > 0$, to $a_1 = 0$. Powyższe działania powtórzmy dla pozostałych wektorów.
+    $$a_1 = a_2 = \ldots = a_n = 0$$
+    Zatem układ wektorów jest liniowo niezależny.
+    \begin{exercise}
+    Dokonaj ortonomilizacji wektorów w $\mathbb{R}_3$:             
+    
+    $\mathbf{v}_1$ =
+    $\begin{bmatrix}
+    1 & 1 & 0
+    \end{bmatrix}
+    \mathbf{v}_2 =
+    \begin{bmatrix}
+    1 & 1 & 1
+    \end{bmatrix}
+    \mathbf{v}_3 =
+    \begin{bmatrix}
+    0 & 1 & 1
+    \end{bmatrix}$
+    \end{exercise}
+    
+    $$
+    \mathbf{u}_1 =
+    \begin{bmatrix}
+    1 & 1 & 0
+    \end{bmatrix}
+    $$
+    
+    $$
+    \mathbf{u}_2 =  \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2 = \begin{bmatrix}
+    1 & 1 & 1
+    \end{bmatrix}
+    -
+    \frac{2}{2}
+    \begin{bmatrix}
+    1 & 1 & 0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+    $$
+    \mathbf{u}_3 =  \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3= 
+    \begin{bmatrix}
+    0 & 1 & 1
+    \end{bmatrix}
+    -
+    \frac{1}{2}
+    \begin{bmatrix}
+    1 & 1 & 0
+    \end{bmatrix}
+    -
+    \frac{1}{1}
+    \begin{bmatrix}
+    0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    -\frac{1}{2} & \frac{1}{2} & 0
+    \end{bmatrix}
+    $$
+    Otrzymane wektory podzielmy przez ich długość:
+    $$
+    \mathbf{e}_1 =
+    \frac
+    {\begin{bmatrix}
+    1 & 1 & 0
+    \end{bmatrix}}
+    {\sqrt{2}}
+    =
+    \begin{bmatrix}
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0
+    \end{bmatrix}
+    $$
+    
+    $$
+    \mathbf{e}_2 =
+    \frac
+    {\begin{bmatrix}
+    0 & 0 & 1
+    \end{bmatrix}}
+    {1}
+    =
+    \begin{bmatrix}
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+    $$
+    \mathbf{e}_3 =
+    \frac
+    {\begin{bmatrix}
+    -\frac{1}{2} & \frac{1}{2} & 0
+    \end{bmatrix}}
+    {\frac{\sqrt{2}}{2}}
+    =
+    \begin{bmatrix}
+    -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0
+    \end{bmatrix}
+    $$
+
+\newpage
 
     \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
     \subsection{Liczby Stirlinga I rodzaju}
