@@ -296,7 +296,7 @@
         $1$ & $3$ & $-$ & $-$ & $-$ \\ \hline
         $1$ & $3$ & $2$ & $-$ & $-$ \\ \hline
         $3$ & $5$ & $1$ & $-\frac{1}{2}$ & $-$ \\ \hline
-        $3$ & $5$ & $6$ & $-\frac{5}{2}$ & $-\frac{3}{2}$ \\ \hline
+        $3$ & $5$ & $6$ & $\frac{5}{2}$ & $\frac{3}{2}$ \\ \hline
     \end{tabular}\\\\
     Zatem otrzymuje się wielomian:
     \begin{align*}
@@ -905,9 +905,268 @@
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
 
+    \begin{exercise}
+        Mamy dziewięć różnych 8-elementowych podzbiorów zbioru $\mathbb{N}_{12}$. Każdy element ze zbioru $\mathbb{N}_{12}$ należy do tej samej liczby r podzbiorów zbioru $\mathbb{N}_{12}$. 
+        \begin{enumerate}
+            \item Ile wynosi r?
+            \item Czy jest to możliwe dla dziewięciu 7-elementowych podzbiorów?
+        \end{enumerate}
+    \end{exercise}
+    Rozwiązanie:
+    \begin{enumerate}
+        \item $k = 8$ \quad $n = 12$\\
+            b - liczba k-elementowych podzbiorów X
+            $b = 9$ \\
+            Szukamy ile wynosi liczba takich podzbiorów korzystając ze wzoru $b=\frac{n\cdot r}{k}$
+            \begin{align*}
+                r=\frac{9 \cdot 8}{12} = 6
+            \end{align*}
+        \item $k = 7$ \quad $b=9$ \quad $n=12$\\\\
+            Czy zachodzi $k|n \cdot r$?
+            \begin{align*}
+                r=\frac{b \cdot k}{n} = \frac{9 \cdot 7}{12} = \frac{21}{4} \notin \mathbb{N}
+            \end{align*}
+            Zatem nie jest to możliwe.
+    \end{enumerate}
+    
+    
+    \begin{exercise}
+        Dana jest 5-konfiguracja z parametrami n=12, k=6, $r_5=1$. Wyznacz wartości $r_i$, dla i-konfiguracji o tym samym n i k oraz i=1,2,3,4.
+    \end{exercise}
+    Rozwiązanie:
+    Korzystamy ze wzoru: $r_{t-1}$ $= r_t \cdot \frac{n-t+1}{k-t+1}$
+    \begin{align*}
+        r_4 = r_5\cdot \frac{12-5+1}{6-5+1} = \frac{8}{2} = 4 \\
+        r_3 = r_4\cdot \frac{12-4+1}{6-4+1} = 4 \cdot \frac{9}{3} = 12 \\
+        r_2 = r_3\cdot \frac{12-3+1}{6-3+1} = 12 \cdot \frac{10}{4} = 30 \\
+        r_1 = r_2\cdot \frac{12-2+1}{6-2+1} = 30 \cdot \frac{11}{5} = 66 \\
+    \end{align*}
+    
+    \begin{align*}
+        r_1: (12,6,66) \\
+        r_2: (12,6,30) \\
+        r_3: (12,6,12) \\
+        r_4: (12,6,4) \\
+    \end{align*}
+    
+    \begin{exercise}
+        Czy może istnieć 3-konfiguracja o parametrach n=15, k=6 i $r_3$=2?
+    \end{exercise}
+    
+    \begin{align*}
+        r_2=r_3\cdot \frac{n-3+1}{k-3+1}=2\cdot \frac{15-3+1}{6-3+1}=2\cdot \frac{13}{4}=\frac{13}{2}\notin \mathbb{Z}
+    \end{align*}
+    Zatem nie może istnieć taka konfiguracja.
+    
+
     \newpage
 
     \section{Cykl Hamiltona, obwód Eulera, liczba chromatyczna - definicje i twierdzenia.}
+
+    \begin{exercise}
+    Podaj przykład grafu, który:
+        \begin{enumerate}
+            \item Ma obwód eulera i cykl Hamiltona
+            \item ma cykl Hamiltona, ale nie ma obwodu Eulera
+            \item ma obwód Eulera, ale nie ma cyklu Hamiltona
+            \item nie ma ani cyklu Hamiltona, ani obwodu Eulera
+        \end{enumerate}
+    \end{exercise}
+    
+    Rozwiązanie:
+    \begin{enumerate}
+        \item 
+                \begin{center}
+                \begin{tikzpicture}[scale=0.075]
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (37.3,-12.9) circle (3);
+                \draw [black] (24.7,-44.7) circle (3);
+                \draw [black] (51.4,-44.3) circle (3);
+                \draw [black] (57.3,-20.4) circle (3);
+                \draw [black] (16.4,-20.8) circle (3);
+                \draw [black] (36.19,-15.69) -- (25.81,-41.91);
+                \draw [black] (27.11,-42.91) -- (54.89,-22.19);
+                \draw [black] (54.3,-20.43) -- (19.4,-20.77);
+                \draw [black] (18.89,-22.47) -- (48.91,-42.63);
+                \draw [black] (50.17,-41.56) -- (38.53,-15.64);
+                \end{tikzpicture}
+                \end{center}
+                
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (21.8,-16.9) circle (3);
+            \draw [black] (51.7,-16.6) circle (3);
+            \draw [black] (21.8,-44.9) circle (3);
+            \draw [black] (50.9,-45.6) circle (3);
+            \draw [black] (24.8,-16.87) -- (48.7,-16.63);
+            \draw [black] (51.62,-19.6) -- (50.98,-42.6);
+            \draw [black] (47.9,-45.53) -- (24.8,-44.97);
+            \draw [black] (21.8,-41.9) -- (21.8,-19.9);
+            \draw [black] (23.98,-42.84) -- (49.52,-18.66);
+            \end{tikzpicture}
+            \end{center}
+        
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.4,-47.2) circle (3);
+            \draw [black] (53.3,-46.9) circle (3);
+            \draw [black] (60.3,-24.5) circle (3);
+            \draw [black] (15,-24.3) circle (3);
+            \draw [black] (38.7,-5.6) circle (3);
+            \draw [black] (36.34,-7.46) -- (17.36,-22.44);
+            \draw [black] (15.92,-27.15) -- (21.48,-44.35);
+            \draw [black] (25.4,-47.17) -- (50.3,-46.93);
+            \draw [black] (54.19,-44.04) -- (59.41,-27.36);
+            \draw [black] (58.04,-22.52) -- (40.96,-7.58);
+            \draw [black] (18,-24.31) -- (57.3,-24.49);
+            \draw [black] (57.73,-26.04) -- (24.97,-45.66);
+            \draw [black] (23.49,-44.41) -- (37.61,-8.39);
+            \draw [black] (39.7,-8.43) -- (52.3,-44.07);
+            \draw [black] (50.72,-45.38) -- (17.58,-25.82);
+            \end{tikzpicture}
+            \end{center}
+            
+        \item
+            
+                \begin{center}
+                \begin{tikzpicture}[scale=0.075]
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (23.9,-14.5) circle (3);
+                \draw [black] (54.1,-13.6) circle (3);
+                \draw [black] (25,-42.7) circle (3);
+                \draw [black] (54.5,-42.7) circle (3);
+                \draw [black] (26.9,-14.41) -- (51.1,-13.69);
+                \draw [black] (54.14,-16.6) -- (54.46,-39.7);
+                \draw [black] (51.5,-42.7) -- (28,-42.7);
+                \draw [black] (24.88,-39.7) -- (24.02,-17.5);
+                \draw [black] (26.11,-16.53) -- (52.29,-40.67);
+                \draw [black] (51.98,-15.72) -- (27.12,-40.58);
+                \end{tikzpicture}
+                \end{center}
+    \end{enumerate}
+
+    
+    \begin{exercise} Określ liczbę chromatyczną:
+        \begin{enumerate}
+            \item grafu zupełnego $K_n$
+            \item grafu cyklicznego $C_{2r}$
+            \item grafu cyklicznego $C_{2kr+1}$
+            \item drzewa
+        \end{enumerate}
+    \end{exercise}
+    Rozwiązanie:
+    
+    \begin{enumerate}
+        \item 
+        
+            $\chi (X)=n$
+        
+             \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (26.2,-19.2) circle (3);
+            \draw (26.2,-19.2) node {$1$};
+            \draw [black] (53.9,-19.5) circle (3);
+            \draw (53.9,-19.5) node {$2$};
+            \draw [black] (26.2,-44.7) circle (3);
+            \draw (26.2,-44.7) node {$4$};
+            \draw [black] (52.9,-45.2) circle (3);
+            \draw (52.9,-45.2) node {$3$};
+            \draw [black] (29.2,-19.23) -- (50.9,-19.47);
+            \draw [black] (53.78,-22.5) -- (53.02,-42.2);
+            \draw [black] (49.9,-45.14) -- (29.2,-44.76);
+            \draw [black] (26.2,-41.7) -- (26.2,-22.2);
+            \draw [black] (28.35,-21.29) -- (50.75,-43.11);
+            \draw [black] (28.42,-42.68) -- (51.68,-21.52);
+            \end{tikzpicture}
+            \end{center}
+        
+        \item 
+             $\chi (X)=2$
+            \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (24.9,-15.4) circle (3);
+            \draw (24.9,-15.4) node {$1$};
+            \draw [black] (46.4,-15.4) circle (3);
+            \draw (46.4,-15.4) node {$2$};
+            \draw [black] (54.7,-30.7) circle (3);
+            \draw (54.7,-30.7) node {$1$};
+            \draw [black] (42.5,-43.5) circle (3);
+            \draw (42.5,-43.5) node {$2$};
+            \draw [black] (24.7,-42.9) circle (3);
+            \draw (24.7,-42.9) node {$1$};
+            \draw [black] (13,-28.1) circle (3);
+            \draw (13,-28.1) node {$2$};
+            \draw [black] (15.05,-25.91) -- (22.85,-17.59);
+            \draw [black] (27.9,-15.4) -- (43.4,-15.4);
+            \draw [black] (47.83,-18.04) -- (53.27,-28.06);
+            \draw [black] (52.63,-32.87) -- (44.57,-41.33);
+            \draw [black] (39.5,-43.4) -- (27.7,-43);
+            \draw [black] (22.84,-40.55) -- (14.86,-30.45);
+            \end{tikzpicture}
+            \end{center}
+        
+        \item 
+        
+             $\chi (X)=3$
+            
+            \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (27.7,-16.7) circle (3);
+            \draw (27.7,-16.7) node {$1$};
+            \draw [black] (47.5,-16.9) circle (3);
+            \draw (47.5,-16.9) node {$2$};
+            \draw [black] (51.9,-35.1) circle (3);
+            \draw (51.9,-35.1) node {$1$};
+            \draw [black] (20.8,-35.9) circle (3);
+            \draw (20.8,-35.9) node {$3$};
+            \draw [black] (37.6,-48.8) circle (3);
+            \draw (37.6,-48.8) node {$2$};
+            \draw [black] (30.7,-16.73) -- (44.5,-16.87);
+            \draw [black] (48.2,-19.82) -- (51.2,-32.18);
+            \draw [black] (49.73,-37.18) -- (39.77,-46.72);
+            \draw [black] (35.22,-46.97) -- (23.18,-37.73);
+            \draw [black] (21.81,-33.08) -- (26.69,-19.52);
+            \end{tikzpicture}
+            \end{center}
+        
+        \item 
+             $\chi (X)=2$
+            \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (37.1,-15.2) circle (3);
+            \draw (37.1,-15.2) node {$1$};
+            \draw [black] (23.7,-29.3) circle (3);
+            \draw (23.7,-29.3) node {$2$};
+            \draw [black] (50.7,-28.9) circle (3);
+            \draw (50.7,-28.9) node {$2$};
+            \draw [black] (12.7,-45.6) circle (3);
+            \draw (12.7,-45.6) node {$1$};
+            \draw [black] (30.8,-45.9) circle (3);
+            \draw (30.8,-45.9) node {$1$};
+            \draw [black] (44.3,-45.8) circle (3);
+            \draw (44.3,-45.8) node {$1$};
+            \draw [black] (61.3,-45.6) circle (3);
+            \draw (61.3,-45.6) node {$1$};
+            \draw [black] (35.03,-17.37) -- (25.77,-27.13);
+            \draw [black] (39.21,-17.33) -- (48.59,-26.77);
+            \draw [black] (22.02,-31.79) -- (14.38,-43.11);
+            \draw [black] (24.88,-32.06) -- (29.62,-43.14);
+            \draw [black] (49.64,-31.71) -- (45.36,-42.99);
+            \draw [black] (52.31,-31.43) -- (59.69,-43.07);
+            \end{tikzpicture}
+            \end{center}
+            
+    \end{enumerate}
 
     \newpage
 

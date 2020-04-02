@@ -1082,45 +1082,48 @@
     \newpage
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
-
+    
     \begin{definition}
-        Rodzinę podzbiorów $B_1, dots, B_b \subset X$ nazywamy \textbf{konfiguracją kombinatoryczną o parametrach ($n, k, \lambda$)}
-        (gdzie $\lambda \geq 1$) na zbiorze X, jeśli spełnia następujące warunki:
+        \textbf{Konfiuracją kombinatoryczną} $B$ o parametrach $(n,k,r)$ nazywamy rodzinę $k$-elementowych podzbiorów w $X$, jeżeli każdy element $x \in X$ występuje w dokładnie $r$ podbiorach. Zachodzą warunki:
         \begin{enumerate}
-            \item $n = |X|$,
-            \item $k = |B_i| \forall i = 1, dots, b$,
-            \item Każde dwa elementy $x, y \in X$ występują jednocześnie w dokładnie $\lambda$ spośród zbiorów $B_i$.
+            \item $n = |X|$
+            \item $|B_i|=k \quad \forall i=1, \dots, b$
+            \item $n \cdot r = b \cdot k$ \quad gdzie b to liczba k-elementowych podzbiorów zbioru n-elementowego
         \end{enumerate}
     \end{definition}
-
+    
     \begin{theorem}
-        Dla dowolnej konfiguracji o parametrach $(n, k, \lambda)$ zachodzą związki:
+        Istnieje konfiguracja kombinatoryczna $B$ o parametrach $(n, k, r)$ wtedy i tylko wtedy, gdy:
         \begin{enumerate}
-            \item $n * r = k * b$
-            \item $\lambda * (n-1) = r * (k-1)$
+            \item $k | n\cdot r$
+            \item $\frac{n\cdot r}{k}\leq {n\choose k}$
         \end{enumerate}
-        gdzie $b$ - liczba bloków, $r$ - łączna liczba wystąpieeń dowolnego pojedynczego $x \in X$ we wszystkich blokach.
-        \begin{align*}
-            r = \lambda  * \frac{n-1}{k-1} ~~ \text{ oraz } ~~ b = \lambda * \frac{n(n-1)}{k(k-1)}
-        \end{align*}
+        
     \end{theorem}
-
+    
     \begin{definition}
-        Niech $t \geq 2$. Rodzinę podzbiorów $B_1, dots, B_b \subset X$ nazywamy \textbf{t-konfiguracją kombinatoryczną
-        o parametrach ($n, k, \lambda_t$)} (gdzie $\lambda_t \geq 1$) na zbiorze X, jeśli spełnia następujące warunki:
-        \begin{enumerate}
-            \item $n = |X|$,
-            \item $k = |B_i| ~~~ \forall i = 1, dots, b$,
-            \item Każdy t-elementowy podzbiór $\{x_1, \dots, x_t\} \subset X$ występuje jednocześnie w dokładnie
-            $\lambda_t$ spośród zbiorów $B_i$.
-        \end{enumerate}
+        Niech $X$ dowolny zbiór, $|X| = n.$ $B$ rodzina $k-$ podzbiorów $X$ jest
+        \textbf{t-konfiguracją kombinatoryczną} o parametrach $(n, k, r_t)$ wtw gdy dla
+        każdego $t-$podzbioru $T \subset X$ liczba bloków z $B$ zawierających $T$ jest
+        równa $r_t$.
     \end{definition}
-
+    
     \begin{theorem}
-        Każda t-konfiguracja kombinatoryczna jest również s-konfiguracją dla $2 \leq s < t$, przy czym zachodzi związek:
-        \begin{align*}
-            \lambda_s = \lambda_t * \frac{(n - t + 1)(n - t + 2) *\dots*(n - s)}{(k - t + 1)(k - t + 2) *\dots*(k - s)}
-        \end{align*}
+        Jeśli $B$ jest $t$-konfiguracją kombinatoryczną, to
+        $B$ jest $s$-konfiguracją kombinatoryczną dla $s = 1, 2,\dots$ $t-1$.
+        Uwagi:
+        \begin{enumerate}
+            \item $r_{t-1}$ $= r_t \cdot \frac{n-t+1}{k-t+1}$
+            \item Jeżeli $B$ jest $t-$konfiguracją o parametrach $(n,k,r_t)$, to dla $1 \leq s \leq (t-1)$ 
+                \begin{align*}
+                    r_s = r_t \cdot \frac{(n-s)(n-s-1)\dots(n-t+1)}{(k-s)(k-s-1)\dots(k-t+1)}
+                \end{align*}
+            \item Jeśli $B$ jest $t$-konfiguracją o parametrach $(n,k,r_t)$, to 
+                \begin{align*}
+                    (k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)
+                \end{align*}
+            warunek 3. dla $t\leq 2$ jest konieczny dla istnienia $t$-konfiguracji, ale nie wystarczający
+        \end{enumerate}
     \end{theorem}
 
     \newpage
