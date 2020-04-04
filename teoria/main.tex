@@ -2187,6 +2187,38 @@
     \end{center}
 
     \section{Metody dowodzenia poprawności pętli.}
+    
+    \begin{itemize}
+        \item \textbf{Asercja} - warunek logiczny wyrażający zależności między zmiennymi
+        algorytmu w kontekście ich aktualnego stanu.
+        \item \textbf{Asercja początkowa} - asercja określająca warunek wejściowy (warunek danych wejściowych) algorytmu.
+        \item \textbf{Asercja końcowa} - asercja określająca wyniki algorytmu (warunek
+        danych wyjściowych).
+        \item Asercje początkowa i końcowa są znane w momencie definiowania
+        problemu i poszukiwania algorytmu, stanowiąc \textbf{specyfikację algorytmu}
+    \end{itemize}
+    
+    \begin{itemize}
+        \item Algorytm A ma własność \textbf{określoności obliczeń} względem warunku $\alpha$, jeśli dla każdych danych spełniających warunek $\alpha$ działanie algorytmu A nie zostanie zerwane
+        (oznaczenie $obl ( \alpha, A )$ ).
+        \item Algorytm A ma \textbf{własność stopu} względem warunku $\alpha$, jeśli dla każdych danych spełniających warunek $\alpha$ działanie algorytmu A nie ciągnie się w nieskończoność (oznaczenie stop $( \alpha, A )$ ).
+        \item Algorytm A jest \textbf{częściowo poprawny} względem warunku początkowego $\alpha$ oraz warunku końcowego $\beta$, gdy dla każdych danych spełniających warunek początkowy $\alpha$, jeżeli działanie algorytmu A dochodzi do końca, wyniki spełniają warunek końcowy $\beta$ (oznaczenie cp $( \alpha, A, \beta)$ ).\\
+        $cp ( \alpha, z \leftarrow w, \beta ) \iff ( \alpha \Rightarrow \beta|_{z \leftarrow w})$\\
+        Przy asercji początkowej $\alpha$ i asercji końcowej $\beta$ podstawienie z $\leftarrow$ w jest częściowo poprawne wtedy i tylko wtedy, gdy
+        poprawna jest implikacja od asercji $\alpha$ do asercji $\beta$, z zastąpieniem każdego wystąpienia zmiennej z podstawianym
+        wyrażeniem w. 
+        \item Algorytm A jest \textbf{całkowicie poprawny} (semantycznie poprawny) względem warunku
+        początkowego $\alpha$ oraz warunku końcowego $\beta$, jeśli ma własność określoności obliczeń
+        względem warunku $\alpha$, ma własność stopu względem warunku $\alpha$ oraz jest częściowo
+        poprawny względem warunku $\alpha$ i warunku $\beta$ (oznaczenie sp $( \alpha, A, \beta )$ ).
+        \item Formalnie:
+        $sp ( \alpha, A, \beta ) \iff obl ( \alpha, A ) \wedge stop ( \alpha, A ) \wedge cp ( \alpha, A, \beta )$
+    \end{itemize}
+    
+    
+    \newpage
+
+
     \section{Odwrotna Notacja Polska: definicja, własności, zalety i wady, algorytmy.}
     \section{Modele obliczen: maszyna Turinga.}
     \section{Modele obliczen: automat skończony, automat ze stosem.}

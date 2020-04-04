@@ -2112,6 +2112,79 @@
 
     \section{Twierdzenie o zmianie zmiennych w rachunku całkowym; współrzędne walcowe i sferyczne.}
 
+    \begin{exercise}
+        Wprowadzając współrzędne walcowe obliczyć podaną całkę po wskazanych obszarach:
+        \begin{align*}
+            \iiint_U (x^2+y^2) \,dx\,dy\,dz, \quad gdzie \ U: \sqrt{x^2+y^2} \leq z \leq 1 
+        \end{align*}
+    \end{exercise}
+    
+    Rozwiązanie:
+    
+    Obszar całkowania $U$ jest stożkiem o wysokości 1 i promieniu podstawy 1. Stożek $U$ i jego rzut na płaszczyznę $xOy$ przedstawiony na rysunkach:
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{28_1a.jpg}
+    \end{figure}
+    
+    Obszar $D_{xy}$ jest określony we współrzędnych biegunowych przez nierówności
+    \begin{align*}
+        0 \leq \varphi \leq 2\pi, \quad 0 \leq \varrho 1 .
+    \end{align*}
+    Dla ustalonego kąta $\varphi$ rysujemy przekrój obszaru $U$ półpłaszczyzną przechodzącą przez oś $Oz$ i przez ramię kąta $\varphi$ (na rysunku). Z rysunku odczytujemy zakres zmienności $h$. Mamy $\varrho \leq h \leq 1$. Ostatecznie obszar $U$ we współrzędnych walcowych jest określony nierównościami:
+    \begin{align*}
+        0 \leq \varphi \leq 2\pi, \quad 0 \leq \varrho \leq 1, \quad \varrho \leq h \leq 1.
+    \end{align*}
+    
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{28_1b.jpg}
+    \end{figure}
+    
+    Dokonując teraz zamiany zmiennych w całce potrójnej na współrzędne walcowe otrzymujemy:
+    \begin{align*}
+        \iiint_U (x^2+y^2) \,dx\,dy\,dz &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} d\varrho \int_{\varrho}^{1} (\varrho^2 cos^2\varphi+\varrho^2sin^2\varphi \varrho) dh 
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} d\varrho \int_{\varrho}^{1} \varrho^3 dh = \int_{0}^{2\pi} d\varphi \int_{0}^{1} d \left[ \varrho^3 h \right]_{h=\varrho}^{h=1} d\varrho 
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} (\varrho^3 - \varrho^4) d\varrho  = \left(\int_{0}^{2\pi}d\varphi\right) \left( \int_{0}^{1} (\varrho^3 - \varrho^4) d\varrho\right) 
+        \\ &= \left[\varphi\right]_0^{2\pi} \cdot \left[\frac{\varrho^4}{4} - \frac{\varrho^5}{5}\right]_0^1 = 2\pi \cdot \left(\frac{1}{4}-\frac{1}{5}\right) = \frac{\pi}{10}
+    \end{align*}
+    
+    
+    \begin{exercise}
+        Wprowadzając współrzędne sferyczne obliczyć podaną całkę po wskazanych obszarach:
+        \begin{align*}
+            \iiint_U (x^2+y^2+z^2) \,dx\,dy\,dz, \quad gdzie \ U: -\sqrt{4-x^2-y^2} \leq z \leq 0 
+        \end{align*}
+    \end{exercise}
+    Rozwiązanie:
+    Obszar całkowania $U$ jest dolną półkulą o promieniu $R=2$. Półkulę $U$ i jej rzut $D_{xy}$ na płaszczyznę $xOy$ przedstawiony na rysunkach:
+    
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{28_2a.jpg}
+    \end{figure}
+    
+    Na podstawie rzutu $D$ obszaru $U$ ustalamy zakres zmienności kąta $\varphi$ we współrzędnych sferycznych $(\varphi, \psi, \varrho)$. Mamy $0 \leq \varphi \leq 2\pi$. Aby określić zakres zmienności kąta $\psi$ i promienia wodzącego rysujemy (dla ustalonego kąta $\varphi$) przekrój obszaru $U$ półpłaszczyzną przechodzącą przez oś $Oz$ i przez ramię kąta $\varphi$. Z rystunku odczytujemy te zakresy: 
+    \begin{align*}
+        -\frac{\pi}{2} \leq \psi \leq 0, \quad 0 \leq \varrho \leq 2.
+    \end{align*}
+    
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth/2]{28_2b.jpg}
+    \end{figure}
+    
+    Ostatecznie obszar $U$ we współrzędnych sferycznych opisany jest układem nierówności postaci:
+    \begin{align*}
+        0 \leq \varphi \leq 2\pi, \quad -\frac{\pi}{2}\leq \psi \leq 0, \quad 0 \leq \varrho \leq 2.
+    \end{align*}
+    
+    W rozważanej całce dokonujemy zamiany zmiennych na współrzędne sferyczne. Mamy:
+    \begin{align*}
+        \iiint_U \mu(x^2+y^2+z^2) \,dx\,dy\,dz
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} (\varrho^2 cos^2\varphi cos^2\psi+\varrho^2sin^2\varphi cos^2\psi + \varrho^2sin^2\psi) \varrho^2cos\psi d\varrho 
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} \varrho^4cos\psi d\varrho
+        \\ &= \left(\int_{0}^{2\pi} d\varphi\right) \left(\int_{-\frac{\pi}{2}}^{0} cos\psi d\psi\right)\cdot \left(\int_{0}^{2} \varrho^4 d\varrho \right)
+        \\ &= \left[\psi\right]_0^{2\pi} \cdot \left[sin\psi\right]_{-\frac{pi}{2}}^0 \cdot \left[\frac{\varrho ^5}{5}\right]_0^2 = 2\pi \cdot 1 \cdot \frac{32}{5}=\frac{64}{5}\pi
+    \end{align*}
+    
+
     \newpage
 
     \begin{center}
