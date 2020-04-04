@@ -2324,7 +2324,71 @@
 
     \newpage
 
+    \section{Modele obliczen: maszyna Turinga.}
     \section{Modele obliczen: automat skończony, automat ze stosem.}
+    \subsection{Automat skończony deterministyczny}
+    \begin{definition}
+    		Automat skończony deterministyczny oznaczamy piątką parametrów: $\mathcal{A}$ = (S, A, f, $s_{0}$, T) gdzie: \\
+    			S - skończony zbiór stanów \\
+    			A - skończony alfabet wejściowy \\
+    			f - funkcja przejścia S$\times$A $\rightarrow$ S \\
+    			$s_{0}$ - stan początkowy $\in$ S\\
+    			T - zbiór terminali (stanów akceptujących) $\in$ S
+    \end{definition}
+
+    	\begin{definition}
+    	Automaty $\mathcal{A}_{1}$ i  $\mathcal{A}_{2}$ są równoważne,  jeżeli rozpoznają ten sam język, czyli: \\
+    	L($\mathcal{A}_{1}$) = L($\mathcal{A}_{2}$)
+    	\end{definition}
+
+    	\begin{definition}
+    	Każdy automat $\mathcal{A}$ = (S, A, f, $s_{0}$, T) wyznacza w wolnym monoidzie $A^{*}$ prawą kongruencję automatową okresloną w następujący sposób: \\
+    	$\forall$u,v $\in A^{*}$ \\
+    $u \sim A$ v $\Leftrightarrow f(s_{0}, u) = f(s_{0}, v)$
+    	\end{definition}
+
+    	\begin{definition}
+    	Niech $L \subset  A^{*}$ będzie dowolnym językiem, a $u \in A^{*}$ dowolnym słowem.
+	Pochodną Brzozowskiego (residuum) z języka L względem słowa u nazywamy język \\
+	$u^{-1}L = \{w \in A^{*}$  :  $uw \in L \}$
+    	\end{definition}
+
+    	\begin{definition}
+    	Automat ilorazowy to automat, w którym stanami są klasy równoważności
+    	\end{definition}
+
+    	\begin{definition}
+    	Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
+    	$\mathcal{M(A)}$ = $\tau \mathcal{A}$(A*) $\subset S^{S}$
+    	\end{definition}
+
+    	\begin{definition}
+    	Każdy język skończony jest akceptowany przez pewien deterministyczny automat skończony
+    	\end{definition}
+
+    \subsection{Automat skończony niedeterministyczny}
+	\begin{definition}
+    		Automat skończony niedeterministyczny oznaczamy piątką parametrów: $\mathcal{A_{ND}}$ = (S, A, f, $S_{0}$, T) gdzie: \\
+    			S - skończony zbiór stanów \\
+    			A - skończony alfabet wejściowy \\
+    			f - funkcja przejścia S$\times$A $\rightarrow$ $\mathcal{P}$(S) \\
+    			$S_{0}$ - zbiór stanów początkowych $\subset$ S\\
+    			T - zbiór terminali (stanów akceptujących) $\in$ S \\
+
+	Słowo x jest akceptowane gdy $f^{*}$($S_{0}$, x) $\cap$ T $\neq \emptyset$
+    \end{definition}
+
+    \subsection{Automat ze stosem}
+    \begin{definition}
+    		Automat ze stosem to $\mathcal{AS}$ = (A, $A_{S}$, Q, f, $s_{0}$, $z_{0}$, $Q_{F}$) gdzie: \\
+    			A - jest alfabetem \\
+    			$A_{S}$ - jest dowolnym, skończonym i niepustym zbiorem zwanym alfabetem stosu \\
+    			Q - jest dowolnym, skończonym i niepustym zbiorem zwanym zbiorem stanów \\
+    			f: $A_{s} \times Q \times (A \cup \{1\}) \rightarrow \mathcal{P}_{sk}(A^{*}_{S} \times Q)$ jest funkcją przejść \\
+    			$q_{0} \in Q$ jest stanem początkowym \\
+    			$z_{0} \in A_{S}$ jest symbolem początkowym stosu \\
+    			$Q_{F} \subset Q$ zbiorem stanów końcowych
+    \end{definition}
 
     \newpage
 
@@ -2412,46 +2476,46 @@
             \item Lista wiązana \textbf{dwukierunkowa} \\
             Z każdego elementu możliwe jest przejscie do jego następnika NEXT i poprzednika PREV
         \end{enumerate}
-        
+
         W liście wiązanej wyróżnia się dwie podstawowe zmienne typu Node potrzebne do jej obsługi
-        
+
         \begin{enumerate}
             \item HEAD
             \item TAIL
         \end{enumerate}
-        
+
         Dodatkowo, lista wiązana jest \textbf{cykliczna} jeżeli
-        
+
         \begin{enumerate}
             \item{$next(TAIL) \rightarrow HEAD$}
             \item{$prev(HEAD) \rightarrow TAIL$}
         \end{enumerate}
-        
+
         Pojedynczy element listy jest klasą lub strukturą, zwyczajowo nazywa się Node (węzeł). Przechowuje pole data o pożądanym typie danych oraz wskaźnik (wskaźniki) na element następny (i poprzedni).
         \\
         Przykład implementacji struktury Node w C++
-        
+
         \begin{verbatim}
-        struct Node { 
-            int data; 
-            struct Node* next; 
+        struct Node {
+            int data;
+            struct Node* next;
             struct Node* prev;
-        }; 
+        };
         \end{verbatim}
         \newpage
         Przykład implementacji klasy Node w Java
-        
+
         \begin{verbatim}
-        class Node<E> { 
-            E data; 
+        class Node<E> {
+            E data;
             Node<E> next;
             Node<E> prev;
-        }; 
+        };
         \end{verbatim}
-        
+
         Przykład implementacji klasy LinkedList w Java
         \begin{verbatim}
-        class LinkedList<E> { 
+        class LinkedList<E> {
             Node<E> head; // head of the list
             Node<E> tail; // tail of the list
             int counter = 0;
