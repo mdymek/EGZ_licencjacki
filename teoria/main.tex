@@ -986,8 +986,147 @@
     \newpage
 
     \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
-    \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
-
+    
+    \begin{theorem}
+    \textbf{Tożsamość Bézouta}
+    
+    Dla niezerowych liczb całkowitych $a$ oraz $b$ o największym wspólnym dzielniku d, istnieją liczby całkowite $x$ oraz $y$, nazywane współczynnikami Bézouta, które spełniają równanie
+    $$ax + by = d$$
+    \end{theorem}
+        
+    \begin{definition}
+    \textbf{Elementy odwrotne modulo}
+    
+    W strukturze $(Z_m, +, *)$ element odwrotny względem mnożenia dla $x$ to taki $x^{-1}$, że: 
+    $$ x \cdot x^{-1} = 1 \  mod \  m $$
+    Element odwrotny istnieje, jeśli $NWD(x, m) = 1$\\
+    
+    
+    Aby obliczyć element odwrotny do $x$ w $Z_{m}$ należy użyć rozszerzonego algorytmu Euklidesa.
+    \end{definition}
+    \subsection{Algorytm Euklidesa}
+    Oblicza największy wspólny dzielnik $a, b$
+    \begin{verbatim}
+    def euclid(a, b):
+        while b != 0:
+            r = a % b
+            a, b = b, r
+        return a
+    \end{verbatim}
+    Wersja z odejmowaniem:
+    \begin{verbatim}
+    def euclid(a, b):
+        while a != b:
+            if a > b:
+                a = a - b
+            else:
+                b = b - a
+        return a
+    \end{verbatim}
+    \subsection{Rozszerzony algorytm Euklidesa}
+    Oprócz obliczenia największego wspólnego dzielnika, algorytm znajduje także współczynniki Bézouta. \\
+    Poprzedni algorytm obliczał ciąg $r_n$ będący resztami z dzielenia, tzn.:
+    $$ r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}$$
+    gdzie $q_{i}$ oznacza wynik całkowitego dzielenia $r_{i - 1}$ przez $r_i$. \\
+    Wprowadźmy dwa dodatkowe ciągi: $x_{i}$ oraz $y_i$:
+    $$ x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}$$
+    $$ y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}$$
+    Możemy zauważyć, że:
+    $$r_i = x_i * a + y_i * b$$
+    \begin{verbatim}
+    def euclid(a, b):
+        x, x' = 0, 1
+        y, y' = 1, 0
+        r, r' = b, a
+        while r != 0:
+            q = r' // r
+            r', r = r, (r' - q * r)
+            x', x = x, (x' - q * x)
+            y', y = y, (y' - q * t)
+        return r', x', y'
+    \end{verbatim}
+    Ponadto ten algorytm pozawala obliczyć takie $x', y'$, że: $ax' + by' = 0$ (wystarczy zwrócić x i y, zamiast x', y'). 
+    
+    \newpage
+    
+    \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta}
+    
+    \begin{definition}
+    \textbf{Ortogonalność.}
+    
+    Dla wektorów $x, y$ w przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$
+    $$x \bot y \Leftrightarrow x \cdot y = 0 $$
+    
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Liniowa niezależność}
+    
+    Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $R_n$ nazywamy liniowo niezależnymi jeśli
+    $$a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0$$
+    tzn., nie istnieją taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
+    
+    Zbiór wektorów, który nie jest liniowo niezależny, jest zbiorem liniowo zależnym. Oznacza to, że przynajmniej jeden jego element jest kombinacją liniową pozostałych wektorów. \\~\\
+    
+    W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
+    
+    \end{definition}
+    
+    \begin{theorem}
+    Każdy układ ortogonalny wektorów w przestrzeni $R_n$ jest liniowo niezależny.
+    \end{theorem}
+    
+    \begin{definition}
+    
+    \textbf{Baza przestrzeni $R_n$}
+    
+    Zbiór wektorów $B \subset R_n$ nazywamy bazą przestrzeni $R_n$ jeśli:
+    
+    \begin{enumerate}
+    \item Jest liniowo niezależny
+    \item Generuje przestrzeń $R_n$ tzn. każdy wektor $\in R_n$ można zapisać jako kombinację liniową wektorów z $B$  
+    \end{enumerate}
+    
+    \end{definition}
+    
+    \begin{theorem}
+    Każdy ortogonalny układ $n$ wektorów w $R_n$ jest bazą.
+    \end{theorem}
+    
+    \begin{definition}
+    \textbf{Ortonormalność}
+    
+    Zbiór wektorów $A$ przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
+    $$ \forall x,y \in A  \quad   x \cdot y =  \begin{cases} 
+    		0, & x \ne y \\ 
+    		1, & x = y \end{cases}$$ 
+    
+    Zatem wektory należące do $A$ są wersorami.
+    \end{definition}
+    
+    \newpage
+    \subsection{Ortonormalizacja Grama-Schmidta}
+    
+    Ortonormalizacja to proces przekształcenia układu niezależnych liniowo wektorów w układ wektorów ortonormalnych.
+    
+    Projekcję wektora $\mathbf{v}$ na wektor $\mathbf{u}$ definiujemy jako:
+    $$\mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$
+    Algorytm:
+    
+    \begin{enumerate}
+    
+    \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie $$\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i$$
+    		tzn:
+    		$$\mathbf{u}_1 = \mathbf{v}_1$$
+    		$$\mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2$$
+    		$$\mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3$$
+    
+    \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$
+    
+    \end{enumerate}
+    
+    \includegraphics[scale=0.20]{graphics/15_6.png}
+    
     \newpage
 
     \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
