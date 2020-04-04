@@ -1560,7 +1560,89 @@
 
     \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
 
-	
+	\subsection{Ciągłość funkcji}
+
+	\textbf{Zad 1} \\
+
+	\noindent Zbadaj ciągłość funkcji \begin{align*} f(x) =
+																		\begin{cases}
+																			x \sin(\frac{1}{x}) & \text{dla x $\neq$ 0} \\
+																			0 & \text{dla x = 0}
+																		\end{cases}
+															\end{align*}
+
+	\noindent Interesuje nas oczywiście punkt 0 i to dla niego musimy policzyć granicę (funkcja w pozostałych punktach jest ciągła, jako że składa się z funkcji elementarnych): \\
+
+	\noindent $\lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin(\frac{1}{x})$ - możemy to zrobić z twierdzenia o 3 funkcjach: \\
+
+	\noindent Korzystając tradycyjnie z warunku $-1 \leq \sin{x} \leq 1$ możemy zauważyć, że: \\
+
+	\noindent $-x \leq x \sin(\frac{1}{x}) \leq x$ a z kolei $\lim_{x \to 0} x = \lim_{x \to 0} -x = 0$ więc i $\lim_{x \to 0} x \sin(\frac{1}{x}) = 0$ \\
+
+	\noindent Mamy więc $\lim_{x \to 0} f(x) = f(0)$ więc ta funkcja jest ciągła \\
+
+
+	\noindent \textbf{Zad 2}
+
+	\noindent Zbadaj ciągłość funkcji \begin{align*} f(x) =
+																		\begin{cases}
+																			x + 2 & \text{dla x $<$ 0} \\
+																			0 & \text{dla x = 0} \\
+																			-x + 2 & \text{dla x $>$ 0}
+																		\end{cases}
+															\end{align*}
+
+	\noindent Oczywiście tak jak i poprzednio interesuje nas punkt 0. Musimy policzyć granice lewo i prawo stronne: \\
+
+	\noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} x + 2 = 2$ \\
+	\noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to 0^{+}} -x + 2 = 2$ \\
+
+	\noindent Granice prawo i lewo stronne są sobie więc równe, ale nie są one równe wartości funkcji w badanym punkcie.
+						Stąd też ta funkcja nie jest ciągła w punkcie 0. \\
+
+
+	\noindent \textbf{Twierdzenie Barboux}
+
+
+	\subsection{Pochodna}
+
+	\textbf{Istnienie pochodnej w punkcie z definicji} \\
+
+	\noindent Zbadaj istnienie pochodnej funkcji \begin{align*} f(x) = 
+																					\begin{cases}
+																						x^2 \cdot \sin{\frac{1}{x}} & \text{dla x $\neq$ 0} \\
+																						0 & \text{dla x = 0}
+																					\end{cases}
+																				\end{align*}
+	dla punktu $x_{0}$ = 0
+
+	\noindent Aby stwierdzić czy funkcja ma pochodną w punkcie $x_{0}$musimy obliczyć jej prawo i lewo stronną pochodną z definicji: \\
+
+	\noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x}
+							= \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
+
+	\noindent Analogiczny wywód możemy zrobić dla pochodnej prawostronnej - wynik również będzie 0 \\
+
+	\noindent Ponieważ pochodne prawo i lewo stronne są równe to pochodna tej funkcji w punkcie $x_{0}$ istnieje \\
+
+
+	\noindent \textbf{Obliczanie przybliżonej wartości funkcji za pomocą różniczki} \\
+
+	\noindent Oblicz przybliżoną wartość liczby $\sqrt[3]{8.2}$ \\
+
+	\noindent Korzystamy ze wzoru $f(x_{0} + \Delta x) \approx f(x_{0}) + f'(x_{0}) \cdot \Delta x$ \\
+
+	\noindent W naszym przypadku: \\
+	$f(x) = \sqrt[3]{x}$ \\
+	$x_{0} = 8$ \\
+	$\Delta x = 0.2$ \\
+	$f'(x) = \frac{1}{3\sqrt[3]{x^2}}$ \\
+
+	\noindent Obliczamy więc: \\
+	$f(8) = 2$ \\
+	$f'(8) = \frac{1}{12}$ \\
+
+	\noindent Więc $\sqrt[3]{8.2} \approx 2 + \frac{1}{12} \cdot 0.2 = \frac{121}{60}$
 
 
     \newpage
