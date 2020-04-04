@@ -1916,10 +1916,58 @@
 
     \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
 
+
     \newpage
 
     \section{Ekstrema funkcji jednej zmiennej. Definicje i twierdzenia.}
 
+        \begin{exercise}
+            Korzystając z definicji uzasadnij, że funkcja 
+                $$f(x) = \begin{cases}
+                        1 - x^2 & x \neq 0 \\
+                        0 & x = 0
+                        \end{cases}$$
+            ma ekstremum lokalne w punkcie $x_0 = 0$.
+        \end{exercise}
+        
+        $f(0) = 0$. Dla każdego punktu $x \in (-1, 1) \setminus \{0\}\;  f(x) > 0$. Zatem $x$ jest właściwym minimum lokalnym (sąsiedztwo $S(0, 1)$).
+        
+        \begin{exercise}
+            Znajdź najmniejszą i największą wartość funkcji\\ $f(x) = x^2 - 2x + 3$ na przedziale $[-2, 5]$
+        \end{exercise}
+
+        $$f'(x) = 2x - 2$$ 
+        $$f'(x) = 0 \Leftrightarrow x = 1$$
+        Wartość pochodnej jest ujemna na przedziale $[-2, 1)$ i dodatnia na przedziale $(1, 5]$, zatem istnieje minimum lokalne w punkcie 1.
+        
+        \begin{center}
+            \begin{tabular}{c||c|c|c}
+                 $x$ & -2 & 1 & 5 \\
+                 \hline
+                 $f(x)$ & 3 & 2 & 18 \\   
+            \end{tabular}
+        \end{center}
+
+        Wartość najmniejsza funkcji $f(x)$ na przedziale $[-2, 5]$ wynosi 2, wartość największa - 18.
+
+        
+        \begin{exercise}
+            Znajdź wszystkie ekstrema lokalne funkcji $f(x) = \frac{x}{x^2 + 4}$
+        \end{exercise}
+        
+        $$f'(x) = \frac{x^2 + 4 - x * 2x}{(x^2 + 4)^2} = \frac{-x^2 + 4}{(x^2 + 4)^2}$$
+        $f'(x) = 0$ dla punktów w których $-x^2 + 4 = 0$, tzn. 2 i -2. Sprawdźmy znak pochodnej pomiędzy jej miejscami zerowymi:
+    
+        \begin{center}
+            \begin{tabular}{c||c|c|c}
+                $x$ &$(-\infty, -2)$ & $(-2, 2)$ & $(2, \infty)$ \\
+                \hline
+                $f'x)$ & - & + & -
+            \end{tabular}
+        \end{center}
+        
+        Widzimy, że pochodna zmienia znak zarówno w -2 jak i 2. Zatem funkcja $f'(x)$ ma minimum lokalne (równe $-\frac{1}{4}$) w punkcie -2, oraz maksimum lokalne (równe $\frac{1}{4}$) w punkcie 2.
+        
     \newpage
 
     \section{Całka Riemanna funkcji jednej zmiennej.}
