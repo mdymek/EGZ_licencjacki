@@ -1463,9 +1463,105 @@
 
     \section{Ciąg i granica ciągu liczbowego, granica funkcji.}
 
+	\subsection{Obliczanie granicy ciągu}
+	$\lim_{n \to \infty} a_{n} = 2^{-\sqrt{n}} = \frac{1}{2^{\sqrt{n}}}$ - mianownik dąży do $\infty$ więc całość dąży do 0 \\
+
+	\noindent $\lim_{n \to \infty} a_{n} = \sqrt[n]{10}$ - pierwiastek o coraz wyższym stopniu z jakiejś stałej dąży do 1 \\
+
+	\noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} + 2n - 5}{2n^{2} - n}$ - w przypadku takich ułamków dzielimy licznik i mianownik przez n w największej potędze, który znajduje się w mianowniku
+	$\frac{\frac{n^{2}}{n^{2}} + \frac{2n}{n^{2}} - \frac{5}{n^{2}}} {\frac{2n^{2}}{n^{2}} - \frac{n}{n^{2}}}$ co po skróceniu daje nam $\frac{1 + \frac{2}{n} - \frac{5}{n^{2}}} {2 - \frac{1}{n}}$.
+	Teraz widzimy, że $\frac{2}{n}$, $\frac{5}{n^{2}}$ oraz $\frac{1}{n}$ zmierzają do 0, więc ostatecznie otrzymujemy $\frac{1}{2}$. \\
+
+	\noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} - 2n}{13n + 1}$ - na początku robimy tak jak w poprzednim przykładzie, czyli dzielimy licznik i mianownik przez n w największej potędze z mianownika
+	$\frac{\frac{n^{2}}{n} - \frac{2n}{n}} {\frac{13n}{n} + \frac{1}{n}}$ co po skróceniu daje $\frac{n - 2}{13 + \frac{1}{n}}$. Widzimy, że $\frac{1}{n}$ dąży do 0, więc całość możemy zapisać już jako
+	$\frac{n - 2}{13}$. Ponieważ licznik cały czas rośnie, a mianownik pozostaje stały to całość dąży do $+\infty$
+
+
+	\subsection{Twierdzenie o dwóch ciągach}
+	
+	Używane aby wykazać rozbieżność pewnego ciągu wykorzystując inny (prostszy) ciąg \\
+
+	\noindent Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
+
+	\noindent Korzystamy z faktu, że $\sin{n} \leq 1$ wtedy \\
+	$(3 \sin{n} - 5) \cdot n^{3}  \leq  (3\cdot 1 - 5) \cdot n^{3}  \leq  -2n^{3}  \leq  -n \stackrel{n \to \infty}{\longrightarrow} -\infty$ \\
+	Więc zgodnie z twierdzeniem o 2 ciągach również $(3 \sin{n} - 5) \cdot n^{3} \stackrel{n \to \infty}{\longrightarrow} -\infty$
+
+	\subsection{Twierdzenie o trzech ciągach}
+
+	Używane aby wyznaczyć granicę właściwą pewnego ciągu korzystając z dwóch innych ciągów
+
+	\noindent Oblicz granicę $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}}$ \\
+
+	\noindent Podobnie jak poprzednio korzystamy z faktu, że $-1 \leq \sin{x} \leq 1$ oraz $-1 \leq \cos{x} \leq 1$ dla każdego naturalnego x
+
+	\noindent Wtedy $\frac{n^2+n-1}{2+n+3n^2} \leq \frac{n^2+n- \cos{n^2}}{2+n \sin{\sqrt{n}}+3n^2} \leq \frac{n^2+n+1}{2-n+3n^2}$ \\
+
+	\noindent Ponieważ $\lim_{n\to \infty} \frac{n^2+n-1}{2+n+3n^2} = \frac{1}{3}$ oraz $\lim_{n\to \infty} \frac{n^2+n+1}{2-n+3n^2} = \frac{1}{3}$
+	więc z twierdzenia o trzech ciągach wiemy również, że i $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}} = \frac{1}{3}$
+
+
+	\subsection{Funkcje}
+
+	Oblicz granice funkcji 
+	\begin{align*} f(x) = 
+	\begin{cases}
+		|\frac{1}{x+2}| & \text{dla x mniejszego od 0} \\
+		\sin{x} & \text{dla x większego bądź równego 0}
+	\end{cases}
+	\end{align*}
+	w punktach $x_{1} = -2$, $x_{2} = 0$, $x_{3} = \pi$ oraz w $+\infty$ i $-\infty$ \\
+
+	\noindent Liczymy granice prawo i lewo stronne dla punktów, w których funkcja jest nie ciągła: \\
+
+	\noindent $\lim_{x \to -2^{-}} f(x) = \lim_{x \to -2^{-}} |\frac{1}{x+2}| = +\infty$ \\
+	\noindent $\lim_{x \to -2^{+}} f(x) = \lim_{x \to -2^{+}} |\frac{1}{x+2}| = +\infty$ \\
+	\noindent Ponieważ granice prawo i lewo stronne są sobie równe to granica w punkcie -2 istnieje i jest równa $-\infty$ \\
+
+	\noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} |\frac{1}{x+2}| = \frac{1}{2}$ \\
+	\noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to -2^{+}} \sin{x} = 0$ \\
+	\noindent Ponieważ granice prawo i lewo stronne nie są sobie równe to granica w punkcie 0 nie istnieje \\
+
+	\noindent W punkcie $\pi$ nasza funkcja jest ciągła, więc jej granicę możemy obliczyć podstawiając $\pi$ bezpośrednio do wzoru: \\
+	\noindent $\lim_{x \to \pi} f(x) = f(\pi) = 0$ \\
+
+	\noindent $\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} |\frac{1}{x+2}| = 0$ - mianownik jest coraz większy (biorąc pod uwagę jego wartość bezwzględną) więc funkcja dąży do 0 \\
+
+	\noindent $\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \sin{x}$ - nie istnieje, ponieważ $\sin{x}$ jest funkcją okresową i nie dąży do żadnej konkretnej wartości \\
+
+
+	\noindent \textbf{Granice specjalne} \\
+
+	\noindent Oblicz granicę funkcji $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5}$
+
+	\noindent Skorzystamy z granic specjalnych $\lim_{x \to 0} \frac{\sin{x}}{x} = 1$ oraz $\lim_{x \to 0} \frac{\ln(x + 1)}{x} = 1$ \\
+
+	\noindent $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5} \stackrel{[\frac{0}{0}]}{=} \lim_{x \to -5} \frac{\sin(x + 5)}{x + 5} + \frac{\ln((x + 5) + 1)}{x + 5}$ \\
+
+	\noindent Ponieważ granica dąży do -5 to wyrażenia w nawiasach dążą do 0 więc możemy zastosować wspomniane granice specjalne. Możemy to zapisać również jako: \\
+
+	\noindent $\lim_{x \to 0} \frac{\sin{x}}{x} + \frac{\ln(x + 1)}{x} \stackrel{\text{z granic specjalnych}}{=} 1 + 1 = 2$ \\
+
+
+	\noindent \textbf{Reguła de L'Hospitala} \\
+
+	\noindent Oblicz granicę funkcji $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x}$ \\
+
+	\noindent Spróbujemy zastosować regułę de L'Hospitala. Aby to zrobić musimy sprawdzić czy granice funkcji z licznika i mianownika z osobna są równe 0 oraz czy funkcja z mianownika w otoczeniu $x_{0}$ nie jest równa 0 \\
+
+	\noindent $\lim_{x \to 0} \sin{x} = 0$ \\
+	\noindent $\lim_{x \to 0} x^2 + 5x = 0$ \\
+	\noindent Możemy do tego zauważyć, że $x^2 + 5x$ w okolicach $x_{0} \neq 0$ więc możemy zastosować regułę de L'Hospitala: \\
+
+	\noindent $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x} = \lim_{x \to 0} \frac{(\sin{x})'}{(x^2 + 5x)'} = \lim_{x \to 0} \frac{\cos{x}}{2x + 5} = \frac{1}{5}$
+
+
     \newpage
 
     \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
+
+	
+
 
     \newpage
 
