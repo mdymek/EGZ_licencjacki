@@ -1,7 +1,11 @@
+%! Suppress = TooLargeSection
+%! Suppress = SentenceEndWithCapital
+%! Suppress = LineBreak
+%! Suppress = MissingLabel
+%! Suppress = Unicode
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-\usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -833,258 +837,270 @@
     Prawdopodobieństwo, że moduł, w którym znalazł się defekt przeszedł proces inspekcji wynosi $\frac{1}{25}$.
 
     \newpage
-    
+
     \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
     \begin{exercise}
-    Oblicz element odwrotny do $\mathrm{7}$ w $Z_{19}$.
-    %11
+        Oblicz element odwrotny do $\mathrm{7}$ w $Z_{19}$.
+        %11
     \end{exercise}
-    
+
     $ NWD(7, 19) = 1 $, zatem element odwrotny istnieje
-    $$19 / 7 = 2 \;r\; 5$$
-    $$7 / 5 = 1 \;r\; 2$$
-    $$5 / 2 = 2\; r\; 1$$
-	Zatem:
-    $$5 = 19 - 2  * 7$$
-    $$2 = 7 - 5 = 7 - (19 - 2 * 7) = -19 + 3 * 7$$
-    $$1 = 5 - 2 * 2 = 19 - 2 * 7 - 2 * (-19 + 3 * 7) = \mathbf{3} * 19 \mathbf{- 8} * 7$$
+    \begin{gather*}
+        19 / 7 = 2 \;r\; 5\\
+        7 / 5 = 1 \;r\; 2\\
+        5 / 2 = 2\; r\; 1\\
+    \end{gather*}
+    Zatem:
+    \begin{gather*}
+        5 = 19 - 2  * 7\\
+        2 = 7 - 5 = 7 - (19 - 2 * 7) = -19 + 3 * 7\\
+        1 = 5 - 2 * 2 = 19 - 2 * 7 - 2 * (-19 + 3 * 7) = \mathbf{3} * 19 \mathbf{- 8} * 7\\
+    \end{gather*}
     Współczynnik przy 7: $-8$. $-8\; mod\; 19 = 11$\\
     Liczbą odwrotną do 7 w $Z_{19}$ jest 11
     \begin{exercise}
-    Oblicz współczynniki Bézouta dla $\mathrm{240}$ i $\mathrm{46}$.
+        Oblicz współczynniki Bézouta dla $\mathrm{240}$ i $\mathrm{46}$.
     \end{exercise}
-    
-    $$240 / 46 = 5 \;r\; 10$$
-    $$46 / 10 = 4 \;r\; 6$$
-    $$10 / 6 = 1 \;r\; 4$$
-    $$6 / 4 = 1 \;r\; 2$$
-    $$4 / 2 = 2 \;r\; 0$$
-    
+
+    \begin{gather*}
+        240 / 46 = 5 \;r\; 10\\
+        46 / 10 = 4 \;r\; 6\\
+        10 / 6 = 1 \;r\; 4\\
+        6 / 4 = 1 \;r\; 2\\
+        4 / 2 = 2 \;r\; 0\\
+    \end{gather*}
+
     \begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-    $i$ &  $r_i$& $d_i$ &       $x_i$   &       $y_i$       \\
-    \hline
-    0   &   240 &   -   &       1       &       0           \\
-    \hline
-    1   &   46  &   5   &       0       &       1           \\
-    \hline
-    2   &   10  &   4   & 1 - 5 * 0 = 1 & 0 - 5 * 1 = -5    \\
-    \hline
-    3   &   6   &   1   & 0 - 4 * 1 = -4& 1 - 4 * -5 = 21   \\
-    \hline
-    4   &   4   &   1   & 1 - 1 * -4 = 5& -5 - 1 * 21 = -26 \\
-    \hline
-    5   &   2   &   2   &-4 - 1 * 5 = -9& 21 - 1 * -26 = 47 \\
-    \hline
-    
-    \end{tabular}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $i$ &  $r_i$& $d_i$ &       $x_i$   &       $y_i$       \\
+            \hline
+            0 & 240 & - & 1 & 0           \\
+            \hline
+            1 & 46 & 5 & 0 & 1           \\
+            \hline
+            2 & 10 & 4 & 1 - 5 * 0 = 1 & 0 - 5 * 1 = -5    \\
+            \hline
+            3 & 6 & 1 & 0 - 4 * 1 = -4& 1 - 4 * -5 = 21   \\
+            \hline
+            4 & 4 & 1 & 1 - 1 * -4 = 5& -5 - 1 * 21 = -26 \\
+            \hline
+            5 & 2 & 2 &-4 - 1 * 5 = -9& 21 - 1 * -26 = 47 \\
+            \hline
+
+        \end{tabular}
     \end{table}
-    
-    $$-9 * 240 + 47 * 46 = 2 = NWD(240, 46)$$
+
+    \[-9 * 240 + 47 * 46 = 2 = NWD(240, 46)\]
     Współczynniki Bézouta wynoszą -9 i 47.\\
-    
-    \begin{exercise}
-    Pokaż, że jeśli $a, b \in \mathbb{N}$ i $d = NWD(a, b)$ to $\exists m, n : d = ma + nb$.
-    \end{exercise}
-    
-    Mamy zbiór $S = \{ma + nb \; | \; m, n \in \mathbb{Z}, ma + nb > 0\}$. $S$ nie jest puste, zatem (z zasady dobrego uporządkowania) istnieje jego najmniejszy element $d$.
-    
-    Pokażmy, że $d$ jest dzielnikiem $a$.
-    $$a = dq + r$$
-    $$r = a - dq$$
-    $$r = a - q(ma + nb)$$
-    $$r = (1 - qm)a - qnb$$
-    $$r = am' + bn'$$
-    Zatem $r = 0$ lub $r \in S$. Skoro $r$ jest resztą z dzielenia $a$ przez $d$, to $r < d$. $d$ jest najmniejszym elementem $S$, zatem $r = 0$, zatem $d | a$. Analogiczne rozumowanie możemy przeprowadzić dla $b$.
-    
-    Pokażmy, że $d = NWD(a, b)$. Niech $c$ będzie wspólnym dzielnikiem $a$ i $b$. Zatem $a = cq_1$ i $b = cq_2$.
-    $$d = ma + nb$$
-    $$d = cq_1a + cq_2b$$
-    $$d = c(q_1a + q_2b)$$
-    Zatem $c | d$, zatem $c \leq d$, zatem $d = NWD(a, b)$
-    
-\section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
 
     \begin{exercise}
-    Udowodnij, że każdy ortogonalny układ wektorów jest liniowo niezależny.
+        Pokaż, że jeśli $a, b \in \mathbb{N}$ i $d = NWD(a, b)$ to $\exists m, n : d = ma + nb$.
     \end{exercise}
-    
-    Mamy układ wektorów ortogonalnych  $x_1, x_2 ,\dots, x_n$. Zatem $$\forall i,j: i \neq j \; x_i \cdot x_j = 0$$ oraz $$\forall i \; x_i \cdot x_i > 0$$
-    Istnieją skalary $a_1, a_2 ,\dots, a_n$, takie, że: $$a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0$$
-    Powyższe równanie pomnóżmy skalarnie przez $x_1$. 
-    $$a_1 * x_1 \cdot x_1 + a_2 * x_2 \cdot x_1 + \ldots + a_n * x_n \cdot x_1 = 0$$
-    $$a_1 * x_1 \cdot x_1 + 0 + \ldots + 0 = 0$$
-    $$a_1 * x_1 \cdot x_1 = 0$$
+
+    Mamy zbiór $S = \{ma + nb \; | \; m, n \in \mathbb{Z}, ma + nb > 0\}$. $S$ nie jest puste, zatem (z zasady dobrego uporządkowania) istnieje jego najmniejszy element $d$.
+
+    Pokażmy, że $d$ jest dzielnikiem $a$.
+    \begin{gather*}
+        a = dq + r\\
+        r = a - dq\\
+        r = a - q(ma + nb)\\
+        r = (1 - qm)a - qnb\\
+        r = am' + bn'\\
+    \end{gather*}
+    Zatem $r = 0$ lub $r \in S$. Skoro $r$ jest resztą z dzielenia $a$ przez $d$, to $r < d$. $d$ jest najmniejszym elementem $S$, zatem $r = 0$, zatem $d | a$. Analogiczne rozumowanie możemy przeprowadzić dla $b$.
+
+    Pokażmy, że $d = NWD(a, b)$. Niech $c$ będzie wspólnym dzielnikiem $a$ i $b$. Zatem $a = cq_1$ i $b = cq_2$.
+    \begin{gather*}
+        d = ma + nb\\
+        d = cq_1a + cq_2b\\
+        d = c(q_1a + q_2b)\\
+    \end{gather*}
+    Zatem $c | d$, zatem $c \leq d$, zatem $d = NWD(a, b)$
+
+    \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta.}
+
+    \begin{exercise}
+        Udowodnij, że każdy ortogonalny układ wektorów jest liniowo niezależny.
+    \end{exercise}
+
+    Mamy układ wektorów ortogonalnych  $x_1, x_2 ,\dots, x_n$. Zatem \[\forall i,j: i \neq j \; x_i \cdot x_j = 0\] oraz \[\forall i \; x_i \cdot x_i > 0\]
+    Istnieją skalary $a_1, a_2 ,\dots, a_n$, takie, że: \[a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0\]
+    Powyższe równanie pomnóżmy skalarnie przez $x_1$.
+    \begin{gather*}
+        a_1 * x_1 \cdot x_1 + a_2 * x_2 \cdot x_1 + \ldots + a_n * x_n \cdot x_1 = 0\\
+        a_1 * x_1 \cdot x_1 + 0 + \ldots + 0 = 0\\
+        a_1 * x_1 \cdot x_1 = 0\\
+    \end{gather*}
     Skoro $x_1 \cdot x_1 > 0$, to $a_1 = 0$. Powyższe działania powtórzmy dla pozostałych wektorów.
-    $$a_1 = a_2 = \ldots = a_n = 0$$
+    \[a_1 = a_2 = \ldots = a_n = 0\]
     Zatem układ wektorów jest liniowo niezależny.
     \begin{exercise}
-    Dokonaj ortonomilizacji wektorów w $\mathbb{R}_3$:             
-    
-    $\mathbf{v}_1$ =
-    $\begin{bmatrix}
-    1 & 1 & 0
-    \end{bmatrix}
-    \mathbf{v}_2 =
-    \begin{bmatrix}
-    1 & 1 & 1
-    \end{bmatrix}
-    \mathbf{v}_3 =
-    \begin{bmatrix}
-    0 & 1 & 1
-    \end{bmatrix}$
-    \end{exercise}
-    
-    $$
-    \mathbf{u}_1 =
-    \begin{bmatrix}
-    1 & 1 & 0
-    \end{bmatrix}
-    $$
-    
-    $$
-    \mathbf{u}_2 =  \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2 = \begin{bmatrix}
-    1 & 1 & 1
-    \end{bmatrix}
-    -
-    \frac{2}{2}
-    \begin{bmatrix}
-    1 & 1 & 0
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-    0 & 0 & 1
-    \end{bmatrix}
-    $$
-    
-    $$
-    \mathbf{u}_3 =  \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3= 
-    \begin{bmatrix}
-    0 & 1 & 1
-    \end{bmatrix}
-    -
-    \frac{1}{2}
-    \begin{bmatrix}
-    1 & 1 & 0
-    \end{bmatrix}
-    -
-    \frac{1}{1}
-    \begin{bmatrix}
-    0 & 0 & 1
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-    -\frac{1}{2} & \frac{1}{2} & 0
-    \end{bmatrix}
-    $$
-    Otrzymane wektory podzielmy przez ich długość:
-    $$
-    \mathbf{e}_1 =
-    \frac
-    {\begin{bmatrix}
-    1 & 1 & 0
-    \end{bmatrix}}
-    {\sqrt{2}}
-    =
-    \begin{bmatrix}
-    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0
-    \end{bmatrix}
-    $$
-    
-    $$
-    \mathbf{e}_2 =
-    \frac
-    {\begin{bmatrix}
-    0 & 0 & 1
-    \end{bmatrix}}
-    {1}
-    =
-    \begin{bmatrix}
-    0 & 0 & 1
-    \end{bmatrix}
-    $$
-    
-    $$
-    \mathbf{e}_3 =
-    \frac
-    {\begin{bmatrix}
-    -\frac{1}{2} & \frac{1}{2} & 0
-    \end{bmatrix}}
-    {\frac{\sqrt{2}}{2}}
-    =
-    \begin{bmatrix}
-    -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0
-    \end{bmatrix}
-    $$
+        Dokonaj ortonomilizacji wektorów w $\mathbb{R}_3$:
 
-\newpage
+        $\mathbf{v}_1$ =
+        $\begin{bmatrix}
+             1 & 1 & 0
+        \end{bmatrix}
+        \mathbf{v}_2 =
+        \begin{bmatrix}
+            1 & 1 & 1
+        \end{bmatrix}
+        \mathbf{v}_3 =
+        \begin{bmatrix}
+            0 & 1 & 1
+        \end{bmatrix}$
+    \end{exercise}
+
+    \[
+        \mathbf{u}_1 =
+        \begin{bmatrix}
+            1 & 1 & 0
+        \end{bmatrix}
+    \]
+
+    \[
+        \mathbf{u}_2 =  \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2 = \begin{bmatrix}
+                                                                                     1 & 1 & 1
+        \end{bmatrix}
+        -
+        \frac{2}{2}
+        \begin{bmatrix}
+            1 & 1 & 0
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            0 & 0 & 1
+        \end{bmatrix}
+    \]
+
+    \[
+        \mathbf{u}_3 =  \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3=
+        \begin{bmatrix}
+            0 & 1 & 1
+        \end{bmatrix}
+        -
+        \frac{1}{2}
+        \begin{bmatrix}
+            1 & 1 & 0
+        \end{bmatrix}
+        -
+        \frac{1}{1}
+        \begin{bmatrix}
+            0 & 0 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            -\frac{1}{2} & \frac{1}{2} & 0
+        \end{bmatrix}
+    \]
+    Otrzymane wektory podzielmy przez ich długość:
+    \[
+        \mathbf{e}_1 =
+        \frac
+        {\begin{bmatrix}
+             1 & 1 & 0
+        \end{bmatrix}}
+        {\sqrt{2}}
+        =
+        \begin{bmatrix}
+            \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0
+        \end{bmatrix}
+    \]
+
+    \[
+        \mathbf{e}_2 =
+        \frac
+        {\begin{bmatrix}
+             0 & 0 & 1
+        \end{bmatrix}}
+        {1}
+        =
+        \begin{bmatrix}
+            0 & 0 & 1
+        \end{bmatrix}
+    \]
+
+    \[
+        \mathbf{e}_3 =
+        \frac
+        {\begin{bmatrix}
+             -\frac{1}{2} & \frac{1}{2} & 0
+        \end{bmatrix}}
+        {\frac{\sqrt{2}}{2}}
+        =
+        \begin{bmatrix}
+            -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0
+        \end{bmatrix}
+    \]
+
+    \newpage
 
     \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
     \subsection{Liczby Stirlinga I rodzaju}
-    Uzasadnij, że C(4,2)=11\newline 
+    Uzasadnij, że C(4,2)=11\newline
     Mamy następujące permutacje dwucyklowe zbioru $\{1, 2, 3, 4\}$ \newline
 
     \begin{center}
-    \begin{tabular}{ c c c }
-        (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)\\
-        (1)(2 3 4), (1)(2 4 3), (2)(1 3 4)\\
-        (2)(1 4 3), (3)(1 2 4), (3)(1 4 2)\\
-        (4)(1 2 3), (4)(1 3 2) 
-    \end{tabular}
+        \begin{tabular}{ c c c }
+            (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)\\
+            (1)(2 3 4), (1)(2 4 3), (2)(1 3 4)\\
+            (2)(1 4 3), (3)(1 2 4), (3)(1 4 2)\\
+            (4)(1 2 3), (4)(1 3 2)
+        \end{tabular}
     \end{center}
-    
+
     \subsection{Liczby Stirlinga II rodzaju}
     Uzasadnij, że S(4,2) = 7 \newline
     Zbiór $\{1,2,3,4\}$ możemy podzielić na dwa bloki w następujący sposób
-    
+
     \begin{center}
-    \begin{tabular}{ c c c }
-        \{1\}, \{2, 3, 4\} ; \{2\}, \{1, 3, 4\} ; \{3\}, \{1, 2, 4\} \\
-        \{4\}, \{1, 2, 3\} ; \{1, 2\}, \{3, 4\} ; \{1, 3\}, \{2, 4\} \\
-        \{1, 4\}, \{2, 3\}
-    \end{tabular}
+        \begin{tabular}{ c c c }
+            \{1\}, \{2, 3, 4\} ; \{2\}, \{1, 3, 4\} ; \{3\}, \{1, 2, 4\} \\
+            \{4\}, \{1, 2, 3\} ; \{1, 2\}, \{3, 4\} ; \{1, 3\}, \{2, 4\} \\
+            \{1, 4\}, \{2, 3\}
+        \end{tabular}
     \end{center}
     \newpage
 
     \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
     \subsection{Funkcja Eulera}
-    
+
     \begin{itemize}
         \item $\varphi(2025) = \varphi(3^4 \cdot 5^2) = \varphi(3^4) \cdot \varphi(5^2) = 3^3 \cdot 2 \cdot 5 \cdot 4 = 1080$
         \item $\varphi(1001) = \varphi(7\cdot11\cdot13) = \varphi(7) \cdot \varphi(11) \cdot \varphi(13) = 6 \cdot 10 \cdot12 = 660$
         \item $\varphi(1980) = \varphi(2^2 \cdot 3^2 \cdot 5 \cdot 11) = \varphi(2^2) \cdot \varphi(3^2) \cdot \varphi (5) \cdot \varphi(11) = 2 \cdot 3 \cdot 2 \cdot 4 \cdot 10 = 480$
     \end{itemize}
-    
+
     \subsection{Twierdzenie Fermata}
-    
+
     \subsection{Twierdzenie Eulera}
     \begin{itemize}
         \item Oblicz $2^{64} \pmod {99}$\newline
         NWD(2,99)=1 zatem możemy stosować Twierdzenie Eulera
-        
+
         $\varphi(99) = \varphi(11\cdot 3^2) = \varphi(11) \cdot \varphi(3^2) = 10 \cdot 3 \cdot 2 = 60$
-        
+
         Zatem z Twierdzenia Eulera\newline
         $2^{60} \equiv 1 \pmod {99}$\newline
         $2^{64} = 2^{60} \cdot 2^4 \equiv 2^4 \pmod {99} = 16$
-        
+
         \item Oblicz $99^{400}\pmod {10^3}$\newline
         NWD(99,1000)=1 zatem możemy stosować Twierdzenie Eulera
-        
+
         $\varphi(10^3) = \varphi(2^3 \cdot 5^3) = \varphi(2^3) \cdot \varphi(5^3) = 2^2 \cdot 5^2 \cdot 4 = 400$
-        
+
         Zatem z Twierdzenia Eulera\newline
         $99^{400} \equiv 1 \pmod {10^3}$
-        
+
     \end{itemize}
     \newpage
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
 
     \begin{exercise}
-        Mamy dziewięć różnych 8-elementowych podzbiorów zbioru $\mathbb{N}_{12}$. Każdy element ze zbioru $\mathbb{N}_{12}$ należy do tej samej liczby r podzbiorów zbioru $\mathbb{N}_{12}$. 
+        Mamy dziewięć różnych 8-elementowych podzbiorów zbioru $\mathbb{N}_{12}$. Każdy element ze zbioru $\mathbb{N}_{12}$ należy do tej samej liczby r podzbiorów zbioru $\mathbb{N}_{12}$.
         \begin{enumerate}
             \item Ile wynosi r?
             \item Czy jest to możliwe dla dziewięciu 7-elementowych podzbiorów?
@@ -1093,21 +1109,21 @@
     Rozwiązanie:
     \begin{enumerate}
         \item $k = 8$ \quad $n = 12$\\
-            b - liczba k-elementowych podzbiorów X
-            $b = 9$ \\
-            Szukamy ile wynosi liczba takich podzbiorów korzystając ze wzoru $b=\frac{n\cdot r}{k}$
-            \begin{align*}
-                r=\frac{9 \cdot 8}{12} = 6
-            \end{align*}
+        b - liczba k-elementowych podzbiorów X
+        $b = 9$ \\
+        Szukamy ile wynosi liczba takich podzbiorów korzystając ze wzoru $b=\frac{n\cdot r}{k}$
+        \begin{align*}
+            r=\frac{9 \cdot 8}{12} = 6
+        \end{align*}
         \item $k = 7$ \quad $b=9$ \quad $n=12$\\\\
-            Czy zachodzi $k|n \cdot r$?
-            \begin{align*}
-                r=\frac{b \cdot k}{n} = \frac{9 \cdot 7}{12} = \frac{21}{4} \notin \mathbb{N}
-            \end{align*}
-            Zatem nie jest to możliwe.
+        Czy zachodzi $k|n \cdot r$?
+        \begin{align*}
+            r=\frac{b \cdot k}{n} = \frac{9 \cdot 7}{12} = \frac{21}{4} \notin \mathbb{N}
+        \end{align*}
+        Zatem nie jest to możliwe.
     \end{enumerate}
-    
-    
+
+
     \begin{exercise}
         Dana jest 5-konfiguracja z parametrami n=12, k=6, $r_5=1$. Wyznacz wartości $r_i$, dla i-konfiguracji o tym samym n i k oraz i=1,2,3,4.
     \end{exercise}
@@ -1119,30 +1135,30 @@
         r_2 = r_3\cdot \frac{12-3+1}{6-3+1} = 12 \cdot \frac{10}{4} = 30 \\
         r_1 = r_2\cdot \frac{12-2+1}{6-2+1} = 30 \cdot \frac{11}{5} = 66 \\
     \end{align*}
-    
+
     \begin{align*}
         r_1: (12,6,66) \\
         r_2: (12,6,30) \\
         r_3: (12,6,12) \\
         r_4: (12,6,4) \\
     \end{align*}
-    
+
     \begin{exercise}
         Czy może istnieć 3-konfiguracja o parametrach n=15, k=6 i $r_3$=2?
     \end{exercise}
-    
+
     \begin{align*}
         r_2=r_3\cdot \frac{n-3+1}{k-3+1}=2\cdot \frac{15-3+1}{6-3+1}=2\cdot \frac{13}{4}=\frac{13}{2}\notin \mathbb{Z}
     \end{align*}
     Zatem nie może istnieć taka konfiguracja.
-    
+
 
     \newpage
 
     \section{Cykl Hamiltona, obwód Eulera, liczba chromatyczna - definicje i twierdzenia.}
 
     \begin{exercise}
-    Podaj przykład grafu, który:
+        Podaj przykład grafu, który:
         \begin{enumerate}
             \item Ma obwód eulera i cykl Hamiltona
             \item ma cykl Hamiltona, ale nie ma obwodu Eulera
@@ -1150,12 +1166,12 @@
             \item nie ma ani cyklu Hamiltona, ani obwodu Eulera
         \end{enumerate}
     \end{exercise}
-    
+
     Rozwiązanie:
     \begin{enumerate}
-        \item 
-                \begin{center}
-                \begin{tikzpicture}[scale=0.075]
+        \item
+        \begin{center}
+            \begin{tikzpicture}[scale=0.075]
                 \tikzstyle{every node}+=[inner sep=0pt]
                 \draw [black] (37.3,-12.9) circle (3);
                 \draw [black] (24.7,-44.7) circle (3);
@@ -1167,53 +1183,53 @@
                 \draw [black] (54.3,-20.43) -- (19.4,-20.77);
                 \draw [black] (18.89,-22.47) -- (48.91,-42.63);
                 \draw [black] (50.17,-41.56) -- (38.53,-15.64);
-                \end{tikzpicture}
-                \end{center}
-                
-        \item
-        
-            \begin{center}
-            \begin{tikzpicture}[scale=0.075]
-            \tikzstyle{every node}+=[inner sep=0pt]
-            \draw [black] (21.8,-16.9) circle (3);
-            \draw [black] (51.7,-16.6) circle (3);
-            \draw [black] (21.8,-44.9) circle (3);
-            \draw [black] (50.9,-45.6) circle (3);
-            \draw [black] (24.8,-16.87) -- (48.7,-16.63);
-            \draw [black] (51.62,-19.6) -- (50.98,-42.6);
-            \draw [black] (47.9,-45.53) -- (24.8,-44.97);
-            \draw [black] (21.8,-41.9) -- (21.8,-19.9);
-            \draw [black] (23.98,-42.84) -- (49.52,-18.66);
             \end{tikzpicture}
-            \end{center}
-        
+        \end{center}
+
         \item
-        
-            \begin{center}
+
+        \begin{center}
             \begin{tikzpicture}[scale=0.075]
-            \tikzstyle{every node}+=[inner sep=0pt]
-            \draw [black] (22.4,-47.2) circle (3);
-            \draw [black] (53.3,-46.9) circle (3);
-            \draw [black] (60.3,-24.5) circle (3);
-            \draw [black] (15,-24.3) circle (3);
-            \draw [black] (38.7,-5.6) circle (3);
-            \draw [black] (36.34,-7.46) -- (17.36,-22.44);
-            \draw [black] (15.92,-27.15) -- (21.48,-44.35);
-            \draw [black] (25.4,-47.17) -- (50.3,-46.93);
-            \draw [black] (54.19,-44.04) -- (59.41,-27.36);
-            \draw [black] (58.04,-22.52) -- (40.96,-7.58);
-            \draw [black] (18,-24.31) -- (57.3,-24.49);
-            \draw [black] (57.73,-26.04) -- (24.97,-45.66);
-            \draw [black] (23.49,-44.41) -- (37.61,-8.39);
-            \draw [black] (39.7,-8.43) -- (52.3,-44.07);
-            \draw [black] (50.72,-45.38) -- (17.58,-25.82);
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (21.8,-16.9) circle (3);
+                \draw [black] (51.7,-16.6) circle (3);
+                \draw [black] (21.8,-44.9) circle (3);
+                \draw [black] (50.9,-45.6) circle (3);
+                \draw [black] (24.8,-16.87) -- (48.7,-16.63);
+                \draw [black] (51.62,-19.6) -- (50.98,-42.6);
+                \draw [black] (47.9,-45.53) -- (24.8,-44.97);
+                \draw [black] (21.8,-41.9) -- (21.8,-19.9);
+                \draw [black] (23.98,-42.84) -- (49.52,-18.66);
             \end{tikzpicture}
-            \end{center}
-            
+        \end{center}
+
         \item
-            
-                \begin{center}
-                \begin{tikzpicture}[scale=0.075]
+
+        \begin{center}
+            \begin{tikzpicture}[scale=0.075]
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (22.4,-47.2) circle (3);
+                \draw [black] (53.3,-46.9) circle (3);
+                \draw [black] (60.3,-24.5) circle (3);
+                \draw [black] (15,-24.3) circle (3);
+                \draw [black] (38.7,-5.6) circle (3);
+                \draw [black] (36.34,-7.46) -- (17.36,-22.44);
+                \draw [black] (15.92,-27.15) -- (21.48,-44.35);
+                \draw [black] (25.4,-47.17) -- (50.3,-46.93);
+                \draw [black] (54.19,-44.04) -- (59.41,-27.36);
+                \draw [black] (58.04,-22.52) -- (40.96,-7.58);
+                \draw [black] (18,-24.31) -- (57.3,-24.49);
+                \draw [black] (57.73,-26.04) -- (24.97,-45.66);
+                \draw [black] (23.49,-44.41) -- (37.61,-8.39);
+                \draw [black] (39.7,-8.43) -- (52.3,-44.07);
+                \draw [black] (50.72,-45.38) -- (17.58,-25.82);
+            \end{tikzpicture}
+        \end{center}
+
+        \item
+
+        \begin{center}
+            \begin{tikzpicture}[scale=0.075]
                 \tikzstyle{every node}+=[inner sep=0pt]
                 \draw [black] (23.9,-14.5) circle (3);
                 \draw [black] (54.1,-13.6) circle (3);
@@ -1225,12 +1241,13 @@
                 \draw [black] (24.88,-39.7) -- (24.02,-17.5);
                 \draw [black] (26.11,-16.53) -- (52.29,-40.67);
                 \draw [black] (51.98,-15.72) -- (27.12,-40.58);
-                \end{tikzpicture}
-                \end{center}
+            \end{tikzpicture}
+        \end{center}
     \end{enumerate}
 
-    
-    \begin{exercise} Określ liczbę chromatyczną:
+
+    \begin{exercise}
+        Określ liczbę chromatyczną:
         \begin{enumerate}
             \item grafu zupełnego $K_n$
             \item grafu cyklicznego $C_{2r}$
@@ -1239,111 +1256,111 @@
         \end{enumerate}
     \end{exercise}
     Rozwiązanie:
-    
+
     \begin{enumerate}
-        \item 
-        
-            $\chi (X)=n$
-        
-             \begin{center}
+        \item
+
+        $\chi (X)=n$
+
+        \begin{center}
             \begin{tikzpicture}[scale=0.075]
-            \tikzstyle{every node}+=[inner sep=0pt]
-            \draw [black] (26.2,-19.2) circle (3);
-            \draw (26.2,-19.2) node {$1$};
-            \draw [black] (53.9,-19.5) circle (3);
-            \draw (53.9,-19.5) node {$2$};
-            \draw [black] (26.2,-44.7) circle (3);
-            \draw (26.2,-44.7) node {$4$};
-            \draw [black] (52.9,-45.2) circle (3);
-            \draw (52.9,-45.2) node {$3$};
-            \draw [black] (29.2,-19.23) -- (50.9,-19.47);
-            \draw [black] (53.78,-22.5) -- (53.02,-42.2);
-            \draw [black] (49.9,-45.14) -- (29.2,-44.76);
-            \draw [black] (26.2,-41.7) -- (26.2,-22.2);
-            \draw [black] (28.35,-21.29) -- (50.75,-43.11);
-            \draw [black] (28.42,-42.68) -- (51.68,-21.52);
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (26.2,-19.2) circle (3);
+                \draw (26.2,-19.2) node {$1$};
+                \draw [black] (53.9,-19.5) circle (3);
+                \draw (53.9,-19.5) node {$2$};
+                \draw [black] (26.2,-44.7) circle (3);
+                \draw (26.2,-44.7) node {$4$};
+                \draw [black] (52.9,-45.2) circle (3);
+                \draw (52.9,-45.2) node {$3$};
+                \draw [black] (29.2,-19.23) -- (50.9,-19.47);
+                \draw [black] (53.78,-22.5) -- (53.02,-42.2);
+                \draw [black] (49.9,-45.14) -- (29.2,-44.76);
+                \draw [black] (26.2,-41.7) -- (26.2,-22.2);
+                \draw [black] (28.35,-21.29) -- (50.75,-43.11);
+                \draw [black] (28.42,-42.68) -- (51.68,-21.52);
             \end{tikzpicture}
-            \end{center}
-        
-        \item 
-             $\chi (X)=2$
-            \begin{center}
+        \end{center}
+
+        \item
+        $\chi (X)=2$
+        \begin{center}
             \begin{tikzpicture}[scale=0.075]
-            \tikzstyle{every node}+=[inner sep=0pt]
-            \draw [black] (24.9,-15.4) circle (3);
-            \draw (24.9,-15.4) node {$1$};
-            \draw [black] (46.4,-15.4) circle (3);
-            \draw (46.4,-15.4) node {$2$};
-            \draw [black] (54.7,-30.7) circle (3);
-            \draw (54.7,-30.7) node {$1$};
-            \draw [black] (42.5,-43.5) circle (3);
-            \draw (42.5,-43.5) node {$2$};
-            \draw [black] (24.7,-42.9) circle (3);
-            \draw (24.7,-42.9) node {$1$};
-            \draw [black] (13,-28.1) circle (3);
-            \draw (13,-28.1) node {$2$};
-            \draw [black] (15.05,-25.91) -- (22.85,-17.59);
-            \draw [black] (27.9,-15.4) -- (43.4,-15.4);
-            \draw [black] (47.83,-18.04) -- (53.27,-28.06);
-            \draw [black] (52.63,-32.87) -- (44.57,-41.33);
-            \draw [black] (39.5,-43.4) -- (27.7,-43);
-            \draw [black] (22.84,-40.55) -- (14.86,-30.45);
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (24.9,-15.4) circle (3);
+                \draw (24.9,-15.4) node {$1$};
+                \draw [black] (46.4,-15.4) circle (3);
+                \draw (46.4,-15.4) node {$2$};
+                \draw [black] (54.7,-30.7) circle (3);
+                \draw (54.7,-30.7) node {$1$};
+                \draw [black] (42.5,-43.5) circle (3);
+                \draw (42.5,-43.5) node {$2$};
+                \draw [black] (24.7,-42.9) circle (3);
+                \draw (24.7,-42.9) node {$1$};
+                \draw [black] (13,-28.1) circle (3);
+                \draw (13,-28.1) node {$2$};
+                \draw [black] (15.05,-25.91) -- (22.85,-17.59);
+                \draw [black] (27.9,-15.4) -- (43.4,-15.4);
+                \draw [black] (47.83,-18.04) -- (53.27,-28.06);
+                \draw [black] (52.63,-32.87) -- (44.57,-41.33);
+                \draw [black] (39.5,-43.4) -- (27.7,-43);
+                \draw [black] (22.84,-40.55) -- (14.86,-30.45);
             \end{tikzpicture}
-            \end{center}
-        
-        \item 
-        
-             $\chi (X)=3$
-            
-            \begin{center}
+        \end{center}
+
+        \item
+
+        $\chi (X)=3$
+
+        \begin{center}
             \begin{tikzpicture}[scale=0.075]
-            \tikzstyle{every node}+=[inner sep=0pt]
-            \draw [black] (27.7,-16.7) circle (3);
-            \draw (27.7,-16.7) node {$1$};
-            \draw [black] (47.5,-16.9) circle (3);
-            \draw (47.5,-16.9) node {$2$};
-            \draw [black] (51.9,-35.1) circle (3);
-            \draw (51.9,-35.1) node {$1$};
-            \draw [black] (20.8,-35.9) circle (3);
-            \draw (20.8,-35.9) node {$3$};
-            \draw [black] (37.6,-48.8) circle (3);
-            \draw (37.6,-48.8) node {$2$};
-            \draw [black] (30.7,-16.73) -- (44.5,-16.87);
-            \draw [black] (48.2,-19.82) -- (51.2,-32.18);
-            \draw [black] (49.73,-37.18) -- (39.77,-46.72);
-            \draw [black] (35.22,-46.97) -- (23.18,-37.73);
-            \draw [black] (21.81,-33.08) -- (26.69,-19.52);
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (27.7,-16.7) circle (3);
+                \draw (27.7,-16.7) node {$1$};
+                \draw [black] (47.5,-16.9) circle (3);
+                \draw (47.5,-16.9) node {$2$};
+                \draw [black] (51.9,-35.1) circle (3);
+                \draw (51.9,-35.1) node {$1$};
+                \draw [black] (20.8,-35.9) circle (3);
+                \draw (20.8,-35.9) node {$3$};
+                \draw [black] (37.6,-48.8) circle (3);
+                \draw (37.6,-48.8) node {$2$};
+                \draw [black] (30.7,-16.73) -- (44.5,-16.87);
+                \draw [black] (48.2,-19.82) -- (51.2,-32.18);
+                \draw [black] (49.73,-37.18) -- (39.77,-46.72);
+                \draw [black] (35.22,-46.97) -- (23.18,-37.73);
+                \draw [black] (21.81,-33.08) -- (26.69,-19.52);
             \end{tikzpicture}
-            \end{center}
-        
-        \item 
-             $\chi (X)=2$
-            \begin{center}
+        \end{center}
+
+        \item
+        $\chi (X)=2$
+        \begin{center}
             \begin{tikzpicture}[scale=0.075]
-            \tikzstyle{every node}+=[inner sep=0pt]
-            \draw [black] (37.1,-15.2) circle (3);
-            \draw (37.1,-15.2) node {$1$};
-            \draw [black] (23.7,-29.3) circle (3);
-            \draw (23.7,-29.3) node {$2$};
-            \draw [black] (50.7,-28.9) circle (3);
-            \draw (50.7,-28.9) node {$2$};
-            \draw [black] (12.7,-45.6) circle (3);
-            \draw (12.7,-45.6) node {$1$};
-            \draw [black] (30.8,-45.9) circle (3);
-            \draw (30.8,-45.9) node {$1$};
-            \draw [black] (44.3,-45.8) circle (3);
-            \draw (44.3,-45.8) node {$1$};
-            \draw [black] (61.3,-45.6) circle (3);
-            \draw (61.3,-45.6) node {$1$};
-            \draw [black] (35.03,-17.37) -- (25.77,-27.13);
-            \draw [black] (39.21,-17.33) -- (48.59,-26.77);
-            \draw [black] (22.02,-31.79) -- (14.38,-43.11);
-            \draw [black] (24.88,-32.06) -- (29.62,-43.14);
-            \draw [black] (49.64,-31.71) -- (45.36,-42.99);
-            \draw [black] (52.31,-31.43) -- (59.69,-43.07);
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (37.1,-15.2) circle (3);
+                \draw (37.1,-15.2) node {$1$};
+                \draw [black] (23.7,-29.3) circle (3);
+                \draw (23.7,-29.3) node {$2$};
+                \draw [black] (50.7,-28.9) circle (3);
+                \draw (50.7,-28.9) node {$2$};
+                \draw [black] (12.7,-45.6) circle (3);
+                \draw (12.7,-45.6) node {$1$};
+                \draw [black] (30.8,-45.9) circle (3);
+                \draw (30.8,-45.9) node {$1$};
+                \draw [black] (44.3,-45.8) circle (3);
+                \draw (44.3,-45.8) node {$1$};
+                \draw [black] (61.3,-45.6) circle (3);
+                \draw (61.3,-45.6) node {$1$};
+                \draw [black] (35.03,-17.37) -- (25.77,-27.13);
+                \draw [black] (39.21,-17.33) -- (48.59,-26.77);
+                \draw [black] (22.02,-31.79) -- (14.38,-43.11);
+                \draw [black] (24.88,-32.06) -- (29.62,-43.14);
+                \draw [black] (49.64,-31.71) -- (45.36,-42.99);
+                \draw [black] (52.31,-31.43) -- (59.69,-43.07);
             \end{tikzpicture}
-            \end{center}
-            
+        \end{center}
+
     \end{enumerate}
 
     \newpage
@@ -1789,7 +1806,7 @@
 
     Przykład
     \begin{align*}
-       u_0 = 1, ~ u_1 = 1, ~~ u_{n+2} - 4 u_{n+1} + 4 u_n = 0
+        u_0 = 1, ~ u_1 = 1, ~~ u_{n+2} - 4 u_{n+1} + 4 u_n = 0
     \end{align*}
     \begin{align*}
         u_{n+2} = 4 u_{n+1} - 4 u_n
@@ -1811,13 +1828,13 @@
         \sum_{n=0}^{\infty} u_n x^n = 1 - 3x + (4x - 4x^2) \sum_{n=0}^{\infty} u_n x^n
     \end{align*}
     \begin{align*}
-        \sum_{n=0}^{\infty} u_n x^n (1 -  4x + 4x^2) = 1 - 3x
+        \sum_{n=0}^{\infty} u_n x^n (1 - 4x + 4x^2) = 1 - 3x
     \end{align*}
     \begin{align*}
-        \sum_{n=0}^{\infty} u_n x^n (1 -  4x + 4x^2) = 1 - 3x
+        \sum_{n=0}^{\infty} u_n x^n (1 - 4x + 4x^2) = 1 - 3x
     \end{align*}
     \begin{align*}
-        \sum_{n=0}^{\infty} u_n x^n = \frac{1 - 3x}{1 -  4x + 4x^2} = \frac{1 - 3x}{(1 - 2x)^2}
+        \sum_{n=0}^{\infty} u_n x^n = \frac{1 - 3x}{1 - 4x + 4x^2} = \frac{1 - 3x}{(1 - 2x)^2}
     \end{align*}
     Rozkład na ułamki proste:
     \begin{align*}
@@ -1912,467 +1929,473 @@
 
     \section{Ciąg i granica ciągu liczbowego, granica funkcji.}
 
-	\subsection{Obliczanie granicy ciągu}
-	$\lim_{n \to \infty} a_{n} = 2^{-\sqrt{n}} = \frac{1}{2^{\sqrt{n}}}$ - mianownik dąży do $\infty$ więc całość dąży do 0 \\
+    \subsection{Obliczanie granicy ciągu}
+    $\lim_{n \to \infty} a_{n} = 2^{-\sqrt{n}} = \frac{1}{2^{\sqrt{n}}}$ - mianownik dąży do $\infty$ więc całość dąży do 0 \\
 
-	\noindent $\lim_{n \to \infty} a_{n} = \sqrt[n]{10}$ - pierwiastek o coraz wyższym stopniu z jakiejś stałej dąży do 1 \\
+    \noindent $\lim_{n \to \infty} a_{n} = \sqrt[n]{10}$ - pierwiastek o coraz wyższym stopniu z jakiejś stałej dąży do 1 \\
 
-	\noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} + 2n - 5}{2n^{2} - n}$ - w przypadku takich ułamków dzielimy licznik i mianownik przez n w największej potędze, który znajduje się w mianowniku
-	$\frac{\frac{n^{2}}{n^{2}} + \frac{2n}{n^{2}} - \frac{5}{n^{2}}} {\frac{2n^{2}}{n^{2}} - \frac{n}{n^{2}}}$ co po skróceniu daje nam $\frac{1 + \frac{2}{n} - \frac{5}{n^{2}}} {2 - \frac{1}{n}}$.
-	Teraz widzimy, że $\frac{2}{n}$, $\frac{5}{n^{2}}$ oraz $\frac{1}{n}$ zmierzają do 0, więc ostatecznie otrzymujemy $\frac{1}{2}$. \\
+    \noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} + 2n - 5}{2n^{2} - n}$ - w przypadku takich ułamków dzielimy licznik i mianownik przez n w największej potędze, który znajduje się w mianowniku
+    $\frac{\frac{n^{2}}{n^{2}} + \frac{2n}{n^{2}} - \frac{5}{n^{2}}} {\frac{2n^{2}}{n^{2}} - \frac{n}{n^{2}}}$ co po skróceniu daje nam $\frac{1 + \frac{2}{n} - \frac{5}{n^{2}}} {2 - \frac{1}{n}}$.
+    Teraz widzimy, że $\frac{2}{n}$, $\frac{5}{n^{2}}$ oraz $\frac{1}{n}$ zmierzają do 0, więc ostatecznie otrzymujemy $\frac{1}{2}$. \\
 
-	\noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} - 2n}{13n + 1}$ - na początku robimy tak jak w poprzednim przykładzie, czyli dzielimy licznik i mianownik przez n w największej potędze z mianownika
-	$\frac{\frac{n^{2}}{n} - \frac{2n}{n}} {\frac{13n}{n} + \frac{1}{n}}$ co po skróceniu daje $\frac{n - 2}{13 + \frac{1}{n}}$. Widzimy, że $\frac{1}{n}$ dąży do 0, więc całość możemy zapisać już jako
-	$\frac{n - 2}{13}$. Ponieważ licznik cały czas rośnie, a mianownik pozostaje stały to całość dąży do $+\infty$
-
-
-	\subsection{Twierdzenie o dwóch ciągach}
-	
-	Używane aby wykazać rozbieżność pewnego ciągu wykorzystując inny (prostszy) ciąg \\
-
-	\noindent Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
-
-	\noindent Korzystamy z faktu, że $\sin{n} \leq 1$ wtedy \\
-	$(3 \sin{n} - 5) \cdot n^{3}  \leq  (3\cdot 1 - 5) \cdot n^{3}  \leq  -2n^{3}  \leq  -n \stackrel{n \to \infty}{\longrightarrow} -\infty$ \\
-	Więc zgodnie z twierdzeniem o 2 ciągach również $(3 \sin{n} - 5) \cdot n^{3} \stackrel{n \to \infty}{\longrightarrow} -\infty$
-
-	\subsection{Twierdzenie o trzech ciągach}
-
-	Używane aby wyznaczyć granicę właściwą pewnego ciągu korzystając z dwóch innych ciągów
-
-	\noindent Oblicz granicę $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}}$ \\
-
-	\noindent Podobnie jak poprzednio korzystamy z faktu, że $-1 \leq \sin{x} \leq 1$ oraz $-1 \leq \cos{x} \leq 1$ dla każdego naturalnego x
-
-	\noindent Wtedy $\frac{n^2+n-1}{2+n+3n^2} \leq \frac{n^2+n- \cos{n^2}}{2+n \sin{\sqrt{n}}+3n^2} \leq \frac{n^2+n+1}{2-n+3n^2}$ \\
-
-	\noindent Ponieważ $\lim_{n\to \infty} \frac{n^2+n-1}{2+n+3n^2} = \frac{1}{3}$ oraz $\lim_{n\to \infty} \frac{n^2+n+1}{2-n+3n^2} = \frac{1}{3}$
-	więc z twierdzenia o trzech ciągach wiemy również, że i $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}} = \frac{1}{3}$
+    \noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} - 2n}{13n + 1}$ - na początku robimy tak jak w poprzednim przykładzie, czyli dzielimy licznik i mianownik przez n w największej potędze z mianownika
+    $\frac{\frac{n^{2}}{n} - \frac{2n}{n}} {\frac{13n}{n} + \frac{1}{n}}$ co po skróceniu daje $\frac{n - 2}{13 + \frac{1}{n}}$. Widzimy, że $\frac{1}{n}$ dąży do 0, więc całość możemy zapisać już jako
+    $\frac{n - 2}{13}$. Ponieważ licznik cały czas rośnie, a mianownik pozostaje stały to całość dąży do $+\infty$
 
 
-	\subsection{Funkcje}
+    \subsection{Twierdzenie o dwóch ciągach}
 
-	Oblicz granice funkcji 
-	\begin{align*} f(x) = 
-	\begin{cases}
-		|\frac{1}{x+2}| & \text{dla x mniejszego od 0} \\
-		\sin{x} & \text{dla x większego bądź równego 0}
-	\end{cases}
-	\end{align*}
-	w punktach $x_{1} = -2$, $x_{2} = 0$, $x_{3} = \pi$ oraz w $+\infty$ i $-\infty$ \\
+    Używane aby wykazać rozbieżność pewnego ciągu wykorzystując inny (prostszy) ciąg \\
 
-	\noindent Liczymy granice prawo i lewo stronne dla punktów, w których funkcja jest nie ciągła: \\
+    \noindent Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
 
-	\noindent $\lim_{x \to -2^{-}} f(x) = \lim_{x \to -2^{-}} |\frac{1}{x+2}| = +\infty$ \\
-	\noindent $\lim_{x \to -2^{+}} f(x) = \lim_{x \to -2^{+}} |\frac{1}{x+2}| = +\infty$ \\
-	\noindent Ponieważ granice prawo i lewo stronne są sobie równe to granica w punkcie -2 istnieje i jest równa $-\infty$ \\
+    \noindent Korzystamy z faktu, że $\sin{n} \leq 1$ wtedy \\
+    $(3 \sin{n} - 5) \cdot n^{3}  \leq  (3\cdot 1 - 5) \cdot n^{3}  \leq  -2n^{3}  \leq  -n \stackrel{n \to \infty}{\longrightarrow} -\infty$ \\
+    Więc zgodnie z twierdzeniem o 2 ciągach również $(3 \sin{n} - 5) \cdot n^{3} \stackrel{n \to \infty}{\longrightarrow} -\infty$
 
-	\noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} |\frac{1}{x+2}| = \frac{1}{2}$ \\
-	\noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to -2^{+}} \sin{x} = 0$ \\
-	\noindent Ponieważ granice prawo i lewo stronne nie są sobie równe to granica w punkcie 0 nie istnieje \\
+    \subsection{Twierdzenie o trzech ciągach}
 
-	\noindent W punkcie $\pi$ nasza funkcja jest ciągła, więc jej granicę możemy obliczyć podstawiając $\pi$ bezpośrednio do wzoru: \\
-	\noindent $\lim_{x \to \pi} f(x) = f(\pi) = 0$ \\
+    Używane aby wyznaczyć granicę właściwą pewnego ciągu korzystając z dwóch innych ciągów
 
-	\noindent $\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} |\frac{1}{x+2}| = 0$ - mianownik jest coraz większy (biorąc pod uwagę jego wartość bezwzględną) więc funkcja dąży do 0 \\
+    \noindent Oblicz granicę $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}}$ \\
 
-	\noindent $\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \sin{x}$ - nie istnieje, ponieważ $\sin{x}$ jest funkcją okresową i nie dąży do żadnej konkretnej wartości \\
+    \noindent Podobnie jak poprzednio korzystamy z faktu, że $-1 \leq \sin{x} \leq 1$ oraz $-1 \leq \cos{x} \leq 1$ dla każdego naturalnego x
+
+    \noindent Wtedy $\frac{n^2+n-1}{2+n+3n^2} \leq \frac{n^2+n- \cos{n^2}}{2+n \sin{\sqrt{n}}+3n^2} \leq \frac{n^2+n+1}{2-n+3n^2}$ \\
+
+    \noindent Ponieważ $\lim_{n\to \infty} \frac{n^2+n-1}{2+n+3n^2} = \frac{1}{3}$ oraz $\lim_{n\to \infty} \frac{n^2+n+1}{2-n+3n^2} = \frac{1}{3}$
+    więc z twierdzenia o trzech ciągach wiemy również, że i $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}} = \frac{1}{3}$
 
 
-	\noindent \textbf{Granice specjalne} \\
+    \subsection{Funkcje}
 
-	\noindent Oblicz granicę funkcji $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5}$
+    Oblicz granice funkcji
+    \begin{align*}
+        f(x) =
+        \begin{cases}
+            |\frac{1}{x+2}| & \text{dla x mniejszego od 0} \\
+            \sin{x} & \text{dla x większego bądź równego 0}
+        \end{cases}
+    \end{align*}
+    w punktach $x_{1} = -2$, $x_{2} = 0$, $x_{3} = \pi$ oraz w $+\infty$ i $-\infty$ \\
 
-	\noindent Skorzystamy z granic specjalnych $\lim_{x \to 0} \frac{\sin{x}}{x} = 1$ oraz $\lim_{x \to 0} \frac{\ln(x + 1)}{x} = 1$ \\
+    \noindent Liczymy granice prawo i lewo stronne dla punktów, w których funkcja jest nie ciągła: \\
 
-	\noindent $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5} \stackrel{[\frac{0}{0}]}{=} \lim_{x \to -5} \frac{\sin(x + 5)}{x + 5} + \frac{\ln((x + 5) + 1)}{x + 5}$ \\
+    \noindent $\lim_{x \to -2^{-}} f(x) = \lim_{x \to -2^{-}} |\frac{1}{x+2}| = +\infty$ \\
+    \noindent $\lim_{x \to -2^{+}} f(x) = \lim_{x \to -2^{+}} |\frac{1}{x+2}| = +\infty$ \\
+    \noindent Ponieważ granice prawo i lewo stronne są sobie równe to granica w punkcie -2 istnieje i jest równa $-\infty$ \\
 
-	\noindent Ponieważ granica dąży do -5 to wyrażenia w nawiasach dążą do 0 więc możemy zastosować wspomniane granice specjalne. Możemy to zapisać również jako: \\
+    \noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} |\frac{1}{x+2}| = \frac{1}{2}$ \\
+    \noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to -2^{+}} \sin{x} = 0$ \\
+    \noindent Ponieważ granice prawo i lewo stronne nie są sobie równe to granica w punkcie 0 nie istnieje \\
 
-	\noindent $\lim_{x \to 0} \frac{\sin{x}}{x} + \frac{\ln(x + 1)}{x} \stackrel{\text{z granic specjalnych}}{=} 1 + 1 = 2$ \\
+    \noindent W punkcie $\pi$ nasza funkcja jest ciągła, więc jej granicę możemy obliczyć podstawiając $\pi$ bezpośrednio do wzoru: \\
+    \noindent $\lim_{x \to \pi} f(x) = f(\pi) = 0$ \\
+
+    \noindent $\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} |\frac{1}{x+2}| = 0$ - mianownik jest coraz większy (biorąc pod uwagę jego wartość bezwzględną) więc funkcja dąży do 0 \\
+
+    \noindent $\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \sin{x}$ - nie istnieje, ponieważ $\sin{x}$ jest funkcją okresową i nie dąży do żadnej konkretnej wartości \\
 
 
-	\noindent \textbf{Reguła de L'Hospitala} \\
+    \noindent \textbf{Granice specjalne} \\
 
-	\noindent Oblicz granicę funkcji $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x}$ \\
+    \noindent Oblicz granicę funkcji $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5}$
 
-	\noindent Spróbujemy zastosować regułę de L'Hospitala. Aby to zrobić musimy sprawdzić czy granice funkcji z licznika i mianownika z osobna są równe 0 oraz czy funkcja z mianownika w otoczeniu $x_{0}$ nie jest równa 0 \\
+    \noindent Skorzystamy z granic specjalnych $\lim_{x \to 0} \frac{\sin{x}}{x} = 1$ oraz $\lim_{x \to 0} \frac{\ln(x + 1)}{x} = 1$ \\
 
-	\noindent $\lim_{x \to 0} \sin{x} = 0$ \\
-	\noindent $\lim_{x \to 0} x^2 + 5x = 0$ \\
-	\noindent Możemy do tego zauważyć, że $x^2 + 5x$ w okolicach $x_{0} \neq 0$ więc możemy zastosować regułę de L'Hospitala: \\
+    \noindent $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5} \stackrel{[\frac{0}{0}]}{=} \lim_{x \to -5} \frac{\sin(x + 5)}{x + 5} + \frac{\ln((x + 5) + 1)}{x + 5}$ \\
 
-	\noindent $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x} = \lim_{x \to 0} \frac{(\sin{x})'}{(x^2 + 5x)'} = \lim_{x \to 0} \frac{\cos{x}}{2x + 5} = \frac{1}{5}$
+    \noindent Ponieważ granica dąży do -5 to wyrażenia w nawiasach dążą do 0 więc możemy zastosować wspomniane granice specjalne. Możemy to zapisać również jako: \\
+
+    \noindent $\lim_{x \to 0} \frac{\sin{x}}{x} + \frac{\ln(x + 1)}{x} \stackrel{\text{z granic specjalnych}}{=} 1 + 1 = 2$ \\
+
+
+    \noindent \textbf{Reguła de L'Hospitala} \\
+
+    \noindent Oblicz granicę funkcji $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x}$ \\
+
+    \noindent Spróbujemy zastosować regułę de L'Hospitala. Aby to zrobić musimy sprawdzić czy granice funkcji z licznika i mianownika z osobna są równe 0 oraz czy funkcja z mianownika w otoczeniu $x_{0}$ nie jest równa 0 \\
+
+    \noindent $\lim_{x \to 0} \sin{x} = 0$ \\
+    \noindent $\lim_{x \to 0} x^2 + 5x = 0$ \\
+    \noindent Możemy do tego zauważyć, że $x^2 + 5x$ w okolicach $x_{0} \neq 0$ więc możemy zastosować regułę de L'Hospitala: \\
+
+    \noindent $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x} = \lim_{x \to 0} \frac{(\sin{x})'}{(x^2 + 5x)'} = \lim_{x \to 0} \frac{\cos{x}}{2x + 5} = \frac{1}{5}$
 
 
     \newpage
 
     \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
 
-	\subsection{Ciągłość funkcji}
+    \subsection{Ciągłość funkcji}
 
-	\textbf{Zad 1} \\
+    \textbf{Zad 1} \\
 
-	\noindent Zbadaj ciągłość funkcji \begin{align*} f(x) =
-																		\begin{cases}
-																			x \sin(\frac{1}{x}) & \text{dla x $\neq$ 0} \\
-																			0 & \text{dla x = 0}
-																		\end{cases}
-															\end{align*}
+    \noindent Zbadaj ciągłość funkcji \begin{align*}
+                                          f(x) =
+                                          \begin{cases}
+                                              x \sin(\frac{1}{x}) & \text{dla x $\neq$ 0} \\
+                                              0 & \text{dla x = 0}
+                                          \end{cases}
+    \end{align*}
 
-	\noindent Interesuje nas oczywiście punkt 0 i to dla niego musimy policzyć granicę (funkcja w pozostałych punktach jest ciągła, jako że składa się z funkcji elementarnych): \\
+    \noindent Interesuje nas oczywiście punkt 0 i to dla niego musimy policzyć granicę (funkcja w pozostałych punktach jest ciągła, jako że składa się z funkcji elementarnych): \\
 
-	\noindent $\lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin(\frac{1}{x})$ - możemy to zrobić z twierdzenia o 3 funkcjach: \\
+    \noindent $\lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin(\frac{1}{x})$ - możemy to zrobić z twierdzenia o 3 funkcjach: \\
 
-	\noindent Korzystając tradycyjnie z warunku $-1 \leq \sin{x} \leq 1$ możemy zauważyć, że: \\
+    \noindent Korzystając tradycyjnie z warunku $-1 \leq \sin{x} \leq 1$ możemy zauważyć, że: \\
 
-	\noindent $-x \leq x \sin(\frac{1}{x}) \leq x$ a z kolei $\lim_{x \to 0} x = \lim_{x \to 0} -x = 0$ więc i $\lim_{x \to 0} x \sin(\frac{1}{x}) = 0$ \\
+    \noindent $-x \leq x \sin(\frac{1}{x}) \leq x$ a z kolei $\lim_{x \to 0} x = \lim_{x \to 0} -x = 0$ więc i $\lim_{x \to 0} x \sin(\frac{1}{x}) = 0$ \\
 
-	\noindent Mamy więc $\lim_{x \to 0} f(x) = f(0)$ więc ta funkcja jest ciągła \\
-
-
-	\noindent \textbf{Zad 2}
-
-	\noindent Zbadaj ciągłość funkcji \begin{align*} f(x) =
-																		\begin{cases}
-																			x + 2 & \text{dla x $<$ 0} \\
-																			0 & \text{dla x = 0} \\
-																			-x + 2 & \text{dla x $>$ 0}
-																		\end{cases}
-															\end{align*}
-
-	\noindent Oczywiście tak jak i poprzednio interesuje nas punkt 0. Musimy policzyć granice lewo i prawo stronne: \\
-
-	\noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} x + 2 = 2$ \\
-	\noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to 0^{+}} -x + 2 = 2$ \\
-
-	\noindent Granice prawo i lewo stronne są sobie więc równe, ale nie są one równe wartości funkcji w badanym punkcie.
-						Stąd też ta funkcja nie jest ciągła w punkcie 0. \\
+    \noindent Mamy więc $\lim_{x \to 0} f(x) = f(0)$ więc ta funkcja jest ciągła \\
 
 
-	\noindent \textbf{Twierdzenie Barboux}
+    \noindent \textbf{Zad 2}
+
+    \noindent Zbadaj ciągłość funkcji \begin{align*}
+                                          f(x) =
+                                          \begin{cases}
+                                              x + 2 & \text{dla x $<$ 0} \\
+                                              0 & \text{dla x = 0} \\
+                                              -x + 2 & \text{dla x $>$ 0}
+                                          \end{cases}
+    \end{align*}
+
+    \noindent Oczywiście tak jak i poprzednio interesuje nas punkt 0. Musimy policzyć granice lewo i prawo stronne: \\
+
+    \noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} x + 2 = 2$ \\
+    \noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to 0^{+}} -x + 2 = 2$ \\
+
+    \noindent Granice prawo i lewo stronne są sobie więc równe, ale nie są one równe wartości funkcji w badanym punkcie.
+    Stąd też ta funkcja nie jest ciągła w punkcie 0. \\
 
 
-	\subsection{Pochodna}
-
-	\textbf{Istnienie pochodnej w punkcie z definicji} \\
-
-	\noindent Zbadaj istnienie pochodnej funkcji \begin{align*} f(x) = 
-																					\begin{cases}
-																						x^2 \cdot \sin{\frac{1}{x}} & \text{dla x $\neq$ 0} \\
-																						0 & \text{dla x = 0}
-																					\end{cases}
-																				\end{align*}
-	dla punktu $x_{0}$ = 0
-
-	\noindent Aby stwierdzić czy funkcja ma pochodną w punkcie $x_{0}$musimy obliczyć jej prawo i lewo stronną pochodną z definicji: \\
-
-	\noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x}
-							= \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
-
-	\noindent Analogiczny wywód możemy zrobić dla pochodnej prawostronnej - wynik również będzie 0 \\
-
-	\noindent Ponieważ pochodne prawo i lewo stronne są równe to pochodna tej funkcji w punkcie $x_{0}$ istnieje \\
+    \noindent \textbf{Twierdzenie Barboux}
 
 
-	\noindent \textbf{Obliczanie przybliżonej wartości funkcji za pomocą różniczki} \\
+    \subsection{Pochodna}
 
-	\noindent Oblicz przybliżoną wartość liczby $\sqrt[3]{8.2}$ \\
+    \textbf{Istnienie pochodnej w punkcie z definicji} \\
 
-	\noindent Korzystamy ze wzoru $f(x_{0} + \Delta x) \approx f(x_{0}) + f'(x_{0}) \cdot \Delta x$ \\
+    \noindent Zbadaj istnienie pochodnej funkcji \begin{align*}
+                                                     f(x) =
+                                                     \begin{cases}
+                                                         x^2 \cdot \sin{\frac{1}{x}} & \text{dla x $\neq$ 0} \\
+                                                         0 & \text{dla x = 0}
+                                                     \end{cases}
+    \end{align*}
+    dla punktu $x_{0}$ = 0
 
-	\noindent W naszym przypadku: \\
-	$f(x) = \sqrt[3]{x}$ \\
-	$x_{0} = 8$ \\
-	$\Delta x = 0.2$ \\
-	$f'(x) = \frac{1}{3\sqrt[3]{x^2}}$ \\
+    \noindent Aby stwierdzić czy funkcja ma pochodną w punkcie $x_{0}$musimy obliczyć jej prawo i lewo stronną pochodną z definicji: \\
 
-	\noindent Obliczamy więc: \\
-	$f(8) = 2$ \\
-	$f'(8) = \frac{1}{12}$ \\
+    \noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x}
+    = \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
 
-	\noindent Więc $\sqrt[3]{8.2} \approx 2 + \frac{1}{12} \cdot 0.2 = \frac{121}{60}$
+    \noindent Analogiczny wywód możemy zrobić dla pochodnej prawostronnej - wynik również będzie 0 \\
+
+    \noindent Ponieważ pochodne prawo i lewo stronne są równe to pochodna tej funkcji w punkcie $x_{0}$ istnieje \\
+
+
+    \noindent \textbf{Obliczanie przybliżonej wartości funkcji za pomocą różniczki} \\
+
+    \noindent Oblicz przybliżoną wartość liczby $\sqrt[3]{8.2}$ \\
+
+    \noindent Korzystamy ze wzoru $f(x_{0} + \Delta x) \approx f(x_{0}) + f'(x_{0}) \cdot \Delta x$ \\
+
+    \noindent W naszym przypadku: \\
+    $f(x) = \sqrt[3]{x}$ \\
+    $x_{0} = 8$ \\
+    $\Delta x = 0.2$ \\
+    $f'(x) = \frac{1}{3\sqrt[3]{x^2}}$ \\
+
+    \noindent Obliczamy więc: \\
+    $f(8) = 2$ \\
+    $f'(8) = \frac{1}{12}$ \\
+
+    \noindent Więc $\sqrt[3]{8.2} \approx 2 + \frac{1}{12} \cdot 0.2 = \frac{121}{60}$
 
     \newpage
 
     \section{Ekstrema funkcji jednej zmiennej. Definicje i twierdzenia.}
 
-        \begin{exercise}
-            Korzystając z definicji uzasadnij, że funkcja 
-                $$f(x) = \begin{cases}
-                        1 - x^2 & x \neq 0 \\
-                        0 & x = 0
-                        \end{cases}$$
-            ma ekstremum lokalne w punkcie $x_0 = 0$.
-        \end{exercise}
-        
-        $f(0) = 0$. Dla każdego punktu $x \in (-1, 1) \setminus \{0\}\;  f(x) > 0$. Zatem $x$ jest właściwym minimum lokalnym (sąsiedztwo $S(0, 1)$).
-        
-        \begin{exercise}
-            Znajdź najmniejszą i największą wartość funkcji\\ $f(x) = x^2 - 2x + 3$ na przedziale $[-2, 5]$
-        \end{exercise}
+    \begin{exercise}
+        Korzystając z definicji uzasadnij, że funkcja
+        \[f(x) = \begin{cases}
+                     1 - x^2 & x \neq 0 \\
+                     0 & x = 0
+        \end{cases}\]
+        ma ekstremum lokalne w punkcie $x_0 = 0$.
+    \end{exercise}
 
-        $$f'(x) = 2x - 2$$ 
-        $$f'(x) = 0 \Leftrightarrow x = 1$$
-        Wartość pochodnej jest ujemna na przedziale $[-2, 1)$ i dodatnia na przedziale $(1, 5]$, zatem istnieje minimum lokalne w punkcie 1.
-        
-        \begin{center}
-            \begin{tabular}{c||c|c|c}
-                 $x$ & -2 & 1 & 5 \\
-                 \hline
-                 $f(x)$ & 3 & 2 & 18 \\   
-            \end{tabular}
-        \end{center}
+    $f(0) = 0$. Dla każdego punktu $x \in (-1, 1) \setminus \{0\}\;  f(x) > 0$. Zatem $x$ jest właściwym minimum lokalnym (sąsiedztwo $S(0, 1)$).
 
-        Wartość najmniejsza funkcji $f(x)$ na przedziale $[-2, 5]$ wynosi 2, wartość największa: 18.
+    \begin{exercise}
+        Znajdź najmniejszą i największą wartość funkcji\\ $f(x) = x^2 - 2x + 3$ na przedziale $[-2, 5]$
+    \end{exercise}
 
-        
-        \begin{exercise}
-            Znajdź wszystkie ekstrema lokalne funkcji $f(x) = \frac{x}{x^2 + 4}$
-        \end{exercise}
-        
-        $$f'(x) = \frac{x^2 + 4 - x * 2x}{(x^2 + 4)^2} = \frac{-x^2 + 4}{(x^2 + 4)^2}$$
-        $f'(x) = 0$ dla punktów w których $-x^2 + 4 = 0$, tzn. 2 i -2. Sprawdźmy znak pochodnej pomiędzy jej miejscami zerowymi:
-    
-        \begin{center}
-            \begin{tabular}{c||c|c|c}
-                $x$ &$(-\infty, -2)$ & $(-2, 2)$ & $(2, \infty)$ \\
-                \hline
-                $f'x)$ & - & + & -
-            \end{tabular}
-        \end{center}
-        
-        Widzimy, że pochodna zmienia znak zarówno w -2 jak i 2. Zatem funkcja $f'(x)$ ma minimum lokalne 
-        (równe $-\frac{1}{4}$) w punkcie -2, oraz maksimum lokalne (równe $\frac{1}{4}$) w punkcie 2.
-        
+    \[f'(x) = 2x - 2\]
+    \[f'(x) = 0 \Leftrightarrow x = 1\]
+    Wartość pochodnej jest ujemna na przedziale $[-2, 1)$ i dodatnia na przedziale $(1, 5]$, zatem istnieje minimum lokalne w punkcie 1.
+
+    \begin{center}
+        \begin{tabular}{c||c|c|c}
+            $x$ & -2 & 1 & 5 \\
+            \hline
+            $f(x)$ & 3 & 2 & 18 \\
+        \end{tabular}
+    \end{center}
+
+    Wartość najmniejsza funkcji $f(x)$ na przedziale $[-2, 5]$ wynosi 2, wartość największa: 18.
+
+
+    \begin{exercise}
+        Znajdź wszystkie ekstrema lokalne funkcji $f(x) = \frac{x}{x^2 + 4}$
+    \end{exercise}
+
+    \[f'(x) = \frac{x^2 + 4 - x * 2x}{(x^2 + 4)^2} = \frac{-x^2 + 4}{(x^2 + 4)^2}\]
+    $f'(x) = 0$ dla punktów w których $-x^2 + 4 = 0$, tzn. 2 i -2. Sprawdźmy znak pochodnej pomiędzy jej miejscami zerowymi:
+
+    \begin{center}
+        \begin{tabular}{c||c|c|c}
+            $x$ &$(-\infty, -2)$ & $(-2, 2)$ & $(2, \infty)$ \\
+            \hline
+            $f'x)$ & - & + & -
+        \end{tabular}
+    \end{center}
+
+    Widzimy, że pochodna zmienia znak zarówno w -2 jak i 2. Zatem funkcja $f'(x)$ ma minimum lokalne
+    (równe $-\frac{1}{4}$) w punkcie -2, oraz maksimum lokalne (równe $\frac{1}{4}$) w punkcie 2.
+
     \newpage
 
     \section{Całka Riemanna funkcji jednej zmiennej.}
-    
-    \begin{exercise}
-        Korzystając z wzoru Newtona - Leibniza oblicz wartość całki $$\int_0^2 \frac{3x + 1}{3x - 1}dx$$
-    \end{exercise}
-    
-    $$\int\frac{3x - 1}{3x + 1} dx = \big| u = 3x + 1 \quad u' = 3\big| = \frac{1}{3}\int \frac{u - 2}{u}du 
-    	= \frac{1}{3} \int du - \frac{2}{3}\int\frac{1}{u}du =$$
-    $$= \frac{u - 2ln(u)}{3} + C = \frac{3x + 1 - 2ln(3x + 1)}{3} + C = x - \frac{2ln(3x + 1)}{3} + C$$
-    
-    $$\int_0^2\frac{3x - 1}{3x + 1} dx = \big[ x - \frac{2ln(3x + 1)}{3} \big]^2_0 = 2 - \frac{2}{3}(ln(7) + ln(1)) = 2 - \frac{2ln(7)}{3}$$  
 
     \begin{exercise}
-        Korzystając z definicji całki Riemanna uzasadnij równość $$\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = \frac{\pi}{4}$$
+        Korzystając z wzoru Newtona - Leibniza oblicz wartość całki \[\int_0^2 \frac{3x + 1}{3x - 1}dx\]
     \end{exercise}
-    
-    $$\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = 
-    \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{n^2}{n^2 + i^2} = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{1}{1 + (\frac{i}{n})^2} $$
-    
+
+    \begin{gather*}
+        \int\frac{3x - 1}{3x + 1} dx = \big| u = 3x + 1 \quad u' = 3\big| = \frac{1}{3}\int \frac{u - 2}{u}du
+        = \frac{1}{3} \int du - \frac{2}{3}\int\frac{1}{u}du =\\
+        = \frac{u - 2ln(u)}{3} + C = \frac{3x + 1 - 2ln(3x + 1)}{3} + C = x - \frac{2ln(3x + 1)}{3} + C\\
+        \int_0^2\frac{3x - 1}{3x + 1} dx = \big[ x - \frac{2ln(3x + 1)}{3} \big]^2_0 = 2 - \frac{2}{3}(ln(7) + ln(1)) = 2 - \frac{2ln(7)}{3}\\
+    \end{gather*}
+
+    \begin{exercise}
+        Korzystając z definicji całki Riemanna uzasadnij równość \[\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = \frac{\pi}{4}\]
+    \end{exercise}
+
+    \[\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) =
+    \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{n^2}{n^2 + i^2} = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{1}{1 + (\frac{i}{n})^2} \]
+
     Korzystamy z definicji całki Riemanna ($[a, b] = [0, 1]$, $f(x) = \frac{1}{1 + x^2})$
-    
-    $$\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = \int_0^1 \frac{1}{1 + x^2}= \big[arctg \; x \big]^1_0 = \frac{\pi}{4}$$
-    
+
+    \[\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = \int_0^1 \frac{1}{1 + x^2}= \big[arctg \; x \big]^1_0 = \frac{\pi}{4}\]
+
     \begin{exercise}
         Korzystając z definicji oblicz całkę
-        $$\int_0^1 2^x \,dx$$
+        \[\int_0^1 2^x \,dx\]
     \end{exercise}
 
     Korzystając ze wzoru
-    $$\int_a^b f(x) \,dx  = \lim_{n \rightarrow \infty} \frac{b - a}{n} \sum_{i =1}^{n} f(a + i\frac{b - a}{n}) $$
+    \[\int_a^b f(x) \,dx = \lim_{n \rightarrow \infty} \frac{b - a}{n} \sum_{i =1}^{n} f(a + i\frac{b - a}{n}) \]
     uzyskujemy
-    $$\int_0^1 2^x \,dx  = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} 2^{\frac{i}{n}} 
-    = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} (\sqrt[n]{2})^i $$
-    
-    Suma n wyrazów ciągu geometrycznego jest równa $a_1 \frac{q^n - 1}{q - 1}$ 
-    
-    $$\lim_{n \rightarrow \infty} \frac{1}{n} \cdot \sqrt[n]{2} \cdot \frac{(\sqrt[n]{2})^n - 1}{\sqrt[n]{2} - 1} = 
-    \lim_{n \rightarrow \infty} \sqrt[n]{2} \cdot \frac{1}{n \cdot (\sqrt[n]{2} - 1)} = 
-    \lim_{n \rightarrow \infty} \frac{\sqrt[n]{2}}{\frac{\sqrt[n]{2} - 1}{\frac{1}{n}}} = $$
-    $$= \frac{\lim_{n \rightarrow \infty} \sqrt[n]{2}}{\lim_{n \rightarrow \infty} \frac{2^{\frac{1}{n}}}{\frac{1}{n}}} =
-    \frac{\lim_{n \rightarrow \infty} \sqrt[n]{2}}{\lim_{k \rightarrow 0} \frac{2^{k}}{k}} = 
-    \frac{1}{ln\; 2} = log_2e$$ 
+    \[\int_0^1 2^x \,dx = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} 2^{\frac{i}{n}}
+    = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} (\sqrt[n]{2})^i \]
+
+    Suma n wyrazów ciągu geometrycznego jest równa $a_1 \frac{q^n - 1}{q - 1}$
+
+    \begin{gather*}
+        \lim_{n \rightarrow \infty} \frac{1}{n} \cdot \sqrt[n]{2} \cdot \frac{(\sqrt[n]{2})^n - 1}{\sqrt[n]{2} - 1} =
+        \lim_{n \rightarrow \infty} \sqrt[n]{2} \cdot \frac{1}{n \cdot (\sqrt[n]{2} - 1)} =
+        \lim_{n \rightarrow \infty} \frac{\sqrt[n]{2}}{\frac{\sqrt[n]{2} - 1}{\frac{1}{n}}} =\\
+        = \frac{\lim_{n \rightarrow \infty} \sqrt[n]{2}}{\lim_{n \rightarrow \infty} \frac{2^{\frac{1}{n}}}{\frac{1}{n}}} =
+        \frac{\lim_{n \rightarrow \infty} \sqrt[n]{2}}{\lim_{k \rightarrow 0} \frac{2^{k}}{k}} =
+        \frac{1}{ln\; 2} = log_2e\\
+    \end{gather*}
     \newpage
 
     \section{Pochodne cząstkowe funkcji wielu zmiennych; różniczkowalność i różniczka funkcji.}
 
     \begin{itemize}
         \item  Korzystając z definicji zbadać, czy istnieją pochodne cząstkowe rzędu pierwszego podanych funkcji
-    
+
         $f(x,y) = x \cdot \sin{xy}, (x_0, y_0) = (\pi,1)$\newline
         \newline
         \begin{equation}
-        \begin{aligned}
-        \frac{\partial f}{\partial x}(\pi, 1)  \stackrel{def}{=} lim_{\Delta x \rightarrow 0} \frac{f(\pi + \Delta x, 1) - f(\pi, 1)}{\Delta x} = \\
-        lim_{\Delta x \rightarrow 0} \frac{(\pi + \Delta x ) \sin{((\pi + \Delta x))} - \pi \sin{(\pi)}}{\Delta x} = \\
-        lim_{\Delta x \rightarrow 0} \left[ (\pi + \Delta x) \frac{-sin \Delta x}{\Delta x} \right] = - \pi
-        \end{aligned}
+            \begin{aligned}
+                \frac{\partial f}{\partial x}(\pi, 1)  \stackrel{def}{=} lim_{\Delta x \rightarrow 0} \frac{f(\pi + \Delta x, 1) - f(\pi, 1)}{\Delta x} = \\
+                lim_{\Delta x \rightarrow 0} \frac{(\pi + \Delta x ) \sin{((\pi + \Delta x))} - \pi \sin{(\pi)}}{\Delta x} = \\
+                lim_{\Delta x \rightarrow 0} \left[ (\pi + \Delta x) \frac{-sin \Delta x}{\Delta x} \right] = - \pi
+            \end{aligned}
         \end{equation}
-        
+
         \item Obliczyć pochodne cząskowe pierwszego rzędu podanych funkcji
-        
+
         $f(x,y) = e^{x^2 \sin y}$\newline
         \newline
         \begin{equation}
             \begin{aligned}
-            \frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \left( e^{x^2 \sin y} \right ) = \left( e^{x^2 \sin y} \right) \cdot 2x \sin y
+                \frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \left( e^{x^2 \sin y} \right ) = \left( e^{x^2 \sin y} \right) \cdot 2x \sin y
             \end{aligned}
         \end{equation}
         \begin{equation}
             \begin{aligned}
-            \frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \left( e^{x^2 \sin y} \right ) = \left( e^{x^2 \sin y} \right) \cdot x^2 \cos y
+                \frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \left( e^{x^2 \sin y} \right ) = \left( e^{x^2 \sin y} \right) \cdot x^2 \cos y
             \end{aligned}
         \end{equation}
-        
+
         \item Obliczyć pochodne cząstkowe drugiego rzędu podanych funkcji
-        
+
         $f(x,y) = xy + \frac{x^2}{y^3}$
-        
+
         Początkowo wyliczamy pochodne pierwszego rzędu
         \begin{equation}
-        \begin{aligned}
-        \frac{\partial f}{\partial x} = \frac{\partial }{\partial x} \left( xy + \frac{x^2}{y^3}\right ) = y + \frac{2x}{y^3}
-        \end{aligned}
+            \begin{aligned}
+                \frac{\partial f}{\partial x} = \frac{\partial }{\partial x} \left( xy + \frac{x^2}{y^3}\right ) = y + \frac{2x}{y^3}
+            \end{aligned}
         \end{equation}
-        
+
         \begin{equation}
-        \begin{aligned}
-         \frac{\partial f}{\partial y} = \frac{\partial }{\partial y} \left( xy + \frac{x^2}{y^3}\right ) = x + \frac{3x^2}{y^4}
-         \end{aligned}
+            \begin{aligned}
+                \frac{\partial f}{\partial y} = \frac{\partial }{\partial y} \left( xy + \frac{x^2}{y^3}\right ) = x + \frac{3x^2}{y^4}
+            \end{aligned}
         \end{equation}
-        
+
         Następnie wyliczamy pochodne cząstkowe drugiego rzędu
         \begin{equation}
             \begin{aligned}
                 \frac{\partial f }{\partial x^2} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial x} \right ) = \frac{\partial}{ \partial x} \left( y + \frac{2x}{y^3} \right) = \frac{2}{y^3}
             \end{aligned}
         \end{equation}
-        
+
         \begin{equation}
             \begin{aligned}
                 \frac{\partial f }{\partial x \partial y} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial y} \right) = \frac{\partial}{\partial x} \left( x - \frac{3x^2}{y^4} \right) = 1 - \frac{6x}{y^4}
             \end{aligned}
         \end{equation}
-        
+
         \begin{equation}
             \begin{aligned}
                 \frac{\partial f }{\partial y \partial x} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial x} \right) = \frac{\partial}{\partial y} \left( y + \frac{2x}{y^3} \right) = 1 - \frac{6x}{y^4}
             \end{aligned}
         \end{equation}
-        
+
         \begin{equation}
             \begin{aligned}
                 \frac{\partial f }{\partial y^2} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial y} \right) = \frac{\partial}{\partial y} \left( x - \frac{3x^2}{y^4} \right) = \frac{12x^2}{y^5}
             \end{aligned}
         \end{equation}
-        
+
         \item Korzystajc z definicji zbadać różniczkowalnośc podanych funkcji we wskazanych punktach \newline
         $f(x,y) = x^2 - y^2$
         w punkcie $(x_0, y_0) = (1, -2)$
-        
+
         Korzystając z definicji, wiemy, żę funkcja jest różniczkowalna jeżeli zachodzi poniższa równość
         \begin{equation}
             \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{f(x_0 + \Delta x, y_0 + \Delta y) - f(x_0, y_0) - \frac{\partial f}{\partial x} (x_0, y_0) \Delta x - \frac{\partial f}{\partial y} (x_0, y_0) \Delta y}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = 0
         \end{equation}
-        
+
         Najpierw policzymy potrzebne pochodne cząstkowe we wskazanych punktach\newline
-        
+
         $\frac{\partial f}{\partial x} = \frac{\partial }{\partial x} (x^2 - y^2) = 2x \; \; \; \; \; \frac{\partial f}{\partial x} (1,-2) = 2x | _{(1,-2)} = 2 \\$ \newline
         $\frac{\partial f}{\partial y} = \frac{\partial}{\partial y} (x^2 - y^2) = 2y \; \; \; \; \; \frac{\partial f}{\partial y} (1, -2) = 2y | _{(1,-2)} = 4$
-        
-         Następnie sprawdzimy równość z definicji
-         
-         \begin{equation}
-         \begin{aligned}
-            \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(1 + \Delta x)^2 - (-2 + \Delta y)^2 - (1 - 4) - 2 \Delta x - 4 \Delta y }{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
-            = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{1 + 2 \Delta x + (\Delta x)^2 - (4 - 4 \Delta y + (\Delta y)^2) - 2 \Delta x - 4 \Delta y}{ \sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
-            = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(\Delta x)^2 - (\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(\Delta x)^2 + (\Delta y)^2 - 2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
-            = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \left[ \sqrt{(\Delta x)^2 + (\Delta y)^2} \right] - \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} \\
+
+        Następnie sprawdzimy równość z definicji
+
+        \begin{equation}
+            \begin{aligned}
+                \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(1 + \Delta x)^2 - (-2 + \Delta y)^2 - (1 - 4) - 2 \Delta x - 4 \Delta y }{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
+                = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{1 + 2 \Delta x + (\Delta x)^2 - (4 - 4 \Delta y + (\Delta y)^2) - 2 \Delta x - 4 \Delta y}{ \sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
+                = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(\Delta x)^2 - (\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{(\Delta x)^2 + (\Delta y)^2 - 2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = \\
+                = \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \left[ \sqrt{(\Delta x)^2 + (\Delta y)^2} \right] - \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} \\
             \end{aligned}
         \end{equation}
-        
+
         $ \lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \left[ \sqrt{(\Delta x)^2 + (\Delta y)^2} \right] = 0$\newline
-        
+
         Oraz z twierdzenia o trzech ciągach\newline
         \\
         $\lim_{(\Delta x, \Delta y) \rightarrow (0,0)} \frac{2(\Delta y)^2}{\sqrt{(\Delta x)^2 + (\Delta y)^2}} = 0 $\newline
         \\
         Zatem cała granica wynosi 0 oraz funkcja jest różniczkowalna w punkcie (1,-2).
-        
-        
-        
+
+
     \end{itemize}
-   
+
     \newpage
 
     \section{Ekstrema funkcji wielu zmiennych. Definicje i twierdzenia.}
-\begin{itemize}
-            \item Zbadać czy podana funkcja ma ekstrema lokalne oraz jeśli tak to podać je\\
-            
-            $f(x,y) = 3(x-1)^2 + 4(y+2)^2 = 3(x^2 - 2x +1) + 4(y^2 + 4y + 4) =\\ = 3x^2 - 6x + 3 + 4y^2 + 16y + 4$\\
-            
-            Korzystamy z warunku wystarczającego na istnienie ekstremum lokalnego funkcji dwóch zmiennych
-            
-            Najpierw liczymy pochodne cząstkowe
-            
-            \begin{equation}
-                \begin{aligned}
-                    \frac{\partial f}{\partial x} (x,y) = \frac{\partial }{\partial x} \left( 3x^2 - 6x + 3 + 4y^2 + 16y + 4 \right) = 6x - 6 \\
-                    \\
-                    \frac{\partial f}{\partial y} (x,y) = \frac{\partial }{\partial y} \left( 3x^2 - 6x + 3 + 4y^2 + 16y + 4 \right) = 8y + 16
-                \end{aligned}
-            \end{equation}
-            
-            Funkcja f może mieć ekstrema tylko w miejscu zerowania się pochodnych
-            
-            \begin{equation}
-                \begin{aligned}
-                    \left \{ \begin{array}{lr}
-                                        \frac{\partial f}{\partial x} (x_0, y_0 ) = 0 \\
-                                        \\
-                                        \frac{\partial f}{\partial y} (x_0, y_0) = 0
-                    \end{array} \right.
-                    \\
-                    \\
-                    \left \{ \begin{array}{lr}
-                                        6x_0 - 6 = 0 \\
-                                        \\
-                                        8y_0 + 16 = 0
-                    \end{array}\right.
-                \end{aligned}
-            \end{equation}
-            
-            Zatem punkt zerowania się pochodnych, w którym funkcja może mieć ekstrema to $P(x_0,y_0) = P(1,-2)$
-            
-            Wyliczamy pochodne cząstkowe drugiego rzędu oraz badamy znak macierzy Jacobi'ego
-            
-            \begin{equation}
-                \begin{aligned}
-                det \begin{bmatrix}
-                           \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
-                           \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
-                \end{bmatrix}
-                                \end{aligned}
-            \end{equation}
-            \newpage
-         
-                 $\frac{\partial f}{\partial x^2} (x,y) = \frac{\partial}{\partial x} \left( 6x - 6 \right) = 6$
-                 \\
-                 
-                $\frac{\partial f}{\partial x \partial y} (x,y)  =  \frac{\partial}{\partial x} \left( 8y + 16 \right) = 0$
-                \\
-                
-                $\frac{\partial f}{\partial y \partial x} (x,y) = \frac{\partial}{\partial y} \left( 6x - 6 \right) = 0$
-                \\
-                
-                $\frac{\partial f}{\partial y^2} (x,y)  = \frac{\partial}{\partial x} \left( 8y + 16 \right) = 8$
-                \\
-                
-                $ det \begin{bmatrix}
-                     6 & 0 \\
-                     0 & 8
-                    \end{bmatrix} = 6 \cdot 8 = 48 > 0$ \\
-                    
-                Zatem funkcja f ma ekstremum lokalne w punkcie (1,-2) oraz $\frac{\partial f}{\partial x^2}(x_0, y_0) > 0$ zatem jest to minimum lokalne właściwe.
+    \begin{itemize}
+        \item Zbadać czy podana funkcja ma ekstrema lokalne oraz jeśli tak to podać je\\
 
-        \end{itemize}
+        $f(x,y) = 3(x-1)^2 + 4(y+2)^2 = 3(x^2 - 2x +1) + 4(y^2 + 4y + 4) =\\ = 3x^2 - 6x + 3 + 4y^2 + 16y + 4$\\
+
+        Korzystamy z warunku wystarczającego na istnienie ekstremum lokalnego funkcji dwóch zmiennych
+
+        Najpierw liczymy pochodne cząstkowe
+
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial f}{\partial x} (x,y) = \frac{\partial }{\partial x} \left( 3x^2 - 6x + 3 + 4y^2 + 16y + 4 \right) = 6x - 6 \\
+                \\
+                \frac{\partial f}{\partial y} (x,y) = \frac{\partial }{\partial y} \left( 3x^2 - 6x + 3 + 4y^2 + 16y + 4 \right) = 8y + 16
+            \end{aligned}
+        \end{equation}
+
+        Funkcja f może mieć ekstrema tylko w miejscu zerowania się pochodnych
+
+        \begin{equation}
+            \begin{aligned}
+                \left \{ \begin{array}{lr}
+                             \frac{\partial f}{\partial x} (x_0, y_0 ) = 0 \\
+                             \\
+                             \frac{\partial f}{\partial y} (x_0, y_0) = 0
+                \end{array} \right.
+                \\
+                \\
+                \left \{ \begin{array}{lr}
+                             6x_0 - 6 = 0 \\
+                             \\
+                             8y_0 + 16 = 0
+                \end{array}\right.
+            \end{aligned}
+        \end{equation}
+
+        Zatem punkt zerowania się pochodnych, w którym funkcja może mieć ekstrema to $P(x_0,y_0) = P(1,-2)$
+
+        Wyliczamy pochodne cząstkowe drugiego rzędu oraz badamy znak macierzy Jacobi'ego
+
+        \begin{equation}
+            \begin{aligned}
+                det \begin{bmatrix}
+                        \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
+                        \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
+                \end{bmatrix}
+            \end{aligned}
+        \end{equation}
+        \newpage
+
+        $\frac{\partial f}{\partial x^2} (x,y) = \frac{\partial}{\partial x} \left( 6x - 6 \right) = 6$
+        \\
+
+        $\frac{\partial f}{\partial x \partial y} (x,y)  =  \frac{\partial}{\partial x} \left( 8y + 16 \right) = 0$
+        \\
+
+        $\frac{\partial f}{\partial y \partial x} (x,y) = \frac{\partial}{\partial y} \left( 6x - 6 \right) = 0$
+        \\
+
+        $\frac{\partial f}{\partial y^2} (x,y)  = \frac{\partial}{\partial x} \left( 8y + 16 \right) = 8$
+        \\
+
+        $ det \begin{bmatrix}
+                  6 & 0 \\
+                  0 & 8
+        \end{bmatrix} = 6 \cdot 8 = 48 > 0$ \\
+
+        Zatem funkcja f ma ekstremum lokalne w punkcie (1,-2) oraz $\frac{\partial f}{\partial x^2}(x_0, y_0) > 0$ zatem jest to minimum lokalne właściwe.
+
+    \end{itemize}
     \newpage
 
     \section{Twierdzenie o zmianie zmiennych w rachunku całkowym; współrzędne walcowe i sferyczne.}
@@ -2380,17 +2403,17 @@
     \begin{exercise}
         Wprowadzając współrzędne walcowe obliczyć podaną całkę po wskazanych obszarach:
         \begin{align*}
-            \iiint_U (x^2+y^2) \,dx\,dy\,dz, \quad gdzie \ U: \sqrt{x^2+y^2} \leq z \leq 1 
+            \iiint_U (x^2+y^2) \,dx\,dy\,dz, \quad gdzie \ U: \sqrt{x^2+y^2} \leq z \leq 1
         \end{align*}
     \end{exercise}
-    
+
     Rozwiązanie:
-    
+
     Obszar całkowania $U$ jest stożkiem o wysokości 1 i promieniu podstawy 1. Stożek $U$ i jego rzut na płaszczyznę $xOy$ przedstawiony na rysunkach:
     \begin{figure}[H]
         \includegraphics[width=\linewidth]{28_1a.jpg}
     \end{figure}
-    
+
     Obszar $D_{xy}$ jest określony we współrzędnych biegunowych przez nierówności
     \begin{align*}
         0 \leq \varphi \leq 2\pi, \quad 0 \leq \varrho 1 .
@@ -2399,56 +2422,55 @@
     \begin{align*}
         0 \leq \varphi \leq 2\pi, \quad 0 \leq \varrho \leq 1, \quad \varrho \leq h \leq 1.
     \end{align*}
-    
+
     \begin{figure}[H]
         \includegraphics[width=\linewidth]{28_1b.jpg}
     \end{figure}
-    
+
     Dokonując teraz zamiany zmiennych w całce potrójnej na współrzędne walcowe otrzymujemy:
     \begin{align*}
-        \iiint_U (x^2+y^2) \,dx\,dy\,dz &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} d\varrho \int_{\varrho}^{1} (\varrho^2 cos^2\varphi+\varrho^2sin^2\varphi \varrho) dh 
-        \\ &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} d\varrho \int_{\varrho}^{1} \varrho^3 dh = \int_{0}^{2\pi} d\varphi \int_{0}^{1} d \left[ \varrho^3 h \right]_{h=\varrho}^{h=1} d\varrho 
-        \\ &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} (\varrho^3 - \varrho^4) d\varrho  = \left(\int_{0}^{2\pi}d\varphi\right) \left( \int_{0}^{1} (\varrho^3 - \varrho^4) d\varrho\right) 
+        \iiint_U (x^2+y^2) \,dx\,dy\,dz &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} d\varrho \int_{\varrho}^{1} (\varrho^2 cos^2\varphi+\varrho^2sin^2\varphi \varrho) dh
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} d\varrho \int_{\varrho}^{1} \varrho^3 dh = \int_{0}^{2\pi} d\varphi \int_{0}^{1} d \left[ \varrho^3 h \right]_{h=\varrho}^{h=1} d\varrho
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{0}^{1} (\varrho^3 - \varrho^4) d\varrho  = \left(\int_{0}^{2\pi}d\varphi\right) \left( \int_{0}^{1} (\varrho^3 - \varrho^4) d\varrho\right)
         \\ &= \left[\varphi\right]_0^{2\pi} \cdot \left[\frac{\varrho^4}{4} - \frac{\varrho^5}{5}\right]_0^1 = 2\pi \cdot \left(\frac{1}{4}-\frac{1}{5}\right) = \frac{\pi}{10}
     \end{align*}
-    
-    
+
+
     \begin{exercise}
         Wprowadzając współrzędne sferyczne obliczyć podaną całkę po wskazanych obszarach:
         \begin{align*}
-            \iiint_U (x^2+y^2+z^2) \,dx\,dy\,dz, \quad gdzie \ U: -\sqrt{4-x^2-y^2} \leq z \leq 0 
+            \iiint_U (x^2+y^2+z^2) \,dx\,dy\,dz, \quad gdzie \ U: -\sqrt{4-x^2-y^2} \leq z \leq 0
         \end{align*}
     \end{exercise}
     Rozwiązanie:
     Obszar całkowania $U$ jest dolną półkulą o promieniu $R=2$. Półkulę $U$ i jej rzut $D_{xy}$ na płaszczyznę $xOy$ przedstawiony na rysunkach:
-    
+
     \begin{figure}[H]
         \includegraphics[width=\linewidth]{28_2a.jpg}
     \end{figure}
-    
-    Na podstawie rzutu $D$ obszaru $U$ ustalamy zakres zmienności kąta $\varphi$ we współrzędnych sferycznych $(\varphi, \psi, \varrho)$. Mamy $0 \leq \varphi \leq 2\pi$. Aby określić zakres zmienności kąta $\psi$ i promienia wodzącego rysujemy (dla ustalonego kąta $\varphi$) przekrój obszaru $U$ półpłaszczyzną przechodzącą przez oś $Oz$ i przez ramię kąta $\varphi$. Z rystunku odczytujemy te zakresy: 
+
+    Na podstawie rzutu $D$ obszaru $U$ ustalamy zakres zmienności kąta $\varphi$ we współrzędnych sferycznych $(\varphi, \psi, \varrho)$. Mamy $0 \leq \varphi \leq 2\pi$. Aby określić zakres zmienności kąta $\psi$ i promienia wodzącego rysujemy (dla ustalonego kąta $\varphi$) przekrój obszaru $U$ półpłaszczyzną przechodzącą przez oś $Oz$ i przez ramię kąta $\varphi$. Z rystunku odczytujemy te zakresy:
     \begin{align*}
         -\frac{\pi}{2} \leq \psi \leq 0, \quad 0 \leq \varrho \leq 2.
     \end{align*}
-    
+
     \begin{figure}[H]
         \includegraphics[width=\linewidth/2]{28_2b.jpg}
     \end{figure}
-    
+
     Ostatecznie obszar $U$ we współrzędnych sferycznych opisany jest układem nierówności postaci:
     \begin{align*}
         0 \leq \varphi \leq 2\pi, \quad -\frac{\pi}{2}\leq \psi \leq 0, \quad 0 \leq \varrho \leq 2.
     \end{align*}
-    
+
     W rozważanej całce dokonujemy zamiany zmiennych na współrzędne sferyczne. Mamy:
     \begin{align*}
         \iiint_U \mu(x^2+y^2+z^2) \,dx\,dy\,dz
-        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} (\varrho^2 cos^2\varphi cos^2\psi+\varrho^2sin^2\varphi cos^2\psi + \varrho^2sin^2\psi) \varrho^2cos\psi d\varrho 
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} (\varrho^2 cos^2\varphi cos^2\psi+\varrho^2sin^2\varphi cos^2\psi + \varrho^2sin^2\psi) \varrho^2cos\psi d\varrho
         \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} \varrho^4cos\psi d\varrho
         \\ &= \left(\int_{0}^{2\pi} d\varphi\right) \left(\int_{-\frac{\pi}{2}}^{0} cos\psi d\psi\right)\cdot \left(\int_{0}^{2} \varrho^4 d\varrho \right)
         \\ &= \left[\psi\right]_0^{2\pi} \cdot \left[sin\psi\right]_{-\frac{pi}{2}}^0 \cdot \left[\frac{\varrho ^5}{5}\right]_0^2 = 2\pi \cdot 1 \cdot \frac{32}{5}=\frac{64}{5}\pi
     \end{align*}
-    
 
     \newpage
 

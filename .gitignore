@@ -279,6 +279,8 @@ TSWLatexianTemp*
 .DS_Store*
 
 #.idea
-.iws
-workspace.xml
-tasks.xml
+.idea/
+praktyka/.idea/
+
+#pdfy
+*.pdf

@@ -1,3 +1,8 @@
+%! Suppress = TooLargeSection
+%! Suppress = SentenceEndWithCapital
+%! Suppress = LineBreak
+%! Suppress = MissingLabel
+%! Suppress = Unicode
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -925,15 +930,10 @@
                 \toprule
                 \multirow{3}{*}{$\sigma^2 = \sigma_0^2$} & $\sigma^2 > \sigma_0^2$
                 & \multirow{3}{*}{$\frac{(n-1)s^2}{\sigma_0^2}$} & $\chi_{obs}^2 > \chi_{\alpha}^2$ & $P{\chi^2 \geq \chi_{obs}^2}$\\
-
                 & $\sigma^2 < \sigma_0^2$ & & $\chi_{obs}^2 < \chi_{\alpha}^2$ & $P{\chi^2 \leq \chi_{obs}^2}$\\
-
-
                 & $\sigma^2 \neq \sigma_0^2$ & & $\chi_{obs}^2 \geq \chi_{\frac{\alpha}{2}}^2$
-
                 or $\chi_{obs}^2 \leq \chi_{\frac{\alpha}{2}}^2$
-                & $2 min(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
-
+                & $2\text{min}(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
                 \bottomrule
             \end{tabular}
         \end{center}
@@ -986,23 +986,23 @@
     \newpage
 
     \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
-    
+
     \begin{theorem}
-    \textbf{Tożsamość Bézouta}
-    
-    Dla niezerowych liczb całkowitych $a$ oraz $b$ o największym wspólnym dzielniku d, istnieją liczby całkowite $x$ oraz $y$, nazywane współczynnikami Bézouta, które spełniają równanie
-    $$ax + by = d$$
+        \textbf{Tożsamość Bézouta}
+
+        Dla niezerowych liczb całkowitych $a$ oraz $b$ o największym wspólnym dzielniku d, istnieją liczby całkowite $x$ oraz $y$, nazywane współczynnikami Bézouta, które spełniają równanie
+        \[ax + by = d\]
     \end{theorem}
-        
+
     \begin{definition}
-    \textbf{Elementy odwrotne modulo}
-    
-    W strukturze $(Z_m, +, *)$ element odwrotny względem mnożenia dla $x$ to taki $x^{-1}$, że: 
-    $$ x \cdot x^{-1} = 1 \  mod \  m $$
-    Element odwrotny istnieje, jeśli $NWD(x, m) = 1$\\
-    
-    
-    Aby obliczyć element odwrotny do $x$ w $Z_{m}$ należy użyć rozszerzonego algorytmu Euklidesa.
+        \textbf{Elementy odwrotne modulo}
+
+        W strukturze $(Z_m, +, *)$ element odwrotny względem mnożenia dla $x$ to taki $x^{-1}$, że:
+        \[ x \cdot x^{-1} = 1 \  mod \  m \]
+        Element odwrotny istnieje, jeśli $NWD(x, m) = 1$\\
+
+
+        Aby obliczyć element odwrotny do $x$ w $Z_{m}$ należy użyć rozszerzonego algorytmu Euklidesa.
     \end{definition}
     \subsection{Algorytm Euklidesa}
     Oblicza największy wspólny dzielnik $a, b$
@@ -1026,13 +1026,15 @@
     \subsection{Rozszerzony algorytm Euklidesa}
     Oprócz obliczenia największego wspólnego dzielnika, algorytm znajduje także współczynniki Bézouta. \\
     Poprzedni algorytm obliczał ciąg $r_n$ będący resztami z dzielenia, tzn.:
-    $$ r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}$$
+    \[ r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}\]
     gdzie $q_{i}$ oznacza wynik całkowitego dzielenia $r_{i - 1}$ przez $r_i$. \\
     Wprowadźmy dwa dodatkowe ciągi: $x_{i}$ oraz $y_i$:
-    $$ x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}$$
-    $$ y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}$$
+    \begin{gather*}
+        x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}\\
+        y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}\\
+    \end{gather*}
     Możemy zauważyć, że:
-    $$r_i = x_i * a + y_i * b$$
+    \[r_i = x_i * a + y_i * b\]
     \begin{verbatim}
     def euclid(a, b):
         x, x' = 0, 1
@@ -1045,88 +1047,89 @@
             y', y = y, (y' - q * t)
         return r', x', y'
     \end{verbatim}
-    Ponadto ten algorytm pozawala obliczyć takie $x', y'$, że: $ax' + by' = 0$ (wystarczy zwrócić x i y, zamiast x', y'). 
-    
+    Ponadto ten algorytm pozawala obliczyć takie $x', y'$, że: $ax' + by' = 0$ (wystarczy zwrócić x i y, zamiast x', y').
+
     \newpage
-    
+
     \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta}
-    
+
     \begin{definition}
-    \textbf{Ortogonalność.}
-    
-    Dla wektorów $x, y$ w przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$
-    $$x \bot y \Leftrightarrow x \cdot y = 0 $$
-    
+        \textbf{Ortogonalność.}
+
+        Dla wektorów $x, y$ w przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$
+        \[x \bot y \Leftrightarrow x \cdot y = 0 \]
+
     \end{definition}
-    
+
     \begin{definition}
-    \textbf{Liniowa niezależność}
-    
-    Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $R_n$ nazywamy liniowo niezależnymi jeśli
-    $$a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0$$
-    tzn., nie istnieją taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
-    
-    Zbiór wektorów, który nie jest liniowo niezależny, jest zbiorem liniowo zależnym. Oznacza to, że przynajmniej jeden jego element jest kombinacją liniową pozostałych wektorów. \\~\\
-    
-    W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
-    
+        \textbf{Liniowa niezależność}
+
+        Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $R_n$ nazywamy liniowo niezależnymi jeśli
+        \[a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0\]
+        tzn., nie istnieją taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
+
+        Zbiór wektorów, który nie jest liniowo niezależny, jest zbiorem liniowo zależnym. Oznacza to, że przynajmniej jeden jego element jest kombinacją liniową pozostałych wektorów. \\~\\
+
+        W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
+
     \end{definition}
-    
+
     \begin{theorem}
-    Każdy układ ortogonalny wektorów w przestrzeni $R_n$ jest liniowo niezależny.
+        Każdy układ ortogonalny wektorów w przestrzeni $R_n$ jest liniowo niezależny.
     \end{theorem}
-    
+
     \begin{definition}
-    
-    \textbf{Baza przestrzeni $R_n$}
-    
-    Zbiór wektorów $B \subset R_n$ nazywamy bazą przestrzeni $R_n$ jeśli:
-    
-    \begin{enumerate}
-    \item Jest liniowo niezależny
-    \item Generuje przestrzeń $R_n$ tzn. każdy wektor $\in R_n$ można zapisać jako kombinację liniową wektorów z $B$  
-    \end{enumerate}
-    
+
+        \textbf{Baza przestrzeni $R_n$}
+
+        Zbiór wektorów $B \subset R_n$ nazywamy bazą przestrzeni $R_n$ jeśli:
+
+        \begin{enumerate}
+            \item Jest liniowo niezależny
+            \item Generuje przestrzeń $R_n$ tzn. każdy wektor $\in R_n$ można zapisać jako kombinację liniową wektorów z $B$
+        \end{enumerate}
+
     \end{definition}
-    
+
     \begin{theorem}
-    Każdy ortogonalny układ $n$ wektorów w $R_n$ jest bazą.
+        Każdy ortogonalny układ $n$ wektorów w $R_n$ jest bazą.
     \end{theorem}
-    
+
     \begin{definition}
-    \textbf{Ortonormalność}
-    
-    Zbiór wektorów $A$ przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
-    $$ \forall x,y \in A  \quad   x \cdot y =  \begin{cases} 
-    		0, & x \ne y \\ 
-    		1, & x = y \end{cases}$$ 
-    
-    Zatem wektory należące do $A$ są wersorami.
+        \textbf{Ortonormalność}
+
+        Zbiór wektorów $A$ przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
+        \[ \forall x,y \in A  \quad   x \cdot y =  \begin{cases}
+                                                       0, & x \ne y \\
+                                                       1, & x = y
+        \end{cases}\]
+
+        Zatem wektory należące do $A$ są wersorami.
     \end{definition}
-    
+
     \newpage
     \subsection{Ortonormalizacja Grama-Schmidta}
-    
+
     Ortonormalizacja to proces przekształcenia układu niezależnych liniowo wektorów w układ wektorów ortonormalnych.
-    
+
     Projekcję wektora $\mathbf{v}$ na wektor $\mathbf{u}$ definiujemy jako:
-    $$\mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$
+    \[\mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}\]
     Algorytm:
-    
+
     \begin{enumerate}
-    
-    \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie $$\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i$$
-    		tzn:
-    		$$\mathbf{u}_1 = \mathbf{v}_1$$
-    		$$\mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2$$
-    		$$\mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3$$
-    
-    \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$
-    
+
+        \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie \[\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i\]
+        tzn:
+        \[\mathbf{u}_1 = \mathbf{v}_1\]
+        \[\mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2\]
+        \[\mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3\]
+
+        \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$
+
     \end{enumerate}
-    
+
     \includegraphics[scale=0.20]{graphics/15_6.png}
-    
+
     \newpage
 
     \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
@@ -1172,56 +1175,56 @@
     \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
     \begin{definition}
         \textbf{Funkcja Eulera (Tocjent)}
-        
-         Funkcja przypisująca każdej liczbie naturalnej liczbę liczb względnie pierwszych z nią i nie większych od niej.\newline $\sum_{m|n}^{} \varphi(m) = n$\newline
-         
-         \textbf{Własności}
-         \begin{enumerate}
-         \item $\varphi (n) \leq n - 1$  dla każdego $n>1$
-         \item $\varphi (p) \leq p - 1$ dla każdego p będącego liczbą pierwszą
-         \item $\varphi (mn) = \varphi (m)\varphi(n)$ jeśli NWD(m,n) = 1 (m i n względnie pierwsze)
-         \item $\varphi(p^{k}) = p^{k-1} \cdot (p-1)$ jeśli p jest liczbą pierwszą
-         \item $\varphi(n) = n  
-         \left (  1 - \frac{1}{p_1}\right)
-         \left (  1 - \frac{1}{p_2}\right)
-         \cdots
-         \left (  1 - \frac{1}{p_n}\right)$
-         gdzie $p_1, p_2, ..., p_n$ są czynnikami pierwszymi liczby n
-         \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
-         \end{enumerate}
+
+        Funkcja przypisująca każdej liczbie naturalnej liczbę liczb względnie pierwszych z nią i nie większych od niej.\newline $\sum_{m|n}^{} \varphi(m) = n$\newline
+
+        \textbf{Własności}
+        \begin{enumerate}
+            \item $\varphi (n) \leq n - 1$  dla każdego $n>1$
+            \item $\varphi (p) \leq p - 1$ dla każdego p będącego liczbą pierwszą
+            \item $\varphi (mn) = \varphi (m)\varphi(n)$ jeśli NWD(m,n) = 1 (m i n względnie pierwsze)
+            \item $\varphi(p^{k}) = p^{k-1} \cdot (p-1)$ jeśli p jest liczbą pierwszą
+            \item $\varphi(n) = n
+            \left (  1 - \frac{1}{p_1}\right)
+            \left (  1 - \frac{1}{p_2}\right)
+            \cdots
+            \left (  1 - \frac{1}{p_n}\right)$
+            gdzie $p_1, p_2, ..., p_n$ są czynnikami pierwszymi liczby n
+            \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
+        \end{enumerate}
     \end{definition}
-    
+
     \begin{definition}
-    \textbf{Małe Twierdzenie Fermata}
-    
-    Jeżeli p jest liczbą pierwszą, to dla dowolnej liczby całkowitej a, liczba $a^{p}-a$ jest podzielna przez p.\newline 
-    \begin{enumerate}
-    \item $a^{p-a} \equiv 0 \pmod p$\newline
-    \end{enumerate}
-    
-    Jeśli p jest liczbą pierwszą, a a jest taką liczbą całkowitą, że liczby a i p są względnie pierwsze to $a^{p-1} - 1$ dzieli się przez p.\newline
-    
-    \begin{enumerate}
-    \item$a^{p-1} - 1 \equiv \pmod p$
-    \item$a^{p-1} \equiv 1 \pmod p$
-    \end{enumerate}
+        \textbf{Małe Twierdzenie Fermata}
+
+        Jeżeli p jest liczbą pierwszą, to dla dowolnej liczby całkowitej a, liczba $a^{p}-a$ jest podzielna przez p.\newline
+        \begin{enumerate}
+            \item $a^{p-a} \equiv 0 \pmod p$\newline
+        \end{enumerate}
+
+        Jeśli p jest liczbą pierwszą, a a jest taką liczbą całkowitą, że liczby a i p są względnie pierwsze to $a^{p-1} - 1$ dzieli się przez p.\newline
+
+        \begin{enumerate}
+            \item$a^{p-1} - 1 \equiv \pmod p$
+            \item$a^{p-1} \equiv 1 \pmod p$
+        \end{enumerate}
 
     \end{definition}
-    
+
     \begin{definition}
-    \textbf{Twierdzenie Eulera}
-    
-    Jeżeli $m \in \mathbb{Z_{+}}$ oraz $a \in \mathbb{Z}$ są liczbami względnie pierwszymi to m dzieli liczbę $a^{\varphi(m)} - 1$, gdzie $\varphi (m)$ oznacza wartość funkcji Eulera.
-    
-    \begin{enumerate}
-    \item $a^{\varphi (m)} \equiv 1 \pmod m$\newline
-    \end{enumerate}
-    
+        \textbf{Twierdzenie Eulera}
+
+        Jeżeli $m \in \mathbb{Z_{+}}$ oraz $a \in \mathbb{Z}$ są liczbami względnie pierwszymi to m dzieli liczbę $a^{\varphi(m)} - 1$, gdzie $\varphi (m)$ oznacza wartość funkcji Eulera.
+
+        \begin{enumerate}
+            \item $a^{\varphi (m)} \equiv 1 \pmod m$\newline
+        \end{enumerate}
+
     \end{definition}
     \newpage
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
-    
+
     \begin{definition}
         \textbf{Konfiuracją kombinatoryczną} $B$ o parametrach $(n,k,r)$ nazywamy rodzinę $k$-elementowych podzbiorów w $X$, jeżeli każdy element $x \in X$ występuje w dokładnie $r$ podbiorach. Zachodzą warunki:
         \begin{enumerate}
@@ -1230,37 +1233,37 @@
             \item $n \cdot r = b \cdot k$ \quad gdzie b to liczba k-elementowych podzbiorów zbioru n-elementowego
         \end{enumerate}
     \end{definition}
-    
+
     \begin{theorem}
         Istnieje konfiguracja kombinatoryczna $B$ o parametrach $(n, k, r)$ wtedy i tylko wtedy, gdy:
         \begin{enumerate}
             \item $k | n\cdot r$
             \item $\frac{n\cdot r}{k}\leq {n\choose k}$
         \end{enumerate}
-        
+
     \end{theorem}
-    
+
     \begin{definition}
         Niech $X$ dowolny zbiór, $|X| = n.$ $B$ rodzina $k-$ podzbiorów $X$ jest
         \textbf{t-konfiguracją kombinatoryczną} o parametrach $(n, k, r_t)$ wtw gdy dla
         każdego $t-$podzbioru $T \subset X$ liczba bloków z $B$ zawierających $T$ jest
         równa $r_t$.
     \end{definition}
-    
+
     \begin{theorem}
         Jeśli $B$ jest $t$-konfiguracją kombinatoryczną, to
         $B$ jest $s$-konfiguracją kombinatoryczną dla $s = 1, 2,\dots$ $t-1$.
         Uwagi:
         \begin{enumerate}
             \item $r_{t-1}$ $= r_t \cdot \frac{n-t+1}{k-t+1}$
-            \item Jeżeli $B$ jest $t-$konfiguracją o parametrach $(n,k,r_t)$, to dla $1 \leq s \leq (t-1)$ 
-                \begin{align*}
-                    r_s = r_t \cdot \frac{(n-s)(n-s-1)\dots(n-t+1)}{(k-s)(k-s-1)\dots(k-t+1)}
-                \end{align*}
-            \item Jeśli $B$ jest $t$-konfiguracją o parametrach $(n,k,r_t)$, to 
-                \begin{align*}
-                    (k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)
-                \end{align*}
+            \item Jeżeli $B$ jest $t-$konfiguracją o parametrach $(n,k,r_t)$, to dla $1 \leq s \leq (t-1)$
+            \begin{align*}
+                r_s = r_t \cdot \frac{(n-s)(n-s-1)\dots(n-t+1)}{(k-s)(k-s-1)\dots(k-t+1)}
+            \end{align*}
+            \item Jeśli $B$ jest $t$-konfiguracją o parametrach $(n,k,r_t)$, to
+            \begin{align*}
+                (k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)
+            \end{align*}
             warunek 3. dla $t\leq 2$ jest konieczny dla istnienia $t$-konfiguracji, ale nie wystarczający
         \end{enumerate}
     \end{theorem}
@@ -2187,7 +2190,7 @@
     \end{center}
 
     \section{Metody dowodzenia poprawności pętli.}
-    
+
     \begin{itemize}
         \item \textbf{Asercja} - warunek logiczny wyrażający zależności między zmiennymi
         algorytmu w kontekście ich aktualnego stanu.
@@ -2197,7 +2200,7 @@
         \item Asercje początkowa i końcowa są znane w momencie definiowania
         problemu i poszukiwania algorytmu, stanowiąc \textbf{specyfikację algorytmu}
     \end{itemize}
-    
+
     \begin{itemize}
         \item Algorytm A ma własność \textbf{określoności obliczeń} względem warunku $\alpha$, jeśli dla każdych danych spełniających warunek $\alpha$ działanie algorytmu A nie zostanie zerwane
         (oznaczenie $obl ( \alpha, A )$ ).
@@ -2206,7 +2209,7 @@
         $cp ( \alpha, z \leftarrow w, \beta ) \iff ( \alpha \Rightarrow \beta|_{z \leftarrow w})$\\
         Przy asercji początkowej $\alpha$ i asercji końcowej $\beta$ podstawienie z $\leftarrow$ w jest częściowo poprawne wtedy i tylko wtedy, gdy
         poprawna jest implikacja od asercji $\alpha$ do asercji $\beta$, z zastąpieniem każdego wystąpienia zmiennej z podstawianym
-        wyrażeniem w. 
+        wyrażeniem w.
         \item Algorytm A jest \textbf{całkowicie poprawny} (semantycznie poprawny) względem warunku
         początkowego $\alpha$ oraz warunku końcowego $\beta$, jeśli ma własność określoności obliczeń
         względem warunku $\alpha$, ma własność stopu względem warunku $\alpha$ oraz jest częściowo
@@ -2214,8 +2217,7 @@
         \item Formalnie:
         $sp ( \alpha, A, \beta ) \iff obl ( \alpha, A ) \wedge stop ( \alpha, A ) \wedge cp ( \alpha, A, \beta )$
     \end{itemize}
-    
-    
+
     \newpage
     \section{Odwrotna Notacja Polska: definicja, własności, zalety i wady, algorytmy.}
 
@@ -2278,7 +2280,7 @@
             }
         } while(!koniec_danych);
         while( niepusty_stos )
-            przepisz_element_ze_stosu_na_wyjscie;
+        przepisz_element_ze_stosu_na_wyjscie;
     \end{verbatim}
 
     \newpage
@@ -2377,11 +2379,11 @@
             \item Przechowuje elementy \textbf{tego samego typu}
             \item Wykorzystuje pamięć w sposób \textbf{dynamiczny lub statyczny}
             \item Dostęp do danych jest \textbf{sekwencyjny}
-            \item Elementy w liście sa \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście 
+            \item Elementy w liście sa \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście
             \begin{itemize}
-                \item element ai znajduje się na pozycji ‘i’
-                \item element ai poprzedza ai+1 dla i=1,2,...,n-1
-                \item element ai następuje po ai-1 dla i=2,...,n
+                \item element $a_i$ znajduje się na pozycji ‘i’
+                \item element $a_i$ poprzedza $a_{i+1}$ dla i=$1,2,\cdots,n-1$
+                \item element $a_i$ następuje po $a_{i-1}$ dla i=$2,\cdots,n$
             \end{itemize}
             \item Wyróżnia się dwa podstawowe sposoby implementacji listy jako ADT
             \begin{itemize}
@@ -2389,18 +2391,18 @@
                 \item Lista wiązana
             \end{itemize}
         \end{itemize}
-        \end{definition}
-        
-        \begin{definition}
-            W sensie matematycznym lista jest skończonym ciągiem elementów ustalonego typu
+    \end{definition}
+
+    \begin{definition}
+        W sensie matematycznym lista jest skończonym ciągiem elementów ustalonego typu
         Node: $a1, a2, . . . , an, , n \geq 0$
         przy czym Node, zwany typem bazowym, może być np. typem \textbf{klasy, struktury, int,
         string} itp.
-        \end{definition}
-        
-        \subsection{Implementacja za pomocą tablic (array)}
-        Tablica wykorzystuje pamięć w sposób \textbf{statyczny}. Oznacza to, że ma z góry określony rozmiar oraz pewna jej część może być niewykorzystana. Tablica posiada zmienne wskazujące na jej maksymalny rozmiar, ilość zajętych miejsc. Indeksowanie elementów zazwyczaj zaczyna się od 0 i kończy na maxsize-1.
-        
+    \end{definition}
+
+    \subsection{Implementacja za pomocą tablic (array)}
+    Tablica wykorzystuje pamięć w sposób \textbf{statyczny}. Oznacza to, że ma z góry określony rozmiar oraz pewna jej część może być niewykorzystana. Tablica posiada zmienne wskazujące na jej maksymalny rozmiar, ilość zajętych miejsc. Indeksowanie elementów zazwyczaj zaczyna się od 0 i kończy na maxsize-1.
+
 
         \subsection{Implementacja za pomocą Listy Wiązanej (Linked List)}
         Rozróznia się dwa podstawowe rodzaje:
@@ -2455,157 +2457,158 @@
             int counter = 0;
             ...
         }
+    \end{verbatim}
+
+    Operacje i złożoności
+
+    \begin{enumerate}
+        \item
+        \begin{verbatim}
+            CREATE(l: List)
         \end{verbatim}
-    
-        Operacje i złożoności
-        
-        \begin{enumerate}
-            \item
-\begin{verbatim}
-CREATE(l: List)
-\end{verbatim}
-            Tworzy nową listę \\
-            O(1) - czas stały
-            \item
-\begin{verbatim}
-APPEND(l: List; d: Data)
-\end{verbatim}
-            Dodaje na końcu  listy l rekord d \\
-            O(1) - czas stały
-            \item
-\begin{verbatim}
-INSERT(l: List; d: Data; i: Integer)
-\end{verbatim}
-            Dodaje rekord d do określonego miejsce i w liście l \\
-            O(n) - czas liniowy
-            \item 
-\begin{verbatim}
-FIND(l: List; i: Integer)
-\end{verbatim}
-            Znajduje i-ty w kolejności rekord z listy \\
-            O(min(i, n)) - czas liniowy
-            \item
-\begin{verbatim}
-DELETE(l: List; i: Integer)
-\end{verbatim}
-            Usuwa -ity w kolejności rekord z listy \\
-            O(min(i, n)) - czas liniowy
-            \item
-\begin{verbatim}
-MAKENULL(l: List)
-\end{verbatim}
-            Czyści listę, usuwając wszystkie rekordy \\
-            O(1) - czas stały
-        \end{enumerate}
-\newpage
+        Tworzy nową listę \\
+        O(1) - czas stały
+        \item
+        \begin{verbatim}
+            APPEND(l: List; d: Data)
+        \end{verbatim}
+        Dodaje na końcu listy l rekord d \\
+        O(1) - czas stały
+        \item
+        \begin{verbatim}
+            INSERT(l: List; d: Data; i: Integer)
+        \end{verbatim}
+        Dodaje rekord d do określonego miejsce i w liście l \\
+        O(n) - czas liniowy
+        \item
+        \begin{verbatim}
+            FIND(l: List; i: Integer)
+        \end{verbatim}
+        Znajduje i-ty w kolejności rekord z listy \\
+        O(min(i, n)) - czas liniowy
+        \item
+        \begin{verbatim}
+            DELETE(l: List; i: Integer)
+        \end{verbatim}
+        Usuwa -ity w kolejności rekord z listy \\
+        O(min(i, n)) - czas liniowy
+        \item
+        \begin{verbatim}
+            MAKENULL(l: List)
+        \end{verbatim}
+        Czyści listę, usuwając wszystkie rekordy \\
+        O(1) - czas stały
+    \end{enumerate}
+    \newpage
     \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
     \subsection{Kolejka}
     \begin{definition}
-        Kolejka FIFO (First In First Out). 
+        Kolejka FIFO (First In First Out).
 
-    Jest to lista, w której
-    \begin{itemize}
-        \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}
-        \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}\\
-        \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki
+        Jest to lista, w której
         \begin{itemize}
-            \item Tablica cykliczna
-            \item Lista wiązana
+            \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}
+            \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}\\
+            \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki
+            \begin{itemize}
+                \item Tablica cykliczna
+                \item Lista wiązana
+            \end{itemize}
         \end{itemize}
-    \end{itemize}
     \end{definition}
 
-Operacje i złożoności
-\begin{enumerate}
-\item
-\begin{verbatim}
-Create()
-\end{verbatim}
-Tworzy pustą kolejkę
-\item
-\begin{verbatim}
-isEmpty()
-\end{verbatim}
-Sprawdza czy kolejka pusta
-\item
-\begin{verbatim}
-Enqueue(x)    
-\end{verbatim}
-Wstawia nowy element x
-\item
-\begin{verbatim}
-Front()
-\end{verbatim}
-Odczytuje pierwszy element w kolejce
-\item 
-\begin{verbatim}
-Dequeue()
-\end{verbatim}
-Usuwa pierwszy element w kolejce i go zwraca 
-\end{enumerate}
+    Operacje i złożoności
+    \begin{enumerate}
+        \item
+        \begin{verbatim}
+            Create()
+        \end{verbatim}
+        Tworzy pustą kolejkę
+        \item
+        \begin{verbatim}
+            isEmpty()
+        \end{verbatim}
+        Sprawdza czy kolejka pusta
+        \item
+        \begin{verbatim}
+            Enqueue(x)
+        \end{verbatim}
+        Wstawia nowy element x
+        \item
+        \begin{verbatim}
+            Front()
+        \end{verbatim}
+        Odczytuje pierwszy element w kolejce
+        \item
+        \begin{verbatim}
+            Dequeue()
+        \end{verbatim}
+        Usuwa pierwszy element w kolejce i go zwraca
+    \end{enumerate}
 
-\subsection{Sposoby implementacji kolejki}
+    \subsection{Sposoby implementacji kolejki}
 
-Na początku zauważmy, że \textbf{nieefektywną} realizacją kolejki w tablicy jest przyjęcie, że
-początek kolejki \textbf{front} będzie zawsze równy 0, a \textbf{rear} będzie indeksem do pierwszego
-wolnego elementu tablicy.\\
-
-
-Najbardziej \textbf{efektywnym} rozwiązaniem jest reprezentacja kolejki w \textbf{tablicy cyklicznej}.
-Operacje wstawiania i usuwania zwiększają pozycje końca i początku kolejki o 1 modulo
-rozmiar tablicy, wykorzystując metodę:
-\begin{verbatim}
-private int Add (int i){
-    return (i+1) % maxSize; // reszta z dzielenia
-} 
-\end{verbatim}
-
-\subsection{Kolejka Priorytetowa}
-\begin{definition} Kolejka Priorytetowa\\
-Jest to lista, w której
-\begin{itemize}
-    \item Usuwany jest zawsze element o największej (najmniejszej) wartości
-\end{itemize}
-\end{definition}
-
-Operacje
-\begin{enumerate}
-    \item
-\begin{verbatim}
-Insert(x, q)
-\end{verbatim}
-Wstawienie elementu ‘x’ do kolejki q
-\item
-\begin{verbatim}
-Max(Q)
-\end{verbatim}
-Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
-\item
-\begin{verbatim}
-Min(Q)
-\end{verbatim}
-Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
-\item
-\begin{verbatim}
-Delete_Max(Q)
-\end{verbatim}
-Usunięcie największego elementu z kolejki q
-\item
-\begin{verbatim}
-Delete_Min(Q)
-\end{verbatim}
-Usunięcie największego elementu z kolejki q
-\end{enumerate}
+    Na początku zauważmy, że \textbf{nieefektywną} realizacją kolejki w tablicy jest przyjęcie, że
+    początek kolejki \textbf{front} będzie zawsze równy 0, a \textbf{rear} będzie indeksem do pierwszego
+    wolnego elementu tablicy.\\
 
 
-\subsection{ Sposoby implementacji kolejki priorytetowej }
-\begin{itemize}
-    \item Lista - Tablica Nieuporządkowana
-    NIEEFEKTYWNA!
-    \item Lista - Tablica Uporządkowana Rosnąco (Malejąco)
-    NIEEFEKTYWNA!
-    \item Kopiec Max (Min)
-\end{itemize}
+    Najbardziej \textbf{efektywnym} rozwiązaniem jest reprezentacja kolejki w \textbf{tablicy cyklicznej}.
+    Operacje wstawiania i usuwania zwiększają pozycje końca i początku kolejki o 1 modulo
+    rozmiar tablicy, wykorzystując metodę:
+    \begin{verbatim}
+        private int Add (int i){
+        return (i+1) % maxSize; // reszta z dzielenia
+        }
+    \end{verbatim}
+
+    \subsection{Kolejka Priorytetowa}
+    \begin{definition}
+        Kolejka Priorytetowa\\
+        Jest to lista, w której
+        \begin{itemize}
+            \item Usuwany jest zawsze element o największej (najmniejszej) wartości
+        \end{itemize}
+    \end{definition}
+
+    Operacje
+    \begin{enumerate}
+        \item
+        \begin{verbatim}
+            Insert(x, q)
+        \end{verbatim}
+        Wstawienie elementu ‘x’ do kolejki q
+        \item
+        \begin{verbatim}
+            Max(Q)
+        \end{verbatim}
+        Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
+        \item
+        \begin{verbatim}
+            Min(Q)
+        \end{verbatim}
+        Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
+        \item
+        \begin{verbatim}
+            Delete_Max(Q)
+        \end{verbatim}
+        Usunięcie największego elementu z kolejki q
+        \item
+        \begin{verbatim}
+            Delete_Min(Q)
+        \end{verbatim}
+        Usunięcie największego elementu z kolejki q
+    \end{enumerate}
+
+
+    \subsection{ Sposoby implementacji kolejki priorytetowej }
+    \begin{itemize}
+        \item Lista - Tablica Nieuporządkowana
+        NIEEFEKTYWNA!
+        \item Lista - Tablica Uporządkowana Rosnąco (Malejąco)
+        NIEEFEKTYWNA!
+        \item Kopiec Max (Min)
+    \end{itemize}
 
     \newpage
 
