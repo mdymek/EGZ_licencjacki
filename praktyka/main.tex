@@ -2220,6 +2220,62 @@
 
     \section{Złożoność obliczeniowa - pesymistyczna i średnia.}
 
+        \begin{exercise}
+            Oblicz pesymistyczną i średnią złożoność obliczeniową algorytmu sortowania przez wstawianie. 
+        \end{exercise}
+        
+        \textbf{Złożoność pesymistyczna}
+        
+        Przypadek pesymistyczny polega na otrzymaniu na wejściu odwrotnie posortowanej tablicy. 
+        Wówczas każdy element (oprócz pierwszego) z zostanie porównany 
+        i zamieniony ze wszystkimi elementami uprzednio posortowanego fragmentu tablicy. 
+        Obliczmy złożoność zakładając, że zamiana elementów zajmuje czas równy stałej $c$.
+        
+        $$W(c) = \sum_{i = 2}^nic$$
+        $$W(c) = \frac{n^2 + n - 2}{2}c$$
+        $$W(c) = \theta(n^2)$$
+        
+        \textbf{Złożoność średnia}
+        
+        Zauważmy, że ilość zamian elementów jest zależna od liczby inwersji w tablicy wejściowej. Aby obliczyć średnią złożoność algorytmu musimy obliczyć średnią liczbę inwersji.\\
+        
+        Niech $X_ij$ będzie zmienną losową oznaczającą, czy w tablicy wejściowej $A[i]$ jest w inwersji z $A[j]$.
+	Ilość par $i,j$ jest równa $\frac{n(n-1)}{2}.$
+        
+        $$A(n) = E(\sum X_{ij}) = \sum E(X_ij) = \frac{1}{2} \cdot \frac{n(n - 1)}{2} = \frac{n(n - 1)}{4}$$
+        
+        \begin{exercise}
+        Oblicz średnią złożoność obliczeniową algorytmu quicksort.
+        \end{exercise}
+        
+        Zakładamy, że tablica wejściowa nie posiada duplikatów, zaś operacją dominującą jest porównywanie.
+	Przy każdym wyborze elementu rozdzielającego ilość elementów od niego mniejsza jest zmienną losową od 0 do $n - 1$ o rozkładzie jednostajnym. 
+        Zatem po podziale otrzymujemy dwie tablice: o długości $i$ oraz o długości $n - i - 1$ gdzie $i$ jest zmienną losową o rozkładzie jednostajnym od 0 do $n - 1$. 
+        Zatem zakładając, że ilość porównań przy każdym podziale wynosi $n - 1$, średnia ilość porównań dla wszystkich permutacji otrzymanej tablicy jest równa:
+        $$A(n) = n - 1 + \frac{1}{n}\sum_{i = 0}^{n - 1}(A(i) + A(n - i - 1)) = 
+        n - 1 + \frac{2}{n}\sum_{i = 0}^{n - 1}A(i)$$
+        
+        $$nA(n) = n(n - 1) + 2 \sum_{i = 0}^{n - 1}A(i)$$
+        
+        $$nA(n) - (n - 1)A(n-1) = n(n - 1) - (n - 1)(n - 2) + 2\sum_{i = 0}^{n - 1}A(i) - 2\sum_{i = 0}^{n - 2}A(i) = $$
+        
+        $$= 2(n - 1) + 2A(n - 1)$$
+        
+        $$nA(n) = (n + 1)A(n - 1) + 2n - 2$$
+        
+        $$A(n) = \frac{(n + 1)A(n - 1)}{n} + 2 - \frac{2}{n}$$
+        
+        $$\frac{A(n)}{n + 1} = \frac{A(n - 1)}{n} + \frac{2}{n + 1} - \frac{2}{n(n + 1)} = $$
+         $$= \frac{A(n - 2)}{n - 1} + \frac{2}{n} - \frac{2}{(n - 1)n} - \frac{2}{n(n + 1)} + \frac{2}{n + 1} = $$
+         $$ = \cdots = \frac{A(1)}{2} + \sum_{i = 2}^n \frac{2}{i + 1} - \sum_{i = 2}^n \frac{2}{i(i + 1)} = 
+         2\sum_{i = 1}^{n - 1} \frac{1}{i} - \frac{n - 1}{n + 1}$$
+         
+         $$\sum_{i = 1}^{n - 1} \frac{1}{i} \approx \int_1^{n - 1}\frac{dx}{x} = ln(n - 1)$$
+         
+         $$A(n) = 2(n + 1)\;ln(n - 1) - n + 1 = 2n\;ln(n - 1) + 2ln(n - 1) - n + 1 \leq$$
+         
+         $$\leq 2\;ln(n) \approx 1.39 n \; log_2 n = \theta(n\;ln(n))$$
+        
     \newpage
 
     \section{Metoda "dziel i zwyciężaj"; zalety i wady.}

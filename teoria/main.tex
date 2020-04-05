@@ -2234,6 +2234,28 @@
         \end{align*}
     \end{definition}
 
+    \begin{definition}
+        \textbf{Koszt amortyzowany}
+        
+        Koszt amortyzowany operacji jest średnim czasem wykonania przypadającym na jedną operację w pesymistycznym ciągu operacji. Koszt amortyzowany różni się od kosztu średniego tym, że bierze pod uwagę pesymistyczny ciąg operacji i nie jest metodą probabilistyczną.
+        
+    \end{definition}
+    
+    \textbf{Przykład:}
+    
+    Tablica dynamiczna (np. vector w C++) podwaja swoją długość w przypadku, gdy jest pełna i dodajemy do niej nowy element.
+    Alokuje wówczas dwukrotnie większą pamięć i kopiuje wszystkie elementy. 
+    Koszt takiego rozszerzenia jest równy $\theta(n)$.\\
+    
+    Obliczmy koszt amortyzowany wstawienia elementu do tablicy przy wstawieniu $n$ elementów ($n = 2^k,\; k \in \mathbb{N}$),
+    zaczynając od pustej tablicy o długości 1.
+    
+    $$T(n) = \frac{1}{n} (1 + 2 + 4 + \cdots + \frac{n}{2}) =
+    \frac{1}{n} \sum_{i = 0}^{log_2(n) - 1}2^i
+    = \frac{n - 1}{n} = 1 - \frac{1}{n} = \theta(1)$$
+    
+    Zatem sumaryczny koszt wstawienia do takiej tablicy n elementów jest równy $\theta(n)$ 
+
     \newpage
 
     \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
