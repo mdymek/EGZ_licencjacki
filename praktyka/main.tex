@@ -1943,9 +1943,9 @@
     $\frac{n - 2}{13}$. Ponieważ licznik cały czas rośnie, a mianownik pozostaje stały to całość dąży do $+\infty$
 
 
-    \subsection{Twierdzenie o dwóch ciągach}
+	\subsection{Twierdzenie o dwóch ciągach}
 
-    Używane aby wykazać rozbieżność pewnego ciągu wykorzystując inny (prostszy) ciąg \\
+	Używane aby wykazać zbieżność pewnego ciągu do granicy niewłaściwej wykorzystując inny (prostszy) ciąg \\
 
     \noindent Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
 
@@ -2753,6 +2753,77 @@
     \newpage
 
     \section{Modele obliczen: automat skończony, automat ze stosem.}
+	\subsection{Automat skończeniestanowy deterministyczny}
+	\textbf{Zad 1.} \\
+
+	\noindent Wykorzystując pochodne Brzozowskiego skonstruuj automat minimalny rozpoznający język $L = a(a+b)^{*}b(a+b)^{*}$ \\
+
+	\noindent Wyznaczamy pochodne: \\
+	$a^{-1}L = (a+b)^{*}b(a+b)^{*} = M$ \\
+	$b^{-1}L = \emptyset$ \\
+	$(aa)^{-1}L = M$ \\
+	$(ab)^{-1}L = (a+b)^{*}b(a+b)^{*} + (a+b)^{*} = N$ \\
+	$(aba)^{-1}L = N$ \\
+	$(abb)^{-1}L = N$ \\
+
+	\noindent Jak można zauważyć nie dostaniemy już innych pochodnych, więc nasz automat składa się z 4 stanów: L, $\emptyset$, M, N. \\
+	Stan N jest stanem akceptującym, ponieważ sotał uzyskany przez odjęcie słowa należącego do języka L. L jest stanem początkowym. Przejściami w tym automacie są przejścia między pochodnymi pod wpływem kolejnych liter. \\
+
+
+	\noindent \textbf{Zad 2.}
+
+	\noindent Dany jest automat $\mathcal{A}$ = (S, f) nad alfabetem A = \{a, b\}, tak że $S = \{s_{0}, s_{1}, s_{2}\}$.
+	\begin{table}[H]
+	\centering
+		\begin{tabular}{|c|l|l|l|}
+			\hline
+			f & $s_{0}$ & $s_{1}$ & $s_{2}$ \\ \hline
+			a & $s_{1}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			b & $s_{0}$ & $s_{0}$ & $s_{2}$ \\ \hline
+		\end{tabular}
+	\end{table}
+	\noindent Określ dla tego automatu jego reprezentację oraz monoid przejść. \\
+
+	\noindent Określamy reprezentację uzupełniając tabelkę wpisując po lewej stronie kolejne słowa, a w kolejnych kolumnach stan w jakim się znajdziemy po przejściu pod wpływem tego słowa zaczynając od stanu z wiersza u samej góry: \\
+
+	\begin{table}[H]
+	\centering
+		\begin{tabular}{|c|l|l|l|}
+			\hline
+				          & $s_{0}$ & $s_{1}$ & $s_{2}$ \\ \hline
+			1	          & $s_{0}$ & $s_{1}$ & $s_{2}$ \\ \hline
+			a            & $s_{1}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			b  	          & $s_{0}$ & $s_{0}$ & $s_{2}$ \\ \hline
+			$a^2$  & $s_{2}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			ab		& $s_{0}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			ba         & $s_{1}$ & $s_{1}$ & $s_{2}$ \\ \hline
+		\end{tabular}
+	\end{table}
+
+	\noindent Powyższa tabelka przedstawia już wszystkie mozliwe kombinacje stanów do uzyskania dla tego automatu (kolejne słowa dawałyby stan, który już jest w tabelce dla innego słowa) i jest ona reprezentacją naszego automatu. \\
+
+	\noindent Dodatkowo możeby podczas uzupełniania tabelki zauważyć m.i. że: \\
+	$b^2 = b$ \\
+	$a^3 = a^2$ \\
+	$a^{2}b = a^2$ \\
+	co może nam ułatwić jej uzupełnianie. \\
+
+	\noindent Monoidem przejść nazywamy zbiór tych słów, które udało nam się uzyskać w naszej tabelce: \\
+	$\mathcal{M(A)}$ = \{1, a, b, $a^2$, ab, ba, $b^2$\} = $\tau \mathcal{A}(A^{*})$
+
+	\subsection{Automat ze stosem}
+	Dany jest automat ze stosem gdzie: \\
+	$A_{S} = \{z_{0}, a\}$ $A = \{a, b, c\}$, $Q = \{q_{0}, q_{1}, q_{2}\}$ \\
+	$P = \{z_{0}q_{0}a \rightarrow aq_{0}, aq_{0}a \rightarrow a^2q_{0}, aq_{0}b \rightarrow a^2q_{1}, aq_{1}b \rightarrow a^2q_{1}, aq_{1}c \rightarrow 1q_{2}, aq_{2}c \rightarrow 1q_{2}\}$ \\
+
+	\noindent Narysuj graf automatu i określ język akceptowany przez pusty stos \\
+
+	\begin{figure}[H]
+        \includegraphics[width=\linewidth]{32.png}
+    \end{figure}
+
+	\noindent Językiem akceptowanym przez ten automat jest język $a^{N}b^{M}c^{N+M}$
+
 
     \newpage
 
