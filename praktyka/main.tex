@@ -1943,11 +1943,13 @@
     $\frac{n - 2}{13}$. Ponieważ licznik cały czas rośnie, a mianownik pozostaje stały to całość dąży do $+\infty$
 
 
-    \subsection{Twierdzenie o dwóch ciągach}
+	\subsection{Twierdzenie o dwóch ciągach}
 
-    Używane aby wykazać rozbieżność pewnego ciągu wykorzystując inny (prostszy) ciąg \\
+	Używane aby wykazać zbieżność pewnego ciągu do granicy niewłaściwej wykorzystując inny (prostszy) ciąg \\
 
-    \noindent Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
+	\begin{exercise}	
+		Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
+	\end{exercise}
 
     \noindent Korzystamy z faktu, że $\sin{n} \leq 1$ wtedy \\
     $(3 \sin{n} - 5) \cdot n^{3}  \leq  (3\cdot 1 - 5) \cdot n^{3}  \leq  -2n^{3}  \leq  -n \stackrel{n \to \infty}{\longrightarrow} -\infty$ \\
@@ -1957,7 +1959,9 @@
 
     Używane aby wyznaczyć granicę właściwą pewnego ciągu korzystając z dwóch innych ciągów
 
-    \noindent Oblicz granicę $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}}$ \\
+    \begin{exercise}
+		Oblicz granicę $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}}$
+	\end{exercise}
 
     \noindent Podobnie jak poprzednio korzystamy z faktu, że $-1 \leq \sin{x} \leq 1$ oraz $-1 \leq \cos{x} \leq 1$ dla każdego naturalnego x
 
@@ -1969,6 +1973,7 @@
 
     \subsection{Funkcje}
 
+	\begin{exercise}
     Oblicz granice funkcji
     \begin{align*}
         f(x) =
@@ -1977,7 +1982,8 @@
             \sin{x} & \text{dla x większego bądź równego 0}
         \end{cases}
     \end{align*}
-    w punktach $x_{1} = -2$, $x_{2} = 0$, $x_{3} = \pi$ oraz w $+\infty$ i $-\infty$ \\
+    w punktach $x_{1} = -2$, $x_{2} = 0$, $x_{3} = \pi$ oraz w $+\infty$ i $-\infty$
+	\end{exercise}
 
     \noindent Liczymy granice prawo i lewo stronne dla punktów, w których funkcja jest nie ciągła: \\
 
@@ -1999,7 +2005,9 @@
 
     \noindent \textbf{Granice specjalne} \\
 
-    \noindent Oblicz granicę funkcji $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5}$
+    \begin{exercise}
+		Oblicz granicę funkcji $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5}$
+	\end{exercise}
 
     \noindent Skorzystamy z granic specjalnych $\lim_{x \to 0} \frac{\sin{x}}{x} = 1$ oraz $\lim_{x \to 0} \frac{\ln(x + 1)}{x} = 1$ \\
 
@@ -2012,7 +2020,9 @@
 
     \noindent \textbf{Reguła de L'Hospitala} \\
 
-    \noindent Oblicz granicę funkcji $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x}$ \\
+    \begin{exercise}
+		Oblicz granicę funkcji $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x}$
+	\end{exercise}
 
     \noindent Spróbujemy zastosować regułę de L'Hospitala. Aby to zrobić musimy sprawdzić czy granice funkcji z licznika i mianownika z osobna są równe 0 oraz czy funkcja z mianownika w otoczeniu $x_{0}$ nie jest równa 0 \\
 
@@ -2031,13 +2041,16 @@
 
     \textbf{Zad 1} \\
 
-    \noindent Zbadaj ciągłość funkcji \begin{align*}
-                                          f(x) =
-                                          \begin{cases}
-                                              x \sin(\frac{1}{x}) & \text{dla x $\neq$ 0} \\
-                                              0 & \text{dla x = 0}
-                                          \end{cases}
-    \end{align*}
+    \begin{exercise}
+		 Zbadaj ciągłość funkcji
+		\begin{align*}
+          	f(x) =
+              \begin{cases}
+              	x \sin(\frac{1}{x}) & \text{dla x $\neq$ 0} \\
+                   0 & \text{dla x = 0}
+              \end{cases}
+    		\end{align*}
+	\end{exercise}
 
     \noindent Interesuje nas oczywiście punkt 0 i to dla niego musimy policzyć granicę (funkcja w pozostałych punktach jest ciągła, jako że składa się z funkcji elementarnych): \\
 
@@ -2052,14 +2065,16 @@
 
     \noindent \textbf{Zad 2}
 
-    \noindent Zbadaj ciągłość funkcji \begin{align*}
-                                          f(x) =
-                                          \begin{cases}
-                                              x + 2 & \text{dla x $<$ 0} \\
-                                              0 & \text{dla x = 0} \\
-                                              -x + 2 & \text{dla x $>$ 0}
-                                          \end{cases}
-    \end{align*}
+    \begin{exercise}
+		Zbadaj ciągłość funkcji \begin{align*}
+         		f(x) =
+              \begin{cases}
+              x + 2 & \text{dla x $<$ 0} \\
+              0 & \text{dla x = 0} \\
+              -x + 2 & \text{dla x $>$ 0}
+			\end{cases}
+    		\end{align*}
+	\end{exercise}
 
     \noindent Oczywiście tak jak i poprzednio interesuje nas punkt 0. Musimy policzyć granice lewo i prawo stronne: \\
 
@@ -2070,26 +2085,40 @@
     Stąd też ta funkcja nie jest ciągła w punkcie 0. \\
 
 
-    \noindent \textbf{Twierdzenie Barboux}
+    \noindent \textbf{Twierdzenie Darboux}
+
+	\begin{exercise}
+		Pokaż, że równanie $2^x = 4x$ ma dwa rozwiązania
+	\end{exercise}
+
+	\noindent Łatwo zauważyć oczywiście, że jednym z nich jest 4, ponieważ $2^4 = 16 = 4 \cdot 4$ \\
+
+	\noindent Do pokazania, że funkcja ma jeszcze inny pierwiastek użyjemy twierdzenia Darboux. \\
+	Przyjmijmy za $f(x) = 2^x - 4x$, która jak widać będzie się zerować w miejscach, które są rozwiązaniami naszego pierwotnego równania. \\
+	Zauważmy, że nasza funkcja jest ciągła. Teraz zbadajmy jakie ma wartości w punktach 0 i 1: $f(0) = 1$ i $f(1) = -2$. Znaki winików funkcji są różne co zgodnie z twierdzeniem Darboux oznacza, 
+	że nasza funkcja pomiędzy 0 a 1 zeruje się, więc nasze oryginalne równanie ma tam jeszcze jedno rozwiązanie.
 
 
     \subsection{Pochodna}
 
     \textbf{Istnienie pochodnej w punkcie z definicji} \\
 
-    \noindent Zbadaj istnienie pochodnej funkcji \begin{align*}
-                                                     f(x) =
-                                                     \begin{cases}
-                                                         x^2 \cdot \sin{\frac{1}{x}} & \text{dla x $\neq$ 0} \\
-                                                         0 & \text{dla x = 0}
-                                                     \end{cases}
-    \end{align*}
-    dla punktu $x_{0}$ = 0
+    \begin{exercise}
+		Zbadaj istnienie pochodnej funkcji
+		\begin{align*}
+         		f(x) =
+              \begin{cases}
+              	x^2 \cdot \sin{\frac{1}{x}} & \text{dla x $\neq$ 0} \\
+                   0 & \text{dla x = 0}
+			\end{cases}
+		\end{align*}
+    		dla punktu $x_{0}$ = 0
+	\end{exercise}
 
     \noindent Aby stwierdzić czy funkcja ma pochodną w punkcie $x_{0}$musimy obliczyć jej prawo i lewo stronną pochodną z definicji: \\
 
-    \noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x}
-    = \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
+    \noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x} = 
+ \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
 
     \noindent Analogiczny wywód możemy zrobić dla pochodnej prawostronnej - wynik również będzie 0 \\
 
@@ -2098,7 +2127,9 @@
 
     \noindent \textbf{Obliczanie przybliżonej wartości funkcji za pomocą różniczki} \\
 
-    \noindent Oblicz przybliżoną wartość liczby $\sqrt[3]{8.2}$ \\
+    \begin{exercise}
+		Oblicz przybliżoną wartość liczby $\sqrt[3]{8.2}$
+	\end{exercise}
 
     \noindent Korzystamy ze wzoru $f(x_{0} + \Delta x) \approx f(x_{0}) + f'(x_{0}) \cdot \Delta x$ \\
 
@@ -2753,6 +2784,164 @@
     \newpage
 
     \section{Modele obliczen: automat skończony, automat ze stosem.}
+	\subsection{Automat skończeniestanowy deterministyczny}
+	\textbf{Zad 1.} \\
+
+	\noindent Wykorzystując pochodne Brzozowskiego skonstruuj automat minimalny rozpoznający język $L = a(a+b)^{*}b(a+b)^{*}$ \\
+
+	\noindent Wyznaczamy pochodne: \\
+	$a^{-1}L = (a+b)^{*}b(a+b)^{*} = M$ \\
+	$b^{-1}L = \emptyset$ \\
+	$(aa)^{-1}L = M$ \\
+	$(ab)^{-1}L = (a+b)^{*}b(a+b)^{*} + (a+b)^{*} = N$ \\
+	$(aba)^{-1}L = N$ \\
+	$(abb)^{-1}L = N$ \\
+
+	\noindent Jak można zauważyć nie dostaniemy już innych pochodnych, więc nasz automat składa się z 4 stanów: L, $\emptyset$, M, N. \\
+	Stan N jest stanem akceptującym, ponieważ sotał uzyskany przez odjęcie słowa należącego do języka L. L jest stanem początkowym. Przejściami w tym automacie są przejścia między pochodnymi pod wpływem kolejnych liter. \\
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (17.3,-14.9) circle (3);
+	\draw (17.3,-14.9) node {$L$};
+	\draw [black] (17.3,-28.2) circle (3);
+	\draw (17.3,-28.2) node {$\emptyset$};
+	\draw [black] (37.1,-14.9) circle (3);
+	\draw (37.1,-14.9) node {$M$};
+	\draw [black] (37.1,-28.2) circle (3);
+	\draw (37.1,-28.2) node {$N$};
+	\draw [black] (37.1,-28.2) circle (2.4);
+	\draw [black] (17.3,-17.9) -- (17.3,-25.2);
+	\fill [black] (17.3,-25.2) -- (17.8,-24.4) -- (16.8,-24.4);
+	\draw (16.8,-21.55) node [left] {$b$};
+	\draw [black] (16.076,-30.926) arc (3.55967:-284.44033:2.25);
+	\draw (11.54,-33.93) node [left] {$a,\mbox{ }b$};
+	\fill [black] (14.39,-28.89) -- (13.56,-28.44) -- (13.62,-29.44);
+	\draw [black] (20.3,-14.9) -- (34.1,-14.9);
+	\fill [black] (34.1,-14.9) -- (33.3,-14.4) -- (33.3,-15.4);
+	\draw (27.2,-15.4) node [below] {$a$};
+	\draw [black] (39.617,-13.29) arc (150.34019:-137.65981:2.25);
+	\draw (44.46,-14.05) node [right] {$a$};
+	\fill [black] (39.91,-15.92) -- (40.36,-16.75) -- (40.85,-15.88);
+	\draw [black] (37.1,-17.9) -- (37.1,-25.2);
+	\fill [black] (37.1,-25.2) -- (37.6,-24.4) -- (36.6,-24.4);
+	\draw (36.6,-21.55) node [left] {$b$};
+	\draw [black] (40.011,-28.873) arc (104.71059:-183.28941:2.25);
+	\draw (42.88,-33.91) node [right] {$a,\mbox{ }b$};
+	\fill [black] (38.34,-30.92) -- (38.06,-31.82) -- (39.02,-31.57);
+	\end{tikzpicture}
+	\end{center}
+
+	\noindent \textbf{Zad 2.}
+
+	\noindent Dany jest automat $\mathcal{A}$ = (S, f) nad alfabetem A = \{a, b\}, tak że $S = \{s_{0}, s_{1}, s_{2}\}$.
+	\begin{table}[H]
+	\centering
+		\begin{tabular}{|c|l|l|l|}
+			\hline
+			f & $s_{0}$ & $s_{1}$ & $s_{2}$ \\ \hline
+			a & $s_{1}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			b & $s_{0}$ & $s_{0}$ & $s_{2}$ \\ \hline
+		\end{tabular}
+	\end{table}
+	\noindent Określ dla tego automatu jego reprezentację oraz monoid przejść.
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (17.6,-22.6) circle (3);
+	\draw (17.6,-22.6) node {$S_0$};
+	\draw [black] (33,-22.6) circle (3);
+	\draw (33,-22.6) node {$S_1$};
+	\draw [black] (47.8,-22.6) circle (3);
+	\draw (47.8,-22.6) node {$S_2$};
+	\draw [black] (30.311,-23.919) arc (-69.79109:-110.20891:14.507);
+	\fill [black] (30.31,-23.92) -- (29.39,-23.73) -- (29.73,-24.66);
+	\draw (25.3,-25.31) node [below] {$a$};
+	\draw [black] (36,-22.6) -- (44.8,-22.6);
+	\fill [black] (44.8,-22.6) -- (44,-22.1) -- (44,-23.1);
+	\draw (40.4,-23.1) node [below] {$a$};
+	\draw [black] (50.48,-21.277) arc (144:-144:2.25);
+	\draw (55.05,-22.6) node [right] {$a,\mbox{ }b$};
+	\fill [black] (50.48,-23.92) -- (50.83,-24.8) -- (51.42,-23.99);
+	\draw [black] (19.305,-25.054) arc (62.53077:-225.46923:2.25);
+	\draw (18.97,-29.87) node [below] {$b$};
+	\fill [black] (16.69,-25.45) -- (15.88,-25.93) -- (16.76,-26.39);
+	\draw [black] (20.12,-20.987) arc (115.48516:64.51484:12.038);
+	\fill [black] (20.12,-20.99) -- (21.06,-21.09) -- (20.63,-20.19);
+	\draw (25.3,-19.32) node [above] {$b$};
+	\end{tikzpicture}
+	\end{center}
+
+	\noindent Określamy reprezentację uzupełniając tabelkę wpisując po lewej stronie kolejne słowa, a w kolejnych kolumnach stan w jakim się znajdziemy po przejściu pod wpływem tego słowa zaczynając od stanu z wiersza u samej góry: \\
+
+	\begin{table}[H]
+	\centering
+		\begin{tabular}{|c|l|l|l|}
+			\hline
+				          & $s_{0}$ & $s_{1}$ & $s_{2}$ \\ \hline
+			1	          & $s_{0}$ & $s_{1}$ & $s_{2}$ \\ \hline
+			a            & $s_{1}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			b  	          & $s_{0}$ & $s_{0}$ & $s_{2}$ \\ \hline
+			$a^2$  & $s_{2}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			ab		& $s_{0}$ & $s_{2}$ & $s_{2}$ \\ \hline
+			ba         & $s_{1}$ & $s_{1}$ & $s_{2}$ \\ \hline
+		\end{tabular}
+	\end{table}
+
+	\noindent Powyższa tabelka przedstawia już wszystkie mozliwe kombinacje stanów do uzyskania dla tego automatu (kolejne słowa dawałyby stan, który już jest w tabelce dla innego słowa) i jest ona reprezentacją naszego automatu. \\
+
+	\noindent Dodatkowo możeby podczas uzupełniania tabelki zauważyć m.i. że: \\
+	$b^2 = b$ \\
+	$a^3 = a^2$ \\
+	$a^{2}b = a^2$ \\
+	co może nam ułatwić jej uzupełnianie. \\
+
+	\noindent Monoidem przejść nazywamy zbiór tych słów, które udało nam się uzyskać w naszej tabelce: \\
+	$\mathcal{M(A)}$ = \{1, a, b, $a^2$, ab, ba, $b^2$\} = $\tau \mathcal{A}(A^{*})$
+
+	\subsection{Automat ze stosem}
+	Dany jest automat ze stosem gdzie: \\
+	$A_{S} = \{z_{0}, a\}$ $A = \{a, b, c\}$, $Q = \{q_{0}, q_{1}, q_{2}\}$ \\
+	$P = \{z_{0}q_{0}a \rightarrow aq_{0}, aq_{0}a \rightarrow a^2q_{0}, aq_{0}b \rightarrow a^2q_{1}, aq_{1}b \rightarrow a^2q_{1}, aq_{1}c \rightarrow 1q_{2}, aq_{2}c \rightarrow 1q_{2}\}$ \\
+
+	\noindent Narysuj graf automatu i określ język akceptowany przez pusty stos: \\
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (15,-24.8) circle (3);
+	\draw (15,-24.8) node {$q_0$};
+	\draw [black] (33.6,-24.8) circle (3);
+	\draw (33.6,-24.8) node {$q_1$};
+	\draw [black] (53.4,-24.8) circle (3);
+	\draw (53.4,-24.8) node {$q_2$};
+	\draw [black] (16.323,-27.48) arc (54:-234:2.25);
+	\draw (15,-30.5) node [above] {$a$};
+	\draw (15,-32.05) node [below] {$z_0/a,\mbox{ }a/a^2$};
+	\fill [black] (13.68,-27.48) -- (12.8,-27.83) -- (13.61,-28.42);
+	\draw [black] (18,-24.8) -- (30.6,-24.8);
+	\fill [black] (30.6,-24.8) -- (29.8,-24.3) -- (29.8,-25.3);
+	\draw (24.3,-24) node [above] {$b$};
+	\draw (24.3,-25.3) node [below] {$a/a^2$};
+	\draw [black] (34.923,-27.48) arc (54:-234:2.25);
+	\draw (33.6,-30.5) node [above] {$b$};
+	\draw (33.6,-32.05) node [below] {$a/a^2$};
+	\fill [black] (32.28,-27.48) -- (31.4,-27.83) -- (32.21,-28.42);
+	\draw [black] (54.723,-27.48) arc (54:-234:2.25);
+	\draw (53.4,-30.5) node [above] {$c$};
+	\draw (53.4,-32.05) node [below] {$a/\mathbf{1}$};
+	\fill [black] (52.08,-27.48) -- (51.2,-27.83) -- (52.01,-28.42);
+	\draw [black] (36.6,-24.8) -- (50.4,-24.8);
+	\fill [black] (50.4,-24.8) -- (49.6,-24.3) -- (49.6,-25.3);
+	\draw (43.5,-24) node [above] {$c$};
+	\draw (43.5,-25.3) node [below] {$a/\mathbf{1}$};
+	\end{tikzpicture}
+	\end{center}
+
+	\noindent Językiem akceptowanym przez ten automat jest język $a^{N}b^{M}c^{N+M}$, gdzie N, M $>$ 0.
+
 
     \newpage
 
