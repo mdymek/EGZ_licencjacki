@@ -2769,6 +2769,38 @@
 	\noindent Jak można zauważyć nie dostaniemy już innych pochodnych, więc nasz automat składa się z 4 stanów: L, $\emptyset$, M, N. \\
 	Stan N jest stanem akceptującym, ponieważ sotał uzyskany przez odjęcie słowa należącego do języka L. L jest stanem początkowym. Przejściami w tym automacie są przejścia między pochodnymi pod wpływem kolejnych liter. \\
 
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (17.3,-14.9) circle (3);
+	\draw (17.3,-14.9) node {$L$};
+	\draw [black] (17.3,-28.2) circle (3);
+	\draw (17.3,-28.2) node {$\emptyset$};
+	\draw [black] (37.1,-14.9) circle (3);
+	\draw (37.1,-14.9) node {$M$};
+	\draw [black] (37.1,-28.2) circle (3);
+	\draw (37.1,-28.2) node {$N$};
+	\draw [black] (37.1,-28.2) circle (2.4);
+	\draw [black] (17.3,-17.9) -- (17.3,-25.2);
+	\fill [black] (17.3,-25.2) -- (17.8,-24.4) -- (16.8,-24.4);
+	\draw (16.8,-21.55) node [left] {$b$};
+	\draw [black] (16.076,-30.926) arc (3.55967:-284.44033:2.25);
+	\draw (11.54,-33.93) node [left] {$a,\mbox{ }b$};
+	\fill [black] (14.39,-28.89) -- (13.56,-28.44) -- (13.62,-29.44);
+	\draw [black] (20.3,-14.9) -- (34.1,-14.9);
+	\fill [black] (34.1,-14.9) -- (33.3,-14.4) -- (33.3,-15.4);
+	\draw (27.2,-15.4) node [below] {$a$};
+	\draw [black] (39.617,-13.29) arc (150.34019:-137.65981:2.25);
+	\draw (44.46,-14.05) node [right] {$a$};
+	\fill [black] (39.91,-15.92) -- (40.36,-16.75) -- (40.85,-15.88);
+	\draw [black] (37.1,-17.9) -- (37.1,-25.2);
+	\fill [black] (37.1,-25.2) -- (37.6,-24.4) -- (36.6,-24.4);
+	\draw (36.6,-21.55) node [left] {$b$};
+	\draw [black] (40.011,-28.873) arc (104.71059:-183.28941:2.25);
+	\draw (42.88,-33.91) node [right] {$a,\mbox{ }b$};
+	\fill [black] (38.34,-30.92) -- (38.06,-31.82) -- (39.02,-31.57);
+	\end{tikzpicture}
+	\end{center}
 
 	\noindent \textbf{Zad 2.}
 
@@ -2782,7 +2814,34 @@
 			b & $s_{0}$ & $s_{0}$ & $s_{2}$ \\ \hline
 		\end{tabular}
 	\end{table}
-	\noindent Określ dla tego automatu jego reprezentację oraz monoid przejść. \\
+	\noindent Określ dla tego automatu jego reprezentację oraz monoid przejść.
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (17.6,-22.6) circle (3);
+	\draw (17.6,-22.6) node {$S_0$};
+	\draw [black] (33,-22.6) circle (3);
+	\draw (33,-22.6) node {$S_1$};
+	\draw [black] (47.8,-22.6) circle (3);
+	\draw (47.8,-22.6) node {$S_2$};
+	\draw [black] (30.311,-23.919) arc (-69.79109:-110.20891:14.507);
+	\fill [black] (30.31,-23.92) -- (29.39,-23.73) -- (29.73,-24.66);
+	\draw (25.3,-25.31) node [below] {$a$};
+	\draw [black] (36,-22.6) -- (44.8,-22.6);
+	\fill [black] (44.8,-22.6) -- (44,-22.1) -- (44,-23.1);
+	\draw (40.4,-23.1) node [below] {$a$};
+	\draw [black] (50.48,-21.277) arc (144:-144:2.25);
+	\draw (55.05,-22.6) node [right] {$a,\mbox{ }b$};
+	\fill [black] (50.48,-23.92) -- (50.83,-24.8) -- (51.42,-23.99);
+	\draw [black] (19.305,-25.054) arc (62.53077:-225.46923:2.25);
+	\draw (18.97,-29.87) node [below] {$b$};
+	\fill [black] (16.69,-25.45) -- (15.88,-25.93) -- (16.76,-26.39);
+	\draw [black] (20.12,-20.987) arc (115.48516:64.51484:12.038);
+	\fill [black] (20.12,-20.99) -- (21.06,-21.09) -- (20.63,-20.19);
+	\draw (25.3,-19.32) node [above] {$b$};
+	\end{tikzpicture}
+	\end{center}
 
 	\noindent Określamy reprezentację uzupełniając tabelkę wpisując po lewej stronie kolejne słowa, a w kolejnych kolumnach stan w jakim się znajdziemy po przejściu pod wpływem tego słowa zaczynając od stanu z wiersza u samej góry: \\
 
@@ -2816,13 +2875,41 @@
 	$A_{S} = \{z_{0}, a\}$ $A = \{a, b, c\}$, $Q = \{q_{0}, q_{1}, q_{2}\}$ \\
 	$P = \{z_{0}q_{0}a \rightarrow aq_{0}, aq_{0}a \rightarrow a^2q_{0}, aq_{0}b \rightarrow a^2q_{1}, aq_{1}b \rightarrow a^2q_{1}, aq_{1}c \rightarrow 1q_{2}, aq_{2}c \rightarrow 1q_{2}\}$ \\
 
-	\noindent Narysuj graf automatu i określ język akceptowany przez pusty stos \\
+	\noindent Narysuj graf automatu i określ język akceptowany przez pusty stos: \\
 
-	\begin{figure}[H]
-        \includegraphics[width=\linewidth]{32.png}
-    \end{figure}
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (15,-24.8) circle (3);
+	\draw (15,-24.8) node {$q_0$};
+	\draw [black] (33.6,-24.8) circle (3);
+	\draw (33.6,-24.8) node {$q_1$};
+	\draw [black] (53.4,-24.8) circle (3);
+	\draw (53.4,-24.8) node {$q_2$};
+	\draw [black] (16.323,-27.48) arc (54:-234:2.25);
+	\draw (15,-30.5) node [above] {$a$};
+	\draw (15,-32.05) node [below] {$z_0/a,\mbox{ }a/a^2$};
+	\fill [black] (13.68,-27.48) -- (12.8,-27.83) -- (13.61,-28.42);
+	\draw [black] (18,-24.8) -- (30.6,-24.8);
+	\fill [black] (30.6,-24.8) -- (29.8,-24.3) -- (29.8,-25.3);
+	\draw (24.3,-24) node [above] {$b$};
+	\draw (24.3,-25.3) node [below] {$a/a^2$};
+	\draw [black] (34.923,-27.48) arc (54:-234:2.25);
+	\draw (33.6,-30.5) node [above] {$b$};
+	\draw (33.6,-32.05) node [below] {$a/a^2$};
+	\fill [black] (32.28,-27.48) -- (31.4,-27.83) -- (32.21,-28.42);
+	\draw [black] (54.723,-27.48) arc (54:-234:2.25);
+	\draw (53.4,-30.5) node [above] {$c$};
+	\draw (53.4,-32.05) node [below] {$a/\mathbf{1}$};
+	\fill [black] (52.08,-27.48) -- (51.2,-27.83) -- (52.01,-28.42);
+	\draw [black] (36.6,-24.8) -- (50.4,-24.8);
+	\fill [black] (50.4,-24.8) -- (49.6,-24.3) -- (49.6,-25.3);
+	\draw (43.5,-24) node [above] {$c$};
+	\draw (43.5,-25.3) node [below] {$a/\mathbf{1}$};
+	\end{tikzpicture}
+	\end{center}
 
-	\noindent Językiem akceptowanym przez ten automat jest język $a^{N}b^{M}c^{N+M}$
+	\noindent Językiem akceptowanym przez ten automat jest język $a^{N}b^{M}c^{N+M}$, gdzie N, M $>$ 0.
 
 
     \newpage
