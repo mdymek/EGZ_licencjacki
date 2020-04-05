@@ -1912,10 +1912,186 @@
 
     \section{Ciąg i granica ciągu liczbowego, granica funkcji.}
 
+	\subsection{Obliczanie granicy ciągu}
+	$\lim_{n \to \infty} a_{n} = 2^{-\sqrt{n}} = \frac{1}{2^{\sqrt{n}}}$ - mianownik dąży do $\infty$ więc całość dąży do 0 \\
+
+	\noindent $\lim_{n \to \infty} a_{n} = \sqrt[n]{10}$ - pierwiastek o coraz wyższym stopniu z jakiejś stałej dąży do 1 \\
+
+	\noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} + 2n - 5}{2n^{2} - n}$ - w przypadku takich ułamków dzielimy licznik i mianownik przez n w największej potędze, który znajduje się w mianowniku
+	$\frac{\frac{n^{2}}{n^{2}} + \frac{2n}{n^{2}} - \frac{5}{n^{2}}} {\frac{2n^{2}}{n^{2}} - \frac{n}{n^{2}}}$ co po skróceniu daje nam $\frac{1 + \frac{2}{n} - \frac{5}{n^{2}}} {2 - \frac{1}{n}}$.
+	Teraz widzimy, że $\frac{2}{n}$, $\frac{5}{n^{2}}$ oraz $\frac{1}{n}$ zmierzają do 0, więc ostatecznie otrzymujemy $\frac{1}{2}$. \\
+
+	\noindent $\lim_{n \to \infty} a_{n} = \frac{n^{2} - 2n}{13n + 1}$ - na początku robimy tak jak w poprzednim przykładzie, czyli dzielimy licznik i mianownik przez n w największej potędze z mianownika
+	$\frac{\frac{n^{2}}{n} - \frac{2n}{n}} {\frac{13n}{n} + \frac{1}{n}}$ co po skróceniu daje $\frac{n - 2}{13 + \frac{1}{n}}$. Widzimy, że $\frac{1}{n}$ dąży do 0, więc całość możemy zapisać już jako
+	$\frac{n - 2}{13}$. Ponieważ licznik cały czas rośnie, a mianownik pozostaje stały to całość dąży do $+\infty$
+
+
+	\subsection{Twierdzenie o dwóch ciągach}
+	
+	Używane aby wykazać rozbieżność pewnego ciągu wykorzystując inny (prostszy) ciąg \\
+
+	\noindent Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
+
+	\noindent Korzystamy z faktu, że $\sin{n} \leq 1$ wtedy \\
+	$(3 \sin{n} - 5) \cdot n^{3}  \leq  (3\cdot 1 - 5) \cdot n^{3}  \leq  -2n^{3}  \leq  -n \stackrel{n \to \infty}{\longrightarrow} -\infty$ \\
+	Więc zgodnie z twierdzeniem o 2 ciągach również $(3 \sin{n} - 5) \cdot n^{3} \stackrel{n \to \infty}{\longrightarrow} -\infty$
+
+	\subsection{Twierdzenie o trzech ciągach}
+
+	Używane aby wyznaczyć granicę właściwą pewnego ciągu korzystając z dwóch innych ciągów
+
+	\noindent Oblicz granicę $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}}$ \\
+
+	\noindent Podobnie jak poprzednio korzystamy z faktu, że $-1 \leq \sin{x} \leq 1$ oraz $-1 \leq \cos{x} \leq 1$ dla każdego naturalnego x
+
+	\noindent Wtedy $\frac{n^2+n-1}{2+n+3n^2} \leq \frac{n^2+n- \cos{n^2}}{2+n \sin{\sqrt{n}}+3n^2} \leq \frac{n^2+n+1}{2-n+3n^2}$ \\
+
+	\noindent Ponieważ $\lim_{n\to \infty} \frac{n^2+n-1}{2+n+3n^2} = \frac{1}{3}$ oraz $\lim_{n\to \infty} \frac{n^2+n+1}{2-n+3n^2} = \frac{1}{3}$
+	więc z twierdzenia o trzech ciągach wiemy również, że i $\lim_{n\to \infty}{\frac{n^2+n-\cos{n^2}}{2+n\sin{\sqrt{n}}+3n^2}} = \frac{1}{3}$
+
+
+	\subsection{Funkcje}
+
+	Oblicz granice funkcji 
+	\begin{align*} f(x) = 
+	\begin{cases}
+		|\frac{1}{x+2}| & \text{dla x mniejszego od 0} \\
+		\sin{x} & \text{dla x większego bądź równego 0}
+	\end{cases}
+	\end{align*}
+	w punktach $x_{1} = -2$, $x_{2} = 0$, $x_{3} = \pi$ oraz w $+\infty$ i $-\infty$ \\
+
+	\noindent Liczymy granice prawo i lewo stronne dla punktów, w których funkcja jest nie ciągła: \\
+
+	\noindent $\lim_{x \to -2^{-}} f(x) = \lim_{x \to -2^{-}} |\frac{1}{x+2}| = +\infty$ \\
+	\noindent $\lim_{x \to -2^{+}} f(x) = \lim_{x \to -2^{+}} |\frac{1}{x+2}| = +\infty$ \\
+	\noindent Ponieważ granice prawo i lewo stronne są sobie równe to granica w punkcie -2 istnieje i jest równa $-\infty$ \\
+
+	\noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} |\frac{1}{x+2}| = \frac{1}{2}$ \\
+	\noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to -2^{+}} \sin{x} = 0$ \\
+	\noindent Ponieważ granice prawo i lewo stronne nie są sobie równe to granica w punkcie 0 nie istnieje \\
+
+	\noindent W punkcie $\pi$ nasza funkcja jest ciągła, więc jej granicę możemy obliczyć podstawiając $\pi$ bezpośrednio do wzoru: \\
+	\noindent $\lim_{x \to \pi} f(x) = f(\pi) = 0$ \\
+
+	\noindent $\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} |\frac{1}{x+2}| = 0$ - mianownik jest coraz większy (biorąc pod uwagę jego wartość bezwzględną) więc funkcja dąży do 0 \\
+
+	\noindent $\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \sin{x}$ - nie istnieje, ponieważ $\sin{x}$ jest funkcją okresową i nie dąży do żadnej konkretnej wartości \\
+
+
+	\noindent \textbf{Granice specjalne} \\
+
+	\noindent Oblicz granicę funkcji $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5}$
+
+	\noindent Skorzystamy z granic specjalnych $\lim_{x \to 0} \frac{\sin{x}}{x} = 1$ oraz $\lim_{x \to 0} \frac{\ln(x + 1)}{x} = 1$ \\
+
+	\noindent $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5} \stackrel{[\frac{0}{0}]}{=} \lim_{x \to -5} \frac{\sin(x + 5)}{x + 5} + \frac{\ln((x + 5) + 1)}{x + 5}$ \\
+
+	\noindent Ponieważ granica dąży do -5 to wyrażenia w nawiasach dążą do 0 więc możemy zastosować wspomniane granice specjalne. Możemy to zapisać również jako: \\
+
+	\noindent $\lim_{x \to 0} \frac{\sin{x}}{x} + \frac{\ln(x + 1)}{x} \stackrel{\text{z granic specjalnych}}{=} 1 + 1 = 2$ \\
+
+
+	\noindent \textbf{Reguła de L'Hospitala} \\
+
+	\noindent Oblicz granicę funkcji $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x}$ \\
+
+	\noindent Spróbujemy zastosować regułę de L'Hospitala. Aby to zrobić musimy sprawdzić czy granice funkcji z licznika i mianownika z osobna są równe 0 oraz czy funkcja z mianownika w otoczeniu $x_{0}$ nie jest równa 0 \\
+
+	\noindent $\lim_{x \to 0} \sin{x} = 0$ \\
+	\noindent $\lim_{x \to 0} x^2 + 5x = 0$ \\
+	\noindent Możemy do tego zauważyć, że $x^2 + 5x$ w okolicach $x_{0} \neq 0$ więc możemy zastosować regułę de L'Hospitala: \\
+
+	\noindent $\lim_{x \to 0} \frac{\sin{x}}{x^2 + 5x} = \lim_{x \to 0} \frac{(\sin{x})'}{(x^2 + 5x)'} = \lim_{x \to 0} \frac{\cos{x}}{2x + 5} = \frac{1}{5}$
+
+
     \newpage
 
     \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
 
+	\subsection{Ciągłość funkcji}
+
+	\textbf{Zad 1} \\
+
+	\noindent Zbadaj ciągłość funkcji \begin{align*} f(x) =
+																		\begin{cases}
+																			x \sin(\frac{1}{x}) & \text{dla x $\neq$ 0} \\
+																			0 & \text{dla x = 0}
+																		\end{cases}
+															\end{align*}
+
+	\noindent Interesuje nas oczywiście punkt 0 i to dla niego musimy policzyć granicę (funkcja w pozostałych punktach jest ciągła, jako że składa się z funkcji elementarnych): \\
+
+	\noindent $\lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin(\frac{1}{x})$ - możemy to zrobić z twierdzenia o 3 funkcjach: \\
+
+	\noindent Korzystając tradycyjnie z warunku $-1 \leq \sin{x} \leq 1$ możemy zauważyć, że: \\
+
+	\noindent $-x \leq x \sin(\frac{1}{x}) \leq x$ a z kolei $\lim_{x \to 0} x = \lim_{x \to 0} -x = 0$ więc i $\lim_{x \to 0} x \sin(\frac{1}{x}) = 0$ \\
+
+	\noindent Mamy więc $\lim_{x \to 0} f(x) = f(0)$ więc ta funkcja jest ciągła \\
+
+
+	\noindent \textbf{Zad 2}
+
+	\noindent Zbadaj ciągłość funkcji \begin{align*} f(x) =
+																		\begin{cases}
+																			x + 2 & \text{dla x $<$ 0} \\
+																			0 & \text{dla x = 0} \\
+																			-x + 2 & \text{dla x $>$ 0}
+																		\end{cases}
+															\end{align*}
+
+	\noindent Oczywiście tak jak i poprzednio interesuje nas punkt 0. Musimy policzyć granice lewo i prawo stronne: \\
+
+	\noindent $\lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{-}} x + 2 = 2$ \\
+	\noindent $\lim_{x \to 0^{+}} f(x) = \lim_{x \to 0^{+}} -x + 2 = 2$ \\
+
+	\noindent Granice prawo i lewo stronne są sobie więc równe, ale nie są one równe wartości funkcji w badanym punkcie.
+						Stąd też ta funkcja nie jest ciągła w punkcie 0. \\
+
+
+	\noindent \textbf{Twierdzenie Barboux}
+
+
+	\subsection{Pochodna}
+
+	\textbf{Istnienie pochodnej w punkcie z definicji} \\
+
+	\noindent Zbadaj istnienie pochodnej funkcji \begin{align*} f(x) = 
+																					\begin{cases}
+																						x^2 \cdot \sin{\frac{1}{x}} & \text{dla x $\neq$ 0} \\
+																						0 & \text{dla x = 0}
+																					\end{cases}
+																				\end{align*}
+	dla punktu $x_{0}$ = 0
+
+	\noindent Aby stwierdzić czy funkcja ma pochodną w punkcie $x_{0}$musimy obliczyć jej prawo i lewo stronną pochodną z definicji: \\
+
+	\noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x}
+							= \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
+
+	\noindent Analogiczny wywód możemy zrobić dla pochodnej prawostronnej - wynik również będzie 0 \\
+
+	\noindent Ponieważ pochodne prawo i lewo stronne są równe to pochodna tej funkcji w punkcie $x_{0}$ istnieje \\
+
+
+	\noindent \textbf{Obliczanie przybliżonej wartości funkcji za pomocą różniczki} \\
+
+	\noindent Oblicz przybliżoną wartość liczby $\sqrt[3]{8.2}$ \\
+
+	\noindent Korzystamy ze wzoru $f(x_{0} + \Delta x) \approx f(x_{0}) + f'(x_{0}) \cdot \Delta x$ \\
+
+	\noindent W naszym przypadku: \\
+	$f(x) = \sqrt[3]{x}$ \\
+	$x_{0} = 8$ \\
+	$\Delta x = 0.2$ \\
+	$f'(x) = \frac{1}{3\sqrt[3]{x^2}}$ \\
+
+	\noindent Obliczamy więc: \\
+	$f(8) = 2$ \\
+	$f'(8) = \frac{1}{12}$ \\
+
+	\noindent Więc $\sqrt[3]{8.2} \approx 2 + \frac{1}{12} \cdot 0.2 = \frac{121}{60}$
 
     \newpage
 
