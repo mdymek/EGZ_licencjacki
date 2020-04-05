@@ -2188,7 +2188,110 @@
 
     \section{Metody dowodzenia poprawności pętli.}
     \section{Odwrotna Notacja Polska: definicja, własności, zalety i wady, algorytmy.}
-    \section{Modele obliczen: maszyna Turinga.}
+
+    \begin{itemize}
+        \item notacja postfiksowa,
+        \item jednoznacznie wyznacza kolejność wykonywania działań,
+        \item pozwala na całkowitą rezygnację z nawiasów.
+        \item Zalety:
+        \begin{itemize}
+            \item ułatwione obliczenia na komputerze - wykorzystuje jedynie stos
+            \item prosty algorytm konwersji między standardowym zapisem infiksowym a ONP
+            wykorzystywany w wielu algorytmach wykorzystujących jako wejście zapis działań
+            brak konieczności stosowania nawiasów
+        \end{itemize}
+        \item Wady:
+        \begin{itemize}
+            \item mniej czytelny dla człowieka (wymaga przyzwyczajenia)
+            \item podczas zapisu na kartce 12 34 + może wyglądać jak 123 4 + (xD)
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Algorytm obliczenia wartości wyrażenia ONP}
+    \begin{verbatim}
+        Dla wszystkich symboli z wyrażenia ONP wykonuj:
+            jeśli i-ty symbol jest liczbą, to odłóż go na stos,
+            jeśli i-ty symbol jest operatorem (funkcją):
+                zdejmij ze stosu oczekiwaną liczbę elementów  (parametrów)
+                odłóż na stos wynik działania operatora (wynik funkcji)
+        Zdejmij ze stosu wynik.
+    \end{verbatim}
+
+    \subsection{Algorytm konwersji z notacji infiksowej do ONP}
+
+    \begin{verbatim}
+        do {
+            weź_kolejny_element_z_wejścia;
+            if ( element_jest_operandem )
+                dopisz_element_na_wyjscie;
+            else // element jest operatorem, przecinkiem lub nawiasem
+            if ( element_jest_operatorem o1) {
+                while ( (lewa łączność(o1) and
+                prior_(operatora_na_stosie o2) >= prior_(elementu o1))
+                or (prawa łączność(o1) and
+                prior_(operatora_na_stosie o2) > prior_(elementu o1)) ){
+                    przepisz_operator_(o2) ze_stosu_na_wyjscie ;
+                }
+                wstaw_operator_(o1) _na_wyjscie ;
+            }
+            else
+            if ( element == '(' )
+                wstaw_element_na_stos;
+            else
+            if ( element jest ',')
+                zignoruj go i wczytaj kolejny symbol z wejścia
+            else
+            if( element == ')' ) {
+                while( na_stosie_jest element różny od '(' )
+                    przepisz_go_na_wyjscie;
+                Usuń_ze_stosu_( ;
+            }
+        } while(!koniec_danych);
+        while( niepusty_stos )
+            przepisz_element_ze_stosu_na_wyjscie;
+    \end{verbatim}
+
+    \newpage
+
+    \section{Modele obliczeń: maszyna Turinga.}
+
+    \begin{definition}
+        \textbf{Formalna definicja maszyny Turinga}. Maszynę Turinga opisujemy poprzez krotkę:
+        \[MT ~ = ~<Q, \Sigma, \delta, \tau, q_0, B, F >\]
+        gdzie:
+        \begin{itemize}
+            \item $Q$ - skończony zbiór stanów,
+            \item $q_0 \in Q$ - stan początkowy,
+            \item $F \subset Q$ - zbiór stanów końcowych,
+            \item $\tau$  - skończony zbiór dopuszczalnych symboli,
+            \item $b \in \tau$  - symbol pusty,
+            \item $\Sigma \subset \tau \ \{b\} $ - zbiór symboli wiejściowych,
+            \item $\delta$ - funkcja sterująca.
+            \begin{itemize}
+                \item W wersji niedeterministycznej postaci maszyny Turinga:
+                \[ \delta \subset (Q \times \tau)  \times (\tau \times \{\leftarrow, \rightarrow, \downarrow\}  \times Q)\]
+                \item W wersji deterministycznej:
+                \[ \delta : Q \times \tau \mapsto \tau \times \{\leftarrow, \rightarrow, \downarrow\} \times Q\]
+            \end{itemize}
+        \end{itemize}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Tablica sterująca}. Dwuwymiarowa tablica indeksowana:
+        \begin{itemize}
+            \item Stanami w jednym wymiarze,
+            \item Symbolami taśmy w drugim wymiarze.
+        \end{itemize}
+        Elementy tablicy
+        \begin{itemize}
+            \item Odpowiadają wszystkim parom stanu i czytanego symbolu stanowiąc dziedzinę
+            funkcji sterowania $\delta$,
+            \item Zawierają trójki działania maszyny, czyli wartości funkcji sterowania $\delta$.
+        \end{itemize}
+    \end{definition}
+
+    \newpage
+
     \section{Modele obliczen: automat skończony, automat ze stosem.}
 
     \newpage

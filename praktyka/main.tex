@@ -2385,7 +2385,278 @@
 
     \section{Metody dowodzenia poprawności pętli.}
     \section{Odwrotna Notacja Polska: definicja, własności, zalety i wady, algorytmy.}
-    \section{Modele obliczen: maszyna Turinga.}
+
+    \subsection{Obliczanie wartości wyrażenia w ONP}
+    \textbf{Przykład:}
+    \[x ~ y ~ z ~ - ~ * ~ a ~ b ~ \text{\textasciicircum} ~ c ~ / ~ +\]
+
+    Widok stosu:
+    \begin{table}[H]
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{x}\\
+            \hline
+            \hline
+            \\
+            \hline
+            \\
+            \hline
+            x \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{y}\\
+            \hline
+            \hline
+            \\
+            \hline
+            y \\
+            \hline
+            x \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{z}\\
+            \hline
+            \hline
+            z \\
+            \hline
+            y \\
+            \hline
+            x \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            $\boldsymbol{-}$\\
+            \hline
+            \hline
+            \\
+            \hline
+            y-z \\
+            \hline
+            x \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            $\boldsymbol{*}$\\
+            \hline
+            \hline
+            \\
+            \hline
+            \\
+            \hline
+            x*(y-z)\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{table}[H]
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{a}\\
+            \hline
+            \hline
+            \\
+            \hline
+            a \\
+            \hline
+            x*(y-z)\\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{b}\\
+            \hline
+            \hline
+            b \\
+            \hline
+            a \\
+            \hline
+            x*(y-z)\\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{\textasciicircum}\\
+            \hline
+            \hline
+            \\
+            \hline
+            a \textasciicircum b\\
+            \hline
+            x*(y-z)\\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            \textbf{c}\\
+            \hline
+            \hline
+            c\\
+            \hline
+            a \textasciicircum b \\
+            \hline
+            x*(y-z)\\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|p{2cm}|}
+            \hline
+            $\boldsymbol{/}$\\
+            \hline
+            \hline
+            \\
+            \hline
+            a \textasciicircum b /c\\
+            \hline
+            x*(y-z)\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{table}[H]
+        \begin{tabular}{|p{3cm}|}
+            \hline
+            $\boldsymbol{+}$\\
+            \hline
+            \hline
+            \\
+            \hline
+            \\
+            \hline
+            x*(y-z)+a \textasciicircum b/c\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \textbf{Wyjście:}
+    \[x*(y-z)+a\text{\textasciicircum}b/c\]
+
+    \subsection{Zamiana wyrażenia infiksowego na ONP}
+    \textbf{Przykład:}
+    \[(a+b*c)\text{\textasciicircum}(x/y - z)\]
+
+    \begin{table}[H]
+        \begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+            \hline
+            \textbf{Wejście} & \textbf{Stos} & \textbf{Wyjście}\\
+            \hline
+            \hline
+            $\boldsymbol{(}a+b*c)\text{\textasciicircum}(x/y - z)$ &&\\
+            $\mathbf{a}+b*c)\text{\textasciicircum}(x/y - z)$ & $($ &\\
+            $\boldsymbol{+}b*c)\text{\textasciicircum}(x/y - z)$ & $($ & $a$\\
+            $\mathbf{b}*c)\text{\textasciicircum}(x/y - z)$ & $( ~ +$ & $a$\\
+            $\boldsymbol{*}c)\text{\textasciicircum}(x/y - z)$  & $( ~ +$ & $a ~ b$\\
+            $\mathbf{c})\text{\textasciicircum}(x/y - z)$  & $( ~ + ~ *$ & $a ~ b$\\
+            $\boldsymbol{)}\text{\textasciicircum}(x/y - z)$  & $( ~ + ~ *$ & $a ~ b ~ c$\\
+            $\text{\textbf{\textasciicircum}}(x/y - z)$  & & $a ~ b ~ c ~ * ~ +$\\
+            $\boldsymbol{(}x/y - z)$  & \textasciicircum & $a ~ b ~ c ~ * ~ +$\\
+            $\mathbf{x}/y - z)$  & \textasciicircum $($ & $a ~ b ~ c ~ * ~ +$\\
+            $\boldsymbol{/}y - z)$  & \textasciicircum $($ & $a ~ b ~ c ~ * ~ + ~ x$\\
+            $\mathbf{y} - z)$  & \textasciicircum $( ~ / $ & $a ~ b ~ c ~ * ~ + ~ x$\\
+            $\boldsymbol{-} z)$  & \textasciicircum $( ~ / $ & $a ~ b ~ c ~ * ~ + ~ x ~ y$\\
+            $\mathbf{z})$  & \textasciicircum $( ~ - $ & $a ~ b ~ c ~ * ~ + ~ x ~ y ~ /$\\
+            $\boldsymbol{)}$  & \textasciicircum $( ~ - $ & $a ~ b ~ c ~ * ~ + ~ x ~ y ~ / ~ z$\\
+            & \textasciicircum & $a ~ b ~ c ~ * ~ + ~ x ~ y ~ / ~ z -$\\
+            & & $a ~ b ~ c ~ * ~ + ~ x ~ y ~ / ~ z - ~ $ \textasciicircum\\
+            \hline
+        \end{tabular}
+    \end{table}
+    \textbf{Wyjście:}
+    \[a ~ b ~ c ~ * ~ + ~ x ~ y ~ / ~ z - ~ \text{\textasciicircum}\]
+
+    \newpage
+
+    \section{Modele obliczeń: maszyna Turinga.}
+
+    Przykład: \textbf{Inkrementacja liczby binarnej}.\\
+
+    \noindent Idea algorytmu:
+    \begin{enumerate}
+        \item Przechodź w prawo pomijając wszystkie znaki aż do znaku pustego.
+        \item Przejdź w lewo drukując na znakach 1 znak 0 aż do oczytania znaku 0 lub znaku pustego.
+        \item Wydrukuj znak 1 i zakończ.
+    \end{enumerate}
+    Przyjmujemy $b = \_$ (znak pusty).\\
+
+
+    Zaczynamy od przechodzenia w prawo na koniec zapisu liczby:
+    \begin{gather*}
+        (A, 0) \mapsto (0, \rightarrow, A)\\
+        (A, 1) \mapsto (1, \rightarrow, A)\\
+    \end{gather*}
+
+    Kiedy odczytamy znak pusty musimy zawrócić - tworzymy nowy stan (B), który będzie odpowiadałza przejście w lewo.
+    \[ (A, \_) \mapsto (\_, \leftarrow, B) \]
+
+    W stanie B przechodzimy wszystkie jedynki zastępując je zerami aż do natrafienia na 0 lub znak pusty:
+    \begin{gather*}
+        (B, 1) \mapsto (0, \leftarrow, B)\\
+        (B, 0) \mapsto (1, \downarrow, Z)\\
+        (B, \_) \mapsto (1, \downarrow, Z)\\
+    \end{gather*}
+
+    Gdzie Z jest stanem końcowym. Zatem nasza maszyna Turinga ma postać:
+    \begin{gather*}
+        MT = <Q, q_0, F, \tau, b, \delta>\\
+        Q = \{A, B, Z\}\\
+        q_0 = A\\
+        F = \{Z\}\\
+        \tau = \{ \_, 0, 1\}\\
+        b = \_ \\
+    \end{gather*}
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{1cm} || p{5cm} | p{5cm} | p{1cm} |}
+                \hline
+                $\boldsymbol{\delta}$ & \textbf{A} & \textbf{B} & \textbf{Z}\\
+                \hline
+                \hline
+                \textbf{0} & $(0, \rightarrow, A)$ & $(1, \downarrow, Z)$ &\\
+                \hline
+                \textbf{1} & $(1, \rightarrow, A)$ & $(0, \leftarrow, B)$ &\\
+                \hline
+                $\boldsymbol{\_}$ & $(\_, \leftarrow, B)$ & $(1, \downarrow, Z)$ &\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (17,-19.8) circle (3);
+            \draw (17,-19.8) node {$A$};
+            \draw [black] (37,-36.3) circle (3);
+            \draw (37,-36.3) node {$B$};
+            \draw [black] (58.4,-25.6) circle (3);
+            \draw (58.4,-25.6) node {$Z$};
+            \draw [black] (58.4,-25.6) circle (2.4);
+            \draw [black] (15.677,-17.12) arc (234:-54:2.25);
+            \draw (17,-12.55) node [above] {$0,\mbox{ }0,\rightarrow$};
+            \fill [black] (18.32,-17.12) -- (19.2,-16.77) -- (18.39,-16.18);
+            \draw [black] (15.788,-22.531) arc (3.80557:-284.19443:2.25);
+            \draw (11.26,-25.56) node [left] {$1,\mbox{ }1,\rightarrow$};
+            \fill [black] (14.09,-20.5) -- (13.26,-20.05) -- (13.33,-21.05);
+            \draw [black] (19.31,-21.71) -- (34.69,-34.39);
+            \fill [black] (34.69,-34.39) -- (34.39,-33.5) -- (33.75,-34.27);
+            \draw (23.88,-28.54) node [below] {$\_,\mbox{ }\_,\leftarrow$};
+            \draw [black] (36.687,-39.272) arc (21.72436:-266.27564:2.25);
+            \draw (30.29,-42.51) node [below] {$1,\mbox{ }0,\leftarrow$};
+            \fill [black] (34.45,-37.86) -- (33.52,-37.69) -- (33.89,-38.62);
+            \draw [black] (38.632,-33.785) arc (142.95131:90.1788:21.104);
+            \fill [black] (55.41,-25.4) -- (54.61,-24.9) -- (54.61,-25.9);
+            \draw (43.01,-27.11) node [above] {$0,\mbox{ }1,\downarrow$};
+            \draw [black] (56.461,-27.887) arc (-43.47365:-83.39625:26.966);
+            \fill [black] (56.46,-27.89) -- (55.55,-28.12) -- (56.27,-28.81);
+            \draw (51.98,-33.97) node [below] {$\_,\mbox{ }1,\downarrow$};
+            \draw [black] (6.7,-11.6) -- (14.65,-17.93);
+            \fill [black] (14.65,-17.93) -- (14.34,-17.04) -- (13.72,-17.82);
+        \end{tikzpicture}
+    \end{center}
+
+    \newpage
+
     \section{Modele obliczen: automat skończony, automat ze stosem.}
 
     \newpage
