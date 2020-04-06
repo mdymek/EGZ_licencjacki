@@ -2813,6 +2813,78 @@
     \newpage
 
     \section{Algorytmy wyszukiwania następnika i poprzednika w drzewach BST; usuwanie węzła.}
+
+    \begin{definition}
+        \textbf{Binarne drzewo poszukiwań (BST)} - dynamiczna struktura danych będąca drzewem binarnym, w którym lewe
+        poddrzewo każdego węzła zawiera wyłącznie elementy o kluczach mniejszych niż klucz węzła a prawe poddrzewo
+        zawiera wyłącznie elementy o kluczach nie mniejszych niż klucz węzła.
+    \end{definition}
+
+    \begin{verbatim}
+        struct BSTNode {
+            int key;
+            struct BSTNode* parent;
+            struct BSTNode* left;
+            struct BSTNode* right;
+        };
+    \end{verbatim}
+
+    \subsection{Wyszukiwanie następnika i poprzednika w BST.}
+    \begin{definition}
+        \textbf{Następnik} danego węzła to węzeł, który jest odwiedzany jako następny w przypadku przechodzenia drzewa
+        metodą in-order. Sposób wyznaczenia nie wymaga porównywania żadnych kluczy, jest to w praktyce:
+        \begin{itemize}
+            \item skrajnie lewy element prawego poddrzewa węzła, jeśli posiada on prawe poddrzewo; wpp
+            \item pierwszy napotkany przodek węzła, dla którego węzeł jest w lewym poddrzewie.
+        \end{itemize}
+    \end{definition}
+
+    \begin{minted}{python}
+        define BST_FIND_SUCCESSOR(Node):
+            if (Node->right != NULL)
+                return BST_SEARCH_MIN_KEY(Node->right)
+            Node_tmp = Node->parent
+            while (Node_tmp != NULL and Node_tmp->left != Node)
+                Node = Node_tmp
+                Node_tmp = Node_tmp->parent
+            return Node_tmp
+    \end{minted}
+
+
+    \begin{definition}
+        \textbf{Poprzednik} danego węzła to węzeł, który jest odwiedzany jako poprzedni w przypadku przechodzenia drzewa
+        metodą in-order. Sposób wyznaczenia nie wymaga porównywania żadnych kluczy, jest to w praktyce:
+        \begin{itemize}
+            \item skrajnie prawy element lewego poddrzewa węzła, jeśli posiada on lewe poddrzewo; wpp
+            \item pierwszy napotkany przodek węzła, dla którego węzeł jest w prawym poddrzewie.
+        \end{itemize}
+    \end{definition}
+
+    \begin{minted}{python}
+        define BST_FIND_PREDECESSOR(Node):
+            if (Node->left != NULL)
+                return BST_SEARCH_MAX_KEY(Node->left)
+            Node_tmp = Node->parent
+            while (Node_tmp != NULL and Node_tmp->right != Node)
+                Node = Node_tmp
+                Node_tmp = Node_tmp->parent
+            return Node_tmp
+    \end{minted}
+
+
+    \subsection{Usuwanie węzła z BST.}
+
+    \begin{theorem}
+        Usuwanie węzła z BST wymaga rozważenia trzech przypadków:
+        \begin{enumerate}
+            \item w przypadku, gdy usuwany węzeł jest liściem wskaźnik do węzła w jego ojcu zastępowany jest wskaźnikiem do węzła pustego,
+            \item w przypadku, gdy usuwany węzeł ma jednego syna to dany węzeł usuwamy a jego syna podstawiamy w miejsce usuniętego węzła,
+            \item w przypadku, gdy usuwany węzeł ma dwóch synów to po jego usunięciu wstawiamy w jego miejsce węzeł, który jest jego następnikiem.
+        \end{enumerate}
+    \end{theorem}
+
+    \newpage
+
     \section{B-drzewa: operacje i ich złożoność.}
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}

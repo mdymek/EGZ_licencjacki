@@ -3124,6 +3124,187 @@
 \newpage
 
     \section{Algorytmy wyszukiwania następnika i poprzednika w drzewach BST; usuwanie węzła.}
+
+    \subsection{Wyszukiwanie następnika i poprzednika w BST.}
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [8
+            [3
+            [1
+            [,.phantom]
+            [,.phantom]]
+            [6
+            [4]
+            [7]]]
+            [10
+            [,.phantom
+            [,.phantom]
+            [,.phantom]]
+            [14
+            [13]
+            [,.phantom]]]]
+        \end{forest}
+    \end{center}
+
+    Rodzaje następników:
+    \begin{enumerate}
+        \item skrajnie lewy element prawego poddrzewa węzła, jeśli posiada on prawe poddrzewo, np:
+        \begin{itemize}
+            \item 4 jest nestępnikiem 3,
+            \item 10 jest następnikiem 8,
+            \item 13 jest nestępnikiem 10.
+        \end{itemize}
+        \item pierwszy napotkany przodek węzła, dla którego węzeł jest w lewym poddrzewie, np:
+        \begin{itemize}
+            \item 3 jest następnikiem 1,
+            \item 8 jest następnikiem 7,
+            \item 14 jest następnikiem 13.
+        \end{itemize}
+    \end{enumerate}
+
+    Rodzaje poprzedników:
+    \begin{enumerate}
+        \item skrajnie prawy element lewego poddrzewa węzła, jeśli posiada on lewe poddrzewo, np:
+        \begin{itemize}
+            \item 7 jest poprzednikiem 8,
+            \item 1 jest poprzednikiem 3,
+            \item 13 jest poprzednikiem 14.
+        \end{itemize}
+        \item pierwszy napotkany przodek węzła, dla którego węzeł jest w prawym poddrzewie, np:
+        \begin{itemize}
+            \item 6 jest poprzednikiem 7,
+            \item 10 jest poprzednikiem 13,
+            \item 8 jest poprzednikiem 10.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsection{Usuwanie węzła z BST.}
+
+    Przypadki usuwania węzła:
+    \begin{enumerate}
+        \item usuwanie liścia, np. 13:
+        \begin{center}
+            \begin{forest}
+                for tree={circle,draw}
+                [8
+                [3
+                [1
+                [,.phantom]
+                [,.phantom]]
+                [6
+                [4]
+                [7]]]
+                [10
+                [,.phantom
+                [,.phantom]
+                [,.phantom]]
+                [14
+                [13, draw={red}]
+                [,.phantom]]]]
+            \end{forest}
+            \begin{forest}
+                for tree={circle,draw}
+                [8
+                [3
+                [1
+                [,.phantom]
+                [,.phantom]]
+                [6
+                [4]
+                [7]]]
+                [10
+                [,.phantom
+                [,.phantom]
+                [,.phantom]]
+                [14
+                [,.phantom]
+                [,.phantom]]]]
+            \end{forest}
+        \end{center}
+        \item usuwanie węzła z jednym synem, np. 14:
+        \begin{center}
+            \begin{forest}
+                for tree={circle,draw}
+                [8
+                [3
+                [1
+                [,.phantom]
+                [,.phantom]]
+                [6
+                [4]
+                [7]]]
+                [10
+                [,.phantom
+                [,.phantom]
+                [,.phantom]]
+                [14, draw={red}
+                [13]
+                [,.phantom]]]]
+            \end{forest}
+            \begin{forest}
+                for tree={circle,draw}
+                [8
+                [3
+                [1
+                [,.phantom]
+                [,.phantom]]
+                [6
+                [4]
+                [7]]]
+                [10
+                [,.phantom
+                [,.phantom]
+                [,.phantom]]
+                [13, draw={red}, edge={red}
+                [,.phantom]
+                [,.phantom]]]]
+            \end{forest}
+        \end{center}
+        \item usuwanie węzła z dwoma synami, np 3 (następnikiem 3 jest 4):
+        \begin{center}
+            \begin{forest}
+                for tree={circle,draw}
+                [8
+                [3, draw={red}
+                [1
+                [,.phantom]
+                [,.phantom]]
+                [6
+                [4]
+                [7]]]
+                [10
+                [,.phantom
+                [,.phantom]
+                [,.phantom]]
+                [14
+                [13]
+                [,.phantom]]]]
+            \end{forest}
+            \begin{forest}
+                for tree={circle,draw}
+                [8
+                [4, draw={red}
+                [1
+                [,.phantom]
+                [,.phantom]]
+                [6
+                [,.phantom]
+                [7]]]
+                [10
+                [,.phantom
+                [,.phantom]
+                [,.phantom]]
+                [14
+                [13]
+                [,.phantom]]]]
+            \end{forest}
+        \end{center}
+    \end{enumerate}
+
+    \newpage
+
     \section{B-drzewa: operacje i ich złożoność.}
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
