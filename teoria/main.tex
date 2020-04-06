@@ -1698,7 +1698,7 @@
             lim_{x \infty x_0} ~ g(x) = \infty.
         \end{align*}
     \end{theorem}
-    
+
     \begin{theorem}
     	\textbf{Granice specjalne}
     	\setlength{\jot}{10pt}
@@ -2793,19 +2793,19 @@
 
     \begin{minted}{python}
         def preorder (v):
-        func(v)
-        preorder(v.left)
-        preorder(v.right)
+            func(v)
+            preorder(v.left)
+            preorder(v.right)
 
         def inorder (v):
-        inorder(v.left)
-        func(v)
-        inorder(v.right)
+            inorder(v.left)
+            func(v)
+            inorder(v.right)
 
         def postorder (v):
-        postorder(v.left)
-        postorder(v.right)
-        func(v)
+            postorder(v.left)
+            postorder(v.right)
+            func(v)
     \end{minted}
 
     Możemy odtworzyć wyjściowe drzewo, jeśli mamy inorder i post- lub pre-order.

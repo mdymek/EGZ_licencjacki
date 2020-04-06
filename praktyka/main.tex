@@ -25,6 +25,7 @@
 \usepackage{minted}
 \usepackage{tikz}
 \usetikzlibrary{automata,arrows,positioning,calc}
+\usepackage{forest}
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -2969,7 +2970,158 @@
 
     \section{Reprezentacja drzewa binarnego za pomocą porządków (preorder, inorder, postorder).}
 
-    \newpage
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [13
+            [30
+            [15]
+            [85]]
+            [71
+            [17]
+            [20]]]
+            [11
+            [32
+            [33]
+            [,.phantom]]
+            [55]]]
+        \end{forest}
+    \end{center}
+
+    \noindent \textbf{Preorder}:  22, 13, 30, 15, 85, 71, 17, 20, 11, 32, 33, 55\\
+    \textbf{Inorder}: 15, 30, 85, 13, 17, 71, 20, 22, 33, 32, 11, 55\\
+    \textbf{Postorder}: 15, 85, 30, 17, 20, 71, 13, 33, 32, 55, 11, 22\\
+
+    \subsection{Odtworzenie drzewa z preordera i inordera.}
+    Idea algorytmu:
+    \begin{enumerate}
+        \item Element pierwszy w preorderze to korzeń.
+        \item Znalezienie tego elementu w inorderze dzieli go na dwie części - elementy po lewej stanowią jego
+        lewe poddrzewo, po prawej - prawe.
+        \item Rekurencyjnie budujemy kolejne poddrzewa.
+    \end{enumerate}
+
+    \noindent \textbf{Preorder}:  \textbf{22}, 13, 30, 15, 85, 71, 17, 20, 11, 32, 33, 55\\
+    \textbf{Inorder}: 15, 30, 85, 13, 17, 71, 20, \textbf{22}, 33, 32, 11, 55\\
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [$L_1$]
+            [$P_1$]]
+        \end{forest}
+    \end{center}
+    Gdzie $L_1$ = lewe poddrzewo zawierające elementy 15, 30, 85, 13, 17, 71, 20, $P_1$ - prawe poddrzewo zawierające
+    33, 32, 11, 55.\\
+
+    \noindent Budujemy rekurencyjnie $L_1$.\\
+    \textbf{Preorder}:  \textbf{13}, 30, 15, 85, 71, 17, 20\\
+    \textbf{Inorder}: 15, 30, 85, \textbf{13}, 17, 71, 20\\
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [13
+            [$L_2$]
+            [$P_2$]]
+            [$P_1$]]
+        \end{forest}
+    \end{center}
+    $L_2$ = 15, 30, 85; $P_2$ = 17, 71, 20.\\
+
+    \noindent Budujemy rekurencyjnie $L_2$.\\
+    \textbf{Preorder}: \textbf{30}, 15, 85\\
+    \textbf{Inorder}: 15, \textbf{30}, 85\\
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [13
+            [30
+            [15]
+            [85]]
+            [$P_2$]]
+            [$P_1$]]
+        \end{forest}
+    \end{center}
+    \hfill \\
+
+    \noindent Budujemy rekurencyjnie $P_2$.\\
+    \textbf{Preorder}: \textbf{71}, 17, 20\\
+    \textbf{Inorder}: 17, \textbf{71}, 20\\
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [13
+            [30
+            [15]
+            [85]]
+            [71
+            [17]
+            [20]]]
+            [$P_1$]]
+        \end{forest}
+    \end{center}
+    \hfill \\
+
+    \noindent Budujemy rekurencyjnie $P_1$.\\
+    \textbf{Preorder}:  \textbf{11}, 32, 33, 55\\
+    \textbf{Inorder}: 33, 32, \textbf{11}, 55\\
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [13
+            [30
+            [15]
+            [85]]
+            [71
+            [17]
+            [20]]]
+            [11
+            [$L_3$]
+            [55]]]
+        \end{forest}
+    \end{center}
+    Gdzie $L_3$ = 32, 33.\\
+
+    \noindent Budujemy rekurencyjnie $L_3$.\\
+    \textbf{Preorder}:  \textbf{32}, 33\\
+    \textbf{Inorder}: 33, \textbf{32}\\
+
+    \begin{center}
+        \begin{forest}
+            for tree={circle,draw}
+            [22
+            [13
+            [30
+            [15]
+            [85]]
+            [71
+            [17]
+            [20]]]
+            [11
+            [32
+            [33]
+            [,.phantom]]
+            [55]]]
+        \end{forest}
+    \end{center}
+
+    Odbudowaliśmy drzewo wyjściowe.\\
+
+    Odtworzenie drzewa z postordera i inordera jest kompletnie analogiczne, z dokładnością do przeglądania postordera
+    od końca i budowania rekurencyjnie najpierw prawych, potem lewych poddrzew. Cała logika jest identyczna.
+
+
+\newpage
 
     \section{Algorytmy wyszukiwania następnika i poprzednika w drzewach BST; usuwanie węzła.}
     \section{B-drzewa: operacje i ich złożoność.}
