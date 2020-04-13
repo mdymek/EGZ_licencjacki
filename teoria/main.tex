@@ -2888,39 +2888,39 @@
     \newpage
 
     \section{B-drzewa: operacje i ich złożoność.}
-    B-drzewa to rozszeżone drzewa BST.
-    Jest ono typowo zoptymalizowane pod kontem operacji wejścia/wyjścia (np. odczytu z dysku twardego) - operacje długotrwałe takie jak odczyt więzła z dysku są wykonywane o wiele rzadziej niż dla typowych drzew BST, natomiast operacje takie jak wyszukanie odpowiedniej wartości w węźle załadowanym już do pamięci ram są praktycznie pomijane ze względu na nieporównywalnie większą szybkość ich wykonywania.
+    B-drzewa to rozszerzone drzewa BST.
+    Jest ono typowo zoptymalizowane pod kątem operacji wejścia/wyjścia (np. odczytu z dysku twardego) - operacje długotrwałe takie jak odczyt węzła z dysku są wykonywane o wiele rzadziej niż dla typowych drzew BST, natomiast operacje takie jak wyszukanie odpowiedniej wartości w węźle załadowanym już do pamięci ram są praktycznie pomijane ze względu na nieporównywalnie większą szybkość ich wykonywania.
     B-drzewa mają ustalony rząd. \\
-    \noindent B-drzewo rzędu K musi spełniac poniższe warunki:
+    \noindent B-drzewo rzędu K musi spełniać poniższe warunki:
     \begin{itemize}
 	    \item Korzeń jest liściem lub ma od 2 do K synów
 	    \item Wszystkie liście są na tym samym poziomie
-	    \item Każdy węzeł wewnętrzny (oprócz korzenia) ma od $\lceil K/2 \rceil$ do K synów. Jeżeli jakiś węzeł ma s synów to musi mieć s-1 kluczy (wartości)
+	    \item Każdy węzeł wewnętrzny (oprócz korzenia) ma od $\lceil K/2 \rceil$ do K synów. Jeżeli jakiś węzeł ma s synów, to musi mieć s-1 kluczy (wartości)
 	    \item Każdy liść zawiera od $\lceil K/2 \rceil - 1$ do K - 1 kluczy (wartości)
     \end{itemize}
     
     \noindent Warunek drugi gwarantuje niewielką wysokość drzewa (dla drzewa o n kluczach: w najgorszym wypadku $\log_{K/2} n/(K/2)$; w najlepszym wypadku $\log_{K} n/K$) \\
     
-    \noindent Generalnie złożoność wszystkich operacji na B-drzewach wynosi $O(K \log_{K} n)$, gdzie n to ilośc kluczy (wartości) w drzewie, a K to rząd drzewa.
+    \noindent Generalnie złożoność wszystkich operacji na B-drzewach wynosi $O(K \log_{K} n)$, gdzie n to ilość kluczy (wartości) w drzewie, a K to rząd drzewa.
     
     \includegraphics[]{graphics/b-trees/b-tree-example.png}
     
-    \noindent Odmianą B-drzew są drzewa B+, które różnią się tym, że wszystkie wartości trzymane są w liściach oraz mają powiązania pomiędzy liściami (tak aby możnabyło po koleji przejść wszystkie wartości w liściach).
+    \noindent Odmianą B-drzew są drzewa B+, które różnią się tym, że wszystkie wartości trzymane są w liściach oraz mają powiązania pomiędzy liśćmi (tak aby można było po kolei przejść wszystkie wartości w liściach).
     
     \subsection{Wyszukiwanie}
-    Wyszukiwanie przebiega bardzo podobnie jak w drzewie binarnym z tą różnicą, że nie mamy tylko lewego i prawego poddrzewa, a możemy mieć ich więcej, więc musimy zadecydować do którego pujść.
-    Oczywiście szukana wartośc może również znajdować się na danym poziomie. Wtedy kończymy wyszukiwanie.
-    Ponieważ rząd drzewa zazwyczaj jest wysoki (np. 1024) aby usprawnić wyszukiwanie zadanej wartości w danym węźle najczęściej używamy wyszukiwania binarnego. \\
+    Wyszukiwanie przebiega bardzo podobnie jak w drzewie BST, z tą różnicą, że nie mamy tylko lewego i prawego poddrzewa, a możemy mieć ich więcej, więc musimy zadecydować, do którego pójść.
+    Oczywiście szukana wartość może również znajdować się na danym poziomie. Wtedy kończymy wyszukiwanie.
+    Ponieważ rząd drzewa zazwyczaj jest wysoki (np. 1024), aby usprawnić wyszukiwanie zadanej wartości w danym węźle, najczęściej używamy wyszukiwania binarnego. \\
     
     \subsection{Wstawianie}
     Aby wstawić wartość wyszukujemy liść, do którego powinna trafić, a następnie wstawiamy ją w odpowiednie miejsce w tym liściu. \\
-    \noindent Jeżeli jednak okazałoby się, że liść ma juz za dużo wartości ($\geq K$) wtedy musimy go podzielić - jedną z wartości z liścia przenosimy w odpowiednie miejsce do rodzica, a jako prawego i lewego syna tej przeniesionej wartości wstawiamy odpowiednio liście powstałe po podzieleniu tego orginalnego liścia. \\
-    \noindent Jeżeli okazałoby się, że po przeniesieniu wartości z liścia do rodzica rodzic ma za dużo wartości, całą operację dzielenia powtarzamy rekurencyjnie na rodzicu - w razie potrzeby aż do korzenia. \\
+    \noindent Jeżeli jednak okazałoby się, że liść ma już za dużo kluczy (wartości) ($\geq K$), wtedy musimy go podzielić - jedną z wartości z liścia przenosimy w odpowiednie miejsce do rodzica, a jako prawego i lewego syna tej przeniesionej wartości wstawiamy odpowiednio liście powstałe po podzieleniu tego oryginalnego liścia. \\
+    \noindent Jeżeli okazałoby się, że po przeniesieniu wartości z liścia do rodzica, rodzic ma za dużo kluczy (wartości), całą operację dzielenia powtarzamy rekurencyjnie na rodzicu - w razie potrzeby aż do korzenia. \\
     
     \subsection{Usuwanie}
-    Usuwanie rozpoczynamy od znalezienia wartości, która chcemy usunąć \\
-    \noindent Następnie bierrzemy największą wartość z lewego podrzewa lub najmniejszą wartość z prawego poddrzewa i wstawiamy z miejsce usuwanego elementu \\
-    \noindent Jeżeli w drzewie zostały naruszone warunki dotyczące ilości dozwolonych elementów w węźle musimy to drzewo zrównoważyć. Proces ten jest generalnie dośc skomplikowany i ciężki do opisania algorytmem ze względu na mnogośc możliwych przypadków, dla tego najlepiej spojrzeć na częśc praktyczną i przykłady.
+    Usuwanie rozpoczynamy od znalezienia wartości, którą chcemy usunąć \\
+    \noindent Następnie bierrzemy największą wartość z lewego podrzewa lub najmniejszą wartość z prawego poddrzewa i wstawiamy w miejsce usuwanego elementu \\
+    \noindent Jeżeli w drzewie zostały naruszone warunki dotyczące ilości dozwolonych elementów w węźle, musimy to drzewo zrównoważyć. Proces ten jest generalnie dośc skomplikowany i ciężki do opisania algorytmem ze względu na mnogość możliwych przypadków, dlatego najlepiej spojrzeć na część praktyczną i przykłady.
     
     \newpage
     
@@ -2929,9 +2929,9 @@
     Drzewa AVL są odmianą drzew BST, w której dla każdego węzła mamy dodatkowy warunek: różnica między wysokością prawego i lewego poddrzewa danego węzła nie może byc większa niż 1.
     Spełnienie tego warunku zapewnia nam dobre zrównoważenie drzewa, a co za tym idzie utrzymanie szybkości operacji wywszukiwania w tym drzewie.\\
     
-    \noindent Operacja wyszukiwania w drzewie AVL jest identyczna jak dla zwykłego drzewa BST, natomiast w przypadku operacji wstawiania i usuwania przebiegają one na początku tak samo jak w zwykłych BST, natomiast potem w razie potrzeby najeży drzewo zrównoważyć poprzez rotacje. \\
+    \noindent Operacja wyszukiwania w drzewie AVL jest identyczna, jak dla zwykłego drzewa BST, natomiast w przypadku operacji wstawiania i usuwania, przebiegają one na początku tak samo jak w zwykłych BST, natomiast potem w razie potrzeby należy drzewo zrównoważyć poprzez rotacje. \\
     
-    \noindent Operacje wyszukiwania, wstawiania oraz usuwania mają złożoność $O(\log_{2} n)$ gdzie n to ilość elementów w drzewie
+    \noindent Operacje wyszukiwania, wstawiania oraz usuwania mają złożoność $O(\log_{2} n)$, gdzie n to ilość elementów w drzewie
     
     \subsection{Rotacje}
     \begin{multicols}{2}
@@ -2952,7 +2952,7 @@
     
     \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
     
-    \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego wezła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast gdy nierównowaga idzie najpierw na prawo potem na lewo używamy rotacji RL, itd.
+    \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
     
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}

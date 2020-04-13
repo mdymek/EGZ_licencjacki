@@ -3341,17 +3341,17 @@
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-04.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-05.png} \\
 
-	\noindent Następnie wstawiany nasz element: \\
+	\noindent Następnie wstawiamy nasz element: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/insert.png} \\
 
 	\noindent Ponieważ liść, do którego wstawiliśmy element nie spełnia warunków drzewa ($3 \geq K=3$) musimy zbalansować drzewo. Bierzemy więc środkowy element z naszego liścia i przenosimy do rodzica, a jako jego potomków ustawiamy odpowiednio obie części podzielonego oryginalnego liścia: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-01.png} \\
 
-	\noindent Okazuje się, że po tej operacji nasz rodzic nie spełnia założenia drzewa. Stosujemy więc w obec niego podobną operację: \\
+	\noindent Okazuje się, że po tej operacji nasz rodzic nie spełnia założenia drzewa. Stosujemy więc wobec niego podobną operację: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-02.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-03.png} \\
 
-	\noindent Nastepnie okazuje się, że i w korzeniu warunki drzewa sa zaburzone. Zwiększamy więc głębokość drzewa dzieląc dotychczasowy korzen na dwa względem środkowego elementu i czyniąc z nich potomków środkowego elementu, który staje się teraz nowym korzeniem: \\
+	\noindent Następnie okazuje się, że i w korzeniu warunki drzewa są zaburzone. Zwiększamy więc głębokość drzewa dzieląc dotychczasowy korzeń na dwa względem środkowego elementu i czyniąc z nich potomków środkowego elementu, który staje się teraz nowym korzeniem: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-04.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-05.png} \\
 
@@ -3371,16 +3371,16 @@
 	\noindent Usuwamy element: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/delete.png} \\
 
-	\noindent Usunięty element zastepujemy największym elementem z lewego poddrzewa: \\
+	\noindent Usunięty element zastępujemy największym elementem z lewego poddrzewa: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-01.png} \\
 
-	\noindent Ponieważ warunki drzewa nie są zachowane dla węzła z przedostatniego poziomu ($1 < \lceil K/2 \rceil = 2$ - mimimalna ilość potomków - lewy liść w praktyce nie istnieje) musimy zbalansowac drzewo: \\
+	\noindent Ponieważ warunki drzewa nie są zachowane dla węzła z przedostatniego poziomu ($1 < \lceil K/2 \rceil = 2$ - minimalna ilość potomków - lewy liść w praktyce nie istnieje) musimy zbalansować drzewo: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-02.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-03.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-04.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-05.png} \\
 
-	\noindent To samo musimy przeprowadzić, dla wyższego poziomu: \\
+	\noindent To samo musimy przeprowadzić dla wyższego poziomu: \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-06.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-07.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-08.png} \\
@@ -3394,9 +3394,9 @@
 
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
 	\subsection{Wstawianie}
-	Wstawiamy po koleji elementy: 10, 5, 2, 4, 3 \\
+	Wstawiamy po kolei elementy: 10, 5, 2, 4, 3 \\
 
-	\noindent Wstawianie 2 pierwszych elementów przebiega dokładnie tak jak dla zwykłego drzewa BST - równowazenie nie jest wymagane. Po wstawieniu 3 elementu tą samą metodą dostajemy następujące drzewo: \\
+	\noindent Wstawianie 2 pierwszych elementów przebiega dokładnie tak,  jak dla zwykłego drzewa BST - równoważenie nie jest wymagane. Po wstawieniu 3 elementu tą samą metodą dostajemy następujące drzewo: \\
 
 	\begin{center}
 	\begin{forest}
@@ -3409,7 +3409,7 @@
 	\end{forest}
 	\end{center}
 
-	Ponieważ dla węzła \texttt{10} lewe poddrzewo jest o 2 głębsze niż prawe poddrzewo musimy zastosować rotację. Na pierwszym poziomie mamy głębsze lewe poddrzewo, na drugim podobnie, musimy więc zastosować rotację LL: \\
+	Ponieważ dla węzła \texttt{10} lewe poddrzewo jest o 2 głębsze niż prawe poddrzewo, musimy zastosować rotację. Na pierwszym poziomie mamy głębsze lewe poddrzewo, na drugim podobnie, musimy więc zastosować rotację LL: \\
 
 	\begin{center}
 	\begin{forest}
@@ -3434,7 +3434,7 @@
 	\end{forest}
 	\end{center}
 
-	Jak widac dla węzła \texttt{2} prawe poddrzewo jest o 2 głębsze niż lewe. Ponieważ n apierwszym poziomie (względem elementu \texttt{2}) mamy głębsze prawe poddrzewo, a na drugim lewe, musimy zastosować rotację RL: \\
+	Jak widac dla węzła \texttt{2} prawe poddrzewo jest o 2 głębsze niż lewe. Ponieważ na pierwszym poziomie (względem elementu \texttt{2}) mamy głębsze prawe poddrzewo, a na drugim lewe, musimy zastosować rotację RL: \\
 
 	\noindent Pierwszy krok rotacji RL (doprowadzamy do sytuacji dla rotacji RR): \\
 
@@ -3465,7 +3465,7 @@
 	Drzewo znów jest zrównoważone
 
 	\subsection{Usuwanie}
-	Z drzewa z poprzedniego przykładu usuniemy element \texttt{10}. Po jego usunięciu tak jak w przypadku zwykłego drzewa BST otrzymujemy poniższe drzewo: \\
+	Z drzewa z poprzedniego przykładu usuniemy element \texttt{10}. Po jego usunięciu tak jak w przypadku zwykłego drzewa BST, otrzymujemy poniższe drzewo: \\
 
 	\begin{center}
 	\begin{forest}
