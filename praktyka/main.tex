@@ -3379,6 +3379,107 @@
 	
 
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
+	\subsection{Wstawianie}
+	Wstawiamy po koleji elementy: 10, 5, 2, 4, 3 \\
+
+	\noindent Wstawianie 2 pierwszych elementów przebiega dokładnie tak jak dla zwykłego drzewa BST - równowazenie nie jest wymagane. Po wstawieniu 3 elementu tą samą metodą dostajemy następujące drzewo: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[10
+		[5
+		[2][,.phantom]
+		[,.phantom]]
+		[,.phantom]]
+	\end{forest}
+	\end{center}
+
+	Ponieważ dla węzła \texttt{10} lewe poddrzewo jest o 2 głębsze niż prawe poddrzewo musimy zastosować rotację. Na pierwszym poziomie mamy głębsze lewe poddrzewo, na drugim podobnie, musimy więc zastosować rotację LL: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[2]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Następnie wstawiamy element \texttt{4} - równoważenie nie jest potrzebne. Wstawiamy element \texttt{3} i otrzymujemy następujące drzewo: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[2
+		[,.phantom]
+		[4
+		[3][,.phantom]]]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Jak widac dla węzła \texttt{2} prawe poddrzewo jest o 2 głębsze niż lewe. Ponieważ n apierwszym poziomie (względem elementu \texttt{2}) mamy głębsze prawe poddrzewo, a na drugim lewe, musimy zastosować rotację RL: \\
+
+	\noindent Pierwszy krok rotacji RL (doprowadzamy do sytuacji dla rotacji RR): \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[2
+		[,.phantom]
+		[3
+		[,.phantom][4]]]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Drugi krok rotacji RL (taki sam jak przy rotacji RR): \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[3
+		[2][4]]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Drzewo znów jest zrównoważone
+
+	\subsection{Usuwanie}
+	Z drzewa z poprzedniego przykładu usuniemy element \texttt{10}. Po jego usunięciu tak jak w przypadku zwykłego drzewa BST otrzymujemy poniższe drzewo: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[3
+		[2][4]]
+		[,.phantom]]
+	\end{forest}
+	\end{center}
+
+	Widzimy że dla węzła \texttt{5} drzewo jest niezrównoważone. Na pierwszym poziomie lewe poddrzewo jest głębsze. Na drugim poziomie oba poddrzewa mają tą samą głębokość - możemy więc zastosować prostszą wersję algorytmu rotacji - rotację LL (a nie rotację LR): \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[3
+		[2][,.phantom]
+		[5
+		[4][,.phantom]
+		[,.phantom]]]
+	\end{forest}
+	\end{center}
+
+	Teraz drzewo jest znów zrównoważone.
+
+	\newpage
+
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
