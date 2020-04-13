@@ -22,6 +22,8 @@
 \usepackage{booktabs}
 \usepackage{float}
 \usepackage{minted}
+\usepackage{multicol}
+
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -2920,8 +2922,38 @@
     \noindent Następnie bierrzemy największą wartość z lewego podrzewa lub najmniejszą wartość z prawego poddrzewa i wstawiamy z miejsce usuwanego elementu \\
     \noindent Jeżeli w drzewie zostały naruszone warunki dotyczące ilości dozwolonych elementów w węźle musimy to drzewo zrównoważyć. Proces ten jest generalnie dośc skomplikowany i ciężki do opisania algorytmem ze względu na mnogośc możliwych przypadków, dla tego najlepiej spojrzeć na częśc praktyczną i przykłady.
     
+    \newpage
+    
     
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
+    Drzewa AVL są odmianą drzew BST, w której dla każdego węzła mamy dodatkowy warunek: różnica między wysokością prawego i lewego poddrzewa danego węzła nie może byc większa niż 1.
+    Spełnienie tego warunku zapewnia nam dobre zrównoważenie drzewa, a co za tym idzie utrzymanie szybkości operacji wywszukiwania w tym drzewie.\\
+    
+    \noindent Operacja wyszukiwania w drzewie AVL jest identyczna jak dla zwykłego drzewa BST, natomiast w przypadku operacji wstawiania i usuwania przebiegają one na początku tak samo jak w zwykłych BST, natomiast potem w razie potrzeby najeży drzewo zrównoważyć poprzez rotacje. \\
+    
+    \noindent Operacje wyszukiwania, wstawiania oraz usuwania mają złożoność $O(\log_{2} n)$ gdzie n to ilość elementów w drzewie
+    
+    \subsection{Rotacje}
+    \begin{multicols}{2}
+    \textbf{Rotacja RR} \\
+    
+    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/rr-rotation.png}
+    \columnbreak \\
+    \textbf{Rotacja LL} \\
+    
+    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/ll-rotation.png}
+    \end{multicols}
+    
+    \textbf{Rotacja RL} \\
+    
+    \includegraphics[width=\linewidth]{graphics/avl-trees/rl-rotation.png} \\
+
+    \textbf{Rotacja LR} \\
+    
+    \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
+    
+    \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego wezła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast gdy nierównowaga idzie najpierw na prawo potem na lewo używamy rotacji RL, itd.
+    
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
