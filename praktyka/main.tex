@@ -26,6 +26,16 @@
 \usepackage{tikz}
 \usetikzlibrary{automata,arrows,positioning,calc}
 \usepackage{forest}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -3375,7 +3385,11 @@
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-07.png} \\
 	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-08.png} \\
 
-	\noindent Teraz drzewo jest zbalansowane
+	\noindent Teraz drzewo jest zbalansowane \\
+
+	\noindent \textbf{Link do symulatora: \url{https://www.cs.usfca.edu/~galles/visualization/BTree.html}}
+
+	\newpage
 	
 
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
@@ -3476,7 +3490,9 @@
 	\end{forest}
 	\end{center}
 
-	Teraz drzewo jest znów zrównoważone.
+	Teraz drzewo jest znów zrównoważone. \\
+
+	\noindent \textbf{Link do symulatora: \url{https://www.cs.usfca.edu/~galles/visualization/AVLtree.html}}
 
 	\newpage
 
