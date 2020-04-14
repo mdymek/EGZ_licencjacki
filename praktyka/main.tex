@@ -26,6 +26,16 @@
 \usepackage{tikz}
 \usetikzlibrary{automata,arrows,positioning,calc}
 \usepackage{forest}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -3306,7 +3316,186 @@
     \newpage
 
     \section{B-drzewa: operacje i ich złożoność.}
+	Wszystkie operacje są przeprowadzane na drzewie rzędu 3.
+
+	\subsection{Wyszukiwanie}
+	Wyszukanie elementu \texttt{0003} w drzewie.
+
+	\begin{center}
+	\includegraphics[width=0.7\linewidth]{graphics/b-trees/find/find-1.png} \\
+	\includegraphics[width=0.7\linewidth]{graphics/b-trees/find/find-2.png} \\
+	\includegraphics[width=0.7\linewidth]{graphics/b-trees/find/find-3.png} \\
+	\includegraphics[width=0.7\linewidth]{graphics/b-trees/find/find-4.png} \\
+	\includegraphics[width=0.7\linewidth]{graphics/b-trees/find/find-5.png} \\
+	\includegraphics[width=0.7\linewidth]{graphics/b-trees/find/find-6.png} \\
+	\end{center}
+
+	\subsection{Wstawianie}
+	Wstawianie elementu \texttt{0030} do poniższego drzewa: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/begin.png} \\
+
+	\noindent Wyszukujemy liść, do którego mamy wstawić element: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-01.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-02.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-03.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-04.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/find-05.png} \\
+
+	\noindent Następnie wstawiamy nasz element: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/insert.png} \\
+
+	\noindent Ponieważ liść, do którego wstawiliśmy element nie spełnia warunków drzewa ($3 \geq K=3$) musimy zbalansować drzewo. Bierzemy więc środkowy element z naszego liścia i przenosimy do rodzica, a jako jego potomków ustawiamy odpowiednio obie części podzielonego oryginalnego liścia: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-01.png} \\
+
+	\noindent Okazuje się, że po tej operacji nasz rodzic nie spełnia założenia drzewa. Stosujemy więc wobec niego podobną operację: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-02.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-03.png} \\
+
+	\noindent Następnie okazuje się, że i w korzeniu warunki drzewa są zaburzone. Zwiększamy więc głębokość drzewa dzieląc dotychczasowy korzeń na dwa względem środkowego elementu i czyniąc z nich potomków środkowego elementu, który staje się teraz nowym korzeniem: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-04.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/insert/rebalance-05.png} \\
+
+	\noindent Teraz drzewo jest zbalansowane
+
+	\subsection{Usuwanie}
+	Usuwanie elementu \texttt{0023} z drzewa: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/begin.png} \\
+
+	\noindent Wyszukujemy element do usunięcia: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/find-01.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/find-02.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/find-03.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/find-04.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/find-05.png} \\
+
+	\noindent Usuwamy element: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/delete.png} \\
+
+	\noindent Usunięty element zastępujemy największym elementem z lewego poddrzewa: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-01.png} \\
+
+	\noindent Ponieważ warunki drzewa nie są zachowane dla węzła z przedostatniego poziomu ($1 < \lceil K/2 \rceil = 2$ - minimalna ilość potomków - lewy liść w praktyce nie istnieje) musimy zbalansować drzewo: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-02.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-03.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-04.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-05.png} \\
+
+	\noindent To samo musimy przeprowadzić dla wyższego poziomu: \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-06.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-07.png} \\
+	\includegraphics[width=\linewidth]{graphics/b-trees/delete/rebalance-08.png} \\
+
+	\noindent Teraz drzewo jest zbalansowane \\
+
+	\noindent \textbf{Link do symulatora: \url{https://www.cs.usfca.edu/~galles/visualization/BTree.html}}
+
+	\newpage
+	
+
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
+	\subsection{Wstawianie}
+	Wstawiamy po kolei elementy: 10, 5, 2, 4, 3 \\
+
+	\noindent Wstawianie 2 pierwszych elementów przebiega dokładnie tak,  jak dla zwykłego drzewa BST - równoważenie nie jest wymagane. Po wstawieniu 3 elementu tą samą metodą dostajemy następujące drzewo: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[10
+		[5
+		[2][,.phantom]
+		[,.phantom]]
+		[,.phantom]]
+	\end{forest}
+	\end{center}
+
+	Ponieważ dla węzła \texttt{10} lewe poddrzewo jest o 2 głębsze niż prawe poddrzewo, musimy zastosować rotację. Na pierwszym poziomie mamy głębsze lewe poddrzewo, na drugim podobnie, musimy więc zastosować rotację LL: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[2]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Następnie wstawiamy element \texttt{4} - równoważenie nie jest potrzebne. Wstawiamy element \texttt{3} i otrzymujemy następujące drzewo: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[2
+		[,.phantom]
+		[4
+		[3][,.phantom]]]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Jak widac dla węzła \texttt{2} prawe poddrzewo jest o 2 głębsze niż lewe. Ponieważ na pierwszym poziomie (względem elementu \texttt{2}) mamy głębsze prawe poddrzewo, a na drugim lewe, musimy zastosować rotację RL: \\
+
+	\noindent Pierwszy krok rotacji RL (doprowadzamy do sytuacji dla rotacji RR): \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[2
+		[,.phantom]
+		[3
+		[,.phantom][4]]]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Drugi krok rotacji RL (taki sam jak przy rotacji RR): \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[3
+		[2][4]]
+		[10]]
+	\end{forest}
+	\end{center}
+
+	Drzewo znów jest zrównoważone
+
+	\subsection{Usuwanie}
+	Z drzewa z poprzedniego przykładu usuniemy element \texttt{10}. Po jego usunięciu tak jak w przypadku zwykłego drzewa BST, otrzymujemy poniższe drzewo: \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[5
+		[3
+		[2][4]]
+		[,.phantom]]
+	\end{forest}
+	\end{center}
+
+	Widzimy że dla węzła \texttt{5} drzewo jest niezrównoważone. Na pierwszym poziomie lewe poddrzewo jest głębsze. Na drugim poziomie oba poddrzewa mają tą samą głębokość - możemy więc zastosować prostszą wersję algorytmu rotacji - rotację LL (a nie rotację LR): \\
+
+	\begin{center}
+	\begin{forest}
+		for tree={circle,draw}
+		[3
+		[2][,.phantom]
+		[5
+		[4][,.phantom]
+		[,.phantom]]]
+	\end{forest}
+	\end{center}
+
+	Teraz drzewo jest znów zrównoważone. \\
+
+	\noindent \textbf{Link do symulatora: \url{https://www.cs.usfca.edu/~galles/visualization/AVLtree.html}}
+
+	\newpage
+
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
