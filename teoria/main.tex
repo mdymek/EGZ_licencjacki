@@ -2961,7 +2961,36 @@
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
     \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
+
+    \newpage
+
     \section{Problemy P, NP, NP-zupełne i zależności między nimi. Hipoteza P vs. NP.}
+    \begin{definition}
+        \textbf{Problem P} (ang. \textit{deterministic polynomial}, deterministycznie wielomianowy) – problem decyzyjny,
+        dla którego rozwiązanie można \textbf{znaleźć} w czasie wielomianowym.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Problem NP} (ang. \textit{nondeterministic polynomial}, niedeterministycznie wielomianowy) – problem
+        decyzyjny, dla którego rozwiązanie można \textbf{zweryfikować} w czasie wielomianowym.
+    \end{definition}
+
+    \begin{theorem}
+        $\mathbf{P \stackrel{?}{=} NP}$. Każdy problem P jest NP, jednak nie wiadomo czy istnieje problem NP niebędący P.
+    \end{theorem}
+
+    \begin{definition}
+        \textbf{Problem NP-zupełny} (ang. \textit{NP-Complete}) – problem, który \textbf{należy do klasy NP} oraz dowolny
+        problem należący do NP może być do niego \textbf{zredukowany w czasie wielomianowym}. Czasami zamiast redukcji w
+        czasie wielomianowym używa się redukcji w pamięci logarytmicznej. Taka definicja problemów NP-zupełnych
+        implikuje fakt, że jeśli tylko potrafimy rozwiązać jakikolwiek problem NP-zupełny w czasie wielomianowym,
+        to potrafimy rozwiązać w takim czasie wszystkie problemy NP.\\
+
+        Pierwszym problemem którego NP-zupełność wykazano był problem SAT, czyli problem spełnialności formuł zdaniowych.
+    \end{definition}
+
+    \newpage
+
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
     \section{Lemat o pompowaniu dla języków regularnych.}
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}

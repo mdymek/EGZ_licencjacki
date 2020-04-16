@@ -31,7 +31,7 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
 }
 
@@ -1958,7 +1958,7 @@
 
 	Używane aby wykazać zbieżność pewnego ciągu do granicy niewłaściwej wykorzystując inny (prostszy) ciąg \\
 
-	\begin{exercise}	
+	\begin{exercise}
 		Oblicz granicę $\lim_{n \to \infty} (3 \sin{n} - 5) \cdot n^{3}$ \\
 	\end{exercise}
 
@@ -2106,7 +2106,7 @@
 
 	\noindent Do pokazania, że funkcja ma jeszcze inny pierwiastek użyjemy twierdzenia Darboux. \\
 	Przyjmijmy za $f(x) = 2^x - 4x$, która jak widać będzie się zerować w miejscach, które są rozwiązaniami naszego pierwotnego równania. \\
-	Zauważmy, że nasza funkcja jest ciągła. Teraz zbadajmy jakie ma wartości w punktach 0 i 1: $f(0) = 1$ i $f(1) = -2$. Znaki winików funkcji są różne co zgodnie z twierdzeniem Darboux oznacza, 
+	Zauważmy, że nasza funkcja jest ciągła. Teraz zbadajmy jakie ma wartości w punktach 0 i 1: $f(0) = 1$ i $f(1) = -2$. Znaki winików funkcji są różne co zgodnie z twierdzeniem Darboux oznacza,
 	że nasza funkcja pomiędzy 0 a 1 zeruje się, więc nasze oryginalne równanie ma tam jeszcze jedno rozwiązanie.
 
 
@@ -2128,7 +2128,7 @@
 
     \noindent Aby stwierdzić czy funkcja ma pochodną w punkcie $x_{0}$musimy obliczyć jej prawo i lewo stronną pochodną z definicji: \\
 
-    \noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x} = 
+    \noindent $f'_{-}(x_{0}) \stackrel{def}{=} \lim_{\Delta x \to 0^{-}} \frac{f(x_{0} + \Delta x) - f(x_{0})}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{f(0 + \Delta x) - f(0)}{\Delta x} = \lim_{\Delta x \to 0^{-}} \frac{(\Delta x)^2 \cdot \sin{\frac{1}{\Delta x}} - 0}{\Delta x} =
  \lim_{\Delta x \to 0^{-}} \Delta x \cdot \sin{\frac{1}{\Delta x}} = 0$ - można to pokazać z twierdzenia o 3 funkcjach \\
 
     \noindent Analogiczny wywód możemy zrobić dla pochodnej prawostronnej - wynik również będzie 0 \\
@@ -3390,7 +3390,7 @@
 	\noindent \textbf{Link do symulatora: \url{https://www.cs.usfca.edu/~galles/visualization/BTree.html}}
 
 	\newpage
-	
+
 
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
 	\subsection{Wstawianie}
@@ -3503,7 +3503,27 @@
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
     \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
+
+    \newpage
+
     \section{Problemy P, NP, NP-zupełne i zależności między nimi. Hipoteza P vs. NP.}
+
+    \textbf{P vs NP - przykład:}
+
+    \begin{center}
+        \textit{Czy jakikolwiek podzbiór zadanego zbioru {-2,6,-3,72,10,-11} sumuje się do zera?}
+    \end{center}
+
+    \noindent Trudno znaleźć rozwiązanie tego zagadnienia w czasie wielomianowym. Nasuwający się algorytm sprawdzenia wszystkich
+    możliwych podzbiorów ma złożoność wykładniczą ze względu na liczebność zbioru. \textbf{Nie wiadomo zatem czy problem ten
+    jest klasy P}.\\
+
+    \noindent Na pewno natomiast uzyskawszy z zewnątrz kandydata na rozwiązanie (np. {-2,6,-3,10,-11}) można w
+    liniowym, czyli również wielomianowym, czasie sprawdzić czy sumuje się do zera. \textbf{Jest to zatem problem NP}.
+
+
+    \newpage
+
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
     \section{Lemat o pompowaniu dla języków regularnych.}
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
