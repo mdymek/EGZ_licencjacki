@@ -3502,7 +3502,360 @@
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
+
+    \newpage
+
     \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
+
+    \subsection{Algorytm Grahama}.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.4,-44.8) circle (3);
+            \draw (70.4,-44.8) node {$A$};
+            \draw [red] (61.6,-40.9) circle (3);
+            \draw (61.6,-40.9) node {$B$};
+            \draw [black] (75.7,-27.9) circle (3);
+            \draw (75.7,-27.9) node {$C$};
+            \draw [black] (63.5,-24.4) circle (3);
+            \draw [black] (62.3,-12.2) circle (3);
+            \draw [black] (48.2,-9.9) circle (3);
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.07) -- (67.49,-45.53);
+            \draw [black, dotted] (67.66,-43.58) -- (64.34,-42.12);
+            \draw [black, dotted] (63.81,-38.87) -- (73.49,-29.93);
+        \end{tikzpicture}
+    \end{center}
+
+    Bierzemy pierwsze trzy punkty A, B, C. Sprawdzamy, czy B należy do trójkąta AOC - należy, więc nie należy
+    do otoczki wypukłej. Usuwamy go z listy, cofamy się o jeden (do O).
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw (30.8,-54.8)  node {$A$};
+            \draw [green] (70.4,-44.8) circle (3);
+            \draw (70.4,-44.8) node {$B$};
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black] (75.7,-27.9) circle (3);
+            \draw (75.7,-27.9) node {$C$};
+            \draw [black] (63.5,-24.4) circle (3);
+            \draw [black] (62.3,-12.2) circle (3);
+            \draw [black] (48.2,-9.9) circle (3);
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black, dotted] (33.71,-54.07) -- (67.49,-45.53);
+            \draw [black, dotted] (71.3,-41.94) -- (74.8,-30.76);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.4,-44.8) circle (3);
+            \draw (70.4,-44.8) node {$A$};
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [green] (75.7,-27.9) circle (3);
+            \draw (75.7,-27.9) node {$B$};
+            \draw [black] (63.5,-24.4) circle (3);
+            \draw (63.5,-24.4) node {$C$};
+            \draw [black] (62.3,-12.2) circle (3);
+            \draw [black] (48.2,-9.9) circle (3);
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.07) -- (67.49,-45.53);
+            \draw [black, dotted] (71.3,-41.94) -- (74.8,-30.76);
+            \draw [black, dotted] (72.82,-27.07) -- (66.38,-25.23);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.4,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw (75.7,-27.9) node {$A$};
+            \draw [red] (63.5,-24.4) circle (3);
+            \draw (63.5,-24.4) node {$B$};
+            \draw [black] (62.3,-12.2) circle (3);
+            \draw (62.3,-12.2) node {$C$};
+            \draw [black] (48.2,-9.9) circle (3);
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.07) -- (67.49,-45.53);
+            \draw [black] (71.3,-41.94) -- (74.8,-30.76);
+            \draw [black, dotted] (72.82,-27.07) -- (66.38,-25.23);
+            \draw [black, dotted] (63.21,-21.41) -- (62.59,-15.19);
+        \end{tikzpicture}
+    \end{center}
+
+    B należy do trójkąta AOC. Usuwamy go z listy i cofamy się na poprzednią pozycję.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.4,-44.8) circle (3);
+            \draw (70.4,-44.8) node {$A$};
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [green] (75.7,-27.9) circle (3);
+            \draw (75.7,-27.9) node {$B$};
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black] (62.3,-12.2) circle (3);
+            \draw (62.3,-12.2) node {$C$};
+            \draw [black] (48.2,-9.9) circle (3);
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.07) -- (67.49,-45.53);
+            \draw [black, dotted] (71.3,-41.94) -- (74.8,-30.76);
+            \draw [black, dotted] (73.75,-25.62) -- (64.25,-14.48);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw (75.7,-27.9) node {$A$};
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [green] (62.3,-12.2) circle (3);
+            \draw (62.3,-12.2) node {$B$};
+            \draw [black] (48.2,-9.9) circle (3);
+            \draw (48.2,-9.9) node {$C$};
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black, dotted] (73.75,-25.62) -- (64.25,-14.48);
+            \draw [black, dotted] (59.34,-11.72) -- (51.16,-10.38);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.3,-12.2) circle (3);
+            \draw (62.3,-12.2) node {$A$};
+            \draw [green] (48.1,-9.9) circle (3);
+            \draw (48.1,-9.9) node {$B$};
+            \draw [black] (38.6,-22.7) circle (3);
+            \draw (38.6,-22.7) node {$C$};
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.75,-25.62) -- (64.25,-14.48);
+            \draw [black, dotted] (59.34,-11.72) -- (51.06,-10.38);
+            \draw [black, dotted] (46.31,-12.31) -- (40.39,-20.29);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.4,-12.2) circle (3);
+            \draw [black, fill={green}] (48.1,-9.9) circle (3);
+            \draw (48.1,-9.9) node {$A$};
+            \draw [green] (38.6,-22.7) circle (3);
+            \draw (38.6,-22.7) node {$B$};
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw (30.8,-37.2) node {$C$};
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.76,-25.61) -- (64.34,-14.49);
+            \draw [black] (59.44,-11.72) -- (51.06,-10.38);
+            \draw [black, dotted] (46.31,-12.31) -- (40.39,-20.29);
+            \draw [black, dotted] (37.18,-25.34) -- (32.22,-34.56);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.4,-12.2) circle (3);
+            \draw [black, fill={green}] (48.1,-9.9) circle (3);
+            \draw [black, fill={green}] (38.5,-22.7) circle (3);
+            \draw (38.5,-22.7) node {$A$};
+            \draw [red] (30.8,-37.2) circle (3);
+            \draw (30.8,-37.2) node {$B$};
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw (14.5,-25.9) node {$C$};
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.76,-25.61) -- (64.34,-14.49);
+            \draw [black] (59.44,-11.72) -- (51.06,-10.38);
+            \draw [black] (46.3,-12.3) -- (40.3,-20.3);
+            \draw [black, dotted] (37.09,-25.35) -- (32.21,-34.55);
+            \draw [black, dotted] (28.33,-35.49) -- (16.97,-27.61);
+        \end{tikzpicture}
+    \end{center}
+
+    B należy do trójkąta AOC. Usuwamy go z listy i cofamy się na poprzednią pozycję.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.4,-12.2) circle (3);
+            \draw [black, fill={green}] (48.1,-9.9) circle (3);
+            \draw (48.1,-9.9) node {$A$};
+            \draw [red] (38.5,-22.7) circle (3);
+            \draw (38.5,-22.7) node {$B$};
+            \draw [black, fill={red}] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw (14.5,-25.9) node {$C$};
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.76,-25.61) -- (64.34,-14.49);
+            \draw [black] (59.44,-11.72) -- (51.06,-10.38);
+            \draw [black, dotted] (46.3,-12.3) -- (40.3,-20.3);
+            \draw [black, dotted] (35.53,-23.1) -- (17.47,-25.5);
+        \end{tikzpicture}
+    \end{center}
+
+    B należy do trójkąta AOC. Usuwamy go z listy i cofamy się na poprzednią pozycję.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw  (30.8,-54.8) node {$O$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.4,-12.2) circle (3);
+            \draw (62.4,-12.2) node {$A$};
+            \draw [green] (48.1,-9.9) circle (3);
+            \draw (48.1,-9.9) node {$B$};
+            \draw [black] (38.5,-22.7) circle (3);
+            \draw [black] (30.8,-37.2) circle (3);
+            \draw [black] (14.5,-25.9) circle (3);
+            \draw (14.5,-25.9) node {$C$};
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.76,-25.61) -- (64.34,-14.49);
+            \draw [black, dotted] (59.44,-11.72) -- (51.06,-10.38);
+            \draw [black, dotted] (45.39,-11.19) -- (17.21,-24.61);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC. Bierzemy kolejne wierzchołki z listy.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw (30.8,-54.8) node {$C$};
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.4,-12.2) circle (3);
+            \draw [black, fill={green}] (48.1,-9.9) circle (3);
+            \draw (48.1,-9.9) node {$A$};
+            \draw [black, fill={red}] (38.5,-22.7) circle (3);
+            \draw [black, fill={red}] (30.8,-37.2) circle (3);
+            \draw [green] (13.9,-25.3) circle (3);
+            \draw (13.9,-25.3) node {$B$};
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.76,-25.61) -- (64.34,-14.49);
+            \draw [black] (59.44,-11.72) -- (51.06,-10.38);
+            \draw [black, dotted] (45.36,-11.13) -- (16.64,-24.07);
+            \draw [black, dotted] (15.39,-27.9) -- (29.31,-52.2);
+        \end{tikzpicture}
+    \end{center}
+
+    B nie należy do trójkąta AOC, więc nalezy do otoczki. Doszliśmy do punktu O - mamy otoczkę.
+
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black, fill={green}] (30.8,-54.8) circle (3);
+            \draw [black, fill={green}] (70.3,-44.8) circle (3);
+            \draw [black, fill={red}] (61.6,-40.9) circle (3);
+            \draw [black, fill={green}] (75.7,-27.9) circle (3);
+            \draw [black, fill={red}] (63.5,-24.4) circle (3);
+            \draw [black, fill={green}] (62.4,-12.2) circle (3);
+            \draw [black, fill={green}] (48.1,-9.9) circle (3);
+            \draw [black, fill={red}] (38.5,-22.7) circle (3);
+            \draw [black, fill={red}] (30.8,-37.2) circle (3);
+            \draw [black, fill={green}] (13.9,-25.3) circle (3);
+            \draw [black] (33.71,-54.06) -- (67.39,-45.54);
+            \draw [black] (71.21,-41.94) -- (74.79,-30.76);
+            \draw [black] (73.76,-25.61) -- (64.34,-14.49);
+            \draw [black] (59.44,-11.72) -- (51.06,-10.38);
+            \draw [black] (45.36,-11.13) -- (16.64,-24.07);
+            \draw [black] (15.39,-27.9) -- (29.31,-52.2);
+        \end{tikzpicture}
+    \end{center}
+
+    \subsection{Algorytm Jarvisa.}
+
+    \includegraphics[width=\linewidth]{jarvis.png}
+
+    \subsection{QuickHull}
+
+    https://upload.wikimedia.org/wikipedia/commons/9/9e/Quickhull.gif
 
     \newpage
 

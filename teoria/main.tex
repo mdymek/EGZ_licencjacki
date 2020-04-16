@@ -2960,7 +2960,74 @@
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
+
+    \newpage
+
     \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
+
+    \begin{definition}
+        \textbf{Algorytm Grahama} - złożoność $O(n \log n)$.
+        \begin{enumerate}
+            \item Wybierz punkt (ozn. O) o najniższej wartości współrzędnej y.
+            \item Przesuń wszystkie punkty tak, by punkt O pokrył się z początkiem układu współrzędnych.
+            \item Posortuj punkty leksykograficznie względem:
+            \begin{itemize}
+                \item kąta pomiędzy wektorem $OP_i$ a dodatnią osią układu współrzędnych,
+                \item odległości punktu $P_i$ od początku układu współrzędnych.
+            \end{itemize}
+            \item Wybierz punkt (ozn. S) o najmniejszej współrzędnej y; jeśli kilka punktów ma tę samą współrzędną
+            y, wybierz spośród nich ten o najmniejszej współrzędnej x.
+            \item Przeglądaj listę posortowanych punktów poczynając od punktu S:
+            \begin{itemize}
+                \item Od bieżącej pozycji weź trzy kolejne punkty (ozn. A, B, C).
+                \item Jeśli punkt B leży na zewnątrz trójkąta AOC, to może należeć do otoczki wypukłej. Przejdź do następnego punktu na liście.
+                \item Jeśli punkt B leży wewnątrz trójkąta AOC, to znaczy, że nie należy do otoczki. Usuń punkt B z listy i cofnij się o jedną pozycję (o ile bieżąca pozycja jest różna od początkowej).
+            \end{itemize}
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Algorytm Jarvisa} - średnia złożoność $O(kn)$, gdzie n liczba punktów, k liczba punktów należących do otoczki; pesymistyczna - $O(n^2)$.
+        \begin{enumerate}
+            \item $P_1$ – punkt na otoczce wypukłej o najmniejszej współrzędnej y (jeśli jest więcej niż jeden, wybierany jest ten o najmniejszej współrzędnej x),
+            \item $P_{0}:=[-\infty ,y(P_{1})]$,
+            \item $i:=1$,
+            \item powtarzaj:
+            \begin{itemize}
+                \item $P_{i+1}$ – punkt $N$, dla którego kąt $P_{i-1}P_{i}N$ jest największy,
+                \item jeśli $N=P_{1}$, koniec iterowania,
+                \item $:=i+1$,
+            \end{itemize}
+            \item ostatecznie otoczkę tworzą punkty $P_{1\dots i}$.
+        \end{enumerate}
+
+        Implementację można usprawnić, odrzucając w każdej iteracji punkty znajdujące się po prawej stronie wektora $P_{1}P_{i}$, ponieważ na pewno nie będą należały do otoczki. Zabieg ten nie wpływa jednak na asymptotyczną złożoność obliczeniową algorytmu.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Quickhull} - średnia złożoność $O(n \log n)$, pesymistyczna złożoność - $O(n^2)$.
+
+        Przygotowanie danych:
+        \begin{enumerate}
+            \item Znajdź w zbiorze punktów dwa skrajne punkty o minimalnej i maksymalnej współrzędnej x (A i B).
+            \item Podziel zbiór punktów na dwa podzbiory $S_1$ i $S_2$ znajdujące się nad i pod prostą $AB$.
+            \item Wywołaj rekurencyjnie QuickHull(A, B, $S_1$) i QuickHull(B, A, $S_2$).
+        \end{enumerate}
+
+        QuickHull(A, B, P):
+        \begin{enumerate}
+            \item Jeśli $P$ jest pusty – koniec.
+            \item Jeśli $P$ ma jeden element, ten punkt należy do otoczki – koniec.
+            \item W przeciwnym razie:
+            \begin{itemize}
+                \item Znajdź w $P$ punkt $C$ najbardziej oddalony od prostej $AB$. Ten punkt należy do otoczki wypukłej.
+                \item Odrzuć wszystkie punkty z wnętrza trójkąta $ABC$, nie mogą należeć do otoczki.
+                \item Znajdź zbiór $S_1$ punktów znajdujących się po prawej stronie prostej $AC$C oraz analogiczny
+                zbiór $S_2$ dla prostej $BC$. (Stronę określa znak równania ogólnego prostej).
+                \item Wywołaj rekurencyjnie QuickHull(A, C, $S_1$) i QuickHull(B, C, $S_2$).
+            \end{itemize}
+        \end{enumerate}
+    \end{definition}
 
     \newpage
 
