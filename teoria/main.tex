@@ -2958,8 +2958,70 @@
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
+    
+    \newpage
+    
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
+    
+    \subsection{Kolorowanie krawędziowe grafów}
+    Problem kolorowania krawędzi, podobnie jak klasycznego kolorowania wierzchołków, jest NP-trudny – nie istnieją wielomianowe algorytmy kolorujące grafy zawsze w sposób optymalny.
+    \\\\
+    Przykład nieopytymalnego algorytmu kolorowania krawędziowego:
+    \begin{enumerate}
+        \item Użyj BFS (Breadth First Search - Przeszukiwanie wszerz) do poruszania się po grafie.
+        \item Wybierz wierzchołek i nadaj różne kolory jego krawędziom.
+        \item Przejdź do kolejnego wierzchołka.
+        \item Powtarzaj aż wszyskie krawędzie zostaną pokolorowane.
+    \end{enumerate}
+    
+    \subsection{Kolorowanie wierzchołkowe grafów planarnych}
+    
+    \begin{definition}
+        Graf planarny - graf, który można narysować na płaszczyźnie tak, by krzywe obrazujące krawędzie grafu nie przecinały się ze sobą.
+    \end{definition}
+    
+    \begin{theorem}
+        Liczba chromatyczna grafu planarnego jest równa lub mniejsza niż 4
+    \end{theorem}
+    
+    Każdy graf planarny można pokolorować 5 kolorami w czasie liniowym.
+    
+    
+    
+    
+    
+    \newpage
+    
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
+    
+    \subsection{Algorytm Boruvki}
+    \begin{enumerate}
+        \item Zainicjalizuj każdy wierzchołek jako osobny zbiór.
+        \item Znajdź krawędź z najmniejszą wagą łączącą ten zbiór z innym. Dodaj tą krawędź do MST.
+        \item Powtarzaj krok 2 dla każdego zbioru dopóki istnieje więcej niż jeden zbiór.
+    \end{enumerate}
+    \textbf{Złożoność:} $O(ElogV)$.
+    
+    
+    \subsection{Algorytm Prima}
+    \begin{enumerate}
+        \item Zainicjalizuj drzewo jednym wierzchołkiem, wybranym losowo z grafu.
+        \item Powiększ drzewo o jeden wierzchołek z najmniejszą wagą który łączy drzewo z wierzchołkami jeszcze nieuwzględnionymi.
+        \item Powtarzaj krok 2 aż wszystkie wierzchołki znajdą się w drzewie.
+    \end{enumerate}
+    \textbf{Złożoność:} Zależy od użytych struktur danych. $O(V^2)$ lub $O(ElogV)$ jeśli użyta została lista sąsiedztwa
+    
+    
+     
+    \subsection{Algorytm Kruskala}
+
+    \begin{enumerate}
+        \item Posortuj krawędzie niemalejąco pod względem wag.
+        \item Wybierz krawędź o najmniejszej wadze. Sprawdź czy tworzy cykl z MST utworzonym do tej pory. Jeśli nie, uwzględnij tą krawędź w MST. W przeciwnym wypadku, odrzuć.
+        \item Powtarzaj krok 2 aż otrzymasz $V-1$ krawędzi w MST
+    \end{enumerate}
+        
+    \textbf{Złożoność:} Sortowanie krawędzi zajmuje $O(ElogE)$. Po sortowaniu, iterujemy po krawędziach i używamy algorytmu find-union który może zająć $O(logV)$. Zatem ogólna złozoność to $O(ElogE+ElogV)$. Wartość E jest mniejsza niż $V^2$, więc $O(logV)$ $=$ $O(logE)$. Złożoność: $O(ElogE)$ lub $O(ElogV)$. 
 
     \newpage
 
