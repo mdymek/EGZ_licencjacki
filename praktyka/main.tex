@@ -3500,9 +3500,636 @@
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
+    
+    \newpage
+    
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
+    
+    \newpage
+    
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
+    
+            \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+        \tikzstyle{every node}+=[inner sep=0pt]
+        \draw [black] (17.6,-15.2) circle (3);
+        \draw (17.6,-15.2) node {$1$};
+        \draw [black] (39.6,-14.4) circle (3);
+        \draw (39.6,-14.4) node {$2$};
+        \draw [black] (59.1,-14.4) circle (3);
+        \draw (59.1,-14.4) node {$3$};
+        \draw [black] (72.3,-29.9) circle (3);
+        \draw (72.3,-29.9) node {$4$};
+        \draw [black] (59,-45.9) circle (3);
+        \draw (59,-45.9) node {$5$};
+        \draw [black] (40,-45.2) circle (3);
+        \draw (40,-45.2) node {$6$};
+        \draw [black] (17.1,-45.5) circle (3);
+        \draw (17.1,-45.5) node {$7$};
+        \draw [black] (6.8,-29.9) circle (3);
+        \draw (6.8,-29.9) node {$0$};
+        \draw [black] (39.6,-29.1) circle (3);
+        \draw (39.6,-29.1) node {$8$};
+        \draw [black] (8.58,-27.48) -- (15.82,-17.62);
+        \draw (12.78,-23.94) node [right] {$4$};
+        \draw [black] (20.6,-15.09) -- (36.6,-14.51);
+        \draw (28.63,-15.34) node [below] {$8$};
+        \draw [black] (42.6,-14.4) -- (56.1,-14.4);
+        \draw (49.35,-14.9) node [below] {$7$};
+        \draw [black] (61.05,-16.68) -- (70.35,-27.62);
+        \draw (65.15,-23.59) node [left] {$9$};
+        \draw [black] (70.38,-32.21) -- (60.92,-43.59);
+        \draw (65.1,-36.46) node [left] {$10$};
+        \draw [black] (56,-45.79) -- (43,-45.31);
+        \draw (49.53,-45.01) node [above] {$2$};
+        \draw [black] (37,-45.24) -- (20.1,-45.46);
+        \draw (28.55,-44.84) node [above] {$1$};
+        \draw [black] (15.45,-43) -- (8.45,-32.4);
+        \draw (12.56,-36.37) node [right] {$8$};
+        \draw [black] (17.55,-18.2) -- (17.15,-42.5);
+        \draw (16.83,-30.35) node [left] {$11$};
+        \draw [black] (19.52,-43.73) -- (37.18,-30.87);
+        \draw (29.35,-37.8) node [below] {$7$};
+        \draw [black] (39.67,-32.1) -- (39.93,-42.2);
+        \draw (39.26,-37.16) node [left] {$6$};
+        \draw [black] (39.6,-26.1) -- (39.6,-17.4);
+        \draw (40.1,-21.75) node [right] {$2$};
+        \draw [black] (41.17,-16.95) -- (57.43,-43.35);
+        \draw (48.67,-31.43) node [left] {$4$};
+        \draw [black] (59.01,-42.9) -- (59.09,-17.4);
+        \draw (59.55,-30.15) node [right] {$14$};
+        \end{tikzpicture}
+        \end{center}
+    
+    \subsection{Algorytm Boruvki}
+    \begin{enumerate}
+        \item Wybrane krawędzie o najmniejszych wagach
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (57.3,-48.8) circle (3);
+            \draw (57.3,-48.8) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-34.1) circle (3);
+            \draw (11.5,-34.1) node {$0$};
+            \draw [black] (57.3,-18.4) circle (3);
+            \draw (57.3,-18.4) node {$3$};
+            \draw [black] (68.3,-34.1) circle (3);
+            \draw (68.3,-34.1) node {$4$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (54.3,-48.8) -- (42.7,-48.8);
+            \draw (48.5,-48.3) node [above] {$2$};
+            \draw [black] (13.25,-31.67) -- (21.05,-20.83);
+            \draw (17.74,-27.63) node [right] {$4$};
+            \draw [black] (54.3,-18.4) -- (42.7,-18.4);
+            \draw (48.5,-17.9) node [above] {$7$};
+            \draw [black] (66.58,-31.64) -- (59.02,-20.86);
+            \draw (63.4,-24.89) node [right] {$9$};
+            \end{tikzpicture}
+            \end{center}
 
+        \item Powtarzamy wybór krawędzi o najmniejszych wagach dla nowo powstałych zbiorów.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (57.3,-48.8) circle (3);
+            \draw (57.3,-48.8) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-34.1) circle (3);
+            \draw (11.5,-34.1) node {$0$};
+            \draw [black] (57.3,-18.4) circle (3);
+            \draw (57.3,-18.4) node {$3$};
+            \draw [black] (68.3,-34.1) circle (3);
+            \draw (68.3,-34.1) node {$4$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (54.3,-48.8) -- (42.7,-48.8);
+            \draw (48.5,-48.3) node [above] {$2$};
+            \draw [black] (13.25,-31.67) -- (21.05,-20.83);
+            \draw (17.74,-27.63) node [right] {$4$};
+            \draw [black] (54.3,-18.4) -- (42.7,-18.4);
+            \draw (48.5,-17.9) node [above] {$7$};
+            \draw [black] (66.58,-31.64) -- (59.02,-20.86);
+            \draw (63.4,-24.89) node [right] {$9$};
+            \draw [black] (36.7,-18.4) -- (25.8,-18.4);
+            \draw (31.25,-17.9) node [above] {$8$};
+            \draw [black] (41.2,-21) -- (55.8,-46.2);
+            \draw (47.85,-34.84) node [left] {$4$};
+            \end{tikzpicture}
+            \end{center}
+        
+        
+    \end{enumerate}
+    
+    
+    \subsection{Algorytm Prima}
+    
+    \begin{enumerate}
+        \item 
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \end{tikzpicture}
+            \end{center}
+
+        \item 
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (22.8,-47.5) circle (3);
+            \draw (22.8,-47.5) node {$7$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+            \draw (16.59,-41.77) node [left] {$8$};
+            \end{tikzpicture}
+            \end{center}
+
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (22.8,-47.5) circle (3);
+            \draw (22.8,-47.5) node {$7$};
+            \draw [black] (40.9,-47.5) circle (3);
+            \draw (40.9,-47.5) node {$6$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+            \draw (16.59,-41.77) node [left] {$8$};
+            \draw [black] (25.8,-47.5) -- (37.9,-47.5);
+            \draw (31.85,-48) node [below] {$1$};
+            \end{tikzpicture}
+            \end{center}
+            
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (22.8,-47.5) circle (3);
+            \draw (22.8,-47.5) node {$7$};
+            \draw [black] (40.9,-47.5) circle (3);
+            \draw (40.9,-47.5) node {$6$};
+            \draw [black] (59.8,-47.5) circle (3);
+            \draw (59.8,-47.5) node {$5$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+            \draw (16.59,-41.77) node [left] {$8$};
+            \draw [black] (25.8,-47.5) -- (37.9,-47.5);
+            \draw (31.85,-48) node [below] {$1$};
+            \draw [black] (43.9,-47.5) -- (56.8,-47.5);
+            \draw (50.35,-48) node [below] {$2$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item
+        
+                \begin{center}
+                \begin{tikzpicture}[scale=0.1]
+                \tikzstyle{every node}+=[inner sep=0pt]
+                \draw [black] (22.8,-18.4) circle (3);
+                \draw (22.8,-18.4) node {$1$};
+                \draw [black] (11.5,-33.2) circle (3);
+                \draw (11.5,-33.2) node {$0$};
+                \draw [black] (22.8,-47.5) circle (3);
+                \draw (22.8,-47.5) node {$7$};
+                \draw [black] (40.9,-47.5) circle (3);
+                \draw (40.9,-47.5) node {$6$};
+                \draw [black] (59.8,-47.5) circle (3);
+                \draw (59.8,-47.5) node {$5$};
+                \draw [black] (40.9,-18.4) circle (3);
+                \draw (40.9,-18.4) node {$2$};
+                \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+                \draw (17.72,-27.2) node [right] {$4$};
+                \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+                \draw (16.59,-41.77) node [left] {$8$};
+                \draw [black] (25.8,-47.5) -- (37.9,-47.5);
+                \draw (31.85,-48) node [below] {$1$};
+                \draw [black] (43.9,-47.5) -- (56.8,-47.5);
+                \draw (50.35,-48) node [below] {$2$};
+                \draw [black] (58.17,-44.98) -- (42.53,-20.92);
+                \draw (50.97,-31.63) node [right] {$4$};
+                \end{tikzpicture}
+                \end{center}
+        
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (22.8,-47.5) circle (3);
+            \draw (22.8,-47.5) node {$7$};
+            \draw [black] (40.9,-47.5) circle (3);
+            \draw (40.9,-47.5) node {$6$};
+            \draw [black] (59.8,-47.5) circle (3);
+            \draw (59.8,-47.5) node {$5$};
+            \draw [black] (40.9,-18.4) circle (3);
+            \draw (40.9,-18.4) node {$2$};
+            \draw [black] (40.9,-33.2) circle (3);
+            \draw (40.9,-33.2) node {$8$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+            \draw (16.59,-41.77) node [left] {$8$};
+            \draw [black] (25.8,-47.5) -- (37.9,-47.5);
+            \draw (31.85,-48) node [below] {$1$};
+            \draw [black] (43.9,-47.5) -- (56.8,-47.5);
+            \draw (50.35,-48) node [below] {$2$};
+            \draw [black] (58.17,-44.98) -- (42.53,-20.92);
+            \draw (50.97,-31.63) node [right] {$4$};
+            \draw [black] (40.9,-21.4) -- (40.9,-30.2);
+            \draw (40.4,-25.8) node [left] {$2$};
+            \end{tikzpicture}
+            \end{center}
+
+        
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (22.8,-47.5) circle (3);
+            \draw (22.8,-47.5) node {$7$};
+            \draw [black] (40.9,-47.5) circle (3);
+            \draw (40.9,-47.5) node {$6$};
+            \draw [black] (59.8,-47.5) circle (3);
+            \draw (59.8,-47.5) node {$5$};
+            \draw [black] (40.9,-18.4) circle (3);
+            \draw (40.9,-18.4) node {$2$};
+            \draw [black] (40.9,-33.2) circle (3);
+            \draw (40.9,-33.2) node {$8$};
+            \draw [black] (59.8,-18.4) circle (3);
+            \draw (59.8,-18.4) node {$3$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+            \draw (16.59,-41.77) node [left] {$8$};
+            \draw [black] (25.8,-47.5) -- (37.9,-47.5);
+            \draw (31.85,-48) node [below] {$1$};
+            \draw [black] (43.9,-47.5) -- (56.8,-47.5);
+            \draw (50.35,-48) node [below] {$2$};
+            \draw [black] (58.17,-44.98) -- (42.53,-20.92);
+            \draw (50.97,-31.63) node [right] {$4$};
+            \draw [black] (40.9,-21.4) -- (40.9,-30.2);
+            \draw (40.4,-25.8) node [left] {$2$};
+            \draw [black] (43.9,-18.4) -- (56.8,-18.4);
+            \draw (50.35,-18.9) node [below] {$7$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-33.2) circle (3);
+            \draw (11.5,-33.2) node {$0$};
+            \draw [black] (22.8,-47.5) circle (3);
+            \draw (22.8,-47.5) node {$7$};
+            \draw [black] (40.9,-47.5) circle (3);
+            \draw (40.9,-47.5) node {$6$};
+            \draw [black] (59.8,-47.5) circle (3);
+            \draw (59.8,-47.5) node {$5$};
+            \draw [black] (40.9,-18.4) circle (3);
+            \draw (40.9,-18.4) node {$2$};
+            \draw [black] (40.9,-33.2) circle (3);
+            \draw (40.9,-33.2) node {$8$};
+            \draw [black] (59.8,-18.4) circle (3);
+            \draw (59.8,-18.4) node {$3$};
+            \draw [black] (70.4,-33.2) circle (3);
+            \draw (70.4,-33.2) node {$4$};
+            \draw [black] (13.32,-30.82) -- (20.98,-20.78);
+            \draw (17.72,-27.2) node [right] {$4$};
+            \draw [black] (13.36,-35.55) -- (20.94,-45.15);
+            \draw (16.59,-41.77) node [left] {$8$};
+            \draw [black] (25.8,-47.5) -- (37.9,-47.5);
+            \draw (31.85,-48) node [below] {$1$};
+            \draw [black] (43.9,-47.5) -- (56.8,-47.5);
+            \draw (50.35,-48) node [below] {$2$};
+            \draw [black] (58.17,-44.98) -- (42.53,-20.92);
+            \draw (50.97,-31.63) node [right] {$4$};
+            \draw [black] (40.9,-21.4) -- (40.9,-30.2);
+            \draw (40.4,-25.8) node [left] {$2$};
+            \draw [black] (43.9,-18.4) -- (56.8,-18.4);
+            \draw (50.35,-18.9) node [below] {$7$};
+            \draw [black] (61.55,-20.84) -- (68.65,-30.76);
+            \draw (64.51,-27.17) node [left] {$9$};
+            \end{tikzpicture}
+            \end{center}
+        
+        
+        
+    \end{enumerate}
+    
+    \subsection{Algorytm Kruskala}
+    \begin{enumerate}
+        \item Wybierz krawędź 7-6: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (27.7,-29) circle (3);
+            \draw (27.7,-29) node {$7$};
+            \draw [black] (51.3,-29) circle (3);
+            \draw (51.3,-29) node {$6$};
+            \draw [black] (30.7,-29) -- (48.3,-29);
+            \draw (39.5,-29.5) node [below] {$1$};
+            \end{tikzpicture}
+            \end{center}    
+        
+        \item Wybierz krawędź 8-2: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (28.8,-48.1) circle (3);
+            \draw (28.8,-48.1) node {$7$};
+            \draw [black] (50.5,-48.1) circle (3);
+            \draw (50.5,-48.1) node {$6$};
+            \draw [black] (50.1,-34.8) circle (3);
+            \draw (50.1,-34.8) node {$8$};
+            \draw [black] (50.1,-17.8) circle (3);
+            \draw (50.1,-17.8) node {$2$};
+            \draw [black] (31.8,-48.1) -- (47.5,-48.1);
+            \draw (39.65,-48.6) node [below] {$1$};
+            \draw [black] (50.1,-31.8) -- (50.1,-20.8);
+            \draw (50.6,-26.3) node [right] {$2$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item Wybierz krawędź 6-5: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (59.5,-48.9) circle (3);
+            \draw (59.5,-48.9) node {$5$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (56.5,-48.88) -- (42.7,-48.82);
+            \draw (49.6,-48.34) node [above] {$2$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item Wybierz krawędź 0-1: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (59.5,-48.9) circle (3);
+            \draw (59.5,-48.9) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (9,-34.1) circle (3);
+            \draw (9,-34.1) node {$0$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (56.5,-48.88) -- (42.7,-48.82);
+            \draw (49.6,-48.34) node [above] {$2$};
+            \draw [black] (10.98,-31.85) -- (20.82,-20.65);
+            \draw (16.44,-27.7) node [right] {$4$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item Wybierz krawędź 2-5: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (57.3,-48.8) circle (3);
+            \draw (57.3,-48.8) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (9,-34.1) circle (3);
+            \draw (9,-34.1) node {$0$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (54.3,-48.8) -- (42.7,-48.8);
+            \draw (48.5,-48.3) node [above] {$2$};
+            \draw [black] (10.98,-31.85) -- (20.82,-20.65);
+            \draw (16.44,-27.7) node [right] {$4$};
+            \draw [black] (55.8,-46.2) -- (41.2,-21);
+            \draw (49.15,-32.36) node [right] {$4$};
+            \end{tikzpicture}
+            \end{center}
+
+        
+        \item Wybierz krawędź 8-6: Cykl, odrzuć krawędź.
+        
+        
+        
+        \item Wybierz krawędź 2-3: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (57.3,-48.8) circle (3);
+            \draw (57.3,-48.8) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (10.8,-34.1) circle (3);
+            \draw (10.8,-34.1) node {$0$};
+            \draw [black] (57.3,-18.4) circle (3);
+            \draw (57.3,-18.4) node {$3$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (54.3,-48.8) -- (42.7,-48.8);
+            \draw (48.5,-48.3) node [above] {$2$};
+            \draw [black] (12.62,-31.72) -- (20.98,-20.78);
+            \draw (17.37,-27.66) node [right] {$4$};
+            \draw [black] (55.8,-46.2) -- (41.2,-21);
+            \draw (49.15,-32.36) node [right] {$4$};
+            \draw [black] (54.3,-18.4) -- (42.7,-18.4);
+            \draw (48.5,-17.9) node [above] {$7$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item Wybierz krawędź 7-8: Cykl, odrzuć krawędź.
+        
+        
+        \item Wybierz krawędź 0-7: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (57.3,-48.8) circle (3);
+            \draw (57.3,-48.8) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-34.1) circle (3);
+            \draw (11.5,-34.1) node {$0$};
+            \draw [black] (57.3,-18.4) circle (3);
+            \draw (57.3,-18.4) node {$3$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (54.3,-48.8) -- (42.7,-48.8);
+            \draw (48.5,-48.3) node [above] {$2$};
+            \draw [black] (13.25,-31.67) -- (21.05,-20.83);
+            \draw (17.74,-27.63) node [right] {$4$};
+            \draw [black] (55.8,-46.2) -- (41.2,-21);
+            \draw (49.15,-32.36) node [right] {$4$};
+            \draw [black] (54.3,-18.4) -- (42.7,-18.4);
+            \draw (48.5,-17.9) node [above] {$7$};
+            \draw [black] (13.33,-36.48) -- (20.97,-46.42);
+            \draw (16.58,-42.86) node [left] {$8$};
+            \end{tikzpicture}
+            \end{center}
+        
+        \item Wybierz krawędź 1-2: Cykl, odrzuć krawędź.
+        
+        
+        \item Wybierz krawędź 3-4: Brak cyklu, uwzględnij ją.
+        
+            \begin{center}
+            \begin{tikzpicture}[scale=0.1]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (22.8,-48.8) circle (3);
+            \draw (22.8,-48.8) node {$7$};
+            \draw [black] (39.7,-48.8) circle (3);
+            \draw (39.7,-48.8) node {$6$};
+            \draw [black] (39.7,-34.1) circle (3);
+            \draw (39.7,-34.1) node {$8$};
+            \draw [black] (39.7,-18.4) circle (3);
+            \draw (39.7,-18.4) node {$2$};
+            \draw [black] (57.3,-48.8) circle (3);
+            \draw (57.3,-48.8) node {$5$};
+            \draw [black] (22.8,-18.4) circle (3);
+            \draw (22.8,-18.4) node {$1$};
+            \draw [black] (11.5,-34.1) circle (3);
+            \draw (11.5,-34.1) node {$0$};
+            \draw [black] (57.3,-18.4) circle (3);
+            \draw (57.3,-18.4) node {$3$};
+            \draw [black] (68.3,-34.1) circle (3);
+            \draw (68.3,-34.1) node {$4$};
+            \draw [black] (25.8,-48.8) -- (36.7,-48.8);
+            \draw (31.25,-49.3) node [below] {$1$};
+            \draw [black] (39.7,-31.1) -- (39.7,-21.4);
+            \draw (40.2,-26.25) node [right] {$2$};
+            \draw [black] (54.3,-48.8) -- (42.7,-48.8);
+            \draw (48.5,-48.3) node [above] {$2$};
+            \draw [black] (13.25,-31.67) -- (21.05,-20.83);
+            \draw (17.74,-27.63) node [right] {$4$};
+            \draw [black] (55.8,-46.2) -- (41.2,-21);
+            \draw (49.15,-32.36) node [right] {$4$};
+            \draw [black] (54.3,-18.4) -- (42.7,-18.4);
+            \draw (48.5,-17.9) node [above] {$7$};
+            \draw [black] (13.33,-36.48) -- (20.97,-46.42);
+            \draw (16.58,-42.86) node [left] {$8$};
+            \draw [black] (66.58,-31.64) -- (59.02,-20.86);
+            \draw (63.4,-24.89) node [right] {$9$};
+            \end{tikzpicture}
+            \end{center}
+        
+        Liczba użytych krawędzi wynosi $(V-1)$, algorytm kończy pracę.
+    \end{enumerate}
+    
     \newpage
 
     \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
