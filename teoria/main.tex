@@ -3134,6 +3134,27 @@ return $\mathcal{A}'$;
     \end{definition}
     
     \section{Lemat o pompowaniu dla języków regularnych.}
+    \begin{definition}
+    Niech $L \subset A^*$ będzie językiem rozpoznawalnym. Istnieje liczba naturalna $N \geq 1$ taka, że dowolne słowo $w \in L$ o długości $|w| \geq N$ można rozłożyć na katenację:
+    \begin{center}
+    $w = v_1uv_2$
+    \end{center}
+    gdzie $v_1, v_2 \in A^*, u \in A^+, |v_1u| < N$ oraz
+    \begin{center}
+    $v_1u^*v_2 \subset L$
+    \end{center}
+    \end{definition}
+    
+    \begin{definition}
+    Jeśli rozpoznawalny język $L \subset A^*$ jest nieskończony, to istnieją
+    $v_1, v_2 \in A^*, u \in A^+$, takie, że
+    \begin{center}
+	$v_1u*v_2 \subset L$
+    \end{center}
+    \end{definition}
+    
+    
+    
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
