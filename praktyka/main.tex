@@ -3022,6 +3022,100 @@
 
 
     \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
+    
+        \subsection{Binary search}
+
+        Problem: dla zadanej posortowanej tablicy $A$ o długości $n$, znajdź indeks elementu
+        równego $x$ lub zwróć symbol niepowodzenia w przypadku braku $x$ w tablicy $A$.
+        \[\]
+        Działamy na (zmniejszającym się) przedziale tablicy $A$. Indeks początka przedziału: 
+        $l = 0$, indeks końca przedziału: $r = n - 1$.
+
+        \begin{enumerate}
+            \item \textbf{Dziel}
+                
+                Porównaj element $A[s]$ ($s = \frac{l+ r}{2}$) z $x$.
+                
+                \begin{itemize}
+                    \item $A[s] = x$ 
+
+                        Zwróć $s$.
+
+                    \item $A[s] > x$
+
+                        Powtórz dla $A[l : s - 1]$, tzn $l = l, r = s - 1$ 
+
+                    \item $A[s] < x$
+
+                        Powtórz rekurencyjnie dla $A[s + 1 : n - 1]$, tzn $l = s + 1, r = r$
+                \end{itemize}
+
+                Złożoność obliczeniowa: $\theta(1)$.
+            
+            \item \textbf{Zwyciężaj}
+
+                Dla tablicy z $n = 1$ ($l = r$) porównaj $A[l]$ z $x$
+
+                \begin{itemize}
+                    \item $A[l] = x$
+
+                        zwróć $x$
+                    \item $A[l] \neq x$
+
+                        $x$ nie znajduje się w $A$, zwróć dany symbol
+                        niepowodzenia (np. dla liczb nieujemnych zwróć -1).
+                \end{itemize}
+
+                Złożoność obliczeniowa: $\theta(1)$.
+
+            \item \textbf{Łącz}
+
+                Brak - wynik zwrócony z podproblemu jest poprawnym wynikiem problemu.
+        \end{enumerate}
+        
+        Złożoność obliczeniowa algorytmu: $O(log(n))$.
+        
+        \subsection{Otoczka wypukła}
+
+        Dla zbioru punktów $A$ na przestrzeni dwuwymiarowej znajdź listę punktów tworzących 
+        otoczkę wypukłą.
+        \[\]
+        Działamy na zbiorze posortowanym względem osi $x$.
+
+        \begin{enumerate}
+            \item \textbf{Dziel}
+                
+                Podziel $A$ na dwa zbiory: lewy $L$ i prawy $R$ względem prostej równoległej do
+                osi $y$.
+                
+                Złożoność obliczeniowa: $\theta(n)$.
+
+            \item \textbf{Zwyciężaj}
+
+                Dla zbioru $A$ o mocy $|A| \leq 3$ otoczka wypukła jest listą wszystkich punktów.
+
+                Złożoność obliczeniowa: $\theta(0)$.
+            \item \textbf{Łącz}
+
+                Połącz wypukłe otoczki podzbiorów.
+
+                Złożoność obliczeniowa: $O(n)$.
+            
+            \item Znajdź elementy "górne" w $L$ i $R$, tzn. $l_u$ i $r_u$ dające wypukłą otoczkę,
+                zaczynając od $l_1$ ($r_1$) i idąc przeciwnie (zgodnie z) do wskazówek zegara. 
+
+            \item Analogicznie znajdź $l_d$ i $r_d$
+            \item Zwróć otoczkę składającą się z:
+                \begin{itemize}
+                    \item krawędzi $l_u$ - $r_u$
+                    \item fragmentu otoczki $R$ łączącej $r_u$ z $r_l$
+                    \item krawędzi $r_d$ - $l_d$
+                    \item fragmentu otoczki $L$ łączącej $l_d$ z $l_u$
+                \end{itemize}
+
+        \end{enumerate}
+    \newpage
+
     \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
     \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
 

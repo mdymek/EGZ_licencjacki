@@ -2473,6 +2473,81 @@
     \newpage
 
     \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
+    
+    Algorytmy dziel i zwyciężaj podlegają poniższemu schematowi:
+
+    \begin{enumerate}
+        \item 
+            \textbf{Dziel}
+
+            Dany problem dzielony jest rekurencyjnie na podproblemy, aż do uzyskania przypadków 
+            bazowych.
+
+        \item 
+            \textbf{Zwyciężaj}
+
+            Rozwiązywany jest problem dla przypadków bazowych (najczęściej jest to możliwe w 
+            czasie stałym).
+
+        \item 
+            \textbf{Łącz} 
+
+            Wyniki otrzymane z podproblemów są łączone, aż do uzyskania wyniku danego problemu
+    \end{enumerate}
+
+    \subsection{Zalety}
+
+    \begin{itemize}
+        \item Algorytm podzielony jest na trzy ortogonalne części: dziel (\textit{divide}), 
+            zwyciężaj (\textit{conquer}) i łącz (\textit{merge / combine}) co ułatwia jego
+            zrozumienie jak i analizę.
+        
+        \item Możliwość łatwego przekształcenia algorytmu w algorytm równownoległy (przy pomocy
+            wzorca redukcji / dekompozycji asynchronicznej)
+
+        \item Optymalne użecie pamięci podręcznej (\textit{cache}): problemy dostatecznie małe
+            (w szczególności bazowe) bardzo często są możliwe do rozwiązania w pamięci
+            nieprzekraczającej wielkości pamięci podręcznej.
+        
+        \item Algorytmy są znacząco bardziej efektywne w porównaniu do bardziej prymitywnych
+            podejść (jak na przykład \textit{brute-force}).
+    \end{itemize}
+
+    \subsection{Wady}
+
+    \begin{itemize}
+        \item W przypadku podziału na dwa i więcej podproblemy uzyskujemy rekurencję nieliniową.
+            Oznacza to, że przekształcenie algorytmu rekurencyjnego w algorytm iteracyjny 
+            najprawdopodobniej jest nietrywialne (w szczególności nie zostanie to wykonane przez
+            kompilator). 
+
+            
+        \item Zarówno algorytm rekurencyjny, jak i algorytm iteracyjny ze stosem może posiadać 
+            złożoność pamięciową. Ponadto rozmiar stosu może przekroczyć pamięć komputera.
+
+
+        \item Możliwość wielokrotnego rozwiązywania identycznych problemów.
+
+            Problem ten rozwiązuje się stosując praktyki należące do programowania dynamicznego
+            (np. \textit{memoization}).
+
+    \end{itemize}
+
+    \subsection{Przykłady}
+    
+    \begin{itemize}
+        \item Binsearch
+        \item Merge sort
+        \item Quicksort
+        \item Szybkie potęgowanie
+        \item Algorytm Karacuby (szybkie mnożenie liczb całkowitych)
+        \item Szybka transformata Fouriera
+        \item Algorytm znajdowania otoczki wypukłej
+    \end{itemize}
+
+    
+    \newpage
+
     \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
     \begin{definition}
         Lista jest abstrakcyjną strukturą danych (ADT), która posiada następujące właściwości
