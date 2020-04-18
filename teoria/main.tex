@@ -1,3 +1,8 @@
+%! Suppress = TooLargeSection
+%! Suppress = SentenceEndWithCapital
+%! Suppress = LineBreak
+%! Suppress = MissingLabel
+%! Suppress = Unicode
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -17,6 +22,8 @@
 \usepackage{booktabs}
 \usepackage{float}
 \usepackage{minted}
+\usepackage{multicol}
+
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -925,15 +932,10 @@
                 \toprule
                 \multirow{3}{*}{$\sigma^2 = \sigma_0^2$} & $\sigma^2 > \sigma_0^2$
                 & \multirow{3}{*}{$\frac{(n-1)s^2}{\sigma_0^2}$} & $\chi_{obs}^2 > \chi_{\alpha}^2$ & $P{\chi^2 \geq \chi_{obs}^2}$\\
-
                 & $\sigma^2 < \sigma_0^2$ & & $\chi_{obs}^2 < \chi_{\alpha}^2$ & $P{\chi^2 \leq \chi_{obs}^2}$\\
-
-
                 & $\sigma^2 \neq \sigma_0^2$ & & $\chi_{obs}^2 \geq \chi_{\frac{\alpha}{2}}^2$
-
                 or $\chi_{obs}^2 \leq \chi_{\frac{\alpha}{2}}^2$
-                & $2 min(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
-
+                & $2\text{min}(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
                 \bottomrule
             \end{tabular}
         \end{center}
@@ -986,23 +988,23 @@
     \newpage
 
     \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Zm, +, *)$ w zależności od liczby naturalnej m. Rozszerzony algorytm Euklidesa.}
-    
+
     \begin{theorem}
-    \textbf{Tożsamość Bézouta}
-    
-    Dla niezerowych liczb całkowitych $a$ oraz $b$ o największym wspólnym dzielniku d, istnieją liczby całkowite $x$ oraz $y$, nazywane współczynnikami Bézouta, które spełniają równanie
-    $$ax + by = d$$
+        \textbf{Tożsamość Bézouta}
+
+        Dla niezerowych liczb całkowitych $a$ oraz $b$ o największym wspólnym dzielniku d, istnieją liczby całkowite $x$ oraz $y$, nazywane współczynnikami Bézouta, które spełniają równanie
+        \[ax + by = d\]
     \end{theorem}
-        
+
     \begin{definition}
-    \textbf{Elementy odwrotne modulo}
-    
-    W strukturze $(Z_m, +, *)$ element odwrotny względem mnożenia dla $x$ to taki $x^{-1}$, że: 
-    $$ x \cdot x^{-1} = 1 \  mod \  m $$
-    Element odwrotny istnieje, jeśli $NWD(x, m) = 1$\\
-    
-    
-    Aby obliczyć element odwrotny do $x$ w $Z_{m}$ należy użyć rozszerzonego algorytmu Euklidesa.
+        \textbf{Elementy odwrotne modulo}
+
+        W strukturze $(Z_m, +, *)$ element odwrotny względem mnożenia dla $x$ to taki $x^{-1}$, że:
+        \[ x \cdot x^{-1} = 1 \  mod \  m \]
+        Element odwrotny istnieje, jeśli $NWD(x, m) = 1$\\
+
+
+        Aby obliczyć element odwrotny do $x$ w $Z_{m}$ należy użyć rozszerzonego algorytmu Euklidesa.
     \end{definition}
     \subsection{Algorytm Euklidesa}
     Oblicza największy wspólny dzielnik $a, b$
@@ -1026,13 +1028,15 @@
     \subsection{Rozszerzony algorytm Euklidesa}
     Oprócz obliczenia największego wspólnego dzielnika, algorytm znajduje także współczynniki Bézouta. \\
     Poprzedni algorytm obliczał ciąg $r_n$ będący resztami z dzielenia, tzn.:
-    $$ r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}$$
+    \[ r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}\]
     gdzie $q_{i}$ oznacza wynik całkowitego dzielenia $r_{i - 1}$ przez $r_i$. \\
     Wprowadźmy dwa dodatkowe ciągi: $x_{i}$ oraz $y_i$:
-    $$ x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}$$
-    $$ y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}$$
+    \begin{gather*}
+        x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}\\
+        y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}\\
+    \end{gather*}
     Możemy zauważyć, że:
-    $$r_i = x_i * a + y_i * b$$
+    \[r_i = x_i * a + y_i * b\]
     \begin{verbatim}
     def euclid(a, b):
         x, x' = 0, 1
@@ -1045,88 +1049,89 @@
             y', y = y, (y' - q * t)
         return r', x', y'
     \end{verbatim}
-    Ponadto ten algorytm pozawala obliczyć takie $x', y'$, że: $ax' + by' = 0$ (wystarczy zwrócić x i y, zamiast x', y'). 
-    
+    Ponadto ten algorytm pozawala obliczyć takie $x', y'$, że: $ax' + by' = 0$ (wystarczy zwrócić x i y, zamiast x', y').
+
     \newpage
-    
+
     \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta}
-    
+
     \begin{definition}
-    \textbf{Ortogonalność.}
-    
-    Dla wektorów $x, y$ w przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$
-    $$x \bot y \Leftrightarrow x \cdot y = 0 $$
-    
+        \textbf{Ortogonalność.}
+
+        Dla wektorów $x, y$ w przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$
+        \[x \bot y \Leftrightarrow x \cdot y = 0 \]
+
     \end{definition}
-    
+
     \begin{definition}
-    \textbf{Liniowa niezależność}
-    
-    Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $R_n$ nazywamy liniowo niezależnymi jeśli
-    $$a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0$$
-    tzn., nie istnieją taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
-    
-    Zbiór wektorów, który nie jest liniowo niezależny, jest zbiorem liniowo zależnym. Oznacza to, że przynajmniej jeden jego element jest kombinacją liniową pozostałych wektorów. \\~\\
-    
-    W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
-    
+        \textbf{Liniowa niezależność}
+
+        Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $R_n$ nazywamy liniowo niezależnymi jeśli
+        \[a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0\]
+        tzn., nie istnieją taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
+
+        Zbiór wektorów, który nie jest liniowo niezależny, jest zbiorem liniowo zależnym. Oznacza to, że przynajmniej jeden jego element jest kombinacją liniową pozostałych wektorów. \\~\\
+
+        W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
+
     \end{definition}
-    
+
     \begin{theorem}
-    Każdy układ ortogonalny wektorów w przestrzeni $R_n$ jest liniowo niezależny.
+        Każdy układ ortogonalny wektorów w przestrzeni $R_n$ jest liniowo niezależny.
     \end{theorem}
-    
+
     \begin{definition}
-    
-    \textbf{Baza przestrzeni $R_n$}
-    
-    Zbiór wektorów $B \subset R_n$ nazywamy bazą przestrzeni $R_n$ jeśli:
-    
-    \begin{enumerate}
-    \item Jest liniowo niezależny
-    \item Generuje przestrzeń $R_n$ tzn. każdy wektor $\in R_n$ można zapisać jako kombinację liniową wektorów z $B$  
-    \end{enumerate}
-    
+
+        \textbf{Baza przestrzeni $R_n$}
+
+        Zbiór wektorów $B \subset R_n$ nazywamy bazą przestrzeni $R_n$ jeśli:
+
+        \begin{enumerate}
+            \item Jest liniowo niezależny
+            \item Generuje przestrzeń $R_n$ tzn. każdy wektor $\in R_n$ można zapisać jako kombinację liniową wektorów z $B$
+        \end{enumerate}
+
     \end{definition}
-    
+
     \begin{theorem}
-    Każdy ortogonalny układ $n$ wektorów w $R_n$ jest bazą.
+        Każdy ortogonalny układ $n$ wektorów w $R_n$ jest bazą.
     \end{theorem}
-    
+
     \begin{definition}
-    \textbf{Ortonormalność}
-    
-    Zbiór wektorów $A$ przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
-    $$ \forall x,y \in A  \quad   x \cdot y =  \begin{cases} 
-    		0, & x \ne y \\ 
-    		1, & x = y \end{cases}$$ 
-    
-    Zatem wektory należące do $A$ są wersorami.
+        \textbf{Ortonormalność}
+
+        Zbiór wektorów $A$ przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
+        \[ \forall x,y \in A  \quad   x \cdot y =  \begin{cases}
+                                                       0, & x \ne y \\
+                                                       1, & x = y
+        \end{cases}\]
+
+        Zatem wektory należące do $A$ są wersorami.
     \end{definition}
-    
+
     \newpage
     \subsection{Ortonormalizacja Grama-Schmidta}
-    
+
     Ortonormalizacja to proces przekształcenia układu niezależnych liniowo wektorów w układ wektorów ortonormalnych.
-    
+
     Projekcję wektora $\mathbf{v}$ na wektor $\mathbf{u}$ definiujemy jako:
-    $$\mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$
+    \[\mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}\]
     Algorytm:
-    
+
     \begin{enumerate}
-    
-    \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie $$\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i$$
-    		tzn:
-    		$$\mathbf{u}_1 = \mathbf{v}_1$$
-    		$$\mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2$$
-    		$$\mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3$$
-    
-    \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$
-    
+
+        \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie \[\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i\]
+        tzn:
+        \[\mathbf{u}_1 = \mathbf{v}_1\]
+        \[\mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2\]
+        \[\mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3\]
+
+        \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$
+
     \end{enumerate}
-    
+
     \includegraphics[scale=0.20]{graphics/15_6.png}
-    
+
     \newpage
 
     \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
@@ -1172,56 +1177,56 @@
     \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
     \begin{definition}
         \textbf{Funkcja Eulera (Tocjent)}
-        
-         Funkcja przypisująca każdej liczbie naturalnej liczbę liczb względnie pierwszych z nią i nie większych od niej.\newline $\sum_{m|n}^{} \varphi(m) = n$\newline
-         
-         \textbf{Własności}
-         \begin{enumerate}
-         \item $\varphi (n) \leq n - 1$  dla każdego $n>1$
-         \item $\varphi (p) \leq p - 1$ dla każdego p będącego liczbą pierwszą
-         \item $\varphi (mn) = \varphi (m)\varphi(n)$ jeśli NWD(m,n) = 1 (m i n względnie pierwsze)
-         \item $\varphi(p^{k}) = p^{k-1} \cdot (p-1)$ jeśli p jest liczbą pierwszą
-         \item $\varphi(n) = n  
-         \left (  1 - \frac{1}{p_1}\right)
-         \left (  1 - \frac{1}{p_2}\right)
-         \cdots
-         \left (  1 - \frac{1}{p_n}\right)$
-         gdzie $p_1, p_2, ..., p_n$ są czynnikami pierwszymi liczby n
-         \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
-         \end{enumerate}
+
+        Funkcja przypisująca każdej liczbie naturalnej liczbę liczb względnie pierwszych z nią i nie większych od niej.\newline $\sum_{m|n}^{} \varphi(m) = n$\newline
+
+        \textbf{Własności}
+        \begin{enumerate}
+            \item $\varphi (n) \leq n - 1$  dla każdego $n>1$
+            \item $\varphi (p) \leq p - 1$ dla każdego p będącego liczbą pierwszą
+            \item $\varphi (mn) = \varphi (m)\varphi(n)$ jeśli NWD(m,n) = 1 (m i n względnie pierwsze)
+            \item $\varphi(p^{k}) = p^{k-1} \cdot (p-1)$ jeśli p jest liczbą pierwszą
+            \item $\varphi(n) = n
+            \left (  1 - \frac{1}{p_1}\right)
+            \left (  1 - \frac{1}{p_2}\right)
+            \cdots
+            \left (  1 - \frac{1}{p_n}\right)$
+            gdzie $p_1, p_2, ..., p_n$ są czynnikami pierwszymi liczby n
+            \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
+        \end{enumerate}
     \end{definition}
-    
+
     \begin{definition}
-    \textbf{Małe Twierdzenie Fermata}
-    
-    Jeżeli p jest liczbą pierwszą, to dla dowolnej liczby całkowitej a, liczba $a^{p}-a$ jest podzielna przez p.\newline 
-    \begin{enumerate}
-    \item $a^{p-a} \equiv 0 \pmod p$\newline
-    \end{enumerate}
-    
-    Jeśli p jest liczbą pierwszą, a a jest taką liczbą całkowitą, że liczby a i p są względnie pierwsze to $a^{p-1} - 1$ dzieli się przez p.\newline
-    
-    \begin{enumerate}
-    \item$a^{p-1} - 1 \equiv \pmod p$
-    \item$a^{p-1} \equiv 1 \pmod p$
-    \end{enumerate}
+        \textbf{Małe Twierdzenie Fermata}
+
+        Jeżeli p jest liczbą pierwszą, to dla dowolnej liczby całkowitej a, liczba $a^{p}-a$ jest podzielna przez p.\newline
+        \begin{enumerate}
+            \item $a^{p-a} \equiv 0 \pmod p$\newline
+        \end{enumerate}
+
+        Jeśli p jest liczbą pierwszą, a a jest taką liczbą całkowitą, że liczby a i p są względnie pierwsze to $a^{p-1} - 1$ dzieli się przez p.\newline
+
+        \begin{enumerate}
+            \item$a^{p-1} - 1 \equiv \pmod p$
+            \item$a^{p-1} \equiv 1 \pmod p$
+        \end{enumerate}
 
     \end{definition}
-    
+
     \begin{definition}
-    \textbf{Twierdzenie Eulera}
-    
-    Jeżeli $m \in \mathbb{Z_{+}}$ oraz $a \in \mathbb{Z}$ są liczbami względnie pierwszymi to m dzieli liczbę $a^{\varphi(m)} - 1$, gdzie $\varphi (m)$ oznacza wartość funkcji Eulera.
-    
-    \begin{enumerate}
-    \item $a^{\varphi (m)} \equiv 1 \pmod m$\newline
-    \end{enumerate}
-    
+        \textbf{Twierdzenie Eulera}
+
+        Jeżeli $m \in \mathbb{Z_{+}}$ oraz $a \in \mathbb{Z}$ są liczbami względnie pierwszymi to m dzieli liczbę $a^{\varphi(m)} - 1$, gdzie $\varphi (m)$ oznacza wartość funkcji Eulera.
+
+        \begin{enumerate}
+            \item $a^{\varphi (m)} \equiv 1 \pmod m$\newline
+        \end{enumerate}
+
     \end{definition}
     \newpage
 
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
-    
+
     \begin{definition}
         \textbf{Konfiuracją kombinatoryczną} $B$ o parametrach $(n,k,r)$ nazywamy rodzinę $k$-elementowych podzbiorów w $X$, jeżeli każdy element $x \in X$ występuje w dokładnie $r$ podbiorach. Zachodzą warunki:
         \begin{enumerate}
@@ -1230,37 +1235,37 @@
             \item $n \cdot r = b \cdot k$ \quad gdzie b to liczba k-elementowych podzbiorów zbioru n-elementowego
         \end{enumerate}
     \end{definition}
-    
+
     \begin{theorem}
         Istnieje konfiguracja kombinatoryczna $B$ o parametrach $(n, k, r)$ wtedy i tylko wtedy, gdy:
         \begin{enumerate}
             \item $k | n\cdot r$
             \item $\frac{n\cdot r}{k}\leq {n\choose k}$
         \end{enumerate}
-        
+
     \end{theorem}
-    
+
     \begin{definition}
         Niech $X$ dowolny zbiór, $|X| = n.$ $B$ rodzina $k-$ podzbiorów $X$ jest
         \textbf{t-konfiguracją kombinatoryczną} o parametrach $(n, k, r_t)$ wtw gdy dla
         każdego $t-$podzbioru $T \subset X$ liczba bloków z $B$ zawierających $T$ jest
         równa $r_t$.
     \end{definition}
-    
+
     \begin{theorem}
         Jeśli $B$ jest $t$-konfiguracją kombinatoryczną, to
         $B$ jest $s$-konfiguracją kombinatoryczną dla $s = 1, 2,\dots$ $t-1$.
         Uwagi:
         \begin{enumerate}
             \item $r_{t-1}$ $= r_t \cdot \frac{n-t+1}{k-t+1}$
-            \item Jeżeli $B$ jest $t-$konfiguracją o parametrach $(n,k,r_t)$, to dla $1 \leq s \leq (t-1)$ 
-                \begin{align*}
-                    r_s = r_t \cdot \frac{(n-s)(n-s-1)\dots(n-t+1)}{(k-s)(k-s-1)\dots(k-t+1)}
-                \end{align*}
-            \item Jeśli $B$ jest $t$-konfiguracją o parametrach $(n,k,r_t)$, to 
-                \begin{align*}
-                    (k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)
-                \end{align*}
+            \item Jeżeli $B$ jest $t-$konfiguracją o parametrach $(n,k,r_t)$, to dla $1 \leq s \leq (t-1)$
+            \begin{align*}
+                r_s = r_t \cdot \frac{(n-s)(n-s-1)\dots(n-t+1)}{(k-s)(k-s-1)\dots(k-t+1)}
+            \end{align*}
+            \item Jeśli $B$ jest $t$-konfiguracją o parametrach $(n,k,r_t)$, to
+            \begin{align*}
+                (k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)
+            \end{align*}
             warunek 3. dla $t\leq 2$ jest konieczny dla istnienia $t$-konfiguracji, ale nie wystarczający
         \end{enumerate}
     \end{theorem}
@@ -1694,6 +1699,20 @@
         \begin{align*}
             lim_{x \infty x_0} ~ g(x) = \infty.
         \end{align*}
+    \end{theorem}
+
+    \begin{theorem}
+    	\textbf{Granice specjalne}
+    	\setlength{\jot}{10pt}
+    	\begin{align*}
+    		&\lim_{x \to +\infty} a^{x} x^{\alpha} \stackrel{[0 \cdot \infty]}{=}  \text{0 dla a} \in (0, 1), \alpha \geq 0 \\
+    		&\lim_{x \to 0} \frac{\sin{x}}{x} \stackrel{[\frac{0}{0}]}{=} \text{1 oraz}    \lim_{x \to 0} \frac{\arcsin{x}}{x} \stackrel{[\frac{0}{0}]}{=} 1\\
+    		&\lim_{x \to 0} (1 + x)^{\frac{1}{x}} \stackrel{1^{\infty}}{=} \text{e oraz}   \lim_{x \to \infty} (1 + x)^{\frac{1}{x}} \stackrel{\infty^{0}}{=} 1 \\
+    		&\lim_{x \to 0} \frac{a^x -1}{x} \stackrel{[\frac{0}{0}]}{=} \ln{a} \text{ dla  a $>$ 0, w szczególności } \lim_{x \to 0} \frac{e^x -1}{x} \stackrel{[\frac{0}{0}]}{=} 1 \\
+    		&\lim_{x \to 0} \frac{\log_{a}(1 + x)}{x} \stackrel{[\frac{0}{0}]}{=} \frac{1}{\ln{a}} \text{, w szczególności } \lim_{x \to 0} \frac{\ln(1 + x)}{x} \stackrel{[\frac{0}{0}]}{=} 1 \\
+    		&\lim_{x \to \pm \infty} (1 + \frac{a}{x})^{x} \stackrel{[1^{\infty}]}{=} e^{a} \text{, dla a} \in \mathbb{R} \\
+    		&\lim_{x \to 0} \frac{(1 + x)^a - 1}{x} \stackrel{[\frac{0}{0}]}{=} \text{a, dla a} \in \mathbb{R}
+    	\end{align*}
     \end{theorem}
 
     \begin{theorem}
@@ -2187,9 +2206,204 @@
     \end{center}
 
     \section{Metody dowodzenia poprawności pętli.}
+
+    \begin{itemize}
+        \item \textbf{Asercja} - warunek logiczny wyrażający zależności między zmiennymi
+        algorytmu w kontekście ich aktualnego stanu.
+        \item \textbf{Asercja początkowa} - asercja określająca warunek wejściowy (warunek danych wejściowych) algorytmu.
+        \item \textbf{Asercja końcowa} - asercja określająca wyniki algorytmu (warunek
+        danych wyjściowych).
+        \item Asercje początkowa i końcowa są znane w momencie definiowania
+        problemu i poszukiwania algorytmu, stanowiąc \textbf{specyfikację algorytmu}
+    \end{itemize}
+
+    \begin{itemize}
+        \item Algorytm A ma własność \textbf{określoności obliczeń} względem warunku $\alpha$, jeśli dla każdych danych spełniających warunek $\alpha$ działanie algorytmu A nie zostanie zerwane
+        (oznaczenie $obl ( \alpha, A )$ ).
+        \item Algorytm A ma \textbf{własność stopu} względem warunku $\alpha$, jeśli dla każdych danych spełniających warunek $\alpha$ działanie algorytmu A nie ciągnie się w nieskończoność (oznaczenie stop $( \alpha, A )$ ).
+        \item Algorytm A jest \textbf{częściowo poprawny} względem warunku początkowego $\alpha$ oraz warunku końcowego $\beta$, gdy dla każdych danych spełniających warunek początkowy $\alpha$, jeżeli działanie algorytmu A dochodzi do końca, wyniki spełniają warunek końcowy $\beta$ (oznaczenie cp $( \alpha, A, \beta)$ ).\\
+        $cp ( \alpha, z \leftarrow w, \beta ) \iff ( \alpha \Rightarrow \beta|_{z \leftarrow w})$\\
+        Przy asercji początkowej $\alpha$ i asercji końcowej $\beta$ podstawienie z $\leftarrow$ w jest częściowo poprawne wtedy i tylko wtedy, gdy
+        poprawna jest implikacja od asercji $\alpha$ do asercji $\beta$, z zastąpieniem każdego wystąpienia zmiennej z podstawianym
+        wyrażeniem w.
+        \item Algorytm A jest \textbf{całkowicie poprawny} (semantycznie poprawny) względem warunku
+        początkowego $\alpha$ oraz warunku końcowego $\beta$, jeśli ma własność określoności obliczeń
+        względem warunku $\alpha$, ma własność stopu względem warunku $\alpha$ oraz jest częściowo
+        poprawny względem warunku $\alpha$ i warunku $\beta$ (oznaczenie sp $( \alpha, A, \beta )$ ).
+        \item Formalnie:
+        $sp ( \alpha, A, \beta ) \iff obl ( \alpha, A ) \wedge stop ( \alpha, A ) \wedge cp ( \alpha, A, \beta )$
+    \end{itemize}
+
+    \newpage
     \section{Odwrotna Notacja Polska: definicja, własności, zalety i wady, algorytmy.}
-    \section{Modele obliczen: maszyna Turinga.}
+
+    \begin{itemize}
+        \item notacja postfiksowa,
+        \item jednoznacznie wyznacza kolejność wykonywania działań,
+        \item pozwala na całkowitą rezygnację z nawiasów.
+        \item Zalety:
+        \begin{itemize}
+            \item ułatwione obliczenia na komputerze - wykorzystuje jedynie stos
+            \item prosty algorytm konwersji między standardowym zapisem infiksowym a ONP
+            wykorzystywany w wielu algorytmach wykorzystujących jako wejście zapis działań
+            brak konieczności stosowania nawiasów
+        \end{itemize}
+        \item Wady:
+        \begin{itemize}
+            \item mniej czytelny dla człowieka (wymaga przyzwyczajenia)
+            \item podczas zapisu na kartce 12 34 + może wyglądać jak 123 4 + (xD)
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Algorytm obliczenia wartości wyrażenia ONP}
+    \begin{verbatim}
+        Dla wszystkich symboli z wyrażenia ONP wykonuj:
+            jeśli i-ty symbol jest liczbą, to odłóż go na stos,
+            jeśli i-ty symbol jest operatorem (funkcją):
+                zdejmij ze stosu oczekiwaną liczbę elementów  (parametrów)
+                odłóż na stos wynik działania operatora (wynik funkcji)
+        Zdejmij ze stosu wynik.
+    \end{verbatim}
+
+    \subsection{Algorytm konwersji z notacji infiksowej do ONP}
+
+    \begin{verbatim}
+        do {
+            weź_kolejny_element_z_wejścia;
+            if ( element_jest_operandem )
+                dopisz_element_na_wyjscie;
+            else // element jest operatorem, przecinkiem lub nawiasem
+            if ( element_jest_operatorem o1) {
+                while ( (lewa łączność(o1) and
+                prior_(operatora_na_stosie o2) >= prior_(elementu o1))
+                or (prawa łączność(o1) and
+                prior_(operatora_na_stosie o2) > prior_(elementu o1)) ){
+                    przepisz_operator_(o2) ze_stosu_na_wyjscie ;
+                }
+                wstaw_operator_(o1) _na_wyjscie ;
+            }
+            else
+            if ( element == '(' )
+                wstaw_element_na_stos;
+            else
+            if ( element jest ',')
+                zignoruj go i wczytaj kolejny symbol z wejścia
+            else
+            if( element == ')' ) {
+                while( na_stosie_jest element różny od '(' )
+                    przepisz_go_na_wyjscie;
+                Usuń_ze_stosu_( ;
+            }
+        } while(!koniec_danych);
+        while( niepusty_stos )
+        przepisz_element_ze_stosu_na_wyjscie;
+    \end{verbatim}
+
+    \newpage
+
+    \section{Modele obliczeń: maszyna Turinga.}
+
+    \begin{definition}
+        \textbf{Formalna definicja maszyny Turinga}. Maszynę Turinga opisujemy poprzez krotkę:
+        \[MT ~ = ~<Q, \Sigma, \delta, \tau, q_0, B, F >\]
+        gdzie:
+        \begin{itemize}
+            \item $Q$ - skończony zbiór stanów,
+            \item $q_0 \in Q$ - stan początkowy,
+            \item $F \subset Q$ - zbiór stanów końcowych,
+            \item $\tau$  - skończony zbiór dopuszczalnych symboli,
+            \item $b \in \tau$  - symbol pusty,
+            \item $\Sigma \subset \tau \ \{b\} $ - zbiór symboli wiejściowych,
+            \item $\delta$ - funkcja sterująca.
+            \begin{itemize}
+                \item W wersji niedeterministycznej postaci maszyny Turinga:
+                \[ \delta \subset (Q \times \tau)  \times (\tau \times \{\leftarrow, \rightarrow, \downarrow\}  \times Q)\]
+                \item W wersji deterministycznej:
+                \[ \delta : Q \times \tau \mapsto \tau \times \{\leftarrow, \rightarrow, \downarrow\} \times Q\]
+            \end{itemize}
+        \end{itemize}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Tablica sterująca}. Dwuwymiarowa tablica indeksowana:
+        \begin{itemize}
+            \item Stanami w jednym wymiarze,
+            \item Symbolami taśmy w drugim wymiarze.
+        \end{itemize}
+        Elementy tablicy
+        \begin{itemize}
+            \item Odpowiadają wszystkim parom stanu i czytanego symbolu stanowiąc dziedzinę
+            funkcji sterowania $\delta$,
+            \item Zawierają trójki działania maszyny, czyli wartości funkcji sterowania $\delta$.
+        \end{itemize}
+    \end{definition}
+
+    \newpage
+
     \section{Modele obliczen: automat skończony, automat ze stosem.}
+    \subsection{Automat skończony deterministyczny}
+    \begin{definition}
+    		Automat skończony deterministyczny oznaczamy piątką parametrów: $\mathcal{A}$ = (S, A, f, $s_{0}$, T) gdzie: \\
+    			S - skończony zbiór stanów \\
+    			A - skończony alfabet wejściowy \\
+    			f - funkcja przejścia S$\times$A $\rightarrow$ S \\
+    			$s_{0}$ - stan początkowy $\in$ S\\
+    			T - zbiór terminali (stanów akceptujących) $\in$ S
+    \end{definition}
+
+    	\begin{definition}
+    	Automaty $\mathcal{A}_{1}$ i  $\mathcal{A}_{2}$ są równoważne,  jeżeli rozpoznają ten sam język, czyli: \\
+    	L($\mathcal{A}_{1}$) = L($\mathcal{A}_{2}$)
+    	\end{definition}
+
+    	\begin{definition}
+    	Każdy automat $\mathcal{A}$ = (S, A, f, $s_{0}$, T) wyznacza w wolnym monoidzie $A^{*}$ prawą kongruencję automatową okresloną w następujący sposób: \\
+    	$\forall$u,v $\in A^{*}$ \\
+    $u \sim A$ v $\Leftrightarrow f(s_{0}, u) = f(s_{0}, v)$
+    	\end{definition}
+
+    	\begin{definition}
+    	Niech $L \subset  A^{*}$ będzie dowolnym językiem, a $u \in A^{*}$ dowolnym słowem.
+	Pochodną Brzozowskiego (residuum) z języka L względem słowa u nazywamy język \\
+	$u^{-1}L = \{w \in A^{*}$  :  $uw \in L \}$
+    	\end{definition}
+
+    	\begin{definition}
+    	Automat ilorazowy to automat, w którym stanami są klasy równoważności
+    	\end{definition}
+
+    	\begin{definition}
+    	Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
+    	$\mathcal{M(A)}$ = $\tau \mathcal{A}$(A*) $\subset S^{S}$
+    	\end{definition}
+
+    	\begin{definition}
+    	Każdy język skończony jest akceptowany przez pewien deterministyczny automat skończony
+    	\end{definition}
+
+    \subsection{Automat skończony niedeterministyczny}
+	\begin{definition}
+    		Automat skończony niedeterministyczny oznaczamy piątką parametrów: $\mathcal{A_{ND}}$ = (S, A, f, $S_{0}$, T) gdzie: \\
+    			S - skończony zbiór stanów \\
+    			A - skończony alfabet wejściowy \\
+    			f - funkcja przejścia S$\times$A $\rightarrow$ $\mathcal{P}$(S) \\
+    			$S_{0}$ - zbiór stanów początkowych $\subset$ S\\
+    			T - zbiór terminali (stanów akceptujących) $\in$ S \\
+
+	Słowo x jest akceptowane gdy $f^{*}$($S_{0}$, x) $\cap$ T $\neq \emptyset$
+    \end{definition}
+
+    \subsection{Automat ze stosem}
+    \begin{definition}
+    		Automat ze stosem to $\mathcal{AS}$ = (A, $A_{S}$, Q, f, $s_{0}$, $z_{0}$, $Q_{F}$) gdzie: \\
+    			A - jest alfabetem \\
+    			$A_{S}$ - jest dowolnym, skończonym i niepustym zbiorem zwanym alfabetem stosu \\
+    			Q - jest dowolnym, skończonym i niepustym zbiorem zwanym zbiorem stanów \\
+    			f: $A_{s} \times Q \times (A \cup \{1\}) \rightarrow \mathcal{P}_{sk}(A^{*}_{S} \times Q)$ jest funkcją przejść \\
+    			$q_{0} \in Q$ jest stanem początkowym \\
+    			$z_{0} \in A_{S}$ jest symbolem początkowym stosu \\
+    			$Q_{F} \subset Q$ zbiorem stanów końcowych
+    \end{definition}
 
     \newpage
 
@@ -2266,11 +2480,11 @@
             \item Przechowuje elementy \textbf{tego samego typu}
             \item Wykorzystuje pamięć w sposób \textbf{dynamiczny lub statyczny}
             \item Dostęp do danych jest \textbf{sekwencyjny}
-            \item Elementy w liście sa \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście 
+            \item Elementy w liście sa \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście
             \begin{itemize}
-                \item element ai znajduje się na pozycji ‘i’
-                \item element ai poprzedza ai+1 dla i=1,2,...,n-1
-                \item element ai następuje po ai-1 dla i=2,...,n
+                \item element $a_i$ znajduje się na pozycji ‘i’
+                \item element $a_i$ poprzedza $a_{i+1}$ dla i=$1,2,\cdots,n-1$
+                \item element $a_i$ następuje po $a_{i-1}$ dla i=$2,\cdots,n$
             \end{itemize}
             \item Wyróżnia się dwa podstawowe sposoby implementacji listy jako ADT
             \begin{itemize}
@@ -2278,18 +2492,18 @@
                 \item Lista wiązana
             \end{itemize}
         \end{itemize}
-        \end{definition}
-        
-        \begin{definition}
-            W sensie matematycznym lista jest skończonym ciągiem elementów ustalonego typu
+    \end{definition}
+
+    \begin{definition}
+        W sensie matematycznym lista jest skończonym ciągiem elementów ustalonego typu
         Node: $a1, a2, . . . , an, , n \geq 0$
         przy czym Node, zwany typem bazowym, może być np. typem \textbf{klasy, struktury, int,
         string} itp.
-        \end{definition}
-        
-        \subsection{Implementacja za pomocą tablic (array)}
-        Tablica wykorzystuje pamięć w sposób \textbf{statyczny}. Oznacza to, że ma z góry określony rozmiar oraz pewna jej część może być niewykorzystana. Tablica posiada zmienne wskazujące na jej maksymalny rozmiar, ilość zajętych miejsc. Indeksowanie elementów zazwyczaj zaczyna się od 0 i kończy na maxsize-1.
-        
+    \end{definition}
+
+    \subsection{Implementacja za pomocą tablic (array)}
+    Tablica wykorzystuje pamięć w sposób \textbf{statyczny}. Oznacza to, że ma z góry określony rozmiar oraz pewna jej część może być niewykorzystana. Tablica posiada zmienne wskazujące na jej maksymalny rozmiar, ilość zajętych miejsc. Indeksowanie elementów zazwyczaj zaczyna się od 0 i kończy na maxsize-1.
+
 
         \subsection{Implementacja za pomocą Listy Wiązanej (Linked List)}
         Rozróznia się dwa podstawowe rodzaje:
@@ -2299,202 +2513,203 @@
             \item Lista wiązana \textbf{dwukierunkowa} \\
             Z każdego elementu możliwe jest przejscie do jego następnika NEXT i poprzednika PREV
         \end{enumerate}
-        
+
         W liście wiązanej wyróżnia się dwie podstawowe zmienne typu Node potrzebne do jej obsługi
-        
+
         \begin{enumerate}
             \item HEAD
             \item TAIL
         \end{enumerate}
-        
+
         Dodatkowo, lista wiązana jest \textbf{cykliczna} jeżeli
-        
+
         \begin{enumerate}
             \item{$next(TAIL) \rightarrow HEAD$}
             \item{$prev(HEAD) \rightarrow TAIL$}
         \end{enumerate}
-        
+
         Pojedynczy element listy jest klasą lub strukturą, zwyczajowo nazywa się Node (węzeł). Przechowuje pole data o pożądanym typie danych oraz wskaźnik (wskaźniki) na element następny (i poprzedni).
         \\
         Przykład implementacji struktury Node w C++
-        
+
         \begin{verbatim}
-        struct Node { 
-            int data; 
-            struct Node* next; 
+        struct Node {
+            int data;
+            struct Node* next;
             struct Node* prev;
-        }; 
+        };
         \end{verbatim}
         \newpage
         Przykład implementacji klasy Node w Java
-        
+
         \begin{verbatim}
-        class Node<E> { 
-            E data; 
+        class Node<E> {
+            E data;
             Node<E> next;
             Node<E> prev;
-        }; 
+        };
         \end{verbatim}
-        
+
         Przykład implementacji klasy LinkedList w Java
         \begin{verbatim}
-        class LinkedList<E> { 
+        class LinkedList<E> {
             Node<E> head; // head of the list
             Node<E> tail; // tail of the list
             int counter = 0;
             ...
         }
+    \end{verbatim}
+
+    Operacje i złożoności
+
+    \begin{enumerate}
+        \item
+        \begin{verbatim}
+            CREATE(l: List)
         \end{verbatim}
-    
-        Operacje i złożoności
-        
-        \begin{enumerate}
-            \item
-\begin{verbatim}
-CREATE(l: List)
-\end{verbatim}
-            Tworzy nową listę \\
-            O(1) - czas stały
-            \item
-\begin{verbatim}
-APPEND(l: List; d: Data)
-\end{verbatim}
-            Dodaje na końcu  listy l rekord d \\
-            O(1) - czas stały
-            \item
-\begin{verbatim}
-INSERT(l: List; d: Data; i: Integer)
-\end{verbatim}
-            Dodaje rekord d do określonego miejsce i w liście l \\
-            O(n) - czas liniowy
-            \item 
-\begin{verbatim}
-FIND(l: List; i: Integer)
-\end{verbatim}
-            Znajduje i-ty w kolejności rekord z listy \\
-            O(min(i, n)) - czas liniowy
-            \item
-\begin{verbatim}
-DELETE(l: List; i: Integer)
-\end{verbatim}
-            Usuwa -ity w kolejności rekord z listy \\
-            O(min(i, n)) - czas liniowy
-            \item
-\begin{verbatim}
-MAKENULL(l: List)
-\end{verbatim}
-            Czyści listę, usuwając wszystkie rekordy \\
-            O(1) - czas stały
-        \end{enumerate}
-\newpage
+        Tworzy nową listę \\
+        O(1) - czas stały
+        \item
+        \begin{verbatim}
+            APPEND(l: List; d: Data)
+        \end{verbatim}
+        Dodaje na końcu listy l rekord d \\
+        O(1) - czas stały
+        \item
+        \begin{verbatim}
+            INSERT(l: List; d: Data; i: Integer)
+        \end{verbatim}
+        Dodaje rekord d do określonego miejsce i w liście l \\
+        O(n) - czas liniowy
+        \item
+        \begin{verbatim}
+            FIND(l: List; i: Integer)
+        \end{verbatim}
+        Znajduje i-ty w kolejności rekord z listy \\
+        O(min(i, n)) - czas liniowy
+        \item
+        \begin{verbatim}
+            DELETE(l: List; i: Integer)
+        \end{verbatim}
+        Usuwa -ity w kolejności rekord z listy \\
+        O(min(i, n)) - czas liniowy
+        \item
+        \begin{verbatim}
+            MAKENULL(l: List)
+        \end{verbatim}
+        Czyści listę, usuwając wszystkie rekordy \\
+        O(1) - czas stały
+    \end{enumerate}
+    \newpage
     \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
     \subsection{Kolejka}
     \begin{definition}
-        Kolejka FIFO (First In First Out). 
+        Kolejka FIFO (First In First Out).
 
-    Jest to lista, w której
-    \begin{itemize}
-        \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}
-        \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}\\
-        \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki
+        Jest to lista, w której
         \begin{itemize}
-            \item Tablica cykliczna
-            \item Lista wiązana
+            \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}
+            \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}\\
+            \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki
+            \begin{itemize}
+                \item Tablica cykliczna
+                \item Lista wiązana
+            \end{itemize}
         \end{itemize}
-    \end{itemize}
     \end{definition}
 
-Operacje i złożoności
-\begin{enumerate}
-\item
-\begin{verbatim}
-Create()
-\end{verbatim}
-Tworzy pustą kolejkę
-\item
-\begin{verbatim}
-isEmpty()
-\end{verbatim}
-Sprawdza czy kolejka pusta
-\item
-\begin{verbatim}
-Enqueue(x)    
-\end{verbatim}
-Wstawia nowy element x
-\item
-\begin{verbatim}
-Front()
-\end{verbatim}
-Odczytuje pierwszy element w kolejce
-\item 
-\begin{verbatim}
-Dequeue()
-\end{verbatim}
-Usuwa pierwszy element w kolejce i go zwraca 
-\end{enumerate}
+    Operacje i złożoności
+    \begin{enumerate}
+        \item
+        \begin{verbatim}
+            Create()
+        \end{verbatim}
+        Tworzy pustą kolejkę
+        \item
+        \begin{verbatim}
+            isEmpty()
+        \end{verbatim}
+        Sprawdza czy kolejka pusta
+        \item
+        \begin{verbatim}
+            Enqueue(x)
+        \end{verbatim}
+        Wstawia nowy element x
+        \item
+        \begin{verbatim}
+            Front()
+        \end{verbatim}
+        Odczytuje pierwszy element w kolejce
+        \item
+        \begin{verbatim}
+            Dequeue()
+        \end{verbatim}
+        Usuwa pierwszy element w kolejce i go zwraca
+    \end{enumerate}
 
-\subsection{Sposoby implementacji kolejki}
+    \subsection{Sposoby implementacji kolejki}
 
-Na początku zauważmy, że \textbf{nieefektywną} realizacją kolejki w tablicy jest przyjęcie, że
-początek kolejki \textbf{front} będzie zawsze równy 0, a \textbf{rear} będzie indeksem do pierwszego
-wolnego elementu tablicy.\\
-
-
-Najbardziej \textbf{efektywnym} rozwiązaniem jest reprezentacja kolejki w \textbf{tablicy cyklicznej}.
-Operacje wstawiania i usuwania zwiększają pozycje końca i początku kolejki o 1 modulo
-rozmiar tablicy, wykorzystując metodę:
-\begin{verbatim}
-private int Add (int i){
-    return (i+1) % maxSize; // reszta z dzielenia
-} 
-\end{verbatim}
-
-\subsection{Kolejka Priorytetowa}
-\begin{definition} Kolejka Priorytetowa\\
-Jest to lista, w której
-\begin{itemize}
-    \item Usuwany jest zawsze element o największej (najmniejszej) wartości
-\end{itemize}
-\end{definition}
-
-Operacje
-\begin{enumerate}
-    \item
-\begin{verbatim}
-Insert(x, q)
-\end{verbatim}
-Wstawienie elementu ‘x’ do kolejki q
-\item
-\begin{verbatim}
-Max(Q)
-\end{verbatim}
-Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
-\item
-\begin{verbatim}
-Min(Q)
-\end{verbatim}
-Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
-\item
-\begin{verbatim}
-Delete_Max(Q)
-\end{verbatim}
-Usunięcie największego elementu z kolejki q
-\item
-\begin{verbatim}
-Delete_Min(Q)
-\end{verbatim}
-Usunięcie największego elementu z kolejki q
-\end{enumerate}
+    Na początku zauważmy, że \textbf{nieefektywną} realizacją kolejki w tablicy jest przyjęcie, że
+    początek kolejki \textbf{front} będzie zawsze równy 0, a \textbf{rear} będzie indeksem do pierwszego
+    wolnego elementu tablicy.\\
 
 
-\subsection{ Sposoby implementacji kolejki priorytetowej }
-\begin{itemize}
-    \item Lista - Tablica Nieuporządkowana
-    NIEEFEKTYWNA!
-    \item Lista - Tablica Uporządkowana Rosnąco (Malejąco)
-    NIEEFEKTYWNA!
-    \item Kopiec Max (Min)
-\end{itemize}
+    Najbardziej \textbf{efektywnym} rozwiązaniem jest reprezentacja kolejki w \textbf{tablicy cyklicznej}.
+    Operacje wstawiania i usuwania zwiększają pozycje końca i początku kolejki o 1 modulo
+    rozmiar tablicy, wykorzystując metodę:
+    \begin{verbatim}
+        private int Add (int i){
+        return (i+1) % maxSize; // reszta z dzielenia
+        }
+    \end{verbatim}
+
+    \subsection{Kolejka Priorytetowa}
+    \begin{definition}
+        Kolejka Priorytetowa\\
+        Jest to lista, w której
+        \begin{itemize}
+            \item Usuwany jest zawsze element o największej (najmniejszej) wartości
+        \end{itemize}
+    \end{definition}
+
+    Operacje
+    \begin{enumerate}
+        \item
+        \begin{verbatim}
+            Insert(x, q)
+        \end{verbatim}
+        Wstawienie elementu ‘x’ do kolejki q
+        \item
+        \begin{verbatim}
+            Max(Q)
+        \end{verbatim}
+        Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
+        \item
+        \begin{verbatim}
+            Min(Q)
+        \end{verbatim}
+        Odczyt największego elementu w kolejce (element ten jest zwracany jako wynik operacji, kolejka się nie zmienia)
+        \item
+        \begin{verbatim}
+            Delete_Max(Q)
+        \end{verbatim}
+        Usunięcie największego elementu z kolejki q
+        \item
+        \begin{verbatim}
+            Delete_Min(Q)
+        \end{verbatim}
+        Usunięcie największego elementu z kolejki q
+    \end{enumerate}
+
+
+    \subsection{ Sposoby implementacji kolejki priorytetowej }
+    \begin{itemize}
+        \item Lista - Tablica Nieuporządkowana
+        NIEEFEKTYWNA!
+        \item Lista - Tablica Uporządkowana Rosnąco (Malejąco)
+        NIEEFEKTYWNA!
+        \item Kopiec Max (Min)
+    \end{itemize}
 
     \newpage
 
@@ -2602,19 +2817,19 @@ Usunięcie największego elementu z kolejki q
 
     \begin{minted}{python}
         def preorder (v):
-        func(v)
-        preorder(v.left)
-        preorder(v.right)
+            func(v)
+            preorder(v.left)
+            preorder(v.right)
 
         def inorder (v):
-        inorder(v.left)
-        func(v)
-        inorder(v.right)
+            inorder(v.left)
+            func(v)
+            inorder(v.right)
 
         def postorder (v):
-        postorder(v.left)
-        postorder(v.right)
-        func(v)
+            postorder(v.left)
+            postorder(v.right)
+            func(v)
     \end{minted}
 
     Możemy odtworzyć wyjściowe drzewo, jeśli mamy inorder i post- lub pre-order.
@@ -2622,16 +2837,311 @@ Usunięcie największego elementu z kolejki q
     \newpage
 
     \section{Algorytmy wyszukiwania następnika i poprzednika w drzewach BST; usuwanie węzła.}
+
+    \begin{definition}
+        \textbf{Binarne drzewo poszukiwań (BST)} - dynamiczna struktura danych będąca drzewem binarnym, w którym lewe
+        poddrzewo każdego węzła zawiera wyłącznie elementy o kluczach mniejszych niż klucz węzła a prawe poddrzewo
+        zawiera wyłącznie elementy o kluczach nie mniejszych niż klucz węzła.
+    \end{definition}
+
+    \begin{verbatim}
+        struct BSTNode {
+            int key;
+            struct BSTNode* parent;
+            struct BSTNode* left;
+            struct BSTNode* right;
+        };
+    \end{verbatim}
+
+    \subsection{Wyszukiwanie następnika i poprzednika w BST.}
+    \begin{definition}
+        \textbf{Następnik} danego węzła to węzeł, który jest odwiedzany jako następny w przypadku przechodzenia drzewa
+        metodą in-order. Sposób wyznaczenia nie wymaga porównywania żadnych kluczy, jest to w praktyce:
+        \begin{itemize}
+            \item skrajnie lewy element prawego poddrzewa węzła, jeśli posiada on prawe poddrzewo; wpp
+            \item pierwszy napotkany przodek węzła, dla którego węzeł jest w lewym poddrzewie.
+        \end{itemize}
+    \end{definition}
+
+    \begin{minted}{python}
+        define BST_FIND_SUCCESSOR(Node):
+            if (Node->right != NULL)
+                return BST_SEARCH_MIN_KEY(Node->right)
+            Node_tmp = Node->parent
+            while (Node_tmp != NULL and Node_tmp->left != Node)
+                Node = Node_tmp
+                Node_tmp = Node_tmp->parent
+            return Node_tmp
+    \end{minted}
+
+
+    \begin{definition}
+        \textbf{Poprzednik} danego węzła to węzeł, który jest odwiedzany jako poprzedni w przypadku przechodzenia drzewa
+        metodą in-order. Sposób wyznaczenia nie wymaga porównywania żadnych kluczy, jest to w praktyce:
+        \begin{itemize}
+            \item skrajnie prawy element lewego poddrzewa węzła, jeśli posiada on lewe poddrzewo; wpp
+            \item pierwszy napotkany przodek węzła, dla którego węzeł jest w prawym poddrzewie.
+        \end{itemize}
+    \end{definition}
+
+    \begin{minted}{python}
+        define BST_FIND_PREDECESSOR(Node):
+            if (Node->left != NULL)
+                return BST_SEARCH_MAX_KEY(Node->left)
+            Node_tmp = Node->parent
+            while (Node_tmp != NULL and Node_tmp->right != Node)
+                Node = Node_tmp
+                Node_tmp = Node_tmp->parent
+            return Node_tmp
+    \end{minted}
+
+
+    \subsection{Usuwanie węzła z BST.}
+
+    \begin{theorem}
+        Usuwanie węzła z BST wymaga rozważenia trzech przypadków:
+        \begin{enumerate}
+            \item w przypadku, gdy usuwany węzeł jest liściem wskaźnik do węzła w jego ojcu zastępowany jest wskaźnikiem do węzła pustego,
+            \item w przypadku, gdy usuwany węzeł ma jednego syna to dany węzeł usuwamy a jego syna podstawiamy w miejsce usuniętego węzła,
+            \item w przypadku, gdy usuwany węzeł ma dwóch synów to po jego usunięciu wstawiamy w jego miejsce węzeł, który jest jego następnikiem.
+        \end{enumerate}
+    \end{theorem}
+
+    \newpage
+
     \section{B-drzewa: operacje i ich złożoność.}
+    B-drzewa to rozszerzone drzewa BST.
+    Jest ono typowo zoptymalizowane pod kątem operacji wejścia/wyjścia (np. odczytu z dysku twardego) - operacje długotrwałe takie jak odczyt węzła z dysku są wykonywane o wiele rzadziej niż dla typowych drzew BST, natomiast operacje takie jak wyszukanie odpowiedniej wartości w węźle załadowanym już do pamięci ram są praktycznie pomijane ze względu na nieporównywalnie większą szybkość ich wykonywania.
+    B-drzewa mają ustalony rząd. \\
+    \noindent B-drzewo rzędu K musi spełniać poniższe warunki:
+    \begin{itemize}
+	    \item Korzeń jest liściem lub ma od 2 do K synów
+	    \item Wszystkie liście są na tym samym poziomie
+	    \item Każdy węzeł wewnętrzny (oprócz korzenia) ma od $\lceil K/2 \rceil$ do K synów. Jeżeli jakiś węzeł ma s synów, to musi mieć s-1 kluczy (wartości)
+	    \item Każdy liść zawiera od $\lceil K/2 \rceil - 1$ do K - 1 kluczy (wartości)
+    \end{itemize}
+    
+    \noindent Warunek drugi gwarantuje niewielką wysokość drzewa (dla drzewa o n kluczach: w najgorszym wypadku $\log_{K/2} n/(K/2)$; w najlepszym wypadku $\log_{K} n/K$) \\
+    
+    \noindent Generalnie złożoność wszystkich operacji na B-drzewach wynosi $O(K \log_{K} n)$, gdzie n to ilość kluczy (wartości) w drzewie, a K to rząd drzewa.
+    
+    \includegraphics[]{graphics/b-trees/b-tree-example.png}
+    
+    \noindent Odmianą B-drzew są drzewa B+, które różnią się tym, że wszystkie wartości trzymane są w liściach oraz mają powiązania pomiędzy liśćmi (tak aby można było po kolei przejść wszystkie wartości w liściach).
+    
+    \subsection{Wyszukiwanie}
+    Wyszukiwanie przebiega bardzo podobnie jak w drzewie BST, z tą różnicą, że nie mamy tylko lewego i prawego poddrzewa, a możemy mieć ich więcej, więc musimy zadecydować, do którego pójść.
+    Oczywiście szukana wartość może również znajdować się na danym poziomie. Wtedy kończymy wyszukiwanie.
+    Ponieważ rząd drzewa zazwyczaj jest wysoki (np. 1024), aby usprawnić wyszukiwanie zadanej wartości w danym węźle, najczęściej używamy wyszukiwania binarnego. \\
+    
+    \subsection{Wstawianie}
+    Aby wstawić wartość wyszukujemy liść, do którego powinna trafić, a następnie wstawiamy ją w odpowiednie miejsce w tym liściu. \\
+    \noindent Jeżeli jednak okazałoby się, że liść ma już za dużo kluczy (wartości) ($\geq K$), wtedy musimy go podzielić - jedną z wartości z liścia przenosimy w odpowiednie miejsce do rodzica, a jako prawego i lewego syna tej przeniesionej wartości wstawiamy odpowiednio liście powstałe po podzieleniu tego oryginalnego liścia. \\
+    \noindent Jeżeli okazałoby się, że po przeniesieniu wartości z liścia do rodzica, rodzic ma za dużo kluczy (wartości), całą operację dzielenia powtarzamy rekurencyjnie na rodzicu - w razie potrzeby aż do korzenia. \\
+    
+    \subsection{Usuwanie}
+    Usuwanie rozpoczynamy od znalezienia wartości, którą chcemy usunąć \\
+    \noindent Następnie bierrzemy największą wartość z lewego podrzewa lub najmniejszą wartość z prawego poddrzewa i wstawiamy w miejsce usuwanego elementu \\
+    \noindent Jeżeli w drzewie zostały naruszone warunki dotyczące ilości dozwolonych elementów w węźle, musimy to drzewo zrównoważyć. Proces ten jest generalnie dośc skomplikowany i ciężki do opisania algorytmem ze względu na mnogość możliwych przypadków, dlatego najlepiej spojrzeć na część praktyczną i przykłady.
+    
+    \newpage
+    
+    
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
+    Drzewa AVL są odmianą drzew BST, w której dla każdego węzła mamy dodatkowy warunek: różnica między wysokością prawego i lewego poddrzewa danego węzła nie może byc większa niż 1.
+    Spełnienie tego warunku zapewnia nam dobre zrównoważenie drzewa, a co za tym idzie utrzymanie szybkości operacji wywszukiwania w tym drzewie.\\
+    
+    \noindent Operacja wyszukiwania w drzewie AVL jest identyczna, jak dla zwykłego drzewa BST, natomiast w przypadku operacji wstawiania i usuwania, przebiegają one na początku tak samo jak w zwykłych BST, natomiast potem w razie potrzeby należy drzewo zrównoważyć poprzez rotacje. \\
+    
+    \noindent Operacje wyszukiwania, wstawiania oraz usuwania mają złożoność $O(\log_{2} n)$, gdzie n to ilość elementów w drzewie
+    
+    \subsection{Rotacje}
+    \begin{multicols}{2}
+    \textbf{Rotacja RR} \\
+    
+    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/rr-rotation.png}
+    \columnbreak \\
+    \textbf{Rotacja LL} \\
+    
+    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/ll-rotation.png}
+    \end{multicols}
+    
+    \textbf{Rotacja RL} \\
+    
+    \includegraphics[width=\linewidth]{graphics/avl-trees/rl-rotation.png} \\
+
+    \textbf{Rotacja LR} \\
+    
+    \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
+    
+    \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
+    
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
+    
+    \newpage
+    
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
+    
+    \subsection{Kolorowanie krawędziowe grafów}
+    Problem kolorowania krawędzi, podobnie jak klasycznego kolorowania wierzchołków, jest NP-trudny – nie istnieją wielomianowe algorytmy kolorujące grafy zawsze w sposób optymalny.
+    \\\\
+    Przykład nieopytymalnego algorytmu kolorowania krawędziowego:
+    \begin{enumerate}
+        \item Użyj BFS (Breadth First Search - Przeszukiwanie wszerz) do poruszania się po grafie.
+        \item Wybierz wierzchołek i nadaj różne kolory jego krawędziom.
+        \item Przejdź do kolejnego wierzchołka.
+        \item Powtarzaj aż wszyskie krawędzie zostaną pokolorowane.
+    \end{enumerate}
+    
+    \subsection{Kolorowanie wierzchołkowe grafów planarnych}
+    
+    \begin{definition}
+        Graf planarny - graf, który można narysować na płaszczyźnie tak, by krzywe obrazujące krawędzie grafu nie przecinały się ze sobą.
+    \end{definition}
+    
+    \begin{theorem}
+        Liczba chromatyczna grafu planarnego jest równa lub mniejsza niż 4
+    \end{theorem}
+    
+    Każdy graf planarny można pokolorować 5 kolorami w czasie liniowym.
+    
+    
+    
+    
+    
+    \newpage
+    
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
+    
+    \subsection{Algorytm Boruvki}
+    \begin{enumerate}
+        \item Zainicjalizuj każdy wierzchołek jako osobny zbiór.
+        \item Znajdź krawędź z najmniejszą wagą łączącą ten zbiór z innym. Dodaj tą krawędź do MST.
+        \item Powtarzaj krok 2 dla każdego zbioru dopóki istnieje więcej niż jeden zbiór.
+    \end{enumerate}
+    \textbf{Złożoność:} $O(ElogV)$.
+    
+    
+    \subsection{Algorytm Prima}
+    \begin{enumerate}
+        \item Zainicjalizuj drzewo jednym wierzchołkiem, wybranym losowo z grafu.
+        \item Powiększ drzewo o jeden wierzchołek z najmniejszą wagą który łączy drzewo z wierzchołkami jeszcze nieuwzględnionymi.
+        \item Powtarzaj krok 2 aż wszystkie wierzchołki znajdą się w drzewie.
+    \end{enumerate}
+    \textbf{Złożoność:} Zależy od użytych struktur danych. $O(V^2)$ lub $O(ElogV)$ jeśli użyta została lista sąsiedztwa
+    
+    
+     
+    \subsection{Algorytm Kruskala}
+
+    \begin{enumerate}
+        \item Posortuj krawędzie niemalejąco pod względem wag.
+        \item Wybierz krawędź o najmniejszej wadze. Sprawdź czy tworzy cykl z MST utworzonym do tej pory. Jeśli nie, uwzględnij tą krawędź w MST. W przeciwnym wypadku, odrzuć.
+        \item Powtarzaj krok 2 aż otrzymasz $V-1$ krawędzi w MST
+    \end{enumerate}
+        
+    \textbf{Złożoność:} Sortowanie krawędzi zajmuje $O(ElogE)$. Po sortowaniu, iterujemy po krawędziach i używamy algorytmu find-union który może zająć $O(logV)$. Zatem ogólna złozoność to $O(ElogE+ElogV)$. Wartość E jest mniejsza niż $V^2$, więc $O(logV)$ $=$ $O(logE)$. Złożoność: $O(ElogE)$ lub $O(ElogV)$. 
+
+    \newpage
+
     \section{Najważniejsze algorytmy wyznaczania otoczki wypukłej zbioru punktów w układzie współrzędnych (Grahama, Jarvisa, algorytm przyrostowy (quickhull)).}
+
+    \begin{definition}
+        \textbf{Algorytm Grahama} - złożoność $O(n \log n)$.
+        \begin{enumerate}
+            \item Wybierz punkt (ozn. O) o najniższej wartości współrzędnej y.
+            \item Przesuń wszystkie punkty tak, by punkt O pokrył się z początkiem układu współrzędnych.
+            \item Posortuj punkty leksykograficznie względem:
+            \begin{itemize}
+                \item kąta pomiędzy wektorem $OP_i$ a dodatnią osią układu współrzędnych,
+                \item odległości punktu $P_i$ od początku układu współrzędnych.
+            \end{itemize}
+            \item Wybierz punkt (ozn. S) o najmniejszej współrzędnej y; jeśli kilka punktów ma tę samą współrzędną
+            y, wybierz spośród nich ten o najmniejszej współrzędnej x.
+            \item Przeglądaj listę posortowanych punktów poczynając od punktu S:
+            \begin{itemize}
+                \item Od bieżącej pozycji weź trzy kolejne punkty (ozn. A, B, C).
+                \item Jeśli punkt B leży na zewnątrz trójkąta AOC, to może należeć do otoczki wypukłej. Przejdź do następnego punktu na liście.
+                \item Jeśli punkt B leży wewnątrz trójkąta AOC, to znaczy, że nie należy do otoczki. Usuń punkt B z listy i cofnij się o jedną pozycję (o ile bieżąca pozycja jest różna od początkowej).
+            \end{itemize}
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Algorytm Jarvisa} - średnia złożoność $O(kn)$, gdzie n liczba punktów, k liczba punktów należących do otoczki; pesymistyczna - $O(n^2)$.
+        \begin{enumerate}
+            \item $P_1$ – punkt na otoczce wypukłej o najmniejszej współrzędnej y (jeśli jest więcej niż jeden, wybierany jest ten o najmniejszej współrzędnej x),
+            \item $P_{0}:=[-\infty ,y(P_{1})]$,
+            \item $i:=1$,
+            \item powtarzaj:
+            \begin{itemize}
+                \item $P_{i+1}$ – punkt $N$, dla którego kąt $P_{i-1}P_{i}N$ jest największy,
+                \item jeśli $N=P_{1}$, koniec iterowania,
+                \item $:=i+1$,
+            \end{itemize}
+            \item ostatecznie otoczkę tworzą punkty $P_{1\dots i}$.
+        \end{enumerate}
+
+        Implementację można usprawnić, odrzucając w każdej iteracji punkty znajdujące się po prawej stronie wektora $P_{1}P_{i}$, ponieważ na pewno nie będą należały do otoczki. Zabieg ten nie wpływa jednak na asymptotyczną złożoność obliczeniową algorytmu.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Quickhull} - średnia złożoność $O(n \log n)$, pesymistyczna złożoność - $O(n^2)$.
+
+        Przygotowanie danych:
+        \begin{enumerate}
+            \item Znajdź w zbiorze punktów dwa skrajne punkty o minimalnej i maksymalnej współrzędnej x (A i B).
+            \item Podziel zbiór punktów na dwa podzbiory $S_1$ i $S_2$ znajdujące się nad i pod prostą $AB$.
+            \item Wywołaj rekurencyjnie QuickHull(A, B, $S_1$) i QuickHull(B, A, $S_2$).
+        \end{enumerate}
+
+        QuickHull(A, B, P):
+        \begin{enumerate}
+            \item Jeśli $P$ jest pusty – koniec.
+            \item Jeśli $P$ ma jeden element, ten punkt należy do otoczki – koniec.
+            \item W przeciwnym razie:
+            \begin{itemize}
+                \item Znajdź w $P$ punkt $C$ najbardziej oddalony od prostej $AB$. Ten punkt należy do otoczki wypukłej.
+                \item Odrzuć wszystkie punkty z wnętrza trójkąta $ABC$, nie mogą należeć do otoczki.
+                \item Znajdź zbiór $S_1$ punktów znajdujących się po prawej stronie prostej $AC$C oraz analogiczny
+                zbiór $S_2$ dla prostej $BC$. (Stronę określa znak równania ogólnego prostej).
+                \item Wywołaj rekurencyjnie QuickHull(A, C, $S_1$) i QuickHull(B, C, $S_2$).
+            \end{itemize}
+        \end{enumerate}
+    \end{definition}
+
+    \newpage
+
     \section{Problemy P, NP, NP-zupełne i zależności między nimi. Hipoteza P vs. NP.}
+    \begin{definition}
+        \textbf{Problem P} (ang. \textit{deterministic polynomial}, deterministycznie wielomianowy) – problem decyzyjny,
+        dla którego rozwiązanie można \textbf{znaleźć} w czasie wielomianowym.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Problem NP} (ang. \textit{nondeterministic polynomial}, niedeterministycznie wielomianowy) – problem
+        decyzyjny, dla którego rozwiązanie można \textbf{zweryfikować} w czasie wielomianowym.
+    \end{definition}
+
+    \begin{theorem}
+        $\mathbf{P \stackrel{?}{=} NP}$. Każdy problem P jest NP, jednak nie wiadomo czy istnieje problem NP niebędący P.
+    \end{theorem}
+
+    \begin{definition}
+        \textbf{Problem NP-zupełny} (ang. \textit{NP-Complete}) – problem, który \textbf{należy do klasy NP} oraz dowolny
+        problem należący do NP może być do niego \textbf{zredukowany w czasie wielomianowym}. Czasami zamiast redukcji w
+        czasie wielomianowym używa się redukcji w pamięci logarytmicznej. Taka definicja problemów NP-zupełnych
+        implikuje fakt, że jeśli tylko potrafimy rozwiązać jakikolwiek problem NP-zupełny w czasie wielomianowym,
+        to potrafimy rozwiązać w takim czasie wszystkie problemy NP.\\
+
+        Pierwszym problemem którego NP-zupełność wykazano był problem SAT, czyli problem spełnialności formuł zdaniowych.
+    \end{definition}
+
+    \newpage
+
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
     \section{Lemat o pompowaniu dla języków regularnych.}
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
