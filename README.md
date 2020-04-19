@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/mdymek/EGZ_licencjacki.svg?style=svg)](https://circleci.com/gh/mdymek/EGZ_licencjacki)
-
 # EGZ_licencjacki
 
 ```
