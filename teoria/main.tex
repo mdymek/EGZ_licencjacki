@@ -2955,7 +2955,246 @@
     \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
     
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
+
+        Algorymy przeszukiwania grafu polegają na przejściu przez wszystkie osiągalne z wierzchołka
+        startowego $s$ wierzchołki grafu $G$.
+
+        \subsection{Przeszukiwanie grafu wszerz (\textit{breadth first search}, BFS)}
+
+            \subsubsection{Algorytm}
+
+            Do przeszukiwania użyjemy kolejki $Q = \{s\}$. Ponadto używamy koloru czarnego do 
+            oznaczania odwiedzonych już wierzchołków.\[\] 
+            Dopóki kolejka nie jest pusta:
+            \begin{enumerate}
+                \item Zdejm $x$ z kolejki
+                \item Pomaluj $x$ na czarno
+                \item Dla każdego niepomalowanego na czarno $v$, sąsiadującego z $x$ wrzuć 
+                    $v$ do kolejki
+            \end{enumerate}
+            
+            \subsubsection{Cechy}
+
+            \begin{enumerate}
+                \item Zlożoność obliczeniowa: $\theta(e + v)$
+                \item Złożoność pamięciowa: $\theta(v)$
+                \item Kompletność: BFS dla nieskończonego grafu zwróci wszystkie poprawne 
+                    odpowiedzi, w przeciwieństwie do DFS.
+            \end{enumerate}
+
+            \subsubsection{Wariacje algorytmu}
+
+            \begin{itemize}
+                \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest 
+                    równa poszukiwanej.
+                \item Przypisywanie wierzchołkom odległości od $s$.
+                \item Przypisanie wierzchołkom rodzica, w celu znalezienia drogi do $s$
+            \end{itemize}
+
+            \subsubsection{Zastosowania}
+
+            \begin{itemize}
+                \item Garbage collection
+                \item Najkrótsza droga do $s$ (licząć liczbę krawędzi)
+                \item Wykrywanie cykli grafu nieskierowanego
+                \item Sprawdzanie dwudzielności grafu
+                \item Social networking
+                \item Algorytmy sieci przepływowych (np. wyznaczanie maksymalnego przepływu)
+                \item Crawlery
+            \end{itemize}
+
+        \subsection{Przeszukiwanie grafu wgłąb (\textit{depth first search}, DFS)}
+
+            \subsubsection{Algorytm}
+
+            Używamy koloru czarnego do oznaczania odwiedzonych już wierzchołków.\[\]
+            Dla danego wierzchołka $x$ (zaczynając od $s$):
+            \begin{enumerate}
+                \item Pomaluj $x$ na czarno
+                \item Wywołaj się rekurencyjnie dla każdego niepomalowanego na czarno $v$,
+                    sąsiadującego z $x$ 
+            \end{enumerate}
+            
+            
+            \subsubsection{Wersja z zapamiętywaniem rodzica}
+
+            Słownik $P = \{s : null\}$ przypisuje każdemu wierzchołkowi (poza $s$) rodzica. Używamy
+            koloru czarnego do oznaczania odwiedzonych już wierzchołków, oraz szarego do 
+            wierzchołków właśnie odwiedzanych.\[\]
+            Dla danego wierzchołka $x$ (zaczynając od $s$):
+            \begin{enumerate}
+                \item Pomaluj $x$ na szaro
+                \item Dla każdego białego $v$, sąsiadującego z $x$:
+                    \begin{enumerate}
+                        \item $P[v] = x$
+                        \item Wywołaj się rekurencyjnie na $v$
+                    \end{enumerate}
+                \item Pomaluj $x$ na czarno
+            \end{enumerate}
+            
+            \subsubsection{Cechy}
+
+            \begin{enumerate}
+                \item Zlożoność obliczeniowa: $\theta(e + v)$
+                \item Złożoność pamięciowa: $\theta(v)$
+                \item Niekompletność dla grafów nieskończonych
+            \end{enumerate}
+
+            \subsubsection{Wariacje algorytmu}
+
+            \begin{itemize}
+                \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest 
+                    równa poszukiwanej.
+                \item Przypisywanie wierzchołkom odległości od $s$.
+                \item Przypisanie wierzchołkom rodzica, w celu znalezienia drogi do $s$
+            \end{itemize}
+
+            \subsubsection{Zastosowania}
+
+            \begin{itemize}
+                \item Garbage collection
+                \item Minimalne drzewo rozpinające (dla grafów nieważonych)
+                \item Wykrywanie cykli w grafie skierowanym
+                \item Sortowanie topologiczne
+                \item Wykrywanie cykli grafu nieskierowanego
+                \item Algorytmy sieci przepływowych (np. wyznaczanie maksymalnego przepływu)
+                \item Crawlery
+                \item Labirynty
+            \end{itemize}
+
+    \newpage
+
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
+        
+        W algorytmach wyszukiwania najkrótszej ścieżki używamy procedury \italic{relax(u, v, w)}, 
+        sprawdzającej, czy ścieżka z $u$ do $w$ przez $v$ jest krótsza od aktualnie najkrótszej 
+        ścieżki.
+
+            \[\]
+        \textit{relax(u, v, w)}:
+            \vskip Jeśli $D[u, w] = D[u, v] + D[v, w]$ to:
+            \begin{enumerate}
+                \item $D[u, w] = D[u, v] + D[v, w]$
+                \item $P[u, w] = v$
+            \end{enumerate}
+
+        \subsection{Algorytm Dijkstry}
+        
+            Algorytm Dijkstry pozwala na wyliczenie w grafie $G = \{V, E\}$ najkrótszej ścieżki z wierzchołka
+            startowego $s$ do wszystkich pozostałych wierzchołków. $|V| = v; |E| = e$
+
+            \subsubsection{Algorytm}
+            
+            Posługujemy się słownikiem $P = \{\}$, przypisującego każdemu wierzchołkowi
+            rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość 
+            wierzchołków od $s$ oraz kolejką priorytetową $S = \{v \in V : D[v]\}$ nieodwiedzonych 
+            wierzchołków. $D[s] = 0; D[\forall v \in V \setminus \{s\}] = \infty$.
+            \[\]
+            Używamy uproszczonej procedury \textit{relax} - wierzchołkiem startowym $u$ jest zawsze $s$
+            \[\]
+            \textit{relax(u, v, w)}:
+                \vskip Jeśli $D[w] = D[v] + e_{v \rightarrow w}$ to:
+                \begin{enumerate}
+                    \item $D[w] = D[v] + e_{v \rightarrow w}$
+                    \item $P[w] = v$
+                \end{enumerate}
+
+            \[\]
+            Dopóki $S \neq \o$:
+            \begin{enumerate}
+                \item Usuń wierzchołek $v$ o najmniejszej wartości z $S$
+                \item Dla każdego wierzchołka $w$ sąsiadującego z $v$ wywołaj \textit{relax(v, w)}
+            \end{enumerate}
+
+            \subsubsection{Złożoność}
+            
+            \begin{itemize}
+                \item Inicjalizacja - $\theta(v)$
+                \item $\theta(v)$ usunięć z kolejki
+                \item $O(e)$ pomniejszeń wartości w $D$
+                \item Przy pomocy kopca binarnego możemy uzyskać $\O(log(v))$ dla pomniejszenia
+                    wartości, $O(log(v))$ dla usunięcia z kolejki. Złożoność: 
+                    $\theta((e + v)log(v)$
+
+                \item Przy pomocy kopca Fibonacciego możemy uzyskać $\theta(1)$ dla pomniejszenia
+                    wartości, $\theta(log (v))$ dla usunięcia z kolki. Złożoność: 
+                    $O(v \cdot log(v) + e)$
+            \end{itemize}
+
+            \subsubsection{Cechy}
+
+            \begin{itemize}
+                \item Nie działa poprawnie dla grafów z wagami ujemnymi
+                \item Algorytm zachłanny
+            \end{itemize}
+        
+        \subsection{Algorytm Bellmana-Forda}
+            
+            Algorytm Bellmana-Forda pozwala na wyliczenie w grafie $G$ najkrótszej ścieżki z 
+            wierzchołka startowego $s$ do wszystkich pozostałych wierzchołków.
+
+            \subsubsection{Algorytm}
+            
+            Posługujemy się słownikiem $P = \{\}$, przypisującego każdemu wierzchołkowi
+            rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość 
+            wierzchołków od $s$. $D[s] = 0; D[v] = \infty \; \forall v \in V \setminus \{s\}$.
+            \[\]
+            Ponownie używamy uproszczonej procedury \textit{relax}.
+
+            \[\]
+            Dla każdego wierzchołka w $V \setminus \{s\}$:
+            \vskip Dla każdej krawędzi $(u, v) \in E$ wywołaj \textit{relax(u, v)}
+            \[\]
+            Dodatkowo można wykonać sprawdzenie, czy w grafie nie ma cykli o wadze ujemnej:
+
+            Dla każdej krawędzi $(u, v) \in E$: jeśli $D[v] > D[u] + e_{u \rightarrow v}$, to
+            istnieje cykl o wadze negatywnej.
+            \subsubsection{Złożoność}
+            
+            $O(v \cdot e)$
+
+            \subsubsection{Cechy}
+
+            \begin{itemize}
+                \item Działa poprawnie dla grafów z wagami ujemnymi (bez cykli o wagach ujemnych)
+                \item Pozwala decydować, czy graf ma cykle negatywne
+                \item Używany w  protokole RIP
+                \item Algorytm można zoptymalizować: jeśli w danej iteracji nie dokonał zmiany,
+                    należy przerwać jego działanie (ścieżki już są najkrótsze)
+            \end{itemize}
+
+        \subsection{Algorytm Floyda-Warshalla}
+
+            Algorytm Floyda-Warshalla pozwala wyliczyć najkrósze ścieżki pomiędzy wszystkimi
+            wierzchołkami w grafie $G$ (nieposiadającym ujemnych cykli).
+
+            \subsubsection{Algorytm}
+            
+            Posługujemy się słownikiem $P = \{\}$, przypisującego parze $(u, w)$ rodzica dla $u$,
+            na ścieżce od $u$ do $w$; słownikiem $D$ przypisującego parze $(u, w)$ długość 
+            najkrószej (aktualnie) ścieżki od $u$ do $w$.\\
+            $D[(u, w) : u, w \in V] = 
+            \begin{cases}
+                0, &\text{ jeśli } u = w\\
+                e_{u \rightarrow w}, &\text{ jeśli } (u, w) \in E\\
+                \infty, &\text{ jeśli } (u, w) \notin E
+            \end{cases}$.
+            \[\]
+
+            Dla każdej trójki $(u, v, w) : u, w, v \in V$ wywołaj \textit{relax(u, v, w)}
+
+            \subsubsection{Złożoność}
+            \theta(v^3)
+
+            \subsubsection{Cechy}
+            \begin{itemize}
+                \item Prostota
+                \item Pozwala obliczyć za jednym razem wszystkie ścieżki pomiędzy wierzchołkami
+                \item Działa dla grafów z krawędziami ujemnymi (ale nie z cyklami ujemnymi)
+                \item Złożoność jest niezależna od gęstości grafu: nieoptymalny dla grafów 
+                    rzadkich
+            \end{itemize}
+ 
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
     
