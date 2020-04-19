@@ -2953,6 +2953,8 @@
     \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
     
     \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
+
+    \newpage
     
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
 
@@ -3066,38 +3068,33 @@
 
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
         
-        W algorytmach wyszukiwania najkrótszej ścieżki używamy procedury \italic{relax(u, v, w)}, 
+        W algorytmach wyszukiwania najkrótszej ścieżki używamy procedury \textit{relax(u, v, w)}, 
         sprawdzającej, czy ścieżka z $u$ do $w$ przez $v$ jest krótsza od aktualnie najkrótszej 
         ścieżki.
-
-            \[\]
+        \\~\\
         \textit{relax(u, v, w)}:
-            \vskip Jeśli $D[u, w] = D[u, v] + D[v, w]$ to:
-            \begin{enumerate}
-                \item $D[u, w] = D[u, v] + D[v, w]$
-                \item $P[u, w] = v$
-            \end{enumerate}
+            \vskip Jeśli $D[u, w] = D[u, v] + D[v, w]$ to:\\
+                \hspace*{1cm} $D[u, w] = D[u, v] + D[v, w]$\\
+                \hspace*{1cm} $P[u, w] = v$\\
 
         \subsection{Algorytm Dijkstry}
         
-            Algorytm Dijkstry pozwala na wyliczenie w grafie $G = \{V, E\}$ najkrótszej ścieżki z wierzchołka
-            startowego $s$ do wszystkich pozostałych wierzchołków. $|V| = v; |E| = e$
+            Algorytm Dijkstry pozwala na wyliczenie w grafie $G = \{V, E\}$ najkrótszej ścieżki od wierzchołka
+            startowego $s$ do wszystkich pozostałych wierzchołków. $|V| = v, |E| = e$
 
             \subsubsection{Algorytm}
             
-            Posługujemy się słownikiem $P = \{\}$, przypisującego każdemu wierzchołkowi
+            Posługujemy się słownikiem $P = \{\}$ przypisującym każdemu wierzchołkowi
             rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość 
             wierzchołków od $s$ oraz kolejką priorytetową $S = \{v \in V : D[v]\}$ nieodwiedzonych 
             wierzchołków. $D[s] = 0; D[\forall v \in V \setminus \{s\}] = \infty$.
             \[\]
-            Używamy uproszczonej procedury \textit{relax} - wierzchołkiem startowym $u$ jest zawsze $s$
+            Używamy uproszczonej procedury \textit{relax} - wierzchołkiem startowym ($u$) jest zawsze $s$
             \[\]
-            \textit{relax(u, v, w)}:
-                \vskip Jeśli $D[w] = D[v] + e_{v \rightarrow w}$ to:
-                \begin{enumerate}
-                    \item $D[w] = D[v] + e_{v \rightarrow w}$
-                    \item $P[w] = v$
-                \end{enumerate}
+            \textit{relax(v, w)}:
+                \vskip Jeśli $D[w] = D[v] + e_{v \rightarrow w}$ to:\\
+                \hspace*{1cm} $D[w] = D[v] + e_{v \rightarrow w}$ \\
+                    \hspace*{1cm} $P[w] = v$ \\
 
             \[\]
             Dopóki $S \neq \o$:
@@ -3112,9 +3109,9 @@
                 \item Inicjalizacja - $\theta(v)$
                 \item $\theta(v)$ usunięć z kolejki
                 \item $O(e)$ pomniejszeń wartości w $D$
-                \item Przy pomocy kopca binarnego możemy uzyskać $\O(log(v))$ dla pomniejszenia
+                \item Przy pomocy kopca binarnego możemy uzyskać $O(log(v))$ dla pomniejszenia
                     wartości, $O(log(v))$ dla usunięcia z kolejki. Złożoność: 
-                    $\theta((e + v)log(v)$
+                    $\theta((e + v)log(v))$
 
                 \item Przy pomocy kopca Fibonacciego możemy uzyskać $\theta(1)$ dla pomniejszenia
                     wartości, $\theta(log (v))$ dla usunięcia z kolki. Złożoność: 
@@ -3135,20 +3132,23 @@
 
             \subsubsection{Algorytm}
             
-            Posługujemy się słownikiem $P = \{\}$, przypisującego każdemu wierzchołkowi
+            Posługujemy się słownikiem $P = \{\}$, przypisującym każdemu wierzchołkowi
             rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość 
-            wierzchołków od $s$. $D[s] = 0; D[v] = \infty \; \forall v \in V \setminus \{s\}$.
+            wierzchołków\\ od $s$. $D[s] = 0; D[v] = \infty \; \forall v \in V \setminus \{s\}$.
             \[\]
             Ponownie używamy uproszczonej procedury \textit{relax}.
 
             \[\]
             Dla każdego wierzchołka w $V \setminus \{s\}$:
-            \vskip Dla każdej krawędzi $(u, v) \in E$ wywołaj \textit{relax(u, v)}
+            \vskip Wywołaj \textit{relax(u, v)} dla każdej krawędzi $(u, v) \in E$ 
             \[\]
+            
             Dodatkowo można wykonać sprawdzenie, czy w grafie nie ma cykli o wadze ujemnej:
 
-            Dla każdej krawędzi $(u, v) \in E$: jeśli $D[v] > D[u] + e_{u \rightarrow v}$, to
-            istnieje cykl o wadze negatywnej.
+            \[\]
+            Dla każdej krawędzi $(u, v) \in E$: 
+            \vskip Jeśli $D[v] > D[u] + e_{u \rightarrow v}$, to
+            istnieje cykl o wadze ujemnej.
             \subsubsection{Złożoność}
             
             $O(v \cdot e)$
@@ -3157,7 +3157,7 @@
 
             \begin{itemize}
                 \item Działa poprawnie dla grafów z wagami ujemnymi (bez cykli o wagach ujemnych)
-                \item Pozwala decydować, czy graf ma cykle negatywne
+                \item Pozwala decydować, czy graf ma cykle ujemne
                 \item Używany w  protokole RIP
                 \item Algorytm można zoptymalizować: jeśli w danej iteracji nie dokonał zmiany,
                     należy przerwać jego działanie (ścieżki już są najkrótsze)
@@ -3170,8 +3170,8 @@
 
             \subsubsection{Algorytm}
             
-            Posługujemy się słownikiem $P = \{\}$, przypisującego parze $(u, w)$ rodzica dla $u$,
-            na ścieżce od $u$ do $w$; słownikiem $D$ przypisującego parze $(u, w)$ długość 
+            Posługujemy się słownikiem $P = \{\}$, przypisującym parze $(u, w)$ rodzica dla $u$,
+            na ścieżce od $u$ do $w$, słownikiem $D$ przypisującym parze $(u, w)$ długość 
             najkrószej (aktualnie) ścieżki od $u$ do $w$.\\
             $D[(u, w) : u, w \in V] = 
             \begin{cases}
@@ -3181,8 +3181,7 @@
             \end{cases}$.
             \[\]
 
-            Dla każdej trójki $(u, v, w) : u, w, v \in V$ wywołaj \textit{relax(u, v, w)}
-
+            Wywołaj  \textit{relax(u, v, w)} dla każdej trójki $(u, v, w) : u, w, v \in V$ wywołaj
             \subsubsection{Złożoność}
             \theta(v^3)
 
@@ -3191,8 +3190,7 @@
                 \item Prostota
                 \item Pozwala obliczyć za jednym razem wszystkie ścieżki pomiędzy wierzchołkami
                 \item Działa dla grafów z krawędziami ujemnymi (ale nie z cyklami ujemnymi)
-                \item Złożoność jest niezależna od gęstości grafu: nieoptymalny dla grafów 
-                    rzadkich
+                \item Złożoność jest niezależna od gęstości grafu
             \end{itemize}
  
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
