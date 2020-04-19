@@ -2846,7 +2846,7 @@
 
 	\noindent \textbf{Zad 2.}
 
-	\noindent Dany jest automat $\mathcal{A}$ = (S, f) nad alfabetem A = \{a, b\}, tak że $S = \{s_{0}, s_{1}, s_{2}\}$.
+	\noindent Dany jest automat $al{A}$ = (S, f) nad alfabetem A = \{a, b\}, tak że $S = \{s_{0}, s_{1}, s_{2}\}$.
 	\begin{table}[H]
 	\centering
 		\begin{tabular}{|c|l|l|l|}
@@ -4505,6 +4505,118 @@
     \newpage
 
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
+	\subsection{Automat minimalny}
+	Konstrukcja automatu minimalnego oparta na pochodnych brzozowskiego opisana została w sekcji \textbf{32.1}
+
+	\subsection{Minimalizacja automatu}
+	\begin{exercise}
+	Niech A = \{a, b\} będzie alfabetem. \\
+	Zminimalizuj automat $\mathcal{A} = (S, A, f, s_0, T)$, gdzie S = \{0, 1, 2, 3, 4, 5, 6\}, \\
+	$s_0$ = 0, T = \{2, 3, 4, 5, 6\}, a f to funkcja przejść zdefiniowana w tabeli poniżej
+	\end{exercise}
+
+	\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
+	\hline
+	f & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+	a & 1 & 1 & 2 & 1 & 6 & 5 & 6 \\ \hline
+	b & 2 & 3 & 4 & 5 & 2 & 3 & 6 \\ \hline
+	\end{tabular}
+	\end{table}
+
+	\noindent Zgodnie z algorytmem rozpoczynamy od dwóch zbiorów: stanów terminalnych i pozostałych:
+	\begin{verbatim}
+	   I          II
+	{0, 1}, {2, 3, 4, 5, 6}
+	\end{verbatim}
+
+	\noindent Zbiory są ponumerowane. W następnych krokach będziemy sprawdzać do jakich zbiorów będziemy trafiać zaczynając od danego stanu pod wpływem wszystkich liter alfabetu,
+	a następnie rozdzielać te zbiory na tej podstawie:
+	\begin{verbatim}
+	     I                      II
+	{ 0  ,  1  }, { 2  ,  3  ,  4  ,  5  ,  6  }
+	 I,II  I,II     II   I,II   II    II    II
+	\end{verbatim}
+
+	\noindent Jak widac na powyższym przykładzie ze stanu 0 pod wpływem litery a przechodzimy do stanu 1, który jest aktualnie w zbiorze I,
+	a pod wpływem litery b przechodzimy do stanu 2, który jest aktualnie w zbiorze II - stąd pod stanem 0 napisaliśmy I,II.
+	Dla odmiany ze stanu 2 pod wpływem a przechodzimy do stanu 2, który aktualnie znajduje sie w zbiorze II,a pod wpływem b przechodzimy do stanu 4,
+	który aktualnie również znajduje się w zbiorze II, stąd pod stanem 2 mamy napisane tylko II. \\
+
+	\noindent Jak widzimy wszystkie stany ze zbioru I trafiają do tych samych ''grup" zbiorów - wszystkie trafiają do I,II (kolejność nie ma znaczenia),
+	więc zbiór I nie wymaga na razie podziału. W przypadku zbioru II, stan 3 trafia do innego zestawu zbiorów niż pozostałe stany, więc musimy go wydzielić ze zbioru:
+	\begin{verbatim}
+	  I      II       III
+	{0, 1}, {3}, {2, 4, 5, 6}
+	\end{verbatim}
+
+	\noindent Całą procedurę powtarzamy, aż do ustabilizowania się zbiorów (braku nowych podziałów): \\
+	\noindent Wyliczenia dla 3 możemy pominąć - zbioru 1-elementowego już nie podzielimy
+	\begin{verbatim}
+	       I           II                 III
+	{  0  ,   1  }, {  3  }, {  2  ,   4  ,   5  ,   6  }
+	 I,III   I,II              III    III  II,III   III
+
+	 I    II  III   IV            V
+	{0}, {1}, {3}, {5}, {  2  ,   4  ,   6  }
+	                       V      V      V
+
+	 I    II  III   IV      V
+	{0}, {1}, {3}, {5}, {2, 4, 6}
+	\end{verbatim}
+	
+	\noindent Jak widzimy zbiory się ustabilizowały. Te zbiory reprezentują stany naszego automatu minimalnego.
+	Stanem początkowym jest ten zbiór, w którym znajduje się stan początkowy oryginalnego automatu.
+	Stanami końcowymi są te zbiory, w których znajduje się przynajmniej jeden stan końcowy oryginalnego automatu. \\
+
+	\noindent Nasz zminimalizowany automat wygląda następująco:
+	\begin{center}
+	\begin{tikzpicture}[scale=0.2]
+	\tikzstyle{every node}+=[inner sep=0pt]
+	\draw [black] (22.4,-32.1) circle (3);
+	\draw (22.4,-32.1) node {$I$};
+	\draw [black] (38.7,-39.6) circle (3);
+	\draw (38.7,-39.6) node {$II$};
+	\draw [black] (51.9,-23) circle (3);
+	\draw (51.9,-23) node {$III$};
+	\draw [black] (51.9,-23) circle (2.4);
+	\draw [black] (38.7,-15.6) circle (3);
+	\draw (38.7,-15.6) node {$IV$};
+	\draw [black] (38.7,-15.6) circle (2.4);
+	\draw [black] (25.4,-18) circle (3);
+	\draw (25.4,-18) node {$V$};
+	\draw [black] (25.4,-18) circle (2.4);
+	\draw [black] (23.02,-29.17) -- (24.78,-20.93);
+	\fill [black] (24.78,-20.93) -- (24.12,-21.61) -- (25.1,-21.82);
+	\draw (24.64,-25.4) node [right] {$b$};
+	\draw [black] (41.481,-40.693) arc (96.27369:-191.72631:2.25);
+	\draw (44.2,-45.08) node [below] {$a$};
+	\fill [black] (39.52,-42.47) -- (39.11,-43.32) -- (40.11,-43.21);
+	\draw [black] (39.115,-36.632) arc (167.37011:115.6478:18.394);
+	\fill [black] (49.1,-24.07) -- (48.16,-23.97) -- (48.6,-24.87);
+	\draw (42.1,-27.79) node [left] {$b$};
+	\draw [black] (37.377,-12.92) arc (234:-54:2.25);
+	\draw (38.7,-8.35) node [above] {$a$};
+	\fill [black] (40.02,-12.92) -- (40.9,-12.57) -- (40.09,-11.98);
+	\draw [black] (51.146,-25.901) arc (-18.33446:-58.64763:22.821);
+	\fill [black] (41.36,-38.21) -- (42.3,-38.22) -- (41.78,-37.37);
+	\draw (47.91,-34.35) node [right] {$a$};
+	\draw [black] (24.704,-15.094) arc (221.19573:-66.80427:2.25);
+	\draw (28.16,-10.76) node [above] {$a,\mbox{ }b$};
+	\fill [black] (27.28,-15.68) -- (28.21,-15.53) -- (27.56,-14.78);
+	\draw [black] (41.69,-15.488) arc (85.07615:36.37334:12.157);
+	\fill [black] (50.44,-20.39) -- (50.36,-19.45) -- (49.56,-20.04);
+	\draw (47.59,-16.49) node [above] {$b$};
+	\draw [black] (25.13,-33.35) -- (35.97,-38.35);
+	\fill [black] (35.97,-38.35) -- (35.46,-37.56) -- (35.04,-38.47);
+	\draw (29.62,-36.36) node [below] {$a$};
+	\draw [black] (48.917,-22.732) arc (-100.78239:-137.76812:15.237);
+	\fill [black] (40.49,-18) -- (40.65,-18.93) -- (41.39,-18.26);
+	\draw (43.32,-21.56) node [below] {$b$};
+	\end{tikzpicture}
+	\end{center}
+
     \section{Lemat o pompowaniu dla języków regularnych.}
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
