@@ -3990,7 +3990,28 @@
 	\end{tikzpicture}
 	\end{center}
 
+	\newpage
+
     \section{Lemat o pompowaniu dla języków regularnych.}
+	\begin{exercise}
+		Wykorzystując lemat o pompowaniu udowodnij, że język $\{a^nb^mc^{n+m} | n, m > 0\} \subset \{a, b, c\}^*$ nie jest regularny
+	\end{exercise}
+
+	\noindent Załóżmy, że język ten jest regularny. Wtedy zgodnie z lematem o pompowaniu:
+	\begin{center}
+		$\exists N \in \mathbb{N}_1 : \forall w \in L : |w| \geq N$ $\exists v_1, v_2 \in A^*$ $\exists u \in A^+$ $|v_1u| < N$ \\
+		$w = v_1uv_2$   $v_1u^*v_2 \subset L$ \\
+		$\forall_i \geq 0$    $v_1u^iv_2 \in L$
+	\end{center}
+
+	\noindent Niech nasze $w = a^Nb^Nc^{2N}$. Rozważmy wszystkie możliwe podziały słowa w, takie że $|v_1u| < N$. W przypadku tak dobranego słowa jest tylko jeden typ takiego podziału: \\
+	\noindent $v_1 = a^{N-i}$ \\
+	\noindent $u = a^i$ \\
+	\noindent gdzie $1 \leq i \leq N-1$ \\
+
+	\noindent Musimy teraz znaleźć takie j dla którego słowo $v_1u^jv_2 \notin L$. Takie j to np. 2 (choć tutaj zasadniczo każde $j \neq 1$ się nadaje).
+	Dla j = 2 nasze słowo przyjmuje postać $a^{N+i}b^Nc^{2N} \notin L$, więc ten język nie jest językiem regularnym.
+
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
