@@ -24,7 +24,6 @@
 \usepackage{minted}
 \usepackage{multicol}
 
-
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
 {%
@@ -45,7 +44,6 @@
 \renewcommand{\figurename}{Załącznik}
 
 \begin{document}
-
     \begin{titlepage}
 
         \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -2472,9 +2470,9 @@
 
     \newpage
 
-    \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
+    \section{Metoda "dziel i zwyciężaj": zalety i wady.}
     
-    Algorytmy dziel i zwyciężaj podlegają poniższemu schematowi:
+    Algorytmy "dziel i zwyciężaj" podlegają poniższemu schematowi:
 
     \begin{enumerate}
         \item 
@@ -2486,30 +2484,30 @@
         \item 
             \textbf{Zwyciężaj}
 
-            Rozwiązywany jest problem dla przypadków bazowych (najczęściej jest to możliwe w 
+            Rozwiązujemy przypadki bazowe (najczęściej jest to możliwe w 
             czasie stałym).
 
         \item 
             \textbf{Łącz} 
 
-            Wyniki otrzymane z podproblemów są łączone, aż do uzyskania wyniku danego problemu
+            Wyniki otrzymane z podproblemów są łączone aż do uzyskania wyniku danego problemu
     \end{enumerate}
 
     \subsection{Zalety}
 
     \begin{itemize}
         \item Algorytm podzielony jest na trzy ortogonalne części: dziel (\textit{divide}), 
-            zwyciężaj (\textit{conquer}) i łącz (\textit{merge / combine}) co ułatwia jego
+            zwyciężaj (\textit{conquer}) i łącz (\textit{merge / combine}), co ułatwia jego
             zrozumienie jak i analizę.
         
-        \item Możliwość łatwego przekształcenia algorytmu w algorytm równownoległy (przy pomocy
-            wzorca redukcji / dekompozycji asynchronicznej)
+        \item Możliwość łatwego przekształcenia algorytmu w algorytm równoległy (przy pomocy
+            wzorca redukcji / dekompozycji asynchronicznej).
 
-        \item Optymalne użecie pamięci podręcznej (\textit{cache}): problemy dostatecznie małe
-            (w szczególności bazowe) bardzo często są możliwe do rozwiązania w pamięci
+        \item Optymalne użycie pamięci podręcznej (\textit{cache}): problemy dostatecznie małe
+            (w szczególności bazowe) rozwiązywane są w pamięci
             nieprzekraczającej wielkości pamięci podręcznej.
         
-        \item Algorytmy są znacząco bardziej efektywne w porównaniu do bardziej prymitywnych
+        \item Znacząco lepsza złożoność obliczeniowa od bardziej prymitywnych
             podejść (jak na przykład \textit{brute-force}).
     \end{itemize}
 
@@ -2518,12 +2516,12 @@
     \begin{itemize}
         \item W przypadku podziału na dwa i więcej podproblemy uzyskujemy rekurencję nieliniową.
             Oznacza to, że przekształcenie algorytmu rekurencyjnego w algorytm iteracyjny 
-            najprawdopodobniej jest nietrywialne (w szczególności nie zostanie to wykonane przez
+            jest nietrywialne (w szczególności nie zostanie to wykonane przez
             kompilator). 
 
             
-        \item Zarówno algorytm rekurencyjny, jak i algorytm iteracyjny ze stosem może posiadać 
-            złożoność pamięciową. Ponadto rozmiar stosu może przekroczyć pamięć komputera.
+        \item Potencjalnie wysoka złożoność pamięciowa algorytmu rekurencyjnego / iteracyjnego ze stosem.
+            Ponadto rozmiar stosu może przekroczyć pamięć komputera.
 
 
         \item Możliwość wielokrotnego rozwiązywania identycznych problemów.

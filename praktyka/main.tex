@@ -3021,12 +3021,12 @@
     \newpage
 
 
-    \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
+    \section{Metoda "dziel i zwyciężaj": zalety i wady.}
     
         \subsection{Binary search}
 
         Problem: dla zadanej posortowanej tablicy $A$ o długości $n$, znajdź indeks elementu
-        równego $x$ lub zwróć symbol niepowodzenia w przypadku braku $x$ w tablicy $A$.
+        równego $x$ lub zwróć -1 w przypadku braku $x$ w tablicy $A$.
         \[\]
         Działamy na (zmniejszającym się) przedziale tablicy $A$. Indeks początka przedziału: 
         $l = 0$, indeks końca przedziału: $r = n - 1$.
@@ -3059,18 +3059,19 @@
                 \begin{itemize}
                     \item $A[l] = x$
 
-                        zwróć $x$
+                        zwróć $l$
                     \item $A[l] \neq x$
 
-                        $x$ nie znajduje się w $A$, zwróć dany symbol
-                        niepowodzenia (np. dla liczb nieujemnych zwróć -1).
+                        $x$ nie znajduje się w $A$, zwróć -1
                 \end{itemize}
 
                 Złożoność obliczeniowa: $\theta(1)$.
 
             \item \textbf{Łącz}
 
-                Brak - wynik zwrócony z podproblemu jest poprawnym wynikiem problemu.
+                Zwróć wynik zwrócony z podproblemu.
+
+                Złożoność obliczeniowa: $\theta(1)$.
         \end{enumerate}
         
         Złożoność obliczeniowa algorytmu: $O(log(n))$.
@@ -3108,13 +3109,13 @@
 
                 \end{center}
                 
-                Złożoność obliczeniowa: $\theta(n)$.
+                Złożoność obliczeniowa: $\theta(1)$.
 
             \item \textbf{Zwyciężaj}
 
                 Dla zbioru $A$ o mocy $|A| \leq 3$ otoczka wypukła jest listą wszystkich punktów.
 
-                Złożoność obliczeniowa: $\theta(0)$.
+                Złożoność obliczeniowa: $\theta(1)$.
                 \begin{center}
                     \begin{tikzpicture}
                             % Node styles
