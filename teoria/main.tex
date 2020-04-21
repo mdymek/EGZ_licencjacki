@@ -3088,7 +3088,7 @@
         ścieżki.
         \\~\\
         \textit{relax(u, v, w)}:
-            \vskip Jeśli $D[u, w] = D[u, v] + D[v, w]$ to:\\
+            \vskip 0pt Jeśli $D[u, w] = D[u, v] + D[v, w]$ to:\\
                 \hspace*{1cm} $D[u, w] = D[u, v] + D[v, w]$\\
                 \hspace*{1cm} $P[u, w] = v$\\
 
@@ -3107,7 +3107,7 @@
             Używamy uproszczonej procedury \textit{relax} - wierzchołkiem startowym ($u$) jest zawsze $s$
             \[\]
             \textit{relax(v, w)}:
-                \vskip Jeśli $D[w] = D[v] + e_{v \rightarrow w}$ to:\\
+                \vskip 0pt Jeśli $D[w] = D[v] + e_{v \rightarrow w}$ to:\\
                 \hspace*{1cm} $D[w] = D[v] + e_{v \rightarrow w}$ \\
                     \hspace*{1cm} $P[w] = v$ \\
 
@@ -3155,14 +3155,14 @@
 
             \[\]
             Dla każdego wierzchołka w $V \setminus \{s\}$:
-            \vskip Wywołaj \textit{relax(u, v)} dla każdej krawędzi $(u, v) \in E$ 
+            \vskip 0pt Wywołaj \textit{relax(u, v)} dla każdej krawędzi $(u, v) \in E$ 
             \[\]
             
             Dodatkowo można wykonać sprawdzenie, czy w grafie nie ma cykli o wadze ujemnej:
 
             \[\]
             Dla każdej krawędzi $(u, v) \in E$: 
-            \vskip Jeśli $D[v] > D[u] + e_{u \rightarrow v}$, to
+            \vskip 0pt Jeśli $D[v] > D[u] + e_{u \rightarrow v}$, to
             istnieje cykl o wadze ujemnej.
             \subsubsection{Złożoność}
             
@@ -3198,7 +3198,7 @@
 
             Wywołaj  \textit{relax(u, v, w)} dla każdej trójki $(u, v, w) : u, w, v \in V$ wywołaj
             \subsubsection{Złożoność}
-            \theta(v^3)
+            $\theta(v^3)$
 
             \subsubsection{Cechy}
             \begin{itemize}
