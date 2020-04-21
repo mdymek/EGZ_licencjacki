@@ -1,0 +1,23 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/EGZ_licencjacki
+    docker:
+      - image: licencjatuj2020/latex:0.1
+
+    steps:
+      - checkout
+      - run:
+          name: Build teoria
+          working_directory: ~/EGZ_licencjacki/teoria
+          command: pdflatex -shell-escape main.tex
+      - run:
+          name: Build praktyka
+          working_directory: ~/EGZ_licencjacki/praktyka
+          command: pdflatex -shell-escape main.tex
+      - store_artifacts:
+          path: teoria/main.pdf
+          destination: ./teoria.pdf
+      - store_artifacts:
+          path: praktyka/main.pdf
+          destination: ./praktyka.pdf
