@@ -23,6 +23,18 @@
 \usepackage{float}
 \usepackage{minted}
 \usepackage{multicol}
+\usepackage{lineno}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
 
 \NewDocumentCommand{\newframedtheorem}{O{}momo}{%
 \IfNoValueTF{#3}
@@ -38,7 +50,10 @@
 \newframedtheorem{theorem}{Twierdzenie}[section]
 \newframedtheorem{definition}[theorem]{Definicja}
 
-
+\lstset{
+  basicstyle=\ttfamily,
+  mathescape
+}
 
 
 \renewcommand{\figurename}{Załącznik}
@@ -3216,7 +3231,87 @@
     \newpage
 
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
+    \subsection{Automat minimalny}
+    \begin{definition}
+    Automat $\mathcal{A} = (S, A, f, s_{0}, T)$ rozpoznający język L nazywamy automatem minimalnym, jeśli posiada najmniejszą liczbę stanów spośród wszystkich automatów rozpoznających język L
+    \end{definition}
+    
+    \begin{definition}
+    Dla dowolnego języka $L \in \mathcal{REC}(A^{*})$ automat
+		\begin{center}
+			$\mathcal{A}_{P_{L}^{r}} = (A^{*} / P_{L}^{r}, A, f^{*}, [1]_{P_{L}^{r}}, T)$,
+		\end{center}
+	gdzie $T = \{[w]_{P_{L}^{r}} : w \in L \}$ jest automatem minimalnym rozpoznającym język L
+    \end{definition}
+    \begin{definition}
+    \textbf{Konstrukcja automatu minimalnego z wykorzystaniem prawej kongruencji automatowej} \\
+	$L \subset A^{*}$ - dowolny język \\
+	$\Theta_{L} \subset A^* \times A^*$ - relacja równoważności dzieląca $A^*$ na dwie klasy:
+	\begin{center}
+		L i $A^*$ \ L
+    \end{center}
+    $\rho_i$ dla $i \in \mathbb{N}$ - zstępujący ciąg relacji: \\
+    $\rho_1 = \Theta_L$, \\
+    $\rho_i = \{(u, w) \in A^* \times A^* : \forall a \in A \cup \{\textbf{1}\} (ua, wa) \in \rho_{i-1} \}$ dla i = 2, ... \\
+    Wtedy
+    \begin{center}
+		$\bigcap\limits_{i \in \mathbb{N}} \rho_i = P^r_L$
+	\end{center}
+    \end{definition}
+    
+    
+    \subsection{Minimalizacja automatu}
+    \begin{definition}
+    		\textbf{Algorytm ``Minimalizuj 1''} \\
+    		\url{http://wazniak.mimuw.edu.pl/index.php?title=J\%C4\%99zyki\%2C_automaty_i_obliczenia/Wyk\%C5\%82ad_5:_Algorytmy_konstrukcji_automatu_minimalnego} \\
+		Wejście L - język \\
+        	Wyjście: automat minimalny $\mathcal{A} = (S_L, A, f_F, s_L, T_L)$ taki, że $L\mathcal{A} = L$
+        	\begin{lstlisting}
+$S_L \leftarrow \{L\};$
+Put$(\mathcal{L}, L);$
+while $\mathcal{L} \neq \emptyset$ do
+  M $\leftarrow$ \textbf{zdejmij} $(\mathcal{L})$;
+  foreach $a \in A$ do
+    N $\leftarrow a^{-1}M$;
+    if $N \cap S_L = \emptyset$ then
+      $S_L \leftarrow S_L \cup \{N\}$;
+      Put$(\mathcal{L}, N);$
+    end if
+  end for
+end while
+foreach $M \in S_L$ do
+  foreach $a \in A$ do
+    $f_L(M, a) \leftarrow a^{-1}M$;
+  end for
+end for
+$s_L \leftarrow L$;
+$T_L \leftarrow \{u^{-1}L : u \in L\}$;
+return $\mathcal{A}'$;
+	    	\end{lstlisting}
+    \end{definition}
+    
     \section{Lemat o pompowaniu dla języków regularnych.}
+    \begin{definition}
+    Niech $L \subset A^*$ będzie językiem rozpoznawalnym. Istnieje liczba naturalna $N \geq 1$ taka, że dowolne słowo $w \in L$ o długości $|w| \geq N$ można rozłożyć na katenację:
+    \begin{center}
+    $w = v_1uv_2$
+    \end{center}
+    gdzie $v_1, v_2 \in A^*, u \in A^+, |v_1u| < N$ oraz
+    \begin{center}
+    $v_1u^*v_2 \subset L$
+    \end{center}
+    \end{definition}
+    
+    \begin{definition}
+    Jeśli rozpoznawalny język $L \subset A^*$ jest nieskończony, to istnieją
+    $v_1, v_2 \in A^*, u \in A^+$, takie, że
+    \begin{center}
+	$v_1u*v_2 \subset L$
+    \end{center}
+    \end{definition}
+    
+    
+    
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
