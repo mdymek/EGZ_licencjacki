@@ -3322,8 +3322,235 @@ return $\mathcal{A}'$;
 
     \section{Reprezentacja liczb całkowitych; arytmetyka.}
     \section{Reprezentacja liczb rzeczywistych; arytmetyka zmiennopozycyjna.}
+
+    \newpage
+
     \section{Różnice w wywołaniu funkcji statycznych, niestatycznych i wirtualnych w C++.}
+
+    \subsection{Funkcje statyczne.}
+    \begin{itemize}
+        \item \textbf{Globalne funkcje statyczne} to funkcje o zakresie widoczności ograniczonym do pliku źródłowego, który je
+        zawiera (a dokładniej do ich \textit{jednostce translacji}, czyli pliku który jest kompilowany - zatem pliku
+        źródłowego wraz z dołączonymi includami).
+        \item \textbf{Metody statyczne klas} to metody których wywołanie jest niezależne od instancjonowania klasy -
+        wszystkie instancje klasy współdzielą kopię statycznych metod i pól. Instancja klasy nie jest nam potrzebna
+        do wywołania statycznej metody (aczkolwiek można jej użyć).
+    \end{itemize}
+
+    \begin{minted}{cpp}
+        #include <iostream>
+        using namespace std;
+
+        // statyczna funkcja globalna dostępna tylko z naszego pliku
+        static void sayHello(){
+            cout << "hello" << endl;
+        }
+
+        class ExampleClass {
+            public:
+                static void sayBye(){
+                    cout  << "bye" << endl;
+                }
+        };
+
+        int main(){
+            sayHello();
+
+            ExampleClass::sayBye(); // wywołanie bez instancjonowania klasy
+
+            ExampleClass e();
+            e.sayBye(); // wywołanie dla instancji klasy
+        }
+    \end{minted}
+
+    \subsection{Funkcje niestatyczne.}
+    \begin{itemize}
+        \item \textbf{Niestatyczne funkcje globalne} są dostępne ze wszystkich plików, które includują zawierające
+        je plik źródłowy - trzeba zatem uważać na konflikty nazw.
+        \item \textbf{Nietstatyczne metody klas} wymagają do wywołania instancji klasy - mogą zachowywać się różnie
+        dla różnych instancji; mogą być oznaczone \texttt{final} i \texttt{override}.
+    \end{itemize}
+
+    \begin{minted}{cpp}
+        #include <iostream>
+        using namespace std;
+
+        // niestatyczna funkcja globalna dostępna dla wszystkich plików
+        void sayHello(){
+            cout << "hello" << endl;
+        }
+
+        class ExampleClass {
+        public:
+            void sayBye(){
+                cout  << "bye" << endl;
+            }
+        };
+
+        int main(){
+            sayHello();
+
+            // ExampleClass::sayBye() -  wywołanie niepoprawne
+
+            ExampleClass e();
+            e.sayBye(); // wywołanie dla instancji klasy
+        }
+    \end{minted}
+
+    \subsection{Funkcje wirtualne.}
+    \begin{itemize}
+        \item \textbf{Wirtualne metody klas} są przydatne polimorfiźmie.
+        \item W przypadku zwykłej metody, wywołanie jej dla wskaźnika typu klasy podstawowej zawsze wywoła instancję
+        z klasy podstawowej, nawet jeżeli wskaźnik będzie tak naprawdę wskazywał na klasę pochodną.
+        \item Słowo kluczowe \texttt{virtual} wymusza dedukcję której metody użyć na podstawie zawartości wskaźnika,
+        a nie jego typu. Dedukcja następuje w czasie wykonania programu.
+    \end{itemize}
+
+    Bez \texttt{virtual}:
+    \begin{minted}{cpp}
+        #include <iostream>
+        using namespace std;
+
+        struct Base {
+            void f() {
+            cout << "base" << endl;
+            }
+        };
+
+        struct Derived : Base {
+            void f() {
+            cout << "derived" << endl;
+            }
+        };
+
+        int main(){
+        Base b;
+        Derived d;
+
+        // call through reference
+        Base& br = b; // the type of br is Base&
+        Base& dr = d; // the type of dr is Base& as  well
+        br.f(); // "base"
+        dr.f(); // "base"
+
+        // cal through pointer
+        Base* bp = &b; // the type of bp is Base*
+        Base* dp = &d; // the type of dp is Base* as  well
+        bp->f(); // "base"
+        dp->f(); // "base"
+
+        return 0;
+        }
+    \end{minted}
+
+
+    Przy użyciu \texttt{virtual}:
+    \begin{minted}{cpp}
+    #include <iostream>
+    using namespace std;
+
+    struct Base {
+        virtual void f() {
+        cout << "base" << endl;
+        }
+    };
+
+    struct Derived : Base {
+        void f() override { // 'override' is optional
+        cout << "derived" << endl;
+        }
+    };
+
+    int main(){
+        Base b;
+        Derived d;
+
+        // call through reference
+        Base& br = b; // the type of br is Base&
+        Base& dr = d; // the type of dr is Base& as  well
+        br.f(); // "base"
+        dr.f(); // "derived"
+
+        // call through pointer
+        Base* bp = &b; // the type of bp is Base*
+        Base* dp = &d; // the type of dp is Base* as  well
+        bp->f(); // "base"
+        dp->f(); // "derived"
+
+        return 0;
+    }
+    \end{minted}
+
+    \newpage
+
     \section{Sposoby przekazywania parametrów do funkcji (przez wartość, przez referencję). Zalety i wady.}
+
+    \subsection{Przekazywanie przez wartość.}
+
+    Przekazywanie argumentu przez wartość oznacza, że argumentem może być \textbf{rvalue} (np. wyrażenie arytmetyczne), a przekazanie
+    lvalue (zmiennej) powoduje utworzenie \textbf{kopii}.
+    \begin{itemize}
+        \item Za zaletę można uznać fakt możliwości użycia wyrażenia w wywołaniu (zakładając że nie używamy wyniku tego
+        wyrażenia nigdzie indziej - nie potrzebujemy tworzyć zbędnej zmiennej).
+        \item Kwestia tworzenia kopii może być zaletą lub wadą - umożliwia nam to swobodne modyfikowanie wartości
+        bez modyfikowania oryginalnej zmiennej (co może być chcianą funkcjonalnością), ale może stanowić niepotrzebne obciążenie
+        w przypadku gdy dana zmienna nie jest lub może być modyfikowana (wtedy tworzenie kopii jest niepotrzebne).
+    \end{itemize}
+
+    \begin{minted}{cpp}
+        #include <iostream>
+        using namespace std;
+
+        void add2(int x){
+            x += 2;
+            cout << x << endl; // 7
+        }
+
+        int main(){
+            int a = 5;
+            cout << a << endl; // 5
+
+            add2(a);
+            cout << a << endl; // 5
+
+            return 0;
+        }
+    \end{minted}
+
+    \subsection{Przekazywanie przez referencję.}
+    Funkcja otrzymuje jako argument adres zmiennej, a nie jej wartość. Mając adres może odwołać się do pamięci tej
+    zmiennej i zmienić jej zawartość. Wszelka modyfikacja takiego argumentu wewnątrz funkcji powoduje zmianę skojarzonej
+    z tym argumentem zmiennej.
+    \begin{itemize}
+        \item Zaletą jest nietworzenie niepotrzebnych kopii, możliwość zmiany zmiennej spoza zakresu funkcji (zamiast
+        np. zwracania i przypisywania nowej wartości).
+        \item Nieprzemyślane użycie może spowodować nieprzewidzianą przez programistę zmianę zawartości zmiennej.
+        \item Brak możliwości użyca wyrażenia jako argumentu funkcji - musimy zapisać jego wynik w zmiennej, by móc
+        ją przekazać.
+    \end{itemize}
+
+    \begin{minted}{cpp}
+        #include <iostream>
+        using namespace std;
+
+        void add2(int & x){
+            x += 2;
+            cout << x << endl; // 7
+        }
+
+        int main(){
+            int a = 5;
+            cout << a << endl; // 5
+
+            add2(a);
+            cout << a << endl; // 7
+
+            return 0;
+        }
+    \end{minted}
+
+    \newpage
+
     \section{Wskaźniki, arytmetyka wskaźników, różnica między wskaźnikiem a referencją w C++.}
     \section{Podstawowe założenia paradygmatu obiektowego: dziedziczenie, abstrakcja, enkapsulacja, polimorfizm.}
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
