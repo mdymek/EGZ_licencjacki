@@ -2962,9 +2962,481 @@
 
     \section{Złożoność obliczeniowa - pesymistyczna i średnia.}
 
+        \begin{exercise}
+            Oblicz pesymistyczną i średnią złożoność obliczeniową algorytmu sortowania przez wstawianie. 
+        \end{exercise}
+        
+        \textbf{Złożoność pesymistyczna}
+        
+        Przypadek pesymistyczny polega na otrzymaniu na wejściu odwrotnie posortowanej tablicy. 
+        Wówczas każdy element (oprócz pierwszego) z zostanie porównany 
+        i zamieniony ze wszystkimi elementami uprzednio posortowanego fragmentu tablicy. 
+        Obliczmy złożoność zakładając, że zamiana elementów zajmuje czas równy stałej $c$.
+        
+        $$W(c) = \sum_{i = 2}^nic$$
+        $$W(c) = \frac{n^2 + n - 2}{2}c$$
+        $$W(c) = \theta(n^2)$$
+        
+        \textbf{Złożoność średnia}
+        
+        Zauważmy, że ilość zamian elementów jest zależna od liczby inwersji w tablicy wejściowej. Aby obliczyć średnią złożoność algorytmu musimy obliczyć średnią liczbę inwersji.\\
+        
+        Niech $X_ij$ będzie zmienną losową oznaczającą, czy w tablicy wejściowej $A[i]$ jest w inwersji z $A[j]$.
+	Ilość par $i,j$ jest równa $\frac{n(n-1)}{2}.$
+        
+        $$A(n) = E(\sum X_{ij}) = \sum E(X_ij) = \frac{1}{2} \cdot \frac{n(n - 1)}{2} = \frac{n(n - 1)}{4}$$
+        
+        \begin{exercise}
+        Oblicz średnią złożoność obliczeniową algorytmu quicksort.
+        \end{exercise}
+        
+        Zakładamy, że tablica wejściowa nie posiada duplikatów, zaś operacją dominującą jest porównywanie.
+	Przy każdym wyborze elementu rozdzielającego ilość elementów od niego mniejsza jest zmienną losową od 0 do $n - 1$ o rozkładzie jednostajnym. 
+        Zatem po podziale otrzymujemy dwie tablice: o długości $i$ oraz o długości $n - i - 1$ gdzie $i$ jest zmienną losową o rozkładzie jednostajnym od 0 do $n - 1$. 
+        Zatem zakładając, że ilość porównań przy każdym podziale wynosi $n - 1$, średnia ilość porównań dla wszystkich permutacji otrzymanej tablicy jest równa:
+        $$A(n) = n - 1 + \frac{1}{n}\sum_{i = 0}^{n - 1}(A(i) + A(n - i - 1)) = 
+        n - 1 + \frac{2}{n}\sum_{i = 0}^{n - 1}A(i)$$
+        
+        $$nA(n) = n(n - 1) + 2 \sum_{i = 0}^{n - 1}A(i)$$
+        
+        $$nA(n) - (n - 1)A(n-1) = n(n - 1) - (n - 1)(n - 2) + 2\sum_{i = 0}^{n - 1}A(i) - 2\sum_{i = 0}^{n - 2}A(i) = $$
+        
+        $$= 2(n - 1) + 2A(n - 1)$$
+        
+        $$nA(n) = (n + 1)A(n - 1) + 2n - 2$$
+        
+        $$A(n) = \frac{(n + 1)A(n - 1)}{n} + 2 - \frac{2}{n}$$
+        
+        $$\frac{A(n)}{n + 1} = \frac{A(n - 1)}{n} + \frac{2}{n + 1} - \frac{2}{n(n + 1)} = $$
+         $$= \frac{A(n - 2)}{n - 1} + \frac{2}{n} - \frac{2}{(n - 1)n} - \frac{2}{n(n + 1)} + \frac{2}{n + 1} = $$
+         $$ = \cdots = \frac{A(1)}{2} + \sum_{i = 2}^n \frac{2}{i + 1} - \sum_{i = 2}^n \frac{2}{i(i + 1)} = 
+         2\sum_{i = 1}^{n - 1} \frac{1}{i} - \frac{n - 1}{n + 1}$$
+         
+         $$\sum_{i = 1}^{n - 1} \frac{1}{i} \approx \int_1^{n - 1}\frac{dx}{x} = ln(n - 1)$$
+         
+         $$A(n) = 2(n + 1)\;ln(n - 1) - n + 1 = 2n\;ln(n - 1) + 2ln(n - 1) - n + 1 \leq$$
+         
+         $$\leq 2\;ln(n) \approx 1.39 n \; log_2 n = \theta(n\;ln(n))$$
+        
     \newpage
 
-    \section{Metoda "dziel i zwyciężaj"; zalety i wady.}
+
+    \section{Metoda "dziel i zwyciężaj": zalety i wady.}
+    
+        \subsection{Binary search}
+
+        Problem: dla zadanej posortowanej tablicy $A$ o długości $n$, znajdź indeks elementu
+        równego $x$ lub zwróć -1 w przypadku braku $x$ w tablicy $A$.
+        \[\]
+        Działamy na (zmniejszającym się) przedziale tablicy $A$. Indeks początka przedziału: 
+        $l = 0$, indeks końca przedziału: $r = n - 1$.
+
+        \begin{enumerate}
+            \item \textbf{Dziel}
+                
+                Porównaj element $A[s]$ ($s = \frac{l+ r}{2}$) z $x$.
+                
+                \begin{itemize}
+                    \item $A[s] = x$ 
+
+                        Zwróć $s$.
+
+                    \item $A[s] > x$
+
+                        Powtórz dla $A[l : s - 1]$, tzn $l = l, r = s - 1$ 
+
+                    \item $A[s] < x$
+
+                        Powtórz rekurencyjnie dla $A[s + 1 : n - 1]$, tzn $l = s + 1, r = r$
+                \end{itemize}
+
+                Złożoność obliczeniowa: $\theta(1)$.
+            
+            \item \textbf{Zwyciężaj}
+
+                Dla tablicy z $n = 1$ ($l = r$) porównaj $A[l]$ z $x$
+
+                \begin{itemize}
+                    \item $A[l] = x$
+
+                        zwróć $l$
+                    \item $A[l] \neq x$
+
+                        $x$ nie znajduje się w $A$, zwróć -1
+                \end{itemize}
+
+                Złożoność obliczeniowa: $\theta(1)$.
+
+            \item \textbf{Łącz}
+
+                Zwróć wynik zwrócony z podproblemu.
+
+                Złożoność obliczeniowa: $\theta(1)$.
+        \end{enumerate}
+        
+        Złożoność obliczeniowa algorytmu: $O(log(n))$.
+        
+        \subsection{Otoczka wypukła}
+
+        Dla zbioru punktów $A$ na przestrzeni dwuwymiarowej znajdź listę punktów tworzących 
+        otoczkę wypukłą.
+        \[\]
+        Działamy na zbiorze posortowanym względem osi $x$.
+
+        \begin{enumerate}
+            \item \textbf{Dziel}
+                
+                Podziel $A$ na dwa zbiory: lewy $L$ i prawy $R$ względem prostej równoległej do
+                osi $y$.
+                \begin{center}
+                    \begin{tikzpicture}
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \node [style=white] (9) at (1, -3) {};
+                            \node [style=white] (10) at (1, 4) {};
+                            \draw (9) to (10);
+                    \end{tikzpicture}
+
+                \end{center}
+                
+                Złożoność obliczeniowa: $\theta(1)$.
+
+            \item \textbf{Zwyciężaj}
+
+                Dla zbioru $A$ o mocy $|A| \leq 3$ otoczka wypukła jest listą wszystkich punktów.
+
+                Złożoność obliczeniowa: $\theta(1)$.
+                \begin{center}
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \draw (1) to (0);
+                            \draw (0) to (2);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                    \end{tikzpicture}
+                \end{center}
+            \item \textbf{Łącz}
+
+                Połącz wypukłe otoczki podzbiorów.
+
+                Złożoność obliczeniowa: $O(n)$.
+            
+                \begin{center}
+                \begin{tikzpicture}
+                        % Node styles
+                        \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                        \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                        \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                        % Edge styles
+                        \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \draw (1) to (0);
+                            \draw (0) to (2);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                            \draw [style=green-line] (1) to (8);
+                            \draw [style=green-line] (3) to (5);
+                            \draw [style=green-line] (1) to (3);
+                            \draw [style=green-line] (8) to (7);
+                            \draw [style=green-line] (7) to (6);
+                            \draw [style=green-line] (6) to (5);
+                \end{tikzpicture}
+                \end{center}
+
+            \begin{enumerate}
+                \item Znajdź element $l_1$ ($r_1$) będący elementem wysuniętym najbardziej na
+                    lewo (prawo) w zbiorze $L$ ($R$)
+                \begin{center}
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+                            \tikzstyle{red-line}=[-, draw={rgb,255: red,213; green,0; blue,0}]
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {l1};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {r1};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \node [style=white] (9) at (1, -3) {};
+                            \node [style=white] (10) at (1, 4) {};
+                            \draw (1) to (0);
+                            \draw (0) to (2);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                    \end{tikzpicture}
+                \end{center}
+
+                \item Znajdź elementy "górne" w $L$ i $R$, tzn. $l_u$ i $r_u$ dające wypukłą otoczkę,
+                    zaczynając od $l_1$ ($r_1$) i idąc przeciwnie (zgodnie z) do wskazówek zegara. 
+                \begin{center}
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+                            \tikzstyle{red-line}=[-, draw={rgb,255: red,213; green,0; blue,0}]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {$l_1$};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {$r_1$};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \node [style=white] (9) at (1, -3) {};
+                            \node [style=white] (10) at (1, 4) {};
+                            \draw (1) to (0);
+                            \draw (0) to (2);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                            \draw [style=red-line] (2) to (4);
+                            \draw [style=red-line] (4) to (8);
+                    \end{tikzpicture}
+                    
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+                            \tikzstyle{red-line}=[-, draw={rgb,255: red,213; green,0; blue,0}]
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {$l_1$};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {$r_1$};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \node [style=white] (9) at (1, -3) {};
+                            \node [style=white] (10) at (1, 4) {};
+                            \draw (1) to (0);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw [style=red-line] (2) to (8);
+                            \draw [style=red-line] (0) to (2);
+                            \draw  (8) to (4);
+                    \end{tikzpicture}
+
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+                            \tikzstyle{red-line}=[-, draw={rgb,255: red,213; green,0; blue,0}]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {};
+                            \node [style=green] (2) at (0.25, 0) {$l_1$};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {$r_1$};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {};
+                            \node [style=white] (9) at (1, -3) {};
+                            \node [style=white] (10) at (1, 4) {};
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                            \draw [style=red-line] (1) to (0);
+                            \draw [style=red-line] (0) to (8);
+                            \draw (2) to (0);
+                    \end{tikzpicture}
+
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+                            \tikzstyle{red-line}=[-, draw={rgb,255: red,213; green,0; blue,0}]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {$l_u$};
+                            \node [style=green] (2) at (0.25, 0) {$l_1$};
+                            \node [style=green] (3) at (-1.5, -1.75) {};
+                            \node [style=red] (4) at (2, -0.25) {$r_1$};
+                            \node [style=red] (5) at (3.25, -2) {};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {$r_u$};
+                            \node [style=white] (9) at (1, -3) {};
+                            \node [style=white] (10) at (1, 4) {};
+                            \draw (1) to (0);
+                            \draw (0) to (2);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                            \draw [style=green-line] (1) to (8);
+                    \end{tikzpicture}
+
+                \end{center}
+            \item Analogicznie znajdź $l_d$ i $r_d$
+
+                \begin{center}
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{white}=[fill=white, draw=white, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {$l_u$};
+                            \node [style=green] (2) at (0.25, 0) {};
+                            \node [style=green] (3) at (-1.5, -1.75) {$l_d$};
+                            \node [style=red] (4) at (2, -0.25) {};
+                            \node [style=red] (5) at (3.25, -2) {$r_d$};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {$r_u$};
+                            \draw (0) to (2);
+                            \draw (2) to (3);
+                            \draw (3) to (1);
+                            \draw (4) to (5);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw (8) to (4);
+                            \draw (1) to (8);
+                            \draw (1) to (0);
+                            \draw (8) to (7);
+                            \draw [style=green-line] (3) to (5);
+                    \end{tikzpicture}
+                \end{center}
+            \item Zwróć otoczkę składającą się z:
+                \begin{itemize}
+                    \item krawędzi $l_u$ - $r_u$
+                    \item fragmentu otoczki $R$ łączącej $r_u$ z $r_l$
+                    \item krawędzi $r_d$ - $l_d$
+                    \item fragmentu otoczki $L$ łączącej $l_d$ z $l_u$
+                \end{itemize}
+
+                \begin{center}
+                    \begin{tikzpicture}
+                            % Node styles
+                            \tikzstyle{green}=[fill={rgb,255: red,0; green,170; blue,0}, draw=black, shape=circle]
+                            \tikzstyle{red}=[fill={rgb,255: red,213; green,0; blue,0}, draw=black, shape=circle]
+
+                            % Edge styles
+                            \tikzstyle{green-line}=[-, draw={rgb,255: red,0; green,170; blue,0}]
+                            \tikzstyle{red-line}=[-, draw={rgb,255: red,213; green,0; blue,0}]
+
+                            \node [style=green] (0) at (-0.75, 1) {};
+                            \node [style=green] (1) at (-3.25, 0.5) {$l_u$};
+                            \node [style=green] (2) at (0.25, 0) {};
+                            \node [style=green] (3) at (-1.5, -1.75) {$l_d$};
+                            \node [style=red] (4) at (2, -0.25) {};
+                            \node [style=red] (5) at (3.25, -2) {$r_d$};
+                            \node [style=red] (6) at (5.25, -1.5) {};
+                            \node [style=red] (7) at (5, 1.25) {};
+                            \node [style=red] (8) at (2.75, 3.25) {$r_u$};
+                            \draw (3) to (1);
+                            \draw (5) to (6);
+                            \draw (6) to (7);
+                            \draw (7) to (8);
+                            \draw [style=green-line] (1) to (8);
+                            \draw [style=green-line] (3) to (5);
+                    \end{tikzpicture}
+
+                \end{center}
+            \end{enumerate}
+        \end{enumerate}
+        \[\] 
+        \textbf{Złożoność algorytmu:} $\theta(n \cdot log(n))$. \[\] 
+        \textbf{Uzasadnienie:} podział na 2 podproblemy (z podziałem i łączeniem zajmującym 
+        $O(n)$ czasu): $O(n \cdot log(n))$ + złożoność sortowania punktów wg. osi $x$ 
+        ($\theta(n \cdot log(n)$), co daje razem $\theta(n \cdot log(n))$.
+    \newpage
+
     \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
     \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
 
