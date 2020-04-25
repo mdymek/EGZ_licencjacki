@@ -3602,7 +3602,7 @@ cout << *(a+3) << endl;  // 30
     Po kompilacji (w kodzie maszynowym) referencje i wskaźniki niczym się nie różnią.
     Korzystając z referencji świadomie rezygnujemy z pewnych możliwości oferowanych nam przez wskaźniki. W zamian dostajemy:
     \begin{itemize}
-	\item Łatwiejszą notację - nie musimy używać operatora wyłuskania do odwoływania się do obiektu
+	\item Łatwiejszą notację - nie musimy używać operatora wyłuskania (\texttt{*}) do odwoływania się do obiektu
 	\item Większe bezpieczeństwo - brak arytmetyki dla referencji znacznie utrudnia popełnienie błędów związanych z niepoprawnym odwołaniem do pamięci
     \end{itemize}
     \end{definition}
@@ -3631,7 +3631,7 @@ cout << n << endl; //7
     \begin{definition}
 	\textbf{Dziedziczenie (kompozycja)} \\
     	Umożliwia stworzenie hierarchii obiektów w programie. Polega na przejęciu właściwości i funkcjonalności obiektów innej klasy
-    	i ewentualnejmodyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane.
+    	i ewentualnej modyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane.
     	\begin{minted}{cpp}
 class Mammal {
 public:
@@ -3800,9 +3800,9 @@ int main() {
     \end{minted}
     
     Jak widzimy dla obu wskaźników instancjonujemy klasę \texttt{ColoredPoint}. W przypadku wskaźnika \texttt{p} i wywołania metody \texttt{printClassName}
-    została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na opiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
-    bierzez pod uwagę typ wskaźnika a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
-    kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
+    została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na obiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
+    bierzez pod uwagę typ wskaźnika, a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
+    kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu, a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
     z powyższego kodu.
     \end{definition}
     
