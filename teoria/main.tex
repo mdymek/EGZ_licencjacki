@@ -3552,6 +3552,78 @@ return $\mathcal{A}'$;
     \newpage
 
     \section{Wskaźniki, arytmetyka wskaźników, różnica między wskaźnikiem a referencją w C++.}
+    \begin{definition}
+    	\textbf{Wskaźnik} – typ zmiennej odpowiedzialnej za przechowywanie adresu do innej zmiennej (innego miejsca w pamięci) w obrębie naszej aplikacji.
+    	Wskaźnik może wskazywać na jakąś zmienną, strukturę, tablicę czy nawet funkcję.
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Operatory związane ze wskaźnikami w C++}
+    	\begin{minted}{cpp}
+int a = 5;
+
+// Creation of pointer to int variable
+int *intPtr = nullptr;  // In older versions NULL
+
+// Using & (ampersand) to get address of variable
+// then assign to pointer
+intPtr = &a;
+
+// Using * as dereference operator
+// to get value of pointed variable
+cout << *intPtr << endl;
+    	\end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Arytmetyka wskaźników} \\
+    	Mając wskaźnik \texttt{int *p} wskazujący na hipotetyczny adres 10, wykonując na nim operację \texttt{p+2} dostajemy wskaźnik wskazujący na adres \texttt{10 + 2*sizeof(int)}
+    	czyli zakładając, że typ \texttt{int} zajmuje w naszym kompilatorze 4 bajty dostajemy \texttt{10 + 2*4} = \texttt{18}. \\
+    	Jest to przydatne szczególnie przy operowaniu na strukturach, których pola są ułożone po kolei w pamięci, np. tablice:
+    	\begin{minted}{cpp}
+int *a = new int[10] {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+// Now a pointing to first element in array
+cout << *a << endl;  // 0
+
+// Using dereference operator with pointer arithmetic
+cout << *(a+3) << endl;  // 30
+    	\end{minted}
+    	Jak więc widać \texttt{*(a+i)} $\Leftrightarrow$ \texttt{a[i]}.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Wskaźnik a referencja} \\
+    Referencję możemy traktować jako dodatkową nazwę na juz istniejący obiekt. Jest to coś w rodzaju stałego wskaźnika.
+    Składnia referencji zabrania jednak wykonywania operacji znanych dla wskaźników:
+    \begin{itemize}
+        \item Dla referencji nie można zmienić referowanego obiektu - raz ustawiony (a musi być ustawiony prawie zawsze podczas jej deklaracji) nie zmienia się przez cały czas jej życia
+        \item Nie jest dostępna arytmetyka referencji (w przeciwieństwie do arytmetyki wskaźników)
+    \end{itemize}
+    Po kompilacji (w kodzie maszynowym) referencje i wskaźniki niczym się nie różnią.
+    Korzystając z referencji świadomie rezygnujemy z pewnych możliwości oferowanych nam przez wskaźniki. W zamian dostajemy:
+    \begin{itemize}
+	\item Łatwiejszą notację - nie musimy używać operatora wyłuskania do odwoływania się do obiektu
+	\item Większe bezpieczeństwo - brak arytmetyki dla referencji znacznie utrudnia popełnienie błędów związanych z niepoprawnym odwołaniem do pamięci
+    \end{itemize}
+    \end{definition}
+    
+    \noindent \textbf{Przykład użycia referencji}
+    \begin{minted}{cpp}
+int n = 6;
+
+// Deklaracja referencji na typ int i przypisanie referowanego obiektu
+// Referencję deklarujemy dodając & (ampersand) między nazwą typu a zmiennej
+// (nie mylić z & jako operatorem pobrania adresu omawianym przy wskaźnikach)
+int &r = n;
+
+cout << r << endl; // 6
+
+// Zmiana wartości odwołując się do referncji
+// zmienia tak na prawdę wartość oryginalnego obiektu
+r = 7;
+
+cout << n << endl; //7
+    \end{minted}    
     
     \newpage
     
@@ -3559,8 +3631,7 @@ return $\mathcal{A}'$;
     \begin{definition}
 	\textbf{Dziedziczenie (kompozycja)} \\
     	Umożliwia stworzenie hierarchii obiektów w programie. Polega na przejęciu właściwości i funkcjonalności obiektów innej klasy
-    	i ewentualnejmodyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane. \\
-    	
+    	i ewentualnejmodyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane.
     	\begin{minted}{cpp}
 class Mammal {
 public:
@@ -3594,7 +3665,6 @@ int main() {
     \textbf{Abstrakcja} \\
     Każdy obiekt w systemie służy jako model abstrakcyjnego "wykonawcy", który może wykonywać pracę, opisywać i zmieniać swój stan, oraz komunikować się
     z innymi obiektami w systemie, bez ujawniania, w jaki sposób zaimplementowano dane cechy.
-    
     \begin{minted}{cpp}
 class DiscountComputator {
 private:
@@ -3629,7 +3699,6 @@ int main() {
     Każdy typ obiektu dostarcza interfejsu, który określa sposób współpracy z innymi obiektami.
     Jedynie za pomocą określonych metod mamy możliwość zmienić stan obiektu, bezpośredni dostęp
     do zmiennych jest zabroniony.
-    
     \begin{minted}{cpp}
 class MyClass {
 private:
@@ -3668,7 +3737,6 @@ int main() {
     Referencje i wskaźniki obiektów mogą dotyczyć obiektów różnego typu, a wywołanie metody dla referencji spowoduje zachowanie
     odpowiednie dla pełnego typu obiektu wywoływanego. Zazwyczaj można wyróżnić dwa rodzaje polimorfizmu: dynamiczne - wykonywane podczas działania programu,
     a także statyczne - na etapie kompilacji.
-
     \begin{minted}{cpp}
 class Point {
 protected:
