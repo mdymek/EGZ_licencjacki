@@ -3552,7 +3552,194 @@ return $\mathcal{A}'$;
     \newpage
 
     \section{Wskaźniki, arytmetyka wskaźników, różnica między wskaźnikiem a referencją w C++.}
+    
+    \newpage
+    
     \section{Podstawowe założenia paradygmatu obiektowego: dziedziczenie, abstrakcja, enkapsulacja, polimorfizm.}
+    \begin{definition}
+	\textbf{Dziedziczenie (kompozycja)} \\
+    	Umożliwia stworzenie hierarchii obiektów w programie. Polega na przejęciu właściwości i funkcjonalności obiektów innej klasy
+    	i ewentualnejmodyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane. \\
+    	
+    	\begin{minted}{cpp}
+class Mammal {
+public:
+  void feed() {
+    cout << "sucking" << endl;
+  }
+		
+  virtual void giveVoice() = 0; // Pure virtual method
+};
+
+class Cat : public Mammal {
+public:
+  void giveVoice() override {
+    cout << "meow" << endl;
+  }
+};
+
+int main() {
+  Cat cat = new Cat();
+  cat.feed();
+  cat.giveVoice();
+  /*
+  sucking
+  meow
+  */
+}
+    	\end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Abstrakcja} \\
+    Każdy obiekt w systemie służy jako model abstrakcyjnego "wykonawcy", który może wykonywać pracę, opisywać i zmieniać swój stan, oraz komunikować się
+    z innymi obiektami w systemie, bez ujawniania, w jaki sposób zaimplementowano dane cechy.
+    
+    \begin{minted}{cpp}
+class DiscountComputator {
+private:
+  int factor;
+  ...
+
+public:  
+  // Setter
+  void setFactor(int factor) {
+    this.factor = factor;
+  }
+  
+  double compute(double price) {
+    ...
+  }
+};
+
+int main() {
+  DiscountComputator dc = new DiscountComputator();
+  
+  dc.setFactor(5);
+  
+  // We are not interested how it is calculated
+  double result = dc.compute(123.45);
+}
+    \end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Enkapsulacja} \\
+    Enkapsulacja zapewnia, że obiekt nie może zmieniać stanu innych obiektów w nieokreślony sposób.
+    Każdy typ obiektu dostarcza interfejsu, który określa sposób współpracy z innymi obiektami.
+    Jedynie za pomocą określonych metod mamy możliwość zmienić stan obiektu, bezpośredni dostęp
+    do zmiennych jest zabroniony.
+    
+    \begin{minted}{cpp}
+class MyClass {
+private:
+  int field;
+  
+public:
+  // Setter
+  void setField(int field) {
+    this.field = field;
+  }
+  
+  // Getter
+  int getField() {
+    return field;
+  }
+};
+
+int main() {
+  MyClass clazz = new MyClass();
+  
+  clazz.setField(5);
+  int field = clazz.getField();
+  
+  /*
+  // The `field` is private, so the following
+  // will cause an error during compilation
+  clazz.field = 5;
+  int field = clazz.field;
+  */
+}
+    \end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Polimorfizm} \\
+    Referencje i wskaźniki obiektów mogą dotyczyć obiektów różnego typu, a wywołanie metody dla referencji spowoduje zachowanie
+    odpowiednie dla pełnego typu obiektu wywoływanego. Zazwyczaj można wyróżnić dwa rodzaje polimorfizmu: dynamiczne - wykonywane podczas działania programu,
+    a także statyczne - na etapie kompilacji.
+
+    \begin{minted}{cpp}
+class Point {
+protected:
+    int x, y;
+public:
+    // Constructor with initializer list
+    Point(int x, int y) : x(x), y(y) {
+    }
+
+    virtual void printPoint() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+
+    void printClassName() {
+        cout << "Point" << endl;
+    }
+};
+
+class ColoredPoint : public Point {
+protected:
+    int color;
+public:
+    // Constructor with initializer list
+    ColoredPoint(int x, int y, int color)
+        : Point(x, y), color(color) {
+    }
+
+    void printPoint() {
+        cout << "(" << x << ", " << y
+            << ", color = " << color << ")" << endl;
+    }
+
+    void printClassName() {
+        cout << "ColoredPoint" << endl;
+    };
+};
+	\end{minted}
+	\end{definition}
+	\begin{definition} \textbf{} \\
+	\begin{minted}{cpp}
+int main() {
+    Point *p = new ColoredPoint(1, 2, 3);
+    p->printPoint();
+    p->printClassName();
+    delete p;
+
+    ColoredPoint *cp = new ColoredPoint(1, 2, 3);
+    cp->printPoint();
+    cp->printClassName();
+    delete cp;
+
+    return 0;
+}
+
+/* Output:
+   (1, 2, color = 3)
+   Point
+   (1, 2, color = 3)
+   ColoredPoint
+*/
+    \end{minted}
+    
+    Jak widzimy dla obu wskaźników instancjonujemy klasę \texttt{ColoredPoint}. W przypadku wskaźnika \texttt{p} i wywołania metody \texttt{printClassName}
+    została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na opiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
+    bierzez pod uwagę typ wskaźnika a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
+    kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
+    z powyższego kodu.
+    \end{definition}
+    
+    \newpage
+    
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
