@@ -50,6 +50,8 @@
 \newframedtheorem{theorem}{Twierdzenie}[section]
 \newframedtheorem{definition}[theorem]{Definicja}
 
+
+
 \lstset{
   basicstyle=\ttfamily,
   mathescape
@@ -57,6 +59,7 @@
 
 
 \renewcommand{\figurename}{Załącznik}
+
 
 \begin{document}
     \begin{titlepage}
@@ -3067,7 +3070,136 @@
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
+    
+    \begin{definition}
+    \textbf{Programowanie dynamiczne}
+    
+    Technika projektowania algorytmów polegająca na \textbf{podziale problemu na mniejsze podproblemy} względem kilku parametrów (podobnie jak w metodzie dziel i zwyciężaj).
+    
+    Wyniki rozwiązywania podproblemów są  \textbf{zapisywane w tabeli}, dzięki czemu w przypadku natrafienia na ten sam podproblem nie trzeba go ponownie rozwiązywać.
+    
+    Cechy
+    \begin{itemize}
+        \item Problem posiada powtarzające się podproblemy
+        \item Podproblemy musi cechować \textbf{własność optymalnej podstruktury}
+        \item Zastosowanie brute force prowadzi do \textbf{ponadwielomianowej} liczby rozwiązań podproblemów, podczas gdy sama liczba różnych podproblemów jest wielomianowa
+    \end{itemize}
+    
+    Niejednokrotnie stosowanie techniki programowania dynamicznego daje w rezultacie algorytm pseudowielomianowy.
+    \end{definition}
+
+    \begin{definition}
+    \textbf{Własność optymalnej podstruktury}
+    
+    Oznacza, że optymalne rozwiązanie problemu jest \textbf{funkcją optymalnych rozwiązań podproblemów}, czyli znając optymalne rozwiązania podproblemów można efektywnie wyznaczyć rozwiązanie problemu.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Funkcja celowa}
+    
+    W zadaniach programowania liniowego liniowa funkcja, dla której szukane jest optymalne rozwiązanie minimum lub maksimum. Dla zdefiniowanego zadania programowania liniowego
+    
+    Optymalizacja – problem polegający na znalezieniu ekstremum zadanej funkcji celu.
+    \end{definition}
+    
+    Metody Programowania Dynamicznego
+    \begin{itemize}
+        \item Metoda zstępująca z zapamiętywaniem polega na rekurencyjnym wywoływaniu funkcji z zapamiętywaniem wyników. Metoda ta jest podobna do metody dziel i zwyciężaj – różni się od niej tym, że jeśli rozwiązanie danego problemu jest już w tabeli z wynikami, to należy je po prostu stamtąd odczytać.
+        \item Metoda wstępująca polega na rozwiązywaniu wszystkich możliwych podproblemów, zaczynając od tych o najmniejszym rozmiarze. Wówczas w momencie rozwiązywania podproblemu na pewno są już dostępne rozwiązania jego podproblemów. W tym podejściu nie zużywa się pamięci na rekurencyjne wywołania funkcji. Może się jednak okazać, że część podproblemów została rozwiązana nadmiarowo (nie były one potrzebne do rozwiązania głównego problemu).
+    \end{itemize}
+    
+    Klucz do zaprojektowania algorytmu tą techniką leży w znalezieniu \textbf{równania rekurencyjnego} opisującego optymalną wartość \textbf{funkcji celu} dla danego problemu jako funkcji optymalnych wartości funkcji celu dla podproblemów o mniejszych rozmiarach. Programowanie dynamiczne znajduje optymalną wartość funkcji celu dla całego zagadnienia, rozwiązując podproblemy od najmniejszego do największego i zapisując optymalne wartości w tablicy. Pozwala to zastąpić wywołania rekurencyjne odwołaniami do odpowiednich komórek wspomnianej tablicy i gwarantuje, że każdy podproblem jest rozwiązywany tylko raz. Rozwiązanie ostatniego z rozpatrywanych podproblemów jest na ogół wartością rozwiązania zadanego zagadnienia.
+    
+    Przykład - Ciąg Fibonacci'ego
+    
+    \begin{verbatim}
+    # Programowanie dynamiczne wstępujące, wersja z listą.
+    def fibonacci(n):
+        F = [0] + n * [1]   # trzymamy wszystkie wartości
+        for i in range(2, n+1):
+            F[i] = F[i-1] + F[i-2]
+        return F[n]
+    \end{verbatim}
+    
+    \begin{verbatim}
+    # Programowanie dynamiczne zstępujące.
+    FIBONACCI = {0:0, 1:1}   # globalny słownik
+
+    def fibonacci(n):
+        global FIBONACCI
+        if n not in FIBONACCI:
+            FIBONACCI[n] = fibonacci(n-1) + fibonacci(n-2)
+        return FIBONACCI[n]
+        \end{verbatim}
+    
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
+    \begin{definition}
+    Algorytmy zachłanne (ang. greedy algorithms)
+    
+    Algorytmy podejmujące w każdym kroku taką decyzję, która w danej chwili jest najkorzystniejsza (\textbf{lokalnie optymalna}) licząc, że doprowadzi to do znalezienia rozwiązania \textbf{globalnie optymalnego}.
+    
+    Cechy
+    
+    \begin{itemize}
+        \item Nie zawsze znajdują rozwiązanie optymalne
+        \item Są podzbiorem algorytmów \textbf{heurystycznych}
+        \item Są to algorytmy \textbf{deterministyczne} – nie ma w nich losowości
+    \end{itemize}
+
+    \end{definition}
+    
+    Przykład I - Wydawanie reszty
+    
+    \begin{verbatim}
+    while (są jeszcze monety i realizacja pozostaje nierozwiązana) {
+         pobierz największą dostępna monetę; 
+         //procedura wyboru
+         
+         if (dodanie monety powoduje przekroczenie kwoty reszty) 
+         //sprawdzenie wykonalności
+            odrzuć monetę;
+         else
+            dodaj monetę do reszty; 
+            
+         if (całkowita wartość reszty jest równa należnej kwocie) 
+         //sprawdzenie rozwiązania
+         realizacja rozwiązania;
+        }
+    \end{verbatim}
+    
+    Przykład II - Pakowanie plecaka
+    
+    \begin{verbatim}
+    posortuj nierosnąco przedmioty według wartości c[j]/w[j]
+    aktualna_waga:=0
+
+    for i:=1 to n do
+      if w[i] + aktualna_waga <= W then
+        dodaj i-ty przedmiot do plecaka
+        aktualna_waga := aktualna_waga + w[i]    
+    \end{verbatim}
+    
+    Dane wejściowe, dla których algorytm będzie działał
+    \begin{itemize}
+        \item Optymalnie
+        
+        Pjemność plecaka: 8
+        
+        Dane wejściowe: 5, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1
+        
+        Rozwiązanie: 5 + 3 + 2
+        
+        \item Nieoptymalnie
+        
+        Pojemność plecaka: 7
+        
+        Dane wejściowe: 3, 3, 2, 2
+        
+        Rozwiązanie: 3 + 3 = 6 :(
+        
+        Rozwiązanie optymalne: 3 + 2 + 2 = 7
+        
+    \end{itemize}
     
     \newpage
     
@@ -3314,8 +3446,196 @@ return $\mathcal{A}'$;
     
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
-    \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
+\section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
+    
+    Problemy rozpatrywane w kategorii języków
+    \begin{itemize}
+        \item Należenie $\in$ - Problem przynależności języka $L$ do jednego z typów języków $L_i$ gdzie $i \in {0,1,2,3}$ generowanych przez odpowiednie gramatyki  $G_i$
+        \item Inkluzja $\subset$ - Problem zawierania się języka $L_i$ w języku $L_k$
+        \item Równoważność $\equiv$ - Problem równoważności dwóch języków $L_1 \equiv L_2$
+        \item Pustość $\emptyset$ - Problem języka pustego czyli nie generującego żadnego słowa
+        \item Nieskończonośc $\infty$ - Problem języka nieskończonego czyli generującego nieskończenie wiele słów
+        \item Jednoznaczność
+    \end{itemize}
+    
+    \begin{definition}
+    Wyprowadzenie lewostronne (prawostronne)
+    
+    Niech $G = (V_N,V_T,v_0,P)$ będzie gramatyką bezkontekstową.
+    
+    Lewostronnym (prawostronnym) wyprowadzeniem słowa $w \in {V_T}^\star$ w gramatyce $G$ nazywamy wyprowadzenie
+    $v_0 \mapsto w_1 \mapsto \ldots.. \mapsto w_n = w$
+    takie, że dla każdego $i=0,\ldots,n-1, \;\; w_{i+1}$ jest generowane bezpośrednio z $w_i$ przez zastąpienie pierwszego z lewej (prawej) symbolu nieterminalnego występującego w słowie $w_i$.
+    Jeśli chcemy zaznaczyć, że wyprowadzenie jest lewostronne lub prawostronne, to posługujemy się zapisem
+    
+    $v_{0}\mapsto_{L}^{*}w,\; v_{0}\mapsto_{P}^{\star}w$.
+    \end{definition}
+    
+    \begin{definition} Jednoznaczność - 
+    
+    Gramatyka bezkontekstowa $G$ jest \textbf{jednoznaczna} $\Leftrightarrow$ każde słowo generowane przez tę gramatykę ma \textbf{dokładnie jedno wyprowadzenie lewostronne (prawostronne)}.
+    
+    Język bezkontekstowy $L$ nazywamy \textbf{jednoznacznym}, jeśli istnieje jednoznaczna gramatyka bezkontekstowa generująca ten język.
+
+    Jednoznaczność gramatyki oznacza istnienie dokładnie jednego drzewa wywodu dla każdego generowanego słowa. 
+    \end{definition}
+    
+    
+     \begin{center}
+     \begin{tabular}{||c c c c c||} 
+     \hline
+     --- & 3 & 2 & 1 & 0 \\ [0.5ex] 
+     \hline\hline
+     Należenie $\in$ & T & T & T & N \\ 
+     \hline
+     Inkluzja $\subset$ & T & N & N & N \\
+     \hline
+     Równoważność $\equiv$ & T & N & N & N \\
+     \hline
+     Pustość $\emptyset$ & T & T & N & N \\
+     \hline
+     Nieskończoność $\infty$ & T & T & N & N \\
+     \hline
+     Jednoznaczność & T & N & - & - \\ [1ex]
+     \hline
+    \end{tabular}
+    \end{center}
+    
+    Oznaczenia\\
+    T - rozstrzygalny\\
+    N - nieroztrzygalny
+    
+    \newpage
+    
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
+
+\begin{itemize}
+\item Gramatyka $G_1 = (V_N,V_T,P,v_0)$ w której
+
+$V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0a, \; v_0 \rightarrow a \}$
+
+generuje język
+
+$L(G_1) = \{ a^n : n = 1,2,... \}$
+
+Gramatyka jest typu (3)
+
+\item Gramatyka $G_2 = (V_N,V_T,P,v_0)$, w której
+
+$V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0v_0, \; v_0 \rightarrow a \}$
+
+generuje język
+
+
+$L(G_2) = \{ a^n : n = 1,2,... \}$
+
+Gramatyka jset typu (2)
+
+
+\item Gramatyka $G_3 = (V_N,V_T,P,v_0)$, w której
+
+$V_N = \{v_0, v_1, v_2 \}, \;\; V_T = \{a,b,c\}$
+
+$P=\{v_0~\rightarrow~abc,  v_0~\rightarrow~av_1bc,  v_1b~\rightarrow~bv_1,v_1c~\rightarrow~v_2bcc, bv_2~\rightarrow~v_2b,  \\ av_2~\rightarrow~aav_1, av_2~\rightarrow~aa\}$
+
+generuje język
+
+$L(G_3) = \{ a^n b^n c^n : n = 1,2,... \}$.
+Gramatyka jest typu (0)
+\\
+
+Gramatyki $G_1$ i $G_2$ są równoważne.
+\end{itemize}
+    \begin{definition}
+    Gramatyka
+    
+    Jest to system $G=(V_N,V_T,P,v_0)$, w którym
+    \begin{itemize}
+        \item
+        $V_N \ne \emptyset$ - skończony zbiór symboli nieterminalnych (alfabet nieterminalny)
+        \item
+        $V_T \ne \emptyset$ - skończony zbiór symboli terminalnych (alfabet terminalny)
+        \item
+        $P \subseteq (V_N \cup V_T)^+ \times (V_N \cup V_T)^\star$ - skończona relacja, zbiór produkcji (praw)
+        \item
+        $v_0 \in V_N$ - symbol początkowy (startowy)
+    \end{itemize}
+
+    Ponadto zakładamy, że $V_N \cap V_T = \emptyset$ i dla każdego 
+    $(u,v)\in P$; $\#_{V_N} u >= 1$
+    
+    Zatem w gramatyce alfabety terminalny i nieterminalny są rozłącznymi zbiorami, a słowo u występujące po lewej stronie produkcji zawiera co najmniej jeden symbol nieterminalny. Fakt, że para $(u,v) \in P$, zapisujemy:
+    
+    $u \rightarrow v \in P$ lub $u \rightarrow_G v$.
+    
+    Wykorzystujemy też zdefiniowane dla systemów przepisujących pojęcia generowania bezpośredniego "$\mapsto$" i generowania "$\mapsto \star$".
+    \end{definition}
+    
+    \begin{definition}
+    Gramatyka $G=(V_N,V_T,P,v_0)$ jest typu (i) dla $i=0,1,2,3$ wtedy i tylko wtedy, gdy spełnia następujące warunki:
+    
+    \begin{itemize}
+        \item Gramatyka
+        
+        Każdy system spełniajacy definicję 57.1
+        \item Kontekstowa
+        
+        Gramatyka, w której każde prawo ze zbioru P ma postać $u_1vu_2 \rightarrow u_1xu_2$
+        
+        gdzie $u_1,u_2 \in (VN \cup VT)^\star,v \in V_N,x \in (V_N \cup V_T)^+$ lub $v_0 \rightarrow 1$,przy czym, jeśli $v_0 \rightarrow 1 \in P$, to $v_0$ nie występuje po prawej stronie w żadnym prawie z $P$
+        
+        \item Bezkontekstowa
+        
+        Gramatyka, w której każde prawo ze zbioru P ma postać
+        $v \rightarrow x$
+        
+        gdzie $v \in V_N, x \in (V_N \cup V_T)^\star$
+        
+        \item Regularna
+        
+        Gramatyka, w której każde prawo ze zbioru P ma postać
+        $v \rightarrow v'x$ lub $v \rightarrow x$
+        
+        gdzie $v,v' \in V_N$;$x \in V_T^\star$
+        \\
+        
+        
+        W oparciu o wprowadzone typy gramatyk określamy odpowiadające im rodziny (klasy) języków, oznaczając przez
+
+        $\bf \mathcal{L}_{0}$ rodzinę wszystkich języków typu 0
+        
+        $\bf \mathcal{L}_{1}$ rodzinę wszystkich języków typu 1 - kontekstowych
+        
+        $\bf \mathcal{L}_{2}$ rodzinę wszystkich języków typu 2 - bezkontekstowych
+        
+        $\bf \mathcal{L}_{3}$ rodzinę wszystkich języków typu 3 - regularnych
+        
+        Pomiędzy wprowadzonymi rodzinami języków zachodzą następujące zależności:
+
+        $\bf \mathcal{L}_{3}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{2}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{1}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{0}$
+        
+    \end{itemize}
+
+    \end{definition}
+    
+    Zamkniętości języków na operacje
+    \begin{center}
+     \begin{tabular}{||c c c c c||} 
+     \hline
+     --- & 3 & 2 & 1 & 0 \\ [0.5ex] 
+     \hline\hline
+     $\cup$ & T & T & T & T \\ 
+     \hline
+     $\cdot$ & T & T & T & T \\
+     \hline
+     $\star$ & T & T & T & T \\
+     \hline
+     $\setminus$ & T & N & T & N \\
+     \hline
+     $\cap $ & T & N & T & T \\ [1ex] 
+     \hline
+    \end{tabular}
+    \end{center}
 
 
     {\Large Wytwarzanie oprogramowania}
@@ -3556,7 +3876,94 @@ return $\mathcal{A}'$;
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
+    \begin{definition}
+    Standard Template Library
+    
+    STL – biblioteka C++ zawierająca algorytmy, kontenery, iteratory oraz inne konstrukcje w formie szablonów, gotowe do użycia w programach.
+    \end{definition}
+    
+    Obecnie występują trzy rodzaje kontenerów
+    \begin{itemize}
+        \item Kontenery Sekwencyjne
+        
+        Implementują struktury danych, które zapewniają sekwencyjny dostęp do ich elementów.
+        
+        \item Kontenery Asocjacyjne
+        
+        Implementują posortowane struktury danych, które da się szybko przeszukiwać (złożoność O(log n))
+
+
+        \item Nieuporządkowane Kontenty Asocjacyjne (unordered)
+        
+        Implementują nieposortowane (haszowane) struktury danych, które mogą być szybko przeszukiwane (zamortyzowana złożoność O(1), w najgorszym przypadku O(n))
+        
+    \end{itemize}
+    
+    \begin{table}[]
+    \begin{tabular}{|l|l|}
+    \hline
+    array         & statyczna, ciągła tablica      \\ \hline
+    vector        & dynamiczna, ciągła tablica     \\ \hline
+    deque         & dwustronnie zakończona kolejka \\ \hline
+    forward\_list & lista jednokierunkowa          \\ \hline
+    list          & lista dwukierunkowa            \\ \hline
+    \end{tabular}
+    \end{table}
+    
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}set\\ unordered\_set\end{tabular}           & \begin{tabular}[c]{@{}l@{}}kolekcja unikalnych kluczy\\ posortowana po kluczach\end{tabular}                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}map\\ unordered\_set\end{tabular}           & \begin{tabular}[c]{@{}l@{}}słownik - kolekcja par klucz-wartość\\ posortowana po kluczach, klucze są unikalne\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}multiset\\ unordered\_multiset\end{tabular} & \begin{tabular}[c]{@{}l@{}}kolekcja kluczy\\ posortowana po kluczach\end{tabular}                                          \\ \hline
+\begin{tabular}[c]{@{}l@{}}multimap\\ unordered\_multimap\end{tabular} & \begin{tabular}[c]{@{}l@{}}słownik - kolekcja par klucz-wartość\\ posortowana po kluczach\end{tabular}                     \\ \hline
+\end{tabular}
+\end{table}
+    
+    Kontenery zarządzają pamięcią alokowaną do przechowywania ich elementów, i zapewniają metody pozwalające na dostęp do nich, bezpośrednio lub przez iteratory (obiekty o właściwościach podobnych do wskaźników).
+    
     \section{Obsługa sytuacji wyjątkowych w C++.}
+    Wyjątki pozwalają zareagować na sytuacje, w których istnieje ryzyko niewykonania określonego zadania.
+    
+    Jeżeli w jakimś miejscu programu zajdzie nieoczekiwana sytuacja, programista piszący ten kod powinien zasygnalizować o tym. Dawniej polegało to na zwróceniu specyficznej wartości, co nie było zbyt szczęśliwym rozwiązaniem, bo sygnał musiał być taki jak wartość zwracana przez funkcję. W przypadku obsługi sytuacji wyjątkowej mówi się o obiekcie sytuacji wyjątkowej, co często zastępowane jest słowem "wyjątek". W C++ wyjątki się "rzuca", służy do tego instrukcja throw.
+    
+    \subsection{Szkielet obsługi wątków}
+    
+    Tam gdzie spodziewamy się wyjątku umieszczamy blok try, w którym umieszczamy "podejrzane" instrukcje. Za tym blokiem muszą (tzn. musi przynajmniej jedna) pojawić się bloki catch.
+    
+    \begin{verbatim}
+        //jakaś zwykła funkcja, lub funkcja main
+      try  // w instrukcjach poniżej może coś się nie udać
+      {
+         fun();
+         fun2();   //podejrzane funkcje
+      }
+      catch(std::string obj)
+      {
+         //tu coś robimy, na przykład piszemy o błędzie
+      }
+    \end{verbatim}
+    
+    W instrukcji catch umieszczamy typ jakim będzie wyjątek. Rzucić możemy wyjątek typu int, char, std::string i inne, dlatego tu określamy co nas interesuje. Nazwa tego obiektu nie jest konieczna, ale jeżeli chcemy znać wartość musimy ten obiekt nazwać. Bloków catch może być więcej, najczęściej tyle ile możliwych typów do złapania. Co ważne jeżeli rzucimy wyjątek konkretnego typu to "wpadnie" on do pierwszego dobrego catch nawet jeżeli inne nadają się lepiej (podobnie jak z instrukcjami if else). Dotyczy to zwłaszcza klas dziedziczonych.
+    
+    Zawsze dobrze jest się zabezpieczyć blokiem
+    catch(...)
+    
+    \subsection{Rzucanie wyjątku}
+    Pisząc funkcję możemy stwierdzić że coś poszło nie tak i chcemy zasygnalizować wyjątek.
+    
+    \begin{verbatim}
+         double Dziel(double a, double b) //funkcja zwraca iloraz a / b
+         {
+             if(b == 0)    {
+                 std::string wyjatek = "dzielenie przez zero!"; //przez zero się nie dzieli
+                 throw wyjatek;  //rzucamy wyjątek
+             }
+             return a / b;
+         }
+    \end{verbatim}
+    
+    Po instrukcji throw umieszczamy obiekt który chcemy rzucić (u nas jest to std::string). W tym miejscu działanie funkcji jest natychmiast przerywane i nasz łańcuch znaków wędruje do bloków catch.
     \section{Obsługa plików w języku C.}
     \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
     \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
