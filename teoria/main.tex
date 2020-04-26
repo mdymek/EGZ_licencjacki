@@ -25,11 +25,12 @@
 \usepackage{multicol}
 \usepackage{lineno}
 \usepackage{hyperref}
+\usetikzlibrary{shapes,snakes}
 \graphicspath{{graphics/}}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=black,
     filecolor=magenta,
     urlcolor=cyan,
 }
@@ -2419,7 +2420,7 @@
 
     	\begin{definition}
     	Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
-    	$\mathcal{M(A)}$ = $\tau \mathcal{A}$(A*) $\subset S^{S}$
+    	$\mathcal{M(A)}$ = $\tau \mathcal{A}(A^*) \subset S^{S}$ 
     	\end{definition}
 
     	\begin{definition}
@@ -3342,10 +3343,351 @@ return $\mathcal{A}'$;
     \end{center}
     \end{definition}
     
-    
-    
+    \newpage
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
+        \subsection{Wyrażenia regularne}
+        
+        \begin{definition}
+            \textbf{Rodzina regularnych podzbiorów}
+
+            Niech $A$ będzie dowolnym zbiorem. Rodzina $REG(A^*)$ regularnych podzbiorów
+            $A^*$ to najmniejsza rodzina $R$ podzbiorów $A^*$ taka, że:
+
+            \begin{enumerate}
+                \item $\emptyset \in R, \forall a \in A$ ${a} \in R$
+                \item jeśli $X, Y \in R$, to: $X \cup Y, X \cdot Y \in R$
+                \item jeśli $X \in R$, to: $X^* = \bigcup\limits_{n = 0}^{\infty} X^n \in R$
+            \end{enumerate}
+        \end{definition}
+
+        \begin{definition}
+            \textbf{Wyrażenie regularne}
+
+            Niech $A$ będzie dowolnym alfabetem, a zbiór $\{+, \star, \emptyset, (,)\}$
+            alfabetem takim, że $A \cap \{+, \star, \emptyset, (,)\} = \emptyset$.
+
+            Słowo $\alpha \in (A \cup \{+, \star, \emptyset, (,)\})^*$ jest wyrażeniem regularnym
+            nad alfabetem A wtedy i tylko wtedy, gdy:
+
+            \begin{enumerate}
+                \item $\alpha = \emptyset$
+                \item $\alpha = a \in A$
+                \item $\alpha$ jest w postaci $(\beta + \gamma), (\beta\gamma), \gamma^*$, gdzie 
+                    $\beta, \gamma$ są wyrażeniami regularnymi nad alfabetem A
+            \end{enumerate}
+        \end{definition}
+
+        Rodzinę wyrażeń regularnych nad $A$ nazywamy $WR$.
+
+        \subsection{Automat skończony}
+
+        \begin{definition}
+            \textbf{Automat}
+
+            Automatem nad alfabetem A nazywamy system $\mathcal{A} = (S, f)$ w którym:
+            \begin{itemize}
+                \item S jest dowolnym zbiorem, zwanym zbiorem stanów
+                \item $f : S \times A \rightarrow S$ jest funkcją przejść
+            \end{itemize}
+
+            Automat $\mathcal{A}$ nazywamy skończonym, jeśli zbiór S jest skończony
+
+            Automat $\mathcal{A}$ ze stanem $s \in S$ taki, że
+            $$f(a, A^*) = Ss$$
+            nazywamy automatem z generatorem s.
+        \end{definition}
+        
+        \begin{definition}
+            \textbf{Język rozpoznawalny}
+
+            Język $L \subset A^*$ jest rozpoznawalny wtedy i tylko wtedy, gdy istnieją:
+            \begin{itemize}
+                \item Automat skończony $\mathcal{A} = (S, f)$
+                \item stan $s_0 \in S$
+                \item zbiór $T \subset S$
+            \end{itemize}
+
+            takie, że
+            $$ L = \{w \in A^* : f(s_0, w) \in T\}$$
+            $s_0$ - stan początkowy \\
+            T - zbiór stanów końcowych automatu
+            $$\mathcal{A} = (S, A, f, s_0, T)$$
+            $L = L(\mathcal{A})$ - język rozpoznawany przez automat $\mathcal{A}$\\
+            $REC(A^*)$ - rodzina wszystkich języków rozpoznawalnych nad alfabetem A
+        \end{definition}
+
+        \subsection{Prawa kongruencja syntaktyczna}
+
+        \begin{definition}
+            \textbf{Prawa kongruencja}
+
+            Każdy automat $\mathcal{A} = (S, f)$ z generatorem $s_0$ wyznacza na wolnym
+            monoidzie $A^*$ prawą kongruencję $\sim_\mathcal{A}$:
+            \[\]
+            $\forall u, v \in A^*$
+            $$u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)$$
+
+            Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat 
+            $\mathcal{A}$ jest skończony.
+        \end{definition}
+
+        \begin{theorem}
+            Każda prawa kongruencja $p \subset (A^*)^2$ wyznacza automat, zwany ilorazowym
+            $$\mathcal{A}_p = (A^* /_{p}, f^*), \; \mathrm{gdzie} \; f^*([w]_p, u) = [wu]_p$$
+            \begin{itemize}
+                \item $\mathcal{A}_p$ jest automatem z generatorem [1]$_p$
+
+                \item $\mathcal{A}_p$ jest automatem skończonym wtedy i tylko gdy relacja $p$ ma skończony indeks 
+            \end{itemize}
+        \end{theorem}
+
+        \subsection{Warunki równoważne definicji języka regularnego}
+        \begin{theorem}
+            \textbf{Twierdzenie Kleenego}
+
+            Dla każdego skończonego alfabetu A
+            $$REC(A^*) = REG(^*)$$
+        \end{theorem}
+
+        \begin{theorem}
+            Dla dowolnego języka regularnego $L \in A^*$ następujące warunki są równoważne:
+            \begin{itemize}
+                \item L = L(G) dla gramatyki G typu 3 (regularnej, lewoliniowej)
+                \item L = L(G) dla gramatyki G prawoliniowej
+                \item L = L($\mathcal{A}$) dla automatu deterministycznego $\mathcal{A}$
+                \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}$
+                \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}^p$ z pustymi przejściami
+
+                \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A                
+                \item L $\in REG(A^*)$
+                \item monoid syntaktyczna M(L) jest skończony
+                \item liczba różnych pochodnych Brzozowskiego dla języka
+                    L jest skończona
+                \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$
+                    o skończonym indeksie oraz L = $\bigcup\limits_{w \in L}[w]_p$
+                \item istnieje skończony monoid M i homomorfizm
+                    $$\varphi : A^* \rightarrow M : L = \varphi^{-1}(\phi(L))$$
+            \end{itemize}
+        \end{theorem}
+
+        \newpage
+        \subsection{Konstrukcja automatu skończenie stanowego rozpoznającego wyrażenie regularne.}
+            \begin{itemize}
+                \item automat rozpoznający język pusty
+                    \begin{center}
+                        \begin{tikzpicture}[scale=0.2]
+                            \tikzstyle{every node}+=[inner sep=0pt]
+                            \draw [black] (13,-27) circle (3);
+                            \draw (13,-27) node {$s_0$};
+                            \draw [black] (28,-27) circle (3);
+                            \draw (28,-27) node {$s_1$};
+                            \draw [black] (28,-27) circle (2.4);
+                        \end{tikzpicture}
+                    \end{center}
+
+                                    
+                \item automat rozpoznający język $\{1\}$
+                    \begin{center}
+                        \begin{tikzpicture}[scale=0.2]
+                            \tikzstyle{every node}+=[inner sep=0pt]
+                            \draw [black] (29.4,-17.1) circle (3);
+                            \draw (29.4,-17.1) node {$s_0$};
+                            \draw [black] (29.4,-17.1) circle (2.4);
+                        \end{tikzpicture}
+                    \end{center}
+
+                \item automat rozpoznający język $\{a\} \; \forall a \in A$
+                    \begin{center}
+                        \begin{tikzpicture}[scale=0.2]
+                            \tikzstyle{every node}+=[inner sep=0pt]
+                            \draw [black] (29.4,-17.1) circle (3);
+                            \draw (29.4,-17.1) node {$s_0$};
+                            \draw [black] (39.8,-17.1) circle (3);
+                            \draw (39.8,-17.1) node {$s_1$};
+                            \draw [black] (39.8,-17.1) circle (2.4);
+                            \draw [black] (32.4,-17.1) -- (36.8,-17.1);
+                            \fill [black] (36.8,-17.1) -- (36,-16.6) -- (36,-17.6);
+                            \draw (34.6,-17.6) node [below] {$a$};
+                        \end{tikzpicture}
+                    \end{center}
+
+                    \newpage
+                \item dla automatu $\mathcal{A}_r$ rozpoznającego wyrażenie $r$ i automatu $\mathcal{A}_r$ rozpoznającego wyrażenie $s$:
+                    $L(\mathcal{A}_x) = L(r + s)$ \\
+                    \noindent $\mathcal{A}_r = (S_r, A, f_r, s_{0r}, T_r) $ \\
+                    \noindent $\mathcal{A}_s = (S_s, A, f_s, s_{0s}, T_s) $ \\
+                    \noindent $\mathcal{A}_x = (S_x, A, f_x, s_{0x}, T_x) $ \\
+
+                    $$\mathcal{A}_s:$$
+                        \begin{center}
+                            \begin{tikzpicture}[scale=0.2]
+                                \tikzstyle{every node}+=[inner sep=0pt]
+                                \draw [black] (18.2,-15.6) circle (3);
+                                \draw (18.2,-15.6) node {$s_0$};
+                                \draw [black] (37.9,-15.6) circle (3);
+                                \draw (37.9,-15.6) node {$s_1$};
+                                \draw [black] (37.9,-15.6) circle (2.4);
+                                \draw [black] (20.569,-13.768) arc (121.67786:58.32214:14.246);
+                                \fill [black] (35.53,-13.77) -- (35.11,-12.92) -- (34.59,-13.77);
+                                \draw (28.05,-11.15) node [above] {$a$};
+                                \draw [black] (35.355,-17.18) arc (-63.43003:-116.56997:16.331);
+                                \fill [black] (20.75,-17.18) -- (21.24,-17.99) -- (21.68,-17.09);
+                                \draw (28.05,-19.4) node [below] {$b$};
+                                \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                \draw (45.15,-15.6) node [right] {$a$};
+                                \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                \draw [black] (15.52,-16.923) arc (324:36:2.25);
+                                \draw (10.95,-15.6) node [left] {$b$};
+                                \fill [black] (15.52,-14.28) -- (15.17,-13.4) -- (14.58,-14.21);
+                            \end{tikzpicture}
+                        \end{center}
+
+                   
+                    $$\mathcal{A}_r:$$
+                        \begin{center}
+                            \begin{tikzpicture}[scale=0.2]
+                                \tikzstyle{every node}+=[inner sep=0pt]
+                                \draw [black] (18.2,-15.6) circle (3);
+                                \draw (18.2,-15.6) node {$r_0$};
+                                \draw [black] (37.9,-15.6) circle (3);
+                                \draw (37.9,-15.6) node {$r_1$};
+                                \draw [black] (37.9,-15.6) circle (2.4);
+                                \draw [black] (20.569,-13.768) arc (121.67786:58.32214:14.246);
+                                \fill [black] (35.53,-13.77) -- (35.11,-12.92) -- (34.59,-13.77);
+                                \draw (28.05,-11.15) node [above] {$b$};
+                                \draw [black] (35.355,-17.18) arc (-63.43003:-116.56997:16.331);
+                                \fill [black] (20.75,-17.18) -- (21.24,-17.99) -- (21.68,-17.09);
+                                \draw (28.05,-19.4) node [below] {$a$};
+                                \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                \draw (45.15,-15.6) node [right] {$b$};
+                                \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                \draw [black] (15.52,-16.923) arc (324:36:2.25);
+                                \draw (10.95,-15.6) node [left] {$a$};
+                                \fill [black] (15.52,-14.28) -- (15.17,-13.4) -- (14.58,-14.21);
+                            \end{tikzpicture}
+                        \end{center}
+
+
+                    \begin{itemize}
+                        \item automat rozpoznający język $r + s$:\\
+                            \noindent $s_{0x} = \{s_{0s}, s_{0r}\}$ \\
+                            \noindent $S_x = S_s \times S_r$ \\
+                            \noindent $f_x(\{s, r\}, a) = \{f_s(s, a), f_r(r, a)\}$ \\
+                            \noindent $T_x \ni t_x = \{s, r\} \Leftrightarrow s \in T_s \lor r \in T_R$ \\
+                            \begin{center}
+                                \begin{tikzpicture}[scale=0.2]
+                                    \tikzstyle{every node}+=[inner sep=0pt]
+                                    \draw [black] (18.2,-15.6) circle (3);
+                                    \draw (18.2,-15.6) node {$s_0,\mbox{ }r_0$};
+                                    \draw [black] (37.9,-15.6) circle (3);
+                                    \draw (37.9,-15.6) node {$s_1,r_0$};
+                                    \draw [black] (37.9,-15.6) circle (2.4);
+                                    \draw [black] (18.2,-32.9) circle (3);
+                                    \draw (18.2,-32.9) node {$s_0,r_1$};
+                                    \draw [black] (18.2,-32.9) circle (2.4);
+                                    \draw [black] (21.2,-15.6) -- (34.9,-15.6);
+                                    \fill [black] (34.9,-15.6) -- (34.1,-15.1) -- (34.1,-16.1);
+                                    \draw (28.05,-15.1) node [above] {$a$};
+                                    \draw [black] (18.2,-18.6) -- (18.2,-29.9);
+                                    \fill [black] (18.2,-29.9) -- (18.7,-29.1) -- (17.7,-29.1);
+                                    \draw (17.7,-24.25) node [left] {$b$};
+                                    \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                    \draw (45.15,-15.6) node [right] {$a$};
+                                    \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                    \draw [black] (15.52,-34.223) arc (324:36:2.25);
+                                    \draw (10.95,-32.9) node [left] {$b$};
+                                    \fill [black] (15.52,-31.58) -- (15.17,-30.7) -- (14.58,-31.51);
+                                    \draw [black] (19.468,-30.182) arc (152.05115:110.52628:29.234);
+                                    \fill [black] (35.04,-16.51) -- (34.12,-16.32) -- (34.47,-17.25);
+                                    \draw (25.05,-21.43) node [above] {$a$};
+                                    \draw [black] (37.033,-18.47) arc (-20.6381:-76.78447:22.448);
+                                    \fill [black] (21.16,-32.41) -- (22.05,-32.71) -- (21.82,-31.74);
+                                    \draw (31.85,-27.91) node [below] {$b$};
+                                \end{tikzpicture}
+                            \end{center}
+
+                        \item automat rozpoznający język $sr$:\\
+                            \noindent $s_{0x} = \{s_{0s}, \emptyset\}$ \\
+                            \noindent $S_x = (S_s \times \mathcal{P}(S_r))$\\
+                            \noindent $f_x(\{s, rs\}, a) = \{s_t, \bigcup\limits_{r \in rs}f_r(r)\}$ \\
+                            \noindent $f_s(s, a) = s_t \in T_s \rightarrow f_x(\{s, rs\}) = \{f_s(s, a), \{r_0\} \cup \bigcup\limits_{r \in rs}f_r(r, a)\}  $ \\
+                            \noindent $\{s, rs\} = t_x \in T_x \Leftrightarrow rs \cap T_r \neq \emptyset$ \\
+                            \begin{center}
+                                \begin{tikzpicture}[scale=0.2]
+                                    \tikzstyle{every node}+=[inner sep=0pt]
+                                    \draw [black] (18.2,-15.6) circle (3);
+                                    \draw (18.2,-15.6) node {$s_0,\mbox{ }\emptyset$};
+                                    \draw [black] (37.9,-15.6) circle (3);
+                                    \draw (37.9,-15.6) node {$s_1,\{r_0\}$};
+                                    \draw [black] (18.2,-32.9) circle (3);
+                                    \draw (18.2,-32.9) node {$s_0,\{r_1\}$};
+                                    \draw [black] (18.2,-32.9) circle (2.4);
+                                    \draw [black] (21.2,-15.6) -- (34.9,-15.6);
+                                    \fill [black] (34.9,-15.6) -- (34.1,-15.1) -- (34.1,-16.1);
+                                    \draw (28.05,-15.1) node [above] {$a$};
+                                    \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                    \draw (45.15,-15.6) node [right] {$a$};
+                                    \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                    \draw [black] (15.52,-34.223) arc (324:36:2.25);
+                                    \draw (10.95,-32.9) node [left] {$b$};
+                                    \fill [black] (15.52,-31.58) -- (15.17,-30.7) -- (14.58,-31.51);
+                                    \draw [black] (19.468,-30.182) arc (152.05115:110.52628:29.234);
+                                    \fill [black] (35.04,-16.51) -- (34.12,-16.32) -- (34.47,-17.25);
+                                    \draw (25.05,-21.43) node [above] {$a$};
+                                    \draw [black] (37.033,-18.47) arc (-20.6381:-76.78447:22.448);
+                                    \fill [black] (21.16,-32.41) -- (22.05,-32.71) -- (21.82,-31.74);
+                                    \draw (31.85,-27.91) node [below] {$b$};
+                                    \draw [black] (15.52,-16.923) arc (-36:-324:2.25);
+                                    \draw (10.95,-15.6) node [left] {$b$};
+                                    \fill [black] (15.52,-14.28) -- (15.17,-13.4) -- (14.58,-14.21);
+                                \end{tikzpicture}
+                            \end{center}
+
+                        \item automat rozpoznający język $r^*$:
+                            \noindent $s_{0x} = s_{0r}$\\
+                            \noindent $f_x(r, a) = f_r(r)$ \\
+                            \noindent $f_x(r_t \in R_t, 1) = r_{0x}$ \\
+                            \noindent $T_x = r_{0x}$ \\
+                    \end{itemize}
+            \end{itemize}
+    \newpage
+
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
+
+        \subsection{Determinizacja automatów skończenie stanowych}
+
+        \begin{theorem}
+            Język $L \in A^*$ jest rozpoznawany przez automat deterministyczny wtedy
+            i tylko wtedy, gdy jest rozpoznawany przez automat niedeterministyczny.
+        \end{theorem}
+
+        $\mathcal{A}_{ND} = (S, f, I, F)$ - automat niedeterministyczny\\
+        \indent$\mathcal{A}_D = (P(S), \overline{f}, I, T)$ - równoważny automat deterministyczny, gdzie:
+        $$\overline{f} : P(S) \times A^* \rightarrow P(S)$$
+        $$\forall Q \in P(S), \forall w \in A^* \; \; \overline{f}(Q, w) = \bigcup\limits_{s \in Q} f(s, w)$$
+        $$T = \{Q \in P(S) | Q \cap F \neq \emptyset\}$$
+
+        \subsection{Determinizm automatu ze stosem}
+
+        \begin{definition}
+            \textbf{Deterministyczny automat ze stosem}
+
+            Automatem $\mathcal{AS} = (A, A_S, Q, q_0, z_0, f, Q_F)$ nazywamy
+            \textbf{deterministycznym}, jeśli dla każdej konfiguracji 
+            $(z, q, a) \in A_S^* \times Q \times (A \cup \{1\})$
+            $$f(z, q, a) \leq 1 \; \mathrm{oraz}$$
+            $$f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A$$
+            Język akceptowany przez automat deterministyczny nazywamy językiem deterministycznym.
+        \end{definition}
+
+        \begin{theorem}
+            Każdy język deterministyczny jest jednoznaczny (rozpoznawany przez gramatykę jednoznaczną), ale nie na odwrót.
+        \end{theorem}
+        
+        \begin{theorem}
+            Każdy język deterministyczny jest kontekstowy (rozpoznawany przez niedeterministyczny automat ze stosem), ale nie na odwrót.
+        \end{theorem}
+
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 

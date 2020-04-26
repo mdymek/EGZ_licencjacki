@@ -31,7 +31,7 @@
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=black,
     filecolor=magenta,
     urlcolor=cyan,
 }
@@ -5514,8 +5514,232 @@
 	\noindent Musimy teraz znaleźć takie j dla którego słowo $v_1u^jv_2 \notin L$. Takie j to np. 2 (choć tutaj zasadniczo każde $j \neq 1$ się nadaje).
 	Dla j = 2 nasze słowo przyjmuje postać $a^{N+i}b^Nc^{2N} \notin L$, więc ten język nie jest językiem regularnym.
 
+    \newpage
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
+
+        \begin{exercise}
+            Dla automatu $\mathcal{A}$ zdefiniuj prawą kongruencję syntaktyczną 
+            oraz wyrażenie regularne opisujące język L akceptowany przez automat $\mathcal{A}$. 
+
+            \begin{center}
+                \begin{tikzpicture}[scale=0.2]
+                    \tikzstyle{every node}+=[inner sep=0pt]
+                    \draw [black] (21.7,-16.4) circle (3);
+                    \draw (21.7,-16.4) node {$s_0$};
+                    \draw [black] (34,-16.4) circle (3);
+                    \draw (34,-16.4) node {$s_1$};
+                    \draw [black] (45.4,-16.4) circle (3);
+                    \draw (45.4,-16.4) node {$s_2$};
+                    \draw [black] (45.4,-16.4) circle (2.4);
+                    \draw [black] (19.02,-17.723) arc (-36:-324:2.25);
+                    \draw (14.45,-16.4) node [left] {$b$};
+                    \fill [black] (19.02,-15.08) -- (18.67,-14.2) -- (18.08,-15.01);
+                    \draw [black] (22.883,-13.675) arc (142.76071:37.23929:6.239);
+                    \fill [black] (32.82,-13.67) -- (32.73,-12.74) -- (31.93,-13.34);
+                    \draw (27.85,-10.71) node [above] {$a$};
+                    \draw [black] (32.724,-19.083) arc (-39.11992:-140.88008:6.282);
+                    \fill [black] (22.98,-19.08) -- (23.09,-20.02) -- (23.87,-19.39);
+                    \draw (27.85,-21.9) node [below] {$b$};
+                    \draw [black] (37,-16.4) -- (42.4,-16.4);
+                    \fill [black] (42.4,-16.4) -- (41.6,-15.9) -- (41.6,-16.9);
+                    \draw (39.7,-16.9) node [below] {$a$};
+                    \draw [black] (48.08,-15.077) arc (144:-144:2.25);
+                    \draw (52.65,-16.4) node [right] {$a,b$};
+                    \fill [black] (48.08,-17.72) -- (48.43,-18.6) -- (49.02,-17.79);
+                \end{tikzpicture}
+            \end{center}
+        \end{exercise}
+
+        \noindent $[1] = (b + ab)^*$ \\
+        \noindent $[a] = (b + ab)^*a$ \\
+        \noindent $[a^2] = (b + ab)^*a^2(a+b)^*$ \\
+        \noindent $\alpha = (b + ab)^*a^2(a+b)^*$ 
+
+    \newpage
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
+        \subsection{Determinizacja automatu niedeterministycznego}
+            $\mathcal{A}_{ND}:$
+
+            \begin{center}
+                \begin{tikzpicture}[scale=0.2]
+                    \tikzstyle{every node}+=[inner sep=0pt]
+                    \draw [black] (11.9,-15.1) circle (3);
+                    \draw (11.9,-15.1) node {$s_0$};
+                    \draw [black] (22.8,-8.6) circle (3);
+                    \draw (22.8,-8.6) node {$s_1$};
+                    \draw [black] (22.8,-22.3) circle (3);
+                    \draw (22.8,-22.3) node {$s_2$};
+                    \draw [black] (35,-15.1) circle (3);
+                    \draw (35,-15.1) node {$s_3$};
+                    \draw [black] (35,-15.1) circle (2.4);
+                    \draw [black] (14.48,-13.56) -- (20.22,-10.14);
+                    \fill [black] (20.22,-10.14) -- (19.28,-10.12) -- (19.79,-10.98);
+                    \draw (16.41,-11.35) node [above] {$a$};
+                    \draw [black] (14.4,-16.75) -- (20.3,-20.65);
+                    \fill [black] (20.3,-20.65) -- (19.9,-19.79) -- (19.35,-20.62);
+                    \draw (16.4,-19.2) node [below] {$a$};
+                    \draw [black] (25.38,-20.78) -- (32.42,-16.62);
+                    \fill [black] (32.42,-16.62) -- (31.47,-16.6) -- (31.98,-17.46);
+                    \draw (29.84,-19.2) node [below] {$a$};
+                    \draw [black] (25.45,-10.01) -- (32.35,-13.69);
+                    \fill [black] (32.35,-13.69) -- (31.88,-12.87) -- (31.41,-13.75);
+                    \draw (27.9,-12.35) node [below] {$b$};
+                    \draw [black] (37.68,-13.777) arc (144:-144:2.25);
+                    \draw (42.25,-15.1) node [right] {$a,b$};
+                    \fill [black] (37.68,-16.42) -- (38.03,-17.3) -- (38.62,-16.49);
+                \end{tikzpicture}
+            \end{center}           
+
+            Determinizacja $\mathcal{A}_{ND}$, krok po kroku:
+            \begin{center}
+                \begin{tikzpicture}[scale=0.2]
+                    \tikzstyle{every node}+=[inner sep=0pt]
+                    \draw [black] (14.9,-13.3) circle (3);
+                    \draw (14.9,-13.3) node {$\{s_0\}$};
+                \end{tikzpicture}
+            \end{center}           
+
+            \begin{center}
+                \begin{tikzpicture}[scale=0.2]
+                    \tikzstyle{every node}+=[inner sep=0pt]
+                    \draw [black] (14.9,-13.3) circle (3);
+                    \draw (14.9,-13.3) node {$\{s_0\}$};
+                    \draw [black] (25.6,-13.3) circle (4);
+                    \draw (25.6,-13.3) node {$\{s_1,\mbox{ }s_2\}$};
+                    \draw [black] (17.9,-13.3) -- (20.6,-13.3);
+                    \fill [black] (21.6,-13.3) -- (20.8,-12.8) -- (20.8,-13.8);
+                    \draw (19.75,-13.8) node [below] {$a$};
+                \end{tikzpicture}
+            \end{center}           
+
+            \begin{center}
+                \begin{tikzpicture}[scale=0.2]
+                    \tikzstyle{every node}+=[inner sep=0pt]
+                    \draw [black] (14.9,-13.3) circle (3);
+                    \draw (14.9,-13.3) node {$\{s_0\}$};
+                    \draw [black] (25.6,-13.3) circle (4);
+                    \draw (25.6,-13.3) node {$\{s_1,\mbox{ }s_2\}$};
+                    \draw [black] (37.6,-13.3) circle (3);
+                    \draw (37.6,-13.3) node {$\{s_3\}$};
+                    \draw [black] (37.6,-13.3) circle (2.4);
+                    \draw [black] (17.9,-13.3) -- (20.6,-13.3);
+                    \fill [black] (21.6,-13.3) -- (20.8,-12.8) -- (20.8,-13.8);
+                    \draw (19.75,-13.8) node [below] {$a$};
+                    \draw [black] (29.6,-13.3) -- (34.6,-13.3);
+                    \fill [black] (34.6,-13.3) -- (33.8,-12.8) -- (33.8,-13.8);
+                    \draw (31.6,-13.8) node [below] {$a,b$};
+                    \draw [black] (39.479,-10.976) arc (168.77514:-119.22486:2.25);
+                    \draw (44.45,-9.44) node [right] {$a,b$};
+                    \fill [black] (40.59,-13.38) -- (41.27,-14.02) -- (41.47,-13.04);
+                \end{tikzpicture}
+            \end{center}
+
+
+        \newpage
+        \subsection{Determinizm automatu ze stosem}
+        \begin{exercise}
+            Określ, czy podane języki są deterministyczne
+
+            \noindent $L_1 = \{w\overleftarrow{w}\ \; | \; w \in \{a, b\}^*\}$ \\
+            \noindent $L_2 = \{wc\overleftarrow{w}\ \; | \; w \in \{a, b\}^*\}$
+
+        \end{exercise}
+
+        \begin{itemize}
+            \item $L_1$ jest niedeterministyczny. Automat:
+                \begin{center}
+                    \begin{tikzpicture}[scale=0.2]
+                        \tikzstyle{every node}+=[inner sep=0pt]
+                        \draw [black] (11.7,-19.9) circle (3);
+                        \draw (11.7,-19.9) node {$s_0$};
+                        \draw [black] (45.4,-19.9) circle (3);
+                        \draw (45.4,-19.9) node {$s_2$};
+                        \draw [black] (28.9,-19.9) circle (3);
+                        \draw (28.9,-19.9) node {$s_1$};
+                        \draw [black] (59.3,-19.9) circle (3);
+                        \draw (59.3,-19.9) node {$s_3$};
+                        \draw [black] (59.3,-19.9) circle (2.4);
+                        \draw [black] (13.745,-17.719) arc (128.65764:51.34236:10.494);
+                        \fill [black] (26.86,-17.72) -- (26.54,-16.83) -- (25.92,-17.61);
+                        \draw (20.3,-14.92) node [above] {$z_0\mbox{ }|\mbox{ }z_0a$};
+                        \draw (20.3,-16.42) node [below] {a};
+                        \draw [black] (26.671,-21.895) arc (-55.76684:-124.23316:11.325);
+                        \fill [black] (26.67,-21.89) -- (25.73,-21.93) -- (26.29,-22.76);
+                        \draw (20.3,-24.36) node [below] {$z_0\mbox{ }|\mbox{ }z_0b$};
+                        \draw (20.3,-22.86) node [above] {b};
+                        \draw [black] (31.9,-19.9) -- (42.4,-19.9);
+                        \fill [black] (42.4,-19.9) -- (41.6,-19.4) -- (41.6,-20.4);
+                        \draw (37.15,-20.4) node [below] {$1$};
+                        \draw [black] (27.577,-17.22) arc (234:-54:2.25);
+                        \draw (28.9,-12.65) node [above] {$1\mbox{ }|\mbox{ }a$};
+                        \draw (28.9,-14.15) node [below] {a};
+                        \fill [black] (30.22,-17.22) -- (31.1,-16.87) -- (30.29,-16.28);
+                        \draw [black] (30.223,-22.58) arc (54:-234:2.25);
+                        \draw (28.9,-27.15) node [below] {$1\mbox{ }|\mbox{ }b$};
+                        \draw (28.9,-25.65) node [above] {b};
+                        \fill [black] (27.58,-22.58) -- (26.7,-22.93) -- (27.51,-23.52);
+                        \draw [black] (48.4,-19.9) -- (56.3,-19.9);
+                        \fill [black] (56.3,-19.9) -- (55.5,-19.4) -- (55.5,-20.4);
+                        \draw (52.35,-18.9) node [above] {$z_0 | 1$};
+                        \draw (52.35,-20.4) node [below] {$1$};
+                        \draw [black] (44.077,-17.22) arc (234:-54:2.25);
+                        \draw (45.4,-12.65) node [above] {$a\mbox{ }|\mbox{ }1$};
+                        \draw (45.4,-14.15) node [below] {a};
+                        \fill [black] (46.72,-17.22) -- (47.6,-16.87) -- (46.79,-16.28);
+                        \draw [black] (46.723,-22.58) arc (54:-234:2.25);
+                        \draw (45.4,-27.15) node [below] {$b\mbox{ }|\mbox{ }1$};
+                        \draw (45.4,-25.65) node [above] {b};
+                        \fill [black] (44.08,-22.58) -- (43.2,-22.93) -- (44.01,-23.52);
+                    \end{tikzpicture}
+                \end{center}
+            \item $L_2$ jest deterministyczny. Automat:
+                \begin{center}
+                    \begin{tikzpicture}[scale=0.2]
+                        \tikzstyle{every node}+=[inner sep=0pt]
+                        \draw [black] (11.7,-19.9) circle (3);
+                        \draw (11.7,-19.9) node {$s_0$};
+                        \draw [black] (45.4,-19.9) circle (3);
+                        \draw (45.4,-19.9) node {$s_2$};
+                        \draw [black] (28.9,-19.9) circle (3);
+                        \draw (28.9,-19.9) node {$s_1$};
+                        \draw [black] (59.3,-19.9) circle (3);
+                        \draw (59.3,-19.9) node {$s_3$};
+                        \draw [black] (59.3,-19.9) circle (2.4);
+                        \draw [black] (13.745,-17.719) arc (128.65764:51.34236:10.494);
+                        \fill [black] (26.86,-17.72) -- (26.54,-16.83) -- (25.92,-17.61);
+                        \draw (20.3,-14.92) node [above] {$z_0\mbox{ }|\mbox{ }z_0a$};
+                        \draw (20.3,-16.42) node [below] {a};
+                        \draw [black] (26.671,-21.895) arc (-55.76684:-124.23316:11.325);
+                        \fill [black] (26.67,-21.89) -- (25.73,-21.93) -- (26.29,-22.76);
+                        \draw (20.3,-24.36) node [below] {$z_0\mbox{ }|\mbox{ }z_0b$};
+                        \draw (20.3,-22.86) node [above] {b};
+                        \draw [black] (31.9,-19.9) -- (42.4,-19.9);
+                        \fill [black] (42.4,-19.9) -- (41.6,-19.4) -- (41.6,-20.4);
+                        \draw (37.15,-20.4) node [below] {$c$};
+                        \draw [black] (27.577,-17.22) arc (234:-54:2.25);
+                        \draw (28.9,-12.65) node [above] {$1\mbox{ }|\mbox{ }a$};
+                        \draw (28.9,-14.15) node [below] {a};
+                        \fill [black] (30.22,-17.22) -- (31.1,-16.87) -- (30.29,-16.28);
+                        \draw [black] (30.223,-22.58) arc (54:-234:2.25);
+                        \draw (28.9,-27.15) node [below] {$1\mbox{ }|\mbox{ }b$};
+                        \draw (28.9,-25.65) node [above] {b};
+                        \fill [black] (27.58,-22.58) -- (26.7,-22.93) -- (27.51,-23.52);
+                        \draw [black] (48.4,-19.9) -- (56.3,-19.9);
+                        \fill [black] (56.3,-19.9) -- (55.5,-19.4) -- (55.5,-20.4);
+                        \draw (52.35,-18.9) node [above] {$z_0 | 1$};
+                        \draw (52.35,-20.4) node [below] {$1$};
+                        \draw [black] (44.077,-17.22) arc (234:-54:2.25);
+                        \draw (45.4,-12.65) node [above] {$a\mbox{ }|\mbox{ }1$};
+                        \draw (45.4,-14.15) node [below] {a};
+                        \fill [black] (46.72,-17.22) -- (47.6,-16.87) -- (46.79,-16.28);
+                        \draw [black] (46.723,-22.58) arc (54:-234:2.25);
+                        \draw (45.4,-27.15) node [below] {$b\mbox{ }|\mbox{ }1$};
+                        \draw (45.4,-25.65) node [above] {b};
+                        \fill [black] (44.08,-22.58) -- (43.2,-22.93) -- (44.01,-23.52);
+                    \end{tikzpicture}
+                \end{center}
+        \end{itemize}
+    \newpage
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 
