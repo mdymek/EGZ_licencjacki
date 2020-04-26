@@ -3509,43 +3509,6 @@ return $\mathcal{A}'$;
     
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 
-\begin{itemize}
-\item Gramatyka $G_1 = (V_N,V_T,P,v_0)$ w której
-
-$V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0a, \; v_0 \rightarrow a \}$
-
-generuje język
-
-$L(G_1) = \{ a^n : n = 1,2,... \}$
-
-Gramatyka jest typu (3)
-
-\item Gramatyka $G_2 = (V_N,V_T,P,v_0)$, w której
-
-$V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0v_0, \; v_0 \rightarrow a \}$
-
-generuje język
-
-
-$L(G_2) = \{ a^n : n = 1,2,... \}$
-
-Gramatyka jset typu (2)
-
-
-\item Gramatyka $G_3 = (V_N,V_T,P,v_0)$, w której
-
-$V_N = \{v_0, v_1, v_2 \}, \;\; V_T = \{a,b,c\}$
-
-$P=\{v_0~\rightarrow~abc,  v_0~\rightarrow~av_1bc,  v_1b~\rightarrow~bv_1,v_1c~\rightarrow~v_2bcc, bv_2~\rightarrow~v_2b,  \\ av_2~\rightarrow~aav_1, av_2~\rightarrow~aa\}$
-
-generuje język
-
-$L(G_3) = \{ a^n b^n c^n : n = 1,2,... \}$.
-Gramatyka jest typu (0)
-\\
-
-Gramatyki $G_1$ i $G_2$ są równoważne.
-\end{itemize}
     \begin{definition}
     Gramatyka
     
@@ -3922,6 +3885,59 @@ Gramatyki $G_1$ i $G_2$ są równoważne.
     
     Kontenery zarządzają pamięcią alokowaną do przechowywania ich elementów, i zapewniają metody pozwalające na dostęp do nich, bezpośrednio lub przez iteratory (obiekty o właściwościach podobnych do wskaźników).
     
+    \subsection{array - kontener sekwencyjny}
+    std::array (tablica) jest kontenerem enkapsulującym tablice o stałej, ustalonej w trakcie kompilacji liczbie elementów.
+    
+    Jako typ agregowany, może być zainicjalizowana korzystając z zasad aggregate-initialization, poprzez nie więcej niż N inicjalizatorów konwertowalnych do \\ $T: std::array<int, 3> a = {1,2,3};$
+    
+    Ta struktura łączy w sobie wydajność i dostępność tablic w stylu języka C, z wszystkimi korzyściami standardowego kontenera, takimi jak
+    \begin{itemize}
+        \item znajomość własnego rozmiaru
+        \item wspieranie przypisywania
+        \item iteratory dostępu bezpośredniego
+    \end{itemize}
+    
+    Tablica długości 0 jest specjalnym przypadkiem (N == 0)
+    
+    Wtedy $array.begin() == array.end()$. Efekt wywołania front() lub back() na tablicy długości 0 jest niezdefiniowany.
+
+Tablica taka może zostać wykorzystana jako krotka N elementów tego samego typu.
+
+Metody
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+at             & Dostęp do wskazanego elementu ze sprawdzeniem zakresów    \\ \hline
+operator{[}  {]} & Dostęp do wskazanego elementu                             \\ \hline
+front          & Dostęp do pierwszego elementu                             \\ \hline
+back           & Dostęp do ostatniego elementu                             \\ \hline
+data           & Bezpośredni dostęp do tablicy opakowywanej przez kontener \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+begin  & Zwraca iterator na początek kontenera         \\ \hline
+end    & Zwraca iterator za koniec kontenera           \\ \hline
+rbegin & Zwraca odwrócony iterator na początek         \\ \hline
+rend   & Zwraca odwrócony iterator za koniec kontenera \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+empty     & Sprawdza czy kontener jest pusty           \\ \hline
+size      & Zwraca liczbę elementów                    \\ \hline
+max\_size & Zwraca maksymalną możliwą liczbę elementów \\ \hline
+fill      & Wypełnia kontener wskazaną wartościa       \\ \hline
+swap      & Zmienia wartości                           \\ \hline
+\end{tabular}
+\end{table}
+
+
     \section{Obsługa sytuacji wyjątkowych w C++.}
     Wyjątki pozwalają zareagować na sytuacje, w których istnieje ryzyko niewykonania określonego zadania.
     
