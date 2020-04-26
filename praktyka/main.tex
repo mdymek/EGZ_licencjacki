@@ -294,6 +294,43 @@
 
     \section{Metody numeryczne rozwiązywania równań nieliniowych: bisekcji, siecznych, Newtona.}
 
+    \begin{exercise}
+        Obliczyć metodą bisekcji 3 kolejne przybliżenia rozwiązania równania $x^3 + x + 1 = 0$ w przedziale $[-2, 2]$.
+    \end{exercise}
+
+    \begin{gather*}
+        f(x) = x^3 + x + 1, ~~ a_0 = -2, b_0 = 2\\
+        c_0 = \frac{-2+2}{2} = 0, ~ f(0) = 1, ~~ a_1 = -2, b_1 = 0\\
+        c_1 = \frac{-2+0}{2} = -1, ~ f(-1) = -1, ~~ a_2 = -1, b_2 = 0\\
+        c_2 = \frac{-1+0}{2} = -\frac{1}{2}\\
+    \end{gather*}
+
+    $c_2 = -\frac{1}{2}$ stanowi trzecie przybliżenie rozwiazania ($x_0$).
+
+    \hfill \\
+
+    \begin{exercise}
+        Obliczyć metodą siecznych 3 kolejne przybliżenia rozwiązania równania $2x^2 - 3x - 10$ w przedziale $[2, 4]$.
+    \end{exercise}
+    \begin{gather*}
+        x_0 = 2, ~~ x_1 = 4\\
+        f(2) = 2*4 - 3*2 - 10 = 8 - 6 - 10 = -8, ~~ f(4) = 2*16 - 3*4 - 10 = 32 - 12 - 10 = 10\\
+        x_2 = 2 - \frac{f(4)(4-2)}{f(4) - f(2)} = 2 - \frac{10*2}{10 + 8} = 2 - \frac{20}{18} = \frac{8}{9}\\
+    \end{gather*}
+    itd.
+
+    \hfill \\
+
+    \begin{exercise}
+        Wykonać dwie iteracje metody Newtona dla wielomianu $p(x) = 4x^3 - 2x^2 - 2$ i punktu początkowego $x_0 = -1$.
+    \end{exercise}
+
+    \begin{gather*}
+        p(x) = 4x^3 - 2x^2 - 2, ~~ p'(x) = 12x^2 - 4x, ~~ x_0 = 1\\
+        x_1 = -1 - \frac{p(-1)}{p'(-1)} = -1 - \frac{-4-2-2}{12+4} = -1 + \frac{8}{16}  = -\frac{1}{2}\\
+        x_2 = -\frac{1}{2} - \frac{\frac{-1}{2} - \frac{1}{2} - 2}{3 + 2} = -\frac{1}{2} + \frac{3}{5} = \frac{1}{10}\\
+    \end{gather*}
+
     \newpage
 
     \section{Rozwiązywanie układów równań liniowych: metoda eliminacji Gaussa, metody iteracyjne Jacobiego i Gaussa-Seidla.}
