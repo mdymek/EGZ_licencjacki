@@ -475,11 +475,44 @@
         A odpowiadającym $\lambda$.
     \end{definition}
 
-    \subsection{Metoda potęgowa}
-    \begin{align*}
-        Ax = \lambda x\\
-        x^{N+1} = A^{N+1} x^0\\
-    \end{align*}
+    \begin{definition}
+        \textbf{Metoda potęgowa} służy do wyznaczania \textbf{największej wartości własnej} macierzy. Korzysta z założeń:
+        \begin{align*}
+            Ax = \lambda x\\
+            x^{N+1} = A^{N+1} x^0\\
+        \end{align*}
+        Algorytm:
+        \begin{enumerate}
+            \item Dla danego $x_0$ oblicz $y_0 = \frac{x_0}{||x_0||_2}$
+            \item W \textit{i}-tej iteracji: $x_i = Ay_i$, $y_i = \frac{x_i}{||x_i||_2}$
+            \item \textit{i}-te przybliżenie największej wartości własnej: $\lambda_i = \frac{<x_i, y_{i-1}>}{<y_{i-1}, y_{i-1}>}$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Odwrotna metoda potęgowa} służy do wyznaczenia \textbf{najmniejszej wartości własnej} macierzy.\\
+        Algorytm:
+        \begin{enumerate}
+            \item $Ax_1 = x_0, Ax_i = x_{i-1}$
+            \item \textit{i}-te przybliżenie najmniejszej wartości własnej: $\frac{1}{\lambda_i} = \frac{<x_i, x_{i-1}>}{<x_{i-1}, x_{i-1}>}$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Metoda QR}  pozwala na przybliżone wyznaczenie wszystkich wartości własnych macierzy. Dla:
+        \begin{enumerate}
+            \item $A_i = Q_i R_i$
+            \item $A_{i+1} = R_i Q_i$
+        \end{enumerate}
+        $A_i$ dąży do macierzy przekątniowej z wartościami własnymi na przekątnej.\\
+
+        Q, R to macierze z rozkładu QR:
+        \begin{gather*}
+            A = QR, ~~ Q - \text{ortonormalna ($QQ^\mathcal{T}=I$)}, ~~ R - \text{górnotrójkątna}\\
+            A = [a_1 \dots a_n], Q = [q_1 \dots q_n], q_1 = \frac{a_1}{||a_1||_2}, q_i = \frac{\tilde{q_i}}{||q_i||_2}\\
+            \tilde{q_i} = a_i - \sum_{j=1}^{i-1} r_{ji} q_j, ~~ r_{ji} = \frac{<a_i, q_j>}{<q_j, q_j>}, r_{jj} = ||\tilde{q_j}||_2
+        \end{gather*}
+    \end{definition}
 
     \newpage
 
