@@ -28,7 +28,7 @@
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=black,
     filecolor=magenta,
     urlcolor=cyan,
 }
@@ -2387,7 +2387,7 @@
 
     	\begin{definition}
     	Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
-    	$\mathcal{M(A)}$ = $\tau \mathcal{A}$(A*) $\subset S^{S}$
+    	$\mathcal{M(A)}$ = $\tau \mathcal{A}(A^*) \subset S^{S}$ 
     	\end{definition}
 
     	\begin{definition}
@@ -3310,10 +3310,150 @@ return $\mathcal{A}'$;
     \end{center}
     \end{definition}
     
-    
-    
+    \newpage
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
+        \subsection{Wyrażenia regularne}
+        
+        \begin{definition}
+            \textbf{Rodzina regularnych podzbiorów}
+
+            Niech $A$ będzie dowolnym zbiorem. Rodzina $REG(A^*)$ regularnych podzbiorów
+            $A^*$ to najmniejsza rodzina $R$ podzbiorów $A^*$ taka, że:
+
+            \begin{enumerate}
+                \item $\emptyset \in R, \forall a \in A$ ${a} \in R$
+                \item jeśli $X, Y \in R$, to: $X \cup Y, X \cdot Y \in R$
+                \item jeśli $X \in R$, to: $X^* = \bigcup\limits_{n = 0}^{\infty} X^n \in R$
+            \end{enumerate}
+        \end{definition}
+
+        \begin{definition}
+            \textbf{Wyrażenie regularne}
+
+            Niech $A$ będzie dowolnym alfabetem, a zbiór $\{+, \star, \emptyset, (,)\}$
+            alfabetem takim, że $A \cap \{+, \star, \emptyset, (,)\} = \emptyset$.
+
+            Słowo $\alpha \in (A \cup \{+, \star, \emptyset, (,)\})^*$ jest wyrażeniem regularnym
+            nad alfabetem A wtedy i tylko wtedy, gdy:
+
+            \begin{enumerate}
+                \item $\alpha = \emptyset$
+                \item $\alpha = a \in A$
+                \item $\alpha$ jest w postaci $(\beta + \gamma), (\beta\gamma), \gamma^*$, gdzie 
+                    $\beta, \gamma$ są wyrażeniami regularnymi nad alfabetem A
+            \end{enumerate}
+        \end{definition}
+
+        Rodzinę wyrażeń regularnych nad $A$ nazywamy $WR$.
+
+        \subsection{Automat skończony}
+
+        \begin{definition}
+            \textbf{Automat}
+
+            Automatem nad alfabetem A nazywamy system $\mathcal{A} = (S, f)$ w którym:
+            \begin{itemize}
+                \item S jest dowolnym zbiorem, zwanym zbiorem stanów
+                \item $f : S \times A \rightarrow S$ jest funkcją przejść
+            \end{itemize}
+
+            Automat $\mathcal{A}$ nazywamy skończonym, jeśli zbiór S jest skończony
+
+            Automat $\mathcal{A}$ ze stanem $s \in S$ taki, że
+            $$f(a, A^*) = Ss$$
+            nazywamy automatem z generatorem s.
+        \end{definition}
+        
+        \begin{definition}
+            \textbf{Język rozpoznawalny}
+
+            Język $L \subset A^*$ jest rozpoznawalny wtedy i tylko wtedy, gdy istnieją:
+            \begin{itemize}
+                \item Automat skończony $\mathcal{A} = (S, f)$
+                \item stan $s_0 \in S$
+                \item zbiór $T \subset S$
+            \end{itemize}
+
+            takie, że
+            $$ L = \{w \in A^* : f(s_0, w) \in T\}$$
+            $s_0$ - stan początkowy \\
+            T - zbiór stanów końcowych automatu
+            $$\mathcal{A} = (S, A, f, s_0, T)$$
+            $L = L(\mathcal{A})$ - język rozpoznawany przez automat $\mathcal{A}$\\
+            $REC(A^*)$ - rodzina wszystkich języków rozpoznawalnych nad alfabetem A
+        \end{definition}
+
+        \subsection{Prawa kongruencja syntaktyczna}
+
+        \begin{definition}
+            \textbf{Prawa kongruencja}
+
+            Każdy automat $\mathcal{A} = (S, f)$ z generatorem $s_0$ wyznacza na wolnym
+            monoidzie $A^*$ prawą kongruencję $\sim_\mathcal{A}$:
+            \[\]
+            $\forall u, v \in A^*$
+            $$u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)$$
+
+            Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat 
+            $\mathcal{A}$ jest skończony.
+        \end{definition}
+
+        \begin{theorem}
+            Każda prawa kongruencja $p \subset (A^*)^2$ wyznacza automat, zwany ilorazowym
+            $$\mathcal{A}_p = (A^* /_{p}, f^*), \; \mathrm{gdzie} \; f^*([w]_p, u) = [wu]_p$$
+            \begin{itemize}
+                \item $\mathcal{A}_p$ jest automatem z generatorem [1]$_p$
+
+                \item $\mathcal{A}_p$ jest automatem skończonym wtedy i tylko gdy relacja $p$ ma skończony indeks 
+            \end{itemize}
+        \end{theorem}
+
+        \subsection{Warunki równoważne definicji języka regularnego}
+        \begin{theorem}
+            \textbf{Twierdzenie Kleenego}
+
+            Dla każdego skończonego alfabetu A
+            $$REC(A^*) = REG(^*)$$
+        \end{theorem}
+
+        \begin{theorem}
+            Dla dowolnego języka $L \in A^*$ następujące warunki są równoważne:
+            \begin{itemize}
+                \item L = L(G) dla gramatyki G typu 3 (regularnej, lewoliniowej)
+                \item L = L(G) dla gramatyki G prawoliniowej
+                \item L = L($\mathcal{A}$) dla automatu deterministycznego $\mathcal{A}$
+                \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}$
+                \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}^p$ z pustymi przejściami
+
+                \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A                
+                \item L $\in REG(A^*)$
+                \item monoid syntaktyczna M(L) jest skończony
+                \item liczba różnych pochodnych Brzozowskiego dla języka
+                    L jest skończona
+                \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$
+                    o skończonym indeksie oraz L = $\bigcup\limits_{w \in L}[w]_p$
+                \item istnieje skończony monoid M i homomorfizm
+                    $$\varphi : A^* \rightarrow M : L = \varphi^{-1}(\phi(L))$$
+            \end{itemize}
+        \end{theorem}
+
+    \newpage
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
+
+        \subsection{Determinizacja}
+
+        \begin{theorem}
+            Język $L \in A^*$ jest rozpoznawany przez automat deterministyczny wtedy
+            i tylko wtedy, gdy jest rozpoznawany przez automat niedeterministyczny.
+        \end{theorem}
+
+        $\mathcal{A}_{ND} = (S, f, I, F)$ - automat niedeterministyczny\\
+        \indent$\mathcal{A}_D = (P(S), \overline{f}, I, T)$ - równoważny automat deterministyczny, gdzie:
+        $$\overline{f} : P(S) \times A^* \rightarrow P(S)$$
+        $$\forall Q \in P(S), \forall w \in A^* \; \; \overline{f}(Q, w) = \bigcup\limits_{s \in Q} f(s, w)$$
+        $$T = \{Q \in P(S) | Q \cap F \neq \emptyset\}$$
+        
+
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 
