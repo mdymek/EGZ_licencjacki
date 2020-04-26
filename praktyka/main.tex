@@ -128,7 +128,89 @@
 
     \section{Porządki częściowe i liniowe. Elementy największe, najmniejsze, maksymalne i minimalne.}
 
-    Przykłady - sprawdź czy porządek: $xRy \Leftrightarrow x | y$
+    \begin{exercise}
+        \textbf{Relacja częściowego porządku}. Sprawdź, czy relacja podzielności
+        \[ x \mathcal{R} y ~ \Leftrightarrow ~ x | y \]
+        jest relacją częściowego porządku.
+    \end{exercise}
+
+    \begin{enumerate}
+        \item \textbf{Zwrotność}: $x \mathcal{R} x ~ \Leftrightarrow ~ x | x$
+        \item \textbf{Przechodniość}:
+        \begin{align*}
+            \left.\begin{matrix}
+                      x \mathcal{R} y \Leftrightarrow x|y \Leftrightarrow x*k = y, ~ k \in \mathbb{Z}\\
+                      y \mathcal{R} z \Leftrightarrow y|z \Leftrightarrow y*l = z, ~ l \in \mathbb{Z}\\
+            \end{matrix}\right\} x*(k*l) = z, ~ (k*l) \in \mathbb{Z} \Rightarrow x \mathcal{R} z
+        \end{align*}
+        \item \textbf{Antysymetryczność}:
+        \begin{align*}
+            \left.\begin{matrix}
+                    x \mathcal{R} y \Leftrightarrow x|y \Leftrightarrow x \leq y\\
+                    y \mathcal{R} x \Leftrightarrow y|x \Leftrightarrow y \leq x\\
+        \end{matrix}\right\} x = y
+        \end{align*}
+    \end{enumerate}
+
+    \begin{exercise}
+        \textbf{Relacja liniowego porządku}. Sprawdź, czy relacja słabej nierówności
+        \[ x \mathcal{R} y ~ \Leftrightarrow ~ x \leq y \]
+        jest relacją liniowego porządku.
+    \end{exercise}
+
+    \begin{enumerate}
+        \item \textbf{Zwrotność}: $x \mathcal{R} x ~ \Leftrightarrow ~ x = x \Rightarrow x \leq x$
+        \item \textbf{Przechodniość}:
+        \begin{align*}
+            \left.\begin{matrix}
+                      x \mathcal{R} y \Leftrightarrow x \leq y\\
+                      y \mathcal{R} z \Leftrightarrow y \leq z\\
+            \end{matrix}\right\} x \leq z \Rightarrow x \mathcal{R} z
+        \end{align*}
+        \item \textbf{Antysymetryczność}:
+        \begin{align*}
+            \left.\begin{matrix}
+                      x \mathcal{R} y \Leftrightarrow x \leq y\\
+                      y \mathcal{R} x \Leftrightarrow y \leq x\\
+            \end{matrix}\right\} x = y
+        \end{align*}
+        \item \textbf{Spójność}: $\forall x, y: ~~ x \leq y \vee y \leq x$
+    \end{enumerate}
+
+    \begin{exercise}
+        Wyznacz elementy maskymalne, minimalne, najmiejszy, największy w relacji podzielności dla zbioru $\{1,2,3,6,9\}$.
+    \end{exercise}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (37,-42.3) circle (3);
+            \draw (37,-42.3) node {$1$};
+            \draw [black] (28.5,-33.2) circle (3);
+            \draw (28.5,-33.2) node {$2$};
+            \draw [black] (47,-33.2) circle (3);
+            \draw (47,-33.2) node {$3$};
+            \draw [black] (37,-17.6) circle (3);
+            \draw (37,-17.6) node {$6$};
+            \draw [black] (47,-17.6) circle (3);
+            \draw (47,-17.6) node {$9$};
+            \draw [black] (39.22,-40.28) -- (44.78,-35.22);
+            \fill [black] (44.78,-35.22) -- (43.85,-35.39) -- (44.53,-36.13);
+            \draw [black] (34.95,-40.11) -- (30.55,-35.39);
+            \fill [black] (30.55,-35.39) -- (30.73,-36.32) -- (31.46,-35.64);
+            \draw [black] (29.94,-30.57) -- (35.56,-20.23);
+            \fill [black] (35.56,-20.23) -- (34.74,-20.7) -- (35.62,-21.18);
+            \draw [black] (45.38,-30.67) -- (38.62,-20.13);
+            \fill [black] (38.62,-20.13) -- (38.63,-21.07) -- (39.47,-20.53);
+            \draw [black] (47,-30.2) -- (47,-20.6);
+            \fill [black] (47,-20.6) -- (46.5,-21.4) -- (47.5,-21.4);
+        \end{tikzpicture}
+    \end{center}
+
+    \noindent \textbf{Element największy}: brak\\
+    \textbf{Element najmniejszy}: 1\\
+    \textbf{Elementy maksymalne}: 6,9\\
+    \textbf{Element minimalny}: 1\\
 
     \newpage
 
