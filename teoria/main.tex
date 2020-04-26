@@ -25,6 +25,7 @@
 \usepackage{multicol}
 \usepackage{lineno}
 \usepackage{hyperref}
+\graphicspath{{graphics/}}
 
 \hypersetup{
     colorlinks=true,
@@ -1148,7 +1149,7 @@
 
     \end{enumerate}
 
-    \includegraphics[scale=0.20]{graphics/15_6.png}
+    \includegraphics[scale=0.20]{15_6.png}
 
     \newpage
 
@@ -3018,7 +3019,7 @@
     
     \noindent Generalnie złożoność wszystkich operacji na B-drzewach wynosi $O(K \log_{K} n)$, gdzie n to ilość kluczy (wartości) w drzewie, a K to rząd drzewa.
     
-    \includegraphics[]{graphics/b-trees/b-tree-example.png}
+    \includegraphics[]{b-trees/b-tree-example.png}
     
     \noindent Odmianą B-drzew są drzewa B+, które różnią się tym, że wszystkie wartości trzymane są w liściach oraz mają powiązania pomiędzy liśćmi (tak aby można było po kolei przejść wszystkie wartości w liściach).
     
@@ -3052,20 +3053,20 @@
     \begin{multicols}{2}
     \textbf{Rotacja RR} \\
     
-    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/rr-rotation.png}
+    \includegraphics[width=0.8\linewidth]{avl-trees/rr-rotation.png}
     \columnbreak \\
     \textbf{Rotacja LL} \\
     
-    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/ll-rotation.png}
+    \includegraphics[width=0.8\linewidth]{avl-trees/ll-rotation.png}
     \end{multicols}
     
     \textbf{Rotacja RL} \\
     
-    \includegraphics[width=\linewidth]{graphics/avl-trees/rl-rotation.png} \\
+    \includegraphics[width=\linewidth]{avl-trees/rl-rotation.png} \\
 
     \textbf{Rotacja LR} \\
     
-    \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
+    \includegraphics[width=\linewidth]{avl-trees/lr-rotation.png} \\
     
     \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
     
@@ -3851,7 +3852,7 @@ int main() {
     \end{definition}
 
     \begin{figure}[H]
-        \includegraphics[width=\linewidth]{graphics/uml_sek.png}
+        \includegraphics[width=\linewidth]{uml_sek.png}
     \end{figure}
 
     \subsection{Diagram przypadków użycia.}
@@ -3875,7 +3876,7 @@ int main() {
     \end{definition}
 
     \begin{figure}[H]
-        \includegraphics[width=\linewidth]{graphics/uml_pu.png}
+        \includegraphics[width=\linewidth]{uml_pu.png}
     \end{figure}
 
     \newpage
@@ -3949,7 +3950,7 @@ int main() {
     \end{itemize}
 
     \begin{figure}[H]
-        \includegraphics[width=\linewidth]{graphics/strat_integr.png}
+        \includegraphics[width=\linewidth]{strat_integr.png}
     \end{figure}
 
     \subsubsection{Testy systemowe.}
