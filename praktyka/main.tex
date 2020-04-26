@@ -27,6 +27,7 @@
 \usetikzlibrary{automata,arrows,positioning,calc}
 \usepackage{forest}
 \usepackage{hyperref}
+\usepackage{enumitem}
 
 \hypersetup{
     colorlinks=true,
@@ -95,8 +96,33 @@
 
     \section{Zasada indukcji matematycznej.}
 
-    Przykład: $2^1 + 2^2 + \cdots + 2^n = 2^{n+1} - 2$, Nierówność Bernoulliego
-    $dla ~ h \geq -1 ~~ (1+h)^2 \geq 1 + n*h, ~~ \forall n \in \mathbb{N}^{+}$, $1 + 2 + \cdots + n = \frac{n(n+1)}{2} \forall n \in \mathbb{N}$
+    \begin{exercise}
+        Teza:
+        \[1 + 2 + \cdots + n = \frac{n(n+1)}{2} ~~ \forall n \in \mathbb{N}\]
+    \end{exercise}
+
+    \begin{enumerate}
+        \item $n = 1$
+        \[1 ~ = ~ \frac{1(1+1)}{2} ~ = ~ \frac{2}{2} ~ = ~ 1\]
+        Pierwszy krok indukcyjny zachodzi.
+
+        \item
+        \begin{enumerate}[label=(\Alph*)]
+            \item \textbf{Założenie indukcyjne}: $1 + 2 + \cdots + n = \frac{n(n+1)}{2}$.
+            \item \textbf{Teza indukcyjna}: $1 + 2 + \cdots + n + (n+1) = \frac{(n+1)(n+2)}{2}$.
+        \end{enumerate}
+
+        Z założenia indukcyjnego:
+        \begin{gather*}
+            1 + 2 + \cdots + n = \frac{n(n+1)}{2}\\
+            1 + 2 + \cdots + n + (n+1) = \frac{n(n+1)}{2} + (n+1)\\
+            1 + 2 + \cdots + n + (n+1) = \frac{n(n+1)}{2} + \frac{2(n+1)}{2}\\
+            1 + 2 + \cdots + n + (n+1) = \frac{(n+2)(n+1)}{2}\\
+        \end{gather*}
+
+        Zatem $(A) \Rightarrow (B)$. Na mocy zasady indukcji matematycznej \textbf{teza jest prawdziwa}.
+
+    \end{enumerate}
 
     \newpage
 
