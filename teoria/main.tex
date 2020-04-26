@@ -3819,7 +3819,67 @@ int main() {
     \section{Obsługa sytuacji wyjątkowych w C++.}
     \section{Obsługa plików w języku C.}
     \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
+
+    \newpage
+
     \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
+
+    \begin{definition}
+        \textbf{UML} - Unified Modelling Language.
+        \begin{itemize}
+            \item rodzina notacji graficznych;
+            \item służy do opisywania i projektowania systemów informatycznych;
+            \item narodził się z unifikacji wielu obiektowych języków modelowania graficznego;
+            \item nadzorowany przez organizacje OMG.
+        \end{itemize}
+    \end{definition}
+
+    \subsection{Diagram sekwencji.}
+
+    \begin{definition}
+        \textbf{Diagram sekwencji} - opisuje interakcje pomiędzy częściami systemu w postaci sekwencji komunikatów
+        wymienianych między nimi.
+
+        Diagramy sekwencji dobrze ukazują dynamiczne aspekty realizacji scenariuszy, w których dochodzi do złożonych
+        oddziaływań pomiędzy obiektami. Podstawowymi oddziaływaniami są wymiany komunikatów oznaczane następującymi
+        symbolami:
+        \begin{itemize}
+            \item przesłanie komunikatu asynchronicznego – strzałka zwykła,
+            \item wywołanie funkcji – strzałka z wypełnionym grotem,
+            \item powrót z funkcji – strzałka rysowana linią przerywaną.
+        \end{itemize}
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{graphics/uml_sek.png}
+    \end{figure}
+
+    \subsection{Diagram przypadków użycia.}
+
+    \begin{definition}
+        \textbf{Diagram przypadków użycia} służy do przedstawiania:
+        \begin{itemize}
+            \item interakcji aktora z systemem,
+            \item zadań, jakie wykonuje system,
+            \item wymagań funkcjonalnych.
+        \end{itemize}
+
+
+        \textbf{Aktorzy} mogą być:
+        \begin{itemize}
+            \item Ludźmi wchodzącymi w interakcję,
+            \item Systemami zewnętrznymi
+            \item Częściami systemu, które mają wpływ na funkcjonowanie systemu, ale same przez ten system nie mogą
+            być zmieniane (jak np. zegar systemowy).
+        \end{itemize}
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{graphics/uml_pu.png}
+    \end{figure}
+
+    \newpage
+
     \section{Klasyfikacja testów.}
     \section{Model Scrum: struktura zespołu, proces wytwarzania oprogramowania, korzyści modelu.}
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
