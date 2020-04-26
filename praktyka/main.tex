@@ -216,7 +216,35 @@
 
     \section{Relacja równoważności i zbiór ilorazowy.}
 
-    Przykład: $xRy ~ \Leftrightarrow x \equiv_3 y$.
+    \begin{exercise}
+        Sprawdź, czy relacja modulo trzy:
+        \[ x \mathcal{R} y ~ \Leftrightarrow x \equiv_3 y\]
+        jest relacją równoważności. Jeśli tak, wyznacz klasy abstrakcji.
+    \end{exercise}
+
+    \begin{enumerate}
+        \item \textbf{Zwrotność}: $x \equiv_3 x$
+        \item \textbf{Symetryczność:} $x \equiv_3 y \Rightarrow y \equiv_3 x$
+        \item \textbf{Przechodniość:}
+        \begin{align*}
+            x = 3k + r_x, ~~ y = 3l + r_y, ~~ z = 3m + r_z, ~~~ k,l,m \in \mathbb{Z}\\
+            \left.\begin{matrix}
+                      x \equiv_3 y ~ \Rightarrow ~ r_x = r_y\\
+                      y \equiv_3 z ~ \Rightarrow ~ r_y = r_z\\
+            \end{matrix}\right\} r_x = r_z \Rightarrow x \mathcal{R} z
+        \end{align*}
+    \end{enumerate}
+
+
+    \textbf{Klasy abstrakcji}:
+    \begin{gather*}
+        [0]_{\mathcal{R}} = \{0, 3, 6, 9, \dots\} = 3*k, k \in \mathbb{N}_0\\
+        [1]_{\mathcal{R}} = \{1, 4, 7, 10, \dots\} = 3*k + 1, k \in \mathbb{N}_0\\
+        [2]_{\mathcal{R}} = \{2, 5, 8, 11, \dots\} = 3*k + 2, k \in \mathbb{N}_0\\
+    \end{gather*}
+
+    \textbf{Zbiór ilorazowy}: $X/\mathcal{R} = \{[0]_{\mathcal{R}}, [1]_{\mathcal{R}}, [2]_{\mathcal{R}}\}$
+
 
     \newpage
 
