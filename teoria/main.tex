@@ -26,6 +26,7 @@
 \usepackage{lineno}
 \usepackage{hyperref}
 \usetikzlibrary{shapes,snakes}
+\graphicspath{{graphics/}}
 
 \hypersetup{
     colorlinks=true,
@@ -70,14 +71,19 @@
 
         \HRule \\[0.4cm]
         %        { \huge \bfseries ETL}\\[0.4cm]
-        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.5cm]
-        \textsc{\large na kierunku Informatyka}\\[0.5cm]
+        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.4cm]
+        \textsc{\large na kierunku Informatyka}\\[0.4cm]
+        \textsc{\Large Teoria}\\[0.4cm]
         \HRule \\[1.0cm]
 
-        \Large% \emph{Autorzy:}\\
-        Małgorzata \textsc{Dymek}\\[1.5cm]
+        \Large %\emph{Autorzy:}\\
+        Karol \textsc{Chrząstek}\\
+        Małgorzata \textsc{Dymek}\\
+        Michał \textsc{Piotrowski}\\
+        Dominik \textsc{Wołek}\\
+        Dagmara \textsc{Zdybał}\\[1.5cm]
 
-        \includegraphics[scale=0.27]{uj.jpg}\\[4cm]
+        \includegraphics[scale=0.27]{uj.jpg}\\[2cm]
 
         {\large Rok akademicki 2019/2020}\\
 
@@ -1144,7 +1150,7 @@
 
     \end{enumerate}
 
-    \includegraphics[scale=0.20]{graphics/15_6.png}
+    \includegraphics[scale=0.20]{15_6.png}
 
     \newpage
 
@@ -3014,7 +3020,7 @@
     
     \noindent Generalnie złożoność wszystkich operacji na B-drzewach wynosi $O(K \log_{K} n)$, gdzie n to ilość kluczy (wartości) w drzewie, a K to rząd drzewa.
     
-    \includegraphics[]{graphics/b-trees/b-tree-example.png}
+    \includegraphics[]{b-trees/b-tree-example.png}
     
     \noindent Odmianą B-drzew są drzewa B+, które różnią się tym, że wszystkie wartości trzymane są w liściach oraz mają powiązania pomiędzy liśćmi (tak aby można było po kolei przejść wszystkie wartości w liściach).
     
@@ -3048,20 +3054,20 @@
     \begin{multicols}{2}
     \textbf{Rotacja RR} \\
     
-    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/rr-rotation.png}
+    \includegraphics[width=0.8\linewidth]{avl-trees/rr-rotation.png}
     \columnbreak \\
     \textbf{Rotacja LL} \\
     
-    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/ll-rotation.png}
+    \includegraphics[width=0.8\linewidth]{avl-trees/ll-rotation.png}
     \end{multicols}
     
     \textbf{Rotacja RL} \\
     
-    \includegraphics[width=\linewidth]{graphics/avl-trees/rl-rotation.png} \\
+    \includegraphics[width=\linewidth]{avl-trees/rl-rotation.png} \\
 
     \textbf{Rotacja LR} \\
     
-    \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
+    \includegraphics[width=\linewidth]{avl-trees/lr-rotation.png} \\
     
     \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
     
@@ -3894,15 +3900,496 @@ return $\mathcal{A}'$;
     \newpage
 
     \section{Wskaźniki, arytmetyka wskaźników, różnica między wskaźnikiem a referencją w C++.}
+    \begin{definition}
+    	\textbf{Wskaźnik} – typ zmiennej odpowiedzialnej za przechowywanie adresu do innej zmiennej (innego miejsca w pamięci) w obrębie naszej aplikacji.
+    	Wskaźnik może wskazywać na jakąś zmienną, strukturę, tablicę czy nawet funkcję.
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Operatory związane ze wskaźnikami w C++}
+    	\begin{minted}{cpp}
+int a = 5;
+
+// Creation of pointer to int variable
+int *intPtr = nullptr;  // In older versions NULL
+
+// Using & (ampersand) to get address of variable
+// then assign to pointer
+intPtr = &a;
+
+// Using * as dereference operator
+// to get value of pointed variable
+cout << *intPtr << endl;
+    	\end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Arytmetyka wskaźników} \\
+    	Mając wskaźnik \texttt{int *p} wskazujący na hipotetyczny adres 10, wykonując na nim operację \texttt{p+2} dostajemy wskaźnik wskazujący na adres \texttt{10 + 2*sizeof(int)}
+    	czyli zakładając, że typ \texttt{int} zajmuje w naszym kompilatorze 4 bajty dostajemy \texttt{10 + 2*4} = \texttt{18}. \\
+    	Jest to przydatne szczególnie przy operowaniu na strukturach, których pola są ułożone po kolei w pamięci, np. tablice:
+    	\begin{minted}{cpp}
+int *a = new int[10] {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+// Now a pointing to first element in array
+cout << *a << endl;  // 0
+
+// Using dereference operator with pointer arithmetic
+cout << *(a+3) << endl;  // 30
+    	\end{minted}
+    	Jak więc widać \texttt{*(a+i)} $\Leftrightarrow$ \texttt{a[i]}.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Wskaźnik a referencja} \\
+    Referencję możemy traktować jako dodatkową nazwę na juz istniejący obiekt. Jest to coś w rodzaju stałego wskaźnika.
+    Składnia referencji zabrania jednak wykonywania operacji znanych dla wskaźników:
+    \begin{itemize}
+        \item Dla referencji nie można zmienić referowanego obiektu - raz ustawiony (a musi być ustawiony prawie zawsze podczas jej deklaracji) nie zmienia się przez cały czas jej życia
+        \item Nie jest dostępna arytmetyka referencji (w przeciwieństwie do arytmetyki wskaźników)
+    \end{itemize}
+    Po kompilacji (w kodzie maszynowym) referencje i wskaźniki niczym się nie różnią.
+    Korzystając z referencji świadomie rezygnujemy z pewnych możliwości oferowanych nam przez wskaźniki. W zamian dostajemy:
+    \begin{itemize}
+	\item Łatwiejszą notację - nie musimy używać operatora wyłuskania (\texttt{*}) do odwoływania się do obiektu
+	\item Większe bezpieczeństwo - brak arytmetyki dla referencji znacznie utrudnia popełnienie błędów związanych z niepoprawnym odwołaniem do pamięci
+    \end{itemize}
+    \end{definition}
+    
+    \noindent \textbf{Przykład użycia referencji}
+    \begin{minted}{cpp}
+int n = 6;
+
+// Deklaracja referencji na typ int i przypisanie referowanego obiektu
+// Referencję deklarujemy dodając & (ampersand) między nazwą typu a zmiennej
+// (nie mylić z & jako operatorem pobrania adresu omawianym przy wskaźnikach)
+int &r = n;
+
+cout << r << endl; // 6
+
+// Zmiana wartości odwołując się do referncji
+// zmienia tak na prawdę wartość oryginalnego obiektu
+r = 7;
+
+cout << n << endl; //7
+    \end{minted}    
+    
+    \newpage
+    
     \section{Podstawowe założenia paradygmatu obiektowego: dziedziczenie, abstrakcja, enkapsulacja, polimorfizm.}
+    \begin{definition}
+	\textbf{Dziedziczenie (kompozycja)} \\
+    	Umożliwia stworzenie hierarchii obiektów w programie. Polega na przejęciu właściwości i funkcjonalności obiektów innej klasy
+    	i ewentualnej modyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane.
+    	\begin{minted}{cpp}
+class Mammal {
+public:
+  void feed() {
+    cout << "sucking" << endl;
+  }
+		
+  virtual void giveVoice() = 0; // Pure virtual method
+};
+
+class Cat : public Mammal {
+public:
+  void giveVoice() override {
+    cout << "meow" << endl;
+  }
+};
+
+int main() {
+  Cat cat = new Cat();
+  cat.feed();
+  cat.giveVoice();
+  /*
+  sucking
+  meow
+  */
+}
+    	\end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Abstrakcja} \\
+    Każdy obiekt w systemie służy jako model abstrakcyjnego "wykonawcy", który może wykonywać pracę, opisywać i zmieniać swój stan, oraz komunikować się
+    z innymi obiektami w systemie, bez ujawniania, w jaki sposób zaimplementowano dane cechy.
+    \begin{minted}{cpp}
+class DiscountComputator {
+private:
+  int factor;
+  ...
+
+public:  
+  // Setter
+  void setFactor(int factor) {
+    this.factor = factor;
+  }
+  
+  double compute(double price) {
+    ...
+  }
+};
+
+int main() {
+  DiscountComputator dc = new DiscountComputator();
+  
+  dc.setFactor(5);
+  
+  // We are not interested how it is calculated
+  double result = dc.compute(123.45);
+}
+    \end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Enkapsulacja} \\
+    Enkapsulacja zapewnia, że obiekt nie może zmieniać stanu innych obiektów w nieokreślony sposób.
+    Każdy typ obiektu dostarcza interfejsu, który określa sposób współpracy z innymi obiektami.
+    Jedynie za pomocą określonych metod mamy możliwość zmienić stan obiektu, bezpośredni dostęp
+    do zmiennych jest zabroniony.
+    \begin{minted}{cpp}
+class MyClass {
+private:
+  int field;
+  
+public:
+  // Setter
+  void setField(int field) {
+    this.field = field;
+  }
+  
+  // Getter
+  int getField() {
+    return field;
+  }
+};
+
+int main() {
+  MyClass clazz = new MyClass();
+  
+  clazz.setField(5);
+  int field = clazz.getField();
+  
+  /*
+  // The `field` is private, so the following
+  // will cause an error during compilation
+  clazz.field = 5;
+  int field = clazz.field;
+  */
+}
+    \end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Polimorfizm} \\
+    Referencje i wskaźniki obiektów mogą dotyczyć obiektów różnego typu, a wywołanie metody dla referencji spowoduje zachowanie
+    odpowiednie dla pełnego typu obiektu wywoływanego. Zazwyczaj można wyróżnić dwa rodzaje polimorfizmu: dynamiczne - wykonywane podczas działania programu,
+    a także statyczne - na etapie kompilacji.
+    \begin{minted}{cpp}
+class Point {
+protected:
+    int x, y;
+public:
+    // Constructor with initializer list
+    Point(int x, int y) : x(x), y(y) {
+    }
+
+    virtual void printPoint() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+
+    void printClassName() {
+        cout << "Point" << endl;
+    }
+};
+
+class ColoredPoint : public Point {
+protected:
+    int color;
+public:
+    // Constructor with initializer list
+    ColoredPoint(int x, int y, int color)
+        : Point(x, y), color(color) {
+    }
+
+    void printPoint() {
+        cout << "(" << x << ", " << y
+            << ", color = " << color << ")" << endl;
+    }
+
+    void printClassName() {
+        cout << "ColoredPoint" << endl;
+    };
+};
+	\end{minted}
+	\end{definition}
+	\begin{definition} \textbf{} \\
+	\begin{minted}{cpp}
+int main() {
+    Point *p = new ColoredPoint(1, 2, 3);
+    p->printPoint();
+    p->printClassName();
+    delete p;
+
+    ColoredPoint *cp = new ColoredPoint(1, 2, 3);
+    cp->printPoint();
+    cp->printClassName();
+    delete cp;
+
+    return 0;
+}
+
+/* Output:
+   (1, 2, color = 3)
+   Point
+   (1, 2, color = 3)
+   ColoredPoint
+*/
+    \end{minted}
+    
+    Jak widzimy dla obu wskaźników instancjonujemy klasę \texttt{ColoredPoint}. W przypadku wskaźnika \texttt{p} i wywołania metody \texttt{printClassName}
+    została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na obiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
+    bierzez pod uwagę typ wskaźnika, a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
+    kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu, a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
+    z powyższego kodu.
+    \end{definition}
+    
+    \newpage
+    
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
     \section{Obsługa sytuacji wyjątkowych w C++.}
     \section{Obsługa plików w języku C.}
     \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
+
+    \newpage
+
     \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
+
+    \begin{definition}
+        \textbf{UML} - Unified Modelling Language.
+        \begin{itemize}
+            \item rodzina notacji graficznych;
+            \item służy do opisywania i projektowania systemów informatycznych;
+            \item narodził się z unifikacji wielu obiektowych języków modelowania graficznego;
+            \item nadzorowany przez organizacje OMG.
+        \end{itemize}
+    \end{definition}
+
+    \subsection{Diagram sekwencji.}
+
+    \begin{definition}
+        \textbf{Diagram sekwencji} - opisuje interakcje pomiędzy częściami systemu w postaci sekwencji komunikatów
+        wymienianych między nimi.
+
+        Diagramy sekwencji dobrze ukazują dynamiczne aspekty realizacji scenariuszy, w których dochodzi do złożonych
+        oddziaływań pomiędzy obiektami. Podstawowymi oddziaływaniami są wymiany komunikatów oznaczane następującymi
+        symbolami:
+        \begin{itemize}
+            \item przesłanie komunikatu asynchronicznego – strzałka zwykła,
+            \item wywołanie funkcji – strzałka z wypełnionym grotem,
+            \item powrót z funkcji – strzałka rysowana linią przerywaną.
+        \end{itemize}
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uml_sek.png}
+    \end{figure}
+
+    \subsection{Diagram przypadków użycia.}
+
+    \begin{definition}
+        \textbf{Diagram przypadków użycia} służy do przedstawiania:
+        \begin{itemize}
+            \item interakcji aktora z systemem,
+            \item zadań, jakie wykonuje system,
+            \item wymagań funkcjonalnych.
+        \end{itemize}
+
+
+        \textbf{Aktorzy} mogą być:
+        \begin{itemize}
+            \item Ludźmi wchodzącymi w interakcję,
+            \item Systemami zewnętrznymi
+            \item Częściami systemu, które mają wpływ na funkcjonowanie systemu, ale same przez ten system nie mogą
+            być zmieniane (jak np. zegar systemowy).
+        \end{itemize}
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uml_pu.png}
+    \end{figure}
+
+    \newpage
+
     \section{Klasyfikacja testów.}
+
+    \subsection{Poziomy testów.}
+    \begin{definition}
+        \textbf{Poziom testów} określa \textbf{sposób} testowania ze względu na \textbf{postać}
+        testowanego obiektu w kontekście cyklu życia (\textbf{co testujemy?}).
+    \end{definition}
+
+    \subsubsection{Testy jednostkowe.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY JEDNOSTKOWE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania na moduły, projekt szczegółowy, kod\\
+                \hline
+                \textbf{Typowe obiekty} & moduły, programy, funkcje, klasy, procedury\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+
+    \begin{itemize}
+        \item testowanie modułowe, unit testing
+        \item defekty szukane w izolacji od reszty systemu
+        \item wykorzystanie zaślepek i sterowników
+        \item przeprowadzane przez deweloperów – autorów testowanego kodu
+        \item usuwanie defektów bezpośrednio po znalezieniu
+        \item brak formalnego procesu zarządzania defektami
+    \end{itemize}
+
+    \hfill \\
+
+    \noindent \textbf{TTD} - Test Driven Developement.
+    \begin{itemize}
+        \item \textbf{Napisanie testu} - sprawdza, że programista rozumie zachowanie nowego kodu.
+        \item \textbf{Uruchomienie testu}, który nie przechodzi (testuje uprząż testową i sam test; pokazuje,
+        że wystąpi awaria, gdy kod będzie błędny).
+        \item \textbf{Napisanie kodu} w minimalnej ilości, wystarczającej do zdania testu; jeśli
+        konieczne, dokonanie refaktoryzacji.
+    \end{itemize}
+
+    \subsubsection{Testy integracyjne.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY INTEGRACYJNE}}\\
+                \hline
+                \textbf{Podstawa testów} & projekt systemu, architektura, przypadki użycia\\
+                \hline
+                \textbf{Typowe obiekty} & interfejsy, podsystemy, konfiguracje systemów\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item testuje interfejsy i interakcje
+        \item im większy zakres integracji, tym trudniej izolować defekty
+        \item rozumienie architektury testowanych modułów/systemów
+        \item może odbywać się na wielu poziomach (np. integracja systemów)
+    \end{itemize}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{strat_integr.png}
+    \end{figure}
+
+    \subsubsection{Testy systemowe.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY SYSTEMOWE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania na system, przypadki użycia,
+                specyfikacja funkcjonalna, raporty analizy ryzyka\\
+                \hline
+                \textbf{Typowe obiekty} & system, podręczniki użytkownika i operatora,
+                konfiguracja systemu\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item sprawdza zachowanie systemu jako całości
+        \item zakres testu określony w planie testów
+        \item środowisko testowe podobne do produkcyjnego – minimalizacja ryzyka awarii zależnych od środowiska
+        \item często konieczność testowania z niekompletnymi wymaganiami
+        \item zwykle przeprowadzane przez niezależny zespół testerski
+    \end{itemize}
+
+    \subsubsection{Testy akceptacyjne.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY AKCEPTACYJNE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania użytkownika, wymagania na system,
+                przypadki użycia, procesy biznesowe, raporty
+                analizy ryzyka\\
+                \hline
+                \textbf{Typowe obiekty} & Procesy biznesowe w pełni zintegrowanego
+                systemu, procesy operacyjne i utrzymania systemu,
+                procedury, raporty, dane konfiguracyjne\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item cel: zyskanie zaufania do systemu
+        \item znajdowanie defektów nie jest głównym celem
+        \item często przeprowadzane przez klienta lub użytkownika
+        \item ocenia gotowość systemu, ale niekoniecznie ostatni etap testów
+    \end{itemize}
+
+    \noindent \textbf{Typowe formy testów akceptacyjnych:}
+    \begin{itemize}
+        \item \textbf{testy akceptacyjne użytkownika (UAT)} – sprawdzenie gotowości do użycia
+        \item \textbf{testy operacyjne (OAT)} – akceptacja przez administratora systemu (testy
+        backupu, przywracania systemu, zarządzania użytkownikami, utrzymania,
+        migracji danych, bezpieczeństwa itp.)
+        \item \textbf{testy akceptacyjne wymagane kontraktem/regulacjami}
+        \item \textbf{testy alfa, beta (polowe)}
+        \begin{itemize}
+            \item alfa: przeprowadzane u producenta, ale nie przez zespół deweloperski
+            \item beta: przeprowadzane u klienta przez klienta/potencjalnego użytkownika
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Typy testów.}
+
+    \begin{definition}
+        \textbf{Typ testów} to zbiór czynności testowych właściwych dla weryfikacji systemu
+        w oparciu o konkretny powód lub cel testów (\textbf{jak testujemy?}).
+    \end{definition}
+
+    \begin{enumerate}
+        \item  \textbf{Testowanie funkcjonalne}\\
+        Testowanie funkcji wykonywanej przez oprogramowanie - \textbf{co system robi}.
+
+        \item \textbf{Testowanie niefunkcjonalne}\\
+        Testowanie niefunkcjonalnej charakterystyki jakościowej (np. niezawodność, wydajność,
+        użyteczność) - \textbf{jak system działa}. Wyrażalne ilościowo (np. czas odpowiedzi w testach wydajności).
+
+        \item \textbf{Testowanie strukturalne}\\
+        Oparte na strukturze (np. kod, graf przepływu sterowania, struktura menu, model procesu biznesowego).
+        Zwykle wykonywane po testach czarnoskrzynkowych, aby sprawdzić stopień przetestowania i wyrazić go ilościowo
+        (\textbf{pokrycie}).
+
+        \item \textbf{Retesty i testy regresji}\\
+        \textbf{Związane ze zmianą}, tzn. potwierdzenie usunięcia defektów (retesty - testy zmienionych fragmentów kodu)
+        oraz poszukiwanie niezamierzonych zmian (regresja - pogarszanie się jakości systemu przy wprowadzaniu zmian;
+        testujemy niezmienione fragmenty programu- często automatyzowane).
+    \end{enumerate}
+
+    \newpage
+
     \section{Model Scrum: struktura zespołu, proces wytwarzania oprogramowania, korzyści modelu.}
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
