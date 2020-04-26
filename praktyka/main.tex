@@ -250,6 +250,46 @@
 
     \section{Metody dowodzenia twierdzeń: wprost, nie wprost, przez kontrapozycję.}
 
+    \begin{exercise}
+        \textbf{Dowód wprost}. Udowodnij, że liczba $6^{100} - 2*6^{99} + 10*6^{98}$ jest podzielna przez $17$.
+    \end{exercise}
+
+    \noindent Dowód wprost ma postać:
+    \begin{center}
+        Jeżeli \textit{\ldots założenie \ldots}, to \textit{\ldots teza \ldots}.
+    \end{center}
+
+    \noindent W naszym przypadku:
+    \begin{center}
+        Jeżeli liczba ma postać $6^{100} - 2*6^{99} + 10*6^{98}$, to jest podzielna przez $17$.
+    \end{center}
+
+    \noindent Rozpisujemy z założenia:
+    \[6^{100} - 2*6^{99} + 10*6^{98} = 6^{98}(6^2 - 2*6 + 10) 6^{98}(36 - 12 + 10) = 6^{98}(34) = 6^{98}*2*17\]
+    \textbf{Teza jest prawdziwa}.
+
+    \hfill \\
+
+    \begin{exercise}
+        \textbf{Dowód nie wprost.} Udowodnij, że liczba $\sqrt{2}$ jest liczbą niewymierną.
+    \end{exercise}
+
+   \noindent Zakładamy, że teza jest fałszywa, to znaczy że liczba $\sqrt{2}$ jest wymierna. Zatem z definicja można ją zapisać
+    w postaci ilorazu dwóch liczb całkowitych, to znaczy \textbf{nieskracalnego ułamka} $\frac{p}{q}, q \neq 0$.\\
+
+    Skoro $\sqrt{2} = \frac{p}{q}$, to $2 = \frac{p^2}{q^2}$, a zatem:
+    \[ 2q^2 = p^2\]
+    Z czego wynika, że $p^2$, a tym samym $p$, jest liczbą parzystą. Możemy zatem zapisać $p = 2k, k \in \mathbb{Z}$.
+    Wtedy
+    \begin{gather*}
+        p^2 = 4k^2\\
+        2q^2 = 4k^2\\
+        q^2 = 2k^2\\
+    \end{gather*}
+    Z czego wynika, że $q^2$ oraz $q$ są liczbami parzystymi. Tak więc obie liczby p i q są parzyste, co \textbf{przeczy
+    założeniu, że iloraz $\frac{p}{q}$ jest ułamkiem nieskracalnym} - można go skrócić przez 2. Otrzymaliśmy sprzeczność,
+    co oznacza, że nasze początkowe przypuszczenie jest fałszywe -  $\sqrt{2}$ jest liczbą niewymierną.
+
     \newpage
 
     \section{Metody numeryczne rozwiązywania równań nieliniowych: bisekcji, siecznych, Newtona.}
