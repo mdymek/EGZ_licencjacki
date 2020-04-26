@@ -3881,6 +3881,172 @@ int main() {
     \newpage
 
     \section{Klasyfikacja testów.}
+
+    \subsection{Poziomy testów.}
+    \begin{definition}
+        \textbf{Poziom testów} określa \textbf{sposób} testowania ze względu na \textbf{postać}
+        testowanego obiektu w kontekście cyklu życia (\textbf{co testujemy?}).
+    \end{definition}
+
+    \subsubsection{Testy jednostkowe.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY JEDNOSTKOWE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania na moduły, projekt szczegółowy, kod\\
+                \hline
+                \textbf{Typowe obiekty} & moduły, programy, funkcje, klasy, procedury\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+
+    \begin{itemize}
+        \item testowanie modułowe, unit testing
+        \item defekty szukane w izolacji od reszty systemu
+        \item wykorzystanie zaślepek i sterowników
+        \item przeprowadzane przez deweloperów – autorów testowanego kodu
+        \item usuwanie defektów bezpośrednio po znalezieniu
+        \item brak formalnego procesu zarządzania defektami
+    \end{itemize}
+
+    \hfill \\
+
+    \noindent \textbf{TTD} - Test Driven Developement.
+    \begin{itemize}
+        \item \textbf{Napisanie testu} - sprawdza, że programista rozumie zachowanie nowego kodu.
+        \item \textbf{Uruchomienie testu}, który nie przechodzi (testuje uprząż testową i sam test; pokazuje,
+        że wystąpi awaria, gdy kod będzie błędny).
+        \item \textbf{Napisanie kodu} w minimalnej ilości, wystarczającej do zdania testu; jeśli
+        konieczne, dokonanie refaktoryzacji.
+    \end{itemize}
+
+    \subsubsection{Testy integracyjne.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY INTEGRACYJNE}}\\
+                \hline
+                \textbf{Podstawa testów} & projekt systemu, architektura, przypadki użycia\\
+                \hline
+                \textbf{Typowe obiekty} & interfejsy, podsystemy, konfiguracje systemów\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item testuje interfejsy i interakcje
+        \item im większy zakres integracji, tym trudniej izolować defekty
+        \item rozumienie architektury testowanych modułów/systemów
+        \item może odbywać się na wielu poziomach (np. integracja systemów)
+    \end{itemize}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{graphics/strat_integr.png}
+    \end{figure}
+
+    \subsubsection{Testy systemowe.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY SYSTEMOWE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania na system, przypadki użycia,
+                specyfikacja funkcjonalna, raporty analizy ryzyka\\
+                \hline
+                \textbf{Typowe obiekty} & system, podręczniki użytkownika i operatora,
+                konfiguracja systemu\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item sprawdza zachowanie systemu jako całości
+        \item zakres testu określony w planie testów
+        \item środowisko testowe podobne do produkcyjnego – minimalizacja ryzyka awarii zależnych od środowiska
+        \item często konieczność testowania z niekompletnymi wymaganiami
+        \item zwykle przeprowadzane przez niezależny zespół testerski
+    \end{itemize}
+
+    \subsubsection{Testy akceptacyjne.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY AKCEPTACYJNE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania użytkownika, wymagania na system,
+                przypadki użycia, procesy biznesowe, raporty
+                analizy ryzyka\\
+                \hline
+                \textbf{Typowe obiekty} & Procesy biznesowe w pełni zintegrowanego
+                systemu, procesy operacyjne i utrzymania systemu,
+                procedury, raporty, dane konfiguracyjne\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item cel: zyskanie zaufania do systemu
+        \item znajdowanie defektów nie jest głównym celem
+        \item często przeprowadzane przez klienta lub użytkownika
+        \item ocenia gotowość systemu, ale niekoniecznie ostatni etap testów
+    \end{itemize}
+
+    \noindent \textbf{Typowe formy testów akceptacyjnych:}
+    \begin{itemize}
+        \item \textbf{testy akceptacyjne użytkownika (UAT)} – sprawdzenie gotowości do użycia
+        \item \textbf{testy operacyjne (OAT)} – akceptacja przez administratora systemu (testy
+        backupu, przywracania systemu, zarządzania użytkownikami, utrzymania,
+        migracji danych, bezpieczeństwa itp.)
+        \item \textbf{testy akceptacyjne wymagane kontraktem/regulacjami}
+        \item \textbf{testy alfa, beta (polowe)}
+        \begin{itemize}
+            \item alfa: przeprowadzane u producenta, ale nie przez zespół deweloperski
+            \item beta: przeprowadzane u klienta przez klienta/potencjalnego użytkownika
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Typy testów.}
+
+    \begin{definition}
+        \textbf{Typ testów} to zbiór czynności testowych właściwych dla weryfikacji systemu
+        w oparciu o konkretny powód lub cel testów (\textbf{jak testujemy?}).
+    \end{definition}
+
+    \begin{enumerate}
+        \item  \textbf{Testowanie funkcjonalne}\\
+        Testowanie funkcji wykonywanej przez oprogramowanie - \textbf{co system robi}.
+
+        \item \textbf{Testowanie niefunkcjonalne}\\
+        Testowanie niefunkcjonalnej charakterystyki jakościowej (np. niezawodność, wydajność,
+        użyteczność) - \textbf{jak system działa}. Wyrażalne ilościowo (np. czas odpowiedzi w testach wydajności).
+
+        \item \textbf{Testowanie strukturalne}\\
+        Oparte na strukturze (np. kod, graf przepływu sterowania, struktura menu, model procesu biznesowego).
+        Zwykle wykonywane po testach czarnoskrzynkowych, aby sprawdzić stopień przetestowania i wyrazić go ilościowo
+        (\textbf{pokrycie}).
+
+        \item \textbf{Retesty i testy regresji}\\
+        \textbf{Związane ze zmianą}, tzn. potwierdzenie usunięcia defektów (retesty - testy zmienionych fragmentów kodu)
+        oraz poszukiwanie niezamierzonych zmian (regresja - pogarszanie się jakości systemu przy wprowadzaniu zmian;
+        testujemy niezmienione fragmenty programu- często automatyzowane).
+    \end{enumerate}
+
+    \newpage
+
     \section{Model Scrum: struktura zespołu, proces wytwarzania oprogramowania, korzyści modelu.}
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
