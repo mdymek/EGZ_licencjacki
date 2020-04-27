@@ -3694,11 +3694,348 @@ return $\mathcal{A}'$;
 
     {\Large Wytwarzanie oprogramowania}
 
+    \newpage
+    
     \section{Reprezentacja liczb całkowitych; arytmetyka.}
+    
+    \subsection{Kod znak-moduł prosty}
+    \subsubsection{Reguły:}
+    \begin{enumerate}
+        \item Sygnalizacja znaku poprzez najwyższą pozycję
+        rejestru (najczęściej pierwszą pozycję od lewej).
+        \item Cyfra 0 na pozycji znaku oznacza dodatniość.
+        \item Niezerowa cyfra na pozycji znaku oznacza ujemność.
+        \item Cyfry określające wartość liczby (pozostałe cyfry) bez zmian (bez żadnego kodowania).
+    \end{enumerate}
+    \subsubsection{Przykłady:}
+    \begin{itemize}
+        \item Przykład w systemie dziesiętnym, q = 10,
+        c = 5, u = 2, n = 8.\\
+        $[+216.7]_{zmp} = 0|00216.70$\\
+        $[-216.7]_{zmp} = 1|00216.70$
+        \item Przykład w systemie binarnym, q = 2, c = 10,
+        u = 5, n = 16.\\
+        $[+1001100.101]_{zmp} = 0|0000100110.10100$\\
+        $[-1001100.101]_{zmp} = 1|0000100110.10100$
+    \end{itemize}
+    \subsubsection{Arytmetyka}
+    Kodowanie znak-moduł prosty przez swoją skomplikowaną
+    i czasochłonną arytmetykę nie nadaje się do praktycznego
+    stosowania (konieczność niestandardowego obsługiwania przepełnień)
+    
+    \subsection{Kod odwrotnościowy}
+    \subsubsection{Reguły}
+    \begin{itemize}
+        \item Najbardziej znacząca cyfra (najczęściej lewa) jest cyfrą znaku.
+        \item Zerowa cyfra znaku oznacza dodatniość.
+        \item Najwyższa (ostatnia) cyfra znaku oznacza ujemność.
+        \item Cyfry wartości liczby dodatniej pozostają bez zmian
+        \item Cyfry wartości dla liczby ujemnej:
+        \begin{itemize}
+            \item W systemie dwójkowym są odwróceniem bitów.
+            \item W systemie dziesiętnym są uzupełnieniem każdej cyfry
+            do liczby 9.
+            \item Ogólnie są uzupełnienie każdej cyfry do najwyższej cyfry
+            systemu, czyli do wartości q-1.
+        \end{itemize}
+    \end{itemize}
+    
+    \subsubsection{Przykłady}
+    \begin{itemize}
+        \item System dziesiętny:
+        q = 10, c = 7, u = 5
+        \begin{align*}
+            [-182073.6954]_{odw} = [-0|0182073.69540]_{odw} = 9|9917926.30459 
+        \end{align*}
+        
+        \item - System binarny:
+        q = 2, c = 7, u = 5
+        \begin{align*}
+            [-101110.011]_{odw} = [-0|0101110.01100]_{odw} = 1|0010001.10011 
+        \end{align*}
+        
+    \end{itemize}
+    
+    \subsubsection{Arytmetyka}
+    Algorytm sumowania:
+    \begin{itemize}
+        \item Dodaj kody, a w przypadku przepełnienia zwiększ wynik o najmniejszą możliwą liczbę dodatnią.
+    \end{itemize}
+    
+    \subsubsection{Przykłady}
+    \begin{itemize}
+        \item W systemie dzisiętnym, q=10, c=7, u=5
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-dec.png}
+        \end{center}
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-dec-2.png}
+        \end{center}
+        
+
+        \item w systemie binarnym, q=2, c=7, u=5
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-bin.png}
+        \end{center}
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-bin-2.png}
+        \end{center}
+        
+    \end{itemize}
+    
+    
+    \subsection{Kod uzupełnieniowy}
+    \subsubsection{Kodowanie}
+        Kodowanie uzupełnieniowe liczby ujemnej polega na uzupełnieniu każdej cyfry do najwyższej
+        cyfry systemu (odwróceniu bitów) i dodaniu do
+        otrzymanej wartości liczby 1 na najmniej znaczącym miejscu.
+    \subsubsection{Dekodowanie}
+        Dekodowanie liczby ujemnej zakodowanej uzupełnieniowo polega na odjęciu od kodu liczby 1
+        na najmniej znaczącym miejscu z uzupełnieniem
+        w otrzymanym kodzie każdej cyfry do najwyższej
+        cyfry systemu (odwróceniem bitów).
+        
+    \subsubsection{Przykłady kodowania}
+    \begin{itemize}
+        \item w systemie dziesiętnym (q = 10, c = 7, u = 5)
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/uzp-encode-dec.png}
+
+        \end{center}
+        \item w systemie binarnym q = 10, c = 7, u = 5.
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/uzp-encode-bin.png}
+        \end{center}
+            
+    \end{itemize}
+    
+    \subsubsection{Arytmetyka}
+        Suma kodów uzupełnieniowych jest zawsze kodem uzupełnieniowym sumy.
+        \begin{itemize}
+            \item w systemie dziesiętnym  (q = 10, c = 7, u = 5)
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/uzp-add-dec.png}
+            \end{center}
+            
+            \item w systemie binarnym q = 10, c = 7, u = 5
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/uzp-add-bin.png}
+            \end{center}
+        \end{itemize}
+        
+    \subsection{Kod nadmiarowy}
+    \subsubsection{Kodowanie}
+    \begin{enumerate}
+        \item Kodowanie nadmiarowe liczby dodatniej polega na
+        ustawieniu cyfry znaku na wartość jednostkową.
+        \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-encode-dec.png}
+        \end{center}
+        \item Kod nadmiarowy liczby ujemnej to kod uzupełnieniowy z odjęciem najwyższej cyfry systemu
+            na pozycji znaku.
+        \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-encode-bin.png}
+        \end{center}
+    \end{enumerate}
+        
+        
+    \subsubsection{Deokodowanie}
+    \begin{itemize}
+        \item Dekodowanie nadmiarowe kodu liczby dodatniej
+        (rozpoznawanego po niezerowej cyfrze znaku) polega na wyzerowaniu cyfry znaku.
+        \item Dekodowanie nadmiarowe kodu liczby ujemnej
+            (rozpoznawanego po zerowej cyfrze znaku) wymaga
+            ustawienia najwyższej cyfry systemu w miejscu znaku z następującym dekodowaniem uzupełnieniowym.
+    \end{itemize}
+    
+    \subsubsection{Arytmetyka}
+    Kod nadmiarowy sumy liczb to suma kodów nadmiarowych
+    składników z odjętą wartością 1 na pozycji znaku.
+    
+    \begin{enumerate}
+        \item w systemie dziesiętnym
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-dec.png}
+            \end{center}
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-dec-2.png}
+            \end{center}
+            
+        \item w systemie binarnym
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-bin.png}
+            \end{center}
+            \begin{center}    
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-bin-2.png}
+            \end{center}
+    \end{enumerate}
+    
+    
+    
+    
+    
+    
+    \newpage
+    
     \section{Reprezentacja liczb rzeczywistych; arytmetyka zmiennopozycyjna.}
+    
+    \subsection{Reprezentacja cecha-mantysa}
+    Liczby postaci
+    \begin{align*}
+        m \times q^c
+    \end{align*}
+    gdzie m - mantysa, q - podstawa systemu liczbowego, c - cecha
+    
+    \begin{itemize}
+        \item Mantysa - ciąg najbardziej znaczących cyfr liczby.
+        \item Cecha - wykładnik potęgi podstawy systemu w iloczynie z mantysą równy reprezentowanej liczbie.
+        \item W rejestrze komputera pamiętane są wyłącznie mantysa oraz cecha, zaś podstawa systemu jest ustalona, zatem nie musi być reprezentowana i nie jest konieczna do działań.
+        \item Różnorodne sposoby zapamiętania w komputerze liczb w postaci cecha-mantysą noszą nazwę \textbf{kodowań zmiennopozycyjnych.}
+        
+    \end{itemize}
+    
+    \subsection{Kodowanie zmiennopozycyjne}
+    \begin{itemize}
+        \item Kodowanie zmiennopozycyjne jest powszechnie stosowanie w komputerach dla reprezentacji liczb rzeczywistych.
+        \item W systemie dziesiętnym dla oddzielenia mantysy i cechy powszechne użycie litery E (lub e).
+        Liczba 28.05
+        \begin{center}
+            \texttt{28.05e0 = 2805e-2 = +2805000e-5 =\\
+            = 0.0002805e+5 = 2.805e1 = 0.2805e2}
+        \end{center}
+        
+        \item W systemie binarnym dla oddzielenia mantysy i cechy powszechne użycie litery D (lub d).
+        Liczba $(9.625)_{10} = (1001.101)_2$
+        \begin{center}
+            \texttt{0.00001001101d1000 = 1001101000d-110 =\\
+            = 1.001101d11 = 0.1001101d100}
+        \end{center}
+       
+       \item Różnorodność reprezentacji zmiennopozycyjnej wymusza konieczność ujednoznacznienia zwaną \textbf{normalizacją.}
+       
+    \end{itemize}
+    
+    \subsection{Normalizacja}
+    
+        \begin{table}
+        \centering
+        \begin{tabular}{l|l|l|l}
+                          & normalizacja
+        całkowita & normalizacja
+        do jedynki & normalizacja
+        do ułamka  \\ 
+        \hline
+        28.05             & \texttt{2805e-2}                & \texttt{2.805e1}                  & \texttt{.2805e2}                  \\
+        -35000000         & -\texttt{35e6}                & -\texttt{3.5e7}                   & -\texttt{.35e8}                   \\
+        0.0000576         & \texttt{576e-6}                  & \texttt{5.76e-4}                  & \texttt{.576e-3}                  \\ 
+        \hline
+        $(1001.101)_2$    & \texttt{1001101d-11}             & \texttt{1.001101d11}              & \texttt{.1001101d100}             \\
+        $(1010000)_2$     & \texttt{101d100}                 & \texttt{1.01d110}                 & \texttt{.101d111}                 \\
+        $(-0.00001011)_2$ & -\texttt{1011d1001}              & -\texttt{1.011d111}               & -\texttt{.1011d1000}             
+        \end{tabular}
+        \end{table}
+        
+    \subsection{Algorytmy kodowania i dekodowania}
+    Przyjmujemy oznaczenia:
+    \begin{itemize}
+        \item $w_m$ - liczba cyfr reprezentacji mantysy (bez cyfry znaku)
+        \item $w_c$ - liczba cyfr reprezentacji cechy (bez cyfry znaku)
+        \item n - liczba cyfr rejestru
+    \end{itemize}
+    Zatem:
+    \begin{align*}
+        n = 1 + w_m + 1 + w_c
+    \end{align*}
+    
+    \subsubsection{Algorytm kodowania}
+    
+    Algorytm kodowania zmiennomozycyjnego obejmuje poniższe kroki:
+    \begin{enumerate}
+        \item Przedstaw liczbę w systemie o podstawie q.
+        \item Zaokrąglij wartość liczby do $w_m$ cyfr.
+        \item Zaokrąglony wynik sprowadź do znormalizowanej postaci
+        potęgowej $m\cdot q^c$
+        \item Jeżeli cecha jest zbyt duża (zbyt dodatnia) by zmieścić się
+        w przewidzianym zakresie $w_c$ to zasygnalizuj błąd przepełnienia i zakończ.
+        \item Jeżeli cecha jest zbyt mała (zbyt ujemna) by zmieścić się
+        w zakresie $w_c$ to zakoduj zerową mantysy oraz zerową wartość cechy i zakończ.
+        \item Zakoduj stałopozycyjnie mantysę na $w_m + 1$ pozycjach.
+        \item Zakoduj stałopozycyjnie cechę na $w_c + 1$ pozycjach.
+    \end{enumerate}
+    
+    Przykłady dziesiętne:
+    
+    \begin{center}
+    \includegraphics[scale=0.4]{graphics/number-repr/fl-pt-encode-dec.png}
+    \end{center}
+    
+    Przykłady binarne:
+    
+    \includegraphics[width=\linewidth]{graphics/number-repr/fl-pt-encode-bin.png}
+    
+    \subsubsection{Algorytm dekodowania}
+    
+    System dziesiętny:
+    \begin{enumerate}
+        \item Dekoduj mantysę i cechę.
+        \item Opcjonalnie eliminuj postać potęgową.
+    \end{enumerate}
+    
+    System binarny:
+    \begin{enumerate}
+        \item Dekoduj mantysę i cechę.
+        \item Sprowadź cechę do postaci dziesiętnej.
+        \item Zdenormalizuj mantysę.
+        \item Zapisz mantysę w postaci dziesiętnej.
+    \end{enumerate}
+    
+    Przykłady binarne:
+    
+    \includegraphics[width=\linewidth]{graphics/number-repr/fl-pt-decode-bin.png}
+    
+    \subsection{Arytmetyka}
+    \begin{itemize}
+        \item Brak ogólnego algorytmu działania na kodach
+        zmiennopozycyjnych.
+        \item Jedyna możliwa droga obejmuje oczywiste
+        kroki:
+        \begin{enumerate}
+            \item Dekodowanie argumentów.
+            \item Wykonanie działania.
+            \item Zakodowanie wyniku.
+        \end{enumerate}
+    \end{itemize}
+    
+    \subsubsection{Dodawanie kodów zmiennopozycyjnych}
+    Algorytm obejmuje kroki:
+    \begin{enumerate}
+        \item Zmodyfikuj mantysy dla zrównania cech (z możliwością
+        denormalizacji).
+        \item Wyznacz mantysę sumy w postaci sumy mantys (możliwe wobec równych cech).
+        \item Zaokrąglij sumę mantys do liczby cyfr rejestru.
+        \item Znormalizuj wynik sumy (skoryguj cechę wyniku).
+    \end{enumerate}
+    Przykład:\\
+    \begin{center}
+        \includegraphics[scale=0.3]{graphics/number-repr/fl-pt-add.png}
+    \end{center}
+    
+    \subsubsection{Mnożenie kodów zmiennopozycyjnych}
+    Algorytm może obejmować kroki:
+    \begin{enumerate}
+        \item Mantysa iloczynu to iloczyn mantys, dlatego
+        pomnóż mantysy.
+        \item Cecha iloczynu to suma cech, zatem dodaj
+        cechy.
+        \item Zaokrąglij mantysę wyniku, iloczynu mantys.
+        \item Znormalizuj mantysę modyfikując cechę.
+    \end{enumerate}
+    Przykład:\\
+    \begin{center}
+        \includegraphics[scale=0.4]{graphics/number-repr/fl-pt-mult.png}
+    \end{center}
 
     \newpage
-
     \section{Różnice w wywołaniu funkcji statycznych, niestatycznych i wirtualnych w C++.}
 
     \subsection{Funkcje statyczne.}
