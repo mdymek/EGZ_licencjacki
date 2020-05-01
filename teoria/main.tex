@@ -5064,8 +5064,124 @@ int main() {
     Na koniec Sprintu nowy Przyrost musi być ``Ukończony''.
     \end{definition}
     
+    \newpage
+    
+    
+    
     
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
+    
+    \begin{definition}
+    \textbf{Wymagania} - opis funkcji (usług), które mają być realizowane przez system i opis ograniczeń dla systemu. \\
+    Wymagania nie opisują jak system ma działać a co ma wykonywać.
+    \end{definition}
+    
+    \subsection{Klasyfikacja}
+    
+    \begin{definition}
+    Wymagania dzielimy na:
+    \begin{itemize}
+        \item \textbf{Funkcjonalne} - opisują jakie funkcje powinien mieć system, np. ``wprowadzanie nowej faktury'' lub ``generowanie raportu miesięcznego''
+        \item \textbf{Pozafunkcjonalne} - opisują najczęściej pewne własności danych funkcjonalności, np. ``minimum 20 faktur na godzinę'', ``średni czas między awariami 2000000h'', itp.
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Klasyfikacja atrybutów jakości oprogramowania}
+    \begin{itemize}
+        \item \textbf{F}unctionality - funkcjonalność
+        \item \textbf{U}sability – użyteczność
+        \item \textbf{R}eliability – niezawodność
+        \item \textbf{P}erformance – wydajność
+        \item \textbf{S}ecurity - bezpieczeństwo
+    \end{itemize}
+    w skrócie \textbf{FURPS}
+    \end{definition}
+    
+    \subsection{Źródła}
+    
+    \begin{definition}
+    \textbf{System powinien…} \\
+    Jest to sposób spisywania wymagań w stylu: ``System powinien umożliwić wystawianie faktur'', ``System powinien generować zestawienie miesięczne faktur'',  ``Faktura powinna zawierać co najmniej jedną pozycję''. \\
+    
+    Zalety:
+    \begin{itemize}
+        \item Łatwość spisywania
+    \end{itemize}
+    
+    Wady:
+    \begin{itemize}
+        \item Słaba czytelność
+        \item Trudne sprawdzanie kompletności, spójności
+    \end{itemize}
+    
+    Obecnie nie używany
+    \end{definition}
+    
+    
+    \begin{definition}
+    \textbf{Funkcje systemu} \\
+    Polega na opisywaniu poszczególnych funkcji systemu. Analogicznie do funkcji matematycznych, każda funkcja systemu informatycznego ma swoje wejście, wyjście, efekty uboczne. \\
+    Przykładowo, rozpatrując funkcję wystawiania faktury, wejściem mogą być pozycje faktury, wyjściem wydruk faktury (lub wysłanie jej faksem), natomiast efektem ubocznym zapisanie tej faktury w rejestrze faktur. \\
+    
+    Wady:
+    \begin{itemize}
+        \item Słaba czytelność
+        \item Trudne do zrozumienia
+    \end{itemize}
+    
+    Obecnie nie używany
+    \end{definition}
+    
+    
+    \begin{definition}
+    \textbf{Przypadki użycia} \\
+    Przykład: \\
+    
+    \textbf{UC1: Wystawianie faktury} \\
+    \textbf{Atrybuty:} \\
+    \textbf{Główny aktor: Użytkownik} \\
+    \textbf{Priorytet: Wysoki} \\
+    \textbf{Źródło: Łukasz Olek} \\
+    
+    \textbf{Główny scenariusz:} \\
+    1. Sprzedawca pragnie wystawić fakturę. \\
+    2. Sprzedawca wpisuje pozycje faktury. \\
+    3. System podlicza fakturę, nadaje jej nowy numer i zapisuje w rejestrze. \\
+    4. Sprzedawca drukuje fakturę. \\
+    \textbf{Rozszerzenia:} \\
+    3.A. Sprzedawca nie dodał żadnej pozycji \\
+    3.A.1. System prosi o ponowne wprowadzenie pozycji (powrót do 2.) \\
+    
+    Zalety:
+    \begin{itemize}
+        \item Łatwość spisywania
+        \item Czytelność
+        \item Łatwość zrozumienia i wyobrażenia sobie przyszłego systemu
+    \end{itemize}
+    
+    Jako mapę łączącą pojedyncze przypadki użycia można potraktować diagram przypadków użycia (UML).
+    \end{definition}
+    
+    
+    \begin{definition}
+    \textbf{Historyjki użytkownika} \\
+    
+    \textbf{Who? What? Why?} \\
+    
+    Wzór: \\
+    
+    \textbf{jako} - osoba, przypisana rola \\
+    \textbf{chcę} - cacha, funkcjonalność, czynność \\
+    \textbf{ponieważ} - uzasadnienie, rezultat, korzyść \\
+    \end{definition}
+    
+    \subsection{Analiza}
+    
+    
+    
+    \newpage
+    
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
     \section{Wzorce architektury systemów.}
 
