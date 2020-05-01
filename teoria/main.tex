@@ -4936,6 +4936,135 @@ int main() {
     \newpage
 
     \section{Model Scrum: struktura zespołu, proces wytwarzania oprogramowania, korzyści modelu.}
+    \begin{definition}
+        \textbf{SCRUM} jest:
+        \begin{itemize}
+            \item lekki
+            \item łatwy do zrozumienia
+            \item bardzo trudny do opanowania
+        \end{itemize}
+
+        Teoria SCRUMa opiera się na trzech filarach:
+        \begin{itemize}
+            \item \textbf{Przejżystość} - wszystkie istotne aspekty procesu muszą być widoczne dla osób odpowiedzialnych za osiągane rezultaty
+            \item \textbf{Adaptacja} - powinna być ciągła. Korekta musi być wykonana jak najszybciej, by ograniczyć dalsze następstwa problemów
+            \item \textbf{Inspekcja} - poddawane regularnej inspekcji są zarówno scrumowe artefakty jak i postępy prac
+        \end{itemize}
+    \end{definition}
+    
+    \subsection{Struktura zespołu}
+    
+    \begin{definition}
+    \textbf{Struktura zespołu} \\
+    \includegraphics[width=\linewidth]{scrum_teams.png}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Product owner} - jest odpowiedzialny za maksymalizację wartości produktu i pracy Zespołu Deweloperskiego. jest jedyną osobą zarządzającą Rejestrem Produktu (Product Backlog) co rozumiemy przez:
+    \begin{itemize}
+        \item Jasne artykułowanie elementów Rejestru Produktu i określanie ich kolejności w sposób zapewniający osiąganie założonych celów i misji
+        \item Zapewnianie, że Rejestr Produktu jest dostępny, przejrzysty oraz jasny dla wszystkich i, że dobrze opisuje to, czym Zespół Scrumowy będzie się zajmował
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Zespół Deweloperski}:
+    \begin{itemize}
+        \item Jest złożony z profesjonalistów
+        \item Ma za zadanie dostarczenie (na zakończenie każdego Sprintu), gotowego do wydania Przyrostu produktu
+        \item Zalecana liczebność: 3-9 osób
+        \item Są samoorganizujące się
+        \item Jest wielofunkcyjny, w swoim składzie posiadają wszystkie umiejętności niezbędne do wytworzenia Przyrostu
+        \item Scrum nie przewiduje tytułów innych niż ``Deweloper'' dla członków Zespołu Deweloperskiego
+        \item Odpowiedzialność za wykonywaną pracę ponosi cały Zespół Deweloperski; nie składają się z podzespołów
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Scrum Master} - jest odpowiedzialny za to, by Scrum był rozumiany i stosowany. Scrum Masterzy dokonują tego poprzez upewnianie się,
+    że Zespół Scrumowy stosuje się do założeń teorii Scruma, jego praktyk i reguł postępowania. Scrum Master wspiera zarówno Właściciela Produktu jak i zespól deweloperski.
+    \end{definition}
+    
+    \subsection{Zdarzenia}
+    
+    \begin{definition}
+    \textbf{Zdarzenia} \\
+    \includegraphics[width=\linewidth]{scrum_events.png}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Planowanie sprintu} - planowanie co zostanie wykonane podczas najbliższego sprintu:
+    \begin{itemize}
+        \item Jest ograniczone czasowo (8h dla miesięcznego sprintu i proporcjonalnie)
+        \item Planowanie Sprintu składa się z dwóch części:
+            \begin{itemize}
+                \item Co zostanie dostarczone
+                \item Jaka praca zostanie wykonana
+            \end{itemize}
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Sprint} - serce SCUMa:
+    \begin{itemize}
+        \item Ograniczony czasowo - trwa miesiąc lub krócej
+        \item Podczas Sprintu wytwarzany jest Przyrost „Ukończonej”, używalnej i potencjalnie gotowej do wydania funkcjonalności
+        \item Ma stałą długość przez cały okres trwania prac
+        \item Niedozwolone są zmiany, które wpłyną na cel Sprintu
+        \item Skład Zespołu Deweloperskiego i jego cel jakościowy pozostają niezmienne
+        \item Przerwanie sprintu:
+            \begin{itemize}
+                \item Tylko product owner ma prawo przerwać sprint
+                \item Sprint może zostać przerwany, jeśli cel Sprintu się zdezaktualizuje
+                \item Powinien zostać przerwany, jeśli kontynuowanie prac nie ma sensu w zaistniałych okolicznościach
+                \item Przerwania Sprintów zużywają zasoby, ponieważ wszyscy muszą się przegrupować podczas kolejnego Planowania Sprintu, aby móc rozpocząć nowy
+            \end{itemize}
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Daily scrum} - jest spotkaniem ograniczonym czasowo do 15 minut, w którym każdy z członków zespołu wyjaśnia:
+    \begin{itemize}
+        \item Co zostało wykonane od ostatniego potkania
+        \item Co zostanie wykonane przed kolejnym spotkaniem
+        \item Jakie przeszkody stoją na drodze
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Przegląd sprintu} -  organizowany jest na zakończenie Sprintu w celu przeprowadzenia inspekcji Przyrostu i dostosowaniu, jeśli zajdzie taka potrzeba, Rejestru Produktu. \\
+    Podczas Przeglądu Sprintu \textbf{Zespół Scrumowy} i \textbf{interesariusze} wspólnie omawiają to, co zostało ukończone w Sprincie. \\
+    Może trwać maksymalnie 4h dla miesięcznego Sprintu.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Retrospektywa Sprintu} - jest okazją dla zespołu Scrumowego do przeprowadzenia inspekcji swoich działań i opracowania planu usprawnień. Ma na celu:
+    \begin{itemize}
+        \item Sprawdzenie, co działo się w ostatnim Sprincie, biorąc pod uwagę ludzi, zależności, procesy i narzędzia
+        \item Zidentyfikowanie i uporządkowanie istotnych elementów, które sprawdziły się w działaniu oraz tych, które kwalifikują się do poprawy
+        \item Stworzenie planu wprowadzania w życie usprawnień sposobu wykonywania pracy przez Zespół Scrumowy
+    \end{itemize}
+    \end{definition}
+    
+    \subsection{Artefakty}
+    
+    \begin{definition}
+    \textbf{Rejestr produktu} - uporządkowana lista tego co może byc potrzebne w produkcie. Jest to jedyne źródło wymaganych zmian, które mają zostać wprowadzone.
+    Odpowiedzialny z rejestr produktu jest Product owner.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Rejestr sprintu} - podzbiór elementów Rejestru produktu. Jest to lista rzeczy do wykonania w danyc sprincie rozszeżona dodatkowo o plan ich wykonania.
+    Rejestr Sprintu definiuje pracę, jaką Zespół Deweloperski wykona by przekształcić elementy Rejestru Produktu w „Ukończony” Przyrost. \\
+    Rejestr Sprintu należy tylko i wyłącznie do Zespołu Deweloperskiego.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Przyrost} - suma wszystkich elementów Rejestru Produktu zakończonych podczas Sprintu i wszystkich Sprintów poprzednich. \\
+    Na koniec Sprintu nowy Przyrost musi być ``Ukończony''.
+    \end{definition}
+    
+    
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
     \section{Wzorce architektury systemów.}
