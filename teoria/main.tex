@@ -4523,9 +4523,191 @@ int main() {
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
     \section{Obsługa sytuacji wyjątkowych w C++.}
-    \section{Obsługa plików w języku C.}
-    \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
 
+    \newpage
+    
+    \section{Obsługa plików w języku C.}
+    
+    Standardowa biblioteka wejścia/wyjścia języka C udostępnia funkcje do operowania na plikach, tj.
+    odczytu i zapisu danych z plików tekstowych i binarnych.\\
+    
+    Sposób pracy z plikami w języku C jest następujący:
+    \begin{enumerate}
+        \item Otwarcie pliku o określonym nazwie w określonym trybie (odczyt, zapis, dopisywanie)
+            Funkcja fopen, prototyp:
+            \begin{minted}{cpp}
+                FILE *fopen(const char *filename, const char *mode);
+            \end{minted}
+            Funkcja fopen otwiera plik, którego nazwa podana jest w pierwszym argumencie. Drugim jest
+            łańcuch znaków zwierający litery oznaczające sposób otwarcia pliku:
+            \begin{itemize}
+                \item "r" - otwiera plik do czytania
+                \item "r+" - otwiera plik do czytania i nadpisywania (aktualizacja)
+                \item "w" - otwiera plik do nadpisywania (zamazuje starą treść)
+                \item "w+" - otwiera plik do nadpisywania i czytania
+                \item "a" - otwiera plik do dopisywania (jeśli plik nie istnieje, to jest tworzony)
+                \item "a+" - otwiera plik do dopisywania i odczytu (jeśli plik nie istnieje, to jest tworzony)
+                \item "t" - otwiera plik w trybie tekstowym
+                \item "b" - otwiera plik w trybie binarnym
+            \end{itemize}
+            
+            Litery można ze sobą łączyć, np. "rwb" albo "wt".
+            Funkcja zwraca wskaźnik do pliku (FILE *) lub NULL, gdy pliku nie udało się otworzyć (nie
+            istnieje, jest już otwarty w innym programie itp. .
+            Przykład wywołania:
+            \begin{minted}{cpp}
+                FILE *f = fopen("dane.txt", "rt");
+            \end{minted}
+            
+            
+            
+        \item     
+            Wykonywanie operacji odczytu/zapisu.\\
+            Funkcje do formatowanego odczytu/zapisu.
+            \begin{minted}{cpp}
+                int fscanf(FILE *stream, const char *format, ...);
+                int fprintf(FILE *stream, const char *format, ...);
+            \end{minted}
+            Funkcje działają tak jak scanf i printf, przy czym jako pierwszy argument przyjmują
+            wskaźnik do pliku uzyskany w punkcie 1 (ogólnie - wskaźnik do strumienia danych).\\
+            Przykłady:
+            \begin{minted}{cpp}
+                //odczyt liczby całkowitej z pliku
+                int i;
+                char lan[] = { "Operacje plikowe" };
+                FILE *f = fopen("dane.txt", "wt");
+                fscanf(f, "%d", &i);
+                //zapis łańcucha znaków do pliku
+                fprintf(f, "%s", lan);
+                //zamknięcie pliku
+                fclose(f);
+            \end{minted}
+        
+    \end{enumerate}
+
+    \newpage
+    
+    \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
+    
+    \subsection{Model kaskadowy}
+    Nazwa model kaskadowy (ang. waterfall model) wprowadzona została przez Winstona W. Royce w roku 1970, w artykule Managing the Development of Large Software Systems”
+        
+    \subsubsection{Zasady}
+    \begin{itemize}
+        \item Tworzenie systemu podzielone na wyizolowane
+        etapy; każdy z nich musi być zakończony, zanim
+        rozpoczną się prace w następnym etapie;
+        \item Wyjścia z jednego etapu są wykorzystywane jako
+        wejścia do etapu następnego;
+        \item Każdy etap podzielony jest na dwie części: części
+        twórczej oraz weryfikacji i/lub zatwierdzenia;
+        \item Ponowna praca, jeśli jest konieczna, jest
+        wykonywana w kolejnych etapach bez powrotu na
+        pierwotny etap, na którym dany produkt został
+        utworzony, np. gdy pojawi się nowe wymaganie;
+    \end{itemize}
+        
+    \subsubsection{Fazy modelu kaskadowego}
+    \begin{enumerate}
+        \item Planowanie
+        \begin{itemize}
+            \item Wstępne założenia dotyczące budowy systemu
+            \item cele biznesowe
+            \item podstawowe wymagania
+            \item podstawowe założenia jakościowe i parametry techniczne, standardy, organizacja i działanie systemu;
+        \end{itemize}
+        \item Analiza
+            \begin{itemize}
+                \item  Zdefiniowane zostaje przeznaczenie systemu.
+                \item Wynikiem analizy powinien być poprawny, kompletny, spójny i jednoznaczny model systemu.
+            \end{itemize}
+        \item Projekt
+            \begin{itemize}
+                \item Projekt systemu
+                \begin{enumerate}
+                    \item Dekompozycja systemu na mniejsze podsystemy.
+                    \item Wybór strategii budowania systemu.
+                \end{enumerate}
+                \item Projekt obiektów
+                \begin{enumerate}
+                    \item Definicja obiektów dziedziny realizacyjnej.
+                    \item Wybór odpowiednich gotowych komponentów.
+                    \item Precyzyjne opisywanie interfejsów dla nowo tworzonych obiektów.
+                \end{enumerate}
+            \end{itemize}
+        \item Implementacja
+            \begin{itemize}
+                \item Tworzenie kodu źródłowego aplikacji.
+                \item Mapowanie np. modeli UML na kod.
+            \end{itemize}
+        \item Testowanie
+            \begin{itemize}
+                \item Znajdowanie różnic miedzy rzeczywistymi fragmentami systemu a ich modelami.
+                \item Celem jest wykrycie jak największej ilości błędów.
+            \end{itemize}
+        \item Pielęgnacja
+    \end{enumerate}
+    
+    \subsubsection{Cechy}
+    \begin{itemize}
+        \item kolejnej fazy nie powinno się rozpoczynać, jeśli poprzednia
+        się nie zakończy.
+        \item kolejność wykonywania prac musi być ściśle przestrzegana;
+        \item koszty opracowania i akceptacji dokumentów są wysokie i
+        dlatego iteracje są również kosztowne oraz wymagają
+        powtarzania wielu prac.
+        \item marginalizacja roli klienta w procesie wytwarzania
+        oprogramowania.
+        \item model kaskadowy powinien być używany jedynie wówczas,
+        gdy wymagania są jasne i zrozumiałe.
+        \item uzyskanie produktu zgodnego z wymaganiami klienta silnie
+        zależy od ich stabilności;
+        \item próba adaptacji do zmieniających sie wymagań jest b.
+        kosztowna;
+        \item bardzo wysoki koszt błędów popełnionych we wstępnych
+        etapach;
+    \end{itemize}
+    
+    \subsection{Model spiralny}
+    Proces tworzenia ma postać spirali, której każda pętla reprezentuje jedną fazę procesu. Najbardziej wewnętrzna pętla przedstawia początkowe etapy projektowania, np. studium wykonalności, kolejna definicji wymagań systemowych itd.
+    
+    \subsubsection{Fazy modelu spiralnego}
+    Każda pętla spirali podzielona jest na cztery sektory
+    \begin{enumerate}
+        \item Ustalanie celów – definiowanie konkretnych celów wymaganych w tej fazie przedsięwzięcia. Identyfikacja ograniczeń i zagrożeń. Ustalanie planów realizacji.
+        \item Rozpoznanie i redukcja zagrożeń – przeprowadzenie szczegółowej analizy rozpoznanych zagrożeń, ich źródeł i sposobów zapobiegania. Podejmuje się odpowiednie kroki zapobiegawcze.
+        \item Tworzenie i zatwierdzanie – tworzenie oprogramowania w oparciu o najbardziej odpowiedni model, wybrany na podstawie oceny zagrożeń.
+        \item Ocena i planowanie – recenzja postępu prac i planowanie kolejnej fazy przedsięwzięcia bądź zakończenie procesu produkcyjnego.
+    \end{enumerate}
+    
+    \subsubsection{Cechy}
+    \begin{itemize}
+        \item ciągłe monitorowanie i pomiar zmian;
+        \item zmiany poddawane są review użytkownika;
+        \item próba minimalizacji ryzyka niepowodzenia;
+    \end{itemize}
+    
+    \begin{table}
+    \centering
+    \begin{tabular}{|l|l|} 
+    \hline
+    \textbf{Model kaskadowy}                                                                         & \textbf{Model spiralny}                                                                              \\ 
+    \hline
+    Działa w sposób sekwencyjny                                                                      & Działa w sposób ewolucyjny                                                                           \\ 
+    \hline
+    \begin{tabular}[c]{@{}l@{}}Błędy są wykrywane i naprawiane\\~po zakończeniu etapów\end{tabular}  & Błędy są wykrywane wcześniej                                                                         \\ 
+    \hline
+    Odpowiedni dla mniejszych projektów                                                              & Odpowiedni dla większych projektów                                                                   \\ 
+    \hline
+    Wymagania określone na początku                                                                  & \begin{tabular}[c]{@{}l@{}}Możliwość dodania wymagań\\~po kilku iteracjach\end{tabular}              \\ 
+    \hline
+    \begin{tabular}[c]{@{}l@{}}Ograniczona możliwość zmian\\~w trakcie trwania projektu\end{tabular} & \begin{tabular}[c]{@{}l@{}}Większa możliwość dostosowania\\~projektu w trakcie trwania\end{tabular}  \\ 
+    \hline
+    Mały koszt                                                                                       & Wysoki koszt                                                                                         \\
+    \hline
+    \end{tabular}
+    \end{table}
+    
     \newpage
 
     \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
