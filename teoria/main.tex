@@ -54,6 +54,10 @@
 
 \lstset{
   basicstyle=\ttfamily,
+  numbers=left,
+  commentstyle=\color{green},
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
   mathescape
 }
 
@@ -4520,7 +4524,56 @@ int main() {
     \newpage
     
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
+    \begin{definition}
+        Funkcja zaprzyjaźniona dla danej klasy to funkcja oznaczona słowem kluczowym
+        \textit{friend}. Funkcja ta ma dostęp ma dostęp do niepublicznych (\textit{private} i
+        \textit{protected}) składowych klasy.
+    \end{definition}
+
+    \begin{itemize}
+        \item Funkcje zaprzyjaźnione mogą się odnosić do wyłącznie obiektów
+            globalnych lub danych przez argumenty
+        \item Mechanizm zaprzyjaźnienia jest specyficzny dla języka C++
+        \item Dowolna ilość klas może deklarować zaprzyjaźnienie jednej funkcji
+        \item Funkcje zaprzyjaźnione mogą być przeładowane, zarówno w definiowanej klasie, jak i na zewnątrz
+        \item Funkcje zaprzyjaźnione mogą być definiowane wewnątz klasy, ale
+            nie stanowią metody klasy definiowanej i są szczególną definicją
+            zewnętrznej funkcji mimo zapisu w ciele definicji klasy.
+    \end{itemize}
+
+    \newpage
+    \subsection{Przeładowania operatorów a funkcje zaprzyjaźnione}
+    Przy przeładowaniu operatorów często stosuje się \textit{friend} w celu dostępu do pól prywatnych przez funkcje zewnętrzne.
+
+
+        \begin{lstlisting}[language=C++]
+class Foo {
+ public:
+    Foo(float val) : data(val) {}
+ private:
+    float data;
+ 
+    friend std::ostream& operator<<(std::ostream& os, const Foo& obj)
+};
+
+std::ostream& operator<<(std::ostream& os, const Foo& obj) 
+{
+    return os << obj.data;
+}
+
+int main()
+{
+    Foo obj(1.23);
+    std::cout << obj << '\n';
+}
+        \end{lstlisting}
+
+    \newpage
+    
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
+
+    \newpage
+    
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
     \section{Obsługa sytuacji wyjątkowych w C++.}
 
