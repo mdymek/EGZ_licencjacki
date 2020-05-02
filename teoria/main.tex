@@ -25,10 +25,12 @@
 \usepackage{multicol}
 \usepackage{lineno}
 \usepackage{hyperref}
+\usetikzlibrary{shapes,snakes}
+\graphicspath{{graphics/}}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
+    linkcolor=black,
     filecolor=magenta,
     urlcolor=cyan,
 }
@@ -69,14 +71,19 @@
 
         \HRule \\[0.4cm]
         %        { \huge \bfseries ETL}\\[0.4cm]
-        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.5cm]
-        \textsc{\large na kierunku Informatyka}\\[0.5cm]
+        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.4cm]
+        \textsc{\large na kierunku Informatyka}\\[0.4cm]
+        \textsc{\Large Teoria}\\[0.4cm]
         \HRule \\[1.0cm]
 
-        \Large% \emph{Autorzy:}\\
-        Małgorzata \textsc{Dymek}\\[1.5cm]
+        \Large %\emph{Autorzy:}\\
+        Karol \textsc{Chrząstek}\\
+        Małgorzata \textsc{Dymek}\\
+        Michał \textsc{Piotrowski}\\
+        Dominik \textsc{Wołek}\\
+        Dagmara \textsc{Zdybał}\\[1.5cm]
 
-        \includegraphics[scale=0.27]{uj.jpg}\\[4cm]
+        \includegraphics[scale=0.27]{uj.jpg}\\[2cm]
 
         {\large Rok akademicki 2019/2020}\\
 
@@ -121,8 +128,7 @@
         $(Z \subset \mathbb{N}) \wedge (J \in Z) \wedge (\forall k \in \mathbb{N} k* \in Z) \Rightarrow Z = \mathbb{N}$.
     \end{theorem}
 
-    Przykład: $2^1 + 2^2 + \cdots + 2^n = 2^{n+1} - 2$, Nierówność Bernoulliego
-    $dla ~ h \geq -1 ~~ (1+h)^2 \geq 1 + n*h, ~~ \forall n \in \mathbb{N}^{+}$, $1 + 2 + \cdots + n = \frac{n(n+1)}{2} \forall n \in \mathbb{N}$
+    \newpage
 
     \section{Porządki częściowe i liniowe. Elementy największe, najmniejsze, maksymalne i minimalne.}
 
@@ -166,9 +172,6 @@
         \end{enumerate}
     \end{definition}
 
-    Przykłady - sprawdź czy porządek: $xRy \Leftrightarrow x | y$
-
-
     \newpage
 
     \section{Relacja równoważności i zbiór ilorazowy.}
@@ -186,7 +189,7 @@
         Niech $R \subset X \times X$ będzie relacją równoważności, $X \neq \varnothing$, $x \in X$. \textbf{Klasą abstrakcji}
         elementu x (wzgledem relacji R) nazywamy:
 
-        $[x]_{R} = {y \in X: xRy}$
+        $[x]_{R} = \{y \in X: xRy\}$
 
         Element x nazywamy reprezentantem klasy abstrakcji $[x]_{R}$.
     \end{definition}
@@ -194,13 +197,10 @@
     \begin{definition}
         \textbf{Zbiorem ilorazowym} zbioru X przez relację R nazywamy zbiór wszystkich klas abstrakcji.
 
-        $X/R = {[y]_{R}: x \in X} ~~ \subset X$
+        $X/R = \{[y]_{R}: x \in X\} ~~ \subset X$
     \end{definition}
 
-    Przykład: $xRy ~ \Leftrightarrow x \equiv_3 y$.
-
     \newpage
-
 
     \section{Metody dowodzenia twierdzeń: wprost, nie wprost, przez kontrapozycję.}
 
@@ -476,11 +476,44 @@
         A odpowiadającym $\lambda$.
     \end{definition}
 
-    \subsection{Metoda potęgowa}
-    \begin{align*}
-        Ax = \lambda x\\
-        x^{N+1} = A^{N+1} x^0\\
-    \end{align*}
+    \begin{definition}
+        \textbf{Metoda potęgowa} służy do wyznaczania \textbf{największej wartości własnej} macierzy. Korzysta z założeń:
+        \begin{align*}
+            Ax = \lambda x\\
+            x^{N+1} = A^{N+1} x^0\\
+        \end{align*}
+        Algorytm:
+        \begin{enumerate}
+            \item Dla danego $x_0$ oblicz $y_0 = \frac{x_0}{||x_0||_2}$
+            \item W \textit{i}-tej iteracji: $x_i = Ay_i$, $y_i = \frac{x_i}{||x_i||_2}$
+            \item \textit{i}-te przybliżenie największej wartości własnej: $\lambda_i = \frac{<x_i, y_{i-1}>}{<y_{i-1}, y_{i-1}>}$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Odwrotna metoda potęgowa} służy do wyznaczenia \textbf{najmniejszej wartości własnej} macierzy.\\
+        Algorytm:
+        \begin{enumerate}
+            \item $Ax_1 = x_0, Ax_i = x_{i-1}$
+            \item \textit{i}-te przybliżenie najmniejszej wartości własnej: $\frac{1}{\lambda_i} = \frac{<x_i, x_{i-1}>}{<x_{i-1}, x_{i-1}>}$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Metoda QR}  pozwala na przybliżone wyznaczenie wszystkich wartości własnych macierzy. Dla:
+        \begin{enumerate}
+            \item $A_i = Q_i R_i$
+            \item $A_{i+1} = R_i Q_i$
+        \end{enumerate}
+        $A_i$ dąży do macierzy przekątniowej z wartościami własnymi na przekątnej.\\
+
+        Q, R to macierze z rozkładu QR:
+        \begin{gather*}
+            A = QR, ~~ Q - \text{ortonormalna ($QQ^\mathcal{T}=I$)}, ~~ R - \text{górnotrójkątna}\\
+            A = [a_1 \dots a_n], Q = [q_1 \dots q_n], q_1 = \frac{a_1}{||a_1||_2}, q_i = \frac{\tilde{q_i}}{||q_i||_2}\\
+            \tilde{q_i} = a_i - \sum_{j=1}^{i-1} r_{ji} q_j, ~~ r_{ji} = \frac{<a_i, q_j>}{<q_j, q_j>}, r_{jj} = ||\tilde{q_j}||_2
+        \end{gather*}
+    \end{definition}
 
     \newpage
 
@@ -1143,7 +1176,7 @@
 
     \end{enumerate}
 
-    \includegraphics[scale=0.20]{graphics/15_6.png}
+    \includegraphics[scale=0.20]{15_6.png}
 
     \newpage
 
@@ -2387,7 +2420,7 @@
 
     	\begin{definition}
     	Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
-    	$\mathcal{M(A)}$ = $\tau \mathcal{A}$(A*) $\subset S^{S}$
+    	$\mathcal{M(A)}$ = $\tau \mathcal{A}(A^*) \subset S^{S}$ 
     	\end{definition}
 
     	\begin{definition}
@@ -3013,7 +3046,7 @@
     
     \noindent Generalnie złożoność wszystkich operacji na B-drzewach wynosi $O(K \log_{K} n)$, gdzie n to ilość kluczy (wartości) w drzewie, a K to rząd drzewa.
     
-    \includegraphics[]{graphics/b-trees/b-tree-example.png}
+    \includegraphics[]{b-trees/b-tree-example.png}
     
     \noindent Odmianą B-drzew są drzewa B+, które różnią się tym, że wszystkie wartości trzymane są w liściach oraz mają powiązania pomiędzy liśćmi (tak aby można było po kolei przejść wszystkie wartości w liściach).
     
@@ -3047,20 +3080,20 @@
     \begin{multicols}{2}
     \textbf{Rotacja RR} \\
     
-    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/rr-rotation.png}
+    \includegraphics[width=0.8\linewidth]{avl-trees/rr-rotation.png}
     \columnbreak \\
     \textbf{Rotacja LL} \\
     
-    \includegraphics[width=0.8\linewidth]{graphics/avl-trees/ll-rotation.png}
+    \includegraphics[width=0.8\linewidth]{avl-trees/ll-rotation.png}
     \end{multicols}
     
     \textbf{Rotacja RL} \\
     
-    \includegraphics[width=\linewidth]{graphics/avl-trees/rl-rotation.png} \\
+    \includegraphics[width=\linewidth]{avl-trees/rl-rotation.png} \\
 
     \textbf{Rotacja LR} \\
     
-    \includegraphics[width=\linewidth]{graphics/avl-trees/lr-rotation.png} \\
+    \includegraphics[width=\linewidth]{avl-trees/lr-rotation.png} \\
     
     \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
 
@@ -3547,21 +3580,699 @@ return $\mathcal{A}'$;
     \end{center}
     \end{definition}
     
-    
-    
+    \newpage
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
+        \subsection{Wyrażenia regularne}
+        
+        \begin{definition}
+            \textbf{Rodzina regularnych podzbiorów}
+
+            Niech $A$ będzie dowolnym zbiorem. Rodzina $REG(A^*)$ regularnych podzbiorów
+            $A^*$ to najmniejsza rodzina $R$ podzbiorów $A^*$ taka, że:
+
+            \begin{enumerate}
+                \item $\emptyset \in R, \forall a \in A$ ${a} \in R$
+                \item jeśli $X, Y \in R$, to: $X \cup Y, X \cdot Y \in R$
+                \item jeśli $X \in R$, to: $X^* = \bigcup\limits_{n = 0}^{\infty} X^n \in R$
+            \end{enumerate}
+        \end{definition}
+
+        \begin{definition}
+            \textbf{Wyrażenie regularne}
+
+            Niech $A$ będzie dowolnym alfabetem, a zbiór $\{+, \star, \emptyset, (,)\}$
+            alfabetem takim, że $A \cap \{+, \star, \emptyset, (,)\} = \emptyset$.
+
+            Słowo $\alpha \in (A \cup \{+, \star, \emptyset, (,)\})^*$ jest wyrażeniem regularnym
+            nad alfabetem A wtedy i tylko wtedy, gdy:
+
+            \begin{enumerate}
+                \item $\alpha = \emptyset$
+                \item $\alpha = a \in A$
+                \item $\alpha$ jest w postaci $(\beta + \gamma), (\beta\gamma), \gamma^*$, gdzie 
+                    $\beta, \gamma$ są wyrażeniami regularnymi nad alfabetem A
+            \end{enumerate}
+        \end{definition}
+
+        Rodzinę wyrażeń regularnych nad $A$ nazywamy $WR$.
+
+        \subsection{Automat skończony}
+
+        \begin{definition}
+            \textbf{Automat}
+
+            Automatem nad alfabetem A nazywamy system $\mathcal{A} = (S, f)$ w którym:
+            \begin{itemize}
+                \item S jest dowolnym zbiorem, zwanym zbiorem stanów
+                \item $f : S \times A \rightarrow S$ jest funkcją przejść
+            \end{itemize}
+
+            Automat $\mathcal{A}$ nazywamy skończonym, jeśli zbiór S jest skończony
+
+            Automat $\mathcal{A}$ ze stanem $s \in S$ taki, że
+            $$f(a, A^*) = Ss$$
+            nazywamy automatem z generatorem s.
+        \end{definition}
+        
+        \begin{definition}
+            \textbf{Język rozpoznawalny}
+
+            Język $L \subset A^*$ jest rozpoznawalny wtedy i tylko wtedy, gdy istnieją:
+            \begin{itemize}
+                \item Automat skończony $\mathcal{A} = (S, f)$
+                \item stan $s_0 \in S$
+                \item zbiór $T \subset S$
+            \end{itemize}
+
+            takie, że
+            $$ L = \{w \in A^* : f(s_0, w) \in T\}$$
+            $s_0$ - stan początkowy \\
+            T - zbiór stanów końcowych automatu
+            $$\mathcal{A} = (S, A, f, s_0, T)$$
+            $L = L(\mathcal{A})$ - język rozpoznawany przez automat $\mathcal{A}$\\
+            $REC(A^*)$ - rodzina wszystkich języków rozpoznawalnych nad alfabetem A
+        \end{definition}
+
+        \subsection{Prawa kongruencja syntaktyczna}
+
+        \begin{definition}
+            \textbf{Prawa kongruencja}
+
+            Każdy automat $\mathcal{A} = (S, f)$ z generatorem $s_0$ wyznacza na wolnym
+            monoidzie $A^*$ prawą kongruencję $\sim_\mathcal{A}$:
+            \[\]
+            $\forall u, v \in A^*$
+            $$u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)$$
+
+            Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat 
+            $\mathcal{A}$ jest skończony.
+        \end{definition}
+
+        \begin{theorem}
+            Każda prawa kongruencja $p \subset (A^*)^2$ wyznacza automat, zwany ilorazowym
+            $$\mathcal{A}_p = (A^* /_{p}, f^*), \; \mathrm{gdzie} \; f^*([w]_p, u) = [wu]_p$$
+            \begin{itemize}
+                \item $\mathcal{A}_p$ jest automatem z generatorem [1]$_p$
+
+                \item $\mathcal{A}_p$ jest automatem skończonym wtedy i tylko gdy relacja $p$ ma skończony indeks 
+            \end{itemize}
+        \end{theorem}
+
+        \subsection{Warunki równoważne definicji języka regularnego}
+        \begin{theorem}
+            \textbf{Twierdzenie Kleenego}
+
+            Dla każdego skończonego alfabetu A
+            $$REC(A^*) = REG(^*)$$
+        \end{theorem}
+
+        \begin{theorem}
+            Dla dowolnego języka regularnego $L \in A^*$ następujące warunki są równoważne:
+            \begin{itemize}
+                \item L = L(G) dla gramatyki G typu 3 (regularnej, lewoliniowej)
+                \item L = L(G) dla gramatyki G prawoliniowej
+                \item L = L($\mathcal{A}$) dla automatu deterministycznego $\mathcal{A}$
+                \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}$
+                \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}^p$ z pustymi przejściami
+
+                \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A                
+                \item L $\in REG(A^*)$
+                \item monoid syntaktyczna M(L) jest skończony
+                \item liczba różnych pochodnych Brzozowskiego dla języka
+                    L jest skończona
+                \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$
+                    o skończonym indeksie oraz L = $\bigcup\limits_{w \in L}[w]_p$
+                \item istnieje skończony monoid M i homomorfizm
+                    $$\varphi : A^* \rightarrow M : L = \varphi^{-1}(\phi(L))$$
+            \end{itemize}
+        \end{theorem}
+
+        \newpage
+        \subsection{Konstrukcja automatu skończenie stanowego rozpoznającego wyrażenie regularne.}
+            \begin{itemize}
+                \item automat rozpoznający język pusty
+                    \begin{center}
+                        \begin{tikzpicture}[scale=0.2]
+                            \tikzstyle{every node}+=[inner sep=0pt]
+                            \draw [black] (13,-27) circle (3);
+                            \draw (13,-27) node {$s_0$};
+                            \draw [black] (28,-27) circle (3);
+                            \draw (28,-27) node {$s_1$};
+                            \draw [black] (28,-27) circle (2.4);
+                        \end{tikzpicture}
+                    \end{center}
+
+                                    
+                \item automat rozpoznający język $\{1\}$
+                    \begin{center}
+                        \begin{tikzpicture}[scale=0.2]
+                            \tikzstyle{every node}+=[inner sep=0pt]
+                            \draw [black] (29.4,-17.1) circle (3);
+                            \draw (29.4,-17.1) node {$s_0$};
+                            \draw [black] (29.4,-17.1) circle (2.4);
+                        \end{tikzpicture}
+                    \end{center}
+
+                \item automat rozpoznający język $\{a\} \; \forall a \in A$
+                    \begin{center}
+                        \begin{tikzpicture}[scale=0.2]
+                            \tikzstyle{every node}+=[inner sep=0pt]
+                            \draw [black] (29.4,-17.1) circle (3);
+                            \draw (29.4,-17.1) node {$s_0$};
+                            \draw [black] (39.8,-17.1) circle (3);
+                            \draw (39.8,-17.1) node {$s_1$};
+                            \draw [black] (39.8,-17.1) circle (2.4);
+                            \draw [black] (32.4,-17.1) -- (36.8,-17.1);
+                            \fill [black] (36.8,-17.1) -- (36,-16.6) -- (36,-17.6);
+                            \draw (34.6,-17.6) node [below] {$a$};
+                        \end{tikzpicture}
+                    \end{center}
+
+                    \newpage
+                \item dla automatu $\mathcal{A}_r$ rozpoznającego wyrażenie $r$ i automatu $\mathcal{A}_r$ rozpoznającego wyrażenie $s$:
+                    $L(\mathcal{A}_x) = L(r + s)$ \\
+                    \noindent $\mathcal{A}_r = (S_r, A, f_r, s_{0r}, T_r) $ \\
+                    \noindent $\mathcal{A}_s = (S_s, A, f_s, s_{0s}, T_s) $ \\
+                    \noindent $\mathcal{A}_x = (S_x, A, f_x, s_{0x}, T_x) $ \\
+
+                    $$\mathcal{A}_s:$$
+                        \begin{center}
+                            \begin{tikzpicture}[scale=0.2]
+                                \tikzstyle{every node}+=[inner sep=0pt]
+                                \draw [black] (18.2,-15.6) circle (3);
+                                \draw (18.2,-15.6) node {$s_0$};
+                                \draw [black] (37.9,-15.6) circle (3);
+                                \draw (37.9,-15.6) node {$s_1$};
+                                \draw [black] (37.9,-15.6) circle (2.4);
+                                \draw [black] (20.569,-13.768) arc (121.67786:58.32214:14.246);
+                                \fill [black] (35.53,-13.77) -- (35.11,-12.92) -- (34.59,-13.77);
+                                \draw (28.05,-11.15) node [above] {$a$};
+                                \draw [black] (35.355,-17.18) arc (-63.43003:-116.56997:16.331);
+                                \fill [black] (20.75,-17.18) -- (21.24,-17.99) -- (21.68,-17.09);
+                                \draw (28.05,-19.4) node [below] {$b$};
+                                \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                \draw (45.15,-15.6) node [right] {$a$};
+                                \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                \draw [black] (15.52,-16.923) arc (324:36:2.25);
+                                \draw (10.95,-15.6) node [left] {$b$};
+                                \fill [black] (15.52,-14.28) -- (15.17,-13.4) -- (14.58,-14.21);
+                            \end{tikzpicture}
+                        \end{center}
+
+                   
+                    $$\mathcal{A}_r:$$
+                        \begin{center}
+                            \begin{tikzpicture}[scale=0.2]
+                                \tikzstyle{every node}+=[inner sep=0pt]
+                                \draw [black] (18.2,-15.6) circle (3);
+                                \draw (18.2,-15.6) node {$r_0$};
+                                \draw [black] (37.9,-15.6) circle (3);
+                                \draw (37.9,-15.6) node {$r_1$};
+                                \draw [black] (37.9,-15.6) circle (2.4);
+                                \draw [black] (20.569,-13.768) arc (121.67786:58.32214:14.246);
+                                \fill [black] (35.53,-13.77) -- (35.11,-12.92) -- (34.59,-13.77);
+                                \draw (28.05,-11.15) node [above] {$b$};
+                                \draw [black] (35.355,-17.18) arc (-63.43003:-116.56997:16.331);
+                                \fill [black] (20.75,-17.18) -- (21.24,-17.99) -- (21.68,-17.09);
+                                \draw (28.05,-19.4) node [below] {$a$};
+                                \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                \draw (45.15,-15.6) node [right] {$b$};
+                                \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                \draw [black] (15.52,-16.923) arc (324:36:2.25);
+                                \draw (10.95,-15.6) node [left] {$a$};
+                                \fill [black] (15.52,-14.28) -- (15.17,-13.4) -- (14.58,-14.21);
+                            \end{tikzpicture}
+                        \end{center}
+
+
+                    \begin{itemize}
+                        \item automat rozpoznający język $r + s$:\\
+                            \noindent $s_{0x} = \{s_{0s}, s_{0r}\}$ \\
+                            \noindent $S_x = S_s \times S_r$ \\
+                            \noindent $f_x(\{s, r\}, a) = \{f_s(s, a), f_r(r, a)\}$ \\
+                            \noindent $T_x \ni t_x = \{s, r\} \Leftrightarrow s \in T_s \lor r \in T_R$ \\
+                            \begin{center}
+                                \begin{tikzpicture}[scale=0.2]
+                                    \tikzstyle{every node}+=[inner sep=0pt]
+                                    \draw [black] (18.2,-15.6) circle (3);
+                                    \draw (18.2,-15.6) node {$s_0,\mbox{ }r_0$};
+                                    \draw [black] (37.9,-15.6) circle (3);
+                                    \draw (37.9,-15.6) node {$s_1,r_0$};
+                                    \draw [black] (37.9,-15.6) circle (2.4);
+                                    \draw [black] (18.2,-32.9) circle (3);
+                                    \draw (18.2,-32.9) node {$s_0,r_1$};
+                                    \draw [black] (18.2,-32.9) circle (2.4);
+                                    \draw [black] (21.2,-15.6) -- (34.9,-15.6);
+                                    \fill [black] (34.9,-15.6) -- (34.1,-15.1) -- (34.1,-16.1);
+                                    \draw (28.05,-15.1) node [above] {$a$};
+                                    \draw [black] (18.2,-18.6) -- (18.2,-29.9);
+                                    \fill [black] (18.2,-29.9) -- (18.7,-29.1) -- (17.7,-29.1);
+                                    \draw (17.7,-24.25) node [left] {$b$};
+                                    \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                    \draw (45.15,-15.6) node [right] {$a$};
+                                    \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                    \draw [black] (15.52,-34.223) arc (324:36:2.25);
+                                    \draw (10.95,-32.9) node [left] {$b$};
+                                    \fill [black] (15.52,-31.58) -- (15.17,-30.7) -- (14.58,-31.51);
+                                    \draw [black] (19.468,-30.182) arc (152.05115:110.52628:29.234);
+                                    \fill [black] (35.04,-16.51) -- (34.12,-16.32) -- (34.47,-17.25);
+                                    \draw (25.05,-21.43) node [above] {$a$};
+                                    \draw [black] (37.033,-18.47) arc (-20.6381:-76.78447:22.448);
+                                    \fill [black] (21.16,-32.41) -- (22.05,-32.71) -- (21.82,-31.74);
+                                    \draw (31.85,-27.91) node [below] {$b$};
+                                \end{tikzpicture}
+                            \end{center}
+
+                        \item automat rozpoznający język $sr$:\\
+                            \noindent $s_{0x} = \{s_{0s}, \emptyset\}$ \\
+                            \noindent $S_x = (S_s \times \mathcal{P}(S_r))$\\
+                            \noindent $f_x(\{s, rs\}, a) = \{s_t, \bigcup\limits_{r \in rs}f_r(r)\}$ \\
+                            \noindent $f_s(s, a) = s_t \in T_s \rightarrow f_x(\{s, rs\}) = \{f_s(s, a), \{r_0\} \cup \bigcup\limits_{r \in rs}f_r(r, a)\}  $ \\
+                            \noindent $\{s, rs\} = t_x \in T_x \Leftrightarrow rs \cap T_r \neq \emptyset$ \\
+                            \begin{center}
+                                \begin{tikzpicture}[scale=0.2]
+                                    \tikzstyle{every node}+=[inner sep=0pt]
+                                    \draw [black] (18.2,-15.6) circle (3);
+                                    \draw (18.2,-15.6) node {$s_0,\mbox{ }\emptyset$};
+                                    \draw [black] (37.9,-15.6) circle (3);
+                                    \draw (37.9,-15.6) node {$s_1,\{r_0\}$};
+                                    \draw [black] (18.2,-32.9) circle (3);
+                                    \draw (18.2,-32.9) node {$s_0,\{r_1\}$};
+                                    \draw [black] (18.2,-32.9) circle (2.4);
+                                    \draw [black] (21.2,-15.6) -- (34.9,-15.6);
+                                    \fill [black] (34.9,-15.6) -- (34.1,-15.1) -- (34.1,-16.1);
+                                    \draw (28.05,-15.1) node [above] {$a$};
+                                    \draw [black] (40.58,-14.277) arc (144:-144:2.25);
+                                    \draw (45.15,-15.6) node [right] {$a$};
+                                    \fill [black] (40.58,-16.92) -- (40.93,-17.8) -- (41.52,-16.99);
+                                    \draw [black] (15.52,-34.223) arc (324:36:2.25);
+                                    \draw (10.95,-32.9) node [left] {$b$};
+                                    \fill [black] (15.52,-31.58) -- (15.17,-30.7) -- (14.58,-31.51);
+                                    \draw [black] (19.468,-30.182) arc (152.05115:110.52628:29.234);
+                                    \fill [black] (35.04,-16.51) -- (34.12,-16.32) -- (34.47,-17.25);
+                                    \draw (25.05,-21.43) node [above] {$a$};
+                                    \draw [black] (37.033,-18.47) arc (-20.6381:-76.78447:22.448);
+                                    \fill [black] (21.16,-32.41) -- (22.05,-32.71) -- (21.82,-31.74);
+                                    \draw (31.85,-27.91) node [below] {$b$};
+                                    \draw [black] (15.52,-16.923) arc (-36:-324:2.25);
+                                    \draw (10.95,-15.6) node [left] {$b$};
+                                    \fill [black] (15.52,-14.28) -- (15.17,-13.4) -- (14.58,-14.21);
+                                \end{tikzpicture}
+                            \end{center}
+
+                        \item automat rozpoznający język $r^*$:
+                            \noindent $s_{0x} = s_{0r}$\\
+                            \noindent $f_x(r, a) = f_r(r)$ \\
+                            \noindent $f_x(r_t \in R_t, 1) = r_{0x}$ \\
+                            \noindent $T_x = r_{0x}$ \\
+                    \end{itemize}
+            \end{itemize}
+    \newpage
+
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
+
+        \subsection{Determinizacja automatów skończenie stanowych}
+
+        \begin{theorem}
+            Język $L \in A^*$ jest rozpoznawany przez automat deterministyczny wtedy
+            i tylko wtedy, gdy jest rozpoznawany przez automat niedeterministyczny.
+        \end{theorem}
+
+        $\mathcal{A}_{ND} = (S, f, I, F)$ - automat niedeterministyczny\\
+        \indent$\mathcal{A}_D = (P(S), \overline{f}, I, T)$ - równoważny automat deterministyczny, gdzie:
+        $$\overline{f} : P(S) \times A^* \rightarrow P(S)$$
+        $$\forall Q \in P(S), \forall w \in A^* \; \; \overline{f}(Q, w) = \bigcup\limits_{s \in Q} f(s, w)$$
+        $$T = \{Q \in P(S) | Q \cap F \neq \emptyset\}$$
+
+        \subsection{Determinizm automatu ze stosem}
+
+        \begin{definition}
+            \textbf{Deterministyczny automat ze stosem}
+
+            Automatem $\mathcal{AS} = (A, A_S, Q, q_0, z_0, f, Q_F)$ nazywamy
+            \textbf{deterministycznym}, jeśli dla każdej konfiguracji 
+            $(z, q, a) \in A_S^* \times Q \times (A \cup \{1\})$
+            $$f(z, q, a) \leq 1 \; \mathrm{oraz}$$
+            $$f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A$$
+            Język akceptowany przez automat deterministyczny nazywamy językiem deterministycznym.
+        \end{definition}
+
+        \begin{theorem}
+            Każdy język deterministyczny jest jednoznaczny (rozpoznawany przez gramatykę jednoznaczną), ale nie na odwrót.
+        \end{theorem}
+        
+        \begin{theorem}
+            Każdy język deterministyczny jest kontekstowy (rozpoznawany przez niedeterministyczny automat ze stosem), ale nie na odwrót.
+        \end{theorem}
+
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 
 
     {\Large Wytwarzanie oprogramowania}
 
+    \newpage
+    
     \section{Reprezentacja liczb całkowitych; arytmetyka.}
+    
+    \subsection{Kod znak-moduł prosty}
+    \subsubsection{Reguły:}
+    \begin{enumerate}
+        \item Sygnalizacja znaku poprzez najwyższą pozycję
+        rejestru (najczęściej pierwszą pozycję od lewej).
+        \item Cyfra 0 na pozycji znaku oznacza dodatniość.
+        \item Niezerowa cyfra na pozycji znaku oznacza ujemność.
+        \item Cyfry określające wartość liczby (pozostałe cyfry) bez zmian (bez żadnego kodowania).
+    \end{enumerate}
+    \subsubsection{Przykłady:}
+    \begin{itemize}
+        \item Przykład w systemie dziesiętnym, q = 10,
+        c = 5, u = 2, n = 8.\\
+        $[+216.7]_{zmp} = 0|00216.70$\\
+        $[-216.7]_{zmp} = 1|00216.70$
+        \item Przykład w systemie binarnym, q = 2, c = 10,
+        u = 5, n = 16.\\
+        $[+1001100.101]_{zmp} = 0|0000100110.10100$\\
+        $[-1001100.101]_{zmp} = 1|0000100110.10100$
+    \end{itemize}
+    \subsubsection{Arytmetyka}
+    Kodowanie znak-moduł prosty przez swoją skomplikowaną
+    i czasochłonną arytmetykę nie nadaje się do praktycznego
+    stosowania (konieczność niestandardowego obsługiwania przepełnień)
+    
+    \subsection{Kod odwrotnościowy}
+    \subsubsection{Reguły}
+    \begin{itemize}
+        \item Najbardziej znacząca cyfra (najczęściej lewa) jest cyfrą znaku.
+        \item Zerowa cyfra znaku oznacza dodatniość.
+        \item Najwyższa (ostatnia) cyfra znaku oznacza ujemność.
+        \item Cyfry wartości liczby dodatniej pozostają bez zmian
+        \item Cyfry wartości dla liczby ujemnej:
+        \begin{itemize}
+            \item W systemie dwójkowym są odwróceniem bitów.
+            \item W systemie dziesiętnym są uzupełnieniem każdej cyfry
+            do liczby 9.
+            \item Ogólnie są uzupełnienie każdej cyfry do najwyższej cyfry
+            systemu, czyli do wartości q-1.
+        \end{itemize}
+    \end{itemize}
+    
+    \subsubsection{Przykłady}
+    \begin{itemize}
+        \item System dziesiętny:
+        q = 10, c = 7, u = 5
+        \begin{align*}
+            [-182073.6954]_{odw} = [-0|0182073.69540]_{odw} = 9|9917926.30459 
+        \end{align*}
+        
+        \item - System binarny:
+        q = 2, c = 7, u = 5
+        \begin{align*}
+            [-101110.011]_{odw} = [-0|0101110.01100]_{odw} = 1|0010001.10011 
+        \end{align*}
+        
+    \end{itemize}
+    
+    \subsubsection{Arytmetyka}
+    Algorytm sumowania:
+    \begin{itemize}
+        \item Dodaj kody, a w przypadku przepełnienia zwiększ wynik o najmniejszą możliwą liczbę dodatnią.
+    \end{itemize}
+    
+    \subsubsection{Przykłady}
+    \begin{itemize}
+        \item W systemie dzisiętnym, q=10, c=7, u=5
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-dec.png}
+        \end{center}
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-dec-2.png}
+        \end{center}
+        
+
+        \item w systemie binarnym, q=2, c=7, u=5
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-bin.png}
+        \end{center}
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/odw-add-bin-2.png}
+        \end{center}
+        
+    \end{itemize}
+    
+    
+    \subsection{Kod uzupełnieniowy}
+    \subsubsection{Kodowanie}
+        Kodowanie uzupełnieniowe liczby ujemnej polega na uzupełnieniu każdej cyfry do najwyższej
+        cyfry systemu (odwróceniu bitów) i dodaniu do
+        otrzymanej wartości liczby 1 na najmniej znaczącym miejscu.
+    \subsubsection{Dekodowanie}
+        Dekodowanie liczby ujemnej zakodowanej uzupełnieniowo polega na odjęciu od kodu liczby 1
+        na najmniej znaczącym miejscu z uzupełnieniem
+        w otrzymanym kodzie każdej cyfry do najwyższej
+        cyfry systemu (odwróceniem bitów).
+        
+    \subsubsection{Przykłady kodowania}
+    \begin{itemize}
+        \item w systemie dziesiętnym (q = 10, c = 7, u = 5)
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/uzp-encode-dec.png}
+
+        \end{center}
+        \item w systemie binarnym q = 10, c = 7, u = 5.
+        \begin{center}
+            \includegraphics[scale=0.4]{graphics/number-repr/uzp-encode-bin.png}
+        \end{center}
+            
+    \end{itemize}
+    
+    \subsubsection{Arytmetyka}
+        Suma kodów uzupełnieniowych jest zawsze kodem uzupełnieniowym sumy.
+        \begin{itemize}
+            \item w systemie dziesiętnym  (q = 10, c = 7, u = 5)
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/uzp-add-dec.png}
+            \end{center}
+            
+            \item w systemie binarnym q = 10, c = 7, u = 5
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/uzp-add-bin.png}
+            \end{center}
+        \end{itemize}
+        
+    \subsection{Kod nadmiarowy}
+    \subsubsection{Kodowanie}
+    \begin{enumerate}
+        \item Kodowanie nadmiarowe liczby dodatniej polega na
+        ustawieniu cyfry znaku na wartość jednostkową.
+        \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-encode-dec.png}
+        \end{center}
+        \item Kod nadmiarowy liczby ujemnej to kod uzupełnieniowy z odjęciem najwyższej cyfry systemu
+            na pozycji znaku.
+        \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-encode-bin.png}
+        \end{center}
+    \end{enumerate}
+        
+        
+    \subsubsection{Deokodowanie}
+    \begin{itemize}
+        \item Dekodowanie nadmiarowe kodu liczby dodatniej
+        (rozpoznawanego po niezerowej cyfrze znaku) polega na wyzerowaniu cyfry znaku.
+        \item Dekodowanie nadmiarowe kodu liczby ujemnej
+            (rozpoznawanego po zerowej cyfrze znaku) wymaga
+            ustawienia najwyższej cyfry systemu w miejscu znaku z następującym dekodowaniem uzupełnieniowym.
+    \end{itemize}
+    
+    \subsubsection{Arytmetyka}
+    Kod nadmiarowy sumy liczb to suma kodów nadmiarowych
+    składników z odjętą wartością 1 na pozycji znaku.
+    
+    \begin{enumerate}
+        \item w systemie dziesiętnym
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-dec.png}
+            \end{center}
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-dec-2.png}
+            \end{center}
+            
+        \item w systemie binarnym
+            \begin{center}
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-bin.png}
+            \end{center}
+            \begin{center}    
+                \includegraphics[scale=0.4]{graphics/number-repr/nad-add-bin-2.png}
+            \end{center}
+    \end{enumerate}
+    
+    
+    
+    
+    
+    
+    \newpage
+    
     \section{Reprezentacja liczb rzeczywistych; arytmetyka zmiennopozycyjna.}
+    
+    \subsection{Reprezentacja cecha-mantysa}
+    Liczby postaci
+    \begin{align*}
+        m \times q^c
+    \end{align*}
+    gdzie m - mantysa, q - podstawa systemu liczbowego, c - cecha
+    
+    \begin{itemize}
+        \item Mantysa - ciąg najbardziej znaczących cyfr liczby.
+        \item Cecha - wykładnik potęgi podstawy systemu w iloczynie z mantysą równy reprezentowanej liczbie.
+        \item W rejestrze komputera pamiętane są wyłącznie mantysa oraz cecha, zaś podstawa systemu jest ustalona, zatem nie musi być reprezentowana i nie jest konieczna do działań.
+        \item Różnorodne sposoby zapamiętania w komputerze liczb w postaci cecha-mantysą noszą nazwę \textbf{kodowań zmiennopozycyjnych.}
+        
+    \end{itemize}
+    
+    \subsection{Kodowanie zmiennopozycyjne}
+    \begin{itemize}
+        \item Kodowanie zmiennopozycyjne jest powszechnie stosowanie w komputerach dla reprezentacji liczb rzeczywistych.
+        \item W systemie dziesiętnym dla oddzielenia mantysy i cechy powszechne użycie litery E (lub e).
+        Liczba 28.05
+        \begin{center}
+            \texttt{28.05e0 = 2805e-2 = +2805000e-5 =\\
+            = 0.0002805e+5 = 2.805e1 = 0.2805e2}
+        \end{center}
+        
+        \item W systemie binarnym dla oddzielenia mantysy i cechy powszechne użycie litery D (lub d).
+        Liczba $(9.625)_{10} = (1001.101)_2$
+        \begin{center}
+            \texttt{0.00001001101d1000 = 1001101000d-110 =\\
+            = 1.001101d11 = 0.1001101d100}
+        \end{center}
+       
+       \item Różnorodność reprezentacji zmiennopozycyjnej wymusza konieczność ujednoznacznienia zwaną \textbf{normalizacją.}
+       
+    \end{itemize}
+    
+    \subsection{Normalizacja}
+    
+        \begin{table}
+        \centering
+        \begin{tabular}{l|l|l|l}
+                          & normalizacja
+        całkowita & normalizacja
+        do jedynki & normalizacja
+        do ułamka  \\ 
+        \hline
+        28.05             & \texttt{2805e-2}                & \texttt{2.805e1}                  & \texttt{.2805e2}                  \\
+        -35000000         & -\texttt{35e6}                & -\texttt{3.5e7}                   & -\texttt{.35e8}                   \\
+        0.0000576         & \texttt{576e-6}                  & \texttt{5.76e-4}                  & \texttt{.576e-3}                  \\ 
+        \hline
+        $(1001.101)_2$    & \texttt{1001101d-11}             & \texttt{1.001101d11}              & \texttt{.1001101d100}             \\
+        $(1010000)_2$     & \texttt{101d100}                 & \texttt{1.01d110}                 & \texttt{.101d111}                 \\
+        $(-0.00001011)_2$ & -\texttt{1011d1001}              & -\texttt{1.011d111}               & -\texttt{.1011d1000}             
+        \end{tabular}
+        \end{table}
+        
+    \subsection{Algorytmy kodowania i dekodowania}
+    Przyjmujemy oznaczenia:
+    \begin{itemize}
+        \item $w_m$ - liczba cyfr reprezentacji mantysy (bez cyfry znaku)
+        \item $w_c$ - liczba cyfr reprezentacji cechy (bez cyfry znaku)
+        \item n - liczba cyfr rejestru
+    \end{itemize}
+    Zatem:
+    \begin{align*}
+        n = 1 + w_m + 1 + w_c
+    \end{align*}
+    
+    \subsubsection{Algorytm kodowania}
+    
+    Algorytm kodowania zmiennomozycyjnego obejmuje poniższe kroki:
+    \begin{enumerate}
+        \item Przedstaw liczbę w systemie o podstawie q.
+        \item Zaokrąglij wartość liczby do $w_m$ cyfr.
+        \item Zaokrąglony wynik sprowadź do znormalizowanej postaci
+        potęgowej $m\cdot q^c$
+        \item Jeżeli cecha jest zbyt duża (zbyt dodatnia) by zmieścić się
+        w przewidzianym zakresie $w_c$ to zasygnalizuj błąd przepełnienia i zakończ.
+        \item Jeżeli cecha jest zbyt mała (zbyt ujemna) by zmieścić się
+        w zakresie $w_c$ to zakoduj zerową mantysy oraz zerową wartość cechy i zakończ.
+        \item Zakoduj stałopozycyjnie mantysę na $w_m + 1$ pozycjach.
+        \item Zakoduj stałopozycyjnie cechę na $w_c + 1$ pozycjach.
+    \end{enumerate}
+    
+    Przykłady dziesiętne:
+    
+    \begin{center}
+    \includegraphics[scale=0.4]{graphics/number-repr/fl-pt-encode-dec.png}
+    \end{center}
+    
+    Przykłady binarne:
+    
+    \includegraphics[width=\linewidth]{graphics/number-repr/fl-pt-encode-bin.png}
+    
+    \subsubsection{Algorytm dekodowania}
+    
+    System dziesiętny:
+    \begin{enumerate}
+        \item Dekoduj mantysę i cechę.
+        \item Opcjonalnie eliminuj postać potęgową.
+    \end{enumerate}
+    
+    System binarny:
+    \begin{enumerate}
+        \item Dekoduj mantysę i cechę.
+        \item Sprowadź cechę do postaci dziesiętnej.
+        \item Zdenormalizuj mantysę.
+        \item Zapisz mantysę w postaci dziesiętnej.
+    \end{enumerate}
+    
+    Przykłady binarne:
+    
+    \includegraphics[width=\linewidth]{graphics/number-repr/fl-pt-decode-bin.png}
+    
+    \subsection{Arytmetyka}
+    \begin{itemize}
+        \item Brak ogólnego algorytmu działania na kodach
+        zmiennopozycyjnych.
+        \item Jedyna możliwa droga obejmuje oczywiste
+        kroki:
+        \begin{enumerate}
+            \item Dekodowanie argumentów.
+            \item Wykonanie działania.
+            \item Zakodowanie wyniku.
+        \end{enumerate}
+    \end{itemize}
+    
+    \subsubsection{Dodawanie kodów zmiennopozycyjnych}
+    Algorytm obejmuje kroki:
+    \begin{enumerate}
+        \item Zmodyfikuj mantysy dla zrównania cech (z możliwością
+        denormalizacji).
+        \item Wyznacz mantysę sumy w postaci sumy mantys (możliwe wobec równych cech).
+        \item Zaokrąglij sumę mantys do liczby cyfr rejestru.
+        \item Znormalizuj wynik sumy (skoryguj cechę wyniku).
+    \end{enumerate}
+    Przykład:\\
+    \begin{center}
+        \includegraphics[scale=0.3]{graphics/number-repr/fl-pt-add.png}
+    \end{center}
+    
+    \subsubsection{Mnożenie kodów zmiennopozycyjnych}
+    Algorytm może obejmować kroki:
+    \begin{enumerate}
+        \item Mantysa iloczynu to iloczyn mantys, dlatego
+        pomnóż mantysy.
+        \item Cecha iloczynu to suma cech, zatem dodaj
+        cechy.
+        \item Zaokrąglij mantysę wyniku, iloczynu mantys.
+        \item Znormalizuj mantysę modyfikując cechę.
+    \end{enumerate}
+    Przykład:\\
+    \begin{center}
+        \includegraphics[scale=0.4]{graphics/number-repr/fl-pt-mult.png}
+    \end{center}
 
     \newpage
-
     \section{Różnice w wywołaniu funkcji statycznych, niestatycznych i wirtualnych w C++.}
 
     \subsection{Funkcje statyczne.}
@@ -3789,17 +4500,940 @@ return $\mathcal{A}'$;
     \newpage
 
     \section{Wskaźniki, arytmetyka wskaźników, różnica między wskaźnikiem a referencją w C++.}
+    \begin{definition}
+    	\textbf{Wskaźnik} – typ zmiennej odpowiedzialnej za przechowywanie adresu do innej zmiennej (innego miejsca w pamięci) w obrębie naszej aplikacji.
+    	Wskaźnik może wskazywać na jakąś zmienną, strukturę, tablicę czy nawet funkcję.
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Operatory związane ze wskaźnikami w C++}
+    	\begin{minted}{cpp}
+int a = 5;
+
+// Creation of pointer to int variable
+int *intPtr = nullptr;  // In older versions NULL
+
+// Using & (ampersand) to get address of variable
+// then assign to pointer
+intPtr = &a;
+
+// Using * as dereference operator
+// to get value of pointed variable
+cout << *intPtr << endl;
+    	\end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Arytmetyka wskaźników} \\
+    	Mając wskaźnik \texttt{int *p} wskazujący na hipotetyczny adres 10, wykonując na nim operację \texttt{p+2} dostajemy wskaźnik wskazujący na adres \texttt{10 + 2*sizeof(int)}
+    	czyli zakładając, że typ \texttt{int} zajmuje w naszym kompilatorze 4 bajty dostajemy \texttt{10 + 2*4} = \texttt{18}. \\
+    	Jest to przydatne szczególnie przy operowaniu na strukturach, których pola są ułożone po kolei w pamięci, np. tablice:
+    	\begin{minted}{cpp}
+int *a = new int[10] {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+// Now a pointing to first element in array
+cout << *a << endl;  // 0
+
+// Using dereference operator with pointer arithmetic
+cout << *(a+3) << endl;  // 30
+    	\end{minted}
+    	Jak więc widać \texttt{*(a+i)} $\Leftrightarrow$ \texttt{a[i]}.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Wskaźnik a referencja} \\
+    Referencję możemy traktować jako dodatkową nazwę na juz istniejący obiekt. Jest to coś w rodzaju stałego wskaźnika.
+    Składnia referencji zabrania jednak wykonywania operacji znanych dla wskaźników:
+    \begin{itemize}
+        \item Dla referencji nie można zmienić referowanego obiektu - raz ustawiony (a musi być ustawiony prawie zawsze podczas jej deklaracji) nie zmienia się przez cały czas jej życia
+        \item Nie jest dostępna arytmetyka referencji (w przeciwieństwie do arytmetyki wskaźników)
+    \end{itemize}
+    Po kompilacji (w kodzie maszynowym) referencje i wskaźniki niczym się nie różnią.
+    Korzystając z referencji świadomie rezygnujemy z pewnych możliwości oferowanych nam przez wskaźniki. W zamian dostajemy:
+    \begin{itemize}
+	\item Łatwiejszą notację - nie musimy używać operatora wyłuskania (\texttt{*}) do odwoływania się do obiektu
+	\item Większe bezpieczeństwo - brak arytmetyki dla referencji znacznie utrudnia popełnienie błędów związanych z niepoprawnym odwołaniem do pamięci
+    \end{itemize}
+    \end{definition}
+    
+    \noindent \textbf{Przykład użycia referencji}
+    \begin{minted}{cpp}
+int n = 6;
+
+// Deklaracja referencji na typ int i przypisanie referowanego obiektu
+// Referencję deklarujemy dodając & (ampersand) między nazwą typu a zmiennej
+// (nie mylić z & jako operatorem pobrania adresu omawianym przy wskaźnikach)
+int &r = n;
+
+cout << r << endl; // 6
+
+// Zmiana wartości odwołując się do referncji
+// zmienia tak na prawdę wartość oryginalnego obiektu
+r = 7;
+
+cout << n << endl; //7
+    \end{minted}    
+    
+    \newpage
+    
     \section{Podstawowe założenia paradygmatu obiektowego: dziedziczenie, abstrakcja, enkapsulacja, polimorfizm.}
+    \begin{definition}
+	\textbf{Dziedziczenie (kompozycja)} \\
+    	Umożliwia stworzenie hierarchii obiektów w programie. Polega na przejęciu właściwości i funkcjonalności obiektów innej klasy
+    	i ewentualnej modyfikacji tych właściwości i funkcjonalności w taki sposób, by były one bardziej wyspecjalizowane.
+    	\begin{minted}{cpp}
+class Mammal {
+public:
+  void feed() {
+    cout << "sucking" << endl;
+  }
+		
+  virtual void giveVoice() = 0; // Pure virtual method
+};
+
+class Cat : public Mammal {
+public:
+  void giveVoice() override {
+    cout << "meow" << endl;
+  }
+};
+
+int main() {
+  Cat cat = new Cat();
+  cat.feed();
+  cat.giveVoice();
+  /*
+  sucking
+  meow
+  */
+}
+    	\end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Abstrakcja} \\
+    Każdy obiekt w systemie służy jako model abstrakcyjnego "wykonawcy", który może wykonywać pracę, opisywać i zmieniać swój stan, oraz komunikować się
+    z innymi obiektami w systemie, bez ujawniania, w jaki sposób zaimplementowano dane cechy.
+    \begin{minted}{cpp}
+class DiscountComputator {
+private:
+  int factor;
+  ...
+
+public:  
+  // Setter
+  void setFactor(int factor) {
+    this.factor = factor;
+  }
+  
+  double compute(double price) {
+    ...
+  }
+};
+
+int main() {
+  DiscountComputator dc = new DiscountComputator();
+  
+  dc.setFactor(5);
+  
+  // We are not interested how it is calculated
+  double result = dc.compute(123.45);
+}
+    \end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Enkapsulacja} \\
+    Enkapsulacja zapewnia, że obiekt nie może zmieniać stanu innych obiektów w nieokreślony sposób.
+    Każdy typ obiektu dostarcza interfejsu, który określa sposób współpracy z innymi obiektami.
+    Jedynie za pomocą określonych metod mamy możliwość zmienić stan obiektu, bezpośredni dostęp
+    do zmiennych jest zabroniony.
+    \begin{minted}{cpp}
+class MyClass {
+private:
+  int field;
+  
+public:
+  // Setter
+  void setField(int field) {
+    this.field = field;
+  }
+  
+  // Getter
+  int getField() {
+    return field;
+  }
+};
+
+int main() {
+  MyClass clazz = new MyClass();
+  
+  clazz.setField(5);
+  int field = clazz.getField();
+  
+  /*
+  // The `field` is private, so the following
+  // will cause an error during compilation
+  clazz.field = 5;
+  int field = clazz.field;
+  */
+}
+    \end{minted}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Polimorfizm} \\
+    Referencje i wskaźniki obiektów mogą dotyczyć obiektów różnego typu, a wywołanie metody dla referencji spowoduje zachowanie
+    odpowiednie dla pełnego typu obiektu wywoływanego. Zazwyczaj można wyróżnić dwa rodzaje polimorfizmu: dynamiczne - wykonywane podczas działania programu,
+    a także statyczne - na etapie kompilacji.
+    \begin{minted}{cpp}
+class Point {
+protected:
+    int x, y;
+public:
+    // Constructor with initializer list
+    Point(int x, int y) : x(x), y(y) {
+    }
+
+    virtual void printPoint() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+
+    void printClassName() {
+        cout << "Point" << endl;
+    }
+};
+
+class ColoredPoint : public Point {
+protected:
+    int color;
+public:
+    // Constructor with initializer list
+    ColoredPoint(int x, int y, int color)
+        : Point(x, y), color(color) {
+    }
+
+    void printPoint() {
+        cout << "(" << x << ", " << y
+            << ", color = " << color << ")" << endl;
+    }
+
+    void printClassName() {
+        cout << "ColoredPoint" << endl;
+    };
+};
+	\end{minted}
+	\end{definition}
+	\begin{definition} \textbf{} \\
+	\begin{minted}{cpp}
+int main() {
+    Point *p = new ColoredPoint(1, 2, 3);
+    p->printPoint();
+    p->printClassName();
+    delete p;
+
+    ColoredPoint *cp = new ColoredPoint(1, 2, 3);
+    cp->printPoint();
+    cp->printClassName();
+    delete cp;
+
+    return 0;
+}
+
+/* Output:
+   (1, 2, color = 3)
+   Point
+   (1, 2, color = 3)
+   ColoredPoint
+*/
+    \end{minted}
+    
+    Jak widzimy dla obu wskaźników instancjonujemy klasę \texttt{ColoredPoint}. W przypadku wskaźnika \texttt{p} i wywołania metody \texttt{printClassName}
+    została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na obiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
+    bierzez pod uwagę typ wskaźnika, a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
+    kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu, a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
+    z powyższego kodu.
+    \end{definition}
+    
+    \newpage
+    
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
     \section{Obsługa sytuacji wyjątkowych w C++.}
+
+    \newpage
+    
     \section{Obsługa plików w języku C.}
+    
+    Standardowa biblioteka wejścia/wyjścia języka C udostępnia funkcje do operowania na plikach, tj.
+    odczytu i zapisu danych z plików tekstowych i binarnych.\\
+    
+    Sposób pracy z plikami w języku C jest następujący:
+    \begin{enumerate}
+        \item Otwarcie pliku o określonym nazwie w określonym trybie (odczyt, zapis, dopisywanie)
+            Funkcja fopen, prototyp:
+            \begin{minted}{cpp}
+                FILE *fopen(const char *filename, const char *mode);
+            \end{minted}
+            Funkcja fopen otwiera plik, którego nazwa podana jest w pierwszym argumencie. Drugim jest
+            łańcuch znaków zwierający litery oznaczające sposób otwarcia pliku:
+            \begin{itemize}
+                \item "r" - otwiera plik do czytania
+                \item "r+" - otwiera plik do czytania i nadpisywania (aktualizacja)
+                \item "w" - otwiera plik do nadpisywania (zamazuje starą treść)
+                \item "w+" - otwiera plik do nadpisywania i czytania
+                \item "a" - otwiera plik do dopisywania (jeśli plik nie istnieje, to jest tworzony)
+                \item "a+" - otwiera plik do dopisywania i odczytu (jeśli plik nie istnieje, to jest tworzony)
+                \item "t" - otwiera plik w trybie tekstowym
+                \item "b" - otwiera plik w trybie binarnym
+            \end{itemize}
+            
+            Litery można ze sobą łączyć, np. "rwb" albo "wt".
+            Funkcja zwraca wskaźnik do pliku (FILE *) lub NULL, gdy pliku nie udało się otworzyć (nie
+            istnieje, jest już otwarty w innym programie itp. .
+            Przykład wywołania:
+            \begin{minted}{cpp}
+                FILE *f = fopen("dane.txt", "rt");
+            \end{minted}
+            
+            
+            
+        \item     
+            Wykonywanie operacji odczytu/zapisu.\\
+            Funkcje do formatowanego odczytu/zapisu.
+            \begin{minted}{cpp}
+                int fscanf(FILE *stream, const char *format, ...);
+                int fprintf(FILE *stream, const char *format, ...);
+            \end{minted}
+            Funkcje działają tak jak scanf i printf, przy czym jako pierwszy argument przyjmują
+            wskaźnik do pliku uzyskany w punkcie 1 (ogólnie - wskaźnik do strumienia danych).\\
+            Przykłady:
+            \begin{minted}{cpp}
+                //odczyt liczby całkowitej z pliku
+                int i;
+                char lan[] = { "Operacje plikowe" };
+                FILE *f = fopen("dane.txt", "wt");
+                fscanf(f, "%d", &i);
+                //zapis łańcucha znaków do pliku
+                fprintf(f, "%s", lan);
+                //zamknięcie pliku
+                fclose(f);
+            \end{minted}
+        
+    \end{enumerate}
+
+    \newpage
+    
     \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
+    
+    \subsection{Model kaskadowy}
+    Nazwa model kaskadowy (ang. waterfall model) wprowadzona została przez Winstona W. Royce w roku 1970, w artykule Managing the Development of Large Software Systems”
+        
+    \subsubsection{Zasady}
+    \begin{itemize}
+        \item Tworzenie systemu podzielone na wyizolowane
+        etapy; każdy z nich musi być zakończony, zanim
+        rozpoczną się prace w następnym etapie;
+        \item Wyjścia z jednego etapu są wykorzystywane jako
+        wejścia do etapu następnego;
+        \item Każdy etap podzielony jest na dwie części: części
+        twórczej oraz weryfikacji i/lub zatwierdzenia;
+        \item Ponowna praca, jeśli jest konieczna, jest
+        wykonywana w kolejnych etapach bez powrotu na
+        pierwotny etap, na którym dany produkt został
+        utworzony, np. gdy pojawi się nowe wymaganie;
+    \end{itemize}
+        
+    \subsubsection{Fazy modelu kaskadowego}
+    \begin{enumerate}
+        \item Planowanie
+        \begin{itemize}
+            \item Wstępne założenia dotyczące budowy systemu
+            \item cele biznesowe
+            \item podstawowe wymagania
+            \item podstawowe założenia jakościowe i parametry techniczne, standardy, organizacja i działanie systemu;
+        \end{itemize}
+        \item Analiza
+            \begin{itemize}
+                \item  Zdefiniowane zostaje przeznaczenie systemu.
+                \item Wynikiem analizy powinien być poprawny, kompletny, spójny i jednoznaczny model systemu.
+            \end{itemize}
+        \item Projekt
+            \begin{itemize}
+                \item Projekt systemu
+                \begin{enumerate}
+                    \item Dekompozycja systemu na mniejsze podsystemy.
+                    \item Wybór strategii budowania systemu.
+                \end{enumerate}
+                \item Projekt obiektów
+                \begin{enumerate}
+                    \item Definicja obiektów dziedziny realizacyjnej.
+                    \item Wybór odpowiednich gotowych komponentów.
+                    \item Precyzyjne opisywanie interfejsów dla nowo tworzonych obiektów.
+                \end{enumerate}
+            \end{itemize}
+        \item Implementacja
+            \begin{itemize}
+                \item Tworzenie kodu źródłowego aplikacji.
+                \item Mapowanie np. modeli UML na kod.
+            \end{itemize}
+        \item Testowanie
+            \begin{itemize}
+                \item Znajdowanie różnic miedzy rzeczywistymi fragmentami systemu a ich modelami.
+                \item Celem jest wykrycie jak największej ilości błędów.
+            \end{itemize}
+        \item Pielęgnacja
+    \end{enumerate}
+    
+    \subsubsection{Cechy}
+    \begin{itemize}
+        \item kolejnej fazy nie powinno się rozpoczynać, jeśli poprzednia
+        się nie zakończy.
+        \item kolejność wykonywania prac musi być ściśle przestrzegana;
+        \item koszty opracowania i akceptacji dokumentów są wysokie i
+        dlatego iteracje są również kosztowne oraz wymagają
+        powtarzania wielu prac.
+        \item marginalizacja roli klienta w procesie wytwarzania
+        oprogramowania.
+        \item model kaskadowy powinien być używany jedynie wówczas,
+        gdy wymagania są jasne i zrozumiałe.
+        \item uzyskanie produktu zgodnego z wymaganiami klienta silnie
+        zależy od ich stabilności;
+        \item próba adaptacji do zmieniających sie wymagań jest b.
+        kosztowna;
+        \item bardzo wysoki koszt błędów popełnionych we wstępnych
+        etapach;
+    \end{itemize}
+    
+    \subsection{Model spiralny}
+    Proces tworzenia ma postać spirali, której każda pętla reprezentuje jedną fazę procesu. Najbardziej wewnętrzna pętla przedstawia początkowe etapy projektowania, np. studium wykonalności, kolejna definicji wymagań systemowych itd.
+    
+    \subsubsection{Fazy modelu spiralnego}
+    Każda pętla spirali podzielona jest na cztery sektory
+    \begin{enumerate}
+        \item Ustalanie celów – definiowanie konkretnych celów wymaganych w tej fazie przedsięwzięcia. Identyfikacja ograniczeń i zagrożeń. Ustalanie planów realizacji.
+        \item Rozpoznanie i redukcja zagrożeń – przeprowadzenie szczegółowej analizy rozpoznanych zagrożeń, ich źródeł i sposobów zapobiegania. Podejmuje się odpowiednie kroki zapobiegawcze.
+        \item Tworzenie i zatwierdzanie – tworzenie oprogramowania w oparciu o najbardziej odpowiedni model, wybrany na podstawie oceny zagrożeń.
+        \item Ocena i planowanie – recenzja postępu prac i planowanie kolejnej fazy przedsięwzięcia bądź zakończenie procesu produkcyjnego.
+    \end{enumerate}
+    
+    \subsubsection{Cechy}
+    \begin{itemize}
+        \item ciągłe monitorowanie i pomiar zmian;
+        \item zmiany poddawane są review użytkownika;
+        \item próba minimalizacji ryzyka niepowodzenia;
+    \end{itemize}
+    
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|} 
+    \hline
+    \textbf{Model kaskadowy}                                                                         & \textbf{Model spiralny}                                                                              \\ 
+    \hline
+    Działa w sposób sekwencyjny                                                                      & Działa w sposób ewolucyjny                                                                           \\ 
+    \hline
+    \begin{tabular}[c]{@{}l@{}}Błędy są wykrywane i naprawiane\\~po zakończeniu etapów\end{tabular}  & Błędy są wykrywane wcześniej                                                                         \\ 
+    \hline
+    Odpowiedni dla mniejszych projektów                                                              & Odpowiedni dla większych projektów                                                                   \\ 
+    \hline
+    Wymagania określone na początku                                                                  & \begin{tabular}[c]{@{}l@{}}Możliwość dodania wymagań\\~po kilku iteracjach\end{tabular}              \\ 
+    \hline
+    \begin{tabular}[c]{@{}l@{}}Ograniczona możliwość zmian\\~w trakcie trwania projektu\end{tabular} & \begin{tabular}[c]{@{}l@{}}Większa możliwość dostosowania\\~projektu w trakcie trwania\end{tabular}  \\ 
+    \hline
+    Mały koszt                                                                                       & Wysoki koszt                                                                                         \\
+    \hline
+    \end{tabular}
+    \end{table}
+    
+    \newpage
+
     \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
+
+    \begin{definition}
+        \textbf{UML} - Unified Modelling Language.
+        \begin{itemize}
+            \item rodzina notacji graficznych;
+            \item służy do opisywania i projektowania systemów informatycznych;
+            \item narodził się z unifikacji wielu obiektowych języków modelowania graficznego;
+            \item nadzorowany przez organizacje OMG.
+        \end{itemize}
+    \end{definition}
+
+    \subsection{Diagram sekwencji.}
+
+    \begin{definition}
+        \textbf{Diagram sekwencji} - opisuje interakcje pomiędzy częściami systemu w postaci sekwencji komunikatów
+        wymienianych między nimi.
+
+        Diagramy sekwencji dobrze ukazują dynamiczne aspekty realizacji scenariuszy, w których dochodzi do złożonych
+        oddziaływań pomiędzy obiektami. Podstawowymi oddziaływaniami są wymiany komunikatów oznaczane następującymi
+        symbolami:
+        \begin{itemize}
+            \item przesłanie komunikatu asynchronicznego – strzałka zwykła,
+            \item wywołanie funkcji – strzałka z wypełnionym grotem,
+            \item powrót z funkcji – strzałka rysowana linią przerywaną.
+        \end{itemize}
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uml_sek.png}
+    \end{figure}
+
+    \subsection{Diagram przypadków użycia.}
+
+    \begin{definition}
+        \textbf{Diagram przypadków użycia} służy do przedstawiania:
+        \begin{itemize}
+            \item interakcji aktora z systemem,
+            \item zadań, jakie wykonuje system,
+            \item wymagań funkcjonalnych.
+        \end{itemize}
+
+
+        \textbf{Aktorzy} mogą być:
+        \begin{itemize}
+            \item Ludźmi wchodzącymi w interakcję,
+            \item Systemami zewnętrznymi
+            \item Częściami systemu, które mają wpływ na funkcjonowanie systemu, ale same przez ten system nie mogą
+            być zmieniane (jak np. zegar systemowy).
+        \end{itemize}
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uml_pu.png}
+    \end{figure}
+
+    \newpage
+
     \section{Klasyfikacja testów.}
+
+    \subsection{Poziomy testów.}
+    \begin{definition}
+        \textbf{Poziom testów} określa \textbf{sposób} testowania ze względu na \textbf{postać}
+        testowanego obiektu w kontekście cyklu życia (\textbf{co testujemy?}).
+    \end{definition}
+
+    \subsubsection{Testy jednostkowe.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY JEDNOSTKOWE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania na moduły, projekt szczegółowy, kod\\
+                \hline
+                \textbf{Typowe obiekty} & moduły, programy, funkcje, klasy, procedury\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+
+    \begin{itemize}
+        \item testowanie modułowe, unit testing
+        \item defekty szukane w izolacji od reszty systemu
+        \item wykorzystanie zaślepek i sterowników
+        \item przeprowadzane przez deweloperów – autorów testowanego kodu
+        \item usuwanie defektów bezpośrednio po znalezieniu
+        \item brak formalnego procesu zarządzania defektami
+    \end{itemize}
+
+    \hfill \\
+
+    \noindent \textbf{TTD} - Test Driven Developement.
+    \begin{itemize}
+        \item \textbf{Napisanie testu} - sprawdza, że programista rozumie zachowanie nowego kodu.
+        \item \textbf{Uruchomienie testu}, który nie przechodzi (testuje uprząż testową i sam test; pokazuje,
+        że wystąpi awaria, gdy kod będzie błędny).
+        \item \textbf{Napisanie kodu} w minimalnej ilości, wystarczającej do zdania testu; jeśli
+        konieczne, dokonanie refaktoryzacji.
+    \end{itemize}
+
+    \subsubsection{Testy integracyjne.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY INTEGRACYJNE}}\\
+                \hline
+                \textbf{Podstawa testów} & projekt systemu, architektura, przypadki użycia\\
+                \hline
+                \textbf{Typowe obiekty} & interfejsy, podsystemy, konfiguracje systemów\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item testuje interfejsy i interakcje
+        \item im większy zakres integracji, tym trudniej izolować defekty
+        \item rozumienie architektury testowanych modułów/systemów
+        \item może odbywać się na wielu poziomach (np. integracja systemów)
+    \end{itemize}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{strat_integr.png}
+    \end{figure}
+
+    \subsubsection{Testy systemowe.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY SYSTEMOWE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania na system, przypadki użycia,
+                specyfikacja funkcjonalna, raporty analizy ryzyka\\
+                \hline
+                \textbf{Typowe obiekty} & system, podręczniki użytkownika i operatora,
+                konfiguracja systemu\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item sprawdza zachowanie systemu jako całości
+        \item zakres testu określony w planie testów
+        \item środowisko testowe podobne do produkcyjnego – minimalizacja ryzyka awarii zależnych od środowiska
+        \item często konieczność testowania z niekompletnymi wymaganiami
+        \item zwykle przeprowadzane przez niezależny zespół testerski
+    \end{itemize}
+
+    \subsubsection{Testy akceptacyjne.}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{4cm}| p{12cm}|}
+                \hline
+                \multicolumn{2}{|c|}{ \textbf{TESTY AKCEPTACYJNE}}\\
+                \hline
+                \textbf{Podstawa testów} & wymagania użytkownika, wymagania na system,
+                przypadki użycia, procesy biznesowe, raporty
+                analizy ryzyka\\
+                \hline
+                \textbf{Typowe obiekty} & Procesy biznesowe w pełni zintegrowanego
+                systemu, procesy operacyjne i utrzymania systemu,
+                procedury, raporty, dane konfiguracyjne\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{itemize}
+        \item cel: zyskanie zaufania do systemu
+        \item znajdowanie defektów nie jest głównym celem
+        \item często przeprowadzane przez klienta lub użytkownika
+        \item ocenia gotowość systemu, ale niekoniecznie ostatni etap testów
+    \end{itemize}
+
+    \noindent \textbf{Typowe formy testów akceptacyjnych:}
+    \begin{itemize}
+        \item \textbf{testy akceptacyjne użytkownika (UAT)} – sprawdzenie gotowości do użycia
+        \item \textbf{testy operacyjne (OAT)} – akceptacja przez administratora systemu (testy
+        backupu, przywracania systemu, zarządzania użytkownikami, utrzymania,
+        migracji danych, bezpieczeństwa itp.)
+        \item \textbf{testy akceptacyjne wymagane kontraktem/regulacjami}
+        \item \textbf{testy alfa, beta (polowe)}
+        \begin{itemize}
+            \item alfa: przeprowadzane u producenta, ale nie przez zespół deweloperski
+            \item beta: przeprowadzane u klienta przez klienta/potencjalnego użytkownika
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Typy testów.}
+
+    \begin{definition}
+        \textbf{Typ testów} to zbiór czynności testowych właściwych dla weryfikacji systemu
+        w oparciu o konkretny powód lub cel testów (\textbf{jak testujemy?}).
+    \end{definition}
+
+    \begin{enumerate}
+        \item  \textbf{Testowanie funkcjonalne}\\
+        Testowanie funkcji wykonywanej przez oprogramowanie - \textbf{co system robi}.
+
+        \item \textbf{Testowanie niefunkcjonalne}\\
+        Testowanie niefunkcjonalnej charakterystyki jakościowej (np. niezawodność, wydajność,
+        użyteczność) - \textbf{jak system działa}. Wyrażalne ilościowo (np. czas odpowiedzi w testach wydajności).
+
+        \item \textbf{Testowanie strukturalne}\\
+        Oparte na strukturze (np. kod, graf przepływu sterowania, struktura menu, model procesu biznesowego).
+        Zwykle wykonywane po testach czarnoskrzynkowych, aby sprawdzić stopień przetestowania i wyrazić go ilościowo
+        (\textbf{pokrycie}).
+
+        \item \textbf{Retesty i testy regresji}\\
+        \textbf{Związane ze zmianą}, tzn. potwierdzenie usunięcia defektów (retesty - testy zmienionych fragmentów kodu)
+        oraz poszukiwanie niezamierzonych zmian (regresja - pogarszanie się jakości systemu przy wprowadzaniu zmian;
+        testujemy niezmienione fragmenty programu- często automatyzowane).
+    \end{enumerate}
+
+    \newpage
+
     \section{Model Scrum: struktura zespołu, proces wytwarzania oprogramowania, korzyści modelu.}
+    \begin{definition}
+        \textbf{SCRUM} jest:
+        \begin{itemize}
+            \item lekki
+            \item łatwy do zrozumienia
+            \item bardzo trudny do opanowania
+        \end{itemize}
+
+        Teoria SCRUMa opiera się na trzech filarach:
+        \begin{itemize}
+            \item \textbf{Przejżystość} - wszystkie istotne aspekty procesu muszą być widoczne dla osób odpowiedzialnych za osiągane rezultaty
+            \item \textbf{Adaptacja} - powinna być ciągła. Korekta musi być wykonana jak najszybciej, by ograniczyć dalsze następstwa problemów
+            \item \textbf{Inspekcja} - poddawane regularnej inspekcji są zarówno scrumowe artefakty jak i postępy prac
+        \end{itemize}
+    \end{definition}
+    
+    \subsection{Struktura zespołu}
+    
+    \begin{definition}
+    \textbf{Struktura zespołu} \\
+    \includegraphics[width=\linewidth]{scrum_teams.png}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Product owner} - jest odpowiedzialny za maksymalizację wartości produktu i pracy Zespołu Deweloperskiego. jest jedyną osobą zarządzającą Rejestrem Produktu (Product Backlog) co rozumiemy przez:
+    \begin{itemize}
+        \item Jasne artykułowanie elementów Rejestru Produktu i określanie ich kolejności w sposób zapewniający osiąganie założonych celów i misji
+        \item Zapewnianie, że Rejestr Produktu jest dostępny, przejrzysty oraz jasny dla wszystkich i, że dobrze opisuje to, czym Zespół Scrumowy będzie się zajmował
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Zespół Deweloperski}:
+    \begin{itemize}
+        \item Jest złożony z profesjonalistów
+        \item Ma za zadanie dostarczenie (na zakończenie każdego Sprintu), gotowego do wydania Przyrostu produktu
+        \item Zalecana liczebność: 3-9 osób
+        \item Są samoorganizujące się
+        \item Jest wielofunkcyjny, w swoim składzie posiadają wszystkie umiejętności niezbędne do wytworzenia Przyrostu
+        \item Scrum nie przewiduje tytułów innych niż ``Deweloper'' dla członków Zespołu Deweloperskiego
+        \item Odpowiedzialność za wykonywaną pracę ponosi cały Zespół Deweloperski; nie składają się z podzespołów
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Scrum Master} - jest odpowiedzialny za to, by Scrum był rozumiany i stosowany. Scrum Masterzy dokonują tego poprzez upewnianie się,
+    że Zespół Scrumowy stosuje się do założeń teorii Scruma, jego praktyk i reguł postępowania. Scrum Master wspiera zarówno Właściciela Produktu jak i zespól deweloperski.
+    \end{definition}
+    
+    \subsection{Zdarzenia}
+    
+    \begin{definition}
+    \textbf{Zdarzenia} \\
+    \includegraphics[width=\linewidth]{scrum_events.png}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Planowanie sprintu} - planowanie co zostanie wykonane podczas najbliższego sprintu:
+    \begin{itemize}
+        \item Jest ograniczone czasowo (8h dla miesięcznego sprintu i proporcjonalnie)
+        \item Planowanie Sprintu składa się z dwóch części:
+            \begin{itemize}
+                \item Co zostanie dostarczone
+                \item Jaka praca zostanie wykonana
+            \end{itemize}
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Sprint} - serce SCUMa:
+    \begin{itemize}
+        \item Ograniczony czasowo - trwa miesiąc lub krócej
+        \item Podczas Sprintu wytwarzany jest Przyrost „Ukończonej”, używalnej i potencjalnie gotowej do wydania funkcjonalności
+        \item Ma stałą długość przez cały okres trwania prac
+        \item Niedozwolone są zmiany, które wpłyną na cel Sprintu
+        \item Skład Zespołu Deweloperskiego i jego cel jakościowy pozostają niezmienne
+        \item Przerwanie sprintu:
+            \begin{itemize}
+                \item Tylko product owner ma prawo przerwać sprint
+                \item Sprint może zostać przerwany, jeśli cel Sprintu się zdezaktualizuje
+                \item Powinien zostać przerwany, jeśli kontynuowanie prac nie ma sensu w zaistniałych okolicznościach
+                \item Przerwania Sprintów zużywają zasoby, ponieważ wszyscy muszą się przegrupować podczas kolejnego Planowania Sprintu, aby móc rozpocząć nowy
+            \end{itemize}
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Daily scrum} - jest spotkaniem ograniczonym czasowo do 15 minut, w którym każdy z członków zespołu wyjaśnia:
+    \begin{itemize}
+        \item Co zostało wykonane od ostatniego potkania
+        \item Co zostanie wykonane przed kolejnym spotkaniem
+        \item Jakie przeszkody stoją na drodze
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Przegląd sprintu} -  organizowany jest na zakończenie Sprintu w celu przeprowadzenia inspekcji Przyrostu i dostosowaniu, jeśli zajdzie taka potrzeba, Rejestru Produktu. \\
+    Podczas Przeglądu Sprintu \textbf{Zespół Scrumowy} i \textbf{interesariusze} wspólnie omawiają to, co zostało ukończone w Sprincie. \\
+    Może trwać maksymalnie 4h dla miesięcznego Sprintu.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Retrospektywa Sprintu} - jest okazją dla zespołu Scrumowego do przeprowadzenia inspekcji swoich działań i opracowania planu usprawnień. Ma na celu:
+    \begin{itemize}
+        \item Sprawdzenie, co działo się w ostatnim Sprincie, biorąc pod uwagę ludzi, zależności, procesy i narzędzia
+        \item Zidentyfikowanie i uporządkowanie istotnych elementów, które sprawdziły się w działaniu oraz tych, które kwalifikują się do poprawy
+        \item Stworzenie planu wprowadzania w życie usprawnień sposobu wykonywania pracy przez Zespół Scrumowy
+    \end{itemize}
+    \end{definition}
+    
+    \subsection{Artefakty}
+    
+    \begin{definition}
+    \textbf{Rejestr produktu} - uporządkowana lista tego co może byc potrzebne w produkcie. Jest to jedyne źródło wymaganych zmian, które mają zostać wprowadzone.
+    Odpowiedzialny z rejestr produktu jest Product owner.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Rejestr sprintu} - podzbiór elementów Rejestru produktu. Jest to lista rzeczy do wykonania w danyc sprincie rozszeżona dodatkowo o plan ich wykonania.
+    Rejestr Sprintu definiuje pracę, jaką Zespół Deweloperski wykona by przekształcić elementy Rejestru Produktu w „Ukończony” Przyrost. \\
+    Rejestr Sprintu należy tylko i wyłącznie do Zespołu Deweloperskiego.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Przyrost} - suma wszystkich elementów Rejestru Produktu zakończonych podczas Sprintu i wszystkich Sprintów poprzednich. \\
+    Na koniec Sprintu nowy Przyrost musi być ``Ukończony''.
+    \end{definition}
+    
+    \newpage
+    
+    
+    
+    
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
+    
+    \begin{definition}
+    \textbf{Wymagania} - opis funkcji (usług), które mają być realizowane przez system i opis ograniczeń dla systemu. \\
+    Wymagania nie opisują jak system ma działać a co ma wykonywać.
+    \end{definition}
+    
+    \subsection{Klasyfikacja}
+    
+    \begin{definition}
+    Wymagania dzielimy na:
+    \begin{itemize}
+        \item \textbf{Funkcjonalne} - opisują jakie funkcje powinien mieć system, np. ``wprowadzanie nowej faktury'' lub ``generowanie raportu miesięcznego''
+        \item \textbf{Pozafunkcjonalne} - opisują najczęściej pewne własności danych funkcjonalności, np. ``minimum 20 faktur na godzinę'', ``średni czas między awariami 2000000h'', itp.
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Klasyfikacja atrybutów jakości oprogramowania}
+    \begin{itemize}
+        \item \textbf{F}unctionality - funkcjonalność
+        \item \textbf{U}sability – użyteczność
+        \item \textbf{R}eliability – niezawodność
+        \item \textbf{P}erformance – wydajność
+        \item \textbf{S}ecurity - bezpieczeństwo
+    \end{itemize}
+    w skrócie \textbf{FURPS}
+    \end{definition}
+    
+    \subsection{Źródła}
+    
+    \begin{definition}
+    \textbf{System powinien…} \\
+    Jest to sposób spisywania wymagań w stylu: ``System powinien umożliwić wystawianie faktur'', ``System powinien generować zestawienie miesięczne faktur'',  ``Faktura powinna zawierać co najmniej jedną pozycję''. \\
+    
+    Zalety:
+    \begin{itemize}
+        \item Łatwość spisywania
+    \end{itemize}
+    
+    Wady:
+    \begin{itemize}
+        \item Słaba czytelność
+        \item Trudne sprawdzanie kompletności, spójności
+    \end{itemize}
+    
+    Obecnie nie używany
+    \end{definition}
+    
+    
+    \begin{definition}
+    \textbf{Funkcje systemu} \\
+    Polega na opisywaniu poszczególnych funkcji systemu. Analogicznie do funkcji matematycznych, każda funkcja systemu informatycznego ma swoje wejście, wyjście, efekty uboczne. \\
+    Przykładowo, rozpatrując funkcję wystawiania faktury, wejściem mogą być pozycje faktury, wyjściem wydruk faktury (lub wysłanie jej faksem), natomiast efektem ubocznym zapisanie tej faktury w rejestrze faktur. \\
+    
+    Wady:
+    \begin{itemize}
+        \item Słaba czytelność
+        \item Trudne do zrozumienia
+    \end{itemize}
+    
+    Obecnie nie używany
+    \end{definition}
+    
+    
+    \begin{definition}
+    \textbf{Przypadki użycia} \\
+    Przykład: \\
+    
+    \textbf{UC1: Wystawianie faktury} \\
+    \textbf{Atrybuty:} \\
+    \textbf{Główny aktor: Użytkownik} \\
+    \textbf{Priorytet: Wysoki} \\
+    \textbf{Źródło: Łukasz Olek} \\
+    
+    \textbf{Główny scenariusz:} \\
+    1. Sprzedawca pragnie wystawić fakturę. \\
+    2. Sprzedawca wpisuje pozycje faktury. \\
+    3. System podlicza fakturę, nadaje jej nowy numer i zapisuje w rejestrze. \\
+    4. Sprzedawca drukuje fakturę. \\
+    \textbf{Rozszerzenia:} \\
+    3.A. Sprzedawca nie dodał żadnej pozycji \\
+    3.A.1. System prosi o ponowne wprowadzenie pozycji (powrót do 2.) \\
+    
+    Zalety:
+    \begin{itemize}
+        \item Łatwość spisywania
+        \item Czytelność
+        \item Łatwość zrozumienia i wyobrażenia sobie przyszłego systemu
+    \end{itemize}
+    
+    Jako mapę łączącą pojedyncze przypadki użycia można potraktować diagram przypadków użycia (UML).
+    \end{definition}
+    
+    
+    \begin{definition}
+    \textbf{Historyjki użytkownika} \\
+    
+    \textbf{Who? What? Why?} \\
+    
+    Wzór: \\
+    
+    \textbf{jako} - osoba, przypisana rola \\
+    \textbf{chcę} - cacha, funkcjonalność, czynność \\
+    \textbf{ponieważ} - uzasadnienie, rezultat, korzyść \\
+    \end{definition}
+    
+    \subsection{Analiza}
+    
+    \begin{definition}
+    Celem analizy wymagań jest stworzenie modelu systemu, zwanego modelem analitycznym. Wysiłek uczestników projektu skupia się na strukturalizowaniu i formalizowaniu zabranych wcześniej wymagań. \\
+    Inaczej mówiąc po przeanalizowaniu przez nas zebranych wymagań musimy to przełożyć na diagramy UML.
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Model analityczny} - reprezentuje tworzony system z perspektywy użytkownika; opis co system powinien robić
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Analityczny model obiektowy} (diagramy klas) - odzwierciedla indywidualne koncepcje korzystania z systemu, ich właściwości i relacje między nimi
+    \end{definition}
+    
+    \begin{definition}
+    \textbf{Model dynamiczny} (diagramy sekwencji i stanów) - koncentruje się na zachowaniu systemu
+    \end{definition}
+    
+    \newpage
+    
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
     \section{Wzorce architektury systemów.}
 
