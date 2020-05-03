@@ -5872,7 +5872,80 @@ swap      & Zmienia wartości                           \\ \hline
     \section{Indeksowanie w bazach danych: drzewa B+, tablice o organizacji indeksowej, indeksy haszowe, mapy binarne.}
     \section{Podstawowe cechy transakcji (ACID). Metody sterowania współbieżnością transakcji, poziomy izolacji transakcji, przykłady.}
     \section{Złączenia, grupowanie, podzapytania w języku SQL.}
+
+    \newpage
+
     \section{Szeregowalność harmonogramów w bazach danych.}
+
+    \begin{definition}
+        \textbf{Harmonogram} - inaczej historia S zbioru n transakcji $T_1, \dots, T_n$ jest takim ciągiem wszystkich
+        operacji transakcji, że dla każdej transakcji $T_i \in S$ operacje tej transakcji w S muszą występować w takiej samej
+        kolejności, w jakiej występują w $T_i$. Operacje z różnych transakcji mogą się przeplatać.\\
+
+        Rodzaje harmonogramów:
+        \begin{itemize}
+            \item \textbf{Harmonogram szeregowy} - operacje każdej transakcji są wykonywane kolejno, \textbf{bez przeplatania}
+            operacji z różnych transakcji. Są nieefektywne.
+            \item \textbf{Harmonogram szeregowalny} - jego wpływ na stan bazy danych jest taki sam jak pewnego
+            harmonogramu szeregowego.
+            \item \textbf{Harmonogram nieszeregowy} - harmonogram, który nie jest sekwencyjny.
+        \end{itemize}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Konflikt operacji}. Dwie operacje są w stanie konfliktu, jeśli spełnione są warunki:
+        \begin{itemize}
+            \item Należą do \textbf{różnych transakcji},
+            \item Uzyskują dostęp do \textbf{tego samego elementu},
+            \item \textbf{Przynajmniej jedna} z operacji jest \textbf{operacją zapisu} elementu.
+        \end{itemize}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Harmonogram pełny} - harmonogram zawierający wszystkie operacje z transakcji składowych, gdzie dla
+        dowolnych dwóch \textbf{operacji}, które są w \textbf{konflikcie}, jedna z nich musi \textbf{poprzedzać} drugą
+        w harmonogramie.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Równoważność konfliktowa}. Mówimy, że dwa harmonogramy są równoważne konfliktowo, jeżeli
+        \textbf{kolejność} wszystkich \textbf{operacji konfliktowych} jest w nich \textbf{taka sama}. Wyniki
+        harmonogramów równoważnych konfliktowo są takie same.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Szeregowalność konfliktowa}. Harmonogram S jest szeregowalny konfliktowo, jeżeli jest on
+        \textbf{konfliktowo równoważny} pewnemu harmonogramowi \textbf{szeregowemu} S’. Możemy zmieniać kolejność
+        niekonfliktowych operacji w S.\\
+
+        Szeregowalność konfliktowa stanowi warunek wystarczający zachowania spójności danych.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Równoważność perspektywiczna harmonogramów}. Harmonogram S i S' zawierają te same instrukcje i dla każdego
+        elementu danych Q:
+        \begin{itemize}
+            \item Jeśli w S $T_k$ jest transakcją, która w
+            harmonogramie czyta Q jako pierwsza, to w S' $T_k$ musi być transakcją, która czyta Q jako pierwsza.
+            \item Jeśli w S $T_i$ czyta Q zapisany przez $T_j$, to w S' $T_i$ czyta Q zapisany przez $T_j$.
+            \item Jeśli w S  $T_m$ jest ostatnią transakcją, która
+            zapisuje Q, to w S' $T_m$ jest ostatnią transakcją, która zapisuje Q.
+        \end{itemize}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Szeregowalność perpektywiczna}. Harmonogram szeregowalny perspektywicznie jest harmonogramem
+        \textbf{równoważnym perspektywicznie} jakiemuś harmonogramowi szeregowemu.
+
+        Szeregowalność perspektywiczna to \textbf{szeregowalność konfliktowa z dodatkowymi ograniczeniami} operacji zapisów:
+        \begin{itemize}
+            \item każda operacja w(x) jest poprzedzona r(x),
+            \item wartość zapisana przez operację w(x) \textbf{jest nie-stałą funkcją} zależną tylko od wartości r(x).
+        \end{itemize}
+    \end{definition}
+
+    \newpage
+
     \section{Definicja cyfrowego układu kombinacyjnego - przykłady układów kombinacyjnych i ich implementacje.}
     \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
     \section{Minimalizacja funkcji logicznych.}
