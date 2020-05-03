@@ -3842,13 +3842,7 @@
 
     \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
     \section{Kolejka i kolejka priorytetowa: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
-
-    \newpage
-
     \section{Algorytmy sortowania QuickSort i MergeSort: metody wyboru pivota w QS; złożoności.}
-
-    \newpage
-
     \section{Algorytm sortowania bez porównań (sortowanie przez zliczanie, sortowanie kubełkowe oraz sortowanie pozycyjne).}
 
     \newpage
@@ -5686,13 +5680,10 @@
 
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
-    
-    \newpage
-    
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
-    
+
     \newpage
-    
+
     \section{Algorytmy wyszukiwania minimalnego drzewa rozpinającego: Boruvki, Prima i Kruskala.}
     
             \begin{center}
@@ -7052,8 +7043,50 @@
         \end{itemize}
     \newpage
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
+
+    \newpage
+
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 
+    \begin{itemize}
+        \item Gramatyka $G_1 = (V_N,V_T,P,v_0)$ w której
+
+        $V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0a, \; v_0 \rightarrow a \}$
+
+        generuje język
+
+        $L(G_1) = \{ a^n : n = 1,2,... \}$
+
+        Gramatyka jest typu (3)
+
+        \item Gramatyka $G_2 = (V_N,V_T,P,v_0)$, w której
+
+        $V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0v_0, \; v_0 \rightarrow a \}$
+
+        generuje język
+
+
+        $L(G_2) = \{ a^n : n = 1,2,... \}$
+
+        Gramatyka jset typu (2)
+
+
+        \item Gramatyka $G_3 = (V_N,V_T,P,v_0)$, w której
+
+        $V_N = \{v_0, v_1, v_2 \}, \;\; V_T = \{a,b,c\}$
+
+        $P=\{v_0~\rightarrow~abc, v_0~\rightarrow~av_1bc, v_1b~\rightarrow~bv_1,v_1c~\rightarrow~v_2bcc, bv_2~\rightarrow~v_2b,  \\ av_2~\rightarrow~aav_1, av_2~\rightarrow~aa\}$
+
+        generuje język
+
+        $L(G_3) = \{ a^n b^n c^n : n = 1,2,... \}$.
+        Gramatyka jest typu (0)
+        \\
+
+        Gramatyki $G_1$ i $G_2$ są równoważne.
+    \end{itemize}
+
+\newpage
 
     {\Large Wytwarzanie oprogramowania}
 

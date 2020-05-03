@@ -2420,7 +2420,7 @@
 
     	\begin{definition}
     	Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
-    	$\mathcal{M(A)}$ = $\tau \mathcal{A}(A^*) \subset S^{S}$ 
+    	$\mathcal{M(A)}$ = $\tau \mathcal{A}(A^*) \subset S^{S}$
     	\end{definition}
 
     	\begin{definition}
@@ -3098,7 +3098,7 @@
     \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
 
     \newpage
-    
+
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
 
         Algorymy przeszukiwania grafu polegają na przejściu przez wszystkie osiągalne z wierzchołka
@@ -3108,29 +3108,29 @@
 
             \subsubsection{Algorytm}
 
-            Do przeszukiwania użyjemy kolejki $Q = \{s\}$. Ponadto używamy koloru czarnego do 
-            oznaczania odwiedzonych już wierzchołków.\[\] 
+            Do przeszukiwania użyjemy kolejki $Q = \{s\}$. Ponadto używamy koloru czarnego do
+            oznaczania odwiedzonych już wierzchołków.\[\]
             Dopóki kolejka nie jest pusta:
             \begin{enumerate}
                 \item Zdejm $x$ z kolejki
                 \item Pomaluj $x$ na czarno
-                \item Dla każdego niepomalowanego na czarno $v$, sąsiadującego z $x$ wrzuć 
+                \item Dla każdego niepomalowanego na czarno $v$, sąsiadującego z $x$ wrzuć
                     $v$ do kolejki
             \end{enumerate}
-            
+
             \subsubsection{Cechy}
 
             \begin{enumerate}
                 \item Zlożoność obliczeniowa: $\theta(e + v)$
                 \item Złożoność pamięciowa: $\theta(v)$
-                \item Kompletność: BFS dla nieskończonego grafu zwróci wszystkie poprawne 
+                \item Kompletność: BFS dla nieskończonego grafu zwróci wszystkie poprawne
                     odpowiedzi, w przeciwieństwie do DFS.
             \end{enumerate}
 
             \subsubsection{Wariacje algorytmu}
 
             \begin{itemize}
-                \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest 
+                \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest
                     równa poszukiwanej.
                 \item Przypisywanie wierzchołkom odległości od $s$.
                 \item Przypisanie wierzchołkom rodzica, w celu znalezienia drogi do $s$
@@ -3157,14 +3157,14 @@
             \begin{enumerate}
                 \item Pomaluj $x$ na czarno
                 \item Wywołaj się rekurencyjnie dla każdego niepomalowanego na czarno $v$,
-                    sąsiadującego z $x$ 
+                    sąsiadującego z $x$
             \end{enumerate}
-            
-            
+
+
             \subsubsection{Wersja z zapamiętywaniem rodzica}
 
             Słownik $P = \{s : null\}$ przypisuje każdemu wierzchołkowi (poza $s$) rodzica. Używamy
-            koloru czarnego do oznaczania odwiedzonych już wierzchołków, oraz szarego do 
+            koloru czarnego do oznaczania odwiedzonych już wierzchołków, oraz szarego do
             wierzchołków właśnie odwiedzanych.\[\]
             Dla danego wierzchołka $x$ (zaczynając od $s$):
             \begin{enumerate}
@@ -3176,7 +3176,7 @@
                     \end{enumerate}
                 \item Pomaluj $x$ na czarno
             \end{enumerate}
-            
+
             \subsubsection{Cechy}
 
             \begin{enumerate}
@@ -3188,7 +3188,7 @@
             \subsubsection{Wariacje algorytmu}
 
             \begin{itemize}
-                \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest 
+                \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest
                     równa poszukiwanej.
                 \item Przypisywanie wierzchołkom odległości od $s$.
                 \item Przypisanie wierzchołkom rodzica, w celu znalezienia drogi do $s$
@@ -3210,9 +3210,9 @@
     \newpage
 
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
-        
-        W algorytmach wyszukiwania najkrótszej ścieżki używamy procedury \textit{relax(u, v, w)}, 
-        sprawdzającej, czy ścieżka z $u$ do $w$ przez $v$ jest krótsza od aktualnie najkrótszej 
+
+        W algorytmach wyszukiwania najkrótszej ścieżki używamy procedury \textit{relax(u, v, w)},
+        sprawdzającej, czy ścieżka z $u$ do $w$ przez $v$ jest krótsza od aktualnie najkrótszej
         ścieżki.
         \\~\\
         \textit{relax(u, v, w)}:
@@ -3221,15 +3221,15 @@
                 \hspace*{1cm} $P[u, w] = v$\\
 
         \subsection{Algorytm Dijkstry}
-        
+
             Algorytm Dijkstry pozwala na wyliczenie w grafie $G = \{V, E\}$ najkrótszej ścieżki od wierzchołka
             startowego $s$ do wszystkich pozostałych wierzchołków. $|V| = v, |E| = e$
 
             \subsubsection{Algorytm}
-            
+
             Posługujemy się słownikiem $P = \{\}$ przypisującym każdemu wierzchołkowi
-            rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość 
-            wierzchołków od $s$ oraz kolejką priorytetową $S = \{v \in V : D[v]\}$ nieodwiedzonych 
+            rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość
+            wierzchołków od $s$ oraz kolejką priorytetową $S = \{v \in V : D[v]\}$ nieodwiedzonych
             wierzchołków. $D[s] = 0; D[\forall v \in V \setminus \{s\}] = \infty$.
             \[\]
             Używamy uproszczonej procedury \textit{relax} - wierzchołkiem startowym ($u$) jest zawsze $s$
@@ -3247,17 +3247,17 @@
             \end{enumerate}
 
             \subsubsection{Złożoność}
-            
+
             \begin{itemize}
                 \item Inicjalizacja - $\theta(v)$
                 \item $\theta(v)$ usunięć z kolejki
                 \item $O(e)$ pomniejszeń wartości w $D$
                 \item Przy pomocy kopca binarnego możemy uzyskać $O(log(v))$ dla pomniejszenia
-                    wartości, $O(log(v))$ dla usunięcia z kolejki. Złożoność: 
+                    wartości, $O(log(v))$ dla usunięcia z kolejki. Złożoność:
                     $\theta((e + v)log(v))$
 
                 \item Przy pomocy kopca Fibonacciego możemy uzyskać $\theta(1)$ dla pomniejszenia
-                    wartości, $\theta(log (v))$ dla usunięcia z kolki. Złożoność: 
+                    wartości, $\theta(log (v))$ dla usunięcia z kolki. Złożoność:
                     $O(v \cdot log(v) + e)$
             \end{itemize}
 
@@ -3267,33 +3267,33 @@
                 \item Nie działa poprawnie dla grafów z wagami ujemnymi
                 \item Algorytm zachłanny
             \end{itemize}
-        
+
         \subsection{Algorytm Bellmana-Forda}
-            
-            Algorytm Bellmana-Forda pozwala na wyliczenie w grafie $G$ najkrótszej ścieżki z 
+
+            Algorytm Bellmana-Forda pozwala na wyliczenie w grafie $G$ najkrótszej ścieżki z
             wierzchołka startowego $s$ do wszystkich pozostałych wierzchołków.
 
             \subsubsection{Algorytm}
-            
+
             Posługujemy się słownikiem $P = \{\}$, przypisującym każdemu wierzchołkowi
-            rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość 
+            rodzica (w celu znalezienia ścieżki), słownikiem $D$ oznaczającym odległość
             wierzchołków\\ od $s$. $D[s] = 0; D[v] = \infty \; \forall v \in V \setminus \{s\}$.
             \[\]
             Ponownie używamy uproszczonej procedury \textit{relax}.
 
             \[\]
             Dla każdego wierzchołka w $V \setminus \{s\}$:
-            \vskip 0pt Wywołaj \textit{relax(u, v)} dla każdej krawędzi $(u, v) \in E$ 
+            \vskip 0pt Wywołaj \textit{relax(u, v)} dla każdej krawędzi $(u, v) \in E$
             \[\]
-            
+
             Dodatkowo można wykonać sprawdzenie, czy w grafie nie ma cykli o wadze ujemnej:
 
             \[\]
-            Dla każdej krawędzi $(u, v) \in E$: 
+            Dla każdej krawędzi $(u, v) \in E$:
             \vskip 0pt Jeśli $D[v] > D[u] + e_{u \rightarrow v}$, to
             istnieje cykl o wadze ujemnej.
             \subsubsection{Złożoność}
-            
+
             $O(v \cdot e)$
 
             \subsubsection{Cechy}
@@ -3312,11 +3312,11 @@
             wierzchołkami w grafie $G$ (nieposiadającym ujemnych cykli).
 
             \subsubsection{Algorytm}
-            
+
             Posługujemy się słownikiem $P = \{\}$, przypisującym parze $(u, w)$ rodzica dla $u$,
-            na ścieżce od $u$ do $w$, słownikiem $D$ przypisującym parze $(u, w)$ długość 
+            na ścieżce od $u$ do $w$, słownikiem $D$ przypisującym parze $(u, w)$ długość
             najkrószej (aktualnie) ścieżki od $u$ do $w$.\\
-            $D[(u, w) : u, w \in V] = 
+            $D[(u, w) : u, w \in V] =
             \begin{cases}
                 0, &\text{ jeśli } u = w\\
                 e_{u \rightarrow w}, &\text{ jeśli } (u, w) \in E\\
@@ -3335,10 +3335,142 @@
                 \item Działa dla grafów z krawędziami ujemnymi (ale nie z cyklami ujemnymi)
                 \item Złożoność jest niezależna od gęstości grafu
             \end{itemize}
- 
+
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
+
+    \begin{definition}
+    \textbf{Programowanie dynamiczne}
+
+    Technika projektowania algorytmów polegająca na \textbf{podziale problemu na mniejsze podproblemy} względem kilku parametrów (podobnie jak w metodzie dziel i zwyciężaj).
+
+    Wyniki rozwiązywania podproblemów są  \textbf{zapisywane w tabeli}, dzięki czemu w przypadku natrafienia na ten sam podproblem nie trzeba go ponownie rozwiązywać.
+
+    Cechy
+    \begin{itemize}
+        \item Problem posiada powtarzające się podproblemy
+        \item Podproblemy musi cechować \textbf{własność optymalnej podstruktury}
+        \item Zastosowanie brute force prowadzi do \textbf{ponadwielomianowej} liczby rozwiązań podproblemów, podczas gdy sama liczba różnych podproblemów jest wielomianowa
+    \end{itemize}
+
+    Niejednokrotnie stosowanie techniki programowania dynamicznego daje w rezultacie algorytm pseudowielomianowy.
+    \end{definition}
+
+    \begin{definition}
+    \textbf{Własność optymalnej podstruktury}
+
+    Oznacza, że optymalne rozwiązanie problemu jest \textbf{funkcją optymalnych rozwiązań podproblemów}, czyli znając optymalne rozwiązania podproblemów można efektywnie wyznaczyć rozwiązanie problemu.
+    \end{definition}
+
+    \begin{definition}
+    \textbf{Funkcja celowa}
+
+    W zadaniach programowania liniowego liniowa funkcja, dla której szukane jest optymalne rozwiązanie minimum lub maksimum. Dla zdefiniowanego zadania programowania liniowego
+
+    Optymalizacja – problem polegający na znalezieniu ekstremum zadanej funkcji celu.
+    \end{definition}
+
+    Metody Programowania Dynamicznego
+    \begin{itemize}
+        \item Metoda zstępująca z zapamiętywaniem polega na rekurencyjnym wywoływaniu funkcji z zapamiętywaniem wyników. Metoda ta jest podobna do metody dziel i zwyciężaj – różni się od niej tym, że jeśli rozwiązanie danego problemu jest już w tabeli z wynikami, to należy je po prostu stamtąd odczytać.
+        \item Metoda wstępująca polega na rozwiązywaniu wszystkich możliwych podproblemów, zaczynając od tych o najmniejszym rozmiarze. Wówczas w momencie rozwiązywania podproblemu na pewno są już dostępne rozwiązania jego podproblemów. W tym podejściu nie zużywa się pamięci na rekurencyjne wywołania funkcji. Może się jednak okazać, że część podproblemów została rozwiązana nadmiarowo (nie były one potrzebne do rozwiązania głównego problemu).
+    \end{itemize}
+
+    Klucz do zaprojektowania algorytmu tą techniką leży w znalezieniu \textbf{równania rekurencyjnego} opisującego optymalną wartość \textbf{funkcji celu} dla danego problemu jako funkcji optymalnych wartości funkcji celu dla podproblemów o mniejszych rozmiarach. Programowanie dynamiczne znajduje optymalną wartość funkcji celu dla całego zagadnienia, rozwiązując podproblemy od najmniejszego do największego i zapisując optymalne wartości w tablicy. Pozwala to zastąpić wywołania rekurencyjne odwołaniami do odpowiednich komórek wspomnianej tablicy i gwarantuje, że każdy podproblem jest rozwiązywany tylko raz. Rozwiązanie ostatniego z rozpatrywanych podproblemów jest na ogół wartością rozwiązania zadanego zagadnienia.
+
+    Przykład - Ciąg Fibonacci'ego
+
+    \begin{verbatim}
+    # Programowanie dynamiczne wstępujące, wersja z listą.
+    def fibonacci(n):
+        F = [0] + n * [1]   # trzymamy wszystkie wartości
+        for i in range(2, n+1):
+            F[i] = F[i-1] + F[i-2]
+        return F[n]
+    \end{verbatim}
+
+    \begin{verbatim}
+    # Programowanie dynamiczne zstępujące.
+    FIBONACCI = {0:0, 1:1}   # globalny słownik
+
+    def fibonacci(n):
+        global FIBONACCI
+        if n not in FIBONACCI:
+            FIBONACCI[n] = fibonacci(n-1) + fibonacci(n-2)
+        return FIBONACCI[n]
+        \end{verbatim}
+
+    \newpage
+
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
-    
+
+    \begin{definition}
+    Algorytmy zachłanne (ang. greedy algorithms)
+
+    Algorytmy podejmujące w każdym kroku taką decyzję, która w danej chwili jest najkorzystniejsza (\textbf{lokalnie optymalna}) licząc, że doprowadzi to do znalezienia rozwiązania \textbf{globalnie optymalnego}.
+
+    Cechy
+
+    \begin{itemize}
+        \item Nie zawsze znajdują rozwiązanie optymalne
+        \item Są podzbiorem algorytmów \textbf{heurystycznych}
+        \item Są to algorytmy \textbf{deterministyczne} – nie ma w nich losowości
+    \end{itemize}
+
+    \end{definition}
+
+    Przykład I - Wydawanie reszty
+
+    \begin{verbatim}
+    while (są jeszcze monety i realizacja pozostaje nierozwiązana) {
+         pobierz największą dostępna monetę;
+         //procedura wyboru
+
+         if (dodanie monety powoduje przekroczenie kwoty reszty)
+         //sprawdzenie wykonalności
+            odrzuć monetę;
+         else
+            dodaj monetę do reszty;
+
+         if (całkowita wartość reszty jest równa należnej kwocie)
+         //sprawdzenie rozwiązania
+         realizacja rozwiązania;
+        }
+    \end{verbatim}
+
+    Przykład II - Pakowanie plecaka
+
+    \begin{verbatim}
+    posortuj nierosnąco przedmioty według wartości c[j]/w[j]
+    aktualna_waga:=0
+
+    for i:=1 to n do
+      if w[i] + aktualna_waga <= W then
+        dodaj i-ty przedmiot do plecaka
+        aktualna_waga := aktualna_waga + w[i]
+    \end{verbatim}
+
+    Dane wejściowe, dla których algorytm będzie działał
+    \begin{itemize}
+        \item Optymalnie
+
+        Pjemność plecaka: 8
+
+        Dane wejściowe: 5, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1
+
+        Rozwiązanie: 5 + 3 + 2
+
+        \item Nieoptymalnie
+
+        Pojemność plecaka: 7
+
+        Dane wejściowe: 3, 3, 2, 2
+
+        Rozwiązanie: 3 + 3 = 6 :(
+
+        Rozwiązanie optymalne: 3 + 2 + 2 = 7
+
+    \end{itemize}
+
     \newpage
     
     \section{Kolorowania wierzchołkowe (grafów planarnych) i krawędziowe grafów, algorytmy i ich złożoności.}
@@ -3581,9 +3713,10 @@ return $\mathcal{A}'$;
     \end{definition}
     
     \newpage
+
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
         \subsection{Wyrażenia regularne}
-        
+
         \begin{definition}
             \textbf{Rodzina regularnych podzbiorów}
 
@@ -3609,7 +3742,7 @@ return $\mathcal{A}'$;
             \begin{enumerate}
                 \item $\alpha = \emptyset$
                 \item $\alpha = a \in A$
-                \item $\alpha$ jest w postaci $(\beta + \gamma), (\beta\gamma), \gamma^*$, gdzie 
+                \item $\alpha$ jest w postaci $(\beta + \gamma), (\beta\gamma), \gamma^*$, gdzie
                     $\beta, \gamma$ są wyrażeniami regularnymi nad alfabetem A
             \end{enumerate}
         \end{definition}
@@ -3633,7 +3766,7 @@ return $\mathcal{A}'$;
             $$f(a, A^*) = Ss$$
             nazywamy automatem z generatorem s.
         \end{definition}
-        
+
         \begin{definition}
             \textbf{Język rozpoznawalny}
 
@@ -3664,7 +3797,7 @@ return $\mathcal{A}'$;
             $\forall u, v \in A^*$
             $$u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)$$
 
-            Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat 
+            Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat
             $\mathcal{A}$ jest skończony.
         \end{definition}
 
@@ -3674,7 +3807,7 @@ return $\mathcal{A}'$;
             \begin{itemize}
                 \item $\mathcal{A}_p$ jest automatem z generatorem [1]$_p$
 
-                \item $\mathcal{A}_p$ jest automatem skończonym wtedy i tylko gdy relacja $p$ ma skończony indeks 
+                \item $\mathcal{A}_p$ jest automatem skończonym wtedy i tylko gdy relacja $p$ ma skończony indeks
             \end{itemize}
         \end{theorem}
 
@@ -3695,7 +3828,7 @@ return $\mathcal{A}'$;
                 \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}$
                 \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}^p$ z pustymi przejściami
 
-                \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A                
+                \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A
                 \item L $\in REG(A^*)$
                 \item monoid syntaktyczna M(L) jest skończony
                 \item liczba różnych pochodnych Brzozowskiego dla języka
@@ -3722,7 +3855,7 @@ return $\mathcal{A}'$;
                         \end{tikzpicture}
                     \end{center}
 
-                                    
+
                 \item automat rozpoznający język $\{1\}$
                     \begin{center}
                         \begin{tikzpicture}[scale=0.2]
@@ -3779,7 +3912,7 @@ return $\mathcal{A}'$;
                             \end{tikzpicture}
                         \end{center}
 
-                   
+
                     $$\mathcal{A}_r:$$
                         \begin{center}
                             \begin{tikzpicture}[scale=0.2]
@@ -3910,7 +4043,7 @@ return $\mathcal{A}'$;
             \textbf{Deterministyczny automat ze stosem}
 
             Automatem $\mathcal{AS} = (A, A_S, Q, q_0, z_0, f, Q_F)$ nazywamy
-            \textbf{deterministycznym}, jeśli dla każdej konfiguracji 
+            \textbf{deterministycznym}, jeśli dla każdej konfiguracji
             $(z, q, a) \in A_S^* \times Q \times (A \cup \{1\})$
             $$f(z, q, a) \leq 1 \; \mathrm{oraz}$$
             $$f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A$$
@@ -3920,21 +4053,174 @@ return $\mathcal{A}'$;
         \begin{theorem}
             Każdy język deterministyczny jest jednoznaczny (rozpoznawany przez gramatykę jednoznaczną), ale nie na odwrót.
         \end{theorem}
-        
+
         \begin{theorem}
             Każdy język deterministyczny jest kontekstowy (rozpoznawany przez niedeterministyczny automat ze stosem), ale nie na odwrót.
         \end{theorem}
 
+    \newpage
+
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
+
+    Problemy rozpatrywane w kategorii języków
+    \begin{itemize}
+        \item Należenie $\in$ - Problem przynależności języka $L$ do jednego z typów języków $L_i$ gdzie $i \in {0,1,2,3}$ generowanych przez odpowiednie gramatyki  $G_i$
+        \item Inkluzja $\subset$ - Problem zawierania się języka $L_i$ w języku $L_k$
+        \item Równoważność $\equiv$ - Problem równoważności dwóch języków $L_1 \equiv L_2$
+        \item Pustość $\emptyset$ - Problem języka pustego czyli nie generującego żadnego słowa
+        \item Nieskończonośc $\infty$ - Problem języka nieskończonego czyli generującego nieskończenie wiele słów
+        \item Jednoznaczność
+    \end{itemize}
+
+    \begin{definition}
+    Wyprowadzenie lewostronne (prawostronne)
+
+    Niech $G = (V_N,V_T,v_0,P)$ będzie gramatyką bezkontekstową.
+
+    Lewostronnym (prawostronnym) wyprowadzeniem słowa $w \in {V_T}^\star$ w gramatyce $G$ nazywamy wyprowadzenie
+    $v_0 \mapsto w_1 \mapsto \ldots.. \mapsto w_n = w$
+    takie, że dla każdego $i=0,\ldots,n-1, \;\; w_{i+1}$ jest generowane bezpośrednio z $w_i$ przez zastąpienie pierwszego z lewej (prawej) symbolu nieterminalnego występującego w słowie $w_i$.
+    Jeśli chcemy zaznaczyć, że wyprowadzenie jest lewostronne lub prawostronne, to posługujemy się zapisem
+
+    $v_{0}\mapsto_{L}^{*}w,\; v_{0}\mapsto_{P}^{\star}w$.
+    \end{definition}
+
+    \begin{definition} Jednoznaczność -
+
+    Gramatyka bezkontekstowa $G$ jest \textbf{jednoznaczna} $\Leftrightarrow$ każde słowo generowane przez tę gramatykę ma \textbf{dokładnie jedno wyprowadzenie lewostronne (prawostronne)}.
+
+    Język bezkontekstowy $L$ nazywamy \textbf{jednoznacznym}, jeśli istnieje jednoznaczna gramatyka bezkontekstowa generująca ten język.
+
+    Jednoznaczność gramatyki oznacza istnienie dokładnie jednego drzewa wywodu dla każdego generowanego słowa.
+    \end{definition}
+
+
+     \begin{center}
+     \begin{tabular}{||c c c c c||}
+     \hline
+     --- & 3 & 2 & 1 & 0 \\ [0.5ex]
+     \hline\hline
+     Należenie $\in$ & T & T & T & N \\
+     \hline
+     Inkluzja $\subset$ & T & N & N & N \\
+     \hline
+     Równoważność $\equiv$ & T & N & N & N \\
+     \hline
+     Pustość $\emptyset$ & T & T & N & N \\
+     \hline
+     Nieskończoność $\infty$ & T & T & N & N \\
+     \hline
+     Jednoznaczność & T & N & - & - \\ [1ex]
+     \hline
+    \end{tabular}
+    \end{center}
+
+    Oznaczenia\\
+    T - rozstrzygalny\\
+    N - nieroztrzygalny
+
+    \newpage
+
+
     \section{Klasy języków w hierarchii Chomsky’ego oraz ich zamkniętość ze względu na operacje boolowskie, homomorfizmy, itp.}
 
+    \begin{definition}
+    Gramatyka
+
+    Jest to system $G=(V_N,V_T,P,v_0)$, w którym
+    \begin{itemize}
+        \item
+        $V_N \ne \emptyset$ - skończony zbiór symboli nieterminalnych (alfabet nieterminalny)
+        \item
+        $V_T \ne \emptyset$ - skończony zbiór symboli terminalnych (alfabet terminalny)
+        \item
+        $P \subseteq (V_N \cup V_T)^+ \times (V_N \cup V_T)^\star$ - skończona relacja, zbiór produkcji (praw)
+        \item
+        $v_0 \in V_N$ - symbol początkowy (startowy)
+    \end{itemize}
+
+    Ponadto zakładamy, że $V_N \cap V_T = \emptyset$ i dla każdego
+    $(u,v)\in P$; $\#_{V_N} u >= 1$
+
+    Zatem w gramatyce alfabety terminalny i nieterminalny są rozłącznymi zbiorami, a słowo u występujące po lewej stronie produkcji zawiera co najmniej jeden symbol nieterminalny. Fakt, że para $(u,v) \in P$, zapisujemy:
+
+    $u \rightarrow v \in P$ lub $u \rightarrow_G v$.
+
+    Wykorzystujemy też zdefiniowane dla systemów przepisujących pojęcia generowania bezpośredniego "$\mapsto$" i generowania "$\mapsto \star$".
+    \end{definition}
+
+    \begin{definition}
+    Gramatyka $G=(V_N,V_T,P,v_0)$ jest typu (i) dla $i=0,1,2,3$ wtedy i tylko wtedy, gdy spełnia następujące warunki:
+
+    \begin{itemize}
+        \item Gramatyka
+
+        Każdy system spełniajacy definicję 57.1
+        \item Kontekstowa
+
+        Gramatyka, w której każde prawo ze zbioru P ma postać $u_1vu_2 \rightarrow u_1xu_2$
+
+        gdzie $u_1,u_2 \in (VN \cup VT)^\star,v \in V_N,x \in (V_N \cup V_T)^+$ lub $v_0 \rightarrow 1$,przy czym, jeśli $v_0 \rightarrow 1 \in P$, to $v_0$ nie występuje po prawej stronie w żadnym prawie z $P$
+
+        \item Bezkontekstowa
+
+        Gramatyka, w której każde prawo ze zbioru P ma postać
+        $v \rightarrow x$
+
+        gdzie $v \in V_N, x \in (V_N \cup V_T)^\star$
+
+        \item Regularna
+
+        Gramatyka, w której każde prawo ze zbioru P ma postać
+        $v \rightarrow v'x$ lub $v \rightarrow x$
+
+        gdzie $v,v' \in V_N$;$x \in V_T^\star$
+        \\
+
+
+        W oparciu o wprowadzone typy gramatyk określamy odpowiadające im rodziny (klasy) języków, oznaczając przez
+
+        $\bf \mathcal{L}_{0}$ rodzinę wszystkich języków typu 0
+
+        $\bf \mathcal{L}_{1}$ rodzinę wszystkich języków typu 1 - kontekstowych
+
+        $\bf \mathcal{L}_{2}$ rodzinę wszystkich języków typu 2 - bezkontekstowych
+
+        $\bf \mathcal{L}_{3}$ rodzinę wszystkich języków typu 3 - regularnych
+
+        Pomiędzy wprowadzonymi rodzinami języków zachodzą następujące zależności:
+
+        $\bf \mathcal{L}_{3}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{2}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{1}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{0}$
+
+    \end{itemize}
+
+    \end{definition}
+
+    Zamkniętości języków na operacje
+    \begin{center}
+     \begin{tabular}{||c c c c c||}
+     \hline
+     --- & 3 & 2 & 1 & 0 \\ [0.5ex]
+     \hline\hline
+     $\cup$ & T & T & T & T \\
+     \hline
+     $\cdot$ & T & T & T & T \\
+     \hline
+     $\star$ & T & T & T & T \\
+     \hline
+     $\setminus$ & T & N & T & N \\
+     \hline
+     $\cap $ & T & N & T & T \\ [1ex]
+     \hline
+    \end{tabular}
+    \end{center}
+
+    \newpage
 
     {\Large Wytwarzanie oprogramowania}
 
-    \newpage
-    
     \section{Reprezentacja liczb całkowitych; arytmetyka.}
-    
+
     \subsection{Kod znak-moduł prosty}
     \subsubsection{Reguły:}
     \begin{enumerate}
@@ -3959,7 +4245,7 @@ return $\mathcal{A}'$;
     Kodowanie znak-moduł prosty przez swoją skomplikowaną
     i czasochłonną arytmetykę nie nadaje się do praktycznego
     stosowania (konieczność niestandardowego obsługiwania przepełnień)
-    
+
     \subsection{Kod odwrotnościowy}
     \subsubsection{Reguły}
     \begin{itemize}
@@ -3976,29 +4262,29 @@ return $\mathcal{A}'$;
             systemu, czyli do wartości q-1.
         \end{itemize}
     \end{itemize}
-    
+
     \subsubsection{Przykłady}
     \begin{itemize}
         \item System dziesiętny:
         q = 10, c = 7, u = 5
         \begin{align*}
-            [-182073.6954]_{odw} = [-0|0182073.69540]_{odw} = 9|9917926.30459 
+            [-182073.6954]_{odw} = [-0|0182073.69540]_{odw} = 9|9917926.30459
         \end{align*}
-        
+
         \item - System binarny:
         q = 2, c = 7, u = 5
         \begin{align*}
-            [-101110.011]_{odw} = [-0|0101110.01100]_{odw} = 1|0010001.10011 
+            [-101110.011]_{odw} = [-0|0101110.01100]_{odw} = 1|0010001.10011
         \end{align*}
-        
+
     \end{itemize}
-    
+
     \subsubsection{Arytmetyka}
     Algorytm sumowania:
     \begin{itemize}
         \item Dodaj kody, a w przypadku przepełnienia zwiększ wynik o najmniejszą możliwą liczbę dodatnią.
     \end{itemize}
-    
+
     \subsubsection{Przykłady}
     \begin{itemize}
         \item W systemie dzisiętnym, q=10, c=7, u=5
@@ -4008,7 +4294,7 @@ return $\mathcal{A}'$;
         \begin{center}
             \includegraphics[scale=0.4]{graphics/number-repr/odw-add-dec-2.png}
         \end{center}
-        
+
 
         \item w systemie binarnym, q=2, c=7, u=5
         \begin{center}
@@ -4017,10 +4303,10 @@ return $\mathcal{A}'$;
         \begin{center}
             \includegraphics[scale=0.4]{graphics/number-repr/odw-add-bin-2.png}
         \end{center}
-        
+
     \end{itemize}
-    
-    
+
+
     \subsection{Kod uzupełnieniowy}
     \subsubsection{Kodowanie}
         Kodowanie uzupełnieniowe liczby ujemnej polega na uzupełnieniu każdej cyfry do najwyższej
@@ -4031,7 +4317,7 @@ return $\mathcal{A}'$;
         na najmniej znaczącym miejscu z uzupełnieniem
         w otrzymanym kodzie każdej cyfry do najwyższej
         cyfry systemu (odwróceniem bitów).
-        
+
     \subsubsection{Przykłady kodowania}
     \begin{itemize}
         \item w systemie dziesiętnym (q = 10, c = 7, u = 5)
@@ -4043,9 +4329,9 @@ return $\mathcal{A}'$;
         \begin{center}
             \includegraphics[scale=0.4]{graphics/number-repr/uzp-encode-bin.png}
         \end{center}
-            
+
     \end{itemize}
-    
+
     \subsubsection{Arytmetyka}
         Suma kodów uzupełnieniowych jest zawsze kodem uzupełnieniowym sumy.
         \begin{itemize}
@@ -4053,13 +4339,13 @@ return $\mathcal{A}'$;
             \begin{center}
                 \includegraphics[scale=0.4]{graphics/number-repr/uzp-add-dec.png}
             \end{center}
-            
+
             \item w systemie binarnym q = 10, c = 7, u = 5
             \begin{center}
                 \includegraphics[scale=0.4]{graphics/number-repr/uzp-add-bin.png}
             \end{center}
         \end{itemize}
-        
+
     \subsection{Kod nadmiarowy}
     \subsubsection{Kodowanie}
     \begin{enumerate}
@@ -4074,8 +4360,8 @@ return $\mathcal{A}'$;
                 \includegraphics[scale=0.4]{graphics/number-repr/nad-encode-bin.png}
         \end{center}
     \end{enumerate}
-        
-        
+
+
     \subsubsection{Deokodowanie}
     \begin{itemize}
         \item Dekodowanie nadmiarowe kodu liczby dodatniej
@@ -4084,11 +4370,11 @@ return $\mathcal{A}'$;
             (rozpoznawanego po zerowej cyfrze znaku) wymaga
             ustawienia najwyższej cyfry systemu w miejscu znaku z następującym dekodowaniem uzupełnieniowym.
     \end{itemize}
-    
+
     \subsubsection{Arytmetyka}
     Kod nadmiarowy sumy liczb to suma kodów nadmiarowych
     składników z odjętą wartością 1 na pozycji znaku.
-    
+
     \begin{enumerate}
         \item w systemie dziesiętnym
             \begin{center}
@@ -4097,40 +4383,40 @@ return $\mathcal{A}'$;
             \begin{center}
                 \includegraphics[scale=0.4]{graphics/number-repr/nad-add-dec-2.png}
             \end{center}
-            
+
         \item w systemie binarnym
             \begin{center}
                 \includegraphics[scale=0.4]{graphics/number-repr/nad-add-bin.png}
             \end{center}
-            \begin{center}    
+            \begin{center}
                 \includegraphics[scale=0.4]{graphics/number-repr/nad-add-bin-2.png}
             \end{center}
     \end{enumerate}
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     \newpage
-    
+
     \section{Reprezentacja liczb rzeczywistych; arytmetyka zmiennopozycyjna.}
-    
+
     \subsection{Reprezentacja cecha-mantysa}
     Liczby postaci
     \begin{align*}
         m \times q^c
     \end{align*}
     gdzie m - mantysa, q - podstawa systemu liczbowego, c - cecha
-    
+
     \begin{itemize}
         \item Mantysa - ciąg najbardziej znaczących cyfr liczby.
         \item Cecha - wykładnik potęgi podstawy systemu w iloczynie z mantysą równy reprezentowanej liczbie.
         \item W rejestrze komputera pamiętane są wyłącznie mantysa oraz cecha, zaś podstawa systemu jest ustalona, zatem nie musi być reprezentowana i nie jest konieczna do działań.
         \item Różnorodne sposoby zapamiętania w komputerze liczb w postaci cecha-mantysą noszą nazwę \textbf{kodowań zmiennopozycyjnych.}
-        
+
     \end{itemize}
-    
+
     \subsection{Kodowanie zmiennopozycyjne}
     \begin{itemize}
         \item Kodowanie zmiennopozycyjne jest powszechnie stosowanie w komputerach dla reprezentacji liczb rzeczywistych.
@@ -4140,38 +4426,38 @@ return $\mathcal{A}'$;
             \texttt{28.05e0 = 2805e-2 = +2805000e-5 =\\
             = 0.0002805e+5 = 2.805e1 = 0.2805e2}
         \end{center}
-        
+
         \item W systemie binarnym dla oddzielenia mantysy i cechy powszechne użycie litery D (lub d).
         Liczba $(9.625)_{10} = (1001.101)_2$
         \begin{center}
             \texttt{0.00001001101d1000 = 1001101000d-110 =\\
             = 1.001101d11 = 0.1001101d100}
         \end{center}
-       
+
        \item Różnorodność reprezentacji zmiennopozycyjnej wymusza konieczność ujednoznacznienia zwaną \textbf{normalizacją.}
-       
+
     \end{itemize}
-    
+
     \subsection{Normalizacja}
-    
+
         \begin{table}
         \centering
         \begin{tabular}{l|l|l|l}
                           & normalizacja
         całkowita & normalizacja
         do jedynki & normalizacja
-        do ułamka  \\ 
+        do ułamka  \\
         \hline
         28.05             & \texttt{2805e-2}                & \texttt{2.805e1}                  & \texttt{.2805e2}                  \\
         -35000000         & -\texttt{35e6}                & -\texttt{3.5e7}                   & -\texttt{.35e8}                   \\
-        0.0000576         & \texttt{576e-6}                  & \texttt{5.76e-4}                  & \texttt{.576e-3}                  \\ 
+        0.0000576         & \texttt{576e-6}                  & \texttt{5.76e-4}                  & \texttt{.576e-3}                  \\
         \hline
         $(1001.101)_2$    & \texttt{1001101d-11}             & \texttt{1.001101d11}              & \texttt{.1001101d100}             \\
         $(1010000)_2$     & \texttt{101d100}                 & \texttt{1.01d110}                 & \texttt{.101d111}                 \\
-        $(-0.00001011)_2$ & -\texttt{1011d1001}              & -\texttt{1.011d111}               & -\texttt{.1011d1000}             
+        $(-0.00001011)_2$ & -\texttt{1011d1001}              & -\texttt{1.011d111}               & -\texttt{.1011d1000}
         \end{tabular}
         \end{table}
-        
+
     \subsection{Algorytmy kodowania i dekodowania}
     Przyjmujemy oznaczenia:
     \begin{itemize}
@@ -4183,9 +4469,9 @@ return $\mathcal{A}'$;
     \begin{align*}
         n = 1 + w_m + 1 + w_c
     \end{align*}
-    
+
     \subsubsection{Algorytm kodowania}
-    
+
     Algorytm kodowania zmiennomozycyjnego obejmuje poniższe kroki:
     \begin{enumerate}
         \item Przedstaw liczbę w systemie o podstawie q.
@@ -4199,25 +4485,25 @@ return $\mathcal{A}'$;
         \item Zakoduj stałopozycyjnie mantysę na $w_m + 1$ pozycjach.
         \item Zakoduj stałopozycyjnie cechę na $w_c + 1$ pozycjach.
     \end{enumerate}
-    
+
     Przykłady dziesiętne:
-    
+
     \begin{center}
     \includegraphics[scale=0.4]{graphics/number-repr/fl-pt-encode-dec.png}
     \end{center}
-    
+
     Przykłady binarne:
-    
+
     \includegraphics[width=\linewidth]{graphics/number-repr/fl-pt-encode-bin.png}
-    
+
     \subsubsection{Algorytm dekodowania}
-    
+
     System dziesiętny:
     \begin{enumerate}
         \item Dekoduj mantysę i cechę.
         \item Opcjonalnie eliminuj postać potęgową.
     \end{enumerate}
-    
+
     System binarny:
     \begin{enumerate}
         \item Dekoduj mantysę i cechę.
@@ -4225,11 +4511,11 @@ return $\mathcal{A}'$;
         \item Zdenormalizuj mantysę.
         \item Zapisz mantysę w postaci dziesiętnej.
     \end{enumerate}
-    
+
     Przykłady binarne:
-    
+
     \includegraphics[width=\linewidth]{graphics/number-repr/fl-pt-decode-bin.png}
-    
+
     \subsection{Arytmetyka}
     \begin{itemize}
         \item Brak ogólnego algorytmu działania na kodach
@@ -4242,7 +4528,7 @@ return $\mathcal{A}'$;
             \item Zakodowanie wyniku.
         \end{enumerate}
     \end{itemize}
-    
+
     \subsubsection{Dodawanie kodów zmiennopozycyjnych}
     Algorytm obejmuje kroki:
     \begin{enumerate}
@@ -4256,7 +4542,7 @@ return $\mathcal{A}'$;
     \begin{center}
         \includegraphics[scale=0.3]{graphics/number-repr/fl-pt-add.png}
     \end{center}
-    
+
     \subsubsection{Mnożenie kodów zmiennopozycyjnych}
     Algorytm może obejmować kroki:
     \begin{enumerate}
@@ -4273,6 +4559,7 @@ return $\mathcal{A}'$;
     \end{center}
 
     \newpage
+
     \section{Różnice w wywołaniu funkcji statycznych, niestatycznych i wirtualnych w C++.}
 
     \subsection{Funkcje statyczne.}
@@ -4504,7 +4791,7 @@ return $\mathcal{A}'$;
     	\textbf{Wskaźnik} – typ zmiennej odpowiedzialnej za przechowywanie adresu do innej zmiennej (innego miejsca w pamięci) w obrębie naszej aplikacji.
     	Wskaźnik może wskazywać na jakąś zmienną, strukturę, tablicę czy nawet funkcję.
     \end{definition}
-    
+
     \begin{definition}
     	\textbf{Operatory związane ze wskaźnikami w C++}
     	\begin{minted}{cpp}
@@ -4522,7 +4809,7 @@ intPtr = &a;
 cout << *intPtr << endl;
     	\end{minted}
     \end{definition}
-    
+
     \begin{definition}
     	\textbf{Arytmetyka wskaźników} \\
     	Mając wskaźnik \texttt{int *p} wskazujący na hipotetyczny adres 10, wykonując na nim operację \texttt{p+2} dostajemy wskaźnik wskazujący na adres \texttt{10 + 2*sizeof(int)}
@@ -4538,7 +4825,7 @@ cout << *(a+3) << endl;  // 30
     	\end{minted}
     	Jak więc widać \texttt{*(a+i)} $\Leftrightarrow$ \texttt{a[i]}.
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Wskaźnik a referencja} \\
     Referencję możemy traktować jako dodatkową nazwę na juz istniejący obiekt. Jest to coś w rodzaju stałego wskaźnika.
@@ -4554,7 +4841,7 @@ cout << *(a+3) << endl;  // 30
 	\item Większe bezpieczeństwo - brak arytmetyki dla referencji znacznie utrudnia popełnienie błędów związanych z niepoprawnym odwołaniem do pamięci
     \end{itemize}
     \end{definition}
-    
+
     \noindent \textbf{Przykład użycia referencji}
     \begin{minted}{cpp}
 int n = 6;
@@ -4571,10 +4858,10 @@ cout << r << endl; // 6
 r = 7;
 
 cout << n << endl; //7
-    \end{minted}    
-    
+    \end{minted}
+
     \newpage
-    
+
     \section{Podstawowe założenia paradygmatu obiektowego: dziedziczenie, abstrakcja, enkapsulacja, polimorfizm.}
     \begin{definition}
 	\textbf{Dziedziczenie (kompozycja)} \\
@@ -4586,7 +4873,7 @@ public:
   void feed() {
     cout << "sucking" << endl;
   }
-		
+
   virtual void giveVoice() = 0; // Pure virtual method
 };
 
@@ -4608,7 +4895,7 @@ int main() {
 }
     	\end{minted}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Abstrakcja} \\
     Każdy obiekt w systemie służy jako model abstrakcyjnego "wykonawcy", który może wykonywać pracę, opisywać i zmieniać swój stan, oraz komunikować się
@@ -4619,12 +4906,12 @@ private:
   int factor;
   ...
 
-public:  
+public:
   // Setter
   void setFactor(int factor) {
     this.factor = factor;
   }
-  
+
   double compute(double price) {
     ...
   }
@@ -4632,15 +4919,15 @@ public:
 
 int main() {
   DiscountComputator dc = new DiscountComputator();
-  
+
   dc.setFactor(5);
-  
+
   // We are not interested how it is calculated
   double result = dc.compute(123.45);
 }
     \end{minted}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Enkapsulacja} \\
     Enkapsulacja zapewnia, że obiekt nie może zmieniać stanu innych obiektów w nieokreślony sposób.
@@ -4651,13 +4938,13 @@ int main() {
 class MyClass {
 private:
   int field;
-  
+
 public:
   // Setter
   void setField(int field) {
     this.field = field;
   }
-  
+
   // Getter
   int getField() {
     return field;
@@ -4666,10 +4953,10 @@ public:
 
 int main() {
   MyClass clazz = new MyClass();
-  
+
   clazz.setField(5);
   int field = clazz.getField();
-  
+
   /*
   // The `field` is private, so the following
   // will cause an error during compilation
@@ -4679,7 +4966,7 @@ int main() {
 }
     \end{minted}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Polimorfizm} \\
     Referencje i wskaźniki obiektów mogą dotyczyć obiektów różnego typu, a wywołanie metody dla referencji spowoduje zachowanie
@@ -4746,28 +5033,170 @@ int main() {
    ColoredPoint
 */
     \end{minted}
-    
+
     Jak widzimy dla obu wskaźników instancjonujemy klasę \texttt{ColoredPoint}. W przypadku wskaźnika \texttt{p} i wywołania metody \texttt{printClassName}
     została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na obiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
     bierzez pod uwagę typ wskaźnika, a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
     kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu, a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
     z powyższego kodu.
     \end{definition}
-    
+
     \newpage
-    
+
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
+    \begin{definition}
+    Standard Template Library
+
+    STL – biblioteka C++ zawierająca algorytmy, kontenery, iteratory oraz inne konstrukcje w formie szablonów, gotowe do użycia w programach.
+    \end{definition}
+
+    Obecnie występują trzy rodzaje kontenerów
+    \begin{itemize}
+        \item Kontenery Sekwencyjne
+
+        Implementują struktury danych, które zapewniają sekwencyjny dostęp do ich elementów.
+
+        \item Kontenery Asocjacyjne
+
+        Implementują posortowane struktury danych, które da się szybko przeszukiwać (złożoność O(log n))
+
+
+        \item Nieuporządkowane Kontenty Asocjacyjne (unordered)
+
+        Implementują nieposortowane (haszowane) struktury danych, które mogą być szybko przeszukiwane (zamortyzowana złożoność O(1), w najgorszym przypadku O(n))
+
+    \end{itemize}
+
+    \begin{table}[]
+    \begin{tabular}{|l|l|}
+    \hline
+    array         & statyczna, ciągła tablica      \\ \hline
+    vector        & dynamiczna, ciągła tablica     \\ \hline
+    deque         & dwustronnie zakończona kolejka \\ \hline
+    forward\_list & lista jednokierunkowa          \\ \hline
+    list          & lista dwukierunkowa            \\ \hline
+    \end{tabular}
+    \end{table}
+
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\begin{tabular}[c]{@{}l@{}}set\\ unordered\_set\end{tabular}           & \begin{tabular}[c]{@{}l@{}}kolekcja unikalnych kluczy\\ posortowana po kluczach\end{tabular}                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}map\\ unordered\_set\end{tabular}           & \begin{tabular}[c]{@{}l@{}}słownik - kolekcja par klucz-wartość\\ posortowana po kluczach, klucze są unikalne\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}multiset\\ unordered\_multiset\end{tabular} & \begin{tabular}[c]{@{}l@{}}kolekcja kluczy\\ posortowana po kluczach\end{tabular}                                          \\ \hline
+\begin{tabular}[c]{@{}l@{}}multimap\\ unordered\_multimap\end{tabular} & \begin{tabular}[c]{@{}l@{}}słownik - kolekcja par klucz-wartość\\ posortowana po kluczach\end{tabular}                     \\ \hline
+\end{tabular}
+\end{table}
+
+    Kontenery zarządzają pamięcią alokowaną do przechowywania ich elementów, i zapewniają metody pozwalające na dostęp do nich, bezpośrednio lub przez iteratory (obiekty o właściwościach podobnych do wskaźników).
+
+    \subsection{array - kontener sekwencyjny}
+    std::array (tablica) jest kontenerem enkapsulującym tablice o stałej, ustalonej w trakcie kompilacji liczbie elementów.
+
+    Jako typ agregowany, może być zainicjalizowana korzystając z zasad aggregate-initialization, poprzez nie więcej niż N inicjalizatorów konwertowalnych do \\ $T: std::array<int, 3> a = {1,2,3};$
+
+    Ta struktura łączy w sobie wydajność i dostępność tablic w stylu języka C, z wszystkimi korzyściami standardowego kontenera, takimi jak
+    \begin{itemize}
+        \item znajomość własnego rozmiaru
+        \item wspieranie przypisywania
+        \item iteratory dostępu bezpośredniego
+    \end{itemize}
+
+    Tablica długości 0 jest specjalnym przypadkiem (N == 0)
+
+    Wtedy $array.begin() == array.end()$. Efekt wywołania front() lub back() na tablicy długości 0 jest niezdefiniowany.
+
+Tablica taka może zostać wykorzystana jako krotka N elementów tego samego typu.
+
+Metody
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+at             & Dostęp do wskazanego elementu ze sprawdzeniem zakresów    \\ \hline
+operator[ ] & Dostęp do wskazanego elementu                             \\ \hline
+front          & Dostęp do pierwszego elementu                             \\ \hline
+back           & Dostęp do ostatniego elementu                             \\ \hline
+data           & Bezpośredni dostęp do tablicy opakowywanej przez kontener \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+begin  & Zwraca iterator na początek kontenera         \\ \hline
+end    & Zwraca iterator za koniec kontenera           \\ \hline
+rbegin & Zwraca odwrócony iterator na początek         \\ \hline
+rend   & Zwraca odwrócony iterator za koniec kontenera \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+empty     & Sprawdza czy kontener jest pusty           \\ \hline
+size      & Zwraca liczbę elementów                    \\ \hline
+max\_size & Zwraca maksymalną możliwą liczbę elementów \\ \hline
+fill      & Wypełnia kontener wskazaną wartościa       \\ \hline
+swap      & Zmienia wartości                           \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
     \section{Obsługa sytuacji wyjątkowych w C++.}
 
-    \newpage
-    
-    \section{Obsługa plików w języku C.}
-    
+    Wyjątki pozwalają zareagować na sytuacje, w których istnieje ryzyko niewykonania określonego zadania.
+
+    Jeżeli w jakimś miejscu programu zajdzie nieoczekiwana sytuacja, programista piszący ten kod powinien zasygnalizować o tym. Dawniej polegało to na zwróceniu specyficznej wartości, co nie było zbyt szczęśliwym rozwiązaniem, bo sygnał musiał być taki jak wartość zwracana przez funkcję. W przypadku obsługi sytuacji wyjątkowej mówi się o obiekcie sytuacji wyjątkowej, co często zastępowane jest słowem "wyjątek". W C++ wyjątki się "rzuca", służy do tego instrukcja throw.
+
+    \subsection{Szkielet obsługi wątków}
+
+    Tam gdzie spodziewamy się wyjątku umieszczamy blok try, w którym umieszczamy "podejrzane" instrukcje. Za tym blokiem muszą (tzn. musi przynajmniej jedna) pojawić się bloki catch.
+
+    \begin{verbatim}
+        //jakaś zwykła funkcja, lub funkcja main
+      try  // w instrukcjach poniżej może coś się nie udać
+      {
+         fun();
+         fun2();   //podejrzane funkcje
+      }
+      catch(std::string obj)
+      {
+         //tu coś robimy, na przykład piszemy o błędzie
+      }
+    \end{verbatim}
+
+    W instrukcji catch umieszczamy typ jakim będzie wyjątek. Rzucić możemy wyjątek typu int, char, std::string i inne, dlatego tu określamy co nas interesuje. Nazwa tego obiektu nie jest konieczna, ale jeżeli chcemy znać wartość musimy ten obiekt nazwać. Bloków catch może być więcej, najczęściej tyle ile możliwych typów do złapania. Co ważne jeżeli rzucimy wyjątek konkretnego typu to "wpadnie" on do pierwszego dobrego catch nawet jeżeli inne nadają się lepiej (podobnie jak z instrukcjami if else). Dotyczy to zwłaszcza klas dziedziczonych.
+
+    Zawsze dobrze jest się zabezpieczyć blokiem
+    catch(...)
+
+    \subsection{Rzucanie wyjątku}
+    Pisząc funkcję możemy stwierdzić że coś poszło nie tak i chcemy zasygnalizować wyjątek.
+
+    \begin{verbatim}
+         double Dziel(double a, double b) //funkcja zwraca iloraz a / b
+         {
+             if(b == 0)    {
+                 std::string wyjatek = "dzielenie przez zero!"; //przez zero się nie dzieli
+                 throw wyjatek;  //rzucamy wyjątek
+             }
+             return a / b;
+         }
+    \end{verbatim}
+
+    Po instrukcji throw umieszczamy obiekt który chcemy rzucić (u nas jest to std::string). W tym miejscu działanie funkcji jest natychmiast przerywane i nasz łańcuch znaków wędruje do bloków catch.
+
+\newpage
+
+\section{Obsługa plików w języku C.}
+
     Standardowa biblioteka wejścia/wyjścia języka C udostępnia funkcje do operowania na plikach, tj.
     odczytu i zapisu danych z plików tekstowych i binarnych.\\
-    
+
     Sposób pracy z plikami w języku C jest następujący:
     \begin{enumerate}
         \item Otwarcie pliku o określonym nazwie w określonym trybie (odczyt, zapis, dopisywanie)
@@ -4787,7 +5216,7 @@ int main() {
                 \item "t" - otwiera plik w trybie tekstowym
                 \item "b" - otwiera plik w trybie binarnym
             \end{itemize}
-            
+
             Litery można ze sobą łączyć, np. "rwb" albo "wt".
             Funkcja zwraca wskaźnik do pliku (FILE *) lub NULL, gdy pliku nie udało się otworzyć (nie
             istnieje, jest już otwarty w innym programie itp. .
@@ -4795,10 +5224,10 @@ int main() {
             \begin{minted}{cpp}
                 FILE *f = fopen("dane.txt", "rt");
             \end{minted}
-            
-            
-            
-        \item     
+
+
+
+        \item
             Wykonywanie operacji odczytu/zapisu.\\
             Funkcje do formatowanego odczytu/zapisu.
             \begin{minted}{cpp}
@@ -4819,16 +5248,16 @@ int main() {
                 //zamknięcie pliku
                 fclose(f);
             \end{minted}
-        
+
     \end{enumerate}
 
     \newpage
-    
+
     \section{Model wodospadu a model spiralny wytwarzania oprogramowania.}
-    
+
     \subsection{Model kaskadowy}
     Nazwa model kaskadowy (ang. waterfall model) wprowadzona została przez Winstona W. Royce w roku 1970, w artykule Managing the Development of Large Software Systems”
-        
+
     \subsubsection{Zasady}
     \begin{itemize}
         \item Tworzenie systemu podzielone na wyizolowane
@@ -4843,7 +5272,7 @@ int main() {
         pierwotny etap, na którym dany produkt został
         utworzony, np. gdy pojawi się nowe wymaganie;
     \end{itemize}
-        
+
     \subsubsection{Fazy modelu kaskadowego}
     \begin{enumerate}
         \item Planowanie
@@ -4884,7 +5313,7 @@ int main() {
             \end{itemize}
         \item Pielęgnacja
     \end{enumerate}
-    
+
     \subsubsection{Cechy}
     \begin{itemize}
         \item kolejnej fazy nie powinno się rozpoczynać, jeśli poprzednia
@@ -4904,10 +5333,10 @@ int main() {
         \item bardzo wysoki koszt błędów popełnionych we wstępnych
         etapach;
     \end{itemize}
-    
+
     \subsection{Model spiralny}
     Proces tworzenia ma postać spirali, której każda pętla reprezentuje jedną fazę procesu. Najbardziej wewnętrzna pętla przedstawia początkowe etapy projektowania, np. studium wykonalności, kolejna definicji wymagań systemowych itd.
-    
+
     \subsubsection{Fazy modelu spiralnego}
     Każda pętla spirali podzielona jest na cztery sektory
     \begin{enumerate}
@@ -4916,35 +5345,35 @@ int main() {
         \item Tworzenie i zatwierdzanie – tworzenie oprogramowania w oparciu o najbardziej odpowiedni model, wybrany na podstawie oceny zagrożeń.
         \item Ocena i planowanie – recenzja postępu prac i planowanie kolejnej fazy przedsięwzięcia bądź zakończenie procesu produkcyjnego.
     \end{enumerate}
-    
+
     \subsubsection{Cechy}
     \begin{itemize}
         \item ciągłe monitorowanie i pomiar zmian;
         \item zmiany poddawane są review użytkownika;
         \item próba minimalizacji ryzyka niepowodzenia;
     \end{itemize}
-    
+
     \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|} 
+    \begin{tabular}{|l|l|}
     \hline
-    \textbf{Model kaskadowy}                                                                         & \textbf{Model spiralny}                                                                              \\ 
+    \textbf{Model kaskadowy}                                                                         & \textbf{Model spiralny}                                                                              \\
     \hline
-    Działa w sposób sekwencyjny                                                                      & Działa w sposób ewolucyjny                                                                           \\ 
+    Działa w sposób sekwencyjny                                                                      & Działa w sposób ewolucyjny                                                                           \\
     \hline
-    \begin{tabular}[c]{@{}l@{}}Błędy są wykrywane i naprawiane\\~po zakończeniu etapów\end{tabular}  & Błędy są wykrywane wcześniej                                                                         \\ 
+    \begin{tabular}[c]{@{}l@{}}Błędy są wykrywane i naprawiane\\~po zakończeniu etapów\end{tabular}  & Błędy są wykrywane wcześniej                                                                         \\
     \hline
-    Odpowiedni dla mniejszych projektów                                                              & Odpowiedni dla większych projektów                                                                   \\ 
+    Odpowiedni dla mniejszych projektów                                                              & Odpowiedni dla większych projektów                                                                   \\
     \hline
-    Wymagania określone na początku                                                                  & \begin{tabular}[c]{@{}l@{}}Możliwość dodania wymagań\\~po kilku iteracjach\end{tabular}              \\ 
+    Wymagania określone na początku                                                                  & \begin{tabular}[c]{@{}l@{}}Możliwość dodania wymagań\\~po kilku iteracjach\end{tabular}              \\
     \hline
-    \begin{tabular}[c]{@{}l@{}}Ograniczona możliwość zmian\\~w trakcie trwania projektu\end{tabular} & \begin{tabular}[c]{@{}l@{}}Większa możliwość dostosowania\\~projektu w trakcie trwania\end{tabular}  \\ 
+    \begin{tabular}[c]{@{}l@{}}Ograniczona możliwość zmian\\~w trakcie trwania projektu\end{tabular} & \begin{tabular}[c]{@{}l@{}}Większa możliwość dostosowania\\~projektu w trakcie trwania\end{tabular}  \\
     \hline
     Mały koszt                                                                                       & Wysoki koszt                                                                                         \\
     \hline
     \end{tabular}
     \end{table}
-    
+
     \newpage
 
     \section{Diagram sekwencji i diagram przypadków użycia w języku UML.}
@@ -5188,14 +5617,14 @@ int main() {
             \item \textbf{Inspekcja} - poddawane regularnej inspekcji są zarówno scrumowe artefakty jak i postępy prac
         \end{itemize}
     \end{definition}
-    
+
     \subsection{Struktura zespołu}
-    
+
     \begin{definition}
     \textbf{Struktura zespołu} \\
     \includegraphics[width=\linewidth]{scrum_teams.png}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Product owner} - jest odpowiedzialny za maksymalizację wartości produktu i pracy Zespołu Deweloperskiego. jest jedyną osobą zarządzającą Rejestrem Produktu (Product Backlog) co rozumiemy przez:
     \begin{itemize}
@@ -5203,7 +5632,7 @@ int main() {
         \item Zapewnianie, że Rejestr Produktu jest dostępny, przejrzysty oraz jasny dla wszystkich i, że dobrze opisuje to, czym Zespół Scrumowy będzie się zajmował
     \end{itemize}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Zespół Deweloperski}:
     \begin{itemize}
@@ -5216,19 +5645,19 @@ int main() {
         \item Odpowiedzialność za wykonywaną pracę ponosi cały Zespół Deweloperski; nie składają się z podzespołów
     \end{itemize}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Scrum Master} - jest odpowiedzialny za to, by Scrum był rozumiany i stosowany. Scrum Masterzy dokonują tego poprzez upewnianie się,
     że Zespół Scrumowy stosuje się do założeń teorii Scruma, jego praktyk i reguł postępowania. Scrum Master wspiera zarówno Właściciela Produktu jak i zespól deweloperski.
     \end{definition}
-    
+
     \subsection{Zdarzenia}
-    
+
     \begin{definition}
     \textbf{Zdarzenia} \\
     \includegraphics[width=\linewidth]{scrum_events.png}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Planowanie sprintu} - planowanie co zostanie wykonane podczas najbliższego sprintu:
     \begin{itemize}
@@ -5240,7 +5669,7 @@ int main() {
             \end{itemize}
     \end{itemize}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Sprint} - serce SCUMa:
     \begin{itemize}
@@ -5258,7 +5687,7 @@ int main() {
             \end{itemize}
     \end{itemize}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Daily scrum} - jest spotkaniem ograniczonym czasowo do 15 minut, w którym każdy z członków zespołu wyjaśnia:
     \begin{itemize}
@@ -5267,13 +5696,13 @@ int main() {
         \item Jakie przeszkody stoją na drodze
     \end{itemize}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Przegląd sprintu} -  organizowany jest na zakończenie Sprintu w celu przeprowadzenia inspekcji Przyrostu i dostosowaniu, jeśli zajdzie taka potrzeba, Rejestru Produktu. \\
     Podczas Przeglądu Sprintu \textbf{Zespół Scrumowy} i \textbf{interesariusze} wspólnie omawiają to, co zostało ukończone w Sprincie. \\
     Może trwać maksymalnie 4h dla miesięcznego Sprintu.
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Retrospektywa Sprintu} - jest okazją dla zespołu Scrumowego do przeprowadzenia inspekcji swoich działań i opracowania planu usprawnień. Ma na celu:
     \begin{itemize}
@@ -5282,39 +5711,39 @@ int main() {
         \item Stworzenie planu wprowadzania w życie usprawnień sposobu wykonywania pracy przez Zespół Scrumowy
     \end{itemize}
     \end{definition}
-    
+
     \subsection{Artefakty}
-    
+
     \begin{definition}
     \textbf{Rejestr produktu} - uporządkowana lista tego co może byc potrzebne w produkcie. Jest to jedyne źródło wymaganych zmian, które mają zostać wprowadzone.
     Odpowiedzialny z rejestr produktu jest Product owner.
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Rejestr sprintu} - podzbiór elementów Rejestru produktu. Jest to lista rzeczy do wykonania w danyc sprincie rozszeżona dodatkowo o plan ich wykonania.
     Rejestr Sprintu definiuje pracę, jaką Zespół Deweloperski wykona by przekształcić elementy Rejestru Produktu w „Ukończony” Przyrost. \\
     Rejestr Sprintu należy tylko i wyłącznie do Zespołu Deweloperskiego.
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Przyrost} - suma wszystkich elementów Rejestru Produktu zakończonych podczas Sprintu i wszystkich Sprintów poprzednich. \\
     Na koniec Sprintu nowy Przyrost musi być ``Ukończony''.
     \end{definition}
-    
+
     \newpage
-    
-    
-    
-    
+
+
+
+
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
-    
+
     \begin{definition}
     \textbf{Wymagania} - opis funkcji (usług), które mają być realizowane przez system i opis ograniczeń dla systemu. \\
     Wymagania nie opisują jak system ma działać a co ma wykonywać.
     \end{definition}
-    
+
     \subsection{Klasyfikacja}
-    
+
     \begin{definition}
     Wymagania dzielimy na:
     \begin{itemize}
@@ -5322,7 +5751,7 @@ int main() {
         \item \textbf{Pozafunkcjonalne} - opisują najczęściej pewne własności danych funkcjonalności, np. ``minimum 20 faktur na godzinę'', ``średni czas między awariami 2000000h'', itp.
     \end{itemize}
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Klasyfikacja atrybutów jakości oprogramowania}
     \begin{itemize}
@@ -5334,53 +5763,53 @@ int main() {
     \end{itemize}
     w skrócie \textbf{FURPS}
     \end{definition}
-    
+
     \subsection{Źródła}
-    
+
     \begin{definition}
     \textbf{System powinien…} \\
     Jest to sposób spisywania wymagań w stylu: ``System powinien umożliwić wystawianie faktur'', ``System powinien generować zestawienie miesięczne faktur'',  ``Faktura powinna zawierać co najmniej jedną pozycję''. \\
-    
+
     Zalety:
     \begin{itemize}
         \item Łatwość spisywania
     \end{itemize}
-    
+
     Wady:
     \begin{itemize}
         \item Słaba czytelność
         \item Trudne sprawdzanie kompletności, spójności
     \end{itemize}
-    
+
     Obecnie nie używany
     \end{definition}
-    
-    
+
+
     \begin{definition}
     \textbf{Funkcje systemu} \\
     Polega na opisywaniu poszczególnych funkcji systemu. Analogicznie do funkcji matematycznych, każda funkcja systemu informatycznego ma swoje wejście, wyjście, efekty uboczne. \\
     Przykładowo, rozpatrując funkcję wystawiania faktury, wejściem mogą być pozycje faktury, wyjściem wydruk faktury (lub wysłanie jej faksem), natomiast efektem ubocznym zapisanie tej faktury w rejestrze faktur. \\
-    
+
     Wady:
     \begin{itemize}
         \item Słaba czytelność
         \item Trudne do zrozumienia
     \end{itemize}
-    
+
     Obecnie nie używany
     \end{definition}
-    
-    
+
+
     \begin{definition}
     \textbf{Przypadki użycia} \\
     Przykład: \\
-    
+
     \textbf{UC1: Wystawianie faktury} \\
     \textbf{Atrybuty:} \\
     \textbf{Główny aktor: Użytkownik} \\
     \textbf{Priorytet: Wysoki} \\
     \textbf{Źródło: Łukasz Olek} \\
-    
+
     \textbf{Główny scenariusz:} \\
     1. Sprzedawca pragnie wystawić fakturę. \\
     2. Sprzedawca wpisuje pozycje faktury. \\
@@ -5389,51 +5818,51 @@ int main() {
     \textbf{Rozszerzenia:} \\
     3.A. Sprzedawca nie dodał żadnej pozycji \\
     3.A.1. System prosi o ponowne wprowadzenie pozycji (powrót do 2.) \\
-    
+
     Zalety:
     \begin{itemize}
         \item Łatwość spisywania
         \item Czytelność
         \item Łatwość zrozumienia i wyobrażenia sobie przyszłego systemu
     \end{itemize}
-    
+
     Jako mapę łączącą pojedyncze przypadki użycia można potraktować diagram przypadków użycia (UML).
     \end{definition}
-    
-    
+
+
     \begin{definition}
     \textbf{Historyjki użytkownika} \\
-    
+
     \textbf{Who? What? Why?} \\
-    
+
     Wzór: \\
-    
+
     \textbf{jako} - osoba, przypisana rola \\
     \textbf{chcę} - cacha, funkcjonalność, czynność \\
     \textbf{ponieważ} - uzasadnienie, rezultat, korzyść \\
     \end{definition}
-    
+
     \subsection{Analiza}
-    
+
     \begin{definition}
     Celem analizy wymagań jest stworzenie modelu systemu, zwanego modelem analitycznym. Wysiłek uczestników projektu skupia się na strukturalizowaniu i formalizowaniu zabranych wcześniej wymagań. \\
     Inaczej mówiąc po przeanalizowaniu przez nas zebranych wymagań musimy to przełożyć na diagramy UML.
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Model analityczny} - reprezentuje tworzony system z perspektywy użytkownika; opis co system powinien robić
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Analityczny model obiektowy} (diagramy klas) - odzwierciedla indywidualne koncepcje korzystania z systemu, ich właściwości i relacje między nimi
     \end{definition}
-    
+
     \begin{definition}
     \textbf{Model dynamiczny} (diagramy sekwencji i stanów) - koncentruje się na zachowaniu systemu
     \end{definition}
-    
+
     \newpage
-    
+
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
     \section{Wzorce architektury systemów.}
 
