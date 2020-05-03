@@ -4371,8 +4371,1319 @@
 
 	\newpage
 
-    \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
+    \section{Algorytmy przeszukiwania wszerz i wgłąb w grafach.}
+
+        \subsection{Przeszukiwanie wszerz}
+
+            \begin{center}
+
+                $$ S = \{s\} $$
+                $$ P = \{\} $$
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+
+                        \node [style=white-fill] (0) at (-1.75, -0.25) {s};
+                        \node [style=white-fill] (2) at (-0.75, 0) {b};
+                        \node [style=white-fill] (3) at (-0.5, -1) {c};
+                        \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                        \draw (0) to (2);
+                        \draw (0) to (3);
+                        \draw (3) to (4);
+                        \draw (2) to (3);
+                \end{tikzpicture}
+                        
+                $$ S = \{b, c\} $$
+                $$ P = \{b : s, c : s\} $$
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-1.75, -0.25) {s};
+                        \node [style=white-fill] (2) at (-0.75, 0) {b};
+                        \node [style=white-fill] (3) at (-0.5, -1) {c};
+                        \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                        \draw (0) to (2);
+                        \draw (0) to (3);
+                        \draw (3) to (4);
+                        \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$ S = \{c\} $$
+                $$ P = \{b : s, c : s\} $$
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-1.75, -0.25) {s};
+                        \node [style=black-fill] (2) at (-0.75, 0) {b};
+                        \node [style=white-fill] (3) at (-0.5, -1) {c};
+                        \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                        \draw (0) to (2);
+                        \draw (0) to (3);
+                        \draw (3) to (4);
+                        \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$ S = \{a\} $$
+                $$ P = \{b : s, c : s, a : c\} $$
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-1.75, -0.25) {s};
+                        \node [style=black-fill] (2) at (-0.75, 0) {b};
+                        \node [style=black-fill] (3) at (-0.5, -1) {c};
+                        \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                        \draw (0) to (2);
+                        \draw (0) to (3);
+                        \draw (3) to (4);
+                        \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$ S = \{\} $$
+                $$ P = \{b : s, c : s, a : c\} $$
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-1.75, -0.25) {s};
+                        \node [style=black-fill] (2) at (-0.75, 0) {b};
+                        \node [style=black-fill] (3) at (-0.5, -1) {c};
+                        \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                        \draw (0) to (2);
+                        \draw (0) to (3);
+                        \draw (3) to (4);
+                        \draw (2) to (3);
+                \end{tikzpicture}
+            \end{center}
+
+            \begin{center}
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=white-fill] (0) at (-2.25, -0.5) {s};
+                        \node [style=white-fill] (1) at (-1.5, 1.75) {};
+                        \node [style=white-fill] (2) at (0.5, 0.25) {};
+                        \node [style=white-fill] (3) at (-0.5, -0.75) {};
+                        \node [style=white-fill] (4) at (-0.5, -2.25) {};
+                        \node [style=white-fill] (5) at (-1, 0.5) {};
+                        \node [style=white-fill] (6) at (0.5, 2.75) {};
+                        \node [style=white-fill] (7) at (1.5, 2) {};
+                        \node [style=white-fill] (8) at (2.5, 0.5) {};
+                        \node [style=white-fill] (9) at (2, -0.5) {};
+                        \node [style=white-fill] (10) at (2, -3) {};
+                        \node [style=white-fill] (11) at (1.5, 4.5) {};
+                        \node [style=white-fill] (12) at (3.25, 3.25) {};
+                        \node [style=white-fill] (13) at (4.25, 1.25) {};
+                        \node [style=white-fill] (14) at (4.25, -0.75) {};
+                        \node [style=white-fill] (15) at (4.25, -2.25) {};
+                        \node [style=white-fill] (16) at (4, -3) {};
+                        \draw (1) to (0);
+                        \draw (5) to (3);
+                        \draw (0) to (5);
+                        \draw (0) to (4);
+                        \draw (4) to (10);
+                        \draw (3) to (2);
+                        \draw (11) to (1);
+                        \draw (5) to (7);
+                        \draw (6) to (7);
+                        \draw (6) to (11);
+                        \draw (6) to (1);
+                        \draw (7) to (12);
+                        \draw (11) to (12);
+                        \draw (7) to (8);
+                        \draw (7) to (2);
+                        \draw (2) to (10);
+                        \draw (2) to (9);
+                        \draw (8) to (9);
+                        \draw (3) to (4);
+                        \draw (9) to (16);
+                        \draw (10) to (16);
+                        \draw (8) to (15);
+                        \draw (15) to (16);
+                        \draw (8) to (14);
+                        \draw (14) to (13);
+                        \draw (13) to (7);
+                        \draw (8) to (13);
+                        \draw (15) to (14);
+                        \draw (3) to (10);
+                        \draw (9) to (10);
+                        \draw (5) to (2);
+                        \draw (5) to (1);
+                        \draw (5) to (6);
+                        \draw (2) to (8);
+                        \draw (11) to (7);
+                        \draw (12) to (13);
+                        \draw (9) to (15);
+                \end{tikzpicture}
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                        \node [style=black-fill] (0) at (-2.25, -0.5) {s};
+                        \node [style=white-fill] (1) at (-1.5, 1.75) {};
+                        \node [style=white-fill] (2) at (0.5, 0.25) {};
+                        \node [style=white-fill] (3) at (-0.5, -0.75) {};
+                        \node [style=white-fill] (4) at (-0.5, -2.25) {};
+                        \node [style=white-fill] (5) at (-1, 0.5) {};
+                        \node [style=white-fill] (6) at (0.5, 2.75) {};
+                        \node [style=white-fill] (7) at (1.5, 2) {};
+                        \node [style=white-fill] (8) at (2.5, 0.5) {};
+                        \node [style=white-fill] (9) at (2, -0.5) {};
+                        \node [style=white-fill] (10) at (2, -3) {};
+                        \node [style=white-fill] (11) at (1.5, 4.5) {};
+                        \node [style=white-fill] (12) at (3.25, 3.25) {};
+                        \node [style=white-fill] (13) at (4.25, 1.25) {};
+                        \node [style=white-fill] (14) at (4.25, -0.75) {};
+                        \node [style=white-fill] (15) at (4.25, -2.25) {};
+                        \node [style=white-fill] (16) at (4, -3) {};
+                        \draw (1) to (0);
+                        \draw (5) to (3);
+                        \draw (0) to (5);
+                        \draw (0) to (4);
+                        \draw (4) to (10);
+                        \draw (3) to (2);
+                        \draw (11) to (1);
+                        \draw (5) to (7);
+                        \draw (6) to (7);
+                        \draw (6) to (11);
+                        \draw (6) to (1);
+                        \draw (7) to (12);
+                        \draw (11) to (12);
+                        \draw (7) to (8);
+                        \draw (7) to (2);
+                        \draw (2) to (10);
+                        \draw (2) to (9);
+                        \draw (8) to (9);
+                        \draw (3) to (4);
+                        \draw (9) to (16);
+                        \draw (10) to (16);
+                        \draw (8) to (15);
+                        \draw (15) to (16);
+                        \draw (8) to (14);
+                        \draw (14) to (13);
+                        \draw (13) to (7);
+                        \draw (8) to (13);
+                        \draw (15) to (14);
+                        \draw (3) to (10);
+                        \draw (9) to (10);
+                        \draw (5) to (2);
+                        \draw (5) to (1);
+                        \draw (5) to (6);
+                        \draw (2) to (8);
+                        \draw (11) to (7);
+                        \draw (12) to (13);
+                        \draw (9) to (15);
+                \end{tikzpicture}
+
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-2.25, -0.5) {s};
+                        \node [style=black-fill] (1) at (-1.5, 1.75) {1};
+                        \node [style=white-fill] (2) at (0.5, 0.25) {};
+                        \node [style=white-fill] (3) at (-0.5, -0.75) {};
+                        \node [style=black-fill] (4) at (-0.5, -2.25) {1};
+                        \node [style=black-fill] (5) at (-1, 0.5) {1};
+                        \node [style=white-fill] (6) at (0.5, 2.75) {};
+                        \node [style=white-fill] (7) at (1.5, 2) {};
+                        \node [style=white-fill] (8) at (2.5, 0.5) {};
+                        \node [style=white-fill] (9) at (2, -0.5) {};
+                        \node [style=white-fill] (10) at (2, -3) {};
+                        \node [style=white-fill] (11) at (1.5, 4.5) {};
+                        \node [style=white-fill] (12) at (3.25, 3.25) {};
+                        \node [style=white-fill] (13) at (4.25, 1.25) {};
+                        \node [style=white-fill] (14) at (4.25, -0.75) {};
+                        \node [style=white-fill] (15) at (4.25, -2.25) {};
+                        \node [style=white-fill] (16) at (4, -3) {};
+                        \draw (1) to (0);
+                        \draw (5) to (3);
+                        \draw (0) to (5);
+                        \draw (0) to (4);
+                        \draw (4) to (10);
+                        \draw (3) to (2);
+                        \draw (11) to (1);
+                        \draw (5) to (7);
+                        \draw (6) to (7);
+                        \draw (6) to (11);
+                        \draw (6) to (1);
+                        \draw (7) to (12);
+                        \draw (11) to (12);
+                        \draw (7) to (8);
+                        \draw (7) to (2);
+                        \draw (2) to (10);
+                        \draw (2) to (9);
+                        \draw (8) to (9);
+                        \draw (3) to (4);
+                        \draw (9) to (16);
+                        \draw (10) to (16);
+                        \draw (8) to (15);
+                        \draw (15) to (16);
+                        \draw (8) to (14);
+                        \draw (14) to (13);
+                        \draw (13) to (7);
+                        \draw (8) to (13);
+                        \draw (15) to (14);
+                        \draw (3) to (10);
+                        \draw (9) to (10);
+                        \draw (5) to (2);
+                        \draw (5) to (1);
+                        \draw (5) to (6);
+                        \draw (2) to (8);
+                        \draw (11) to (7);
+                        \draw (12) to (13);
+                        \draw (9) to (15);
+                \end{tikzpicture}
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-2.25, -0.5) {s};
+                        \node [style=black-fill] (1) at (-1.5, 1.75) {1};
+                        \node [style=black-fill] (2) at (0.5, 0.25) {2};
+                        \node [style=black-fill] (3) at (-0.5, -0.75) {2};
+                        \node [style=black-fill] (4) at (-0.5, -2.25) {1};
+                        \node [style=black-fill] (5) at (-1, 0.5) {1};
+                        \node [style=black-fill] (6) at (0.5, 2.75) {2};
+                        \node [style=black-fill] (7) at (1.5, 2) {2};
+                        \node [style=white-fill] (8) at (2.5, 0.5) {};
+                        \node [style=white-fill] (9) at (2, -0.5) {};
+                        \node [style=black-fill] (10) at (2, -3) {2};
+                        \node [style=black-fill] (11) at (1.5, 4.5) {2};
+                        \node [style=white-fill] (12) at (3.25, 3.25) {};
+                        \node [style=white-fill] (13) at (4.25, 1.25) {};
+                        \node [style=white-fill] (14) at (4.25, -0.75) {};
+                        \node [style=white-fill] (15) at (4.25, -2.25) {};
+                        \node [style=white-fill] (16) at (4, -3) {};
+                        \draw (1) to (0);
+                        \draw (5) to (3);
+                        \draw (0) to (5);
+                        \draw (0) to (4);
+                        \draw (4) to (10);
+                        \draw (3) to (2);
+                        \draw (11) to (1);
+                        \draw (5) to (7);
+                        \draw (6) to (7);
+                        \draw (6) to (11);
+                        \draw (6) to (1);
+                        \draw (7) to (12);
+                        \draw (11) to (12);
+                        \draw (7) to (8);
+                        \draw (7) to (2);
+                        \draw (2) to (10);
+                        \draw (2) to (9);
+                        \draw (8) to (9);
+                        \draw (3) to (4);
+                        \draw (9) to (16);
+                        \draw (10) to (16);
+                        \draw (8) to (15);
+                        \draw (15) to (16);
+                        \draw (8) to (14);
+                        \draw (14) to (13);
+                        \draw (13) to (7);
+                        \draw (8) to (13);
+                        \draw (15) to (14);
+                        \draw (3) to (10);
+                        \draw (9) to (10);
+                        \draw (5) to (2);
+                        \draw (5) to (1);
+                        \draw (5) to (6);
+                        \draw [in=180, out=0] (2) to (8);
+                        \draw (11) to (7);
+                        \draw (12) to (13);
+                        \draw (9) to (15);
+                \end{tikzpicture}
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+
+                        \node [style=black-fill] (0) at (-2.25, -0.5) {s};
+                        \node [style=black-fill] (1) at (-1.5, 1.75) {1};
+                        \node [style=black-fill] (2) at (0.5, 0.25) {2};
+                        \node [style=black-fill] (3) at (-0.5, -0.75) {2};
+                        \node [style=black-fill] (4) at (-0.5, -2.25) {1};
+                        \node [style=black-fill] (5) at (-1, 0.5) {1};
+                        \node [style=black-fill] (6) at (0.5, 2.75) {2};
+                        \node [style=black-fill] (7) at (1.5, 2) {2};
+                        \node [style=black-fill] (8) at (2.5, 0.5) {3};
+                        \node [style=black-fill] (9) at (2, -0.5) {3};
+                        \node [style=black-fill] (10) at (2, -3) {2};
+                        \node [style=black-fill] (11) at (1.5, 4.5) {2};
+                        \node [style=black-fill] (12) at (3.25, 3.25) {3};
+                        \node [style=black-fill] (13) at (4.25, 1.25) {3};
+                        \node [style=white-fill] (14) at (4.25, -0.75) {};
+                        \node [style=white-fill] (15) at (4.25, -2.25) {};
+                        \node [style=black-fill] (16) at (4, -3) {3};
+                        \draw (1) to (0);
+                        \draw (5) to (3);
+                        \draw (0) to (5);
+                        \draw (0) to (4);
+                        \draw (4) to (10);
+                        \draw (3) to (2);
+                        \draw (11) to (1);
+                        \draw (5) to (7);
+                        \draw (6) to (7);
+                        \draw (6) to (11);
+                        \draw [in=30, out=-150] (6) to (1);
+                        \draw (7) to (12);
+                        \draw (11) to (12);
+                        \draw (7) to (8);
+                        \draw (7) to (2);
+                        \draw (2) to (10);
+                        \draw (2) to (9);
+                        \draw (8) to (9);
+                        \draw (3) to (4);
+                        \draw (9) to (16);
+                        \draw (10) to (16);
+                        \draw (8) to (15);
+                        \draw (15) to (16);
+                        \draw (8) to (14);
+                        \draw (14) to (13);
+                        \draw (13) to (7);
+                        \draw (8) to (13);
+                        \draw (15) to (14);
+                        \draw (3) to (10);
+                        \draw (9) to (10);
+                        \draw (5) to (2);
+                        \draw (5) to (1);
+                        \draw (5) to (6);
+                        \draw (2) to (8);
+                        \draw (11) to (7);
+                        \draw (12) to (13);
+                        \draw (9) to (15);
+                \end{tikzpicture}
+
+                \begin{tikzpicture}
+                        \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                        \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                        \node [style=black-fill] (0) at (-2.25, -0.5) {s};
+                        \node [style=black-fill] (1) at (-1.5, 1.75) {1};
+                        \node [style=black-fill] (2) at (0.5, 0.25) {2};
+                        \node [style=black-fill] (3) at (-0.5, -0.75) {2};
+                        \node [style=black-fill] (4) at (-0.5, -2.25) {1};
+                        \node [style=black-fill] (5) at (-1, 0.5) {1};
+                        \node [style=black-fill] (6) at (0.5, 2.75) {2};
+                        \node [style=black-fill] (7) at (1.5, 2) {2};
+                        \node [style=black-fill] (8) at (2.5, 0.5) {3};
+                        \node [style=black-fill] (9) at (2, -0.5) {3};
+                        \node [style=black-fill] (10) at (2, -3) {2};
+                        \node [style=black-fill] (11) at (1.5, 4.5) {2};
+                        \node [style=black-fill] (12) at (3.25, 3.25) {3};
+                        \node [style=black-fill] (13) at (4.25, 1.25) {3};
+                        \node [style=black-fill] (14) at (4.25, -0.75) {4};
+                        \node [style=black-fill] (15) at (4.25, -2.25) {4};
+                        \node [style=black-fill] (16) at (4, -3) {3};
+                        \draw (1) to (0);
+                        \draw (5) to (3);
+                        \draw (0) to (5);
+                        \draw (0) to (4);
+                        \draw (4) to (10);
+                        \draw (3) to (2);
+                        \draw (11) to (1);
+                        \draw (5) to (7);
+                        \draw (6) to (7);
+                        \draw (6) to (11);
+                        \draw [in=30, out=-150] (6) to (1);
+                        \draw (7) to (12);
+                        \draw (11) to (12);
+                        \draw (7) to (8);
+                        \draw (7) to (2);
+                        \draw (2) to (10);
+                        \draw (2) to (9);
+                        \draw (8) to (9);
+                        \draw (3) to (4);
+                        \draw (9) to (16);
+                        \draw (10) to (16);
+                        \draw (8) to (15);
+                        \draw (15) to (16);
+                        \draw (8) to (14);
+                        \draw (14) to (13);
+                        \draw (13) to (7);
+                        \draw (8) to (13);
+                        \draw [in=270, out=90] (15) to (14);
+                        \draw (3) to (10);
+                        \draw (9) to (10);
+                        \draw (5) to (2);
+                        \draw (5) to (1);
+                        \draw (5) to (6);
+                        \draw (2) to (8);
+                        \draw (11) to (7);
+                        \draw (12) to (13);
+                        \draw (9) to (15);
+                \end{tikzpicture}
+            
+            \end{center}
+
+            \newpage
+
+        \subsection{Przeszukiwanie wgłąb}
+            \begin{center}
+
+                $$P = \{\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=white-fill] (2) at (-0.75, 0) {b};
+                     \node [style=white-fill] (3) at (-0.5, -1) {c};
+                     \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=grey-fill] (2) at (-0.75, 0) {b};
+                     \node [style=white-fill] (3) at (-0.5, -1) {c};
+                     \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s, c: b\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=grey-fill] (2) at (-0.75, 0) {b};
+                     \node [style=grey-fill] (3) at (-0.5, -1) {c};
+                     \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s, c : b, a : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=grey-fill] (2) at (-0.75, 0) {b};
+                     \node [style=grey-fill] (3) at (-0.5, -1) {c};
+                     \node [style=grey-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s, c : b, a : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=grey-fill] (2) at (-0.75, 0) {b};
+                     \node [style=grey-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s, c : b, a : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=grey-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s, c : b, a : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+
+                $$P = \{b : s, c : b, a : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {s};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \draw (0) to (2);
+                     \draw (0) to (3);
+                     \draw (3) to (4);
+                     \draw (2) to (3);
+                \end{tikzpicture}
+            \end{center}
+
+            \newpage
+
+            \subsubsection{Sortowanie topologiczne z użyciem DFS}
+            \[\]
+            \textbf{DAG} (\textit{directed acyclic graph}):
+            graf skierowany bez cykli. Przykłady użycia: graf dziedziczenia, menadżer pakietów,
+            drzewo technologii.
+            \[\]
+            \textbf{Problem:} Dla DAG podaj listę wierzchołków w takiej kolejności,
+            aby dla każdej krawędzi $u \rightarrow v$, $u$ będzie występował przed $v$.
+            \[\]
+            \textbf{Algorytm:} 
+            \begin{enumerate}
+                \item Wykonaj DFS (zaczynając od dowolnego białego wierzchołka).
+                \item Przy kolorowaniu wierzchołka na czarno, przypisz mu rangę, zaczynając od 1.
+                \item Powtarzaj kroki 1., 2. aż do pomalowania całego grafu.
+                \item Zwróć listę wierzchołków posortowanych odwrotnie według rangi
+            \end{enumerate}
+            \[\]
+            \textbf{Złożoność:} Taka sama jak dla DFS, tzn. $\theta(v + e)$ 
+
+            \begin{center}
+                $$rank = \{\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=white-fill] (2) at (-0.75, 0) {b};
+                     \node [style=white-fill] (3) at (-0.5, -1) {c};
+                     \node [style=white-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=white-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=white-fill] (2) at (-0.75, 0) {b};
+                     \node [style=white-fill] (3) at (-0.5, -1) {c};
+                     \node [style=grey-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=grey-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=white-fill] (2) at (-0.75, 0) {b};
+                     \node [style=white-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=grey-fill] (2) at (-0.75, 0) {b};
+                     \node [style=grey-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=grey-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=white-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=grey-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=white-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=black-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=grey-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=black-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=black-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=black-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=white-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=white-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=black-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=black-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=grey-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=grey-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$rank = \{h : 9, i : 8, f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     \tikzstyle{grey-fill}=[fill={rgb,255: red,203; green,203; blue,203}, draw=black, shape=circle]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-1.75, -0.25) {d};
+                     \node [style=black-fill] (2) at (-0.75, 0) {b};
+                     \node [style=black-fill] (3) at (-0.5, -1) {c};
+                     \node [style=black-fill] (4) at (1.5, -1.25) {a};
+                     \node [style=black-fill] (5) at (1.25, 0.25) {f};
+                     \node [style=black-fill] (6) at (3, 0.25) {e};
+                     \node [style=black-fill] (7) at (3, -1.25) {g};
+                     \node [style=black-fill] (8) at (4.75, -1.25) {h};
+                     \node [style=black-fill] (9) at (5, 0.25) {i};
+                     \draw [style=arrow] (0) to (3);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (5) to (4);
+                     \draw [style=arrow] (9) to (7);
+                     \draw [style=arrow] (8) to (9);
+                     \draw [style=arrow] (9) to (6);
+                     \draw [style=arrow] (8) to (7);
+                     \draw [style=arrow] (6) to (7);
+                     \draw [style=arrow] (4) to (7);
+                \end{tikzpicture}
+
+                $$result = [h, i, f, e, d, b, c, a, g]$$
+            \end{center}           
+
+    \newpage
+
     \section{Algorytmy wyszukiwania najkrótszej ścieżki (Dijkstry oraz Bellmana-Forda).}
+
+        \subsection{Algorytm Dijkstry}
+            
+            \begin{center}
+
+                $$D = \{s : 0, a : \infty, b : \infty, c : \infty, d : \infty\}$$
+                $$P = \{\}$$
+                
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=white-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=white-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=white-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=white-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {2};
+                     \node [style=invisible] (8) at (-1.5, 0.5) {1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {2};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {7};
+                     \node [style=invisible] (12) at (0.75, 0.25) {3};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+
+                $$D = \{s : 0, \mathbf{a : 6, b : 2}, c : \infty, d : \infty\}$$
+                $$P = \{\mathbf{a : s, b : s}\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=white-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=white-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=white-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=white-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {2};
+                     \node [style=invisible] (8) at (-1.5, 0.5) {1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {2};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {7};
+                     \node [style=invisible] (12) at (0.75, 0.25) {3};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+
+                $$D = \{s : 0, a : 6, b : 2, \mathbf{c : 4, d : 9}\}$$
+                $$P = \{a : s, b : s, \mathbf{c : b, d : b}\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=black-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=white-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=white-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=white-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {2};
+                     \node [style=invisible] (8) at (-1.5, 0.5) {1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {2};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {7};
+                     \node [style=invisible] (12) at (0.75, 0.25) {3};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+
+                $$D = \{s : 0, \mathbf{a : 5}, b : 2, c : 4, \mathbf{d : 7}\}$$
+                $$P = \{\mathbf{a : c}, b : s, c : b, \mathbf{d : c}\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=black-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=black-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=white-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=white-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {2};
+                     \node [style=invisible] (8) at (-1.5, 0.5) {1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {2};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {7};
+                     \node [style=invisible] (12) at (0.75, 0.25) {3};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+
+                $$D = \{s : 0, a : 5, b : 2, c : 4, d : 7\}$$
+                $$P = \{a : c, b : s, c : b, d : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=black-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=black-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=white-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=black-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {2};
+                     \node [style=invisible] (8) at (-1.5, 0.5) {1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {2};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {7};
+                     \node [style=invisible] (12) at (0.75, 0.25) {3};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+
+                $$D = \{s : 0, a : 5, b : 2, c : 4, d : 7\}$$
+                $$P = \{a : c, b : s, c : b, d : c\}$$
+
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=black-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=black-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=black-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=black-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=black-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {2};
+                     \node [style=invisible] (8) at (-1.5, 0.5) {1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {2};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {7};
+                     \node [style=invisible] (12) at (0.75, 0.25) {3};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+                
+            \end{center}
+
+        \newpage
+
+        \subsection{Algorytm Bellmana-Forda}
+
+            \begin{center}
+                \begin{tikzpicture}
+                     % Node styles
+                     \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
+                     \tikzstyle{invisible}=[fill=white, draw=white, shape=circle]
+                     \tikzstyle{black-fill}=[fill=black, draw=black, shape=circle, text=white]
+                     
+                     % Edge styles
+                     \tikzstyle{arrow}=[->]
+                     \node [style=white-fill] (0) at (-3, 0) {s};
+                     \node [style=white-fill] (1) at (-1.25, 2.25) {};
+                     \node [style=white-fill] (2) at (-1.5, -1.25) {b};
+                     \node [style=white-fill] (3) at (0.5, 2.25) {c};
+                     \node [style=white-fill] (4) at (0.5, -1.25) {d};
+                     \node [style=white-fill] (5) at (-1.25, 2.25) {a};
+                     \node [style=invisible] (6) at (-2.25, 1.25) {6};
+                     \node [style=invisible] (7) at (-2.5, -0.75) {3};
+                     \node [style=invisible] (8) at (-1.75, 0.5) {-1};
+                     \node [style=invisible] (9) at (-0.25, 2.5) {1};
+                     \node [style=invisible] (10) at (-0.5, 0.75) {1};
+                     \node [style=invisible] (11) at (-0.5, -1.5) {-1};
+                     \node [style=invisible] (12) at (0.75, 0.25) {-1};
+                     \draw [style=arrow] (0) to (5);
+                     \draw [style=arrow] (5) to (2);
+                     \draw [style=arrow] (0) to (2);
+                     \draw [style=arrow] (2) to (4);
+                     \draw [style=arrow] (3) to (4);
+                     \draw [style=arrow] (2) to (3);
+                     \draw [style=arrow] (3) to (5);
+                \end{tikzpicture}
+                
+                \[\]
+                Wartości w $D$ w zależności od iteracji:
+                
+                \begin{tabular}{c||c|c|c|c}
+                    i & a & b & c & d \\
+                    \hline \hline
+                    0 & $\infty$ & $\infty$ & $\infty$ & $\infty$ \\
+                    \hline
+                    1 & 6 & 3 & $\infty$ & $\infty$ \\
+                    \hline
+                    2 & 5 & 3 & 4 & 2 \\
+                    \hline
+                    3 & 5 & 3 & 4 & 2 \\
+                \end{tabular} 
+
+                \[\]
+                Wartości w $P$ w zależności od iteracji:
+
+                \begin{tabular}{c||c|c|c|c}
+                    i & a & b & c & d \\
+                    \hline \hline
+                    0 &   &   &  &  \\
+                    \hline
+                    1 & s & s &  &  \\
+                    \hline
+                    2 & c & s & b & b \\
+                    \hline
+                    3 & c & s & b & b \\
+                \end{tabular} 
+            \end{center}
+        
+        \newpage
+
+
     \section{Programowanie dynamiczne: podział na podproblemy, porównanie z metodą "dziel i zwyciężaj".}
     \section{Algorytm zachłanny: przykład optymalnego i nieoptymalnego wykorzystania.}
     
