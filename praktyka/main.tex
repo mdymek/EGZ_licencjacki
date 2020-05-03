@@ -7507,6 +7507,43 @@
     \newpage
 
     \section{Definicja cyfrowego układu kombinacyjnego - przykłady układów kombinacyjnych i ich implementacje.}
+
+    \begin{exercise}
+        \textbf{Projektowanie układów kombinacyjnych.} Za pomocą bramek NAND zrealizować układ opisany poniższą tablicą
+        prawdy:
+
+        \begin{tabular}{| p{1cm} p{1cm} p{1cm} | p{2cm} |}
+            \hline
+            \multicolumn{3}{|c|}{Wejścia} & Wyjścia\\
+            \hline
+            x & y & z & f\\
+            \hline
+            0 & 0 & 0 & 1\\
+            0 & 0 & 1 & 1\\
+            0 & 1 & 0 & 1\\
+            0 & 1 & 1 & 0\\
+            1 & 0 & 0 & 0\\
+            1 & 0 & 1 & 0\\
+            1 & 1 & 0 & 0\\
+            1 & 1 & 1 & 0\\
+            \hline
+        \end{tabular}
+    \end{exercise}
+
+    Na podstawie tablicy prawdy otrzymujemy funkcję logiczną:
+    \[f(x,y,z) = \sum (0,1,2) = \bar{x} \bar{y} \bar{z} + \bar{x} \bar{y} z + \bar{x} y \bar{z} = \bar{x} \bar{y} + \bar{x} \bar{z}\]
+
+    Korzystając z praw de Morgana:
+    \[f(x,y,z) = \bar{x} \bar{y} + \bar{x} + \bar{z} = \overline{\overline{\bar{x} \bar{y} + \bar{x} + \bar{z}}} = \overline{\overline{\bar{x} \bar{y}} \cdot \overline{\bar{x} \bar{z}}} \]
+
+    Zatem schemat logiczny:
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk_ex.png}
+    \end{figure}
+
+    \newpage
+
     \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
     \section{Minimalizacja funkcji logicznych.}
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}

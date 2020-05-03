@@ -5947,6 +5947,97 @@ swap      & Zmienia wartości                           \\ \hline
     \newpage
 
     \section{Definicja cyfrowego układu kombinacyjnego - przykłady układów kombinacyjnych i ich implementacje.}
+
+    \begin{definition}
+        \textbf{Układ kombinacyjny} to taki układ logiczny, w którym każda kombinacja wartosci zmiennych wejściowych
+        jednoznacznie określa kombinację wartości zmiennych wyjściowych.\\
+
+        Układy kombinacyjne opisujemy za pomocą bramek logicznych. Można też za pomocą tablicy prawdy.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Bramka logiczna} to układ elektroniczny realizujący funkcję logiczną jednej lub wielu zmiennych
+        (w podstawowej wersji dwóch).
+    \end{definition}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/bramki.png}
+    \end{figure}
+
+    \subsection{Układy arytmetyczne.}
+
+    \subsubsection{Półsumator (Half Adder).}
+    Zmiennymi wejściowymi półsumatora są bity składników sumy \textit{(x, y)}. Zmiennymi wyjsciowymi są bity
+    umy \textit{s} i przeniesienia \textit{c}.
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/ha.png}
+    \end{figure}
+
+    Z tablicy prawdy półsumatora otrzymujemy następujące funkcje logiczne:
+    \begin{gather*}
+        s(x,y) = \sum (1,2) = \bar{x}y + x\bar{y} = x \oplus y\\
+        c(x,y) = \sum (3) = xy\\
+    \end{gather*}
+
+    na podstawie których możemy zbudować schemat logiczny półsumatora:
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/ha_l.png}
+    \end{figure}
+
+    \subsubsection{Sumator (Full Adder).}
+    Układ kombinacyjny dodający trzy cyfry dwójkowe.  Ma trzy wejścia. Dwie ze zmiennych wejściowych \textit{(x, y)}
+    reprezentują bity składników sumy. Trzecie wejście \textit{(z)} reprezentuje przeniesienie z poprzedniej, mniej
+    znaczącej pozycji. Zmiennymi wyjściowymi są bity sumy \textit{s} i przeniesienia \textit{c}.
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/fa.png}
+    \end{figure}
+
+    \begin{gather*}
+        s(x,y) = \sum (1,2,4,7) = \bar{x}\bar{y}z + \bar{x}y\bar{z} + xyz
+        c(x,y) = \sum (3,5,6,7) = xz + yz + xy\\
+    \end{gather*}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/fa_l.png}
+    \end{figure}
+
+    Schemat blokowy 4-bitowego sumatora równoległego (sumatora dwóch liczb czterobitowych a i b):
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/fa_4.png}
+    \end{figure}
+
+    \subsubsection{Dekoder.}
+    Układ kombinacyjny mający $n$ wejść i $m \leq 2^n$ wyjść, w którym każdej kombinacji zmiennych wejściowych
+    odpowiada pojawienie się jedynki logicznej tylko na jednym wyjściu, na pozostałych wyjściach zera.
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/dek.png}
+    \end{figure}
+
+    \textbf{Koder to układ kombinacyjny działający odwrotnie do dekodera}.
+
+    \subsubsection{Multiplekser.}
+    Układ kombinacyjny wybierający informację dwójkową na jednej z linii wejściowych i kierujący ją na jedną linię
+    wyjściową. Wybór linii wejściowej jest określany przez linie sterujące.
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/mul.png}
+    \end{figure}
+
+    Linie wejściowe $(d_0, d_1, d_2, d_3)$ są doprowadzone do bramek AND, których wyjścia sa doprowadzone do bramki
+    OR. W danej chwili tylko jedna linia wejściowa jest połączona z wyjściem \textit{y}. O wyborze wjeścia połączonego
+    decydują linie sterujące $s_0, s_1$.
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{uk/mul_l.png}
+    \end{figure}
+
+    \newpage
+
     \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
     \section{Minimalizacja funkcji logicznych.}
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
