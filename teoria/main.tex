@@ -54,6 +54,10 @@
 
 \lstset{
   basicstyle=\ttfamily,
+  numbers=left,
+  commentstyle=\color{green},
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
   mathescape
 }
 
@@ -5044,7 +5048,140 @@ int main() {
     \newpage
 
     \section{Funkcje zaprzyjaźnione i ich związek z przeładowaniem operatorów w C++.}
+    \begin{definition}
+        Funkcja zaprzyjaźniona dla danej klasy to funkcja oznaczona słowem kluczowym
+        \textit{friend}. Funkcja ta ma dostęp do niepublicznych (\textit{private} i
+        \textit{protected}) składowych klasy.
+    \end{definition}
+
+    \begin{itemize}
+        \item Funkcje zaprzyjaźnione mogą się odnosić wyłącznie do obiektów
+            globalnych lub danych przez argumenty
+        \item Mechanizm zaprzyjaźnienia jest specyficzny dla języka C++
+        \item Dowolna ilość klas może deklarować zaprzyjaźnienie jednej funkcji
+        \item Funkcje zaprzyjaźnione mogą być przeładowane, zarówno w definiowanej klasie, jak i na zewnątrz
+        \item Funkcje zaprzyjaźnione mogą być definiowane wewnątz klasy, ale
+            nie stanowią metody klasy definiowanej i są szczególną definicją
+            zewnętrznej funkcji mimo zapisu w ciele definicji klasy.
+    \end{itemize}
+
+    \newpage
+    \subsection{Przeładowania operatorów a funkcje zaprzyjaźnione}
+    Przy przeładowaniu operatorów często stosuje się \textit{friend} w celu dostępu do pól prywatnych przez funkcje zewnętrzne.
+
+
+        \begin{lstlisting}[language=C++]
+class Foo {
+ public:
+    Foo(float val) : data(val) {}
+ private:
+    float data;
+ 
+    friend std::ostream& operator<<(std::ostream& os, const Foo& obj)
+};
+
+std::ostream& operator<<(std::ostream& os, const Foo& obj) 
+{
+    return os << obj.data;
+}
+
+int main()
+{
+    Foo obj(1.23);
+    std::cout << obj << '\n';
+}
+        \end{lstlisting}
+
+    \newpage
+    
     \section{Programowanie generyczne na podstawie szablonów w języku C++.}
+
+    Programowanie generyczne to paradygmat programowania w którym algorytmy (funkcje, klasy)
+    są zapisywane bez specyfikacji typów, na których działają. 
+    W C++ szablony \textit{template} pozwalają na programowanie generyczne.
+
+    Zalety szablonów:
+    \begin{itemize}
+        \item Zmniejszają redundancję
+        \item Wydajny, elastyczny, wielozadaniowy kod (np. kontenery i algorytmy
+            w STL)
+        \item Metaprogramowanie
+        \item Polimorfizm rozwiązywany w czasie kompilacji
+    \end{itemize}
+
+    W C++ istnieją szablony:
+    \begin{itemize}
+        \item klas
+        \item struktur
+        \item funkcji (również metod)
+        \item zmiennych
+        \item konceptów
+        \item rodzin typów
+    \end{itemize}
+
+\newpage
+    \begin{lstlisting}[language=C++]
+#include <iostream>
+
+template <typename T>
+class ExampleTemplate {
+ public:
+    T data[5];
+
+    T getMax() {
+	T max = data[0];
+    	for (auto i : data) {
+	    if (i > max) {
+	    	max = i;
+	    }
+    	}
+	return max;
+    }
+};
+
+int main() {
+    ExampleTemplate <double> doubleObj = {0.5, 165.43, 1.76, 98, 23};
+    std::cout << doubleObj.getMax() << std::endl;
+    //165.43
+
+    ExampleTemplate <bool> boolObj = {true, false, false, true, true};
+    std::cout << boolObj.getMax() << std::endl;
+    //1
+}
+    \end{lstlisting}
+
+    \subsection{Domyślne argumenty szablonów}
+    
+    Argumenty końcowe szablonu mogą mieć domyślne wartości.
+
+    \begin{lstlisting}[language=C++]
+template <typename T, typename S = double>
+class X{
+    //...
+};
+
+X<int> x1;
+X<int, double> x2;
+    \end{lstlisting}
+
+\newpage
+    \subsection{Specjalizacja szablonów}
+    Możliwe jest dostarczenie niestandardowego kodu dla danego zestawu argumentów szablonu.
+
+    \begin{lstlisting}[language=C++]
+template<typename T>   
+struct is_void : std::false_type {};
+
+// specjalizacja szablonu dla T = void
+template<>
+struct is_void<void> : std::true_type {};    
+    \end{lstlisting}
+
+    Przykładem takiej specjalizacji jest vector booli - wartości są przechowywane
+    w sposób optymalny, tzn. przy pomocy operacji binarnych, na pojedynczych bitach,
+    nie bajtach.
+    \newpage
+    
     \section{Podstawowe kontenery w STL z szerszym omówieniem jednego z nich.}
     \begin{definition}
     Standard Template Library
