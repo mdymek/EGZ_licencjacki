@@ -7553,7 +7553,187 @@
     \section{Pamięć wirtualna i mechanizm stronicowania.}
     \section{Systemy plikowe - organizacja fizyczna i logiczna (na przykładzie wybranego systemu uniksopodobnego).}
     \section{Model ISO OSI. Przykłady protokołów w poszczególnych warstwach.}
+
+    \newpage
+
     \section{Adresowanie w protokołach IPv4 i IPv6.}
+
+    \subsection{Adresowanie w IPv4.}
+
+    \begin{exercise}
+        Wylicz adres sieci i broadcast z adresu hosta:
+        \begin{enumerate}
+            \item 11.12.13.14/24
+            \item 11.12.13.14/25
+            \item 11.12.13.167/28
+            \item 11.12.138.167/17
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{enumerate}
+        \item 11.12.13.14/24\\
+        Maska $24 = 3*8$ bajtów (24 jedynki i 8 zer) od lewej - odcina trzy pierwsze oktety. Dla adresu sieci zerujemy
+        resztę, dla broadcastu - wypełniamy jedynkami.
+        \begin{itemize}
+            \item sieć: 11.12.13.0/24
+            \item broadcast: 11.12.13.255/24
+        \end{itemize}
+        \item 11.12.13.14/25\\
+        Maska 25 bajtów ``odcina'' pierwszy bajt ostatniego oktetu (\textbf{0}0001110).
+        Uzupełniamy zerami/jedynkami pozostałe 7 bajtów.
+        \begin{itemize}
+            \item sieć: 11.12.13.0/24
+            \item broadcast: 11.12.13.127/24
+        \end{itemize}
+        \item 11.12.13.167/28\\
+        28 bajtów - odcięte pierwsze z lewej cztery bajty ostatniego oktetu (\textbf{1010}0111), pozostałe cztery uzupełniamy.
+        \begin{itemize}
+            \item sieć: 11.12.13.160/24
+            \item broadcast: 11.12.13.175/24
+        \end{itemize}
+        \item 11.12.138.167/17\\
+        17 bajtów z lewej - zahaczamy jednym bajtem o 3 oktet(\textbf{1}0001010), zostaje 15 bajtów.
+        \begin{itemize}
+            \item sieć: 11.12.128.0/24
+            \item broadcast: 11.12.255.255/24
+        \end{itemize}
+    \end{enumerate}
+
+    \begin{exercise}
+        Podziel podaną sieć na jak najwięcej podsieci tak, aby każda miała n użytecznych adresów.
+        \begin{enumerate}
+            \item 10.0.0.0/24, n = 7
+            \item 132.168.0.0/16, n = 30
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{enumerate}
+        \item 10.0.0.0/24, n = 7\\
+        7 użytecznych adresów IP - $7 \leq 2^k - 2 ~ \Rightarrow ~ 9 \leq 2^k ~ \Rightarrow ~ k = 4$. Potrzebujemy czterech
+        bajtów na adres hosta, zostają 4 bajty na adres podsieci (pierwsze 24 odcina maska jako adres sieci). Nowa maska
+        $= 24 + 4 = 28$ bajtów. Zatem adresy podsieci:
+        \begin{itemize}
+            \item pierwsza: 10.0.0.0/28
+            \item druga: 10.0.0.16/28
+            \item $\vdots$
+            \item przedostatnia: 10.0.0.224/28
+            \item ostatnia: 10.0.0.240/28
+        \end{itemize}
+
+        \item 132.168.0.0/16, n = 30\\
+        $30 \leq 2^k - 2 ~ \Rightarrow ~ 32 \leq 2^k ~ \Rightarrow ~ k = 5$. 5 bajtów na adres hosta, $32-5-16 = 11$ na adres
+        podsieci - zaczynając od trzeciego oktetu. Nowa maska $= 16 + 11 = 27$.
+        \begin{itemize}
+            \item pierwsza: 132.168.0.0/27
+            \item druga: 132.168.0.32/27
+            \item $\vdots$
+            \item przedostatnia: 132.168.255.224/27
+            \item ostatnia: 132.168.255.192/27
+        \end{itemize}
+    \end{enumerate}
+
+    \begin{exercise}
+        Podziel daną sieć na n podsieci po równo hostów.
+        \begin{enumerate}
+            \item 132.168.0.0/16, n = 7
+            \item 192.168.128.0/20, n = 4
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{enumerate}
+        \item 132.168.0.0/16, n = 7\\
+        $7 \leq 2^n ~ \Rightarrow ~ k = 3$ potrzebujemy 3 bajtów na zakodowanie podsieci (będzie ich 8). 16 bajtów odcina
+        maska, kolejne 3 to podsieć i pozostałe 13 to host (nowa maska $= 16 + 3 = 19$).
+        \begin{itemize}
+            \item pierwsza: 132.168.0.0/19
+            \item druga: 132.168.32.0/19
+            \item $\vdots$
+            \item przedostatnia: 132.168.192.0/19
+            \item ostatnia: 132.168.224.0/19
+        \end{itemize}
+
+        \item 192.168.128.0/20, n = 4\\
+        $4 \leq 2^k ~ \Rightarrow ~ k = 2$ bajty na podsieć. 20 bajtów odciętych przez maskę (w tym pierwsze cztery
+        z 3 oktetu - \textbf{1000}0000), 2 na podsieć (nowa maska $=20+2=22$), 10 na adres hosta. Kolejne adresy:
+        \begin{itemize}
+            \item 192.168.128.0/22
+            \item 192.168.132.0/22
+            \item 192.168.136.0/22
+            \item 192.168.140.0/22
+        \end{itemize}
+    \end{enumerate}
+
+    \begin{exercise}
+        \textbf{Sumaryzacja sieci}. Zagreguj poniższe sieci - wyznacz najbardziej precyzyjną agregującą ``nadsieć''.
+        \begin{enumerate}
+            \item
+            \begin{enumerate}[label=(\Alph*)]
+                \item 11.12.1.0/24
+                \item 11.12.2.0/24
+                \item 11.12.3.0/24
+                \item 11.12.4.0/24
+            \end{enumerate}
+            \item
+            \begin{enumerate}[label=(\Alph*)]
+                \item 192.130.0.0/16
+                \item 192.137.0.0/16
+                \item 192.138.0.0/16
+            \end{enumerate}
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{enumerate}
+        \item
+        \begin{enumerate}[label=(\Alph*)]
+            \item 11.12.1.0/24
+            \item 11.12.2.0/24
+            \item 11.12.3.0/24
+            \item 11.12.4.0/24
+        \end{enumerate}
+        Szukamy pierwsze od lewej bajtu, który się różni dla co najmniej dwóch z tych sieci. Widzimy, że pierwsze dwa
+        oktety są wspólne dla wszystkich, rozpisujemy więc trzeci:
+        \begin{center}
+            \begin{tabular}{c || c c c c c | c c c}
+                A & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & 0 & 0 & 1\\
+                \hline
+                B & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & 0 & 1 & 0\\
+                \hline
+                C & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & 0 & 1 & 1\\
+                \hline
+                D & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & 1 & 0 & 0\\
+                \hline
+                \hline
+                & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\
+            \end{tabular}
+        \end{center}
+        Różnią się dopiero na 6 bajcie, pierwsze pięć jest zgodnych. Zatem nadsieć współdzieli pierwsze $16+5=21$ bajtów:
+        \[11.12.0.0/21\]
+
+        \item
+        \begin{enumerate}[label=(\Alph*)]
+            \item 192.130.0.0/16
+            \item 192.137.0.0/16
+            \item 192.138.0.0/16
+        \end{enumerate}
+    \end{enumerate}
+    Różnica w drugim oktecie:
+    \begin{center}
+        \begin{tabular}{c || c c c c | c c c c}
+            A & \textbf{1} & \textbf{0} & \textbf{0} & \textbf{0} & 0 & 0 & 1 & 0\\
+            \hline
+            B & \textbf{1} & \textbf{0} & \textbf{0} & \textbf{0} & 1 & 0 & 0 & 1\\
+            \hline
+            C & \textbf{1} & \textbf{0} & \textbf{0} & \textbf{0} & 1 & 0 & 1 & 0\\
+            \hline
+            \hline
+            & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\
+        \end{tabular}
+    \end{center}
+    Różnią się dopiero na 5 bajcie, pierwsze cztery są zgodne. Zatem nadsieć współdzieli pierwsze $16+4=20$ bajtów:
+    \[192.128.0.0/21\]
+
+    \newpage
+
     \section{Najważniejsze procesy zachodzące w sieci komputerowej od momentu wpisania adresu strony WWW do wyświetlenia strony w przeglądarce (komunikat HTTP, segment TCP, system DNS, pakiet IP, ARP, ramka).}
     \section{Działanie przełączników Ethernet, sieci VLAN, protokół STP.}
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}

@@ -6308,6 +6308,180 @@ mathescape
     \newpage
 
     \section{Adresowanie w protokołach IPv4 i IPv6.}
+
+    \subsection{Adresowanie w IPv4.}
+    Adres IP jest przypisywany do karty sieciowej, nie do komputera. Składają się z czterech części bo 8 bajtów\\
+
+    \noindent Istnieją \textbf{trzy typy adresów IPv4}:
+    \begin{itemize}
+        \item \textbf{Adresy jednostkowe} (unicast) – pojedynczy interfejs sieciowy (one-to-one).
+        \item \textbf{Adresy rozgłoszeniowe} (broadcast) – wszystkie węzły w tym samym segmencie sieci (one-to-everyone).
+        \item \textbf{Adresy grupowe} (multicast) – jeden lub wiele komputerów w jednej lub w różnych segmentach sieci (one-to-many).
+    \end{itemize}
+
+    \noindent W \textbf{adresie IP} zapisanym binarnie można wyróżnić \textbf{dwie części}:
+    \begin{itemize}
+        \item \textbf{Identyfikator sieci} (Network ID) - pewna liczba bitów z lewej strony adresu.
+        \item \textbf{Identyfikator hosta} (Host ID) - pozostałe bity.
+    \end{itemize}
+    \textbf{Granica} między identyfikatorem sieci a identyfikatorem hosta może być wyznaczona przez
+    tzw. \textbf{maskę sieci}.
+
+    Adres IP, który zawiera \textbf{same zera} w części hosta jest traktowany jako \textbf{adres sieci}.
+    \textbf{Adresy rozgłoszenia do sieci lub podsieci mają jedynki tylko w części hosta}.
+
+    \textbf{Adres ograniczonego rozgłoszenia} - 255.255.255.255- adres rozgłoszenia
+    w danym segmencie sieci ograniczonym routerami.\\
+
+    \subsubsection{Adresowanie oparte na klasach}
+
+    Pierwszy bajt adresu determinuje do jakiej klasy należy sieć.
+
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Klasa & Adres sieci & Adresy & Zakres 1-go bajtu & Najstarsze bity\\
+        \hline
+        A & w.0.0.0 & 1.0.0.0 - 126.0.0.0 & 1 – 126 & 0\\
+        \hline
+        B & w.x.0.0 & 128.0.0.0 - 191.255.0.0 & 128 – 191 & 10\\
+        \hline
+        C & w.x.y.0 & 192.0.0.0 - 223.255.255.0 & 192 – 223 & 110\\
+        \hline
+        D & nie dotyczy & nie dotyczy & 224 – 239 & 1110\\
+        \hline
+        E & nie dotyczy & nie dotyczy & 240 – 255 & 11110\\
+        \hline
+    \end{tabular}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                Klasa & Ilość sieci & \# Hostów & ID sieci & ID hosta & pierwszy & ostatni\\
+                \hline
+                A & 126 & $2^{24}-2$ & 1 bajt & 3 bajty & w.0.0.1 & w.255.255.254\\
+                \hline
+                B & $(191-128+1)*256$ & $2^{16}-2$ & 2 bajty & 2 bajty & w.x.0.1 & w.x.255.254\\
+                \hline
+                C & $(192-223+1)*256^2$ & $2^8-2$ & 3 bajty & 1 bajt & w.x.z.1 & w.x.z.254\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+
+    \begin{itemize}
+        \item \textbf{Adresy klasy D} - przeznaczone są do transmisji grupowych.
+        \item \textbf{Adresy klasy E} - zarezerwowane (nie wykorzystywane normalnie do transmisji pakietów).
+        \item \textbf{Adresy pętli zwrotnej} (loopback) - postaci 127.x.y.z (na ogół 127.0.0.1). Cały ruch przesyłany na ten adres nie wychodzi z komputera.
+    \end{itemize}
+
+
+    \subsubsection{Adresowanie bezklasowe}
+    Dzielenie na podsieci z \textbf{użyciem dowolnej liczby jedynek}. Do określenia sieci należy podać adres
+    sieci oraz maskę. Obecnie w Internecie powszechnie jest wykorzystywane adresowanie
+    bezklasowe.
+
+    \begin{itemize}
+        \item Protokół \textbf{warstwy trzeciej} modelu ISO OSI.
+        \item Oprogramowanie implementujące protokół IP jest odpowiedzialne za:
+        \begin{itemize}
+            \item \textbf{adresowanie} IP,
+            \item \textbf{tworzenie datagramów} IP (pakietów)
+            \item uczestniczenie w \textbf{kierowaniu ich} w sieci z punktu początkowego do punktu docelowego.
+        \end{itemize}
+        \item Realizuje usługę \textbf{zawodną}. Jeśli komunikacja powinna zawierać mechanizmy niezawodności, to muszą one być dostarczone przez protokoły warstwy wyższej.
+        \item Datagram IP składa się z nagłówka (header) i bloku danych (payload).
+        \begin{itemize}
+            \item \textbf{Nagłówek} dzięki informacjom w nim zawartym umożliwia obsługę routowania, identyfikację bloku danych, określenie rozmiaru nagłówka i datagramu oraz obsługę fragmentacji. W nagłówku mogą się znaleźć również tzw. opcje rozszerzające.
+            \item \textbf{Blok danych}.
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Adresowanie w IPv6.}
+
+    \begin{itemize}
+        \item \textbf{osiem 16 bitowych sekcji w zapisie szesnastkowym}, oddzielonych dwukropkami,
+
+        np.: fe80:0000:0000:0000:0202:b3ff:fe1e:8329
+        \item długi ciąg zer może być \textbf{raz} połączony i przedstawiony jako dwa dwukropki "::"
+        \item w środowisku z węzłami IPv4 oraz IPv6 często \textbf{w adresie IPv6 umieszcza się również IPv4}. Są dwa typy takich adresów:
+        \begin{itemize}
+            \item \textbf{Typ 1: IPv4-Compatible IPv6 Address} - 96 bitów zero + adres IPv4
+            \item \textbf{Typ 2: IPv4-Mapped IPv6 Address} (zalecany) - $0000..............................0000$ ffff + IPv4 address
+        \end{itemize}
+        \item Zamiast identyfikatora sieci (jak było w IPv4), w IPv6 używa się tzw. \textbf{prefiksu}. Prefiks to \textbf{pewna liczba bitów} adresu licząc z lewej strony. Prefiks \textbf{określa} zatem \textbf{sieć}. Prefiks podaje się standardowo jako pewną liczbę sekcji adresu.
+    \end{itemize}
+
+    \subsubsection{Typy adresów}
+    \begin{itemize}
+        \item \textbf{Adres niewyspecyfikowany} - ::/128
+        \item \textbf{Pętla zwrotna} (Loopback) - ::1/128
+        \item \textbf{Multicast} - ff00::/8 (1111 1111)
+        \item \textbf{Link-local unicast} - fe80::/10 (1111 1110 10)
+        \item \textbf{Global unicast}
+    \end{itemize}
+
+    \subsubsection{Klasyfikacja adresów.}
+    \begin{enumerate}
+        \item \textbf{adresy jednostkowe (unicast)} - może być przypisany do wielu interfejsów w węźle lub wielu komputerów;
+        podzielony na prefiks i identyfikator interfejsu, Typowy prefix - 48 bitów od dostawcy, 16 od podsieci.
+        \begin{itemize}
+            \item Global unicast address - dawniej w strukturze hierarchicznej, obecnie zawiera prefix,
+            identyfikator podsieci i identyfikator interfejsu.
+            \item Adresy jednostkowe używane lokalnie (Link-local Unicast Address) - używane na łączach, na których nie
+            ma routerów, do tworzenia sieci tymczasowych - 1111111010 + 54 bity zera + 64 bity ID interfejsu.
+            \item Adresy jednostkowe siedziby lokalnej (Site-local Unicast Address) - przestarzały odpowiednik adresów
+            prywatnych IPv4, używane do adresacji wewnątrz prywatnej organizacji - 1111111011 + 38 bitów 0 + 16 bitów
+            ID podsieci + 64 bity ID interfejsu.
+        \end{itemize}
+        \item \textbf{adresy pobliskie (anycast)} - z zakresu adresów jednostkowych organizacji, przydzielane do grupy
+        węzłów (np. routerów).
+        \begin{itemize}
+            \item Required Anycast Address - podobny do adresu sieci w IPv4 - n-bitowy prefix i same zera. Każdy router
+            rozpoznaje ten adres jako swój.
+        \end{itemize}
+        \item \textbf{adresy grupowe (multicast)} - zastępują adresy rozgłoszeniowe i grupowe w IPv4, przydzielane do
+        grupy węzłów lecz w przeciwieństwie do anycasta wszystkie węzły odbierają pakiety wysłane do danego adresu
+        - 11111111 + 4 bity flagi + 4 bity zakresu + 112 bitów ID grupy.
+        \begin{itemize}
+            \item Solicited-Node Multicast Address - adres grupowy tworzony automatycznie dla każdego adresu uni/anycast
+            w każdym węźle. Adres ten jest tworzony
+            przez 24 najmniej znaczące bity adresu IPv6 (ostatnia część identyfikatora hosta) przez
+            dodanie do nich prefiksu: ff02:0:0:0:0:1:ff00::/104.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsubsection{Wymagane adres IPv6}
+    Host powinien rozpoznawać następujące adresy:
+    \begin{itemize}
+        \item Link-Local address dla każdego swojego interfejsu.
+        \item Dodatkowe adresy Unicast i Anycast skonfigurowane ręcznie lub automatycznie dla interfejsów.
+        \item Adres loopback (::1).
+        \item Adres All-Nodes multicast (ff02:0:0:0:0:0:0:1).
+        \item Adres Solicited-Node multicast dla każdego adresu Unicast i Anycast skonfigurowanego na interfejsach.
+        \item Adresy Multicast wszystkich grup, do których host należy.
+    \end{itemize}
+
+    Router powinien ponadto rozpoznawać następujące adresy:
+    \begin{itemize}
+        \item Adres Subnet-Router Anycast na wszystkich łączach, na których działa jako router
+        \item Wszystkie inne adresy Anycast, skonfigurowane na routerze.
+        \item Adresy multicast dotyczące routerów
+    \end{itemize}
+
+    \subsubsection{Skąd wziąć adres MAC?}
+    \begin{itemize}
+        \item Unicastowy adres IP na multicastowy (Solicited Node Multicast address) - ff02:0:0:0:0:1:ff\_:\_ \_,
+        z trzema najmłodszymi bajtami adresu IP
+        \item Multicastowy MAC - 33:33:\_:\_:\_:\_ z czterema najmłodszymi bajtami adresu multicastowego
+        \item Ramka skonstruowana z adresem MAC, z pakietem IP z multicastowym IP w środku, z unicastowym w komunikacie ICMP
+        \item Switche się znają na tyle, że ramka w miarę dochodzi tylko tam gdzie trzeba
+        \item Komputer otrzymujący ramkę sprawdza czy o niego chodzi w komunikacie ICMP, i unicastowo odpowiada
+    \end{itemize}
+
+    \newpage
+
     \section{Najważniejsze procesy zachodzące w sieci komputerowej od momentu wpisania adresu strony WWW do wyświetlenia strony w przeglądarce (komunikat HTTP, segment TCP, system DNS, pakiet IP, ARP, ramka).}
     \section{Działanie przełączników Ethernet, sieci VLAN, protokół STP.}
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
