@@ -7546,6 +7546,9 @@
     \newpage
 
     \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
+
+	\newpage
+
     \section{Minimalizacja funkcji logicznych.}
 	\subsection{Minimalizacja z wykorzystaniem algebry Boole’a}
 	\begin{exercise}
@@ -7587,6 +7590,7 @@
 
 	\noindent $\mathbf{f(a, b, c) = \neg a \wedge (b \wedge 1) \vee a \wedge ( \neg b \wedge 1) = (\neg a \wedge b) \vee (a \wedge \neg b)}$
 
+	\newpage
 
 	\subsection{Minimalizacja z wykorzystaniem tablic Karnaugha}
 	\begin{exercise}
@@ -7618,7 +7622,7 @@
 
 	\noindent W naszym przypadku podzielimy argumenty naszej funkcji na \texttt{ab} oraz \texttt{cd} (ale oczywiście można dowolnie inaczej).
 	\noindent Tworzymy tabelę Karnaugha zapisując poszczególne kombinacje wartości naszych argumentów - kolejność tych kombinacji nie ma znaczenia, ale odpowiedni jej dobór ułatwia dalsze działanie
-	(pozwala zaznaczyć z jednym razem większy obszar):
+	(pozwala zaznaczyć za jednym razem większy obszar):
 
 	\begin{table}[H]
 	\centering
@@ -7632,8 +7636,8 @@
 	\end{tabular}
 	\end{table}
 
-	\noindent Szukamy teraz ciągłych obszarów z \texttt{1}, których wielkość (ilość jedynek jest potęgą 2. Jak widzimy taki obszar złożony z czterech \texttt{1} występuje na środku tabelki.
-	Dodatkowo jeżeli skorzystamy z faktu, że tabelka ta jest cykliczna, to możemy wysnaczyć drugi taki obszar (złożony również z chterech \texttt{1}), w skład którego wchodzą \texttt{1} na rogach tabeli. \\
+	\noindent Szukamy teraz ciągłych obszarów z \texttt{1}, których wielkość (ilość jedynek jest potęgą 2. Jak widzimy, taki obszar złożony z czterech \texttt{1} występuje na środku tabelki.
+	Dodatkowo jeżeli skorzystamy z faktu, że tabelka ta jest cykliczna, to możemy wyznaczyć drugi taki obszar (złożony również z czterech \texttt{1}), w skład którego wchodzą \texttt{1} na rogach tabeli. \\
 	\noindent Te dwa obszary pokrywają już wszystkie \texttt{1}, więc na tym kończymy ich wyszukiwanie:
 
 	\begin{table}[H]
@@ -7652,7 +7656,7 @@
 		\textbf{\color[HTML]{FD6864}Obszar A}	\textbf{\color[HTML]{34CDF9}Obszar B}
 	\end{center}
 
-	\noindent Teraz dla każdego z obszarów wykluczamy te zmienne od których nie zależy (które się zmieniają na tym obszarze). \\
+	\noindent Teraz dla każdego z obszarów wykluczamy te zmienne, od których nie zależy (które się zmieniają na tym obszarze). \\
 	\noindent I tak dla obszaru \textbf{\color[HTML]{FD6864}A}, dla zmiennych w wierszach zmienia się zmienna \texttt{a} (z 0 na 1), więc ją wykluczamy
 	oraz dla zmiennych w kolumnach zmienia się zmienna \texttt{c}, więc również ją wykluczamy. \\
 	\noindent Teraz z niewykluczonych zmiennych tworzymy funkcję iloczynu (podobnie jak w poprzedniej metodzie): \\
