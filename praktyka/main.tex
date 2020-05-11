@@ -7594,79 +7594,38 @@
 
 	\subsection{Minimalizacja z wykorzystaniem tablic Karnaugha}
 	\begin{exercise}
-		Zminimalizuj funkcję logiczną zadaną poniższą tabelką:
-		\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c|c|c|c|}
-		\hline
-		\textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{f ( a,b,c,d )} \\ \hline
-		0          & 0          & 0          & 0          & 1                      \\ \hline
-		0          & 0          & 0          & 1          & 0                      \\ \hline
-		0          & 0          & 1          & 0          & 1                      \\ \hline
-		0          & 0          & 1          & 1          & 0                      \\ \hline
-		0          & 1          & 0          & 0          & 0                      \\ \hline
-		0          & 1          & 0          & 1          & 1                      \\ \hline
-		0          & 1          & 1          & 0          & 0                      \\ \hline
-		0          & 1          & 1          & 1          & 1                      \\ \hline
-		1          & 0          & 0          & 0          & 1                      \\ \hline
-		1          & 0          & 0          & 1          & 0                      \\ \hline
-		1          & 0          & 1          & 0          & 1                      \\ \hline
-		1          & 0          & 1          & 1          & 0                      \\ \hline
-		1          & 1          & 0          & 0          & 0                      \\ \hline
-		1          & 1          & 0          & 1          & 1                      \\ \hline
-		1          & 1          & 1          & 0          & 0                      \\ \hline
-		1          & 1          & 1          & 1          & 1                      \\ \hline
-		\end{tabular}
-		\end{table}
+		Uprość funkcję f(x, y, z) = $\sum$(0, 2, 4, 6, 7)
 	\end{exercise}
 
-	\noindent W naszym przypadku podzielimy argumenty naszej funkcji na \texttt{ab} oraz \texttt{cd} (ale oczywiście można dowolnie inaczej).
-	\noindent Tworzymy tabelę Karnaugha zapisując poszczególne kombinacje wartości naszych argumentów - kolejność tych kombinacji nie ma znaczenia, ale odpowiedni jej dobór ułatwia dalsze działanie
-	(pozwala zaznaczyć za jednym razem większy obszar):
+	\noindent W przypadku takiego zapisu funkcji, liczby traktujemy jako zapisane dziesiętnie liczby binarne, w których każdy bit odpowiada danej zmiennej w funkcji
+	(najstarszy bit odpowiada pierwszej zmiennej funkcji, itd.) \\
+	\noindent Więc dla przykładu 6 odpowiada 110 = $xy\bar{z}$ \\
 
-	\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|c|c|c|c|}
-	\hline
-	\textbf{\diagbox{ab}{cd}} & \textbf{00} & \textbf{01} & \textbf{11} & \textbf{10} \\ \hline
-	\textbf{00}     & 1           & 0           & 0           & 1           \\ \hline
-	\textbf{01}     & 0           & 1           & 1           & 0           \\ \hline
-	\textbf{11}     & 0           & 1           & 1           & 0           \\ \hline
-	\textbf{10}     & 1           & 0           & 0           & 1           \\ \hline
-	\end{tabular}
-	\end{table}
-
-	\noindent Szukamy teraz ciągłych obszarów z \texttt{1}, których wielkość (ilość jedynek jest potęgą 2. Jak widzimy, taki obszar złożony z czterech \texttt{1} występuje na środku tabelki.
-	Dodatkowo jeżeli skorzystamy z faktu, że tabelka ta jest cykliczna, to możemy wyznaczyć drugi taki obszar (złożony również z czterech \texttt{1}), w skład którego wchodzą \texttt{1} na rogach tabeli. \\
-	\noindent Te dwa obszary pokrywają już wszystkie \texttt{1}, więc na tym kończymy ich wyszukiwanie:
-
-	\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|c|c|c|c|}
-	\hline
-	\textbf{\diagbox{ab}{cd}} & \textbf{00}               & \textbf{01}               & \textbf{11}               & \textbf{10}               \\ \hline
-	\textbf{00}     & \cellcolor[HTML]{34CDF9}1 & 0                         & 0                         & \cellcolor[HTML]{34CDF9}1 \\ \hline
-	\textbf{01}     & 0                         & \cellcolor[HTML]{FD6864}1 & \cellcolor[HTML]{FD6864}1 & 0                         \\ \hline
-	\textbf{11}     & 0                         & \cellcolor[HTML]{FD6864}1 & \cellcolor[HTML]{FD6864}1 & 0                         \\ \hline
-	\textbf{10}     & \cellcolor[HTML]{34CDF9}1 & 0                         & 0                         & \cellcolor[HTML]{34CDF9}1 \\ \hline
-	\end{tabular}
-	\end{table}
+	\noindent Uzupełniamy tablice Karnaugha dla funkcji 3 zmiennych: \\
 
 	\begin{center}
-		\textbf{\color[HTML]{FD6864}Obszar A}	\textbf{\color[HTML]{34CDF9}Obszar B}
+		\includegraphics[width=\linewidth]{karnaugh/3-vars.png}
 	\end{center}
 
-	\noindent Teraz dla każdego z obszarów wykluczamy te zmienne, od których nie zależy (które się zmieniają na tym obszarze). \\
-	\noindent I tak dla obszaru \textbf{\color[HTML]{FD6864}A}, dla zmiennych w wierszach zmienia się zmienna \texttt{a} (z 0 na 1), więc ją wykluczamy
-	oraz dla zmiennych w kolumnach zmienia się zmienna \texttt{c}, więc również ją wykluczamy. \\
-	\noindent Teraz z niewykluczonych zmiennych tworzymy funkcję iloczynu (podobnie jak w poprzedniej metodzie): \\
-	$\mathbf{{\color[HTML]{FD6864}A} = b \wedge d}$ \\
+	\noindent W polach odpowiadających liczbom z naszej funkcji wpisujemy \texttt{1}: \\
 
-	\noindent Następnie to samo robimy dla obszaru \textbf{\color[HTML]{34CDF9}B}: tutaj okazuje się, że również wykluczamy zmienne \texttt{a} oraz \texttt{c}, a nasza funkcja ma postać: \\
-	$\mathbf{{\color[HTML]{34CDF9}B} = \neg b \wedge \neg d}$ \\
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{karnaugh/1.png}
+	\end{center}
 
-	\noindent Ostatecznie nasza pierwotna, zminimalizowana funkcja będzie sumą funkcji dla poszczególnych obszarów, czyli w naszym przypadku: \\
-	$\mathbf{f(a, b, c, d) = {\color[HTML]{FD6864}A} \vee {\color[HTML]{34CDF9}B} = (b \wedge d) \vee (\neg b \wedge \neg d)}$
+	\noindent Nastepnie zaznaczamy prostokątnym zaznaczeniem jak największą liczbę pól z \texttt{1}, ale tylko w taki sposób aby liczba tych pól była całkowitą potęgą 2.
+	Warto w tym miejscu pamiętać, że tablice Karnaugha możemy traktować jako tablicę cykliczną: \\
+
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{karnaugh/2.png}
+	\end{center}
+
+	\noindent Następnie odczytujemy z tablic uproszczone już iloczyny dla poszczególnych zaznaczeń: dane zaznaczenie jest iloczynem tych zmiennych do których to zaznaczenie całkowicie należy lub nie należy. \\
+	\noindent Tak więc dla zaznaczenia \textbf{\color[HTML]{ff0000}A} będzie to $\bar{z}$ ponieważ zaznaczenie w całości nie leży w obszarze zmiennej z. \\
+	\noindent Natomiast dla zaznaczenia \textbf{\color[HTML]{00ff00}B} będzie to \texttt{xy} ponieważ leży ono całkowicie na obszarze zmiennych x oraz y. \\
+
+	\noindent Ostatecznie nasza wyjściowa funkcja po uproszczeniu będzie miała postać sumy iloczynów poszczególnych obszarów: \\
+	\noindent f(x, y, z) = $\sum$(0, 2, 4, 6, 7) = xy + $\bar{z}$
 
 	\newpage
 

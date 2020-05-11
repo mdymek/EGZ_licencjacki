@@ -6314,16 +6314,24 @@ mathescape
     
     \subsection{Minimalizacja z wykorzystaniem tablic Karnaugha}
     \begin{definition}
-    Minimalizacja z wykorzystaniem tablic Karnaugha polega na podziale argumentów funkcji na dwie grupy, a następnie zapisaniu tej funkcji w postaci tabeli,
-    gdzie nagłówkami wierszy są poszczególne kombinacje argumentów z pierwszej grupy, nagłówkami kolumn kombinacje argumentów z drugiej grupy,
-    a wartościami w komórkach wartości naszej funkcji dla poszczególnych argumentów. \\
-    W tak przygotowanej tabeli szukamy takich obszarów, aby prostokątnym zaznaczeniem można było objąć 1 w ilości będącej potęgą 2 (1, 2, 4, 8, ...). Obszarami tymi musimy pokryć wszystkie 1.
-    Obszary mogą na siebie zachodzić.
-    Ponadto tablicę tą możemy traktować jako tablicę cykliczną (początek i koniec danego wiersza lub kolumny łączą się ze sobą), co często ułatwia zaznaczanie obszarów. \\
-    Gdy mamy już zaznaczone obszary, dla każdego z nich patrzymy od jakich zmiennych zależy, tzn. jeżeli dana zmienna zmienia się dla tego obszaru, oznacza to, że nie zależy on od tej zmiennej i możemy ją wykluczyć.
-    Następnie zapisujemy dane obszary jako funkcje iloczynu niewykluczonych zmiennych, dla których obszar przyjmuje wartość 1 - czyli piszemy iloczyn wszystkich niewykluczonych zmiennych, a dodatkowo te zmienne,
-    które na tym obszarze miały wartość 0 negujemy. \\
-    Ostatecznie nasza zminimalizowana funkcja będzie miała postać sumy wszystkich funkcji dla wszystkich zaznaczonych obszarów wyznaczonych w poprzednim kroku.
+    \textbf{Tablica Karnaugha} składa się z pól reprezentujących wszystkie kombinacje zmiennych naszej funkcji, którą chcemy zminimalizować jednak są one ułożone w specyficzny sposób:
+    każde sąsiednie dwa pola (pól po ukosie nie uznajemy za sąsiednie) muszą się różnić wartością tylko jednej zmiennej.
+    Za sąsiednie pola uważamy również pola na krańcach danego wiersza i danej kolumny - możemy więc traktować tą tablicę jako tablicę cykliczną. \\
+    
+    Przykłady gotowych tablic Karnauhga: \\
+    
+    \begin{center}
+    		Dla dwóch zmiennych \\
+		\includegraphics[width=\linewidth]{karnaugh/2-vars.png}
+		
+		Dla trzech zmiennych \\
+		\includegraphics[width=\linewidth]{karnaugh/3-vars.png}
+		
+		Dla czterech zmiennych \\
+		\includegraphics[width=\linewidth]{karnaugh/4-vars.png}
+	\end{center}
+    
+    Przy pomocy tablic Karnaugha możemy minimalizować funkcję o maksymalnie 6 zmiennych.
     \end{definition}
     
     
