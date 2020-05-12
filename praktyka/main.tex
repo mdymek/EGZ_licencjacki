@@ -28,6 +28,7 @@
 \usepackage{forest}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{diagbox}
 
 \hypersetup{
     colorlinks=true,
@@ -7545,7 +7546,89 @@
     \newpage
 
     \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
+
+	\newpage
+
     \section{Minimalizacja funkcji logicznych.}
+	\subsection{Minimalizacja z wykorzystaniem algebry Boole’a}
+	\begin{exercise}
+		Zminimalizuj funkcję logiczną zadaną poniższą tabelką:
+		\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{a} & \textbf{b} & \textbf{c} & \textbf{f ( a,b,c )} \\ \hline
+		0          & 0          & 0          & 0                    \\ \hline
+		0          & 0          & 1          & 0                    \\ \hline
+		0          & 1          & 0          & 1                    \\ \hline
+		0          & 1          & 1          & 1                    \\ \hline
+		1          & 0          & 0          & 1                    \\ \hline
+		1          & 0          & 1          & 1                    \\ \hline
+		1          & 1          & 0          & 0                    \\ \hline
+		1          & 1          & 1          & 0                    \\ \hline
+		\end{tabular}
+		\end{table}
+	\end{exercise}
+
+	\noindent Zapisujemy funkcję w postaci sumy iloczynów poszczególnych argumentów, dla których funkcja przyjmuje wartość 1.
+	Oczywiście aby wszystko było zgodne z prawdą, tam gdzie dany argument jest równy 0, musimy go zanegować: \\
+
+	\noindent $\mathbf{f(a, b, c) = (\neg a \wedge b \wedge \neg c) \vee (\neg a \wedge b \wedge c) \vee (a \wedge \neg b \wedge \neg c) \vee (a \wedge \neg b \wedge c)}$ \\
+
+	\noindent Następnie wykorzystując rozdzielność możemy uprościć to wyrażenie: \\
+
+	\noindent $\mathbf{f(a, b, c) = \neg a \wedge (b \wedge \neg c \vee b \wedge c) \vee a \wedge ( \neg b \wedge \neg c \vee \neg b \wedge c) =}$ \\
+	\noindent $\mathbf{= \neg a \wedge (b \wedge ( \neg c \vee c)) \vee a \wedge ( \neg b \wedge ( \neg c \vee c))}$ \\
+
+	\noindent Wykorzystując: \\
+	
+	\noindent $\mathbf{\neg c \vee c = 1}$ \\
+	\noindent $\mathbf{b \wedge 1 = b}$ \\
+	\noindent $\mathbf{\neg b \wedge 1 = \neg b}$ \\
+
+	\noindent Otrzymujemy: \\
+
+	\noindent $\mathbf{f(a, b, c) = \neg a \wedge (b \wedge 1) \vee a \wedge ( \neg b \wedge 1) = (\neg a \wedge b) \vee (a \wedge \neg b)}$
+
+	\newpage
+
+	\subsection{Minimalizacja z wykorzystaniem tablic Karnaugha}
+	\begin{exercise}
+		Uprość funkcję f(x, y, z) = $\sum$(0, 2, 4, 6, 7)
+	\end{exercise}
+
+	\noindent W przypadku takiego zapisu funkcji, liczby traktujemy jako zapisane dziesiętnie liczby binarne, w których każdy bit odpowiada danej zmiennej w funkcji
+	(najstarszy bit odpowiada pierwszej zmiennej funkcji, itd.) \\
+	\noindent Więc dla przykładu 6 odpowiada 110 = $xy\bar{z}$ \\
+
+	\noindent Uzupełniamy tablice Karnaugha dla funkcji 3 zmiennych: \\
+
+	\begin{center}
+		\includegraphics[width=\linewidth]{karnaugh/3-vars.png}
+	\end{center}
+
+	\noindent W polach odpowiadających liczbom z naszej funkcji wpisujemy \texttt{1}: \\
+
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{karnaugh/1.png}
+	\end{center}
+
+	\noindent Nastepnie zaznaczamy prostokątnym zaznaczeniem jak największą liczbę pól z \texttt{1}, ale tylko w taki sposób aby liczba tych pól była całkowitą potęgą 2.
+	Warto w tym miejscu pamiętać, że tablice Karnaugha możemy traktować jako tablicę cykliczną: \\
+
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{karnaugh/2.png}
+	\end{center}
+
+	\noindent Następnie odczytujemy z tablic uproszczone już iloczyny dla poszczególnych zaznaczeń: dane zaznaczenie jest iloczynem tych zmiennych do których to zaznaczenie całkowicie należy lub nie należy. \\
+	\noindent Tak więc dla zaznaczenia \textbf{\color[HTML]{ff0000}A} będzie to $\bar{z}$ ponieważ zaznaczenie w całości nie leży w obszarze zmiennej z. \\
+	\noindent Natomiast dla zaznaczenia \textbf{\color[HTML]{00ff00}B} będzie to \texttt{xy} ponieważ leży ono całkowicie na obszarze zmiennych x oraz y. \\
+
+	\noindent Ostatecznie nasza wyjściowa funkcja po uproszczeniu będzie miała postać sumy iloczynów poszczególnych obszarów: \\
+	\noindent f(x, y, z) = $\sum$(0, 2, 4, 6, 7) = xy + $\bar{z}$
+
+	\newpage
+
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
     \section{Schemat blokowy komputera (maszyna von Neumanna).}
     \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}

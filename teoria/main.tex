@@ -6204,7 +6204,139 @@ mathescape
     \newpage
 
     \section{Definicja cyfrowego układu sekwencyjnego - przykłady układów sekwencyjnych i ich implementacje.}
+    
+    \begin{definition}
+	Układem sekwencyjnym (ang. sequential logic circuits) nazywamy układ, w którym poziomy sygnałów wyjściowych zależą nie tylko od aktualnego stanu poziomów sygnałów na jego wejściu,
+	ale również od stanu poziomów, które występowały uprzednio. Oznacza to, że układy te zawierają elementy pamiętające i nazywane są czasem układami kombinacyjnymi z pamięcią.
+    \end{definition}
+    
+    \begin{definition}
+    	\textbf{Przerzutnik RS} (Reset-Set) - jest najprostszym rodzajem przerzutnika zbudowanego z 2 bramek NOR (w innej wersji NAND). Posiada dwa wejścia: S i R; oraz dwa wyjścia Q i $\bar{Q}$.
+    	Zasadę jego działania przedstawia poniższa tabelka:
+    	\begin{table}[H]
+    	\center
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	\textbf{R} & \textbf{S} & $\mathbf{Q_{n-1}}$ & $\mathbf{Q_n}$ \\ \hline
+	0          & 0          & 0                  & 0              \\ \hline
+	0          & 0          & 1                  & 1              \\ \hline
+	0          & 1          & X                  & 1              \\ \hline
+	1          & 0          & X                  & 0              \\ \hline
+	1          & 1          & X                  & N              \\ \hline
+	\end{tabular}
+	\end{table}
+	Jak widać, po podaniu 1 na wejście S, wyjście Q niezależnie od swojego poprzedniego stanu jest ustawiane na 1, natomiast podanie 1 na wejście R, powoduje ustawienie wyjścia Q na stan 0 niezależnie od jego poprzedniego stanu. Gdy ani na wejście S, ani na wejście R nie podamy 1, wtedy przerzutnik ``pamięta'' poprzedni stan (stan wyjścia Q się nie zmienia), natomiast podanie na oba wejścia 1 jest niedozwolone, ponieważ powoduje ustawienie stanu 0 na obu wyjściach, co jest niezgodne z założeniami (wyjście $\bar{Q}$ ma być zawsze negacją wyjścia Q). \\
+	\noindent Przykładowy schemat blokowy przerzutnika (na bramkach NOR): \\
+	
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{sequentials/rs.png}
+	\end{center}
+	
+    \end{definition}
+    
+    
+    
+    
+    \begin{definition}
+    	\textbf{Przerzutnik D} (Delay) - jest pewną modyfikacją przerzutnika RS. Ma on wejście D oraz C (Clock). Jego działanie polega na przekazaniu stanu wejścia D na wyjście Q w momencie ``tyknięcia'' zegara
+    	(podania stanu 1) na wejściu C.
+    	Zasadę jego działania przedstawia poniższa tabelka:
+    	\begin{table}[H]
+    	\center
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	\textbf{D} & $\mathbf{Q_{n-1}}$ & $\mathbf{Q_n}$ \\ \hline
+	0          & 0                  & 0              \\ \hline
+	0          & 1                  & 0              \\ \hline
+	1          & 0                  & 1              \\ \hline
+	1          & 1                  & 1              \\ \hline
+	\end{tabular}
+	\end{table}
+	
+	lub równoważnie:
+	
+	\begin{table}[H]
+    	\center
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	\textbf{D} & $\mathbf{Q_{n-1}}$ & $\mathbf{Q_n}$ \\ \hline
+	0          & X                  & 0              \\ \hline
+	1          & X                  & 1              \\ \hline
+	\end{tabular}
+	\end{table}
+	
+	Jak widać w przeciwieństwie do samego przerzutnika RS, który jest asynchroniczny, tutaj mamy wejście zegarowe, które synchronizuje jego pracę. \\
+	\noindent Przykładowy schemat blokowy przerzutnika (w tym przypadku część odpowiedzialna za przerzutnik RS została zbudowana na bramkach NAND - ta wersja nazywa się SR,
+	ponieważ w przypadku podania na oba wejścia 1, na obu wyjściach pojawi się stan 1 - Set ma priorytet): \\
+	
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{sequentials/d.png}
+	\end{center}
+	
+    \end{definition}
+    
+    
+    
+       \begin{definition}
+    	\textbf{Przerzutnik JK} - podobnie jak przerzutnik D jest synchroniczny oraz powstał poprzez modyfikację przerzutnika RS (SR). W tej wersji pozbyto się kłopotliwego stanu, gdy na oba wejścia przerzutnika RS podana zostanie 1.
+    	Przerzutnik JK posiada 3 wejścia: J, K oraz Clock. Porównując RS do JK: odpowiednikiem wejścia S jest wejście J, a odpowiednikiem wejścia R jest wejście K.
+    	Zasadę działania przerzutnika JK przedstawia poniższa tabelka:
+    	\begin{table}[H]
+    	\center
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	\textbf{J} & \textbf{K} & $\mathbf{Q_{n-1}}$ & $\mathbf{Q_n}$ \\ \hline
+	0          & 0          & 0                  & 0              \\ \hline
+	0          & 0          & 1                  & 1              \\ \hline
+	1          & 0          & X                  & 1              \\ \hline
+	0          & 1          & X                  & 0              \\ \hline
+	1          & 1          & 0                  & 1              \\ \hline
+	1          & 1          & 1                  & 0              \\ \hline
+	\end{tabular}
+	\end{table}
+	Jak widać w przypadku podania na oba wejścia (J i K) 1, przerzutnik zmienia stan wyjścia na odwrotny w stosunku do tego, który był przed podaniem sygnału zegarowego. \\
+	\noindent Przykładowy schemat blokowy przerzutnika (na bramkach NAND): \\
+	
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{sequentials/jk.png}
+	\end{center}
+	
+    \end{definition}
+    
+    \newpage
+    
     \section{Minimalizacja funkcji logicznych.}
+    
+    \subsection{Minimalizacja z wykorzystaniem algebry Boole'a}
+    \begin{definition}
+    Minimalizacja z wykorzystaniem algebry Boole'a polega na zapisaniu funkcji w postaci sumy stanów wejść, dla których funkcja przyjmuje wratość 1, a następnie wykorzystując prawa algebry Boole'a uproszczenie jej.
+    \end{definition}
+    
+    \subsection{Minimalizacja z wykorzystaniem tablic Karnaugha}
+    \begin{definition}
+    \textbf{Tablica Karnaugha} składa się z pól reprezentujących wszystkie kombinacje zmiennych naszej funkcji, którą chcemy zminimalizować jednak są one ułożone w specyficzny sposób:
+    każde sąsiednie dwa pola (pól po ukosie nie uznajemy za sąsiednie) muszą się różnić wartością tylko jednej zmiennej.
+    Za sąsiednie pola uważamy również pola na krańcach danego wiersza i danej kolumny - możemy więc traktować tą tablicę jako tablicę cykliczną. \\
+    
+    Przykłady gotowych tablic Karnauhga: \\
+    
+    \begin{center}
+    		Dla dwóch zmiennych \\
+		\includegraphics[width=\linewidth]{karnaugh/2-vars.png}
+		
+		Dla trzech zmiennych \\
+		\includegraphics[width=\linewidth]{karnaugh/3-vars.png}
+		
+		Dla czterech zmiennych \\
+		\includegraphics[width=\linewidth]{karnaugh/4-vars.png}
+	\end{center}
+    
+    Przy pomocy tablic Karnaugha możemy minimalizować funkcję o maksymalnie 6 zmiennych.
+    \end{definition}
+    
+    
+    \newpage
+    
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
     \section{Schemat blokowy komputera (maszyna von Neumanna).}
     \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}
