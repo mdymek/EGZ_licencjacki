@@ -7655,27 +7655,27 @@
 
     \begin{enumerate}
         \item 11.12.13.14/24\\
-        Maska $24 = 3*8$ bajtów (24 jedynki i 8 zer) od lewej - odcina trzy pierwsze oktety. Dla adresu sieci zerujemy
+        Maska $24 = 3*8$ bitów (24 jedynki i 8 zer) od lewej - odcina trzy pierwsze oktety. Dla adresu sieci zerujemy
         resztę, dla broadcastu - wypełniamy jedynkami.
         \begin{itemize}
             \item sieć: 11.12.13.0/24
             \item broadcast: 11.12.13.255/24
         \end{itemize}
         \item 11.12.13.14/25\\
-        Maska 25 bajtów ``odcina'' pierwszy bajt ostatniego oktetu (\textbf{0}0001110).
-        Uzupełniamy zerami/jedynkami pozostałe 7 bajtów.
+        Maska 25 bajtów ``odcina'' pierwszy bit ostatniego oktetu (\textbf{0}0001110).
+        Uzupełniamy zerami/jedynkami pozostałe 7 bitów.
         \begin{itemize}
             \item sieć: 11.12.13.0/24
             \item broadcast: 11.12.13.127/24
         \end{itemize}
         \item 11.12.13.167/28\\
-        28 bajtów - odcięte pierwsze z lewej cztery bajty ostatniego oktetu (\textbf{1010}0111), pozostałe cztery uzupełniamy.
+        28 bitów - odcięte pierwsze z lewej cztery bity ostatniego oktetu (\textbf{1010}0111), pozostałe cztery uzupełniamy.
         \begin{itemize}
             \item sieć: 11.12.13.160/24
             \item broadcast: 11.12.13.175/24
         \end{itemize}
         \item 11.12.138.167/17\\
-        17 bajtów z lewej - zahaczamy jednym bajtem o 3 oktet(\textbf{1}0001010), zostaje 15 bajtów.
+        17 bitów z lewej - zahaczamy jednym bitem o 3 oktet(\textbf{1}0001010), zostaje 15 bity.
         \begin{itemize}
             \item sieć: 11.12.128.0/24
             \item broadcast: 11.12.255.255/24
@@ -7693,7 +7693,7 @@
     \begin{enumerate}
         \item 10.0.0.0/24, n = 7\\
         7 użytecznych adresów IP - $7 \leq 2^k - 2 ~ \Rightarrow ~ 9 \leq 2^k ~ \Rightarrow ~ k = 4$. Potrzebujemy czterech
-        bajtów na adres hosta, zostają 4 bajty na adres podsieci (pierwsze 24 odcina maska jako adres sieci). Nowa maska
+        bitów na adres hosta, zostają 4 bity na adres podsieci (pierwsze 24 odcina maska jako adres sieci). Nowa maska
         $= 24 + 4 = 28$ bajtów. Zatem adresy podsieci:
         \begin{itemize}
             \item pierwsza: 10.0.0.0/28
@@ -7704,7 +7704,7 @@
         \end{itemize}
 
         \item 132.168.0.0/16, n = 30\\
-        $30 \leq 2^k - 2 ~ \Rightarrow ~ 32 \leq 2^k ~ \Rightarrow ~ k = 5$. 5 bajtów na adres hosta, $32-5-16 = 11$ na adres
+        $30 \leq 2^k - 2 ~ \Rightarrow ~ 32 \leq 2^k ~ \Rightarrow ~ k = 5$. 5 bitów na adres hosta, $32-5-16 = 11$ na adres
         podsieci - zaczynając od trzeciego oktetu. Nowa maska $= 16 + 11 = 27$.
         \begin{itemize}
             \item pierwsza: 132.168.0.0/27
@@ -7725,7 +7725,7 @@
 
     \begin{enumerate}
         \item 132.168.0.0/16, n = 7\\
-        $7 \leq 2^n ~ \Rightarrow ~ k = 3$ potrzebujemy 3 bajtów na zakodowanie podsieci (będzie ich 8). 16 bajtów odcina
+        $7 \leq 2^n ~ \Rightarrow ~ k = 3$ potrzebujemy 3 bitów na zakodowanie podsieci (będzie ich 8). 16 bitów odcina
         maska, kolejne 3 to podsieć i pozostałe 13 to host (nowa maska $= 16 + 3 = 19$).
         \begin{itemize}
             \item pierwsza: 132.168.0.0/19
@@ -7736,7 +7736,7 @@
         \end{itemize}
 
         \item 192.168.128.0/20, n = 4\\
-        $4 \leq 2^k ~ \Rightarrow ~ k = 2$ bajty na podsieć. 20 bajtów odciętych przez maskę (w tym pierwsze cztery
+        $4 \leq 2^k ~ \Rightarrow ~ k = 2$ bity na podsieć. 20 bitów odciętych przez maskę (w tym pierwsze cztery
         z 3 oktetu - \textbf{1000}0000), 2 na podsieć (nowa maska $=20+2=22$), 10 na adres hosta. Kolejne adresy:
         \begin{itemize}
             \item 192.168.128.0/22
@@ -7773,7 +7773,7 @@
             \item 11.12.3.0/24
             \item 11.12.4.0/24
         \end{enumerate}
-        Szukamy pierwsze od lewej bajtu, który się różni dla co najmniej dwóch z tych sieci. Widzimy, że pierwsze dwa
+        Szukamy pierwsze od lewej bitu, który się różni dla co najmniej dwóch z tych sieci. Widzimy, że pierwsze dwa
         oktety są wspólne dla wszystkich, rozpisujemy więc trzeci:
         \begin{center}
             \begin{tabular}{c || c c c c c | c c c}
@@ -7789,7 +7789,7 @@
                 & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\
             \end{tabular}
         \end{center}
-        Różnią się dopiero na 6 bajcie, pierwsze pięć jest zgodnych. Zatem nadsieć współdzieli pierwsze $16+5=21$ bajtów:
+        Różnią się dopiero na 6 bicie, pierwsze pięć jest zgodnych. Zatem nadsieć współdzieli pierwsze $16+5=21$ bitów:
         \[11.12.0.0/21\]
 
         \item
@@ -7812,7 +7812,7 @@
             & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1\\
         \end{tabular}
     \end{center}
-    Różnią się dopiero na 5 bajcie, pierwsze cztery są zgodne. Zatem nadsieć współdzieli pierwsze $16+4=20$ bajtów:
+    Różnią się dopiero na 5 bicie, pierwsze cztery są zgodne. Zatem nadsieć współdzieli pierwsze $16+4=20$ bitów:
     \[192.128.0.0/21\]
 
     \newpage

@@ -6542,7 +6542,7 @@ mathescape
 
     \subsubsection{Półsumator (Half Adder).}
     Zmiennymi wejściowymi półsumatora są bity składników sumy \textit{(x, y)}. Zmiennymi wyjsciowymi są bity
-    umy \textit{s} i przeniesienia \textit{c}.
+    sumy \textit{s} i przeniesienia \textit{c}.
 
     \begin{figure}[H]
         \includegraphics[width=\linewidth]{uk/ha.png}
@@ -6570,7 +6570,7 @@ mathescape
     \end{figure}
 
     \begin{gather*}
-        s(x,y) = \sum (1,2,4,7) = \bar{x}\bar{y}z + \bar{x}y\bar{z} + xyz
+        s(x,y) = \sum (1,2,4,7) = \bar{x}\bar{y}z + \bar{x}y\bar{z} + xyz\\
         c(x,y) = \sum (3,5,6,7) = xz + yz + xy\\
     \end{gather*}
 
@@ -6799,7 +6799,7 @@ mathescape
         \item \textbf{SSL} (Secure Socket Layer) - protokół szyfrowania zapewniający poufność i ingtegralność danych.
         Otwarty protokół umożliwiający autoryzację serwerów i klientów, wykorzystuje szyfrowanie symetryczne
         z kluczem publicznym, stosuje sumy kontrolne dla zapewnienia integralności danych.
-        \item \textbf{TSL} (Transport Later Secuirty) - jak wyżej. Ustalenie klucza symetrycznego szyfrowaniem niesymetrycznym,
+        \item \textbf{TSL} (Transport Layer Security) - jak wyżej. Ustalenie klucza symetrycznego szyfrowaniem niesymetrycznym,
         symetryczne szyfrowanie danych.
     \end{itemize}
 
@@ -6967,49 +6967,12 @@ mathescape
     \begin{enumerate}
         \item \textbf{adresy jednostkowe (unicast)} - może być przypisany do wielu interfejsów w węźle lub wielu komputerów;
         podzielony na prefiks i identyfikator interfejsu, Typowy prefix - 48 bitów od dostawcy, 16 od podsieci.
-        \begin{itemize}
-            \item Global unicast address - dawniej w strukturze hierarchicznej, obecnie zawiera prefix,
-            identyfikator podsieci i identyfikator interfejsu.
-            \item Adresy jednostkowe używane lokalnie (Link-local Unicast Address) - używane na łączach, na których nie
-            ma routerów, do tworzenia sieci tymczasowych - 1111111010 + 54 bity zera + 64 bity ID interfejsu.
-            \item Adresy jednostkowe siedziby lokalnej (Site-local Unicast Address) - przestarzały odpowiednik adresów
-            prywatnych IPv4, używane do adresacji wewnątrz prywatnej organizacji - 1111111011 + 38 bitów 0 + 16 bitów
-            ID podsieci + 64 bity ID interfejsu.
-        \end{itemize}
         \item \textbf{adresy pobliskie (anycast)} - z zakresu adresów jednostkowych organizacji, przydzielane do grupy
         węzłów (np. routerów).
-        \begin{itemize}
-            \item Required Anycast Address - podobny do adresu sieci w IPv4 - n-bitowy prefix i same zera. Każdy router
-            rozpoznaje ten adres jako swój.
-        \end{itemize}
         \item \textbf{adresy grupowe (multicast)} - zastępują adresy rozgłoszeniowe i grupowe w IPv4, przydzielane do
         grupy węzłów lecz w przeciwieństwie do anycasta wszystkie węzły odbierają pakiety wysłane do danego adresu
         - 11111111 + 4 bity flagi + 4 bity zakresu + 112 bitów ID grupy.
-        \begin{itemize}
-            \item Solicited-Node Multicast Address - adres grupowy tworzony automatycznie dla każdego adresu uni/anycast
-            w każdym węźle. Adres ten jest tworzony
-            przez 24 najmniej znaczące bity adresu IPv6 (ostatnia część identyfikatora hosta) przez
-            dodanie do nich prefiksu: ff02:0:0:0:0:1:ff00::/104.
-        \end{itemize}
     \end{enumerate}
-
-    \subsubsection{Wymagane adres IPv6}
-    Host powinien rozpoznawać następujące adresy:
-    \begin{itemize}
-        \item Link-Local address dla każdego swojego interfejsu.
-        \item Dodatkowe adresy Unicast i Anycast skonfigurowane ręcznie lub automatycznie dla interfejsów.
-        \item Adres loopback (::1).
-        \item Adres All-Nodes multicast (ff02:0:0:0:0:0:0:1).
-        \item Adres Solicited-Node multicast dla każdego adresu Unicast i Anycast skonfigurowanego na interfejsach.
-        \item Adresy Multicast wszystkich grup, do których host należy.
-    \end{itemize}
-
-    Router powinien ponadto rozpoznawać następujące adresy:
-    \begin{itemize}
-        \item Adres Subnet-Router Anycast na wszystkich łączach, na których działa jako router
-        \item Wszystkie inne adresy Anycast, skonfigurowane na routerze.
-        \item Adresy multicast dotyczące routerów
-    \end{itemize}
 
     \subsubsection{Skąd wziąć adres MAC?}
     \begin{itemize}
