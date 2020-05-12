@@ -1,4 +1,5 @@
 # EGZ_licencjacki
+[CircleCI link](https://circleci.com/gh/mdymek/EGZ_licencjacki)  - pdfs in artifacts.
 
 ```
 cd teoria
