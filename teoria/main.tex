@@ -5991,45 +5991,454 @@ mathescape
             \item Łatwość zrozumienia i wyobrażenia sobie przyszłego systemu
         \end{itemize}
 
-        Jako mapę łączącą pojedyncze przypadki użycia można potraktować diagram przypadków użycia (UML).
+    Jako mapę łączącą pojedyncze przypadki użycia można potraktować diagram przypadków użycia (UML).
     \end{definition}
-
-
+    
+    
     \begin{definition}
-        \textbf{Historyjki użytkownika} \\
-
-        \textbf{Who? What? Why?} \\
-
-        Wzór: \\
-
-        \textbf{jako} - osoba, przypisana rola \\
-        \textbf{chcę} - cacha, funkcjonalność, czynność \\
-        \textbf{ponieważ} - uzasadnienie, rezultat, korzyść \\
+    \textbf{Historyjki użytkownika} \\
+    
+    \textbf{Who? What? Why?} \\
+    
+    Wzór: \\
+    
+    \textbf{jako} - osoba, przypisana rola \\
+    \textbf{chcę} - cacha, funkcjonalność, czynność \\
+    \textbf{ponieważ} - uzasadnienie, rezultat, korzyść \\
     \end{definition}
-
+    
     \subsection{Analiza}
-
+    
     \begin{definition}
-        Celem analizy wymagań jest stworzenie modelu systemu, zwanego modelem analitycznym. Wysiłek uczestników projektu skupia się na strukturalizowaniu i formalizowaniu zabranych wcześniej wymagań. \\
-        Inaczej mówiąc po przeanalizowaniu przez nas zebranych wymagań musimy to przełożyć na diagramy UML.
+    Celem analizy wymagań jest stworzenie modelu systemu, zwanego modelem analitycznym. Wysiłek uczestników projektu skupia się na strukturalizowaniu i formalizowaniu zabranych wcześniej wymagań. \\
+    Inaczej mówiąc po przeanalizowaniu przez nas zebranych wymagań musimy to przełożyć na diagramy UML.
     \end{definition}
-
+    
     \begin{definition}
-        \textbf{Model analityczny} - reprezentuje tworzony system z perspektywy użytkownika; opis co system powinien robić
+    \textbf{Model analityczny} - reprezentuje tworzony system z perspektywy użytkownika; opis co system powinien robić
     \end{definition}
-
+    
     \begin{definition}
-        \textbf{Analityczny model obiektowy} (diagramy klas) - odzwierciedla indywidualne koncepcje korzystania z systemu, ich właściwości i relacje między nimi
+    \textbf{Analityczny model obiektowy} (diagramy klas) - odzwierciedla indywidualne koncepcje korzystania z systemu, ich właściwości i relacje między nimi
     \end{definition}
-
+    
     \begin{definition}
-        \textbf{Model dynamiczny} (diagramy sekwencji i stanów) - koncentruje się na zachowaniu systemu
+    \textbf{Model dynamiczny} (diagramy sekwencji i stanów) - koncentruje się na zachowaniu systemu
     \end{definition}
-
-    \newpage
+    
+   \newpage
 
     \section{Analiza obiektowa: modele obiektowe i dynamiczne, obiekty encjowe, brzegowe i sterujące.}
-    \section{Wzorce architektury systemów.}
+
+        \subsection{Diagram klas}
+            
+            Diagram klas ma za zadanie:
+            \begin{itemize}
+                \item przedstawić strukturę systemu w modelach obiektowych poprzez
+                    ilustrację struktury klas i zależności między nimi
+                \item przedstawić podział odpowiedzialności pomiędzy klasy systemu
+                    i rodzaj wymienianych pomiędzy nimi komunikatów
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[scale=0.40]{ooad/uml.png}
+            \end{center}
+
+
+            \subsubsection{Klasy}
+                
+                Podstawowa część diagramu klas. Służą m.in. do opanowania słownictwa
+                tworzonego systemu.
+
+                Klasa składa się z:
+                \begin{enumerate}
+                    \item Nazwy
+                    \item Atrybutów - czyli nazwanych właściwości klasy
+                    \item Operacji - implementacji pewnej usługi, której można żądać
+                        od obiektów klasy
+                    \item Odpowiedzialności (opcjonalnie)
+                \end{enumerate}
+
+                \begin{center}
+                    \includegraphics[scale=0.40]{ooad/class.png}
+                \end{center}
+                    
+            \subsubsection{Widoczność pól}
+
+                \begin{itemize}
+                    \item \textbf{+} public
+                    \item \textbf{-} private
+                    \item \textbf{\#} protected
+                    \item \textbf{\~} package 
+                \end{itemize}
+
+            \subsubsection{Związki}
+
+                \begin{itemize}
+                    \item Asocjacja
+
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/association.png}
+                        \end{center}
+                    
+                    \item Zależność
+                        
+                        Informuje nas, że klasa używa innej klasy. Przykład:
+                        EventHandler i Event.
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/dependency.png}
+                        \end{center}
+                    
+                    \item Generalizacja
+
+                        Czyli dziedziczenie lub uogólnienie. Określa zależność 
+                        między klasą pochodną a klasą bazową.
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/generalization.png}
+                        \end{center}
+                    
+                    \item Realizacja
+
+                        Określa zależność między implementacją a interfejsem.
+                        Przyład: ArrayList i List.
+
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/realization.png}
+                        \end{center}
+                    
+                    \item Agregacja
+
+                        Określa zależność między częścią a całością.
+                        Przykład: cegła i mur.
+
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/composition.png}
+                        \end{center}
+                    
+                    \item Kompozycja
+
+                        Zwana również silną agregacją. Tak jak agregacja, określa
+                        zależność między częścią a całością, jednak część nie może 
+                        istnieć bez całości. Przykład: wydział i uczelnia.
+
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/aggregation.png}
+                        \end{center}
+                \end{itemize}
+
+        \newpage
+        \subsection{Modele dynamiczne}
+            
+            \subsubsection{Diagram stanów}
+
+                W UML dynamiczne aspekty systemu modeluje się za pomocą maszyny stanów.
+                Diagram stanów zapewnia graficzną reprezentację stanów, przejść, zdarzeń i akcji.
+                Notacja ta pozwala zwizualizować zachowanie obiektu w sposób, który pozwala
+                podkreślić ważne elementy życia tego obiektu.
+
+                    \begin{center}
+                        \includegraphics[scale=0.40]{state-diagram/diagram.png}
+                    \end{center}
+
+
+                \begin{itemize}
+                    \item \textbf{Stan}
+
+                        Stan na diagramie reprezentuje sytuację lub stan obiektu,
+                        w którym spełnia on pewien warunek, wykonuje jakąś czynność lub czeka
+                        na jakieś zdarzenie. Obiekt pozostaje w stanie przez określony czas.
+                        Graficznie stan renedeorwany jest jako 
+                        prostokąt z zaokrąglonymi narożnikami.
+
+                        \begin{center}
+                            \includegraphics[scale=0.60]{state-diagram/state.png}
+                        \end{center}
+
+                        \begin{itemize}
+                            \item Podstany
+
+                                Możliwe jest podzielenie stanu na wewnętrzne podstany,
+                                z wewnętrznymi przejściami, akcjami, itp.
+
+                            \begin{center}
+                                \includegraphics[scale=0.50]{state-diagram/substate.png}
+                            \end{center}
+
+                            \item Stan początkowy
+
+                                Wskazuje domyślne miejsce początkowe dla danego stanu lub automatu.
+                                Stan początkowy jest reprezentowany jako wypełnione czarne kółko.
+                            \begin{center}
+                                \includegraphics[scale=0.60]{state-diagram/begin.png}
+                            \end{center}
+
+                            \item Stan końcowy
+
+                                Wskazuje, że wykonanie automatu stanów lub danego stanu zostało
+                                zakończone. Stan końcowy jest reprezentowany jako wypełnione 
+                                czarne koło otoczone niewypełnionym okręgiem.
+
+                            \begin{center}
+                                \includegraphics[scale=0.60]{state-diagram/end.png}
+                            \end{center}
+
+                        \end{itemize}
+                        
+                    \item \textbf{Przejścia}
+                            
+                            
+                            Przejście to związek między dwoma stanami wskazujący, że obiekt
+                            w pierwszym stanie wykona określone działania i przejdzie w drugi
+                            stan, gdy wystąpi określone zdarzenie i spełnione zostaną
+                            określone warunki.
+
+                        \begin{itemize}
+                            \item Zdarzenia
+
+                                Wystąpienie bodźca, który może wywołać zmianę stanu.
+
+                            \begin{center}
+                                \includegraphics[scale=0.50]{state-diagram/event.png}
+                            \end{center}
+
+
+                            \item Akcje
+
+                                Wykonywalne obliczenie atomowe. Akcje mogą obejmować wywołania 
+                                operacji (do obiektu będącego właścicielem maszyny stanu, a także
+                                do innych widocznych obiektów), utworzenie lub zniszczenie innego
+                                obiektu lub wysłanie sygnału do obiektu. Istnieje specjalny zapis
+                                do wysyłania sygnału - nazwa sygnału jest poprzedzona słowem 
+                                kluczowym send jako wskazówką wizualną.
+
+                        \begin{center}
+                            \includegraphics[scale=0.50]{state-diagram/action.png}
+                        \end{center}
+
+                        \begin{center}
+                            \includegraphics[scale=0.50]{state-diagram/signal.png}
+                        \end{center}
+
+                        \end{itemize}
+                \end{itemize}
+
+            \subsubsection{Diagram sekwencji}
+
+                Diagram ten opisuje interakcje pomiędzy częściami systemu w postaci sekwencji 
+                komunikatów wymienianych między nimi. Ukazuje dynamiczne aspekty realizacji 
+                scenariuszy, w których dochodzi do złożonych oddziaływań pomiędzy obiektami 
+
+                \begin{center}
+                    \includegraphics[scale=0.40]{ooad/sequence.png}
+                \end{center}
+
+                Rodzaje komunikatów:
+
+                \begin{itemize}
+                    \item Wywołanie funkcji
+                        
+                        \begin{center}
+                            \includegraphics[scale=0.35]{ooad/normal.png}
+                        \end{center}
+
+                    \item Powrót z wywołania
+                        
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/return.png}
+                        \end{center}
+
+                    \item Wywołanie asynchoniczne
+                        
+                        \begin{center}
+                            \includegraphics[scale=0.40]{ooad/async.png}
+                        \end{center}
+
+                \end{itemize}
+
+        \subsection{Encja-Brzeg-Sterowanie}
+
+            Model ten dzieli obiekty wchodzące w ramy systemu na trzy typy:
+            \begin{itemize}
+                \item \textbf{Obiekty encji}
+
+                    Reprezentują trwałą informację przetwarzaną przez system
+
+                \item \textbf{Obiekty brzegowe}
+
+                    Odzwierciedlają interakcje między aktorami a systemem
+
+                \item \textbf{Obiekty sterujące}
+            
+                    Odpowiadają za realizację przypadków użycia        
+
+            \end{itemize}
+
+            \begin{center}
+                \includegraphics[scale=0.40]{ooad/ecb.png}
+            \end{center}
+
+            \begin{center}
+                \includegraphics[scale=0.50]{ooad/ecb-uml.png}
+            \end{center}
+   \newpage
+   
+   \section{Wzorce architektury systemów.}
+
+        \subsection{Architektura warstwowa}
+
+        Efektem dekompozycji hierarchicznej jest
+        uporządkowany zbiór warstw. Warstwa stanowi
+        zgrupowanie podsystemów oferujących
+        powiązane usługi.
+
+        Wyróżniamy dwa rodzaje architektury warstwowej:
+        otwartą i zamkniętą.
+
+        Zalety:
+        \begin{itemize}
+            \item modyfikowalność
+            \item prostota wykorzystania warstwy
+            \item spójność i przejrzystość
+            \item wielokrotne wykorzystanie
+            \item naturalna ewolucja z tradycyjnego modelu aplikacji
+        \end{itemize}
+        
+            \subsubsection{Architektura otwarta}
+            
+            W otwartej architekturze warstwowej warstwa może wywołać
+            dowolną z warstw poniżej niej.
+
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/swing.png}
+            \end{center}
+
+            Przykłady:
+            \begin{itemize}
+                \item Serverless
+                \item Swing
+            \end{itemize}
+
+            \subsubsection{Architektura zamknięta}
+
+            W zamkniętej architekturze warstwa może wywołać tylko wartstwę
+            bezpośrednio pod nią
+
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/tcp.png}
+            \end{center}
+
+            Przykłady:
+            \begin{itemize}
+                \item ISO/OSI
+                \item TCP/IP
+            \end{itemize}
+
+            \subsubsection{Architektura trójwarstwowa}
+
+            Architektura trójwarstwowa to architektura typu klient-serwer,
+            często stosowana przy tworzeniu aplikacji internetowych.
+
+            Warstwy:
+            \begin{enumerate}
+                \item Wartwa prezentacji
+
+                    Interfejs użytkownika. Tłumaczy żądania i wyniki
+                    do i z języka zrozumiałego dla użytkownika.
+
+                \item Warstwa logiki biznesowej
+
+                    Koordynuje pracę aplikacji, przeytwarza żądania
+                    wartstwy prezentacji, dokonuje obliczeń.
+
+                \item Warstwa danych
+
+                    Zawiera w sobie mechanizmy persystencji danych
+                    (jak na przykład bazy danych) oraz dostępu do nich.
+            \end{enumerate}
+        
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/three-layer.png}
+            \end{center}
+
+        \subsection{Model View Controller}
+
+            Wzorzec architektoniczny, dzielący system na trzy główne części:
+            \begin{enumerate}
+                \item \textbf{Model}
+                    
+                    Reprezentuje podstawową część funkcjonalności systemu
+
+                \item \textbf{Widok}
+
+                    Wyświetla dane dostarczone przez model użytkownikowi
+
+                \item \textbf{Kontroler}
+                    
+                    Przyjmuje dane wejściowe od użytkownika oraz przetwarza jego żądania
+
+            \end{enumerate}
+
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/mvc.png}
+            \end{center}
+
+            Przykłady:
+            \begin{itemize}
+                \item Smalltalk
+                \item Swing
+            \end{itemize}
+
+        \subsection{Pipeline (filtry i potoki)}
+
+            Wzorzec Pipeline pozwala na uporządkowanie systemu, która przetwarza
+            strumienie danych. Każdy krok przetwarzania jest zamknięty w filtrze
+            Dane przesułane są pomiędzy elementami za pomocą potoków (pipes).
+
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/pipeline.png}
+            \end{center}
+
+            Przykłady:
+            \begin{itemize}
+                \item Unix pipeline
+                \item Multimedia (GStreamer, Membrane)
+            \end{itemize}
+
+        \subsection{Client - Server}
+
+            Architektura ta polega na podziale systemu na dostawcę usług (server)
+            oraz ich odbiorców (clients). Serwer oczekuje na żądania (request) klientów,
+            przetwarza je, a następnie wysyła odpowiedzi (response). Pracuje zatem, w 
+            przeciwieństwie do klientów, w trybie pasywnym.
+            
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/client-server.png}
+            \end{center}
+
+            Przykłady:
+            \begin{itemize}
+                \item Serwer WWW i przeglądarka internetowa
+                \item System bankowy
+            \end{itemize}
+
+        \newpage
+        \subsection{Peer-to-Peer}
+            
+            Każdy z podsytemów (hostów, peerów) może pełnić zarówno funkcję 
+            serwera, jak i klienta. Architektura systemu jest rozproszona, każdy
+            z hostów ma te same uprawnienia.
+
+            \begin{center}
+                \includegraphics[scale=0.30]{patterns/peer2peer.png}
+            \end{center}
+
+            Przykłady:
+            \begin{itemize}
+                \item Torrenty
+                \item Videochaty (nie zawsze)
+            \end{itemize}
+
+    \newpage
 
     {\Large Inżynieria systemów}
 
@@ -6611,7 +7020,6 @@ mathescape
         \item Switche się znają na tyle, że ramka w miarę dochodzi tylko tam gdzie trzeba
         \item Komputer otrzymujący ramkę sprawdza czy o niego chodzi w komunikacie ICMP, i unicastowo odpowiada
     \end{itemize}
-
     \newpage
 
     \section{Najważniejsze procesy zachodzące w sieci komputerowej od momentu wpisania adresu strony WWW do wyświetlenia strony w przeglądarce (komunikat HTTP, segment TCP, system DNS, pakiet IP, ARP, ramka).}
