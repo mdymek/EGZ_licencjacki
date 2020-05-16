@@ -7328,6 +7328,87 @@ mathescape
     \newpage
 
     \section{Najważniejsze procesy zachodzące w sieci komputerowej od momentu wpisania adresu strony WWW do wyświetlenia strony w przeglądarce (komunikat HTTP, segment TCP, system DNS, pakiet IP, ARP, ramka).}
+    W poniższych rozważaniach zakładamy, że klient wpisał w przeglądarkę internetową adres \texttt{www.ksi.sh}.
+    Oto kolejne procesy, które dzieją się od wpisania tego adresu do wyświetlenia strony.
+    \begin{enumerate}
+        \item \textbf{Zapytanie DNS}
+        \begin{enumerate}
+            \item Przeglądarka internetowa uruchamia odpowiednie wywołanie systemowe odpowiedzialne za rozwiązanie nazwy domenowej na adres IP
+            \item System operacyjny sprawdza, czy żądany adres nie jest zapisany w cache'u
+            \item Jeżeli wpisu nie ma w cache'u wysyła on zapytanie do skonfigurowanego w systemie serwera DNS (najczęściej serwera naszego ISP - Internet Service Provider'a) o adres IP związany z domeną \texttt{www.ksi.sh}.
+                  Zapytanie to nazywamy \textbf{zapytaniem rekurencyjnym} - klient DNS przerzuca odpowiedzialność za znalezienie adresu IP na serwer DNS.
+            \item Powyższy serwer DNS sprawdza, czy sam nie obsługuje żądanej domeny. Jeżeli tak, zwraca on adres IP szukanej domeny bezpośrednio ze swojej bazy.
+            \item Powyższy serwer DNS sprawdza, czy zapytania o tę domenę również nie ma w cache'u
+            \item Jeżeli serwer ten nie znajdzie odpowiedniego wpisu w swoim cache'u, rozpoczyna on serię \textbf{zapytań iteracyjnych} do \textbf{autorytatywnych} serwerów poszczególnych domen.
+                  \textbf{Serwer autorytatywny} to taki, który nie obsługuje rekurencyjnych zapytań od resolver'ów DNS (czyli np. zwykłych komputerów), a jedynie zapytania iteracyjne od innych serwerów o konkretne domeny.
+            \item Przykładowy proces wyszukiwania iteracyjnego może wyglądać następująco:
+            \begin{enumerate}
+                \item Serwer DNS naszego ISP pobiera ze swojej konfiguracji adresy IP głównych serwerów DNS.
+                    Tych adresów IP jest 13, chociaż tak na prawdę, fizycznie tych serwerów jest oczywiście więcej
+                    - dzięki technice \texttt{anycast} wiele fizycznych serwerów jest widocznych pod tym samym adresem IP, a zapytanie na dany adres
+                    jest kierowane do najbliższego z nich względem pytającego.
+                \item Serwer DNS naszego ISP wysyła zapytanie o domenę \texttt{www.ksi.sh} do jednego z głównych serwerów DNS
+                \item Główny serwer DNS odpowiada mu, że nie wie jaki jest adres IP należący do \texttt{www.ksi.sh}, ale wie jaki serwer obsługuje domeny \texttt{sh} (jaki serwer jest serwerem autorytatywnym dla tej domeny)
+                      i zwraca on adres tego serwera
+                \item Serwer DNS naszego ISP wysyła więc zapytanie do serwera autorytatywnego domeny \texttt{sh} o adres IP dla domeny \texttt{www.ksi.sh}
+                \item Serwer obsługujący domenę \texttt{sh} odpowiada, że nie wie jaki jest adres IP dla \texttt{www.ksi.sh}, ale wie, jaki serwer obsługuje domenę \texttt{ksi.sh} i zwraca jego adres
+                \item Serwer naszego ISP wysyła więc zapytanie o domenę \texttt{www.ksi.sh} do serwera autorytatywnego dla domeny \texttt{ksi.sh}
+                \item Ten serwer z kolei okazuje się, że zna adres IP dla domeny \texttt{www.ksi.sh}, więc sprawdza go w swojej bazie danych i odsyła odpowiedź do serwera DNS naszego ISP
+            \end{enumerate}
+            \item Ostatecznie serwer DNS naszego ISP zapisuje znaleziony adres w swoim cache'u i odsyła go do naszego komputera z uruchomioną przeglądarką internetową
+        \end{enumerate}
+
+        \begin{center}
+            \includegraphics[width=\linewidth]{dns_resolving.png}
+        \end{center}
+
+        \item \textbf{Tworzenie pakietów zgodnie ze stosem TCP/IP}
+        \begin{enumerate}
+            \item Komputer z przeglądarką tworzy zapytanie HTTP o stronę \tettt{www.ksi.sh}
+            \item Komputer tworzy \textbf{pakiet IP}:
+            \begin{itemize}
+                \item Adres źródłowy: adres IP komputera (jego adres w sieci LAN)
+                \item Adres docelowy: adres serwera WWW otrzymany z zapytania DNS
+                \item Port źródłowy: losowo wybrany spośród wolnych portów na lokalnym komputerze
+                \item Port docelowy: specyficzny dla protokołu (w tym przypadku 80 lub 443 - chyba że w adresie URL podano inaczej)
+            \end{itemize}
+            i opakowywuje w ten pakiet zapytanie HTTP
+            \item Komputer na podstawie swojego lokalnego adresu IP i ustawionej maski sprawdza, czy docelowy komputer znajduje się w jego sieci LAN.
+                  Załóżmy tutaj, że się nie znajduje.
+            \item Komputer odczytuje więc ze swojej konfiguracji adres IP swojej bramy domyślnej
+            \item Komputer musi dowiedzieć się teraz, jaki jest adres MAC odpowiadający adresowi IP bramy.
+                  W tym celu komputer sprawdza, czy nie ma go zapisanego w pamięci cache u siebie.
+                  Jeżeli nie, wysyła on na rozgłoszeniowy adres MAC (FF:FF:FF:FF:FF:FF) \textbf{ARP Request} - jest to zapytanie o to jaki adres MAC ma komputer o podanym adresie IP
+            \item Komputer będący bramą odpowiada mu \textbf{unicastem} (na adres MAC naszego komputera) \textbf{ARP Response} - w ten sposób nasz komputer zna adres MAC bramy
+            \item Komputer tworzy \textbf{ramkę}:
+            \begin{itemize}
+                \item Adres MAC źródłowy: adres MAC naszego komputera
+                \item Adres MAC docelowy: adres MAC naszej bramy
+            \end{itemize}
+            i opakowywuje w tę ramkę pakiet IP
+            \item Ramka następnie jest wysyłana (po uprzednim przetworzeniu na sygnały zgodne z medium, którym jest wysyłana - np. sygnały elektryczne) do sieci
+        \end{enumerate}
+
+        \item \textbf{Przekazywanie pakietów do serwera WWW i z powrotem}
+        \begin{enumerate}
+            \item Switch, do którego podłączony jest nasz komputer odbiera wysłane przez niego dane i zagląda do ramki
+            \item Sprawdza on docelowy adres MAC i zgodnie ze swoją tablicą przełączania przekazuje tę ramkę na właściwy port
+                  lub w przypadku, gdy nie znajdzie odpowiedniego wpisu w swojej tablicy, rozsyła tę ramkę do wszystkich portów
+            \item Po przejściu być może przez kolejne switch'e, które zachowują się tak samo, ramka trafia wreszcie do naszej bramy
+            \item Brama jako router zagląda do pakietu IP i sprawdza zgodnie ze swoją tablicą routing'u
+                  (do której należą również bezpośrednio przyłączone do tego routera sieci) do jakiego kolejnego routera lub sieci skierować ten pakiet
+            \item Gdy już znajdzie adres następnego skoku (kolejny router lub już komputer docelowy), router konstruuje kolejną ramkę do tego właśnie kolejnego routera
+                  lub komputera docelowego (wszystko dzieje się analogicznie, jak w przypadku konstruowania ramki przez komputer źródłowy), opakowuje w nią pakiet IP i wysyła
+            \item Tak dzieje się do momentu aż pakiet nie dotrze do serwera WWW. Ten odczytuje żądanie HTTP, generuje odpowiedź HTTP i opakowuje ją w pakiet IP,
+                  w którym port źródłowy i docelowy oraz adres źródłowy i docelowy są zamienione ze sobą względem pakietu, który dostał - nadawca staje się odbiorcą
+            \item Następnie serwer WWW tworzy ramkę (znów analogicznie jak to miało miejsce u klienta), w którą opakowuje wcześniej wspomniany pakiet i wysyła
+            \item Wysłane przez serwer dane znów są przekazywane przez switch'e i router'y - tak jak to miało miejsce w przypadku wysłanego żądania od klienta do serwera,
+                  aż dojdą do naszego komputera (klienta)
+            \item Ten z kolei odczytuje odpowiedź HTTP od serwera WWW i wyświetla zawartość strony
+        \end{enumerate}
+    \end{enumerate}
+    \newpage
+
     \section{Działanie przełączników Ethernet, sieci VLAN, protokół STP.}
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
