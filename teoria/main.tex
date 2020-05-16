@@ -6444,9 +6444,351 @@ mathescape
 
     \section{Relacyjny model danych, normalizacja relacji (w szczególności algorytm doprowadzenia relacji do postaci Boyce’a-Codda), przykłady.}
     \section{Indeksowanie w bazach danych: drzewa B+, tablice o organizacji indeksowej, indeksy haszowe, mapy binarne.}
-    \section{Podstawowe cechy transakcji (ACID). Metody sterowania współbieżnością transakcji, poziomy izolacji transakcji, przykłady.}
-    \section{Złączenia, grupowanie, podzapytania w języku SQL.}
 
+
+    \newpage
+    
+    \section{Podstawowe cechy transakcji (ACID). Metody sterowania współbieżnością transakcji, poziomy izolacji transakcji, przykłady.}
+    
+    \subsection{Transakcja}
+    Transakcja jest wykonywanym programem, który tworzy logiczną jednostkę przetwarzania w
+    bazie danych. Transakcja składa się z jednej lub wielu operacji dostępu do bazy danych i może
+    obejmować operacje wstawiania, usuwania, modyfikowania i pobierania danych.
+    \\\\
+    W celu wyjaśnienia pojęć dotyczących przetwarzania transakcji przyjmiemy pewien uproszczony
+    model bazy danych. Baza danych będzie reprezentowana przez zbiór nazwanych elementów
+    danych. Podstawowymi operacjami wykonywanymi na elementach bazą danych będą read(A) i
+    write(A).
+    \\
+    Operacja read(A) oznacza odczyt z twardego dysku elementu danych A i zapisanie do pamięci
+    RAM do zmiennej lokalnej (dla uproszczenia też oznaczonej przez A). Operacja write(A) oznacza
+    zapis zmiennej A na twardy dysk (w odpowiednie miejsce, tj. do elementu danych A).
+    \\\\
+    W rzeczywistych systemach operacje odczytu i zapisu są realizowane całymi blokami (stronami).
+    Zwykle blok (strona) ma kilka (2,4,8,16) kilobajtów. W systemie Microsoft SQL Server wielkość
+    strony jest stała i wynosi 8kB. W systemie Oracle wielkość bloku można definiować, ponadto w
+    jednej bazie danych można korzystać z bloków o różnych rozmiarach.\\
+    
+    W systemie z blokowymi odczytami i zapisami operacja read(A) może być realizowana   
+    następująco:
+    \begin{enumerate}
+        \item Znalezienie adresu bloku dyskowego, zawierającego element A.
+        \item Sprawdzenie czy blok ten znajduje się już w pamięci operacyjnej, jeśli nie to skopiowanie
+        znalezionego bloku do bufora pamięci.
+        \item Skopiowanie elementu A z bufora do zmiennej lokalnej o nazwie A.
+    \end{enumerate}
+    
+    Operacja write(A) może być wykonana następująco:
+    \begin{enumerate}
+        \item Znalezienie adresu bloku dyskowego, zawierającego element A.
+        \item Sprawdzenie czy blok ten znajduje się już w pamięci operacyjnej, jeśli nie to skopiowanie
+        znalezionego bloku do bufora pamięci.
+        \item Skopiowanie elementu A ze zmiennej lokalnej A do odpowiedniego miejsca w buforze.
+        \item Skopiowanie bloku z bufora na dysk (ta operacja może być wykonana od razu lub z
+        pewnym opóźnieniem).
+    \end{enumerate}
+    
+    \subsection{Przykład transakcji:}
+    Przelew pieniędzy: należy przelać 1000 zł z jednego konta na drugie.
+    W poniższej tabeli numer stanu określa stan po wykonaniu operacji w linii, np. stan numer 1
+    oznacza stan po wykonaniu operacji read(A).
+    
+    \begin{table}[H]
+    \begin{tabular}{|l|l|l|}
+    \hline
+      & Konto 1           & Konto 2           \\ \hline
+    0 & 5000.00           & 300.00            \\ \hline
+    1 & read(A)           &                   \\ \hline
+    2 & A := A-1000       &                   \\ \hline
+    3 & write(A) (A=4000) &                   \\ \hline
+    4 &                   & read(B)           \\ \hline
+    5 &                   & B := B+1000       \\ \hline
+    6 &                   & write(B) (B=1300) \\ \hline
+    \end{tabular}
+    \end{table}
+    
+    Problem w przypadku awarii systemu w momencie oznaczonym jako 4.
+    
+    Mówimy, że w chwilach 0 i 7 baza danych jest w stanie spójnym (lub stan 0 i 7 są spójne), tzn.
+    wszystkie ograniczenia narzucone na dane (jawne i niejawne) są spełnione.
+    
+    \subsection{ACID}
+    \begin{itemize}
+        \item \textbf{Atomicity} (atomowość, niepodzielność) – transakcja jest niepodzielną jednostką
+        przetwarzania; albo jest wykonywana w całości, albo wcale.
+        \item \textbf{Consistency} (spojność) – po zakończeniu transakcji baza musi być w stanie spójnym, tj. muszą
+        być zachowane wszystkie więzy narzucone na dane.
+        \item \textbf{Isolation} (separacja, odseparowanie, izolacja) Transakcja powinna wyglądać tak, jakby była
+        wykonywana w izolacji od innych transakcji.
+        \item \textbf{Durability} (trwałość) – po zatwierdzeniu (tj. pomyślnym zakończeniu) transakcji jej efekty
+        muszą być trwałe w systemie (nawet jeśli nastąpi uszkodzenie systemu natychmiast po
+        zatwierdzeniu transakcji).
+    \end{itemize}
+    
+    \subsubsection{ACID dla przykładowej transakcji}
+    Co oznaczałyby powyższe warunki w stosunku do wcześniej przedstawionej transakcji (nazwijmyją Ti)?
+    \\\\
+    \textbf{Atomowość}: Efekt musi być taki, jakby wykonały się wszystkie kroki 1-6, albo żaden.\\
+    \textbf{Spójność}: Suma ( A + B ) musi być taka sama przed i po wykonaniu transakcji Ti.\\
+    \textbf{Odseparowanie}: Załóżmy, że inna transakcja Tk sumuje zawartość kont A i B. Rezultat
+    współbieżnego działania obydwu transakcji powinien być poprawny, tj. żadne
+    pieniądze nie powinny zaginąć lub pojawić się znikąd.\\
+    \textbf{Trwałość}: Nowe wartości A oraz B powinny znaleźć się na dysku bez względu na to, co
+    stanie się po zatwierdzeniu transakcji. Jeśli natychmiast po zatwierdzeniu
+    transakcji nastąpi awaria, może być wymagane wykonanie specjalnej operacji
+    odtworzenia bazy danych (w zależności od architektury systemu i sposobu
+    działania menadżera odtwarzania), efekty transakcji muszą być odtworzone.\\
+    
+    \subsection{Stany transakcji:}
+    \begin{enumerate}
+        \item \textbf{Aktywna} (active) – transakcja jest w tym stanie podczas wykonywania operacji. Transakcja
+        przechodzi do tego stanu zaraz po rozpoczęciu wykonywania.
+        
+        \item \textbf{Częściowo zatwierdzona} (partially committed) – ostatnia operacja transakcji została wykona-
+        na. Teraz protokół zatwierdzania musi zapewnić trwałość zmian danych wykonanych przez
+        transakcję (również w przypadku awarii). Dokonuje się to na przykład przez zapis w tzw. dzienniku
+        transakcji (rejestrowane są tu wszystkie operacje rozpoczęcia transakcji, zmiany danych,
+        zakończenia transakcji, czasem rejestrowane są też operacje odczytu). Jednak zanim zostanie
+        podjęta decyzja o zatwierdzeniu, w zależności od typu systemu (przyjętych rozwiązań) zarządca
+        odtwarzania może teżsprawdzać pewne dodatkowe warunki określające, czy transakcja może być
+        zatwierdzona (np. ze względu na sterowanie wieloma współbieżnymi transakcjami). Jeśli
+        sprawdzenie tych warunków dało wynik pozytywny, czyli transakcja może zostać zatwierdzona
+        mówi się, że transakcja osiągnęła swój punkt zatwierdzenia.
+        \item \textbf{Nieudana} (failed) – normalne wykonywanie transakcji nie może być kontynuowane. Może to wynikać z przebiegu operacji transakcji (np. niespełniony warunek CHECK, wycofanie jawne
+        ROLLBACK, zakleszczenie). Transakcja może się również znaleźć w tym stanie wskutek działania
+        zarządcy odtwarzania (omówionego powyżej, w punkcie 2).
+        \item \textbf{Przerwana, wycofana} (aborted) – baza jest odtworzona do stanu sprzed rozpoczęcia
+        transakcji.
+        \item \textbf{Zatwierdzona, wypełniona} (committed) – wszelkie zmiany wykonane przez transakcje muszą
+        być trwałe. Fizyczny zapis może być elementów danych może być później, jednak muszą działać
+        mechanizmy zapewniające trwałość tych zmian (również w obliczu możliwych awarii).
+    \end{enumerate}
+    
+    \textbf{Wypełnionej (zatwierdzonej) transakcji nie można już wycofać}. Jeśli wykonanie transakcji A
+    było błędem, to należy wykonać odpowiednią \textbf{transakcję kompensującą B}, która odwróci skutki
+    działania transakcji A.
+    Operacja zatwierdzenia (wypełnienia) transakcji w języku SQL to \textbf{COMMIT}.
+    Operacja wycofania transakcji (wycofania wszystkich wprowadzonych przez nią zmian) w języku
+    SQL to \textbf{ROLLBACK}.
+    
+    \subsection{Techniki sterowania współbieżnością transakcji}
+    
+    Twórca transakcji (programista) na ogół ma możliwość wyboru tego, w jaki sposób jego system
+    będzie zarządzał (sterował) współbieżnością transakcji.
+    Podstawowy sposób to stosowanie blokad (omówione niżej). 
+    
+    \subsubsection{Typy blokad}
+    
+    \textbf{Blokada} (lock) jest zmienną związaną z elementem danych, która opisuje stan tego elementu
+    pod względem możliwości działań, jakie mogą być na nim w danej chwili wykonywane.
+    \textbf{Blokowanie binarne} – element wolny lub zablokowany. Wada: mała efektywność operacji
+    współbieżnych.
+    Propozycja dwóch typów blokad:
+    \begin{itemize}
+        \item \textbf{Blokady wyłączne} (typu X, exclusive, blokady do zapisu)
+        \item \textbf{Blokady wspólne} (typu S, shared, blokady do odczytu)
+    \end{itemize}
+    
+    Zasady:
+    \begin{enumerate}
+        \item Jeśli transakcja A założy blokadę wyłączną (X) na wiersz p, to próba założenia jakiejkolwiek
+        blokady przez inną transakcję B na tym samym wierszu zostanie oddalona.
+        \item Jeśli transakcja A założy blokadę wspólną (S) na wiersz p, to:
+        \begin{enumerate}
+            \item próba założenia blokady wyłącznej (X) przez transakcję B na tym samym wierszu zostanie
+            oddalona,
+            \item próba założenia blokady wspólnej (S) przez transakcję B na tym samym wierszu zostanie
+            zaakceptowana - transakcja B też będzie utrzymywać blokadę na p.
+        \end{enumerate}
+    \end{enumerate}
+    
+    \subsubsection{Blokady na poziomie tabeli}
+    \textbf{IS (intent shared)} – wspólna blokada zapobiegająca – transakcja zamierza założyć blokadę S
+    na poszczególnych wierszach tabeli (ogólnie: węzłach potomnych)\\
+    \textbf{IX (intent exclusive)} – wyłączna blokada zapobiegająca – zamiar założenia blokady X na
+    wierszach (ogólnie: węzłach potomnych)\\
+    \textbf{SIX (shared intent exclusive)} – wspólna wyłączna blokada zapobiegająca – na tabeli (węźle
+    macierzystym) jest już blokada S, zamierza się założyć blokadę X na wiersze (połączenie S
+    oraz IX).
+    
+    \subsubsection{Sterowanie współbieżnością transakcji w systemie Microsoft SQL Server.}
+    SQL Server realizuje poziomy izolacji transakcji w wersji blokowania:
+    \begin{itemize}
+        \item locking READ UNCOMMITTED,
+        \item locking READ COMMITTED,
+        \item locking REPETEABLE READ,
+        \item locking SERIALIZABLE.
+    \end{itemize}
+    
+    Można włączyć tzw. wielowersyjne techniki sterowania współbieżnością (system może
+    przechowywać wiele wersji tego samego elementu danych). Dostępne są wówczas dwa
+    dodatkowe poziomy izolacji transakcji:
+    \begin{itemize}
+        \item READ COMMITTED SNAPSHOT (READ CONSISTENCY) oraz
+        \item SNAPSHOT (anomalny SERIALIZABLE).
+    \end{itemize}
+    
+    \subsubsection{Implementacja poziomów izolacji transakcji:}
+    
+    \begin{table}[H]
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+    Poziom izolacji                                                       & \begin{tabular}[c]{@{}l@{}}P0\\ Dirty\\ Write\end{tabular} & \begin{tabular}[c]{@{}l@{}}P1\\ Dirty\\ Read\end{tabular} & \begin{tabular}[c]{@{}l@{}}P2\\ Non-\\ repeatable\\ Read\end{tabular} & \begin{tabular}[c]{@{}l@{}}P3\\ Phantoms\end{tabular} & \begin{tabular}[c]{@{}l@{}}Blokady\\ X\end{tabular} & \begin{tabular}[c]{@{}l@{}}Blokady\\ S\end{tabular}             \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Locking \\ READ \\ UNCOMMITED\end{tabular} & NIE                                                        & TAK                                                       & TAK                                                                   & TAK                                                   & T, długie                                           & Nie ma                                                          \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Locking\\ READ \\ COMMITED\end{tabular}    & NIE                                                        & NIE                                                       & TAK                                                                   & TAK                                                   & T, długie                                           & T, krótkie                                                      \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Locking\\ REPEATABLE\\ READ\end{tabular}   & NIE                                                        & NIE                                                       & NIE                                                                   & TAK                                                   & T, długie                                           & T, długie                                                       \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Locking\\ SERIALIZABLE\end{tabular}        & NIE                                                        & NIE                                                       & NIE                                                                   & NIE                                                   & T, długie                                           & \begin{tabular}[c]{@{}l@{}}T, długie\\ predykatowe\end{tabular} \\ \hline
+    \end{tabular}
+    \end{table}
+    
+    \textbf{A1 (Dirty Read)}: Transaction T1 modifies a data item. Another transaction T2 then reads that data item before
+    T1 performs a COMMIT or ROLLBACK. If T1 then performs a ROLLBACK, T2 has read a data item that was never
+    committed and so never really existed.\\
+    \textbf{A2 (Non-repeatable or Fuzzy Read)}: Transaction T1 reads a data item. Another transaction T2 then modifies or
+    deletes that data item and commits. If T1 then attempts to reread the data item, it receives a modified value or
+    discovers that the data item has been deleted.\\
+    \textbf{A3 (Phantom)}: Transaction T1 reads a set of data items satisfying some <search condition>. Transaction
+    T2 then creates data items that satisfy T1’s <search condition> and commits. If T1 then repeats its read
+    with the same <search condition>, it gets a set of data items different from the first read.
+
+    \subsubsection{Poziom izolacji Cursor Stability}
+    Poziom izolacji Cursor Stability może być zdefiniowany poprzez pewne rozszerzenie sposobu
+    blokowania w poziomie Locking READ COMMITTED. Dodaje się operację rc (czytaj kursor,
+    pobierz wiersz) dla instrukcji FETCH, blokada (S lub nowy typ blokady do odczytu scroll lock)
+    będzie utrzymywana do chwili przejścia do innego wiersza lub do zamknięcia kursora.
+    Aktualizacja wiersza przez kursor – operacja wc powoduje założenie na ten wiersz blokady X
+    utrzymywanej do końca transakcji.
+    
+    \subsubsection{Poziom izolacji Snapshot}
+    
+    W poziomie izolacji Snapshot transakcja czyta dane (zatwierdzone) z chwili swojego
+    początku, Start-Timestamp.
+
+    Protokoły odczytu spójnych wersji czasowych.
+    \begin{itemize}
+        \item Propozycja 1 (Snapshot isolation): Transakcja odczytuje dane zatwierdzone przed początkiem
+        transakcji (czyta wartości aktualne w momencie rozpoczęcia transakcji, wartości z pewnej
+        migawki - snapshot). Wszelkie zmiany są wykonywane na lokalnych kopiach i zapisywane na
+        końcu transakcji. Aktualizacje wykonywane przez inne transakcje nie są odczytywane.
+        \item Propozycja 2 (Snapshot isolation):
+        Podobna do propozycji 1, ale są stosowane blokady do zapisu, ponadto przy każdym zapisie
+        transakcja wykonuje podobne sprawdzenie jak wykonywane w propozycji 1 na końcu
+        transakcji.
+        \item Propozycja 3: Read Committed Snapshot (Read Consistency):
+        Podobna do propozycji 2, ale operacja odczytu czyta ostatnią zatwierdzoną wartość
+        elementu danych (niekoniecznie sprzed początku transakcji).
+    \end{itemize}
+
+    \newpage
+    
+    \section{Złączenia, grupowanie, podzapytania w języku SQL.}
+    
+    \subsection{JOIN}
+    Łączenie tabel umożliwia odczytywanie danych z wielu tabel jednocześnie. Tabele zostają połączone pomiędzy kluczem podstawowym jednej tabeli, a kluczem obcym drugiej (klucz obcy to kolumna, która stanowi klucz podstawowy w innej tabeli). Połączenia tabel dzielą się na wewnętrzne i zewnętrzne.
+    
+    Połączenia wewnętrzne są realizowane przy pomocy instrukcji INNER JOIN, która wybiera rekordy posiadające takie same wartości w obu tabelach. Jej składnia wygląda następująco:
+    
+    \begin{minted}{sql}
+    tabela1 INNER JOIN  tabela2
+    ON tabela1.kolumna1=tabela2.kolumna2
+    \end{minted}
+    Przykładowo, wypisanie idZamowienia z tabeli zamowienia i nazwa klienta z tabeli klienci:
+    
+    \begin{minted}{sql}
+    SELECT zamowienia.idZamowienia, klienci.nazwa_klienta
+    FROM zamowienia
+    INNER JOIN klienci ON zamowienia.idKlienta = klienci.IdKlienta;
+    \end{minted}
+    
+    Połączenia zewnętrzne definiuje się za pomocą poleceń:
+    
+    LEFT OUTER JOIN – zwraca wszystkie wiersze z pierwszej tabeli i pasujące wierszej z drugiej
+    RIGHT OUTER JOIN – zwraca wszystkie wiersze z drugiej tabeli i pasujące wierszej z pierwszej
+    FULL OUTER JOIN – zwraca wszystkie pasujące i niepasujące wiersze z obu tabel
+    
+    Przykładowo:\\
+    Wypisanie nazwy klientów z tabeli klienci i identyfikatorów zamówień z tabeli zamowienia
+    \begin{minted}{sql}
+    SELECT zamowienia.IdZamowienia, pracownicy.nazwisko, pracownicy.imie
+    FROM zamowienia
+    RIGHT OUTER JOIN pracownicy ON zamowienia.IdPracownika =
+        pracownicy.IdPracownika
+    ORDER BY zamowienia.IdZamowienia;
+    \end{minted}
+    Wypisanie nazwy klientów z tabeli klienci i identyfikatorów zamówień z tabeli zamowienia
+    
+    \begin{minted}{sql}
+    SELECT klienci.nazwa_klienta, zamowienia.IdZamowienia
+    FROM Klienci
+    FULL OUTER JOIN  zamowienia ON klienci.IdKlienta=zamowienia.IdKlienta
+    ORDER BY Klienci.nazwa_klienta;
+    \end{minted}
+    
+    \subsection{GROUP BY}
+    Grupowanie danych polega na tworzeniu grup rekordów w oparciu o definicję grupowania (klauzulę GROUP BY). Krok ten, wykonywany jest jako kolejny po filtrowaniu rekordów, zgodnie z warunkami określonymi w WHERE (o ile w ogóle cokolwiek filtrujemy), lub bezpośrednio po FROM jeśli nie korzystamy z selekcji wierszy.
+    \\
+    W przypadku stosowania GROUP BY, w trakcie przetwarzania zapytania, tworzone są dwie sekcje danych.
+    \begin{itemize}
+        \item Sekcja grupująca składa się z atrybutów tworzących definicję grupowania (są to kolumny wyszczególnione w GROUP BY). Grupy tworzone są przez wiersze, które mają takie same wartości w ramach tej sekcji. Grupa może być tworzona przez jeden (jeśli jest unikalny w ramach definicji grupy) lub wiele wierszy, w przypadku gdy posiadają te same wartości w kolumnach po których grupujemy.
+        \item Sekcja danych surowych (raw data section) zawierają wszystkie pozostałe dane, które mogą być już unikalne dla każdego wiersza w ramach sekcji grupującej. Sekcja danych surowych jest zawsze rozpatrywana w kontekście grupy.
+    \end{itemize}
+    \begin{center}
+            \includegraphics[scale=1]{graphics/sql/before-group-by.png}
+    \end{center}
+    \begin{minted}{sql}
+    select Title, Country, COUNT(*) as EmQty
+    from dbo.Employees
+    GROUP BY Country,Title
+    \end{minted}
+    \begin{center}
+            \includegraphics[scale=1]{graphics/sql/after-group-by.png}
+    \end{center}
+    
+    \subsection{Podzapytania}
+    
+    Podzapytanie polega na umieszczeniu instrukcji SELECT wewnątrz innej instrukcji SELECT. Serwer bazodanowy w pierwszej kolejności wykona zapytania wewnętrzne. Wynik zapytania wewnętrznego zwracany jest do zapytania zewnętrznego.
+    
+    Podział podzapytań ze względu na korelację z zapytaniem nadrzędnym:
+    \begin{itemize}
+        \item podzapytania niepowiązane (nieskorelowane)
+        \item podzapytania powiązane (skorelowane)
+    \end{itemize}
+    
+    \subsubsection{Podzapytania niepowiązane}
+    W podzapytaniach niepowiązanych wewnętrzne zapytanie jest wykonywane tylko raz. Zwraca jeden wynik. Zapytanie wewnętrzne jest niezależne od zewnętrznego i może być wykonane samodzielnie.
+
+    Za pomocą poniższego zapytania możemy odczytać nazwę podkategorii, do której należy produkt posiadający ID o numerze 748.
+    \begin{minted}{sql}
+        SELECT b.Name
+        FROM Production.ProductSubcategory b
+        WHERE b.ProductSubcategoryID =
+                                   (SELECT a.ProductSubcategoryID
+                                    FROM Production.Product a
+                                    WHERE a.ProductID  = 748);
+    \end{minted}
+    
+    Z tabeli Production.ProductSubcategory odczytujemy nazwy wszystkich podkategorii (kolumna Name).
+
+    Następnie sprawdzamy warunek w zewnętrznej klauzuli WHERE.
+    
+    W celu sprawdzenia warunku należy wykonać wewnętrzne zapytanie. W zapytaniu wewnętrznym możemy wybrać tylko jedną wartość (wartość skalarna).
+    
+    \subsubsection{Podzapytania powiązane}
+    
+    Podzapytania powiązane (skorelowane) są bezpośrednio powiązane z zapytaniem nadrzędnym. Łącznikiem jest jeden lub więcej atrybutów, przekazywanych z zapytania nadrzędnego. Zapytanie wewnętrzne wykonywane jest osobno dla każdego wiersza zwróconego przez zapytanie zewnętrzne. Zwraca ono tyle wyników, ile jest rekordów w wyniku zapytania zewnętrznego.
+
+    Ze względu na powiązanie z zapytaniem nadrzędnym, zapytanie wewnętrzne nie może być wykonane samodzielnie.
+    \begin{minted}{sql}
+    SELECT b.BusinessEntityID,
+    (SELECT COUNT(a.AddressTypeID) 
+    FROM Person.BusinessEntityAddress as a
+    WHERE a.BusinessEntityID = b.BusinessEntityID) as licz_zam
+    FROM Person.Person as b
+    ORDER BY licz_zam DESC;
+    \end{minted}
+    
+    W powyższym przykładzie w zapytaniu wewnętrznym zliczana jest liczba rekordów w tabeli Person.BusinessEntityAddress. Zapytanie wewnętrzne uruchomione jest dla każdego rekordu z tabeli Person.Person, w przypadku którego BusinessEntityID jest takie samo jak BusinessEntityID w tabeli Person.BusinessEntityAddress.
+    
     \newpage
 
     \section{Szeregowalność harmonogramów w bazach danych.}
