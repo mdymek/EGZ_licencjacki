@@ -7417,12 +7417,12 @@ mathescape
     adresów MAC z portem (gniazdem) Switch'a, a którą uzupełnia na podstawie odbieranych ramek.
     Zasada działania Switch'a jest następująca:
     \begin{enumerate}
-        \item Gdy switch odbiera na jakimś porcie ramkę sprawdza on czy adresat (odbiorca) tej ramki znajduje się w tablicy CAM - czy adres MAC odbiorcy się w niej znajduje:
+        \item Gdy switch odbiera na jakimś porcie ramkę, sprawdza on czy adresat (odbiorca), a właściwie jego adres MAC znajduje się w tablicy CAM:
         \begin{enumerate}
             \item Jeżeli tak - ramka wysyłana jest tylko na port powiązany z tym adresem MAC
-            \item Jeżeli nie - Switch postąpi podobnie jak Hub - roześle tą ramkę do wszystkich portów. Podobnie postąpi, jeżeli adres MAC odbiorcy jest adresem broadcastowym
+            \item Jeżeli nie - Switch postąpi podobnie jak Hub - roześle tę ramkę do wszystkich portów. Podobnie postąpi, jeżeli adres MAC odbiorcy jest adresem broadcastowym
         \end{enumerate}
-        \item Switch odczytuje z ramki adres MAC nadawcy i wiąże go z portem, na który przyszła ta ramka, oraz zapisuje tą informację w tablicy CAM
+        \item Switch odczytuje z ramki adres MAC nadawcy i wiąże go z portem, na który przyszła ta ramka, oraz zapisuje tę informację w tablicy CAM
     \end{enumerate}
 
     \noindent Standardowe przełączniki warstwy drugiej mogą pracować w dwóch trybach pracy:
@@ -7430,8 +7430,8 @@ mathescape
         \item \textbf{Store-and-Forward} – przełącznik pobiera całą ramkę, analizuje czy nie jest błędna i przesyła ją dalej. Ten tryb wprowadza największe opóźnienie.
         \item \textbf{Cut-through} (dwa podtypy):
         \begin{enumerate}
-            \item \textbf{Fast-forward switching} - po otrzymaniu adresu MAC miejsca docelowego ramki już rozpoczyna się jej nadawanie.
-            Jest to najszybsza metoda, ale nie sprawdza się czy nie nastąpiła kolizja i ramka jest niepoprawna.
+            \item \textbf{Fast-forward switching} - po otrzymaniu adresu MAC miejsca docelowego ramki, już rozpoczyna się jej nadawanie.
+            Jest to najszybsza metoda, ale nie sprawdza czy nie nastąpiła kolizja i ramka jest niepoprawna.
             \item \textbf{Fragment-free switching} - ramka jest przesyłana do portu docelowego dopiero po otrzymaniu 64 bajtów (rozmiar najmniejszej poprawnej ramki w Ethernecie).
             Zapewnia to, że ramka nie koliduje z inną
         \end{enumerate}
@@ -7439,8 +7439,8 @@ mathescape
 
 
     \subsection{Sieci VLAN}
-    W sieciach komputerowych często zachodzi potrzeba oddzielenia od siebie pewnej komputerów, tak aby mogły one porozumiewać się między sobą w obrębie jednej grupy,
-    ale jednocześnie aby nie mogły się komunikować między grupami.
+    W sieciach komputerowych często zachodzi potrzeba oddzielenia od siebie pewnej grupy komputerów tak, aby mogły one porozumiewać się między sobą w obrębie jednej grupy,
+    ale jednocześnie, aby nie mogły się komunikować między grupami.
     Naturalnym rozwiązaniem wydaje się podłączenie grup do osobnych switch'y:
 
     \bigskip
@@ -7448,8 +7448,8 @@ mathescape
     \smallskip
 
     \noindent Nie jest to jednak idealne rozwiązanie: dla każdej kolejnej grupy musimy kupować kolejne urządzenie, co przy większej ilości grup znacznie zwiększa koszty.
-    Poza tym co jeżeli komputery z każdej z grup są np. na różnych piętrach? Musimy wtedy kupować kolejne urządzenia do obsługi komputerów na kolejnych piętrach, oraz
-    rozciągać między piętrami tak wiele kabli do połączeń między switch'ami jak wiele mamy tych grup.
+    Poza tym co jeżeli komputery z każdej z grup są np. na różnych piętrach? Musimy wtedy kupować kolejne urządzenia do obsługi komputerów na kolejnych piętrach oraz
+    rozciągać między piętrami tak wiele kabli do połączeń między switch'ami, jak wiele mamy tych grup.
 
     Odpowiedzią na te potrzeby są \textbf{VLAN}'y (Virtual LAN). Dzięki nim na jednym switch'u jesteśmy w stanie wydzielić wiele osobnych ``podswitch'y'':
     każdy port (gniazdo) w switch'u możemy przypisać do konkretnego VLAN'u - te, które są w tym samym VLAN'ie mogą się ze sobą komunikować (zachowują się jak podpięte
@@ -7466,15 +7466,15 @@ mathescape
         \item Jednym kablem możemy przesyłać wiele VLAN'ów - nie potrzebujemy rozciągać wielu kabli między switch'ami na różnych piętrach (patrz dalej)
     \end{itemize}
 
-    Ramki w przypadku technologi VLAN mogą być \textbf{tagowane} lub \textbf{nietagowane}. Te pierwsze to po prostu zwykłe ramki używane do tej pory w sieciach Ethernet.
+    Ramki w przypadku technologi VLAN mogą być \textbf{tagowane} lub \textbf{nietagowane}. Te drugie to po prostu zwykłe ramki używane do tej pory w sieciach Ethernet.
     Ramki tagowane natomiast mają w sobie dodatkową informację do którego VLAN'u należą.
 
-    Porty i połączenia na których wysyłane/odbierane są ramki nietagowane nazywamy \textbf{dostępowymi}, natomiast te gdzie komunikacja odbywa się
+    Porty i połączenia, na których wysyłane/odbierane są ramki nietagowane nazywamy \textbf{dostępowymi}, natomiast te, gdzie komunikacja odbywa się
     przy pomocy ramek tagowanych nazywamy \textbf{trunk}'owymi. Standardowo komputery rozumieją tylko ramki nietagowane.
 
     Ramki tagowane otwierają nam nowe możliwości: możemy przy pomocy jednego kabla przesyłać ramki z wielu sieci VLAN, co pozwala np. połączyć za pomocą tylko jednego kabla
     switch'e z różnych pięter w rozważanym na początku przypadku, gdy komputery z jednej grupy znajdują się na różnych piętrach. Switch'e połączone są wtedy ze sobą łączem
-    \textbf{trunk}'owym, dzięki czemu wysyłają one między sobą ramki tagowane, więc wiedzą do którego VLAN'u (do której grupy komputerów) skierować przychodzącą ramkę:
+    \textbf{trunk}'owym, dzięki czemu wysyłają one między sobą ramki tagowane, więc wiedzą, do którego VLAN'u (do której grupy komputerów) skierować przychodzącą ramkę:
 
     \bigskip
     \includegraphics[width=\linewidth]{vlan/two_switches_with_trunk.png}
@@ -7484,16 +7484,16 @@ mathescape
     Czasami zachodzi jednak potrzeba, aby komputery mogły się ze sobą komunikować nawet między grupami (ale przeważnie chodzi nam o kontrolę takiej komunikacji
     - zezwolenie tylko na określony ruch). Ponieważ każdy VLAN traktowany jest jako osobna podsieć (w każdym z nich powinniśmy używać adresów IP z innej podsieci),
     aby umożliwić komunikację między VLAN'ami potrzebny nam jest \textbf{router}. Będzie on po prostu robił prosty routing między tymi sieciami, a dzięki zastosowaniu
-    zasad na firewall'u będziemy mogli ograniczyć ten ruch tak jak chcemy.
+    zasad na firewall'u będziemy mogli ograniczyć ten ruch tak, jak chcemy.
 
     Ponieważ router potrzebuje dostępu do wszystkich sieci VLAN, najprościej jest to osiągnąć poprzez podłączenie go do portu switch'a skonfigurowanego jako trunk.
     Takie podłączenie routera nazywamy \texttt{routerem na kiju} (router on a stick).
     Dzięki temu - podobnie jak w przypadku komunikacji między switch'ami będziemy mogli przy pomocy jednego kabla podłączyć do routera wiele sieci. Pomimo fizycznego
-    połączenia tylko do jednego interface'u routera, w praktyce dla każdego VLAN'u zostaną na nim utworzone \textbf{wirtualne interface}'y,
+    podłączenia tylko do jednego interface'u routera, w praktyce dla każdego VLAN'u zostaną na nim utworzone \textbf{wirtualne interface}'y,
     które będą reprezentować poszczególne VLAN'y i to między nimi będzie wykonywany routing.
 
     Zauważmy, że w takiej konfiguracji, każdy ruch, który odbywa się między VLAN'ami musi przejść przez router. Może to znacznie zwiększyć obciążenie sieci:
-    np. aby dwa komputery w różnych VLAN'ach jednak podłączone do tego samego switch'a mogły się ze sobą komunikować cały ruch musi przejść niekiedy być może
+    np. aby dwa komputery w różnych VLAN'ach jednak podłączone do tego samego switch'a mogły się ze sobą komunikować, cały ruch musi przejść niekiedy być może
     długą drogę przez całą sieć, aż do router'a i z powrotem. Aby temu zaradzić można użyć \textbf{Switch'y (przełączników) warstwy 3}. Są one mini routerami,
     które są w stanie wykonywać routing między VLAN'ami, które obsługują (z możliwością ustawienia zasad komunikacji między nimi - podobnie jak zasady firewall na routerze).
     Dzięki temu we wspomnianym wcześniej przykładzie ruch między tymi dwoma komputerami może odbywać się praktycznie tylko przy pomocy switch'a, do którego są podłączone
@@ -7541,8 +7541,8 @@ mathescape
         do przełącznika-korzenia. Port staje się zawsze „root-portem” jeśli jest bezpośrednio
         połączony do przełącznika – korzenia. Jeśli nie ma portów bezpośrednio dołączonych
         do korzenia, to jest analizowany koszt połączenia. Koszt ten jest zależny od szerokości
-        pasma np. dla 10Mbps koszt wynosił 100, dla 100Mbps koszt
-        wynosił 10, itd. Koszty są przekazywane w ramkach BPDU i
+        pasma np. dla 10Mbps koszt wynosi 100, dla 100Mbps koszt
+        wynosi 10, itd. Koszty są przekazywane w ramkach BPDU i
         przełączniki wyliczają całkowite koszty połączenia z przełącznikiem korzeniem – jako
         sumy kosztów poszczególnych połączeń. W każdym przełączniku port o najniższym
         koszcie trasy do przełącznika korzenia staje się root-portem (oczywiście tylko w
