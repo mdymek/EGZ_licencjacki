@@ -6715,21 +6715,21 @@ mathescape
     można zapisać w jednym węźle\\
     
     \textbf{Struktura węzła wewnętrznego}\\
-    $< P_1,K_1, . . . , P_{n − 1},K_{n − 1}, P_n >$\\
+    $< P_1,K_1,\dots, P_{n - 1},K_{n - 1}, P_n >$\\
     gdzie $n \leq p$\\
     $K_i$ jest wartością klucza indeksu\\
     $P_i$ jest wskaźnikiem do poddrzewa, przechowuje wartości kluczy z
-    przedziału $[K_{i - 1},K_i)$, z uwzględnieniem $K_0 = −\infty$, $K_n = +\infty$
-    oraz $K_1 < K_2 < . . . < K_n$\\
+    przedziału $[K_{i - 1},K_i)$, z uwzględnieniem $K_0 = -\infty$, $K_n = +\infty$
+    oraz $K_1 < K_2 < \dots < K_n$\\
     
     \textbf{Struktura liścia}\\
-    $<< K_1, Pr_1 >, . . . , < K_n, Pr_n >, P_{next} >>$\\
+    $<< K_1, Pr_1 >, \dots , < K_n, Pr_n >, P_{next} >>$\\
     gdzie $n \leq p$\\
     $K_i$ jest wartością klucza indeksu\\
     $Pr_i$ jest wskaźnikiem do rekordów na dysku lub bloków danych
     $P_{next}$ wskazuje następnego liścia (na tym samym poziomie)
     oraz
-    $K_1 < K_2 < . . . < K_n$
+    $K_1 < K_2 < \dots < K_n$
     \end{definition}
 \newpage
     
@@ -8319,7 +8319,7 @@ mathescape
         \item poufność
         \item integralność
         \item autentyczność
-    \end{itemize}\\
+    \end{itemize}
     
     Ogólnie wyróżniamy trzy powszechnie stosowane rodzaje sieci VPN:
     \begin{itemize}
