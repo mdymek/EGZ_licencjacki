@@ -6443,10 +6443,295 @@ mathescape
     {\Large Inżynieria systemów}
 
     \section{Relacyjny model danych, normalizacja relacji (w szczególności algorytm doprowadzenia relacji do postaci Boyce’a-Codda), przykłady.}
+    
+    LINK :\\
+    \url{http://www.informatyka.orawskie.pl/?pl_relacyjny-model-bazy-danych,112}
+    \url{https://drive.google.com/drive/folders/1vsBsmaooGSXhDF0WGDRy8CElA7667xy9}
+    
+    \subsection{Relacyjny model danych}
+    
+    W systemach baz danych opartych o model relacyjny zachodzą własności
+    \begin{itemize}
+        \item Dane przechowywane są w strukturach nazywanych \textbf{tabelami}. Tabelę można traktować jako strukturę reprezentującą (i przedstawiającą) tzw. relację bazodanową
+        \item Wiersz tabeli zawiera dane reprezentujące pewien \textbf{byt} (obiekt, czynność, zdarzenie, zjawisko) lub \textbf{zależność między bytami} (związek)
+        \item Cechy „bytu”, zwane \textbf{atrybutami} są reprezentowane w \textbf{kolumnach}. Kolumny mają \textbf{nazwę} i określony \textbf{typ} danych związany z dziedziną atrybutu. Dane wpisywane do kolumny są elementami dziedziny i są logicznie niepodzielne (elementarne, atomowe)
+        \item Każdy wiersz w tabeli musi (powinien) być \textbf{unikalny}
+    \end{itemize}
+    
+    \begin{definition}
+    \textbf{Klucz główny}\\
+    Minimalna kombinacja pól identyfikująca każdy rekord w tabeli w sposób jednoznaczny (pole, które dla każdego rekordu będzie przyjmowało inną, niepowtarzalną wartość)
+    \end{definition}
+
+    \subsection{Relacja bazodanowa}
+    Projektując bazę danych, dzielimy dane na wiele tabel tematycznych, tak aby każda informacja została zapisana tylko raz. Aby zestawić razem dane zapisane w różnych tabelach, tworzy się między nimi połączenia zwiane relacjami.
+    
+    
+    
+    Relacja jest to zdefiniowanie logicznego połączenia między tabelami bazy danych. W efekcie zmiana wiersza bieżącego w tabeli głównej powoduje automatyczną zmianę wiersza bieżącego w tabeli przyłączonej.
+
+    \subsection{Typy relacji bazodanowej}
+    
+    W rzeczywistości występują trzy typy relacji:
+    
+    \begin{itemize}
+        \item \textbf{Relacja jeden do jednego}\\
+        W relacji „jeden do jednego” każdemu rekordowi z pierwszej tabeli może odpowiadać tylko jeden rekord z drugiej tabeli i każdemu rekordowi z drugiej tabeli może odpowiadać tylko jeden rekord z pierwszej tabeli. Jest to nietypowy rodzaj relacji, ponieważ najczęściej informacje powiązane w ten sposób są przechowywane w jednej tabeli. Opisywanej relacji używa się w celu odizolowania części tabeli ze względu na bezpieczeństwo danych lub w celu podzielenia danych na podzbiory.
+        \item \textbf{Relacja wiele do jednego}\\
+        W relacji „wiele do jednego” każdemu rekordowi z pierwszej tabeli może odpowiadać najwyżej jeden rekord z drugiej tabeli, a każdemu rekordowi z drugiej tabeli może odpowiadać wiele rekordów z pierwszej tabeli. Jest to typ relacji najczęściej występujący w relacyjnych bazach danych.
+        \item \textbf{Relacja wiele do wielu}\\
+        W relacji „wiele do wielu” każdemu rekordowi z pierwszej tabeli może odpowiadać wiele rekordów z drugiej tabeli i każdemu rekordowi z drugiej tabeli może odpowiadać wiele rekordów z pierwszej tabeli.
+    \end{itemize}
+    
+    \subsection{Własności relacji bazodanowej}
+    
+    \begin{itemize}
+        \item Nie ma powtarzających się krotek
+        \item Krotki i atrybuty \textbf{nie są uporządkowane}
+        \item Wartości atrybutów są \textbf{skalarne (atomowe, niepodzielne)}
+    \end{itemize}
+    
+    \subsection{Postaci normalne}
+    
+    \begin{itemize}
+        \item \textbf{Pierwsza postać normalna 1NF}\\
+        Relacja jest w pierwszej postaci normalnej jeżeli każdy jej atrybut jest skalarny (atomowy, niepodzielny). Atrybut nie może być strukturą danych (listą, macierzą itp.). Relacja musi mieć zdefiniowany klucz.
+        \item \textbf{Druga postać normalna 2NF}\\
+        Relacja jest w drugiej postaci normalnej jeżeli jest w 1NF i żaden atrybut nie będący kluczem nie jest częściowo funkcyjnie zależny od jakiegkolwiek klucza potencjalnego.
+        \item \textbf{Trzecia postać normalna 3NF}\\
+        Relacja jest trzeciej postaci normalnej jeżeli jest w 2NF i żadna kolumna niekluczowa nie jest zależna funkcyjnie od innych atrybutów niekluczowych.
+        \item \textbf{Postać normalna Boyce'a-Codda}\\
+        W tej postaci zależności funkcyjne muszą mieć następującą postać: jeżeli X → A i atrybut A nie jest zawarty w X, to X jest kluczem lub zawiera klucz.
+    \end{itemize}
+    
+    \subsection{Normalizacja}
+    \begin{definition}
+    \textbf{Normalizacja}\\
+    Proces organizowania danych w bazie danych. Obejmuje to tworzenie tabel i ustanawianie relacji między tymi tabelami zgodnie z regułami zaprojektowanymi w celu zarówno ochrony danych, jak i zapewnienia większej elastyczności bazy danych przez wyeliminowanie nadmiarowości i niespójnych zależności. 
+    \end{definition}
+    
+    Cel normalizacji
+    \begin{itemize}
+        \item Uniknięcie redundancji
+        \item Wyeliminowanie niewygodnych relacji wieloznacznych
+        \item Uniknięcie anomalii przy aktualizacji (CRUD)
+        \item Uniknięcie niespójności
+    \end{itemize}
+    
+    Normalizacja
+    \begin{itemize}
+        \item \textbf{Pierwsza postać normalna 1NF}\\
+        Wyeliminowanie powtarzających się grup
+        \item \textbf{Druga postać normalna 2NF}\\
+        Wyeliminowanie nadmiarowych danych
+        \item \textbf{Trzecia postać normalna 3NF}\\
+        Wyeliminowanie danych nie zależnych od klucza
+    \end{itemize}
+    
+    PRZYKŁADY
+    \begin{enumerate}
+        \item \textbf{1NF}\\
+        Tabela nieznormalizowana\\
+        Naruszenie 1NF (atrybut imię nie jest skalarny, jest strukturą danych - listą). Relacja nie ma też zdefiniowanego klucza.
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        Płeć   & Imię               \\ \hline
+        Męska  & Jan, Piotr, Zenon  \\ \hline
+        Żeńska & Anna, Maria, Zofia \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        Tabela znormalizowana\\
+        Rozdział zagnieżdżonego atrybutu na pojedyncze krotki. Relacja może mieć teraz klucz główny składający się z dwój atrybutów: Płeć + Imię
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        Płeć   & Imię  \\ \hline
+        Męska  & Jan   \\ \hline
+        Męska  & Piotr \\ \hline
+        Męska  & Zenon \\ \hline
+        Żeńska & Anna  \\ \hline
+        Żeńska & Maria \\ \hline
+        Żeńska & Zofia \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        \item \textbf{2NF}\\
+        Tabela nieznormalizowana\\
+        Klucz potencjalny składa się z dwóch atrybutów Imię + Nazwisko, atrybut Płeć zalezy tylko od jegnego z atrybutów klucza (Imię) zatem atrybut Płeć zależny jest od podzbioru właściwego klucza.
+        \begin{table}[H]
+        \begin{tabular}{|l|l|l|}
+        \hline
+        Imię   & Nazwisko & Płeć  \\ \hline
+        Edward & Szczypka & Męska \\ \hline
+        Rafał  & Kawa     & Męska \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        Tabela znormalizowana\\
+        Podział tabeli na dwie tabele.
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        Imię   & Nazwisko \\ \hline
+        Edward & Szczypka \\ \hline
+        Rafał  & Kawa     \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        Imię   & Płeć  \\ \hline
+        Edward & Męska \\ \hline
+        Rafał  & Męska \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        \item \textbf{3NF}\\
+        Tabela nieznormalizowana\\
+        Atrybut Stawka jest zależny od atrybutu Stanowisko, który nie jest atrybutem kluczowym.
+        \begin{table}[H]
+        \begin{tabular}{|l|l|l|l|}
+        \hline
+        Imię   & Nazwisko & Stanowisko            & Stawka za godzinę \\ \hline
+        Edward & Sczypka  & Żołnież               & 15                \\ \hline
+        Rafał  & Kawa     & Pracownik dydaktyczny & 10                \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        Tabela znormalizowana\\
+        Podział tabeli na dwie
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|l|}
+        \hline
+        Imię   & Nazwisko & Stanowisko            \\ \hline
+        Edward & Sczypka  & Żołnież               \\ \hline
+        Rafał  & Kawa     & Pracownik dydaktyczny \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        Stanowisko            & Stawka za godzinę \\ \hline
+        Żołnież               & 15                \\ \hline
+        Pracownik dydaktyczny & 10                \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        \item{Boyce-Codd}\\
+        Tabela nieznormalizowana\\
+        Kluczem jest Student + Przedmiot. Zachodzi zależność Przedmiot $\Rightarrow$ Profesor ale Przedmiot nie jest nadkluczem (czyli zbiorem atrybutów zawierających klucz)
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Student} & \textbf{Przedmiot} & Profesor \\ \hline
+        X       & WDI       & A        \\ \hline
+        Y       & ASD       & B        \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        Tabela znormalizowana\\
+        Podział tabeli na dwie
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        student & przedmiot \\ \hline
+        X       & WDI       \\ \hline
+        Y       & ASD       \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        \begin{table}[H]
+        \begin{tabular}{|l|l|}
+        \hline
+        Przedmiot & Profesor \\ \hline
+        WDI       & WDI      \\ \hline
+        ASD       & ASD      \\ \hline
+        \end{tabular}
+        \end{table}
+        
+        
+        
+    \end{enumerate}
+
     \section{Indeksowanie w bazach danych: drzewa B+, tablice o organizacji indeksowej, indeksy haszowe, mapy binarne.}
-
-
-    \newpage
+    
+    \begin{definition}
+    \textbf{Indeks}\\
+    Jest to \textbf{struktura danych} na dysku umożliwiająca szybkie wyszukiwanie danych w bazie danych na podstawie wartości klucza.\\
+    
+    W najprostszej postaci wyszukiwanie polega na tym, że mając wartość poszukujemy rekordów, w których ta wartość występuje w danym polu.
+    \end{definition}
+    
+    \textbf{Zalety stosowania indeksów}\\
+    \begin{itemize}
+        \item Zmniejszenie czasu odszukania potrzebnych danych (minimalizowanie liczby odczytów bloków danych z dysku)
+    \end{itemize}
+    
+    \textbf{Wady stosowania indeksów}\\
+    \begin{itemize}
+        \item Zwiększenie czasu zmiany danych, na których założony jest indeks (zmiana takich danych oznacza zmiane w indeksie)
+    \end{itemize}
+    
+    \subsection{Typy indeksów (dla plików sekwencyjnych)}
+    
+    Indeksy dzieli się na
+    \begin{enumerate}
+        \item Główne (Primary)
+        \item Drugorzędne (Secondary)
+    \end{enumerate}
+    
+    \begin{enumerate}
+        \item Gęste (Dense)\\
+        Każdy wiersz danych ma swój wpis w indeksie
+        \item Rzadkie (Sparse)\\
+        Każdy blok danych ma jeden wpis w indeksie. Dane muszą być posortowane według klucza indeksu.
+    \end{enumerate}
+    
+    \subsection{Indeksy dla standardowych typów danych}
+    \begin{itemize}
+        \item Drzewa B+
+        \item Tablice haszujące
+        \item Indeksy binarne (mapy binarne)
+    \end{itemize}
+    
+    \subsection{Drzewa B+}
+    \begin{definition}
+    \textbf{Drzewa B+}\\
+    B-drzewa, które nie przechowują danych w węzłach
+    wewnętrznych, a jedynie w swoich liściach. W B-drzewie każdy
+    węzeł wewnętrzny posiada od N do 2N wartości.\\
+    
+    Rząd B+-drzewa — maksymalna liczba wskaźników p, którą
+    można zapisać w jednym węźle\\
+    
+    \textbf{Struktura węzła wewnętrznego}\\
+    $< P_1,K_1, . . . , P_{n − 1},K_{n − 1}, P_n >$\\
+    gdzie $n \leq p$\\
+    $K_i$ jest wartością klucza indeksu\\
+    $P_i$ jest wskaźnikiem do poddrzewa, przechowuje wartości kluczy z
+    przedziału $[K_{i - 1},K_i)$, z uwzględnieniem $K_0 = −\infty$, $K_n = +\infty$
+    oraz $K_1 < K_2 < . . . < K_n$\\
+    
+    \textbf{Struktura liścia}\\
+    $<< K_1, Pr_1 >, . . . , < K_n, Pr_n >, P_{next} >>$\\
+    gdzie $n \leq p$\\
+    $K_i$ jest wartością klucza indeksu\\
+    $Pr_i$ jest wskaźnikiem do rekordów na dysku lub bloków danych
+    $P_{next}$ wskazuje następnego liścia (na tym samym poziomie)
+    oraz
+    $K_1 < K_2 < . . . < K_n$
+    \end{definition}
+\newpage
     
     \section{Podstawowe cechy transakcji (ACID). Metody sterowania współbieżnością transakcji, poziomy izolacji transakcji, przykłady.}
     
@@ -7091,7 +7376,203 @@ mathescape
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
     \section{Schemat blokowy komputera (maszyna von Neumanna).}
     \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}
+    \subsection{Proces}
+    Proces służy do \textbf{organizowania wykonywania programu} w ten sposób, że stanowi on powiązanie \textbf{niezbędnych zasobów systemu komputerowego} i umożliwia \textbf{kontrolę stanu} tych zasobów związaną z wykonywaniem programu.
+    
+    
+    \subsection{Proces a program}
+    Program
+    \begin{itemize}
+        \item Zbiór instrukcji
+        \item Element procesu znajdujący się w segmencie kodu
+        \item Stan nie ulega modyfikacji w czasie wykonywania
+        \item Wykorzystuje dodatkowe zasoby (procesor, pamięć itp.)
+    \end{itemize}
+    
+    Stan procesu ulega zmianie: zmienia się stan wykonywania programu podobnie jak stan większości zasobów z tym związanych. Zmianie w wyniku wykonywania procesu ulega np. segment danych, segment stosu, stan rejestrów procesora itp. Procesem jest więc cały ten kontekst niezbędny do wykonania programu. Wyodrębnienie procesu wiąże się z współbieżnością przetwarzania. W systemie może istnieć wiele procesów (wiele niezależnych przetwarzań), stąd ważne jest utrzymanie informacji o tym, które zasoby przedzielone na potrzeby każdego przetwarzania.
+    
+    \subsection{Zarządzanie procesami}
+    
+    Fragmenty kodu jądra związane z obsługą procesów i zasobów nazywa się zarządcami.
+    Wyróżnia się:
+    \begin{itemize}
+        \item \textbf{zarządców procesów} (grupują i wykonuja funkcje obsługi procesów)
+        \item \textbf{zarządców zasobów} (kontrolują stan zajętości zasobów i realizację żądań procesów)
+    \end{itemize}
+    
+    \subsection{Stany procesu}
+    
+    W zależności od stanu wykonywania programu i dostępności zasobów można wyróżnić następujące, ogólne stany procesu:
+
+    \begin{itemize}
+        \item \textbf{Nowy} — formowanie procesu, czyli gromadzenie zasobów niezbędnych do rozpoczęcia wykonywania procesu, z wyjątkiem procesora (kwantu czasu procesora), a po zakończeniu formowania oczekiwanie na przyjęcie do kolejki procesów gotowych.
+        \item \textbf{Wykonywany} — wykonywanie instrukcji programu danego procesu i wynikająca z ich wykonywania zmiana stanu odpowiednich zasobów systemu.
+        \item \textbf{Oczekujący} — zatrzymanie wykonywania instrukcji programu danego procesu ze względy na potrzebę przydziału dodatkowych zasobów, konieczność otrzymania danych lub osiągnięcia odpowiedniego stanu przez otoczenie procesu (np. urządzenia zewnętrzne lub inne procesy).
+        \item \textbf{Gotowy} — oczekiwanie na przydział kwantu czasu procesora (dostępność wszystkich niezbędnych zasobów z wyjątkiem procesora).
+        \item \textbf{Zakończony} — zakończenie wykonywania programu, zwolnienie większości zasobów i oczekiwanie na możliwość przekazania informacji o zakończeniu innym procesom lub jądru systemu operacyjnego.
+        Pozostawanie procesu z stanie zakończony (w systemach uniksopodobnych zwany zombi ) spowodowane jest przetrzymywaniem pewnych informacji o procesie po jego zakończeniu (np. statusu zakończenie). Całkowite usunięcie procesu mogłoby oznaczać zwolnienie pamięci i utratę tych informacji.
+    \end{itemize}
+    
+    \subsection{Cykl zmiany stanów procesu}
+    
+    \begin{itemize}
+        \item Gotowy $\rightarrow$ Wykonywany \\
+        Decyzja modułu szeregującego procesy (planista przydziału procesora), która oparta jest na priorytetach procesów. Jeżeli w systemie jest jedna jednostka przetwarzająca (procesor), to w stanie wykonywany może być tylko jeden proces, podczas gdy pozostałe procesy znajdują się w innych stanach (w szczególności w stanie gotowy).
+        \item Wykonywany $\rightarrow$ Gotowy \\
+        Oznacza wywłaszczenie procesu z procesora. Wywłaszczenie może być następstwem:
+        \begin{enumerate}
+            \item Upływu kwantu czasu. \\
+            W systemach z \textbf{podziałem czasu} proces otrzymuje tylko kwant czasu na wykonanie kolejnych instrukcji.
+            Upływ kwantu czasu odmierzany jest przez przerwanie zegarowe, a po stwierdzeniu wyczerpania kwantu czasu następuje przełączenie kontekstu i kolejny kwant czasu otrzymuje inny proces (rotacyjny algorytm planowania przydziału procesora).
+            \item Pojawienia się procesu gotowego z wyższym priorytetem.\\
+            W systemie z \textbf{dynamicznymi priorytetami} przerwanie zegarowe lub inne zdarzenie obsługiwane przez jądro wyznacza momenty czasu, w którym przeliczane są priorytety procesów. Jeśli stosowane jest wywłaszczeniowe podejście do planowania przydziału procesora, oparte na priorytecie, proces o najwyższym priorytecie otrzymuje procesor. Więcej szczegółów zostanie omówionych w następnym module.
+        \end{enumerate}
+    \end{itemize}
+
+    \subsection{Szeregowanie procesów}
+    
+    Szeregowanie (planowanie) sprowadza się do wyboru jednego z procesów (lub wątków) gotowych i przekazaniu mu procesora. \\
+    
+    Planowanie opiera się na trzech elementach, z których dwa zasadnicze to tryb decyzji oraz funkcja priorytetu.
+    
+    \begin{itemize}
+        \item \textbf{Funkcja priorytetu} — funkcja wyznaczająca aktualny priorytet procesu na podstawie parametrów procesu i stanu systemu.
+        \item \textbf{Tryb decyzji} — określa okoliczności, w których oceniane i porównywane są priorytety procesów oraz dokonywany jest wybór procesu do wykonania.
+        \item \textbf{Reguła arbitrażu} — reguła rozstrzygania konfliktów w dostępie do procesora w przypadku procesów o tym samym priorytecie.
+    \end{itemize}
+    
+    \subsubsection{Funkcja priorytetu}
+    Funkcja priorytetu jest zbiorem wytycznych dla planisty. Zadaniem planisty jest po prostu realizacja funkcji priorytetu, ewentualnie rozwiązywanie problemów, wynikających z takiej samej wartości priorytetów dla więcej niż jednego procesu.
+    
+    Wartość funkcji priorytetu jest jakąś liczbą, przy czym w niektórych systemach większa wartość tej liczby oznacza wyższy priorytet (np. w Windows), w innych wyższy priorytet to mniejsza wartość funkcji (np. w tradycyjnym systemie UNIX).
+    
+    Funkcja priorytetu uwzględnia przede wszystkim stan procesu. Może też uwzględniać stan systemu, np. stan zasobów pamięci. Ubocznym skutkiem wyznaczania wartości priorytetu jest wskazanie następnego procesu do wykonania, dlatego czasami używa się określenia funkcja wyboru.
+    
+    \begin{itemize}
+        \item Argumentami funkcji priorytetu są wybrane składowe stanu procesu oraz stanu systemu (czas oczekiwania, czas obsługi, czas przebywania w systemie, priorytet zewnętrzny)
+        \item Priorytet procesu w danej chwili jest wartością wynikową funkcji priorytetu dla bieżących wartości parametrów stanu danego procesu i aktualnego stanu systemu.
+    \end{itemize}
+    
+    \subsubsection{Tryb decyzji}
+    Tryb decyzji jest z zbiorem wytycznych odnośnie uruchamiania ekspedytora. Szczegółowe wytyczne mogą obejmować również wartość funkcji priorytetu, gdyż jedną z okoliczności zmiany przydziału procesora jest wzrost lub spadek priorytetu procesów gotowych lub wykonywanego.
+    
+    Tryb decyzji można sklasyfikować jako wywłaszczeniowy lub niewywłaszczeniowy.
+    W schemacie niewywłaszczeniowym procesor traktowany jest jako zasób niewywłaszczalny. Nie można go odebrać procesowi, ale proces może się go zrzec dobrowolnie (służy do tego np. funkcja yield, dostępna w niektórych systemach) lub się zakończyć. Rezygnacja z procesora jest też uboczną konsekwencją wejścia w stan oczekiwania (np. w wyniku zażądania operacji wejścia-wyjścia).
+    
+    W schemacie wywłaszczeniowym, w ramach kontrolnego przekazania sterowania do jądra systemu operacyjnego może zostać podjęta decyzja o przełączeniu kontekstu pomimo, że wykonywany proces nie zażądał żadnej usługi, oznaczającej rezygnację z procesora. Przechodzi on wówczas do stanu gotowy, a rozpoczyna się wykonywanie innego procesu.
+    
+    \subsubsection{Reguła arbitrażu}
+    
+    Arbitraż losowy przy małej zmienności priorytetów mógłby prowadzić do głodzenia procesów.
+
+    Arbitraż cykliczny jest trudny w realizacji przy zmiennych priorytetach. Można go z powodzeniem realizować przy stałych priorytetach przy odpowiednim wsparciu ze strony struktur danych.
+    
+    Arbitraż chronologiczny wydaję się być najbardziej sprawiedliwym, ale wymaga utrzymania odpowiednich atrybutów procesów lub użycia pewnych struktur danych do powiązania procesów w celu ustalenia kolejności przyjmowania ich do systemu.
+    
+    Losowo — możliwe w przypadku, gdy liczba procesów o tym samym priorytecie jest niewielka
+    Cyklicznie — cykliczny przydział procesora kolejnym procesom
+    Chronologicznie — w kolejności przyjmowania procesów do systemu (w kolejności FIFO)
+
+    \subsection{Algorytmy planowania przydziału procesora}
+    
+    Wyróżnia się między innymi następujące algorytmy planowania przydziału procesora:
+    \begin{itemize}
+        \item FCFS (First Come First Served) - Pierwszy zgłoszony, pierwszy obsłużony
+        \item LCFS (Last Come First Served) - Ostatni zgłoszony, pierwszy obsłużony
+        \item SJF (Shortest Job First) - Najpierw najkrótsze zadanie
+    \end{itemize}
+    
+    \subsubsection{FCFS}
+    Algorytm FCFS jest naturalnym algorytmem w systemach obsługi masowej, takich jak kasy sklepowe, kasy biletowe, banki, urzędy itp. Procesy otrzymują procesor w kolejności, w jakiej zgłosiły się do systemu. Specyficzną cechą w systemach komputerowych, nie zawsze mającą odpowiednik w systemach masowej obsługi, jest możliwość oddania procesora innemu procesowi na czas oczekiwania na przydział dodatkowego zasobu, np. wykonania operacji wejścia-wyjścia.
+    
+    \subsubsection{LCFS}
+    Algorytm LCFS obsługuje procesy w kolejności odwrotnej do kolejności zgłoszeń. Algorytm nie wywłaszcza procesów, więc nowo przychodzący proces jest pierwszy w kolejce i czeka na zwolnienie procesora przez bieżąco wykonywany proces. Algorytm ten wymieniany jest dla porządku, nie ma natomiast praktycznego zastosowania we współczesnych koncepcjach planowania przydziału procesora.
+    
+    \subsubsection{SJF}
+    Algorytm SJF preferuje procesy, które mają najmniejsze wymagania odnośnie czasu procesora, potrzebnego na realizację przetwarzania. W kontekście systemów komputerowych preferencje te należałoby raczej określić jako najpierw zadanie z najkrótszą następną fazą procesora, gdyż po odwołaniu do jądra w celu przydziału dodatkowych zasobów nastąpi zwolnienie procesora. Algorytm ten ma sens również w systemach masowej obsługi (często w kolejce do kasy w sklepie przepuszczamy kogoś, kto ma niewiele produktów w koszyku). Problemem praktycznej stosowalności jest określenie przyszłego zapotrzebowania na procesor.
+    
+    Zakładając, że procesy kolejkowane są zgodnie z kolejnością zgłoszeń, w algorytmie FCFS wybierany jest proces z czoła kolejki, w algorytmie LCFS wybierany jest proces z ogona (końca) kolejki, a w algorytmie SJF kolejkę należy przejrzeć w celu znalezienia procesu, który najmniej zaabsorbuje procesor.
+
+\newpage
     \section{Muteks, semafor, monitor jako narzędzia synchronizacji procesów.}
+\subsection{Sekcja krytyczna}
+    Wielozadaniowość systemu oprócz oczywistych korzyści stwarza również pewne problemy. W środowisku, w którym wiele wątków działa równolegle i niezależnie od siebie, potrzebne są mechanizmy, które pozwolą w pewien sposób zdeterminować ich kolejność, oraz dostęp do tzw. sekcji krytycznych. Sekcje te są to fragmenty kodu, które nie mogą zostać wykonane „w tym samym czasie” przez kilka wątków.
+
+
+    \subsection{Semafor}
+    Zmienna całkowita, która z logicznego punktu widzenia przyjmuje wartości nieujemne (semafor ogólny) lub wartości logiczne (semafor binarny). Zmienna semaforowa musi mieć nadaną początkową wartość (oczywiście nieujemną).
+    
+    \begin{itemize}
+    \item Semafor binarny — zmienna semaforowa przyjmuje tylko wartości true (stan podniesienia, otwarcia) lub false (stan opuszczenia, zamknięcia).
+    \item Semafor ogólny (zliczający) — zmienna semaforowa przyjmuje wartości całkowite nieujemne, a jej bieżąca wartość jest zmniejszana lub zwiększana o 1 w wyniku wykonania odpowiednio operacji opuszczenia lub podniesienia semafora.
+    \end{itemize}
+    
+    Po nadaniu początkowej wartości zmiennej semaforowej można na niej wykonywać tylko dwa rodzaje operacji:
+    
+    \begin{itemize}
+    \item P — opuszczanie semafora (zmniejszenie wartości)
+    \item V - podnoszenie semafora (zwiększenie wartości)
+    \end{itemize}
+    
+    Wykonując operację semaforową, proces może zastać zablokowany (przejść w stan oczekiwania). Typowym przypadkiem jest blokowanie w operacji opuszczania semafora. Operacja opuszczania nie zakończy się do czasu, aż wartość zmiennej semaforowej będzie na tyle duża (być może zostanie zwiększona w międzyczasie), że zmniejszenie jej wartości w wyniku tej operacji nie spowoduje przyjęcia wartości ujemnej. W przypadku semaforów dwustronnie ograniczonych blokowanie może wystąpić również w przypadku podnoszenia semafora.
+    
+    \subsubsection{Implementacja semafora ogólnego}
+    \begin{verbatim}
+        procedure P(var s: Semaphore)
+            begin
+                while s=0 do nic;
+                s := s - 1;
+            end;
+    \end{verbatim}
+    
+    \begin{verbatim}
+        procedure V(var s: Semaphore)
+            begin
+                s := s+1;
+            end;
+    \end{verbatim}
+    
+    \subsection{Muteks (Zamek)}
+    Muteksy (ang. mutual exclusion semaphores), stanowią szczególny rodzaj semaforów binarnych. Muteks może być zablokowany (ma wartość 1) lub odblokowany (ma wartość 0 - nie zablokowany). Muteksy korzystają z operacji atomowych, tylko jeden wątek może być w posiadaniu muteksa i tylko on może go zwolnić.
+    
+    Operacje:
+    \begin{itemize}
+        \item lock (mutex\_lock)\\ - zajęcie muteksu jeśli jest wolny
+        \item unlock (mutex\_unlock) \\ - ustawienie zamka na wolny, jesli kolejka oczekujących wątków jest pusta\\
+        - wybranie wątku z niepustej kolejki wątków oczekujących i ustawienie jego stanu na gotowy
+        \item trylock (mutex\_trylock)\\ - zajęcie zamkna lub kontynuacja przetwarzania
+    \end{itemize}
+    
+    Cechy
+    \begin{itemize}
+        \item Cecha posiadania - jeżeli zadanie zablokuje muteks (nadanie wartości 1) to tylko ono może ten muteks odblokować (nadać wartość 0)
+        \item Rekurencyjne blokowanie - określa ile razy zadanie, które posiada dany muteks wykonało na nim operacje blokowania (zapobiega to zakleszczeniu)
+    \end{itemize}
+    
+   \subsection{Monitor (Zmienna warunkowa)}
+    Są to zmienne i działające na nich procedury zebrane w jednym module. Monitory definiowane są jako klasy. Dostęp do zmiennych monitora jest możliwy tylko za pomocą procedur monitora. W danej chwili tylko jeden proces może wykonywać procedury monitora. Gdy inny proces wywoła procedurę monitora proces ten będzie zablokowany do chwili opuszczenia monitora przez znajdujący się tam już proces. Istnieje możliwość wstrzymania i wznowienia procedur monitora za pomocą zmiennych warunkowych. Procesy oczekujące na wejście do monitora są zorganizowane w kolejkę FIFO.
+    
+    \begin{itemize}
+        \item wait\\ – powoduje wstrzymanie procesu i wstawienie go na koniec kolejki
+        \item signal\\ – powoduje wznowienie pierwszego procesu z kolejki, o ile kolejka nie jest pusta
+        \item signal\\ – powoduje wznowienie pierwszego procesu z kolejki, o ile kolejka nie jest pusta
+    \end{itemize}
+    
+    \subsubsection{Ogólny schemat definicji monitora}
+    \begin{verbatim}
+        type nazwa_monitora = monitor
+        -> deklaracje zmiennych
+        procedure entry proc_1(...);
+        begin ... end;
+        ...
+        procedure entry proc_n(...);
+        begin ... end;
+        begin
+            kod inicjalizujący
+        end
+    \end{verbatim}
+
+\newpage
     \section{Pamięć wirtualna i mechanizm stronicowania.}
     \section{Systemy plikowe - organizacja fizyczna i logiczna (na przykładzie wybranego systemu uniksopodobnego).}
 
@@ -7332,6 +7813,93 @@ mathescape
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
     \section{Wirtualne sieci prywatne, protokół IPsec.}
+    Wirtualna Sieć Prywatna, zwaną potocznie „siecią VPN” (z ang. Virtual Private Network) jest siecią przekazu danych korzystającą z publicznej infrastruktury telekomunikacyjnej, która dzięki stosowaniu protokołów tunelowania i procedur bezpieczeństwa zachowuje poufność danych. Infrastrukturą może być sieć szkieletowa operatora telekomunikacyjnego (np. Frame Relay lub ATM), a także globalna sieć Internet. Sieci te nazwano „wirtualnymi”, gdyż opierają się one na dynamicznych, wirtualnych połączeniach - wirtualnych obwodach (Virtual Circuit– wirtualny obwód – jest to połączenie zestawiane w sieci pomiędzy nadawcą a odbiorcą, w którym trasy przesyłu danych oraz przepływność pasma dla połączenia są ustawiane dynamicznie) czy też tunelach – nie mających fizycznego bytu i istniejącymi tylko wtedy, gdy jest nimi przenoszony ruch.Połączenia takie mogą być zestawiane między dwoma osobnymi urządzeniami, urządzeniem a siecią oraz między dwoma sieciami.\\
+    Sieć VPN w założeniu powinna zapewniać:
+    \begin{itemize}
+        \item poufność
+        \item integralność
+        \item autentyczność
+    \end{itemize}\\
+    
+    Ogólnie wyróżniamy trzy powszechnie stosowane rodzaje sieci VPN:
+    \begin{itemize}
+        \item zaufany VPN
+        \item bezpieczny VPN
+        \item hybrydowy VPN
+    \end{itemize}
+    \subsection{Zaufany VPN (z ang. Trusted VPN)}
+    To łącza uzyskane od operatora telekomunikacyjnego z zapewnieniem, że dane są odpowiednio chronione. Z technicznego punktu widzenia nie ma gwarancji, iż urządzenia w sieci operatora, przez które przesyłane są dane nie zostaną przejęte przez osoby nieupoważnione. Usługa tego typu świadczona przez operatora może opierać się o łącza dzierżawione zestawione w technologii ATM, Frame Relay czy MPLS. Operator może zapewnić odpowiednio wysoką dostępność usługi, odpowiedni poziom jakości usług QoS (Quality-of-Service) i wymagane pasmo.
+    
+    
+    \subsection{Bezpieczny VPN (Secure VPN)}
+    Sieć VPN bazująca na urządzeniach i oprogramowaniu klienta) wg IETF, gdzie transmisja odbywa się przez Internet, a do jej ochrony stosuje się techniki kryptograficzne. Użytkownik lub firma sama decyduje, jakie mechanizmy ochrony mają być zastosowane. Zaszyfrowany ruch jest widoczny jako tunel między dwoma sieciami i nawet, jeżeli napastnik widzi ruch sieciowy, to i tak nie może go odczytać, jak również zmodyfikować danych niezauważalnie dla strony odbiorczej. Dużą zaletą tego rozwiązania jest koszt , ponieważ VPN wykorzystuje zwykłe łącze internetowe posiadane przez firmę, którego koszt utrzymania jest o wiele niższy niż dedykowanego łącza dzierżawionego. Należy jednak zauważyć, że bezpieczny VPN realizowany jest przez łącza publiczne, gdzie operatorzy nie mogą zapewnić takich samych parametrów sieci na całej drodze transmisji.
+    
+    \subsection{Hybrydowy VPN}
+    Istnieje jeszcze rodzaj sieci VPN integrujący dwa powyższe. Są to hybrydowe sieci VPN (z ang. Hybrid VPN), które stosuje się do przesyłania poufnych informacji wrażliwych na opóźnienia w sieci, np. VoIP. Transmisja w tym wypadku realizowana jest przez łącza dzierżawione, odpowiednio zabezpieczone za pomocą technik kryptograficznych.
+    
+    \subsection{Zalety VPN}
+    \begin{itemize}
+        \item niezależność od fizycznej realizacji połączeń - lokalizacja z przyłączem w postaci linii dzierżawionej bez problemów kontaktuje się z lokalizacją dołączoną do dostawcy Internetu przez Ethernet czy ATM
+        \item niskie koszty ponoszone za dzierżawę łączy - opłaty ponoszone są głównie za łącze dostępowe
+        \item dostępność - Internet jest największą siecią na świecie, poza ewentualnymi problemami z szybkością transmisji nie ma problemów w łączności między lokalizacjami dołączonymi do różnych dostawców Internetu
+        \item szybkość zestawiania nowych bezpiecznych połączeń - z uwagi na fakt, że Internet oparty jest o bezpołączeniowy protokół IP, umożliwiający komunikację między dowolnymi punktami, zestawienie nowych "połączeń" konfigurowane jest lokalnie, bez udziału dostawców usługi
+    \end{itemize}
+    
+    \href{http://students.mimuw.edu.pl/SO/Projekt02-03/temat4-g1/Darek/VirtualPrivateNetwork.html}{Źródło (click me)}
+
+    \subsection{Protokół IPsec}
+    
+    (ang. Internet Protocol Security, IP Security) – zbiór protokołów służących implementacji bezpiecznych połączeń oraz wymiany kluczy szyfrowania pomiędzy komputerami. Protokoły tej grupy mogą być wykorzystywane do tworzenia Wirtualnej Sieci Prywatnej (ang. VPN).\\
+
+    VPN oparta na IPsec składa się z dwóch kanałów komunikacyjnych pomiędzy połączonymi komputerami: kanał wymiany kluczy, za pośrednictwem którego przekazywane są dane związane z uwierzytelnianiem i szyfrowaniem (klucze), oraz kanału (jednego lub więcej), który niesie pakiety transmitowane poprzez sieć prywatną. Kanał wymiany kluczy jest standardowym protokołem UDP (port 500).
+    
+    \subsubsection{Usługi zapewniane przez IPsec}
+    \begin{itemize}
+        \item Poufność (szyfrowanie) transmisji
+        \item Zapewnienie integralności danych w pakiecie
+        \item Uwierzytelnianie pochodzenia danych
+        \item Zabezpieczenie przed atakami polegającymi na powtórnym przesłaniu pakietu
+        \item Ograniczone zabezpieczenie przed analizą ruchu
+        \item Kontrola dostępu
+        \item IPsec jest jednym ze sposobów na bzudowanie VPN
+    \end{itemize}
+    
+    \subsubsection{Składowe standardu IPsec}
+    IPSec opiera się na trzech protokołach: AH (Authentication Header), który zapewnia zarówno identyfikację oryginalności danych, jak i ich integralność, ESP (Encapsulating Security Payload), dostarczający poufności danych, identyfikację oryginalności oraz integralności danych, i ISAKMP (Internet Security Association and Key Management Protocol), który jest odpowiedzialny za automatyczne ustawianie SA oraz zarządzanie kluczami kryptograficznymi tych SA.
+    
+    \begin{itemize}
+        \item AH (Authentication Header) - nagłówek dodawany do pakietu IP, zawierający dane służące do uwierzytelnienie (i kontroli integralności)\\
+        AH zapewnia uwierzytelnienie integralności i pochodzenia danych. Integralność danych jest zapewniona poprzez sumę kontrolną generowaną przez kod identyfikacyjny wiadomości. Natomiast sprawdzenie oryginalności danych dokonuje się poprzez zamieszczenie tajnego, współdzielonego klucza w danych przeznaczonych do identyfikowania.
+
+        AH może być aplikowany zarówno w trybie tunelowym, jak i w trybie transportowym. AH może być stosowany samodzielnie lub w połączeniu z ESP. W takiej kombinacji identyfikacja może być zapewniona między parą komputerów, zapór ogniowych lub między komputerem a zaporą.
+
+        \item ESP (Encapsulating Security Payload) - szyfrowanie oryginalnego pakietu IP i obduowanie w pakiet ESP
+        \begin{itemize}
+            \item Tryb transportowy - podmiana zawartości pakietu IP na zaszyfrowaną
+            \item Tryb tunelowy - zanurzenie pakietu ESP w nowy pakiet IP
+        \end{itemize}
+        IPSec (IP Security), który ma dwa tryby szyfrowania: tunelowy i transportowy. W pierwszym z nich szyfruje się nagłówek i ładunek każdego z pakietów, natomiast w drugim tylko ładunek. Wszystkie urządzenia muszą używać wspólnego klucza, a zapory ogniowe muszą mieć ustanowione podobne polityki bezpieczeństwa. IPSec może szyfrować dane między różnymi urządzeniami, takimi jak np. dwa rutery, ruter i zapora ogniowa czy komputer osobisty i ruter.\\
+        
+        ESP zapewnia poufność danych dzięki szyfrowaniu. Może także opcjonalnie zapewnić uwierzytelnienie pochodzenia danych, sprawdzanie integralności i replayprotection. Porównując ESP do AH, widać, że tylko ten pierwszy dostarcza szyfrowania, natomiast obydwa zapewniają identyfikację, i sprawdzenie integralności i replayprotection. Szyfrowanie ESP stosuje symetryczny współdzielony klucz, tzn. jest on współużytkowany przy szyfrowaniu i deszyfrowaniu danych.
+        \item IKE (Internet Key Exchange) - uniwersalny algorytm wymiany klucza
+    \end{itemize}
+
+    \subsubsection{Security Association}
+    Relacja zabezpieczeń SA określa zależności bezpieczeństwa pomiędzy dwoma lub więcej jednostkami. Wyjaśnia, w jaki sposób jednostki używać będą systemów zabezpieczeń do bezpiecznej komunikacji. Relacja zabezpieczeń jest jednokierunkowa. Zatem dla każdej pary komunikujących się urządzeń zdefiniować należy przynajmniej dwa bezpieczne połączenia - z A do B i z B do A. Relacja zabezpieczeń jest jednoznacznie definiowana przez losowo wybrany jednoznaczny numer tzw. Security Parameters Index (SPI), docelowy adres IP odbiorcy oraz identyfikator protokołu zabezpieczeń (AH lub ESP). Kiedy system wysyła pakiet, który wymaga ochrony IPSec, przegląda relacje zabezpieczeń w swojej bazie i następnie umieszcza SPI w nagłówku IPSec. Parametry relacji zabezpieczeń są negocjowane w trakcie zestawiania bezpiecznego połączenia i obowiązują przez cały czas funkcjonowania tej relacji.\\
+    
+    Abstrakcyjny kanał komunikacji w IPsec
+    \begin{itemize}
+        \item jednokierunkowy
+        \item dla ustalonych nadawcy i odbiorcy
+        \item z określonymi aspektami szyfrowania i aktualnym kontekstem
+    \end{itemize}
+    
+    Idetyfikowany przez
+    \begin{itemize}
+        \item adres IP odbiorcy (może być unicastowy, broadcastowy lub multicastowy)
+        \item liczbę nazywaną Security Parameter Index (SPI)
+        \item Identyfikator protokołu bezpieczeństwa (ESP lub AH)
+    \end{itemize}
 
 
 \end{document}
