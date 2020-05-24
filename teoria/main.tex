@@ -7330,7 +7330,72 @@ mathescape
     \section{Najważniejsze procesy zachodzące w sieci komputerowej od momentu wpisania adresu strony WWW do wyświetlenia strony w przeglądarce (komunikat HTTP, segment TCP, system DNS, pakiet IP, ARP, ramka).}
     \section{Działanie przełączników Ethernet, sieci VLAN, protokół STP.}
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
+    \newpage
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
+    \subsection{Syfrowanie z kluczem publicznym}
+    Szyfrowanie i odszyfrowanie jest realizowane przy pomocy pary kluczy - \textbf{prywatnego} i \textbf{pubicznego}.
+    Jeśli coś zostanie zaszyfrowane przy pomocy klucza prywatnego, to może być odszyfrowane tylko przy pomocy odpowiadającego mu klucza publicznego i na odwrót.
+
+    Jeśli chcemy coś przekazać innej osobie w wersji zaszyfrowanej, to powinniśmy zaszyfrować to kluczem publicznym tej osoby. Ponieważ nikt poza tą osobą nie
+    zna odpowiadającego klucza prywatnego, nikt przesyłki nie odszyfruje.
+
+    \subsection{Podpis cyfrowy}
+
+    Zaszyfrowanie kluczem prywatnym daje gwarancję, że zaszyfrowana wiadomość pochodzi z odpowiedniego źródła.
+    Odgadnięcie klucza prywatnego, jeśli znany jest publiczny jest „praktycznie niemożliwe” w sensownym czasie (przy użyciu współczesnych komputerów).
+
+
+    \subsubsection{Skrót(Hash)}
+    Szyfrowanie dużych porcji danych może być kosztowne i czasem niepożądane. Skrót ma zwykle 160 bitów (SHA-1) lub 224--512 (rodzina SHA-2).
+    Jeśli w oryginalnej wiadomości zmieniony zostanie chociaż jeden bit, to skrót będzie zupełnie inny niż ten, który został
+    utworzony przed zmianą.  Jednak na podstawie skrótu odtworzenie oryginalnej wiadomości jest prawie niemożliwe. Algorytmy haszujące są deterministyczne.
+
+
+    \subsubsection{Uzyskanie podpisu cyfrowego}
+    \begin{enumerate}
+        \item Generacja skrótu wiadomości
+        \item Szyfrowanie go kluczem prywatnym
+    \end{enumerate}
+
+    Zaszyfrowany skrót stanowi podpis cyfrowy.
+    Niezaszyfrowana wiadomość może być przesłana jawnie razem z podpisem cyfrowym.
+
+    \subsubsection{Sprawdzenie podpisu cyfrowego}
+    \begin{enumerate}
+        \item Odszyfrowanie skrótu kluczem publicznym nadawcy
+        \item Tworzenie skrótu wiadomości używając tej samej funkcji haszującej
+    \end{enumerate}
+
+        Jeśli wyniki obu operacji są identyczne, to znaczy, że wiadomość na pewno
+        podpisał określony nadawca, a ponadto nikt po tej wiadomości nie zmienił już po podpisaniu.
+
+
+
+    \subsection{Certyfikaty}
+
+    Klucze mogą być generowane na komputerze lokalnym przy pomocy odpowiedniego oprogramowania i powinny być podpisane przez jakieś centrum certyfikacyjne.
+
+    Centrum certyfikacyjne (ang. CA – Certification Authority) wydaje tzw. certyfikaty cyfrowe.
+
+    Certyfikat zawiera:
+    \begin{itemize}
+        \item Identyfikator osoby/firmy/obiektu
+        \item Identyfikator Centrum certyfikacyjnego (CA), który wydał certyfikat
+        \item Numer identyfikacyjny certyfikatu
+        \item Cel stosowania (np. podpisywanie bezpiecznych stron WWW albo podpisywanie listów elektronicznych)
+        \item Wartość klucza publicznego
+        \item Okres ważności
+        \item Podpis cyfrowy wydawcy (CA)
+    \end{itemize}
+
+    Jeśli ufamy danemu wydawcy (CA), to ufamy, że zawarty w certyfikacie klucz publiczny jest prawdziwy.
+    W systemach operacyjnych oraz różnych programach (np. przeglądarkach internetowych)
+    jest wpisana lista zaufanych tzw. głównych urzędów certyfikacji oraz lista pośrednich
+    urzędów certyfikacji, których certyfikaty są podpisane przez główne urzędy. Poprzez panel
+    sterowania (w opcjach internetowych) można przeglądać i zarządzać listą zaufanych
+    wydawców i dodawać do tej listy certyfikaty swoich zaufanych urzędów certyfikacji.
+
+    \newpage
     \section{Wirtualne sieci prywatne, protokół IPsec.}
 
 
