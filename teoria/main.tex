@@ -7089,7 +7089,92 @@ mathescape
     \newpage
     
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
+    
+    Programowalne układy logiczne (Programmable Logic Devices / PLD) dzielą się na:
+    \begin{itemize}
+        \item Read Only Memory (ROM)
+        \item Programmable Array Logic (PAL)
+        \item Programmable Logic Array (PLA)
+    \end{itemize}
+    
+    \subsection{ROM}
+        Wejście jest '\textit{hard-wired}` i zawiera wszystkie możliwe mintermy, wyjście jest programowalne.
+            \begin{center}
+                 \includegraphics[scale=0.7]{graphics/rom.png}
+            \end{center}
+             
+    \subsection{PAL}
+        Układy PAL zawierają część nieprogramowalną (wbudowane bramki OR) oraz programowalną
+        matrycę bramek AND.
+        Wejście jest programowalne, wyjście jest '\textit{hard-wired}`.
+            \begin{center}
+                \includegraphics[scale=0.7]{graphics/pal.png}
+            \end{center}     
+            
+    \subsection{PLA}
+        Układy PLA zawierają część programowalną matrycę bramek OR oraz programowalną
+        matrycę bramek AND.
+        Wejście jest programowalne, wyjście jest programowalne.
+       \begin{center}
+         \includegraphics[scale=0.7]{graphics/pla.png}
+        \end{center}
+    
+        \textbf{PLA} vs \textbf{PAL}:
+        \begin{itemize}
+            \item PLA konstruuje się bramkami AND i OR. PAL tak samo, ale liczba
+            OR jest ustalona.
+            \item PLA są droższe w produkcji
+            \item PAL są szybsze
+            \item Liczba funkcji zaimplementowanych w PAL jest ograniczona,
+            układy PAL są mniej elastyczne i programowalne niż PLA
+        \end{itemize}
+    \newpage
+    
     \section{Schemat blokowy komputera (maszyna von Neumanna).}
+    
+    \begin{center}
+        \includegraphics[width=0.62\textwidth]{graphics/von_neumann.png}
+    \end{center}
+    
+    Architektura von Neumanna to rodzaj architektury cyfrowego komputera opracowana w 1945 przez Johna von Neumanna.
+    Składa się z następujących części:
+    
+    \begin{itemize}
+    \item Pamięci - zawiera zarówno dane, jak i instrukcji
+    \item CPU, Central Processing Unit, Procesora. CPU składa się z:
+        \begin{itemize}
+            \item Jednostki kontrolnej (nadzorującej)
+            \item Jednostki arytmetyczno-logicznej wykonującej podstawowe operacje przetwarzania informacji. 
+        \end{itemize}
+    \end{itemize}
+    
+    I/O:
+    \begin{itemize}
+        \item Akumulator, wchodzący w skład jednostki arytmetyczno-logicznej
+        \item Urządzenia wejścia
+        \item Urządzenia wyjścia
+    \end{itemize}
+    
+    Cechy architektury von Neumanna:
+    \begin{itemize}
+        \item Jednolitość pamięci 
+        \begin{itemize}
+            \item Możliwość uruchomienia samomodyfikującego się programu
+            \item Dzielenie pamięci instrukcji z pamięcią danych może prowadzić do bottlenecków (w tym celu wprowadza się cache)
+        \end{itemize}
+        \item Skończona liczba rozkazów
+        \item Informacje są przetwarzane poprzez sekwencyjny odczyt kolejnych instrukcji z pamięci i ich wykonanie przez procesor
+    \end{itemize}
+
+    Warto zapamiętać:
+    \begin{itemize}
+        \item Niemalże wszystkie cyfrowe, elektroniczne współczesne komputery są oparte na architekturze von Neumanna 
+        \item Architektura von Neumanna pozwoliła na oddzielenie programu od procesora
+        \item Istnieje architektura Harvardzka, oddzielająca pamięć z rozkazami od pamięci z danymi.
+    \end{itemize}
+    	
+    \newpage
+
     \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}
     \section{Muteks, semafor, monitor jako narzędzia synchronizacji procesów.}
     \section{Pamięć wirtualna i mechanizm stronicowania.}
