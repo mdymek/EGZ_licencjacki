@@ -7374,28 +7374,28 @@ mathescape
     \newpage
     
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
-    
+
     Programowalne układy logiczne (Programmable Logic Devices / PLD) dzielą się na:
     \begin{itemize}
         \item Read Only Memory (ROM)
         \item Programmable Array Logic (PAL)
         \item Programmable Logic Array (PLA)
     \end{itemize}
-    
+
     \subsection{ROM}
         Wejście jest '\textit{hard-wired}` i zawiera wszystkie możliwe mintermy, wyjście jest programowalne.
             \begin{center}
                  \includegraphics[scale=0.7]{graphics/rom.png}
             \end{center}
-             
+
     \subsection{PAL}
         Układy PAL zawierają część nieprogramowalną (wbudowane bramki OR) oraz programowalną
         matrycę bramek AND.
         Wejście jest programowalne, wyjście jest '\textit{hard-wired}`.
             \begin{center}
                 \includegraphics[scale=0.7]{graphics/pal.png}
-            \end{center}     
-            
+            \end{center}
+
     \subsection{PLA}
         Układy PLA zawierają część programowalną matrycę bramek OR oraz programowalną
         matrycę bramek AND.
@@ -7403,7 +7403,7 @@ mathescape
        \begin{center}
          \includegraphics[scale=0.7]{graphics/pla.png}
         \end{center}
-    
+
         \textbf{PLA} vs \textbf{PAL}:
         \begin{itemize}
             \item PLA konstruuje się bramkami AND i OR. PAL tak samo, ale liczba
@@ -7414,35 +7414,35 @@ mathescape
             układy PAL są mniej elastyczne i programowalne niż PLA
         \end{itemize}
     \newpage
-    
+
     \section{Schemat blokowy komputera (maszyna von Neumanna).}
-    
+
     \begin{center}
         \includegraphics[width=0.62\textwidth]{graphics/von_neumann.png}
     \end{center}
-    
+
     Architektura von Neumanna to rodzaj architektury cyfrowego komputera opracowana w 1945 przez Johna von Neumanna.
     Składa się z następujących części:
-    
+
     \begin{itemize}
     \item Pamięci - zawiera zarówno dane, jak i instrukcji
     \item CPU, Central Processing Unit, Procesora. CPU składa się z:
         \begin{itemize}
             \item Jednostki kontrolnej (nadzorującej)
-            \item Jednostki arytmetyczno-logicznej wykonującej podstawowe operacje przetwarzania informacji. 
+            \item Jednostki arytmetyczno-logicznej wykonującej podstawowe operacje przetwarzania informacji.
         \end{itemize}
     \end{itemize}
-    
+
     I/O:
     \begin{itemize}
         \item Akumulator, wchodzący w skład jednostki arytmetyczno-logicznej
         \item Urządzenia wejścia
         \item Urządzenia wyjścia
     \end{itemize}
-    
+
     Cechy architektury von Neumanna:
     \begin{itemize}
-        \item Jednolitość pamięci 
+        \item Jednolitość pamięci
         \begin{itemize}
             \item Możliwość uruchomienia samomodyfikującego się programu
             \item Dzielenie pamięci instrukcji z pamięcią danych może prowadzić do bottlenecków (w tym celu wprowadza się cache)
@@ -7453,11 +7453,11 @@ mathescape
 
     Warto zapamiętać:
     \begin{itemize}
-        \item Niemalże wszystkie cyfrowe, elektroniczne współczesne komputery są oparte na architekturze von Neumanna 
+        \item Niemalże wszystkie cyfrowe, elektroniczne współczesne komputery są oparte na architekturze von Neumanna
         \item Architektura von Neumanna pozwoliła na oddzielenie programu od procesora
         \item Istnieje architektura Harvardzka, oddzielająca pamięć z rozkazami od pamięci z danymi.
     \end{itemize}
-    	
+
     \newpage
 
     \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}
@@ -8391,18 +8391,18 @@ mathescape
     \newpage
 
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
-    
+
     Sposób obsługi routowania przez warstwę IP nazywa się mechanizmem routowania.
     Określenie to dotyczy przeglądania przez system operacyjny tablicy routowania i podejmowania określonych decyzji, co do przesyłania datagramów IP.
     Przez pojęcie polityka routowania określa się działania procesu routowania podejmowane w
     celu ustanowienia i bieżącej modyfikacji tablicy routowania. Polityka routowania realizowana jest z wykorzystaniem protokołów routowania.
-    
+
     Pożądane cechy protokołów routowania:
     \begin{enumerate}
         \item Wyznaczenie najlepszej trasy do punktu docelowego
         \item Odporność (robustness) na nieprzewidziane, nieporządanie zdarzenia:
         "kopara", niewłaściwa konfiguracja, obciążenia sieci
-        \item Szybkie osiaganie zbieżności, tj. osiągnięcie stanu w którym 
+        \item Szybkie osiaganie zbieżności, tj. osiągnięcie stanu w którym
         routery "widzą" jednakowo topologię sieci.
         \item Dopasowanie do zmian, np.:
             \begin{itemize}
@@ -8412,27 +8412,27 @@ mathescape
                 \item Zmiana opóźnienia
             \end{itemize}
     \end{enumerate}
-    
+
     Ze względu na sposób działania protokoły routowania wewnętrznego dzielimy na
     \begin{itemize}
         \item protokoły wektora odległości (DV, distance-vector)
         \item protokoły stanu łącza (link-state)
     \end{itemize}
-    
+
     \newpage
-    
+
     \subsection{Protokoły wektora odległości}
-        Protokoły wektora odległości opierają się na algorytmie Bellmana Forda, gdzie 
+        Protokoły wektora odległości opierają się na algorytmie Bellmana Forda, gdzie
         węzły to router, krawędzie - połączenia pomiędzy nimi.
-        
-        Protokołami wektora odległości są: 
+
+        Protokołami wektora odległości są:
         \begin{itemize}
             \item RIP
             \item RIP2
             \item IGRP
             \item EIGRP (wg Cisco hybrydowy)
         \end{itemize}
-        
+
         \subsubsection{RIP}
         Metryką w RIP jest liczba skoków / routerów po drodze do celu - 0 to połączenie bezpośrednie, 1 to jeden skok do następnego router, itd. Co ważne, metryka 16
         oznacza umownie nieskończoność. Trasa o metryce 16 jest traktowana jako trasa niedostępna, przez co RIP nie sprawdza się w przypadku bardzo dużych sieci.
@@ -8444,22 +8444,22 @@ mathescape
             \item Hold-down timer (180s) – po osiągnięciu wartości progowej przez invalid timer trasa jest ustawiana w stan hold-down.
             \item Flush timer (240s) – zegar ten jest zerowany po otrzymaniu informacji o danej trasie. Po upłynięciu trasa jest usuwana (nawet, jeśli znajduje się w stanie hold-down.
         \end{itemize}
-        
+
         Zalety:
         \begin{itemize}
             \item prostota
             \item łatwa konfiguracja
         \end{itemize}
-        
+
         Wady:
         \begin{itemize}
             \item Wolno rozprzestrzenianie się informacji o zmianach w topologii
             \item Wolne osiąganie zbieżności
             \item Częste przesyłanie dużych porcji informacji (wektory odległości)
         \end{itemize}
-        
+
         \subsubsection{RIP2}
-        
+
         \begin{itemize}
             \item Przekazuje maski podsieci
             \item Umożliwia stosowanie sieci bezklasowych CIDR
@@ -8469,14 +8469,14 @@ mathescape
             \item Metryka 16 dalej oznacza nieskończoność
             \item Dalej brak alternatywnych tras
         \end{itemize}
-    
+
     \newpage
-            
+
     \subsection{Protokoły stanu łącza}
         Łącze reprezentuje połączenie z sąsiednim routerem (routerami,
         w przypadku technologii wielodostępnych, np. Ehternet), komputerem lub siecią. Stan łącza
         składa się z wielu atrybutów, np. prędkość transmisji, opóźnienie, adres IP, sąsiedzi
-        
+
         Protokołami stanu łącza są:
         \begin{itemize}
             \item OSPF
@@ -8484,9 +8484,9 @@ mathescape
             \item IS-IS
             \item NLSP
         \end{itemize}
-        
+
         \subsection{OSPF}
-    
+
         Zasada działania:
         \begin{itemize}
             \item Każdy router posiada (albo buduje) informację o połączeniach w całej sieci
@@ -8511,7 +8511,7 @@ mathescape
             \end{itemize}
             \item W przypadku istnienia kilku tras o jednakowym koszcie realizowane jest równoważenie obciążeń (load balancing).
         \end{itemize}
-        
+
         Metryki:
         \begin{itemize}
             \item Standardowo metryka = $\frac{\mathrm{wartość\ odniesienia}}{\mathrm{szerokość\ pasma}}$
@@ -8519,13 +8519,74 @@ mathescape
             \item Ethernet 100Mbps ma metrykę 1
             \item Łącze 56kps ma metrykę 1768
         \end{itemize}
-        
+
     \newpage
-    
+
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
+    \subsection{Syfrowanie z kluczem publicznym}
+    Szyfrowanie i odszyfrowanie jest realizowane przy pomocy pary kluczy - \textbf{prywatnego} i \textbf{pubicznego}.
+    Jeśli coś zostanie zaszyfrowane przy pomocy klucza prywatnego, to może być odszyfrowane tylko przy pomocy odpowiadającego mu klucza publicznego i na odwrót.
+
+    Jeśli chcemy coś przekazać innej osobie w wersji zaszyfrowanej, to powinniśmy zaszyfrować to kluczem publicznym tej osoby. Ponieważ nikt poza tą osobą nie
+    zna odpowiadającego klucza prywatnego, nikt przesyłki nie odszyfruje.
+
+    \subsection{Podpis cyfrowy}
+
+    Zaszyfrowanie kluczem prywatnym daje gwarancję, że zaszyfrowana wiadomość pochodzi z odpowiedniego źródła.
+    Odgadnięcie klucza prywatnego, jeśli znany jest publiczny jest „praktycznie niemożliwe” w sensownym czasie (przy użyciu współczesnych komputerów).
+
+
+    \subsubsection{Skrót(Hash)}
+    Szyfrowanie dużych porcji danych może być kosztowne i czasem niepożądane. Skrót ma zwykle 160 bitów (SHA-1) lub 224--512 (rodzina SHA-2).
+    Jeśli w oryginalnej wiadomości zmieniony zostanie chociaż jeden bit, to skrót będzie zupełnie inny niż ten, który został
+    utworzony przed zmianą.  Jednak na podstawie skrótu odtworzenie oryginalnej wiadomości jest prawie niemożliwe. Algorytmy haszujące są deterministyczne.
+
+
+    \subsubsection{Uzyskanie podpisu cyfrowego}
+    \begin{enumerate}
+        \item Generacja skrótu wiadomości
+        \item Szyfrowanie go kluczem prywatnym
+    \end{enumerate}
+
+    Zaszyfrowany skrót stanowi podpis cyfrowy.
+    Niezaszyfrowana wiadomość może być przesłana jawnie razem z podpisem cyfrowym.
+
+    \subsubsection{Sprawdzenie podpisu cyfrowego}
+    \begin{enumerate}
+        \item Odszyfrowanie skrótu kluczem publicznym nadawcy
+        \item Tworzenie skrótu wiadomości używając tej samej funkcji haszującej
+    \end{enumerate}
+
+        Jeśli wyniki obu operacji są identyczne, to znaczy, że wiadomość na pewno
+        podpisał określony nadawca, a ponadto nikt po tej wiadomości nie zmienił już po podpisaniu.
+
+
+
+    \subsection{Certyfikaty}
+
+    Klucze mogą być generowane na komputerze lokalnym przy pomocy odpowiedniego oprogramowania i powinny być podpisane przez jakieś centrum certyfikacyjne.
+
+    Centrum certyfikacyjne (ang. CA – Certification Authority) wydaje tzw. certyfikaty cyfrowe.
+
+    Certyfikat zawiera:
+    \begin{itemize}
+        \item Identyfikator osoby/firmy/obiektu
+        \item Identyfikator Centrum certyfikacyjnego (CA), który wydał certyfikat
+        \item Numer identyfikacyjny certyfikatu
+        \item Cel stosowania (np. podpisywanie bezpiecznych stron WWW albo podpisywanie listów elektronicznych)
+        \item Wartość klucza publicznego
+        \item Okres ważności
+        \item Podpis cyfrowy wydawcy (CA)
+    \end{itemize}
+
+    Jeśli ufamy danemu wydawcy (CA), to ufamy, że zawarty w certyfikacie klucz publiczny jest prawdziwy.
+    W systemach operacyjnych oraz różnych programach (np. przeglądarkach internetowych)
+    jest wpisana lista zaufanych tzw. głównych urzędów certyfikacji oraz lista pośrednich
+    urzędów certyfikacji, których certyfikaty są podpisane przez główne urzędy. Poprzez panel
+    sterowania (w opcjach internetowych) można przeglądać i zarządzać listą zaufanych
+    wydawców i dodawać do tej listy certyfikaty swoich zaufanych urzędów certyfikacji.
 
     \newpage
-
     \section{Wirtualne sieci prywatne, protokół IPsec.}
     Wirtualna Sieć Prywatna, zwaną potocznie „siecią VPN” (z ang. Virtual Private Network) jest siecią przekazu danych korzystającą z publicznej infrastruktury telekomunikacyjnej, która dzięki stosowaniu protokołów tunelowania i procedur bezpieczeństwa zachowuje poufność danych. Infrastrukturą może być sieć szkieletowa operatora telekomunikacyjnego (np. Frame Relay lub ATM), a także globalna sieć Internet. Sieci te nazwano „wirtualnymi”, gdyż opierają się one na dynamicznych, wirtualnych połączeniach - wirtualnych obwodach (Virtual Circuit– wirtualny obwód – jest to połączenie zestawiane w sieci pomiędzy nadawcą a odbiorcą, w którym trasy przesyłu danych oraz przepływność pasma dla połączenia są ustawiane dynamicznie) czy też tunelach – nie mających fizycznego bytu i istniejącymi tylko wtedy, gdy jest nimi przenoszony ruch.Połączenia takie mogą być zestawiane między dwoma osobnymi urządzeniami, urządzeniem a siecią oraz między dwoma sieciami.\\
     Sieć VPN w założeniu powinna zapewniać:
