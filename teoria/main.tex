@@ -7374,7 +7374,92 @@ mathescape
     \newpage
     
     \section{Programowalne układy logiczne PLD (ROM, PAL, PLA).}
+    
+    Programowalne układy logiczne (Programmable Logic Devices / PLD) dzielą się na:
+    \begin{itemize}
+        \item Read Only Memory (ROM)
+        \item Programmable Array Logic (PAL)
+        \item Programmable Logic Array (PLA)
+    \end{itemize}
+    
+    \subsection{ROM}
+        Wejście jest '\textit{hard-wired}` i zawiera wszystkie możliwe mintermy, wyjście jest programowalne.
+            \begin{center}
+                 \includegraphics[scale=0.7]{graphics/rom.png}
+            \end{center}
+             
+    \subsection{PAL}
+        Układy PAL zawierają część nieprogramowalną (wbudowane bramki OR) oraz programowalną
+        matrycę bramek AND.
+        Wejście jest programowalne, wyjście jest '\textit{hard-wired}`.
+            \begin{center}
+                \includegraphics[scale=0.7]{graphics/pal.png}
+            \end{center}     
+            
+    \subsection{PLA}
+        Układy PLA zawierają część programowalną matrycę bramek OR oraz programowalną
+        matrycę bramek AND.
+        Wejście jest programowalne, wyjście jest programowalne.
+       \begin{center}
+         \includegraphics[scale=0.7]{graphics/pla.png}
+        \end{center}
+    
+        \textbf{PLA} vs \textbf{PAL}:
+        \begin{itemize}
+            \item PLA konstruuje się bramkami AND i OR. PAL tak samo, ale liczba
+            OR jest ustalona.
+            \item PLA są droższe w produkcji
+            \item PAL są szybsze
+            \item Liczba funkcji zaimplementowanych w PAL jest ograniczona,
+            układy PAL są mniej elastyczne i programowalne niż PLA
+        \end{itemize}
+    \newpage
+    
     \section{Schemat blokowy komputera (maszyna von Neumanna).}
+    
+    \begin{center}
+        \includegraphics[width=0.62\textwidth]{graphics/von_neumann.png}
+    \end{center}
+    
+    Architektura von Neumanna to rodzaj architektury cyfrowego komputera opracowana w 1945 przez Johna von Neumanna.
+    Składa się z następujących części:
+    
+    \begin{itemize}
+    \item Pamięci - zawiera zarówno dane, jak i instrukcji
+    \item CPU, Central Processing Unit, Procesora. CPU składa się z:
+        \begin{itemize}
+            \item Jednostki kontrolnej (nadzorującej)
+            \item Jednostki arytmetyczno-logicznej wykonującej podstawowe operacje przetwarzania informacji. 
+        \end{itemize}
+    \end{itemize}
+    
+    I/O:
+    \begin{itemize}
+        \item Akumulator, wchodzący w skład jednostki arytmetyczno-logicznej
+        \item Urządzenia wejścia
+        \item Urządzenia wyjścia
+    \end{itemize}
+    
+    Cechy architektury von Neumanna:
+    \begin{itemize}
+        \item Jednolitość pamięci 
+        \begin{itemize}
+            \item Możliwość uruchomienia samomodyfikującego się programu
+            \item Dzielenie pamięci instrukcji z pamięcią danych może prowadzić do bottlenecków (w tym celu wprowadza się cache)
+        \end{itemize}
+        \item Skończona liczba rozkazów
+        \item Informacje są przetwarzane poprzez sekwencyjny odczyt kolejnych instrukcji z pamięci i ich wykonanie przez procesor
+    \end{itemize}
+
+    Warto zapamiętać:
+    \begin{itemize}
+        \item Niemalże wszystkie cyfrowe, elektroniczne współczesne komputery są oparte na architekturze von Neumanna 
+        \item Architektura von Neumanna pozwoliła na oddzielenie programu od procesora
+        \item Istnieje architektura Harvardzka, oddzielająca pamięć z rozkazami od pamięci z danymi.
+    \end{itemize}
+    	
+    \newpage
+
     \section{Zarządzanie procesami: stany procesu, algorytmy szeregowania z wywłaszczaniem.}
     \subsection{Proces}
     Proces służy do \textbf{organizowania wykonywania programu} w ten sposób, że stanowi on powiązanie \textbf{niezbędnych zasobów systemu komputerowego} i umożliwia \textbf{kontrolę stanu} tych zasobów związaną z wykonywaniem programu.
@@ -7495,7 +7580,6 @@ mathescape
 
 \newpage
     \section{Muteks, semafor, monitor jako narzędzia synchronizacji procesów.}
-<<<<<<< HEAD
 \subsection{Sekcja krytyczna}
     Wielozadaniowość systemu oprócz oczywistych korzyści stwarza również pewne problemy. W środowisku, w którym wiele wątków działa równolegle i niezależnie od siebie, potrzebne są mechanizmy, które pozwolą w pewien sposób zdeterminować ich kolejność, oraz dostęp do tzw. sekcji krytycznych. Sekcje te są to fragmenty kodu, które nie mogą zostać wykonane „w tym samym czasie” przez kilka wątków.
 
@@ -7574,11 +7658,7 @@ mathescape
     \end{verbatim}
 
 \newpage
-=======
-    
-    \newpage
-    
->>>>>>> 658b97f348c1544fcc1e5e3e9237d373dd2add90
+
     \section{Pamięć wirtualna i mechanizm stronicowania.}
     
     \subsection{Stronicowanie}
@@ -8311,7 +8391,141 @@ mathescape
     \newpage
 
     \section{Rola routerów i podstawowe protokoły routingu (RIP, OSPF).}
+    
+    Sposób obsługi routowania przez warstwę IP nazywa się mechanizmem routowania.
+    Określenie to dotyczy przeglądania przez system operacyjny tablicy routowania i podejmowania określonych decyzji, co do przesyłania datagramów IP.
+    Przez pojęcie polityka routowania określa się działania procesu routowania podejmowane w
+    celu ustanowienia i bieżącej modyfikacji tablicy routowania. Polityka routowania realizowana jest z wykorzystaniem protokołów routowania.
+    
+    Pożądane cechy protokołów routowania:
+    \begin{enumerate}
+        \item Wyznaczenie najlepszej trasy do punktu docelowego
+        \item Odporność (robustness) na nieprzewidziane, nieporządanie zdarzenia:
+        "kopara", niewłaściwa konfiguracja, obciążenia sieci
+        \item Szybkie osiaganie zbieżności, tj. osiągnięcie stanu w którym 
+        routery "widzą" jednakowo topologię sieci.
+        \item Dopasowanie do zmian, np.:
+            \begin{itemize}
+                \item Odłączenie danej sieci
+                \item Podłączenie nowej sieci
+                \item Zmiana szerokości pasma
+                \item Zmiana opóźnienia
+            \end{itemize}
+    \end{enumerate}
+    
+    Ze względu na sposób działania protokoły routowania wewnętrznego dzielimy na
+    \begin{itemize}
+        \item protokoły wektora odległości (DV, distance-vector)
+        \item protokoły stanu łącza (link-state)
+    \end{itemize}
+    
+    \newpage
+    
+    \subsection{Protokoły wektora odległości}
+        Protokoły wektora odległości opierają się na algorytmie Bellmana Forda, gdzie 
+        węzły to router, krawędzie - połączenia pomiędzy nimi.
+        
+        Protokołami wektora odległości są: 
+        \begin{itemize}
+            \item RIP
+            \item RIP2
+            \item IGRP
+            \item EIGRP (wg Cisco hybrydowy)
+        \end{itemize}
+        
+        \subsubsection{RIP}
+        Metryką w RIP jest liczba skoków / routerów po drodze do celu - 0 to połączenie bezpośrednie, 1 to jeden skok do następnego router, itd. Co ważne, metryka 16
+        oznacza umownie nieskończoność. Trasa o metryce 16 jest traktowana jako trasa niedostępna, przez co RIP nie sprawdza się w przypadku bardzo dużych sieci.
+
+        Liczniki RIP:
+        \begin{itemize}
+            \item Update timer (30s) – co 30s wysyłany jest wektor odległości (routing update)
+            \item Invalid timer (180s) – za każdym razem, gdy router dostaeje uaktualnienie pewnej trasy, zegar dla tej trasy jest zerowany. Po upłynięciu 180s trasa zaznaczana jest jako nieprawidłowa.
+            \item Hold-down timer (180s) – po osiągnięciu wartości progowej przez invalid timer trasa jest ustawiana w stan hold-down.
+            \item Flush timer (240s) – zegar ten jest zerowany po otrzymaniu informacji o danej trasie. Po upłynięciu trasa jest usuwana (nawet, jeśli znajduje się w stanie hold-down.
+        \end{itemize}
+        
+        Zalety:
+        \begin{itemize}
+            \item prostota
+            \item łatwa konfiguracja
+        \end{itemize}
+        
+        Wady:
+        \begin{itemize}
+            \item Wolno rozprzestrzenianie się informacji o zmianach w topologii
+            \item Wolne osiąganie zbieżności
+            \item Częste przesyłanie dużych porcji informacji (wektory odległości)
+        \end{itemize}
+        
+        \subsubsection{RIP2}
+        
+        \begin{itemize}
+            \item Przekazuje maski podsieci
+            \item Umożliwia stosowanie sieci bezklasowych CIDR
+            \item Umożliwia stosowania podsieci o zmiennym rozmiarze VLSM
+            \item Umożliwia prostą autentykację (hasła)
+            \item Przekazuje adresy następnego skoku w komunikatach
+            \item Metryka 16 dalej oznacza nieskończoność
+            \item Dalej brak alternatywnych tras
+        \end{itemize}
+    
+    \newpage
+            
+    \subsection{Protokoły stanu łącza}
+        Łącze reprezentuje połączenie z sąsiednim routerem (routerami,
+        w przypadku technologii wielodostępnych, np. Ehternet), komputerem lub siecią. Stan łącza
+        składa się z wielu atrybutów, np. prędkość transmisji, opóźnienie, adres IP, sąsiedzi
+        
+        Protokołami stanu łącza są:
+        \begin{itemize}
+            \item OSPF
+            \item OSPF2
+            \item IS-IS
+            \item NLSP
+        \end{itemize}
+        
+        \subsection{OSPF}
+    
+        Zasada działania:
+        \begin{itemize}
+            \item Każdy router posiada (albo buduje) informację o połączeniach w całej sieci
+            \item Za pomocą algorytmu Dijkstry obliczane są najkrótsze ścieżki od danego routera do innych węzłów
+            \item Przesyłane są informacje o zmianach w stanie łączy - nie całe tablice routowania
+            \item Na początku pracy sieć jest zalewana informacją o stanie łączy (flooding), późniejsze updaty są szybkie
+            \item Ruch w wielodostępnych fragmentach sieci jest ograniczany przez wybranie DR (designated router) i BDR (backup designated router)
+            \item Obliczanie najkrótszych ścieżej Dijiskrą jest zasobożerne, przez co
+            tworzy się obszary OSPF:
+            \begin{itemize}
+                \item Każdy obszar ma przypisany numer
+                \item Jeśli jest jeden obszar ma on numer 0
+                \item Routery na granicy obszarów OSPF nazywamy ABR (Area Border Routers)
+                \item Routerem granicznym wprowadzającym do OSPF trasy zewnętrzne (z innych protokołów) nazywamy ASBR (Autonomous System Border Router)
+                \item Rodzaje obszarów OSPF:
+                \begin{itemize}
+                    \item Stub Area - nie ma tras zewnętrzych, sumy tras z innych obszarów są wprowadzane
+                    \item Totally Stubby Area - nie ma ani tras zewnętrznych, ani sum tras z innych obszarów. Wyjście z takiego obszaru jest przez trasę domyślną
+                    \item Not So Stubby Area - Stub Area, do którego wprowadzane są pewne, nieliczne trasy zewnętrzne. Trasy te wprowadzane są do innych obszarów tak jak sumy tras
+                    \item Not So Stubby Totally Stubby Area - obszar połąszania NSSA i TSA
+                \end{itemize}
+            \end{itemize}
+            \item W przypadku istnienia kilku tras o jednakowym koszcie realizowane jest równoważenie obciążeń (load balancing).
+        \end{itemize}
+        
+        Metryki:
+        \begin{itemize}
+            \item Standardowo metryka = $\frac{\mathrm{wartość\ odniesienia}}{\mathrm{szerokość\ pasma}}$
+            \item Standardowa wartość odniesienia to 100Mbps
+            \item Ethernet 100Mbps ma metrykę 1
+            \item Łącze 56kps ma metrykę 1768
+        \end{itemize}
+        
+    \newpage
+    
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
+
+    \newpage
+
     \section{Wirtualne sieci prywatne, protokół IPsec.}
     Wirtualna Sieć Prywatna, zwaną potocznie „siecią VPN” (z ang. Virtual Private Network) jest siecią przekazu danych korzystającą z publicznej infrastruktury telekomunikacyjnej, która dzięki stosowaniu protokołów tunelowania i procedur bezpieczeństwa zachowuje poufność danych. Infrastrukturą może być sieć szkieletowa operatora telekomunikacyjnego (np. Frame Relay lub ATM), a także globalna sieć Internet. Sieci te nazwano „wirtualnymi”, gdyż opierają się one na dynamicznych, wirtualnych połączeniach - wirtualnych obwodach (Virtual Circuit– wirtualny obwód – jest to połączenie zestawiane w sieci pomiędzy nadawcą a odbiorcą, w którym trasy przesyłu danych oraz przepływność pasma dla połączenia są ustawiane dynamicznie) czy też tunelach – nie mających fizycznego bytu i istniejącymi tylko wtedy, gdy jest nimi przenoszony ruch.Połączenia takie mogą być zestawiane między dwoma osobnymi urządzeniami, urządzeniem a siecią oraz między dwoma sieciami.\\
     Sieć VPN w założeniu powinna zapewniać:
