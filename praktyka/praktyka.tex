@@ -1,0 +1,112 @@
+%! Suppress = TooLargeSection
+%! Suppress = SentenceEndWithCapital
+%! Suppress = LineBreak
+%! Suppress = MissingLabel
+%! Suppress = Unicode
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[MeX]{polski}
+\usepackage{rotating}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\usepackage{xparse}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{../graphics/praktyka/}}
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows,positioning,calc}
+\usepackage{forest}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{diagbox}
+\usepackage{subfiles}
+
+\hypersetup{
+colorlinks=true,
+linkcolor=black,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+\NewDocumentCommand{\newframedtheorem}{O{}momo}{%
+\IfNoValueTF{#3}
+{%
+\IfNoValueTF{#5}
+{\newtheorem{#2}{#4}}
+{\newtheorem{#2}{#4}[#5]}%
+}
+{\newtheorem{#2}[#3]{#4}}
+\tcolorboxenvironment{#2}{#1}%
+}
+
+\newframedtheorem{theorem}{Twierdzenie}[section]
+\newframedtheorem{definition}[theorem]{Definicja}
+\newframedtheorem{exercise}[theorem]{Zadanie}
+
+
+\renewcommand{\figurename}{Załącznik}
+
+\begin{document}
+
+    \begin{titlepage}
+
+        \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+        \center
+
+        \textsc{\LARGE Uniwerystet Jagielloński}\\[1.5cm]
+
+        \HRule \\[0.4cm]
+        %        { \huge \bfseries ETL}\\[0.4cm]
+        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.4cm]
+        \textsc{\large na kierunku Informatyka}\\[0.4cm]
+        \textsc{\Large Praktyka}\\[0.4cm]
+        \HRule \\[1.0cm]
+
+        \Large %\emph{Autorzy:}\\
+        Karol \textsc{Chrząstek}\\
+        Małgorzata \textsc{Dymek}\\
+        Michał \textsc{Piotrowski}\\
+        Dominik \textsc{Wołek}\\
+        Dagmara \textsc{Zdybał}\\[1.5cm]
+
+        \includegraphics[scale=0.27]{uj.jpg}\\[2cm]
+
+        {\large Rok akademicki 2019/2020}\\
+
+        \vfill
+    \end{titlepage}
+
+    \tableofcontents
+
+    \newpage
+
+    \begin{center}{\LARGE Matematyczne podstawy informatyki}\end{center}
+
+    \subfile{mpi}
+
+    \begin{center} {\LARGE Teoretyczne podstawy informatyki} \end{center}
+
+    \subfile{tpi}
+
+    \begin{center}{\LARGE Wytwarzanie oprogramowania}\end{center}
+
+    \subfile{wo}
+
+    \begin{center}{\LARGE Inżynieria systemów}\end{center}
+
+    \subfile{is}
+
+\end{document}

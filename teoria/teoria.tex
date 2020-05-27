@@ -1,0 +1,114 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[MeX]{polski}
+\usepackage{rotating}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\usepackage{xparse}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{lineno}
+\usepackage{hyperref}
+\usetikzlibrary{shapes,snakes}
+\graphicspath{{../graphics/teoria/}}
+\usepackage{subfiles}
+\usepackage[T1]{fontenc}
+
+\hypersetup{
+colorlinks=true,
+linkcolor=black,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+
+\NewDocumentCommand{\newframedtheorem}{O{}momo}{%
+\IfNoValueTF{#3}
+{%
+\IfNoValueTF{#5}
+{\newtheorem{#2}{#4}}
+{\newtheorem{#2}{#4}[#5]}%
+}
+{\newtheorem{#2}[#3]{#4}}
+\tcolorboxenvironment{#2}{#1}%
+}
+
+\newframedtheorem{theorem}{Twierdzenie}[section]
+\newframedtheorem{definition}[theorem]{Definicja}
+
+\lstset{
+basicstyle=\ttfamily,
+numbers=left,
+commentstyle=\color{green},
+keywordstyle=\color{blue},
+stringstyle=\color{red},
+mathescape
+}
+
+
+\renewcommand{\figurename}{Załącznik}
+
+\begin{document}
+    \begin{titlepage}
+
+        \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+        \center
+
+        \textsc{\LARGE Uniwerystet Jagielloński}\\[1.5cm]
+
+        \HRule \\[0.4cm]
+        %        { \huge \bfseries ETL}\\[0.4cm]
+        \textsc{\Large Pytania do egzaminu licencjackiego}\\[0.4cm]
+        \textsc{\large na kierunku Informatyka}\\[0.4cm]
+        \textsc{\Large Teoria}\\[0.4cm]
+        \HRule \\[1.0cm]
+
+        \Large %\emph{Autorzy:}\\
+        Karol \textsc{Chrząstek}\\
+        Małgorzata \textsc{Dymek}\\
+        Michał \textsc{Piotrowski}\\
+        Dominik \textsc{Wołek}\\
+        Dagmara \textsc{Zdybał}\\[1.5cm]
+
+        \includegraphics[scale=0.27]{uj.jpg}\\[2cm]
+
+        {\large Rok akademicki 2019/2020}\\
+
+        \vfill
+    \end{titlepage}
+
+    \tableofcontents
+
+    \newpage
+
+    \begin{center}{\LARGE Matematyczne podstawy informatyki}\end{center}
+
+    \subfile{mpi}
+
+    \begin{center} {\LARGE Teoretyczne podstawy informatyki} \end{center}
+
+    \subfile{tpi}
+
+    \begin{center}{\LARGE Wytwarzanie oprogramowania}\end{center}
+
+    \subfile{wo}
+
+    \begin{center}{\Large Inżynieria systemów}\end{center}
+
+    \subfile{is}
+
+\end{document}

@@ -1,0 +1,59 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    name: Build document
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chceckout code
+        uses: actions/checkout@v2
+
+      - name: Compile praktyka document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: praktyka
+          root_file: praktyka.tex
+          args: -pdf -shell-escape
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: praktyka
+          path: praktyka/praktyka.pdf
+
+      - name: Compile teoria document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: teoria
+          root_file: teoria.tex
+          args: -pdf -shell-escape
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: teoria
+          path: teoria/teoria.pdf
+
+  release:
+    name: Publish documents
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Download praktyka artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: praktyka
+      - name: Download teoria artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: teoria
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./*.pdf"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
