@@ -55,7 +55,7 @@
         \item Wady:
         \begin{itemize}
             \item mniej czytelny dla człowieka (wymaga przyzwyczajenia)
-            \item podczas zapisu na kartce 12 34 + może wyglądać jak 123 4 + (xD)
+            \item podczas zapisu na kartce ``12 34'' + może wyglądać jak ``123 4'' + (xD)
         \end{itemize}
     \end{itemize}
 
@@ -268,9 +268,9 @@
     Obliczmy koszt amortyzowany wstawienia elementu do tablicy przy wstawieniu $n$ elementów ($n = 2^k,\; k \in \mathbb{N}$),
     zaczynając od pustej tablicy o długości 1.
 
-    $$T(n) = \frac{1}{n} (1 + 2 + 4 + \cdots + \frac{n}{2}) =
+    \[T(n) = \frac{1}{n} \left(1 + 2 + 4 + \cdots + \frac{n}{2}\right) =
     \frac{1}{n} \sum_{i = 0}^{log_2(n) - 1}2^i
-    = \frac{n - 1}{n} = 1 - \frac{1}{n} = \theta(1)$$
+    = \frac{n - 1}{n} = 1 - \frac{1}{n} = \theta(1)\]
 
     Zatem sumaryczny koszt wstawienia do takiej tablicy n elementów jest równy $\theta(n)$
 
@@ -375,7 +375,7 @@
 
     \begin{definition}
         W sensie matematycznym lista jest skończonym ciągiem elementów ustalonego typu
-        Node: $a1, a2, . . . , an, , n \geq 0$
+        Node: $a_1, a_2, \cdots , a_n, , n \geq 0$
         przy czym Node, zwany typem bazowym, może być np. typem \textbf{klasy, struktury, int,
         string} itp.
     \end{definition}
@@ -581,7 +581,7 @@
     \end{enumerate}
 
 
-    \subsection{ Sposoby implementacji kolejki priorytetowej }
+    \subsection{Sposoby implementacji kolejki priorytetowej}
     \begin{itemize}
         \item Lista - Tablica Nieuporządkowana
         NIEEFEKTYWNA!
@@ -679,7 +679,7 @@
         for a in b:
         arr[i++] = a
     \end{minted}
-    \textbf{Złożoność:} pesymistyczna -  $O(n^2)$, średnia - $O(n + \frac{n^2}{k} + k)$.
+    \textbf{Złożoność:} pesymistyczna -  $O(n^2)$, średnia - $O\left(n + \frac{n^2}{k} + k\right)$.
 
     \subsection{RadixSort.}
     \begin{minted}{python}
@@ -1010,13 +1010,13 @@
         \item Inicjalizacja - $\theta(v)$
         \item $\theta(v)$ usunięć z kolejki
         \item $O(e)$ pomniejszeń wartości w $D$
-        \item Przy pomocy kopca binarnego możemy uzyskać $O(log(v))$ dla pomniejszenia
-        wartości, $O(log(v))$ dla usunięcia z kolejki. Złożoność:
-        $\theta((e + v)log(v))$
+        \item Przy pomocy kopca binarnego możemy uzyskać $O(\log(v))$ dla pomniejszenia
+        wartości, $O(\log(v))$ dla usunięcia z kolejki. Złożoność:
+        $\theta((e + v)\log(v))$
 
         \item Przy pomocy kopca Fibonacciego możemy uzyskać $\theta(1)$ dla pomniejszenia
-        wartości, $\theta(log (v))$ dla usunięcia z kolki. Złożoność:
-        $O(v \cdot log(v) + e)$
+        wartości, $\theta(\log (v))$ dla usunięcia z kolki. Złożoność:
+        $O(v \cdot \log(v) + e)$
     \end{itemize}
 
     \subsubsection{Cechy}
@@ -1390,7 +1390,7 @@
         \end{center}
         $\rho_i$ dla $i \in \mathbb{N}$ - zstępujący ciąg relacji: \\
         $\rho_1 = \Theta_L$, \\
-        $\rho_i = \{(u, w) \in A^* \times A^* : \forall a \in A \cup \{\textbf{1}\}: (ua, wa) \in \rho_{i-1} \}$ dla i = 2, ... \\
+        $\rho_i = \{(u, w) \in A^* \times A^* : \forall a \in A \cup \{\textbf{1}\}: (ua, wa) \in \rho_{i-1} \}$ dla i = 2, \ldots \\
         Wtedy
         \begin{center}
             $\bigcap\limits_{i \in \mathbb{N}} \rho_i = P^r_L$
@@ -1432,11 +1432,11 @@
     \begin{definition}
         Niech $L \subset A^*$ będzie językiem rozpoznawalnym. Istnieje liczba naturalna $N \geq 1$ taka, że dowolne słowo $w \in L$ o długości $|w| \geq N$ można rozłożyć na katenację:
         \begin{center}
-            $w = v_1uv_2$
+            $w = v_1 u v_2$
         \end{center}
-        gdzie $v_1, v_2 \in A^*, u \in A^+, |v_1u| < N$ oraz
+        gdzie $v_1, v_2 \in A^*, u \in A^+, |v_1 u| < N$ oraz
         \begin{center}
-            $v_1u^*v_2 \subset L$
+            $v_1 u^* v_2 \subset L$
         \end{center}
     \end{definition}
 
@@ -1444,7 +1444,7 @@
         Jeśli rozpoznawalny język $L \subset A^*$ jest nieskończony, to istnieją
         $v_1, v_2 \in A^*, u \in A^+$, takie, że
         \begin{center}
-            $v_1u*v_2 \subset L$
+            $v_1 u^* v_2 \subset L$
         \end{center}
     \end{definition}
 
@@ -1499,7 +1499,7 @@
         Automat $\mathcal{A}$ nazywamy skończonym, jeśli zbiór S jest skończony
 
         Automat $\mathcal{A}$ ze stanem $s \in S$ taki, że
-        $$f(a, A^*) = Ss$$
+        \[f(a, A^*) = Ss\]
         nazywamy automatem z generatorem s.
     \end{definition}
 
@@ -1514,10 +1514,10 @@
         \end{itemize}
 
         takie, że
-        $$ L = \{w \in A^* : f(s_0, w) \in T\}$$
+        \[ L = \{w \in A^* : f(s_0, w) \in T\}\]
         $s_0$ - stan początkowy \\
         T - zbiór stanów końcowych automatu
-        $$\mathcal{A} = (S, A, f, s_0, T)$$
+        \[\mathcal{A} = (S, A, f, s_0, T)\]
         $L = L(\mathcal{A})$ - język rozpoznawany przez automat $\mathcal{A}$\\
         $REC(A^*)$ - rodzina wszystkich języków rozpoznawalnych nad alfabetem A
     \end{definition}
@@ -1531,7 +1531,7 @@
         monoidzie $A^*$ prawą kongruencję $\sim_\mathcal{A}$:
         \[\]
         $\forall u, v \in A^*$
-        $$u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)$$
+        \[u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)\]
 
         Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat
         $\mathcal{A}$ jest skończony.
@@ -1539,7 +1539,7 @@
 
     \begin{theorem}
         Każda prawa kongruencja $p \subset (A^*)^2$ wyznacza automat, zwany ilorazowym
-        $$\mathcal{A}_p = (A^* /_{p}, f^*), \; \mathrm{gdzie} \; f^*([w]_p, u) = [wu]_p$$
+        \[\mathcal{A}_p = (A^* /_{p}, f^*), \; \mathrm{gdzie} \; f^*([w]_p, u) = [wu]_p\]
         \begin{itemize}
             \item $\mathcal{A}_p$ jest automatem z generatorem [1]$_p$
 
@@ -1552,7 +1552,7 @@
         \textbf{Twierdzenie Kleenego}
 
         Dla każdego skończonego alfabetu A
-        $$REC(A^*) = REG(^*)$$
+        \[REC(A^*) = REG(^*)\]
     \end{theorem}
 
     \begin{theorem}
@@ -1572,7 +1572,7 @@
             \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$
             o skończonym indeksie oraz L = $\bigcup\limits_{w \in L}[w]_p$
             \item istnieje skończony monoid M i homomorfizm
-            $$\varphi : A^* \rightarrow M : L = \varphi^{-1}(\phi(L))$$
+            \[\varphi : A^* \rightarrow M : L = \varphi^{-1}(\phi(L))\]
         \end{itemize}
     \end{theorem}
 
@@ -1624,7 +1624,7 @@
         \noindent $\mathcal{A}_s = (S_s, A, f_s, s_{0s}, T_s) $ \\
         \noindent $\mathcal{A}_x = (S_x, A, f_x, s_{0x}, T_x) $ \\
 
-        $$\mathcal{A}_s:$$
+        \[\mathcal{A}_s:\]
         \begin{center}
             \begin{tikzpicture}[scale=0.2]
                 \tikzstyle{every node}+=[inner sep=0pt]
@@ -1649,7 +1649,7 @@
         \end{center}
 
 
-        $$\mathcal{A}_r:$$
+        \[\mathcal{A}_r:\]
         \begin{center}
             \begin{tikzpicture}[scale=0.2]
                 \tikzstyle{every node}+=[inner sep=0pt]
@@ -1769,9 +1769,11 @@
 
     $\mathcal{A}_{ND} = (S, f, I, F)$ - automat niedeterministyczny\\
     \indent$\mathcal{A}_D = (P(S), \overline{f}, I, T)$ - równoważny automat deterministyczny, gdzie:
-    $$\overline{f} : P(S) \times A^* \rightarrow P(S)$$
-    $$\forall Q \in P(S), \forall w \in A^* \; \; \overline{f}(Q, w) = \bigcup\limits_{s \in Q} f(s, w)$$
-    $$T = \{Q \in P(S) | Q \cap F \neq \emptyset\}$$
+    \begin{gather*}
+        \overline{f} : P(S) \times A^* \rightarrow P(S)\\
+        \forall Q \in P(S), \forall w \in A^* \; \; \overline{f}(Q, w) = \bigcup\limits_{s \in Q} f(s, w)\\
+        T = \{Q \in P(S) | Q \cap F \neq \emptyset\}\\
+    \end{gather*}
 
     \subsection{Determinizm automatu ze stosem}
 
@@ -1781,8 +1783,10 @@
         Automatem $\mathcal{AS} = (A, A_S, Q, q_0, z_0, f, Q_F)$ nazywamy
         \textbf{deterministycznym}, jeśli dla każdej konfiguracji
         $(z, q, a) \in A_S^* \times Q \times (A \cup \{1\})$
-        $$f(z, q, a) \leq 1 \; \mathrm{oraz}$$
-        $$f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A$$
+        \begin{gather*}
+            f(z, q, a) \leq 1 \; \mathrm{oraz}\\
+            f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A\\
+        \end{gather*}
         Język akceptowany przez automat deterministyczny nazywamy językiem deterministycznym.
     \end{definition}
 
@@ -1895,7 +1899,7 @@
             Każdy system spełniajacy definicję 57.1
             \item Kontekstowa
 
-            Gramatyka, w której każde prawo ze zbioru P ma postać $u_1vu_2 \rightarrow u_1xu_2$
+            Gramatyka, w której każde prawo ze zbioru P ma postać $u_1 v u_2 \rightarrow u_1 x u_2$
 
             gdzie $u_1,u_2 \in (VN \cup VT)^\star,v \in V_N,x \in (V_N \cup V_T)^+$ lub $v_0 \rightarrow 1$,przy czym, jeśli $v_0 \rightarrow 1 \in P$, to $v_0$ nie występuje po prawej stronie w żadnym prawie z $P$
 
@@ -1917,17 +1921,17 @@
 
             W oparciu o wprowadzone typy gramatyk określamy odpowiadające im rodziny (klasy) języków, oznaczając przez
 
-            $\bf \mathcal{L}_{0}$ rodzinę wszystkich języków typu 0
+            $\mathbf{\mathcal{L}}_{0}$ rodzinę wszystkich języków typu 0
 
-            $\bf \mathcal{L}_{1}$ rodzinę wszystkich języków typu 1 - kontekstowych
+            $\mathbf{\mathcal{L}}_{1}$ rodzinę wszystkich języków typu 1 - kontekstowych
 
-            $\bf \mathcal{L}_{2}$ rodzinę wszystkich języków typu 2 - bezkontekstowych
+            $\mathbf{\mathcal{L}}_{2}$ rodzinę wszystkich języków typu 2 - bezkontekstowych
 
-            $\bf \mathcal{L}_{3}$ rodzinę wszystkich języków typu 3 - regularnych
+            $\mathbf{\mathcal{L}}_{3}$ rodzinę wszystkich języków typu 3 - regularnych
 
             Pomiędzy wprowadzonymi rodzinami języków zachodzą następujące zależności:
 
-            $\bf \mathcal{L}_{3}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{2}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{1}\subseteq \! \! \! \! \! _{/\; \, }\bf \mathcal{L}_{0}$
+            $\mathbf{\mathcal{L}}_{3}\subseteq \! \! \! \! \! _{/\; \, }\mathbf{\mathcal{L}}_{2}\subseteq \! \! \! \! \! _{/\; \, }\mathbf{\mathcal{L}} _{1}\subseteq \! \! \! \! \! _{/\; \, }\mathbf{\mathcal{L}}_{0}$
 
         \end{itemize}
 

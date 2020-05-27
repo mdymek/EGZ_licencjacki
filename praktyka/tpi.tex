@@ -392,7 +392,7 @@
 
     \noindent Powyższa tabelka przedstawia już wszystkie mozliwe kombinacje stanów do uzyskania dla tego automatu (kolejne słowa dawałyby stan, który już jest w tabelce dla innego słowa) i jest ona reprezentacją naszego automatu. \\
 
-    \noindent Dodatkowo możeby podczas uzupełniania tabelki zauważyć m.i. że: \\
+    \noindent Dodatkowo możeby podczas uzupełniania tabelki zauważyć m.in. że: \\
     $b^2 = b$ \\
     $a^3 = a^2$ \\
     $a^{2}b = a^2$ \\
@@ -404,7 +404,7 @@
     \subsection{Automat ze stosem}
     Dany jest automat ze stosem gdzie: \\
     $A_{S} = \{z_{0}, a\}$ $A = \{a, b, c\}$, $Q = \{q_{0}, q_{1}, q_{2}\}$ \\
-    $P = \{z_{0}q_{0}a \rightarrow aq_{0}, aq_{0}a \rightarrow a^2q_{0}, aq_{0}b \rightarrow a^2q_{1}, aq_{1}b \rightarrow a^2q_{1}, aq_{1}c \rightarrow 1q_{2}, aq_{2}c \rightarrow 1q_{2}\}$ \\
+    $P = \{z_{0}q_{0}a \rightarrow aq_{0}, aq_{0}a \rightarrow a^2 q_{0}, aq_{0}b \rightarrow a^2 q_{1}, aq_{1}b \rightarrow a^2 q_{1}, aq_{1}c \rightarrow 1q_{2}, aq_{2}c \rightarrow 1q_{2}\}$ \\
 
     \noindent Narysuj graf automatu i określ język akceptowany przez pusty stos: \\
 
@@ -462,18 +462,20 @@
     i zamieniony ze wszystkimi elementami uprzednio posortowanego fragmentu tablicy.
     Obliczmy złożoność zakładając, że zamiana elementów zajmuje czas równy stałej $c$.
 
-    $$W(c) = \sum_{i = 2}^nic$$
-    $$W(c) = \frac{n^2 + n - 2}{2}c$$
-    $$W(c) = \theta(n^2)$$
+    \begin{gather*}
+        W(c) = \sum_{i = 2}^n ic\\
+        W(c) = \frac{n^2 + n - 2}{2}c\\
+        W(c) = \theta(n^2)\\
+    \end{gather*}
 
     \textbf{Złożoność średnia}
 
     Zauważmy, że ilość zamian elementów jest zależna od liczby inwersji w tablicy wejściowej. Aby obliczyć średnią złożoność algorytmu musimy obliczyć średnią liczbę inwersji.\\
 
-    Niech $X_ij$ będzie zmienną losową oznaczającą, czy w tablicy wejściowej $A[i]$ jest w inwersji z $A[j]$.
+    Niech $X_{ij}$ będzie zmienną losową oznaczającą, czy w tablicy wejściowej $A[i]$ jest w inwersji z $A[j]$.
     Ilość par $i,j$ jest równa $\frac{n(n-1)}{2}.$
 
-    $$A(n) = E(\sum X_{ij}) = \sum E(X_ij) = \frac{1}{2} \cdot \frac{n(n - 1)}{2} = \frac{n(n - 1)}{4}$$
+    \[A(n) = E\left(\sum X_{ij}\right) = \sum E(X_i j) = \frac{1}{2} \cdot \frac{n(n - 1)}{2} = \frac{n(n - 1)}{4}\]
 
     \begin{exercise}
         Oblicz średnią złożoność obliczeniową algorytmu quicksort.
@@ -483,29 +485,26 @@
     Przy każdym wyborze elementu rozdzielającego ilość elementów od niego mniejsza jest zmienną losową od 0 do $n - 1$ o rozkładzie jednostajnym.
     Zatem po podziale otrzymujemy dwie tablice: o długości $i$ oraz o długości $n - i - 1$ gdzie $i$ jest zmienną losową o rozkładzie jednostajnym od 0 do $n - 1$.
     Zatem zakładając, że ilość porównań przy każdym podziale wynosi $n - 1$, średnia ilość porównań dla wszystkich permutacji otrzymanej tablicy jest równa:
-    $$A(n) = n - 1 + \frac{1}{n}\sum_{i = 0}^{n - 1}(A(i) + A(n - i - 1)) =
-    n - 1 + \frac{2}{n}\sum_{i = 0}^{n - 1}A(i)$$
-
-    $$nA(n) = n(n - 1) + 2 \sum_{i = 0}^{n - 1}A(i)$$
-
-    $$nA(n) - (n - 1)A(n-1) = n(n - 1) - (n - 1)(n - 2) + 2\sum_{i = 0}^{n - 1}A(i) - 2\sum_{i = 0}^{n - 2}A(i) = $$
-
-    $$= 2(n - 1) + 2A(n - 1)$$
-
-    $$nA(n) = (n + 1)A(n - 1) + 2n - 2$$
-
-    $$A(n) = \frac{(n + 1)A(n - 1)}{n} + 2 - \frac{2}{n}$$
-
-    $$\frac{A(n)}{n + 1} = \frac{A(n - 1)}{n} + \frac{2}{n + 1} - \frac{2}{n(n + 1)} = $$
-    $$= \frac{A(n - 2)}{n - 1} + \frac{2}{n} - \frac{2}{(n - 1)n} - \frac{2}{n(n + 1)} + \frac{2}{n + 1} = $$
-    $$ = \cdots = \frac{A(1)}{2} + \sum_{i = 2}^n \frac{2}{i + 1} - \sum_{i = 2}^n \frac{2}{i(i + 1)} =
-    2\sum_{i = 1}^{n - 1} \frac{1}{i} - \frac{n - 1}{n + 1}$$
-
-    $$\sum_{i = 1}^{n - 1} \frac{1}{i} \approx \int_1^{n - 1}\frac{dx}{x} = ln(n - 1)$$
-
-    $$A(n) = 2(n + 1)\;ln(n - 1) - n + 1 = 2n\;ln(n - 1) + 2ln(n - 1) - n + 1 \leq$$
-
-    $$\leq 2\;ln(n) \approx 1.39 n \; log_2 n = \theta(n\;ln(n))$$
+    \begin{align*}
+        &A(n) = n - 1 + \frac{1}{n}\sum_{i = 0}^{n - 1}(A(i) + A(n - i - 1)) =
+        n - 1 + \frac{2}{n}\sum_{i = 0}^{n - 1}A(i)\\
+        &nA(n) = n(n - 1) + 2 \sum_{i = 0}^{n - 1}A(i)\\
+        &nA(n) - (n - 1)A(n-1) = n(n - 1) - (n - 1)(n - 2) + 2\sum_{i = 0}^{n - 1}A(i) - 2\sum_{i = 0}^{n - 2}A(i) =\\
+        &= 2(n - 1) + 2A(n - 1)\\
+        &\\
+        &nA(n) = (n + 1)A(n - 1) + 2n - 2\\
+        &\\
+        &A(n) = \frac{(n + 1)A(n - 1)}{n} + 2 - \frac{2}{n}\\
+        &\frac{A(n)}{n + 1} = \frac{A(n - 1)}{n} + \frac{2}{n + 1} - \frac{2}{n(n + 1)}
+        = \frac{A(n - 2)}{n - 1} + \frac{2}{n} - \frac{2}{(n - 1)n} - \frac{2}{n(n + 1)} + \frac{2}{n + 1} =\\
+        &= \cdots = \frac{A(1)}{2} + \sum_{i = 2}^n \frac{2}{i + 1} - \sum_{i = 2}^n \frac{2}{i(i + 1)} =
+        2\sum_{i = 1}^{n - 1} \frac{1}{i} - \frac{n - 1}{n + 1}\\
+        &\\
+        &\sum_{i = 1}^{n - 1} \frac{1}{i} \approx \int_1^{n - 1}\frac{dx}{x} = ln(n - 1)\\
+        &\\
+        &A(n) = 2(n + 1)\;ln(n - 1) - n + 1 = 2n\;ln(n - 1) + 2ln(n - 1) - n + 1 \leq\\
+        &\leq 2\;ln(n) \approx 1.39 n \; log_2 n = \theta(n\;ln(n))\\
+    \end{align*}
 
     \newpage
 
@@ -563,7 +562,7 @@
         Złożoność obliczeniowa: $\theta(1)$.
     \end{enumerate}
 
-    Złożoność obliczeniowa algorytmu: $O(log(n))$.
+    Złożoność obliczeniowa algorytmu: $O(\log(n))$.
 
     \subsection{Otoczka wypukła}
 
@@ -920,10 +919,10 @@
         \end{enumerate}
     \end{enumerate}
     \[\]
-    \textbf{Złożoność algorytmu:} $\theta(n \cdot log(n))$. \[\]
+    \textbf{Złożoność algorytmu:} $\theta(n \cdot \log(n))$. \[\]
     \textbf{Uzasadnienie:} podział na 2 podproblemy (z podziałem i łączeniem zajmującym
-    $O(n)$ czasu): $O(n \cdot log(n))$ + złożoność sortowania punktów wg. osi $x$
-    ($\theta(n \cdot log(n)$), co daje razem $\theta(n \cdot log(n))$.
+    $O(n)$ czasu): $O(n \cdot \log(n))$ + złożoność sortowania punktów wg. osi $x$
+    ($\theta(n \cdot \log(n)$), co daje razem $\theta(n \cdot \log(n))$.
     \newpage
 
     \section{Lista: ujęcie abstrakcyjne, możliwe implementacje i ich złożoności.}
@@ -1457,8 +1456,10 @@
 
     \begin{center}
 
-        $$ S = \{s\} $$
-        $$ P = \{\} $$
+        \begin{gather*}
+            S = \{s\}\\
+            P = \{\}\\
+        \end{gather*}
         \begin{tikzpicture}
             \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
 
@@ -1472,8 +1473,10 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$ S = \{b, c\} $$
-        $$ P = \{b : s, c : s\} $$
+        \begin{gather*}
+            S = \{b, c\}\\
+            P = \{b : s, c : s\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
@@ -1489,8 +1492,10 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$ S = \{c\} $$
-        $$ P = \{b : s, c : s\} $$
+        \begin{gather*}
+            S = \{c\}\\
+            P = \{b : s, c : s\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
@@ -1506,8 +1511,10 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$ S = \{a\} $$
-        $$ P = \{b : s, c : s, a : c\} $$
+        \begin{gather*}
+            S = \{a\}\\
+            P = \{b : s, c : s, a : c\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
@@ -1523,8 +1530,10 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$ S = \{\} $$
-        $$ P = \{b : s, c : s, a : c\} $$
+        \begin{gather*}
+            S = \{\}\\
+            P = \{b : s, c : s, a : c\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             \tikzstyle{white-fill}=[fill=white, draw=black, shape=circle]
@@ -1909,7 +1918,7 @@
     \subsection{Przeszukiwanie wgłąb}
     \begin{center}
 
-        $$P = \{\}$$
+        \[P = \{\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -1926,7 +1935,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s\}$$
+        \[P = \{b : s\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -1943,7 +1952,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s, c: b\}$$
+        \[P = \{b : s, c: b\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -1960,7 +1969,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s, c : b, a : c\}$$
+        \[P = \{b : s, c : b, a : c\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -1977,7 +1986,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s, c : b, a : c\}$$
+        \[P = \{b : s, c : b, a : c\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -1994,7 +2003,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s, c : b, a : c\}$$
+        \[P = \{b : s, c : b, a : c\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2011,7 +2020,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s, c : b, a : c\}$$
+        \[P = \{b : s, c : b, a : c\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2028,7 +2037,7 @@
             \draw (2) to (3);
         \end{tikzpicture}
 
-        $$P = \{b : s, c : b, a : c\}$$
+        \[P = \{b : s, c : b, a : c\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2068,7 +2077,7 @@
     \textbf{Złożoność:} Taka sama jak dla DFS, tzn. $\theta(v + e)$
 
     \begin{center}
-        $$rank = \{\}$$
+        \[rank = \{\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2100,7 +2109,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{\}$$
+        \[rank = \{\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2132,7 +2141,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{a : 2, g : 1\}$$
+        \[rank = \{a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2164,7 +2173,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{a : 2, g : 1\}$$
+        \[rank = \{a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2196,7 +2205,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2228,7 +2237,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2260,7 +2269,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2292,7 +2301,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2324,7 +2333,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2356,7 +2365,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2388,7 +2397,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2420,7 +2429,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2452,7 +2461,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$rank = \{h : 9, i : 8, f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}$$
+        \[rank = \{h : 9, i : 8, f : 7, e : 6, d : 5, b : 4, c : 3, a : 2, g : 1\}\]
 
         \begin{tikzpicture}
             % Node styles
@@ -2484,7 +2493,7 @@
             \draw [style=arrow] (4) to (7);
         \end{tikzpicture}
 
-        $$result = [h, i, f, e, d, b, c, a, g]$$
+        \[result = [h, i, f, e, d, b, c, a, g]\]
     \end{center}
 
     \newpage
@@ -2495,8 +2504,10 @@
 
     \begin{center}
 
-        $$D = \{s : 0, a : \infty, b : \infty, c : \infty, d : \infty\}$$
-        $$P = \{\}$$
+        \begin{gather*}
+            D = \{s : 0, a : \infty, b : \infty, c : \infty, d : \infty\}\\
+            P = \{\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             % Node styles
@@ -2528,8 +2539,10 @@
             \draw [style=arrow] (3) to (5);
         \end{tikzpicture}
 
-        $$D = \{s : 0, \mathbf{a : 6, b : 2}, c : \infty, d : \infty\}$$
-        $$P = \{\mathbf{a : s, b : s}\}$$
+        \begin{gather*}
+            D = \{s : 0, \mathbf{a : 6, b : 2}, c : \infty, d : \infty\}\\
+            P = \{\mathbf{a : s, b : s}\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             % Node styles
@@ -2561,8 +2574,10 @@
             \draw [style=arrow] (3) to (5);
         \end{tikzpicture}
 
-        $$D = \{s : 0, a : 6, b : 2, \mathbf{c : 4, d : 9}\}$$
-        $$P = \{a : s, b : s, \mathbf{c : b, d : b}\}$$
+        \begin{gather*}
+            D = \{s : 0, a : 6, b : 2, \mathbf{c : 4, d : 9}\}\\
+            P = \{a : s, b : s, \mathbf{c : b, d : b}\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             % Node styles
@@ -2594,8 +2609,10 @@
             \draw [style=arrow] (3) to (5);
         \end{tikzpicture}
 
-        $$D = \{s : 0, \mathbf{a : 5}, b : 2, c : 4, \mathbf{d : 7}\}$$
-        $$P = \{\mathbf{a : c}, b : s, c : b, \mathbf{d : c}\}$$
+        \begin{gather*}
+            D = \{s : 0, \mathbf{a : 5}, b : 2, c : 4, \mathbf{d : 7}\}\\
+            P = \{\mathbf{a : c}, b : s, c : b, \mathbf{d : c}\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             % Node styles
@@ -2627,8 +2644,10 @@
             \draw [style=arrow] (3) to (5);
         \end{tikzpicture}
 
-        $$D = \{s : 0, a : 5, b : 2, c : 4, d : 7\}$$
-        $$P = \{a : c, b : s, c : b, d : c\}$$
+        \begin{gather*}
+            D = \{s : 0, a : 5, b : 2, c : 4, d : 7\}\\
+            P = \{a : c, b : s, c : b, d : c\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             % Node styles
@@ -2660,8 +2679,10 @@
             \draw [style=arrow] (3) to (5);
         \end{tikzpicture}
 
-        $$D = \{s : 0, a : 5, b : 2, c : 4, d : 7\}$$
-        $$P = \{a : c, b : s, c : b, d : c\}$$
+        \begin{gather*}
+            D = \{s : 0, a : 5, b : 2, c : 4, d : 7\}\\
+            P = \{a : c, b : s, c : b, d : c\}\\
+        \end{gather*}
 
         \begin{tikzpicture}
             % Node styles
@@ -2730,7 +2751,6 @@
             \draw [style=arrow] (3) to (5);
         \end{tikzpicture}
 
-        \[\]
         Wartości w $D$ w zależności od iteracji:
 
         \begin{tabular}{c||c|c|c|c}
@@ -2745,7 +2765,6 @@
             3 & 5 & 3 & 4 & 2 \\
         \end{tabular}
 
-        \[\]
         Wartości w $P$ w zależności od iteracji:
 
         \begin{tabular}{c||c|c|c|c}
@@ -3142,7 +3161,7 @@
 
     \subsection{Algorytm Kruskala}
     \begin{enumerate}
-        \item Wybierz krawędź 7-6: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 7--6: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3156,7 +3175,7 @@
             \end{tikzpicture}
         \end{center}
 
-        \item Wybierz krawędź 8-2: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 8--2: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3176,7 +3195,7 @@
             \end{tikzpicture}
         \end{center}
 
-        \item Wybierz krawędź 6-5: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 6--5: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3200,7 +3219,7 @@
             \end{tikzpicture}
         \end{center}
 
-        \item Wybierz krawędź 0-1: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 0--1: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3230,7 +3249,7 @@
             \end{tikzpicture}
         \end{center}
 
-        \item Wybierz krawędź 2-5: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 2--5: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3263,11 +3282,11 @@
         \end{center}
 
 
-        \item Wybierz krawędź 8-6: Cykl, odrzuć krawędź.
+        \item Wybierz krawędź 8--6: Cykl, odrzuć krawędź.
 
 
 
-        \item Wybierz krawędź 2-3: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 2--3: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3303,10 +3322,10 @@
             \end{tikzpicture}
         \end{center}
 
-        \item Wybierz krawędź 7-8: Cykl, odrzuć krawędź.
+        \item Wybierz krawędź 7--8: Cykl, odrzuć krawędź.
 
 
-        \item Wybierz krawędź 0-7: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 0--7: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3344,10 +3363,10 @@
             \end{tikzpicture}
         \end{center}
 
-        \item Wybierz krawędź 1-2: Cykl, odrzuć krawędź.
+        \item Wybierz krawędź 1--2: Cykl, odrzuć krawędź.
 
 
-        \item Wybierz krawędź 3-4: Brak cyklu, uwzględnij ją.
+        \item Wybierz krawędź 3--4: Brak cyklu, uwzględnij ją.
 
         \begin{center}
             \begin{tikzpicture}[scale=0.1]
@@ -3883,23 +3902,23 @@
 
     \section{Lemat o pompowaniu dla języków regularnych.}
     \begin{exercise}
-        Wykorzystując lemat o pompowaniu udowodnij, że język $\{a^nb^mc^{n+m} | n, m > 0\} \subset \{a, b, c\}^*$ nie jest regularny
+        Wykorzystując lemat o pompowaniu udowodnij, że język $\{a^n b^m c^{n+m} | n, m > 0\} \subset \{a, b, c\}^*$ nie jest regularny
     \end{exercise}
 
     \noindent Załóżmy, że język ten jest regularny. Wtedy zgodnie z lematem o pompowaniu:
     \begin{center}
-        $\exists N \in \mathbb{N}_1 : \forall w \in L : |w| \geq N$ $\exists v_1, v_2 \in A^*$ $\exists u \in A^+$ $|v_1u| < N$ \\
-        $w = v_1uv_2$   $v_1u^*v_2 \subset L$ \\
-        $\forall_i \geq 0$    $v_1u^iv_2 \in L$
+        $\exists N \in \mathbb{N}_1 : \forall w \in L : |w| \geq N$ $\exists v_1, v_2 \in A^*$ $\exists u \in A^+$ $|v_1 u| < N$ \\
+        $w = v_1 u v_2$   $v_1 u^* v_2 \subset L$ \\
+        $\forall_i \geq 0$    $v_1 u^i v_2 \in L$
     \end{center}
 
-    \noindent Niech nasze $w = a^Nb^Nc^{2N}$. Rozważmy wszystkie możliwe podziały słowa w, takie że $|v_1u| < N$. W przypadku tak dobranego słowa jest tylko jeden typ takiego podziału: \\
+    \noindent Niech nasze $w = a^N b^N c^{2N}$. Rozważmy wszystkie możliwe podziały słowa w, takie że $|v_1 u| < N$. W przypadku tak dobranego słowa jest tylko jeden typ takiego podziału: \\
     \noindent $v_1 = a^{N-i}$ \\
     \noindent $u = a^i$ \\
     \noindent gdzie $1 \leq i \leq N-1$ \\
 
-    \noindent Musimy teraz znaleźć takie j dla którego słowo $v_1u^jv_2 \notin L$. Takie j to np. 2 (choć tutaj zasadniczo każde $j \neq 1$ się nadaje).
-    Dla j = 2 nasze słowo przyjmuje postać $a^{N+i}b^Nc^{2N} \notin L$, więc ten język nie jest językiem regularnym.
+    \noindent Musimy teraz znaleźć takie j dla którego słowo $v_1 u^j v_2 \notin L$. Takie j to np. 2 (choć tutaj zasadniczo każde $j \neq 1$ się nadaje).
+    Dla j = 2 nasze słowo przyjmuje postać $a^{N+i} b^N c^{2N} \notin L$, więc ten język nie jest językiem regularnym.
 
     \newpage
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
@@ -4048,11 +4067,11 @@
                 \draw [black] (59.3,-19.9) circle (2.4);
                 \draw [black] (13.745,-17.719) arc (128.65764:51.34236:10.494);
                 \fill [black] (26.86,-17.72) -- (26.54,-16.83) -- (25.92,-17.61);
-                \draw (20.3,-14.92) node [above] {$z_0\mbox{ }|\mbox{ }z_0a$};
+                \draw (20.3,-14.92) node [above] {$z_0\mbox{ }|\mbox{ }z_0 a$};
                 \draw (20.3,-16.42) node [below] {a};
                 \draw [black] (26.671,-21.895) arc (-55.76684:-124.23316:11.325);
                 \fill [black] (26.67,-21.89) -- (25.73,-21.93) -- (26.29,-22.76);
-                \draw (20.3,-24.36) node [below] {$z_0\mbox{ }|\mbox{ }z_0b$};
+                \draw (20.3,-24.36) node [below] {$z_0\mbox{ }|\mbox{ }z_0 b$};
                 \draw (20.3,-22.86) node [above] {b};
                 \draw [black] (31.9,-19.9) -- (42.4,-19.9);
                 \fill [black] (42.4,-19.9) -- (41.6,-19.4) -- (41.6,-20.4);
@@ -4094,11 +4113,11 @@
                 \draw [black] (59.3,-19.9) circle (2.4);
                 \draw [black] (13.745,-17.719) arc (128.65764:51.34236:10.494);
                 \fill [black] (26.86,-17.72) -- (26.54,-16.83) -- (25.92,-17.61);
-                \draw (20.3,-14.92) node [above] {$z_0\mbox{ }|\mbox{ }z_0a$};
+                \draw (20.3,-14.92) node [above] {$z_0\mbox{ }|\mbox{ }z_0 a$};
                 \draw (20.3,-16.42) node [below] {a};
                 \draw [black] (26.671,-21.895) arc (-55.76684:-124.23316:11.325);
                 \fill [black] (26.67,-21.89) -- (25.73,-21.93) -- (26.29,-22.76);
-                \draw (20.3,-24.36) node [below] {$z_0\mbox{ }|\mbox{ }z_0b$};
+                \draw (20.3,-24.36) node [below] {$z_0\mbox{ }|\mbox{ }z_0 b$};
                 \draw (20.3,-22.86) node [above] {b};
                 \draw [black] (31.9,-19.9) -- (42.4,-19.9);
                 \fill [black] (42.4,-19.9) -- (41.6,-19.4) -- (41.6,-20.4);
@@ -4136,22 +4155,22 @@
     \begin{itemize}
         \item Gramatyka $G_1 = (V_N,V_T,P,v_0)$ w której
 
-        $V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0a, \; v_0 \rightarrow a \}$
+        $V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0 a, \; v_0 \rightarrow a \}$
 
         generuje język
 
-        $L(G_1) = \{ a^n : n = 1,2,... \}$
+        $L(G_1) = \{ a^n : n = 1,2,\dots \}$
 
         Gramatyka jest typu (3)
 
         \item Gramatyka $G_2 = (V_N,V_T,P,v_0)$, w której
 
-        $V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0v_0, \; v_0 \rightarrow a \}$
+        $V_N = \{v_0\}, \;\; V_T = \{a\}, \;\; P = \{ v_0 \rightarrow v_0 v_0, \; v_0 \rightarrow a \}$
 
         generuje język
 
 
-        $L(G_2) = \{ a^n : n = 1,2,... \}$
+        $L(G_2) = \{ a^n : n = 1,2,\dots \}$
 
         Gramatyka jset typu (2)
 
@@ -4160,11 +4179,11 @@
 
         $V_N = \{v_0, v_1, v_2 \}, \;\; V_T = \{a,b,c\}$
 
-        $P=\{v_0~\rightarrow~abc, v_0~\rightarrow~av_1bc, v_1b~\rightarrow~bv_1,v_1c~\rightarrow~v_2bcc, bv_2~\rightarrow~v_2b,  \\ av_2~\rightarrow~aav_1, av_2~\rightarrow~aa\}$
+        $P=\{v_0~\rightarrow~abc, v_0~\rightarrow~a v_1 bc, v_1 b~\rightarrow~b v_1,v_1 c~\rightarrow~v_2 bcc, bv_2~\rightarrow~ v_2 b,  \\ av_2~\rightarrow~aav_1, av_2~\rightarrow~aa\}$
 
         generuje język
 
-        $L(G_3) = \{ a^n b^n c^n : n = 1,2,... \}$.
+        $L(G_3) = \{ a^n b^n c^n : n = 1,2,\dots \}$.
         Gramatyka jest typu (0)
         \\
 

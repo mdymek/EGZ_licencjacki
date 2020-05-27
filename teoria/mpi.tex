@@ -452,7 +452,7 @@
         \delta_{ij} = p_n(x_j)=\sum _{k=0}^{n}y_{i}l_k(x_j)=\sum _{k=0}^{n}\delta_k l_k (x_j)=l_i(x_j) \quad (0 \leq j \leq n)
     \end{align*}
 
-    ($\delta_ij$ jest deltą Kroneckera). Łatwo znaleźć wielomian $l_i$ o tej własności. Jego zerami są wszystkie węzły oprócz $x_i$, czyli dla pewniej stałej c jest
+    ($\delta_{ij}$ jest deltą Kroneckera). Łatwo znaleźć wielomian $l_i$ o tej własności. Jego zerami są wszystkie węzły oprócz $x_i$, czyli dla pewniej stałej c jest
     \begin{align*}
         l_i(x)=c(x-x_0)\dots(x-x_{i-1})(x-x_{i+1})\dots(x-x_n)
     \end{align*}
@@ -831,9 +831,9 @@
 
                 $p_1 = p_2$ & $p_1 - p_2$,
 
-                $\hat{p_1} - \hat{p_2}$ & $0$ & $p(1-p)(\frac{1}{n} + \frac{1}{m})$
+                $\hat{p_1} - \hat{p_2}$ & $0$ & $p(1-p)\left(\frac{1}{n} + \frac{1}{m}\right)$
 
-                gdzie $p = p_1 = p_2$ & $Z = \frac{\hat{p_1} - \hat{p_2}}{\sqrt{\hat{p}(1-\hat{p})(\frac{1}{n} + \frac{1}{m})}}$
+                gdzie $p = p_1 = p_2$ & $Z = \frac{\hat{p_1} - \hat{p_2}}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n} + \frac{1}{m}\right)}}$
 
                 gdzie $\hat{p} = \frac{n\hat{p_1} + m\hat{p_2}}{n + m}$\\
                 \bottomrule
@@ -894,7 +894,7 @@
                 & $\sigma^2 < \sigma_0^2$ & & $\chi_{obs}^2 < \chi_{\alpha}^2$ & $P{\chi^2 \leq \chi_{obs}^2}$\\
                 & $\sigma^2 \neq \sigma_0^2$ & & $\chi_{obs}^2 \geq \chi_{\frac{\alpha}{2}}^2$
                 or $\chi_{obs}^2 \leq \chi_{\frac{\alpha}{2}}^2$
-                & $2\text{min}(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
+                & $2\min(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
                 \bottomrule
             \end{tabular}
         \end{center}
@@ -1081,9 +1081,11 @@
 
         \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie \[\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i\]
         tzn:
-        \[\mathbf{u}_1 = \mathbf{v}_1\]
-        \[\mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2\]
-        \[\mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3\]
+        \begin{gather*}
+            \mathbf{u}_1 = \mathbf{v}_1\\
+            \mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2\\
+            \mathbf{u}_3 = \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_3 - \mathrm{proj}_\mathbf{u_2} \mathbf{v}_3\\
+        \end{gather*}
 
         \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$
 
@@ -1150,7 +1152,7 @@
             \left (  1 - \frac{1}{p_2}\right)
             \cdots
             \left (  1 - \frac{1}{p_n}\right)$
-            gdzie $p_1, p_2, ..., p_n$ są czynnikami pierwszymi liczby n
+            gdzie $p_1, p_2, \dots, p_n$ są czynnikami pierwszymi liczby n
             \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
         \end{enumerate}
     \end{definition}
@@ -1301,11 +1303,11 @@
     \end{definition}
 
     \begin{theorem}
-        Niech G będzie dowolnym grafem. Wtedy $\chi(G) \leq d_{max}(G) + 1$.
+        Niech G będzie dowolnym grafem. Wtedy $\chi(G) \leq d_{\max}(G) + 1$.
     \end{theorem}
 
     \begin{theorem}
-        Niech G będzie grafem spójnym. Wówczas $\chi(G) \leq d_{max}(G)$, o ile G nie jest grafem pełnym ani cyklem o
+        Niech G będzie grafem spójnym. Wówczas $\chi(G) \leq d_{\max}(G)$, o ile G nie jest grafem pełnym ani cyklem o
         nieparzystej liczbie wierzchołków.
     \end{theorem}
 
@@ -1576,7 +1578,7 @@
 
     \begin{theorem}
         \textbf{O ciągu monotonicznym i ograniczonym}. Jeżeli ciąg $(a_n)$ jest niemalejący dla $n \geq n_0$ oraz
-        ograniczony z góry, to jest zbieżny do granicy właściwej $sup\{a_n : n \geq n_0\}$.
+        ograniczony z góry, to jest zbieżny do granicy właściwej $\sup\{a_n : n \geq n_0\}$.
 
         Prawdziwe jest także analogiczne twierdzenie dla ciągu nierosnącego i ograniczonego z dołu.
     \end{theorem}
@@ -2047,7 +2049,7 @@
         na otoczeniu punktu $(x_0, y_0)$ oraz niech
         \begin{enumerate}
             \item $\frac{\partial f}{\partial x}(x_0, y_0) = 0, \frac{\partial f}{\partial y}(x_0, y_0) = 0$
-            \item $det \begin{bmatrix}
+            \item $\det \begin{bmatrix}
                            \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
                            \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
             \end{bmatrix} > 0$

@@ -288,7 +288,7 @@
         oraz $K_1 < K_2 < \dots < K_n$\\
 
         \textbf{Struktura liścia}\\
-        $<< K_1, Pr_1 >, \dots , < K_n, Pr_n >, P_{next} >>$\\
+        $\ll K_1, Pr_1 >, \dots , < K_n, Pr_n >, P_{next} \gg$\\
         gdzie $n \leq p$\\
         $K_i$ jest wartością klucza indeksu\\
         $Pr_i$ jest wskaźnikiem do rekordów na dysku lub bloków danych
@@ -378,7 +378,7 @@
     \subsubsection{ACID dla przykładowej transakcji}
     Co oznaczałyby powyższe warunki w stosunku do wcześniej przedstawionej transakcji (nazwijmyją Ti)?
     \\\\
-    \textbf{Atomowość}: Efekt musi być taki, jakby wykonały się wszystkie kroki 1-6, albo żaden.\\
+    \textbf{Atomowość}: Efekt musi być taki, jakby wykonały się wszystkie kroki 1--6, albo żaden.\\
     \textbf{Spójność}: Suma ( A + B ) musi być taka sama przed i po wykonaniu transakcji Ti.\\
     \textbf{Odseparowanie}: Załóżmy, że inna transakcja Tk sumuje zawartość kont A i B. Rezultat
     współbieżnego działania obydwu transakcji powinien być poprawny, tj. żadne
@@ -1231,6 +1231,9 @@
     \end{itemize}
 
     \subsubsection{Ogólny schemat definicji monitora}
+
+    % ... instead of \ldots becuase of verbatim env
+
     \begin{verbatim}
         type nazwa_monitora = monitor
         -> deklaracje zmiennych

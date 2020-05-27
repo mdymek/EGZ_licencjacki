@@ -425,12 +425,12 @@
     \end{gather*}
 
     Pierwsze przybliżenie:
-    \[\lambda_1 = \frac{<x_1, y_0>}{<y_0, y_0>} = \frac{(\frac{1}{\sqrt{2}})^2 (-1*0 + 1*25 + 0*1)}
-    {(\frac{1}{\sqrt{2}})^2 (0*0 + 1*1 + 1*1)} = \frac{25}{2} = 12.5\]
+    \[\lambda_1 = \frac{<x_1, y_0>}{<y_0, y_0>} = \frac{\left(\frac{1}{\sqrt{2}}\right)^2 (-1*0 + 1*25 + 0*1)}
+    {\left(\frac{1}{\sqrt{2}}\right)^2 (0*0 + 1*1 + 1*1)} = \frac{25}{2} = 12.5\]
 
     Drugie przybliżenie:
-    \[\lambda_2 = \frac{<x_2, y_1>}{<y_1, y_1>} = \frac{(\frac{1}{\sqrt{626}})^2 (30 + 749*25 + 25*0)}
-    {(\frac{1}{\sqrt{626}})^2 (1 + 25*25)} = \frac{18755}{626} \approx 29.96\]
+    \[\lambda_2 = \frac{<x_2, y_1>}{<y_1, y_1>} = \frac{\left(\frac{1}{\sqrt{626}}\right)^2 (30 + 749*25 + 25*0)}
+    {\left(\frac{1}{\sqrt{626}}\right)^2 (1 + 25*25)} = \frac{18755}{626} \approx 29.96\]
 
     Fakt, że drugie przybliżenie jest dobre, możemy zweryfikować za pomocą \textbf{Kół Geszgorina} - własności własne
     macierzy powinny znajdować się wewnątrz okręgów o środkach wyznaczonych na osi x wartościami przekątnej w macierzy,
@@ -662,7 +662,7 @@
         Zmienna losowa X ma rozkład dwumianowy $(X \sim Bin(n,p))$ gdzie $n$ - ilość prób, $p$ - prawdopodobieństwo sukcesu. Ponadto wiemy, że $E(X) = np$ oraz $Var(X)=np(1-p)$
     \end{exercise}
     Rozwiązanie:
-    Mamy $X \sim Bin (n=4, p=\frac{1}{2})$ oraz $k=2$, więc
+    Mamy $X \sim Bin \left(n=4, p=\frac{1}{2}\right)$ oraz $k=2$, więc
     \begin{align*}
         P(X=2)={{4}\choose{2}} \left(\frac{1}{2}\right) ^2 \left(\frac{1}{2}\right)^2=6\cdot\frac{1}{4} \cdot \frac{1}{4}=\frac{3}{8},
     \end{align*}
@@ -786,7 +786,7 @@
     \end{exercise}
     Rozwiązanie:\\
 
-    Całkowity czas kompilacji opisuje zmienna losowa o rozkładzie $Gamma(T \sim \Gamma(\alpha = 3, \lambda = \frac{1}{5}))$.
+    Całkowity czas kompilacji opisuje zmienna losowa o rozkładzie $Gamma\left(T \sim \Gamma\left(\alpha = 3, \lambda = \frac{1}{5}\right)\right)$.
     Wartość oczekiwana i wariancja całkowitego czasu kompilacji to
     \begin{align*}
         E(X) = \frac{\alpha}{\lambda} = \frac{3}{\frac{1}{5}} = 15
@@ -800,7 +800,7 @@
     \begin{align*}
         P(T < t) = P(X \geq \alpha),
     \end{align*}
-    gdzie $X \sim Poisson(\lambda*t = \frac{1}{5} * 12 = 2.4)$ oraz $\alpha = 3$, $t = 12$. Mamy więc:
+    gdzie $X \sim Poisson\left(\lambda*t = \frac{1}{5} * 12 = 2.4\right)$ oraz $\alpha = 3$, $t = 12$. Mamy więc:
     \begin{align*}
         P(T < 12) = P (X \geq 3) = 1 - P(0) - P(1) - P(2) = 1 - F_X(2) = 1 - 0.5697 = 0.43
     \end{align*}
@@ -1212,13 +1212,13 @@
             \hline
             1 & 46 & 5 & 0 & 1           \\
             \hline
-            2 & 10 & 4 & 1 - 5 * 0 = 1 & 0 - 5 * 1 = -5    \\
+            2 & 10 & 4 & $1 - 5 * 0 = 1$ & $0 - 5 * 1 = -5$    \\
             \hline
-            3 & 6 & 1 & 0 - 4 * 1 = -4& 1 - 4 * -5 = 21   \\
+            3 & 6 & 1 & $0 - 4 * 1 = -4$ & $1 - 4 * -5 = 21$   \\
             \hline
-            4 & 4 & 1 & 1 - 1 * -4 = 5& -5 - 1 * 21 = -26 \\
+            4 & 4 & 1 & $1 - 1 * -4 = 5$ & $-5 - 1 * 21 = -26$ \\
             \hline
-            5 & 2 & 2 &-4 - 1 * 5 = -9& 21 - 1 * -26 = 47 \\
+            5 & 2 & 2 & $-4 - 1 * 5 = -9$ & $21 - 1 * -26 = 47$ \\
             \hline
 
         \end{tabular}
@@ -1246,8 +1246,8 @@
     Pokażmy, że $d = NWD(a, b)$. Niech $c$ będzie wspólnym dzielnikiem $a$ i $b$. Zatem $a = cq_1$ i $b = cq_2$.
     \begin{gather*}
         d = ma + nb\\
-        d = cq_1a + cq_2b\\
-        d = c(q_1a + q_2b)\\
+        d = c q_1 a + c q_2 b\\
+        d = c(q_1 a + q_2 b)\\
     \end{gather*}
     Zatem $c | d$, zatem $c \leq d$, zatem $d = NWD(a, b)$
 
@@ -2343,7 +2343,7 @@
 
     \noindent Skorzystamy z granic specjalnych $\lim_{x \to 0} \frac{\sin{x}}{x} = 1$ oraz $\lim_{x \to 0} \frac{\ln(x + 1)}{x} = 1$ \\
 
-    \noindent $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5} \stackrel{[\frac{0}{0}]}{=} \lim_{x \to -5} \frac{\sin(x + 5)}{x + 5} + \frac{\ln((x + 5) + 1)}{x + 5}$ \\
+    \noindent $\lim_{x \to -5} \frac{\sin(x + 5) + \ln(x + 6)}{x + 5} \stackrel{\left[\frac{0}{0}\right]}{=} \lim_{x \to -5} \frac{\sin(x + 5)}{x + 5} + \frac{\ln((x + 5) + 1)}{x + 5}$ \\
 
     \noindent Ponieważ granica dąży do -5 to wyrażenia w nawiasach dążą do 0 więc możemy zastosować wspomniane granice specjalne. Możemy to zapisać również jako: \\
 
@@ -2386,11 +2386,11 @@
 
     \noindent Interesuje nas oczywiście punkt 0 i to dla niego musimy policzyć granicę (funkcja w pozostałych punktach jest ciągła, jako że składa się z funkcji elementarnych): \\
 
-    \noindent $\lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin(\frac{1}{x})$ - możemy to zrobić z twierdzenia o 3 funkcjach: \\
+    \noindent $\lim_{x \to 0} f(x) = \lim_{x \to 0} x \sin\left(\frac{1}{x}\right)$ - możemy to zrobić z twierdzenia o 3 funkcjach: \\
 
     \noindent Korzystając tradycyjnie z warunku $-1 \leq \sin{x} \leq 1$ możemy zauważyć, że: \\
 
-    \noindent $-x \leq x \sin(\frac{1}{x}) \leq x$ a z kolei $\lim_{x \to 0} x = \lim_{x \to 0} -x = 0$ więc i $\lim_{x \to 0} x \sin(\frac{1}{x}) = 0$ \\
+    \noindent $-x \leq x \sin\left(\frac{1}{x}\right) \leq x$ a z kolei $\lim_{x \to 0} x = \lim_{x \to 0} -x = 0$ więc i $\lim_{x \to 0} x \sin\left(\frac{1}{x}\right) = 0$ \\
 
     \noindent Mamy więc $\lim_{x \to 0} f(x) = f(0)$ więc ta funkcja jest ciągła \\
 
@@ -2496,8 +2496,10 @@
         Znajdź najmniejszą i największą wartość funkcji\\ $f(x) = x^2 - 2x + 3$ na przedziale $[-2, 5]$
     \end{exercise}
 
-    \[f'(x) = 2x - 2\]
-    \[f'(x) = 0 \Leftrightarrow x = 1\]
+    \begin{gather*}
+        f'(x) = 2x - 2\\
+        f'(x) = 0 \Leftrightarrow x = 1\\
+    \end{gather*}
     Wartość pochodnej jest ujemna na przedziale $[-2, 1)$ i dodatnia na przedziale $(1, 5]$, zatem istnieje minimum lokalne w punkcie 1.
 
     \begin{center}
@@ -2545,15 +2547,15 @@
     \end{gather*}
 
     \begin{exercise}
-        Korzystając z definicji całki Riemanna uzasadnij równość \[\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = \frac{\pi}{4}\]
+        Korzystając z definicji całki Riemanna uzasadnij równość \[\lim_{n \rightarrow \infty} \left(\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}\right) = \frac{\pi}{4}\]
     \end{exercise}
 
-    \[\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) =
-    \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{n^2}{n^2 + i^2} = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{1}{1 + (\frac{i}{n})^2} \]
+    \[\lim_{n \rightarrow \infty} \left(\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}\right) =
+    \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{n^2}{n^2 + i^2} = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \frac{1}{1 + \left(\frac{i}{n}\right)^2} \]
 
     Korzystamy z definicji całki Riemanna ($[a, b] = [0, 1]$, $f(x) = \frac{1}{1 + x^2})$
 
-    \[\lim_{n \rightarrow \infty} (\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}) = \int_0^1 \frac{1}{1 + x^2}= \big[arctg \; x \big]^1_0 = \frac{\pi}{4}\]
+    \[\lim_{n \rightarrow \infty} \left(\frac{n}{n^2 + 1} + \frac{n}{n^2 + 2^2} + \cdots + \frac{n}{n^2 + n^2}\right) = \int_0^1 \frac{1}{1 + x^2}= \big[arctg \; x \big]^1_0 = \frac{\pi}{4}\]
 
     \begin{exercise}
         Korzystając z definicji oblicz całkę
@@ -2561,10 +2563,10 @@
     \end{exercise}
 
     Korzystając ze wzoru
-    \[\int_a^b f(x) \,dx = \lim_{n \rightarrow \infty} \frac{b - a}{n} \sum_{i =1}^{n} f(a + i\frac{b - a}{n}) \]
+    \[\int_a^b f(x) \,dx = \lim_{n \rightarrow \infty} \frac{b - a}{n} \sum_{i =1}^{n} f\left(a + i\frac{b - a}{n}\right) \]
     uzyskujemy
     \[\int_0^1 2^x \,dx = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} 2^{\frac{i}{n}}
-    = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} (\sqrt[n]{2})^i \]
+    = \lim_{n \rightarrow \infty} \frac{1}{n} \sum_{i =1}^{n} \left(\sqrt[n]{2}\right)^i \]
 
     Suma n wyrazów ciągu geometrycznego jest równa $a_1 \frac{q^n - 1}{q - 1}$
 
@@ -2574,7 +2576,7 @@
         \lim_{n \rightarrow \infty} \frac{\sqrt[n]{2}}{\frac{\sqrt[n]{2} - 1}{\frac{1}{n}}} =\\
         = \frac{\lim_{n \rightarrow \infty} \sqrt[n]{2}}{\lim_{n \rightarrow \infty} \frac{2^{\frac{1}{n}}}{\frac{1}{n}}} =
         \frac{\lim_{n \rightarrow \infty} \sqrt[n]{2}}{\lim_{k \rightarrow 0} \frac{2^{k}}{k}} =
-        \frac{1}{ln\; 2} = log_2e\\
+        \frac{1}{ln\; 2} = log_2 e\\
     \end{gather*}
     \newpage
 
@@ -2751,10 +2753,13 @@
         $\frac{\partial f}{\partial y^2} (x,y)  = \frac{\partial}{\partial x} \left( 8y + 16 \right) = 8$
         \\
 
-        $ det \begin{bmatrix}
-                  6 & 0 \\
-                  0 & 8
-        \end{bmatrix} = 6 \cdot 8 = 48 > 0$ \\
+        \begin{align}
+            \det \begin{bmatrix}
+                     6 & 0 \\
+                     0 & 8
+            \end{bmatrix} = 6 \cdot 8 = 48 > 0
+        \end{align}
+        \\
 
         Zatem funkcja f ma ekstremum lokalne w punkcie (1,-2) oraz $\frac{\partial f}{\partial x^2}(x_0, y_0) > 0$ zatem jest to minimum lokalne właściwe.
 
@@ -2829,8 +2834,8 @@
     W rozważanej całce dokonujemy zamiany zmiennych na współrzędne sferyczne. Mamy:
     \begin{align*}
         \iiint_U \mu(x^2+y^2+z^2) \,dx\,dy\,dz
-        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} (\varrho^2 cos^2\varphi cos^2\psi+\varrho^2sin^2\varphi cos^2\psi + \varrho^2sin^2\psi) \varrho^2cos\psi d\varrho
-        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} \varrho^4cos\psi d\varrho
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} (\varrho^2 cos^2\varphi cos^2\psi+\varrho^2 sin^2 \varphi cos^2 \psi + \varrho^2 sin^2 \psi) \varrho^2 cos\psi d\varrho
+        \\ &= \int_{0}^{2\pi} d\varphi \int_{-\frac{\pi}{2}}^{0} d\psi \int_{0}^{2} \varrho^4 cos\psi d\varrho
         \\ &= \left(\int_{0}^{2\pi} d\varphi\right) \left(\int_{-\frac{\pi}{2}}^{0} cos\psi d\psi\right)\cdot \left(\int_{0}^{2} \varrho^4 d\varrho \right)
         \\ &= \left[\psi\right]_0^{2\pi} \cdot \left[sin\psi\right]_{-\frac{pi}{2}}^0 \cdot \left[\frac{\varrho ^5}{5}\right]_0^2 = 2\pi \cdot 1 \cdot \frac{32}{5}=\frac{64}{5}\pi
     \end{align*}
