@@ -1,14 +1,16 @@
 # EGZ_licencjacki
-[CircleCI link](https://circleci.com/gh/mdymek/EGZ_licencjacki)  - pdfs in artifacts.
 
 ```
 cd teoria
-pdflatex -shell-escape main.tex
-open main.pdf
+pdflatex -shell-escape teoria.tex
+open teoria.pdf
 ```
 
 ```
 cd praktyka
-pdflatex -shell-escape main.tex
-open main.pdf
+pdflatex -shell-escape praktyka.tex
+open praktyka.pdf
 ```
+
+Pdfs generated in artifacts of the latest successful [action](https://github.com/mdymek/EGZ_licencjacki/actions).  
+[Releases](https://github.com/mdymek/EGZ_licencjacki/releases).
