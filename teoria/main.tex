@@ -3421,27 +3421,10 @@ mathescape
         \end{itemize}
 
     \end{definition}
+    
+    % Tu był przykład z wydawaniem reszty. Usuwam, bo ciężko zdefiniować "nieoptymalne" rozwiązanie - ktoś na egzaminie mógłby mieć przez to problem.
 
-    Przykład I - Wydawanie reszty
-
-    \begin{verbatim}
-        while (są jeszcze monety i realizacja pozostaje nierozwiązana) {
-        pobierz największą dostępna monetę;
-        //procedura wyboru
-
-        if (dodanie monety powoduje przekroczenie kwoty reszty)
-        //sprawdzenie wykonalności
-        odrzuć monetę;
-        else
-        dodaj monetę do reszty;
-
-        if (całkowita wartość reszty jest równa należnej kwocie)
-        //sprawdzenie rozwiązania
-        realizacja rozwiązania;
-        }
-    \end{verbatim}
-
-    Przykład II - Pakowanie plecaka
+    Przykład - Pakowanie plecaka
 
     \begin{verbatim}
         posortuj nierosnąco przedmioty według wartości c[j]/w[j]
@@ -3512,20 +3495,21 @@ mathescape
 
     \subsection{Algorytm Boruvki}
     \begin{enumerate}
-        \item Zainicjalizuj każdy wierzchołek jako osobny zbiór.
-        \item Znajdź krawędź z najmniejszą wagą łączącą ten zbiór z innym. Dodaj tą krawędź do MST.
-        \item Powtarzaj krok 2 dla każdego zbioru dopóki istnieje więcej niż jeden zbiór.
+        \item Weź wszystkie wierzchołki, ale bez krawędzi - każdy wierzchołek jest osobnym drzewem.
+        \item Dla każdego drzewa znajdź krawędź o najmniejszej wadze w oryignalnym grafie, która łączy je z innym drzewem.
+        \item Dodaj tę krawędź do MST.
+        \item Powtarzaj, dopóki drzewa nie połączyły się w jedno.
     \end{enumerate}
     \textbf{Złożoność:} $O(ElogV)$.
 
 
     \subsection{Algorytm Prima}
     \begin{enumerate}
-        \item Zainicjalizuj drzewo jednym wierzchołkiem, wybranym losowo z grafu.
-        \item Powiększ drzewo o jeden wierzchołek z najmniejszą wagą który łączy drzewo z wierzchołkami jeszcze nieuwzględnionymi.
-        \item Powtarzaj krok 2 aż wszystkie wierzchołki znajdą się w drzewie.
+        \item Zainicjalizuj MST jednym wierzchołkiem, wybranym losowo z grafu.
+        \item Spośród krawędzi łączących MST z wierzchołkami jeszcze w nim niebędącymi wybierz tę, która ma najmniejszą wagę, i dodaj ją do MST.
+        \item Powtarzaj krok 2 aż wszystkie wierzchołki znajdą się w MST.
     \end{enumerate}
-    \textbf{Złożoność:} Zależy od użytych struktur danych. $O(V^2)$ lub $O(ElogV)$ jeśli użyta została lista sąsiedztwa
+    \textbf{Złożoność:} Zależy od użytych struktur danych. $O(V^2)$ lub $O(ElogV)$, jeśli użyta została lista sąsiedztwa.
 
 
 
@@ -3546,26 +3530,24 @@ mathescape
     \begin{definition}
         \textbf{Algorytm Grahama} - złożoność $O(n \log n)$.
         \begin{enumerate}
-            \item Wybierz punkt (ozn. O) o najniższej wartości współrzędnej y.
-            \item Przesuń wszystkie punkty tak, by punkt O pokrył się z początkiem układu współrzędnych.
-            \item Posortuj punkty leksykograficznie względem:
+            \item Wybierz punkt (ozn. O) o najmniejszym y (jeśli jest kilka ex aequo, to ten z nich o najmniejszym x).
+            \item Posortuj pozostałe punkty leksykograficznie względem:
             \begin{itemize}
-                \item kąta pomiędzy wektorem $OP_i$ a dodatnią osią układu współrzędnych,
-                \item odległości punktu $P_i$ od początku układu współrzędnych.
+                \item kąta pomiędzy wektorem $OP_i$ a osią X,
+                \item długości wektora $OP_i$.
             \end{itemize}
-            \item Wybierz punkt (ozn. S) o najmniejszej współrzędnej y; jeśli kilka punktów ma tę samą współrzędną
-            y, wybierz spośród nich ten o najmniejszej współrzędnej x.
-            \item Przeglądaj listę posortowanych punktów poczynając od punktu S:
+            \item Przeglądaj listę posortowanych punktów:
             \begin{itemize}
                 \item Od bieżącej pozycji weź trzy kolejne punkty (ozn. A, B, C).
-                \item Jeśli punkt B leży na zewnątrz trójkąta AOC, to może należeć do otoczki wypukłej. Przejdź do następnego punktu na liście.
+                \item Jeśli punkt B leży na zewnątrz trójkąta AOC, to może należeć do otoczki wypukłej. Przejdź do następnej trójki punktów.
                 \item Jeśli punkt B leży wewnątrz trójkąta AOC, to znaczy, że nie należy do otoczki. Usuń punkt B z listy i cofnij się o jedną pozycję (o ile bieżąca pozycja jest różna od początkowej).
             \end{itemize}
+            \item Pozostałe na liście punkty stanowią otoczkę wypukłą.
         \end{enumerate}
     \end{definition}
 
     \begin{definition}
-        \textbf{Algorytm Jarvisa} - średnia złożoność $O(kn)$, gdzie n liczba punktów, k liczba punktów należących do otoczki; pesymistyczna - $O(n^2)$.
+        \textbf{Algorytm Jarvisa} - średnia złożoność $O(kn)$, gdzie n - liczba punktów, k - liczba punktów należących do otoczki; pesymistyczna - $O(n^2)$.
         \begin{enumerate}
             \item $P_1$ – punkt na otoczce wypukłej o najmniejszej współrzędnej y (jeśli jest więcej niż jeden, wybierany jest ten o najmniejszej współrzędnej x),
             \item $P_{0}:=[-\infty ,y(P_{1})]$,
@@ -3574,7 +3556,7 @@ mathescape
             \begin{itemize}
                 \item $P_{i+1}$ – punkt $N$, dla którego kąt $P_{i-1}P_{i}N$ jest największy,
                 \item jeśli $N=P_{1}$, koniec iterowania,
-                \item $:=i+1$,
+                \item $i:=i+1$,
             \end{itemize}
             \item ostatecznie otoczkę tworzą punkty $P_{1\dots i}$.
         \end{enumerate}
@@ -3585,14 +3567,14 @@ mathescape
     \begin{definition}
         \textbf{Quickhull} - średnia złożoność $O(n \log n)$, pesymistyczna złożoność - $O(n^2)$.
 
-        Przygotowanie danych:
+        QuickHull(P):
         \begin{enumerate}
-            \item Znajdź w zbiorze punktów dwa skrajne punkty o minimalnej i maksymalnej współrzędnej x (A i B).
-            \item Podziel zbiór punktów na dwa podzbiory $S_1$ i $S_2$ znajdujące się nad i pod prostą $AB$.
+            \item Znajdź w $P$ punkty o minimalnym i maksymalnym x (A oraz B).
+            \item Podziel $P$ na dwa podzbiory $S_1$ i $S_2$ znajdujące się nad i pod prostą $AB$.
             \item Wywołaj rekurencyjnie QuickHull(A, B, $S_1$) i QuickHull(B, A, $S_2$).
         \end{enumerate}
 
-        QuickHull(A, B, P):
+        QuickHull(A, B, P) - funkcja pomocnicza:
         \begin{enumerate}
             \item Jeśli $P$ jest pusty – koniec.
             \item Jeśli $P$ ma jeden element, ten punkt należy do otoczki – koniec.
@@ -3625,21 +3607,17 @@ mathescape
     \end{theorem}
 
     \begin{definition}
-        \textbf{Problem NP-zupełny} (ang. \textit{NP-Complete}) – problem, który \textbf{należy do klasy NP} oraz dowolny
-        problem należący do NP może być do niego \textbf{zredukowany w czasie wielomianowym}. Czasami zamiast redukcji w
-        czasie wielomianowym używa się redukcji w pamięci logarytmicznej. Taka definicja problemów NP-zupełnych
-        implikuje fakt, że jeśli tylko potrafimy rozwiązać jakikolwiek problem NP-zupełny w czasie wielomianowym,
-        to potrafimy rozwiązać w takim czasie wszystkie problemy NP.\\
-
-        Pierwszym problemem którego NP-zupełność wykazano był problem SAT, czyli problem spełnialności formuł zdaniowych.
-    \end{definition}
+        \textbf{Problem NP-zupełny} (ang. \textit{NP-Complete}) – taki problem \textbf{NP}, do którego można \textbf{w czasie wielomianowym zredukować} dowolny inny problem NP. Czasami zamiast redukcji w czasie wielomianowym używa się redukcji w pamięci logarytmicznej.
+    \end{definition} 
+    Stąd wynika, że jeśli potrafimy rozwiązać jakikolwiek problem NP-zupełny w czasie wielomianowym,
+    to potrafimy rozwiązać w takim czasie wszystkie problemy NP.
 
     \newpage
 
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
     \subsection{Automat minimalny}
     \begin{definition}
-        Automat $\mathcal{A} = (S, A, f, s_{0}, T)$ rozpoznający język L nazywamy automatem minimalnym, jeśli posiada najmniejszą liczbę stanów spośród wszystkich automatów rozpoznających język L
+        Automat $\mathcal{A} = (S, A, f, s_{0}, T)$ rozpoznający język L jest minimalny, jeśli posiada najmniejszą liczbę stanów spośród wszystkich automatów rozpoznających język L.
     \end{definition}
 
     \begin{definition}
@@ -3654,11 +3632,11 @@ mathescape
         $L \subset A^{*}$ - dowolny język \\
         $\Theta_{L} \subset A^* \times A^*$ - relacja równoważności dzieląca $A^*$ na dwie klasy:
         \begin{center}
-            L i $A^*$ \ L
+            L oraz $A^* \setminus L$
         \end{center}
         $\rho_i$ dla $i \in \mathbb{N}$ - zstępujący ciąg relacji: \\
         $\rho_1 = \Theta_L$, \\
-        $\rho_i = \{(u, w) \in A^* \times A^* : \forall a \in A \cup \{\textbf{1}\} (ua, wa) \in \rho_{i-1} \}$ dla i = 2, ... \\
+        $\rho_i = \{(u, w) \in A^* \times A^* : \forall a \in A \cup \{\textbf{1}\}: (ua, wa) \in \rho_{i-1} \}$ dla i = 2, ... \\
         Wtedy
         \begin{center}
             $\bigcap\limits_{i \in \mathbb{N}} \rho_i = P^r_L$
