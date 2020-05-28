@@ -1371,18 +1371,19 @@
     \section{Automat minimalny, wybrany algorytm minimalizacji.}
     \subsection{Automat minimalny}
     \begin{definition}
-        Automat $\mathcal{A} = (S, A, f, s_{0}, T)$ rozpoznający język L jest minimalny, jeśli posiada najmniejszą liczbę stanów spośród wszystkich automatów rozpoznających język L.
+        Automat rozpoznający język L jest minimalny, jeśli posiada najmniej stanów spośród automatów rozpoznających język L.
     \end{definition}
 
-    \begin{definition}
+    \begin{theorem}
         Dla dowolnego języka $L \in \mathcal{REC}(A^{*})$ automat
         \begin{center}
             $\mathcal{A}_{P_{L}^{r}} = (A^{*} / P_{L}^{r}, A, f^{*}, [1]_{P_{L}^{r}}, T)$,
         \end{center}
-        gdzie $T = \{[w]_{P_{L}^{r}} : w \in L \}$ jest automatem minimalnym rozpoznającym język L
-    \end{definition}
-    \begin{definition}
-        \textbf{Konstrukcja automatu minimalnego z wykorzystaniem prawej kongruencji automatowej} \\
+        $T = \{[w]_{P_{L}^{r}} : w \in L \}$ jest automatem minimalnym rozpoznającym język L.
+    \end{theorem}
+    
+    \begin{theorem}
+        \textbf{Konstrukcja prawej kongruencji syntaktycznej} \\
         $L \subset A^{*}$ - dowolny język \\
         $\Theta_{L} \subset A^* \times A^*$ - relacja równoważności dzieląca $A^*$ na dwie klasy:
         \begin{center}
@@ -1391,45 +1392,21 @@
         $\rho_i$ dla $i \in \mathbb{N}$ - zstępujący ciąg relacji: \\
         $\rho_1 = \Theta_L$, \\
         $\rho_i = \{(u, w) \in A^* \times A^* : \forall a \in A \cup \{\textbf{1}\}: (ua, wa) \in \rho_{i-1} \}$ dla i = 2, \ldots \\
-        Wtedy
+        Wtedy prawa kongruencja syntaktyczna to:
         \begin{center}
-            $\bigcap\limits_{i \in \mathbb{N}} \rho_i = P^r_L$
+            $P^r_L = \bigcap\limits_{i \in \mathbb{N}} \rho_i$
         \end{center}
-    \end{definition}
-
+        Ponieważ $\rho_i$ po pewnym $i$ przestaje się zmieniać, a $\rho_i \subset \rho_{i-1}$, w praktyce nasza $P^r_L$ to "ostatnie" $\rho_i$.
+    \end{theorem}
 
     \subsection{Minimalizacja automatu}
-    \begin{definition}
-        \textbf{Algorytm ``Minimalizuj 1''} \\
-        \url{http://wazniak.mimuw.edu.pl/index.php?title=J\%C4\%99zyki\%2C_automaty_i_obliczenia/Wyk\%C5\%82ad_5:_Algorytmy_konstrukcji_automatu_minimalnego} \\
-        Wejście L - język \\
-        Wyjście: automat minimalny $\mathcal{A} = (S_L, A, f_F, s_L, T_L)$ taki, że $L\mathcal{A} = L$
-        \begin{lstlisting}
-            $S_L \leftarrow \{L\};$
-            Put$(\mathcal{L}, L);$
-            while $\mathcal{L} \neq \emptyset$ do
-            M $\leftarrow$ \textbf{zdejmij} $(\mathcal{L})$;
-            foreach $a \in A$ do
-            N $\leftarrow a^{-1}M$;
-            if $N \cap S_L = \emptyset$ then
-            $S_L \leftarrow S_L \cup \{N\}$;
-            Put$(\mathcal{L}, N);$
-            end if
-            end for
-            end while
-            foreach $M \in S_L$ do
-            foreach $a \in A$ do
-            $f_L(M, a) \leftarrow a^{-1}M$;
-            end for
-            end for
-            $s_L \leftarrow L$;
-            $T_L \leftarrow \{u^{-1}L : u \in L\}$;
-            return $\mathcal{A}'$;
-        \end{lstlisting}
-    \end{definition}
+    \href{http://wazniak.mimuw.edu.pl/index.php?title=J\%C4\%99zyki\%2C_automaty_i_obliczenia/Wyk\%C5\%82ad_5:_Algorytmy_konstrukcji_automatu_minimalnego}{Ważniak} \\
+    Ideowo: konstruujemy $P^r_L$ dla języka rozpoznawanego przez dany automat, a następnie konstruujemy automat minimalny za pomocą $P^r_L$. Jest jeszcze druga metoda, z wykorzystaniem pochodnej Brzozowskiego, ale ponieważ pochodna Brzozowskiego nie jest wymagana w żadnym innym pytaniu, nie trzeba się jej uczyć :)
 
+    
+    \newpage
     \section{Lemat o pompowaniu dla języków regularnych.}
-    \begin{definition}
+    \begin{theorem}
         Niech $L \subset A^*$ będzie językiem rozpoznawalnym. Istnieje liczba naturalna $N \geq 1$ taka, że dowolne słowo $w \in L$ o długości $|w| \geq N$ można rozłożyć na katenację:
         \begin{center}
             $w = v_1 u v_2$
@@ -1438,21 +1415,75 @@
         \begin{center}
             $v_1 u^* v_2 \subset L$
         \end{center}
-    \end{definition}
+    \end{theorem}
+    Wynika to z faktu, że jeśli automat akceptuje słowo, które ma więcej liter niż automat stanów, to musiał gdzieś się zapętlić. Ta własność jest bardzo przydatna w dowodach pt "dany język nie jest rozpoznawalny".
 
-    \begin{definition}
+    \begin{theorem}
         Jeśli rozpoznawalny język $L \subset A^*$ jest nieskończony, to istnieją
         $v_1, v_2 \in A^*, u \in A^+$, takie, że
         \begin{center}
             $v_1 u^* v_2 \subset L$
         \end{center}
-    \end{definition}
+    \end{theorem}
+
 
     \newpage
-
     \section{Warunki równoważne definicji języka regularnego: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
-    \subsection{Wyrażenia regularne}
+    
+    \subsection{Automat skończony}
+    \begin{definition}
+        \textbf{Automat}
 
+        Automatem nad alfabetem A nazywamy system $\mathcal{A} = (S, f)$ w którym:
+        \begin{itemize}
+            \item S jest dowolnym zbiorem, zwanym zbiorem stanów
+            \item $f : S \times A \rightarrow S$ jest funkcją przejść
+        \end{itemize}
+
+        Automat $\mathcal{A}$ nazywamy skończonym, jeśli zbiór S jest skończony
+
+        Stan (ozn. $s_0$), z którego da się przejść do każdego innego stanu, nazywamy generatorem.
+    \end{definition}
+    
+    \begin{definition}
+        \textbf{Język rozpoznawalny}
+
+        Język $L \subset A^*$ jest rozpoznawalny wtedy i tylko wtedy, gdy istnieją:
+        \begin{itemize}
+            \item Automat skończony $\mathcal{A} = (S, f)$
+            \item stan $s_0 \in S$
+            \item zbiór $T \subset S$
+        \end{itemize}
+
+        takie, że
+        \[ L = \{w \in A^* : f(s_0, w) \in T\}\]
+        $s_0$ - stan początkowy \\
+        T - zbiór stanów końcowych automatu
+        \[\mathcal{A} = (S, A, f, s_0, T)\]
+        $L = L(\mathcal{A})$ - język rozpoznawany przez automat $\mathcal{A}$\\
+        $REC(A^*)$ - rodzina wszystkich języków rozpoznawalnych nad alfabetem A
+    \end{definition}
+    
+    
+    \subsection{Prawa kongruencja syntaktyczna}
+    \begin{definition}
+        \textbf{Prawa kongruencja}
+        
+        Relacja równoważności $\rho$ taka, że:
+        \[\forall x,y,z \in A^*: x \rho y \implies xz \rho yz\]
+    \end{definition}
+    
+    \begin{definition}
+        \textbf{Prawa kongruencja syntaktyczna}
+        
+        Relacja $P^r_L$, która jest spełniona dla słów $u$ i $w$, jeżeli:
+        \[\forall w \in A^*: uw \in L \iff vw \in L\]
+    \end{definition}
+    
+    Każda prawa kongruencja wyznacza automat, którego stany są klasami równoważności tej kongruencji. W drugą stronę również: każdy automat wyznacza prawą kongruencję. Prawa kongruencja \textit{syntaktyczna} odpowiada automatowi minimalnemu.
+    
+    
+    \subsection{Wyrażenia regularne}
     \begin{definition}
         \textbf{Rodzina regularnych podzbiorów}
 
@@ -1476,108 +1507,45 @@
         nad alfabetem A wtedy i tylko wtedy, gdy:
 
         \begin{enumerate}
-            \item $\alpha = \emptyset$
-            \item $\alpha = a \in A$
+            \item $\alpha = \emptyset$, lub
+            \item $\alpha = a \in A$, lub
             \item $\alpha$ jest w postaci $(\beta + \gamma), (\beta\gamma), \gamma^*$, gdzie
             $\beta, \gamma$ są wyrażeniami regularnymi nad alfabetem A
         \end{enumerate}
+        
+        Język wyznaczany przez $\alpha$ oznaczamy $\|\alpha\|$.
     \end{definition}
-
-    Rodzinę wyrażeń regularnych nad $A$ nazywamy $WR$.
-
-    \subsection{Automat skończony}
-
-    \begin{definition}
-        \textbf{Automat}
-
-        Automatem nad alfabetem A nazywamy system $\mathcal{A} = (S, f)$ w którym:
-        \begin{itemize}
-            \item S jest dowolnym zbiorem, zwanym zbiorem stanów
-            \item $f : S \times A \rightarrow S$ jest funkcją przejść
-        \end{itemize}
-
-        Automat $\mathcal{A}$ nazywamy skończonym, jeśli zbiór S jest skończony
-
-        Automat $\mathcal{A}$ ze stanem $s \in S$ taki, że
-        \[f(a, A^*) = Ss\]
-        nazywamy automatem z generatorem s.
-    \end{definition}
-
-    \begin{definition}
-        \textbf{Język rozpoznawalny}
-
-        Język $L \subset A^*$ jest rozpoznawalny wtedy i tylko wtedy, gdy istnieją:
-        \begin{itemize}
-            \item Automat skończony $\mathcal{A} = (S, f)$
-            \item stan $s_0 \in S$
-            \item zbiór $T \subset S$
-        \end{itemize}
-
-        takie, że
-        \[ L = \{w \in A^* : f(s_0, w) \in T\}\]
-        $s_0$ - stan początkowy \\
-        T - zbiór stanów końcowych automatu
-        \[\mathcal{A} = (S, A, f, s_0, T)\]
-        $L = L(\mathcal{A})$ - język rozpoznawany przez automat $\mathcal{A}$\\
-        $REC(A^*)$ - rodzina wszystkich języków rozpoznawalnych nad alfabetem A
-    \end{definition}
-
-    \subsection{Prawa kongruencja syntaktyczna}
-
-    \begin{definition}
-        \textbf{Prawa kongruencja}
-
-        Każdy automat $\mathcal{A} = (S, f)$ z generatorem $s_0$ wyznacza na wolnym
-        monoidzie $A^*$ prawą kongruencję $\sim_\mathcal{A}$:
-        \[\]
-        $\forall u, v \in A^*$
-        \[u \sim_\mathcal{A} v \Leftrightarrow f(s_0, u) = f(s_0, v)\]
-
-        Relacja $\sim_{\mathcal{A}}$ ma skończony indeks wtedy i tylko wtedy, gdy automat
-        $\mathcal{A}$ jest skończony.
-    \end{definition}
-
-    \begin{theorem}
-        Każda prawa kongruencja $p \subset (A^*)^2$ wyznacza automat, zwany ilorazowym
-        \[\mathcal{A}_p = (A^* /_{p}, f^*), \; \mathrm{gdzie} \; f^*([w]_p, u) = [wu]_p\]
-        \begin{itemize}
-            \item $\mathcal{A}_p$ jest automatem z generatorem [1]$_p$
-
-            \item $\mathcal{A}_p$ jest automatem skończonym wtedy i tylko gdy relacja $p$ ma skończony indeks
-        \end{itemize}
-    \end{theorem}
-
-    \subsection{Warunki równoważne definicji języka regularnego}
+    
     \begin{theorem}
         \textbf{Twierdzenie Kleenego}
 
         Dla każdego skończonego alfabetu A
         \[REC(A^*) = REG(^*)\]
     \end{theorem}
+    
+    Dla każdego wyrażenia regularnego możemy skonstruować automat - najłatwiej jest konstruować automat niedeterministyczny z pustymi przejściami. W drugą stronę też się da - np. usuwając po kolei stany i przepisując przejścia, aż będziemy mieć tylko stan początkowy i końcowy.
 
+
+    \subsection{Warunki równoważne definicji języka regularnego}
     \begin{theorem}
-        Dla dowolnego języka regularnego $L \in A^*$ następujące warunki są równoważne:
+        Dla dowolnego języka $L \in A^*$ następujące warunki są równoważne:
         \begin{itemize}
             \item L = L(G) dla gramatyki G typu 3 (regularnej, lewoliniowej)
             \item L = L(G) dla gramatyki G prawoliniowej
             \item L = L($\mathcal{A}$) dla automatu deterministycznego $\mathcal{A}$
             \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}$
             \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}^p$ z pustymi przejściami
-
             \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A
             \item L $\in REG(A^*)$
-            \item monoid syntaktyczna M(L) jest skończony
-            \item liczba różnych pochodnych Brzozowskiego dla języka
-            L jest skończona
-            \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$
-            o skończonym indeksie oraz L = $\bigcup\limits_{w \in L}[w]_p$
-            \item istnieje skończony monoid M i homomorfizm
-            \[\varphi : A^* \rightarrow M : L = \varphi^{-1}(\phi(L))\]
+            \item monoid syntaktyczny M(L) jest skończony
+            \item liczba różnych pochodnych Brzozowskiego dla języka L jest skończona
+            \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$ o skończonym indeksie
         \end{itemize}
     \end{theorem}
 
     \newpage
     \subsection{Konstrukcja automatu skończenie stanowego rozpoznającego wyrażenie regularne.}
+    % Nie poprawiałem rysunków w tej sekcji. IMO raczej utrudniają zrozumienie, bo ciężko zilustrować wszystkie reguły na jednym przykładzie - lepiej opisać to słownie?
     \begin{itemize}
         \item automat rozpoznający język pusty
         \begin{center}
@@ -1756,17 +1724,23 @@
             \noindent $T_x = r_{0x}$ \\
         \end{itemize}
     \end{itemize}
-    \newpage
 
+
+
+    \newpage
     \section{Automaty niedeterministyczne i deterministyczne (w tym ze stosem); determinizacja.}
 
-    \subsection{Determinizacja automatów skończenie stanowych}
-
+    \subsection{Niedeterministyczne automaty skończenie stanowe}
+    Automat niedeterministyczny różni się od deterministycznego tym, że dla danego stanu i litery może być dowolnie wiele przejść (w tym 0). Język jest akceptowany, jeśli istnieje stosowna ścieżka ze stanu początkowego do stanu końcowego.
+    
+    Automat z pustymi przejściami dodaje do tego możliwość zmiany stanu bez przeczytania litery.
+    
     \begin{theorem}
-        Język $L \in A^*$ jest rozpoznawany przez automat deterministyczny wtedy
-        i tylko wtedy, gdy jest rozpoznawany przez automat niedeterministyczny.
+        Język $L \in A^*$ jest rozpoznawany przez automat deterministyczny $\iff$ jest rozpoznawany przez automat niedeterministyczny.
     \end{theorem}
 
+    Determinizacja automatu opiera się na budowie nowego automatu deterministycznego, którego stany są \textit{zbiorami stanów} oryginalnego automatu, w których mogliśmy się znaleźć:
+    
     $\mathcal{A}_{ND} = (S, f, I, F)$ - automat niedeterministyczny\\
     \indent$\mathcal{A}_D = (P(S), \overline{f}, I, T)$ - równoważny automat deterministyczny, gdzie:
     \begin{gather*}
@@ -1775,19 +1749,37 @@
         T = \{Q \in P(S) | Q \cap F \neq \emptyset\}\\
     \end{gather*}
 
-    \subsection{Determinizm automatu ze stosem}
 
+    \subsection{Automaty ze stosem}
+    \begin{definition}
+        \textbf{Automat ze stosem}
+        
+        System $\mathcal{AS} = (A, A_S, Q, q_0, z_0, f, Q_F)$, gdzie:
+        \begin{enumerate}
+            \item $A$ - alfabet
+            \item $A_S$ - alfabet stosu
+            \item $Q$ - zbiór stanów
+            \item $q_0$ - stan początkowy
+            \item $z_0$ - symbol, który na początku jest na stosie
+            \item $f$ - relacja przejść (bierze stan, pochłania szczyt stosu i ew. literę słowa - zwraca nowy stan oraz \textit{słowo} do dopisania na szczyt stosu).
+            \item $Q_F$ - zbiór stanów końcowych
+        \end{enumerate}
+        
+        Są dwie definicje akceptacji - przez stany końcowe lub pusty stos. Tutaj stosujemy stany końcowe.
+    \end{definition}
+    
+    To znaczy, że automaty ze stosem z reguły mogą być niedeterministyczne.
+    
     \begin{definition}
         \textbf{Deterministyczny automat ze stosem}
 
-        Automatem $\mathcal{AS} = (A, A_S, Q, q_0, z_0, f, Q_F)$ nazywamy
-        \textbf{deterministycznym}, jeśli dla każdej konfiguracji
+        Automat jest \textbf{deterministyczny}, jeśli dla każdej konfiguracji
         $(z, q, a) \in A_S^* \times Q \times (A \cup \{1\})$
         \begin{gather*}
-            f(z, q, a) \leq 1 \; \mathrm{oraz}\\
+            |f(z, q, a)| \leq 1 \; \mathrm{oraz}\\
             f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A\\
         \end{gather*}
-        Język akceptowany przez automat deterministyczny nazywamy językiem deterministycznym.
+        Język akceptowany przez taki automat nazywamy deterministycznym.
     \end{definition}
 
     \begin{theorem}
@@ -1798,8 +1790,9 @@
         Każdy język deterministyczny jest kontekstowy (rozpoznawany przez niedeterministyczny automat ze stosem), ale nie na odwrót.
     \end{theorem}
 
-    \newpage
 
+
+    \newpage
     \section{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
 
     Problemy rozpatrywane w kategorii języków
