@@ -28,7 +28,7 @@
         \item $\Rightarrow 0 \in M$
         \item $\Rightarrow n \in M \Rightarrow n+1 \in M$
     \end{enumerate}
-    Zatem z \textbf{aksjomatu 5} wnioskujemy M = N.
+    Zatem z \textbf{aksjomatu 5} wnioskujemy M = $\mathbb{N}$.
 
     \begin{theorem}
         \textbf{Aksjomat 5 liczb naturalnych (Peano)}. Niech będzie dany zbiór, którego elementami są liczby
@@ -65,7 +65,7 @@
     \end{definition}
 
     \begin{definition}
-        \textbf{Liniowy porządek}. Niech X zbiór, $R \subset X \times X$ relacja. Wtedy R nazywamy \textbf{relacją częściowego porządku} w X
+        \textbf{Liniowy porządek}. Niech X zbiór, $R \subset X \times X$ relacja. Wtedy R nazywamy \textbf{relacją liniowego porządku} w X
         $\Leftrightarrow$
         \begin{enumerate}
             \item R \textbf{zwrotna} ($\forall x \in X ~ xRx$),
@@ -196,9 +196,9 @@
     gdzie $x_0 = a$, $x_1 = b$.
 
     \begin{itemize}
-        \item W metodzie siecznych rezygnujemy z założenia, że funkcja na końcach przedziału ma rózne znaki.
+        \item W metodzie siecznych rezygnujemy z założenia, że funkcja na końcach przedziału ma różne znaki.
         \item Należy kontrolować zachowanie otrzymanego ciągu. \textbf{Może się zdarzyć, że metoda wyprodukuje ciąg rozbieżny!}
-        \item korzyćci płynące ze stosowania tej metody to zdecydowanie \textbf{szybsza zbieżność} ciągu iteracji, jeśli
+        \item korzyści płynące ze stosowania tej metody to zdecydowanie \textbf{szybsza zbieżność} ciągu iteracji, jeśli
         $x_n, x_{n+1}$ juz są dobrymi \textbf{przybliżeniami pierwiastka}.
     \end{itemize}
 
@@ -435,7 +435,7 @@
     \subsection{Interpolacja wielomianowa}
 
     Interpolacja wielomianowa jest metodą numeryczną przybliżania funkcji.
-    Wielomian p o możłiwie najniższym stopniu interpoluje wartości $y_k$ w węzłąch $x_k$ gdy dla danych $n+1$ punktów $(x_i, y_i)$
+    Wielomian p o możliwie najniższym stopniu interpoluje wartości $y_k$ w węzłach $x_k$ gdy dla danych $n+1$ punktów $(x_i, y_i)$
     \begin{align*}
         p(x_i)=y_i  \quad (0\leq i \leq n)
     \end{align*}
@@ -495,7 +495,9 @@
     \end{tabular}
     \\\\
 
-    Następnie dopisuje się do każdej kolumny kolejne różnice dzielone, z tym wyjątkiem, że przy węzłach $k$-krotnych, $k>1$, gdzie, de facto, nie można obliczyć różnicy dzielonej, podstawia się wartości kolejnych pochodnych na węzłach podzielone przez silnię z liczby tych samych węzłów. (W tabeli przedstawiony jest $3$-krotny węzeł $x_{1}$).\\\\
+    Następnie dopisuje się do każdej kolumny kolejne różnice dzielone, z tym wyjątkiem, że przy węzłach $k$-krotnych,
+    $k>1$, gdzie, de facto, nie można obliczyć różnicy dzielonej, podstawia się wartości kolejnych pochodnych na węzłach
+    podzielone przez silnię ze stopnia pochodnej. (W tabeli przedstawiony jest $3$-krotny węzeł $x_{1}$).\\\\
 
 
     \begin{tabular}{|c|c|cc}
@@ -661,7 +663,6 @@
     \end{table}
 
     \newpage
-
 
     \section{Zmienne losowe ciągłe. Definicje i najważniejsze rozkłady.}
 
@@ -1012,12 +1013,12 @@
 
     \newpage
 
-    \section{Ortogonalność wektorów w przestrzeni $R_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta}
+    \section{Ortogonalność wektorów w przestrzeni $\mathbb{R}^n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta}
 
     \begin{definition}
         \textbf{Ortogonalność.}
 
-        Dla wektorów $x, y$ w przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$
+        Dla wektorów $x, y$ w przestrzeni $\mathbb{R}^n$ z zadanym iloczynem skalarnym $\cdot$
         \[x \bot y \Leftrightarrow x \cdot y = 0 \]
 
     \end{definition}
@@ -1025,41 +1026,41 @@
     \begin{definition}
         \textbf{Liniowa niezależność}
 
-        Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $R_n$ nazywamy liniowo niezależnymi jeśli
+        Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $\mathbb{R}^n$ nazywamy liniowo niezależnymi jeśli
         \[a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0\]
-        tzn., nie istnieją taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
+        tzn., nie istnieje taki układ skalarów $a_1, a_2 \ldots a_n$ dla których suma $\sum_{i=1}^{n}{a_i * x_i} = 0$ poza i przynajmniej jeden skalar nie równa się zeru. \\~\\
 
         Zbiór wektorów, który nie jest liniowo niezależny, jest zbiorem liniowo zależnym. Oznacza to, że przynajmniej jeden jego element jest kombinacją liniową pozostałych wektorów. \\~\\
 
-        W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
+        W przestrzeni $R^n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.
 
     \end{definition}
 
     \begin{theorem}
-        Każdy układ ortogonalny wektorów w przestrzeni $R_n$ jest liniowo niezależny.
+        Każdy układ ortogonalny wektorów w przestrzeni $\mathbb{R}^n$ jest liniowo niezależny.
     \end{theorem}
 
     \begin{definition}
 
-        \textbf{Baza przestrzeni $R_n$}
+        \textbf{Baza przestrzeni $\mathbb{R}^n$}
 
-        Zbiór wektorów $B \subset R_n$ nazywamy bazą przestrzeni $R_n$ jeśli:
+        Zbiór wektorów $B \subset \mathbb{R}^n$ nazywamy bazą przestrzeni $\mathbb{R}^n$ jeśli:
 
         \begin{enumerate}
             \item Jest liniowo niezależny
-            \item Generuje przestrzeń $R_n$ tzn. każdy wektor $\in R_n$ można zapisać jako kombinację liniową wektorów z $B$
+            \item Generuje przestrzeń $\mathbb{R}^n$ tzn. każdy wektor $\in \mathbb{R}^n$ można zapisać jako kombinację liniową wektorów z $B$
         \end{enumerate}
 
     \end{definition}
 
     \begin{theorem}
-        Każdy ortogonalny układ $n$ wektorów w $R_n$ jest bazą.
+        Każdy ortogonalny układ $n$ wektorów w $\mathbb{R}^n$ jest bazą.
     \end{theorem}
 
     \begin{definition}
         \textbf{Ortonormalność}
 
-        Zbiór wektorów $A$ przestrzeni $R_n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
+        Zbiór wektorów $A$ przestrzeni $\mathbb{R}^n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
         \[ \forall x,y \in A  \quad   x \cdot y =  \begin{cases}
                                                        0, & x \ne y \\
                                                        1, & x = y
@@ -1099,7 +1100,7 @@
 
 
     \begin{definition}
-        \textbf{Liczby Stirling I rodzaju}.
+        \textbf{Liczby Stirlinga I rodzaju}.
 
         Dla dowolnego $n \geq 1$ mamy:
         \begin{enumerate}
@@ -1227,7 +1228,7 @@
             \begin{align*}
                 (k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)
             \end{align*}
-            warunek 3. dla $t\leq 2$ jest konieczny dla istnienia $t$-konfiguracji, ale nie wystarczający
+            warunek 3. dla $t\geq 2$ jest konieczny dla istnienia $t$-konfiguracji, ale nie wystarczający
         \end{enumerate}
     \end{theorem}
 
@@ -1247,7 +1248,7 @@
     \end{definition}
 
     \begin{theorem}
-        Niech $G = (V, E)$ będzie grafem o $n \geq 3$ wierzchołkach. Jeśli dla dwolonych różnych, niesąsiednich
+        Niech $G = (V, E)$ będzie grafem o $n \geq 3$ wierzchołkach. Jeśli dla dowolonych różnych, niesąsiednich
         wierzchołków $u, v \in V$ zachodzi warunek $d(u) + d(v) \geq n$, to G jest hamiltonowski.
     \end{theorem}
 
@@ -1326,7 +1327,7 @@
         spełniającą następujące warunki:
         \begin{enumerate}
             \item $f(\vec{uv}) \leq c(\vec{uv})$  dla każdej krawędzi $\vec{uv} \in \vec{E}$,
-            \item dla każdego ustalonego $v \in V\ \{s, t\}:$
+            \item dla każdego ustalonego $v \in V \backslash \{s, t\}:$
             \begin{align*}
                 \sum_{\vec{uv} \in \vec{E}} ~ f(\vec{uv}) ~~ = ~~ \sum_{\vec{vw} \in \vec{E}} ~ f(\vec{vw}).
             \end{align*}
@@ -1364,8 +1365,8 @@
             \item przyjmujemy początkowo dowolny (np. zerowy) przepływ $f$,
             \item budujemy sieć rezydualną $G_f$,
             \item dopóki w $G_f$ istnieje ścieżka rozszerzająca $P = v_0 \rightarrow v_1 \rightarrow \cdots \rightarrow v_k$
-            określamy $c_p = min_{i = 0, \cdots, k-1} c_f(\vec{v_i v_{i+1}})$, a następni zwiększamy o $c_p$ wartość
-            przepływu $f$ na krawędziach $\vec{v_i v_{i+1}}$ tej ścieżki i uaktualniamy wartośi funkcji $c_f$ sieci
+            określamy $c_p = min_{i = 0, \cdots, k-1} c_f(\vec{v_i v_{i+1}})$, a następnie zwiększamy o $c_p$ wartość
+            przepływu $f$ na krawędziach $\vec{v_i v_{i+1}}$ tej ścieżki i uaktualniamy wartości funkcji $c_f$ sieci
             rezydualnej.
         \end{enumerate}
     \end{theorem}
@@ -1456,9 +1457,9 @@
             \frac{1}{(1-x)^m} ~ = ~ \sum_{n=0}^{\infty} \binom{n+m-1}{n} x^n.
         \end{align*}
 
-        Dla dowolneego $\alpha \in \mathbb{R}$ oraz $|x| < 1$ zachodzi wzór:
+        Dla dowolnego $\alpha \in \mathbb{R}$ oraz $|x| < 1$ zachodzi wzór:
         \begin{align*}
-            (1+x)^{\alpha} ~ - ~ \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n
+            (1+x)^{\alpha} ~ = ~ \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n
         \end{align*}
     \end{theorem}
 
@@ -1754,7 +1755,7 @@
         \textbf{Darboux o przyjmowaniu wartości pośrednich}. Jeżeli funkcja $f$ jest ciągła na przedziale $[a,b]$ oraz
         spełnia warunek $f(a) < f(b)$, to
         \begin{align*}
-            \forall w \in (f(a, f(b))) ~ \exists c \in (a,b) ~~ f(c) = w.
+            \forall w \in (f(a), f(b)) ~ \exists c \in (a,b) ~~ f(c) = w.
         \end{align*}
     \end{theorem}
 
@@ -1777,9 +1778,9 @@
             f'(x_0) ~ \stackrel{def}{=} ~ lim_{x \rightarrow x_0} ~ \frac{f(x) - f(x_0)}{x - x_0}
         \end{align*}
 
-        Inaczej mówiąc pochodna funkcji $f$ jest granicą ilorazu różnicowego gdy $\Delta x \rightarrow \infty$. Mamy zatem
+        Inaczej mówiąc pochodna funkcji $f$ jest granicą ilorazu różnicowego gdy $\Delta x \rightarrow 0$. Mamy zatem
         \begin{align*}
-            f'(x_0) ~ \stackrel{def}{=} ~ lim_{\Delta x \rightarrow \infty} ~ \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+            f'(x_0) ~ \stackrel{def}{=} ~ lim_{\Delta x \rightarrow 0} ~ \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
         \end{align*}
     \end{definition}
 
@@ -1892,8 +1893,8 @@
             \item $f'(x_0) = 0$,
             \item $\exists \delta > 0
             \left\{\begin{matrix}
-                       f'{x} > 0 ~~ \forall x \in  S(x^{-}_0, \delta), \\
-                       f'{x} < 0 ~~ \forall x \in  S(x^{+}_0, \delta),
+                       f'(x) > 0 ~~ \forall x \in  S(x^{-}_0, \delta), \\
+                       f'(x) < 0 ~~ \forall x \in  S(x^{+}_0, \delta),
             \end{matrix}\right.$
         \end{enumerate}
         to w punkcie $x_0$ ma maksimum lokalne właściwe. Analogicznie dla minimum.
@@ -2045,13 +2046,13 @@
     \end{theorem}
 
     \begin{theorem}
-        \textbf{Warunek wystarczający istnienia ekstremum}. Niech funcka $f$ ma ciągłe pochodne cząstkowe rzędu drugiego
+        \textbf{Warunek wystarczający istnienia ekstremum}. Niech funkcja $f$ ma ciągłe pochodne cząstkowe rzędu drugiego
         na otoczeniu punktu $(x_0, y_0)$ oraz niech
         \begin{enumerate}
             \item $\frac{\partial f}{\partial x}(x_0, y_0) = 0, \frac{\partial f}{\partial y}(x_0, y_0) = 0$
             \item $\det \begin{bmatrix}
-                           \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
-                           \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
+                            \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
+                            \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
             \end{bmatrix} > 0$
         \end{enumerate}
         Wtedy w punkcie $(x_0, y_0)$ funkcja $f$ ma ekstremum lokalne i jest to:
@@ -2159,8 +2160,4 @@
             \iiint_U f(x, y, z)\,dx\,dy\,dz = \iiint_{\Omega} f(\varrho cos \varphi cos \psi, \varrho sin \varphi cos \psi, \varrho sin \psi) \varrho^3\,d\varrho\,d\psi\,d\varphi
         \end{align*}
     \end{definition}
-
-    \newpage
-
-
 \end{document}
