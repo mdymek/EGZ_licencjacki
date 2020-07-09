@@ -1,0 +1,1628 @@
+%! Suppress = MissingImport
+%! Suppress = TooLargeSection
+%! Suppress = SentenceEndWithCapital
+%! Suppress = LineBreak
+%! Suppress = MissingLabel
+%! Suppress = Unicode
+
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+    \section{Zasada indukcji matematycznej.}
+
+    \begin{itemize}
+        \item Dla $T(n)$ będącego funkcją/formą zdaniową jeżeli (1) zachodzi $T(0)$, (2) $\forall n \in \mathbb{N} ~~ T(n) \Rightarrow T(n+1)$
+        to $T(n)$ jest prawdziwa dla każdego $n \in \mathbb{N}$.
+
+        \item W dowodzie udowadniamy że $M = \{ n \in \mathbb{N}: ~ T(n) ~ zachodzi \}$ jest równe $\mathbb{N}$ przy pomocy
+        \textbf{Aksjomatu 5 liczb naturalnych (Peano)} -- zbiór liczb naturalnych taki, że (1) $1$ jest elementem
+        tego zbioru, (2) dla każdej liczby ze zbioru należy do niego również jej następnik, zawiera wszystkie liczby naturalne.
+    \end{itemize}
+
+
+    \section{Porządki częściowe i liniowe. Elementy największe, najmniejsze, maksymalne i minimalne.}
+    \begin{itemize}
+        \item Relacja \textbf{częściowego porządku} ($\leqslant, \preceq, \prec$) to relacja \textbf{zwrotna} ($\forall x \in X ~ xRx$),
+        \textbf{przechodnia} ($\forall x,y,z \in X ~ xRy \wedge yRz \Rightarrow xRz$) i \textbf{antysymetryczna}
+        ($\forall x,y \in X ~ xRy \wedge yRx \Rightarrow x = y$.
+
+        \begin{itemize}
+            \item \textbf{Elementy porównywalne} to takie, które są w relacji ze sobą.
+            \item \textbf{Element maksymalny}, jeśli $~~ \forall a \in A ~~ m \preceq a ~ \Rightarrow  ~ a = m$.
+            \item \textbf{Element minimalny}, jeśli $~~ \forall a \in A ~~ a \preceq m ~ \Rightarrow  ~ a = m$.
+            \item \textbf{Element największy}, jeśli $~~ \forall a \in A ~~ a \preceq m$.
+            \item \textbf{Element najmniejszy}, jeśli $~~ \forall a \in A ~~ m \preceq a$.
+        \end{itemize}
+
+        \item \textbf{Diagram Hassego} - graf skierowany przedstawiający częściowy porządek w zbiorze, w odpowiedni sposób
+        przedstawiony graficznie.
+
+        \item \textbf{Relacja liniowego porządku} to relacja \textbf{zwrotna}, \textbf{przechodnia}, \textbf{antysymetryczna}
+        i \textbf{spójna} ($\forall x,y \in X ~ xRy \vee yRx \vee x = y$).
+    \end{itemize}
+
+
+    \section{Relacja równoważności i zbiór ilorazowy.}
+
+    \begin{itemize}
+        \item \textbf{Relacja równoważości} jest \textbf{zwrotna}, \textbf{symetryczna} i \textbf{przechodnia}.
+
+        \item \textbf{Klasa abstrakcji} elementu x (wzgledem relacji R) to: $[x]_{R} = \{y \in X: xRy\}$. Element x to
+        reprezentant klasy abstrakcji $[x]_{R}$.
+
+        \item \textbf{Zbiór ilorazowy} zbioru X przez relację R to zbiór wszystkich klas abstrakcji.
+    \end{itemize}
+
+
+    \section{Metody dowodzenia twierdzeń: wprost, nie wprost, przez kontrapozycję.}
+
+    Dla prawdziwości zdania:
+    \begin{align*}
+        p \Rightarrow q
+    \end{align*}
+
+    \textbf{Dowód wprost}: $ p \Rightarrow q$.
+
+    \textbf{Dowód nie wprost}: $(p \Rightarrow q) \Leftrightarrow (\neg q \Rightarrow \neg p)$ (prawo \textbf{kontrapozycji}).
+
+    \textbf{Dowód przez zaprzeczenie}: $(p \Rightarrow q) ~ \Leftrightarrow ~ (\neg p \vee q) ~ \Leftrightarrow ~ \neg(p \wedge \neg q)$
+
+
+    \section{Metody numeryczne rozwiązywania równań nieliniowych: bisekcji, siecznych, Newtona.}
+
+    \subsection{Metoda połowienia (bisekcji)}
+
+    \textbf{Założenia:} $f$ jest funkcją ciągłą w przedziale $[a,b]$, $f(a)f(b) < 0$.
+
+    \noindent Z \textbf{własności Darboux} funkcji ciągłych, funkcja f ma miejsce zerowe w przedziale $[a,b]$.
+
+    \begin{definition}
+        \textbf{Algorytm bisekcji} polega na obliczeniu $f(c_k)$, gdzie $c_k = \frac{a_k + b_k}{2}$ i zastąpieniu przez
+        $c_k$ tej z liczb $a_k, b_k$ dla której funkcja $f$ ma taki sam znak.
+        \begin{center}
+            $(a_{k+1}, b_{k+1}) = (c_k, b_k)$ jeżeli $f(a_k)f(c_k) > 0$\\
+            $(a_{k+1}, b_{k+1}) = (a_k, c_k)$ jeżeli $f(b_k)f(c_k) > 0$
+        \end{center}
+        Jeżeli $f(c_k) = 0$ to kończymy obliczenia.
+    \end{definition}
+    \begin{itemize}
+        \item Metoda bisekcji jest \textbf{niezawodna}, ale \textbf{wolno zbieżna}.
+        \item Kryteria zakończednia obliczeń: osiągnięta \textbf{dokładność}, \textbf{bliskość} wartości funkcji do 0,
+        ilość \textbf{iteracji}.
+        \item \textbf{dokładność} przybliżenia w k-tej iteracji: $|x_k - \alpha| \leq \frac{|b - a|}{2^k}$.
+    \end{itemize}
+
+
+    \subsection{Metoda siecznych}
+
+    \textbf{Założenia:} $f$ jest funkcją ciągłą w przedziale $[a,b]$, $f(a)f(b) < 0$.
+
+    \begin{align*}
+        x_{k+1} = x_k - \frac{f(x_k)(x_k - x_{k-1})}{f(x_k) - f(x_{k-1})}
+    \end{align*}
+    gdzie $x_0 = a$, $x_1 = b$.
+
+    \begin{itemize}
+        \item W metodzie siecznych rezygnujemy z założenia, że funkcja na końcach przedziału ma różne znaki.
+        \item \textbf{Może się zdarzyć, że metoda wyprodukuje ciąg rozbieżny.}
+        \item \textbf{Szybsza zbieżność} ciągu iteracji, jeśli zaczynamy od dobrego przybliżenia.
+    \end{itemize}
+
+    \subsection{Metoda Newtona (stycznych)}
+
+    \begin{align*}
+        x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+    \end{align*}
+
+    \textbf{Zmodyfikowana metoda Newtona:}
+    \begin{align*}
+        x_{n+1} = x_n - \frac{f'(x_n) \pm \sqrt{(f'(x_n))^2 - 2f(x_n)f''(x_n)}}{f''(x_n)}
+    \end{align*}
+
+
+    \begin{itemize}
+        \item Metoda Newtona w wielu sytuacjach daje \textbf{bardzo szybką zbieżność}.
+        \item Podstawową wadą tej metody jest konieczność obliczenia pochodnej funkcji.
+        \item Zmodyfikowana metoda Newtona daje bardzo szybką zbieżność, jeśli $x_n$ jest już dobrym przybliżeniem
+        pierwiastka.
+        \item Koszt wyznaczenia kolejnego przybliżenia w zmodyfikowanej metodzie może przerastać korzyści płynące
+        z szybszej zbieżności.
+    \end{itemize}
+
+    \textbf{Wielowymiarowa metoda Newtona}.\\
+
+    Jeśli $f = (f_1, f_2, \dots, f_n): \mathbb{R}^n \rightarrow \mathbb{R}^n$ jest różniczkowalną funkcją wielu zmiennych
+    możemy przybliżyć ją lokalnie:
+
+    \begin{align*}
+        f(x) \approx f(x_0) + Df(x_0)(x - x_0)
+    \end{align*}
+
+    gdzie
+
+    \begin{align*}
+        Df(x_0) =
+        \begin{bmatrix}
+            \frac{\delta f_1}{\delta x_1}(x_0) & \frac{\delta f_1}{\delta x_2}(x_0) & \dots & \frac{\delta f_1}{\delta x_n}(x_0)\\
+            \frac{\delta f_2}{\delta x_1}(x_0) & \frac{\delta f_2}{\delta x_2}(x_0) & \dots & \frac{\delta f_2}{\delta x_n}(x_0)\\
+            \dots & \dots & \dots & \dots\\
+            \frac{\delta f_n}{\delta x_1}(x_0) & \frac{\delta f_n}{\delta x2}(x_0) & \dots & \frac{\delta f_n}{\delta x_n}(x_0)
+        \end{bmatrix}
+    \end{align*}
+
+    Rozwiązując równanie $f(x_0) + Df(x_0)(x - x_0) = 0$ otrzymujemy:
+    \begin{align*}
+        x^{(i+1)} = x^{(i)} - [Df(x^{(i)})]^{-1} f(x^{(i)})
+    \end{align*}
+    \begin{align*}
+    [Df(x^{(i)})]
+        ( x^{(i+1)} - x^{(i)} ) = -f(x^{(i)})
+    \end{align*}
+
+
+    \section{Rozwiązywanie układów równań liniowych: metoda eliminacji Gaussa, metody iteracyjne Jacobiego i Gaussa-Seidla.}
+
+    \subsection{Metoda eliminacji Gaussa}
+
+    Obliczając rząd macierzy metodą Gaussa należy za pomocą operacji elementarnych na wierszach sprowadzić macierz do
+    macierzy schodkowej. Wtedy wszystkie niezerowe wiersze są liniowo niezależne.
+
+    \hfill \\
+    \begin{center}{\large Metody iteracyjne}\end{center}
+    Ogólna postać metody iteracyjnej:
+    \begin{align*}
+        Ax = b
+    \end{align*}
+    \begin{align*}
+        Qx^{n+1} = (Q - A)x^n + b = \tilde{b}
+    \end{align*}
+
+    \begin{align*}
+        \begin{bmatrix}
+            5 & -2 & 3\\
+            2 & 4 & 2\\
+            2 & -1 & -4\\
+        \end{bmatrix}
+        \begin{bmatrix}
+            x_1\\
+            x_2\\
+            x_3\\
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            10\\
+            0\\
+            0\\
+        \end{bmatrix}
+    \end{align*}
+
+    \subsection{Metoda iteracyjna Jacobiego}
+
+    \subsubsection{Algebraicznie}
+    \begin{align*}
+        \left\{\begin{matrix}
+                   x^{N+1}_1 = \frac{1}{5}(10 + 2x^N_2 - 3x^N_3)\\
+                   x^{N+1}_2 = \frac{1}{4}(-2x^N_1 - 2x^N_3)\\
+                   x^{N+1}_3 = -\frac{1}{4}(x^N_2 - 2x^N_1)
+        \end{matrix}\right.
+    \end{align*}
+
+    \subsubsection{Macierzowo}
+    \begin{align*}
+        Q = D ~~ \text{(diagonalna)}
+    \end{align*}
+
+    \subsection{Metoda iteracyjna Gaussa-Seidla}
+    \subsubsection{Algebraicznie}
+    \begin{align*}
+        \left\{\begin{matrix}
+                   x^{N+1}_1 = \frac{1}{5}(10 + 2x^N_2 - 3x^N_3)\\
+                   x^{N+1}_2 = \frac{1}{4}(-2x^N_1 - 2x^{\mathbf{N+1}}_3)\\
+                   x^{N+1}_3 = -\frac{1}{4}(x^{N+1}_2 - 2x^{\mathbf{N+1}}_1)
+        \end{matrix}\right.
+    \end{align*}
+
+    \subsubsection{Macierzowo}
+    \begin{align*}
+        Q = L + D ~~ \text{(diagonalna i dolnotrójkątna)}
+    \end{align*}
+
+    \newpage
+
+
+    \section{Wartości i wektory własne macierzy: numeryczne algorytmy ich wyznaczania.}
+    \begin{definition}
+        Jeżeli $\mathbf{Ax = \lambda x}$ dla $x \neq 0$ to $\lambda$ jest \textbf{wartością własną} A, a x -
+        \textbf{wektorem własnym} A odpowiadającym $\lambda$.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Metoda potęgowa} służy do wyznaczania \textbf{największej wartości własnej} macierzy. Korzysta z założenia:
+        $\mathbf{x^{N+1} = A^{N+1} x^0}$.
+
+        \begin{enumerate}
+            \item W \textit{i}-tej iteracji: $x_i = Ay_i$, $y_i = \frac{x_i}{||x_i||_2}$
+            \item \textit{i}-te przybliżenie największej wartości własnej: $\lambda_i = \frac{<x_i, y_{i-1}>}{<y_{i-1}, y_{i-1}>}$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Odwrotna metoda potęgowa} służy do wyznaczenia \textbf{najmniejszej wartości własnej} macierzy.
+        \begin{enumerate}
+            \item $Ax_1 = x_0, Ax_i = x_{i-1}$
+            \item \textit{i}-te przybliżenie najmniejszej wartości własnej: $\frac{1}{\lambda_i} = \frac{<x_i, x_{i-1}>}{<x_{i-1}, x_{i-1}>}$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Metoda QR}  pozwala na przybliżone wyznaczenie \textbf{wszystkich wartości własnych} macierzy. Dla:
+        \[A_i = Q_i R_i, ~~~~ A_{i+1} = R_i Q_i\]
+
+        $A_i$ dąży do macierzy przekątniowej z wartościami własnymi na przekątnej.
+
+        Q, R to macierze z \textbf{rozkładu QR}:
+        \begin{gather*}
+            A = QR, ~~ Q - \text{ortonormalna ($QQ^\mathcal{T}=I$)}, ~~ R - \text{górnotrójkątna}\\
+            A = [a_1 \dots a_n], Q = [q_1 \dots q_n], q_1 = \frac{a_1}{||a_1||_2}, q_i = \frac{\tilde{q_i}}{||q_i||_2}\\
+            \tilde{q_i} = a_i - \sum_{j=1}^{i-1} r_{ji} q_j, ~~ r_{ji} = \frac{<a_i, q_j>}{<q_j, q_j>}, r_{jj} = ||\tilde{q_j}||_2
+        \end{gather*}
+    \end{definition}
+
+    \newpage
+
+
+    \section{Interpolacja wielomianowa: metody Lagrange'a i Hermite'a. Efekt Rungego.}
+
+    \subsection{Interpolacja wielomianowa}
+
+    Interpolacja wielomianowa jest numeryczną \textbf{metodą przybliżania funkcji}.
+    Wielomian $p$ o możliwie najniższym stopniu interpoluje wartości $y_k$ w węzłach $x_k$ gdy przyjmuje porządane wartości
+    w odpowiednich punktach. Jeśli są to wartości pewnej funkcji $f$ to mówimy też że $p$ interpoluje $f$.
+
+    \subsection{Wzór interpolacyjny Lagrange'a}
+
+    Wyrażamy wielomian $p$ jako sumę
+    \begin{align*}
+        \mathbf{p(x)=\sum _{k=0}^{n}y_{i}l_k(x), ~~~~
+        p(x)=\sum _{i=0}^{n}y_{i}\prod _{j=0\land j\neq i}^{n}{\frac {x-x_{j}}{x_{i}-x_{j}}}}.
+    \end{align*}
+    w której $l_k$ są wielomianami zależnymi od węzłów $x_0,x_1, \dots x_n$ ale nie od wartości $y_0,y_1, \dots ,y_n$.
+    Gdyby jedna z nich, mianowicie $y_i$, była równa 1, a pozostałe by znikały, to mielibyśmy równość
+    \begin{align*}
+        \delta_{ij} = p_n(x_j)=\sum _{k=0}^{n}y_{i}l_k(x_j)=\sum _{k=0}^{n}\delta_k l_k (x_j)=l_i(x_j) \quad (0 \leq j \leq n)
+    \end{align*}
+
+    ($\delta_{ij}$ jest deltą Kroneckera). Łatwo znaleźć wielomian $l_i$ o tej własności. Jego zerami są wszystkie węzły
+    oprócz $x_i$, czyli dla pewniej stałej c jest
+    \begin{align*}
+        l_i(x)=c(x-x_0)\dots(x-x_{i-1})(x-x_{i+1})\dots(x-x_n)
+    \end{align*}
+    a $c$ wynika z warunku $l_i(x_i)=1$.
+
+
+    \subsection{Interpolacja Hermite’a}
+
+    Interpolacja umożliwiająca znalezienie \textbf{wielomianu przybliżającego według wartości funkcji} na $n$ zadanych węzłach
+    oraz na wartościach jej pochodnych.
+    Węzeł zadany bez pochodnej jest węzłem pojedynczym, a węzeł z podanymi pochodnymi $k$-tego stopnia jest węzłem
+    $k+1$-krotnym.
+
+    \subsubsection{Algorytm}
+
+    Budujemy tabelę z użyciem \textbf{różnic dzielonych} z tym wyjątkiem, że przy węzłach $k$-krotnych, $k>1$, gdzie,
+    de facto, nie można obliczyć różnicy dzielonej, podstawia się $\frac{f^{(k)}(x_i)}{k!}$. (W tabeli przedstawiony jest
+    $3$-krotny węzeł $x_{1}$).\\
+
+    \textbf{Różnica dzielona} jest zdefiniowana rekurencyjnie:
+    \begin{gather*}
+        f[x_{i}]=f(x_{i}), ~~~
+        f[x_{i},\ldots ,x_{i+j+1}]= \frac {f[x_{i+1},\ldots ,x_{i+j+1}]-f[x_{i},\ldots ,x_{i+j}]}{x_{i+j+1}-x_{i}}\\
+    \end{gather*}
+
+
+    \begin{tabular}{|c|c|cccll}
+        \hline
+        $x_i$ &
+        $f(x_i)$ &
+        \multicolumn{1}{c|}{$f[x_{i-1}]$} &
+        \multicolumn{1}{c|}{$f[x_{i-2},x_{i-1},x_i]$} &
+        \multicolumn{1}{c|}{$f[x_{i-3},x_{i-2},x_{i-1},x_i]$} &
+        \multicolumn{1}{c|}{$\dots$} &
+        \multicolumn{1}{c|}{$f[x_{i-n},\dots,x_i]$} \\ \hline
+        $x_0$ &
+        $f(x_0)$ &
+        &
+        &
+        \multicolumn{1}{l}{} &
+        &
+        \\ \cline{1-3}
+        $x_1$ &
+        $f(x_1)$ &
+        \multicolumn{1}{c|}{$f[x_0,x_1]$} &
+        &
+        \multicolumn{1}{l}{} &
+        &
+        \\ \cline{1-4}
+        $x_1$ &
+        $f(x_1)$ &
+        \multicolumn{1}{c|}{$f'(x_1)$} &
+        \multicolumn{1}{c|}{$f[x_0,x_1,x_1]$} &
+        \multicolumn{1}{l}{} &
+        &
+        \\ \cline{1-5}
+        $x_1$ &
+        $f(x_1)$ &
+        \multicolumn{1}{c|}{$f'(x_1)$} &
+        \multicolumn{1}{c|}{$\frac{f''(x_1)}{2!}$} &
+        \multicolumn{1}{c|}{$f[x_0,x_1,x_1,x_1]$} &
+        &
+        \\ \cline{1-6}
+        \vdots &
+        \vdots &
+        \multicolumn{1}{c|}{$\vdots$} &
+        \multicolumn{1}{c|}{$\vdots$} &
+        \multicolumn{1}{c|}{$\vdots$} &
+        \multicolumn{1}{c|}{$\ddots$} &
+        \\ \hline
+        $x_n$ &
+        $f(x_n)$ &
+        \multicolumn{1}{c|}{$f[x_{n-1},x_n]$} &
+        \multicolumn{1}{c|}{$f[x_{n-2},x_{n-1},x_n]$} &
+        \multicolumn{1}{c|}{$f[x_{n-3},x_{n-2},x_{n-1},x_n]$} &
+        \multicolumn{1}{c|}{$\dots$} &
+        \multicolumn{1}{c|}{$f[x_0,\dots,x_n]$} \\ \hline
+    \end{tabular}\\\\
+
+    Definiując $a_{i}$ jako wartości na przekątnej, $i=1,2 \dots ,m$ oraz $\bar {x}_{i} = \{x_j ~ : ~ j < i\}$.
+
+    \begin{align*}
+        w(x)=\sum _{i=0}^{m}a_{i}\prod _{j=0}^{i-1}(x-{\bar {x}}_{j}),
+    \end{align*}
+
+
+    \subsection{Efekt Rungego}
+
+    \textbf{Efekt Rungego} - \textbf{pogorszenie jakości} interpolacji wielomianowej, mimo \textbf{zwiększenia liczby
+    węzłów}.
+    \begin{itemize}
+        \item Pogorszenie szczególnie widoczne na końcach przedziałów.
+        \item Typowe dla interpolacji za pomocą wielomianów wysokich stopni przy stałych odległościach węzłów oraz przy
+        interpolowacji funkcji nieciągłych albo odbiegających znacząco od funkcji gładkiej.
+        \item Dla uniknięcia efektu, stosuje się interpolację z węzłami coraz gęściej upakowanymi na krańcach przedziału
+        interpolacji. Np. węzłami interpolacji n-punktowej wielomianowej powinny być miejsca zerowe wielomianu Czebyszewa
+        n-tego stopnia.
+
+    \end{itemize}
+
+    \newpage
+
+
+    \section{Zmienne losowe dyskretne. Definicje i najważniejsze rozkłady.}
+
+    \begin{definition}
+        \textbf{Zmienne dyskretne}.
+        \begin{align*}
+            P(x) = P(X=x)
+        \end{align*}
+
+        \textbf{Obliczanie prawdopodobieństwa}: $P(X \in A) = \sum_{x \in A} P(x)$.
+
+
+        \textbf{Skumulowana funkcja rozkładu}: $F(x) = P(X \leq x) = \sum_{y \leq x}P(y)$.
+
+        \textbf{Całkowite prawdopodobieństwo}: $\sum_{x}P(x) = 1$.
+
+        \textbf{Wartość oczekiwana} (średnia): $EX = \sum_{x} x P(x)$.
+
+        \textbf{Wariancja} (kwadrat odchylenia stand.): $VarX = \sigma^2 = E[ (X - \mu)^2 ]$.
+    \end{definition}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{ p{3.0cm} | p{6cm}  p{0.8cm}  p{1cm}  p{3cm}}
+                Rozkład & P(x) & EX & VarX\\
+                \toprule
+
+                \textbf{Bernoulli(p)} &
+                \[P(x) = \left\{\begin{array}{lr}
+                                    p, & \text{for } x = 1\\
+                                    q = (1-p), & \text{for } x = 0
+                \end{array}\right.\]
+                &
+                $p$
+                &
+                $pq$
+                &
+                próba\\
+                \cmidrule(rl){2-5}
+
+                \textbf{Binomial(n, p)} &
+                $P(x) = \binom{n}{x} p^x (1-p)^{n-x} \text{ for } x = 0,1,\dots$
+                &
+                $np$
+                &
+                $npq$
+                &
+                liczba sukcesów z n prób\\
+                \cmidrule(rl){2-5}
+
+                \textbf{Geometric(p)} &
+                $P(x) = (1-p)^{x-1}p \text{ for } x = 1,2,\dots$
+
+                $P(X>k) = (1-p)^k$
+                &
+                $\frac{1}{p}$
+                &
+                $\frac{1-p}{p^2}$
+                &
+                liczba prób do sukcesu\\
+                \cmidrule(rl){2-5}
+
+                \textbf{Poiss($\lambda$)} &
+                $P(x) = e^{-\lambda} \frac{\lambda^x}{x!} \text{ for } x = 0,1,\dots$
+                &
+                $\lambda$
+                &
+                $\lambda$
+                &
+                rozkład zdarzeń rzadkich\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{gather*}
+        X_i \sim Bernoulli(p), S_n = \sum_{i=1}^{n} X_i, 0.05 \leq p \leq -0.95
+    \end{gather*}
+
+    \newpage
+
+
+    \section{Zmienne losowe ciągłe. Definicje i najważniejsze rozkłady.}
+
+    \begin{definition}
+        \textbf{Zmienne ciągłe}.
+        \begin{align*}
+            f(x) = F'(x)
+        \end{align*}
+
+        \textbf{Obliczanie prawdopodobieństwa}: $P(X \in A) = \int_{A} f(x)dx$.
+
+        \textbf{Skumulowana funkcja rozkładu}: $F(x) = P(X \leq x) = \int_{-\infty}^{x}f(y)dy$.
+
+        \textbf{Całkowite prawdopodobieństwo}: $\int_{- \infty}^{\infty}f(x)dx = 1$.
+
+        \textbf{Wartość oczekiwana}: $EX = \int xf(x) dx$.
+
+        \textbf{Wariancja}: $VarX = \int_{- \infty}^{\infty} (x - \mu)^2 f(x) dx$.
+    \end{definition}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{ p{2.7cm} | p{5.5cm} p{0.8cm} p{1cm} p{3.5cm}}
+                Rozkład & f(x), F(x) & EX & VarX\\
+                \toprule
+
+                \textbf{Unif(a,b)} &
+                $f(x) = \frac{1}{b-a} \text{ for } a \leq x \leq b$
+
+                \[F(x) = \left\{\begin{array}{lr}
+                                    0, & \text{for } x < a\\
+                                    \frac{x-a}{b-a}, &  \text{for } a \leq x < b\\
+                                    1, & \text{for } x \geq b
+                \end{array}\right.\]
+                &
+                $\frac{a+b}{2}$
+                &
+                $\frac{(b-a)^2}{12}$
+                &
+                \\
+                \cmidrule(rl){2-5}
+
+                \textbf{Exp($\lambda$)} &
+                $f(x) = \lambda e^{-\lambda x} \text{ for } x \geq 0$
+
+                $F(x) = 1 - e^{-\lambda x}$
+                &
+                $\frac{1}{\lambda}$
+                &
+                $\frac{1}{\lambda^2}$
+                & modelowanie czasu, brak pamięci\\
+                \cmidrule(rl){2-5}
+
+                \textbf{Gamma($\alpha, \lambda$)} &
+                $f(x) = \frac{\lambda^{\alpha}}{\Gamma (\alpha)} x^{\alpha-1} e^{-\lambda x}$
+
+                $F(x) = \frac{\lambda ^{\alpha}}{\Gamma(\alpha)} \int_{0}^{x} t^{\alpha-1} e^{-\lambda t} dt$
+                &
+                $\frac{\alpha}{\lambda}$
+                &
+                $\frac{\alpha}{\lambda ^2}$
+                &
+                łączny czas $\alpha$ niezależnych zdarzeń $\sim Exp(\lambda)$\\
+                \cmidrule(rl){2-5}
+
+                \textbf{N($\mu, \sigma$)} &
+                $f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{\frac{-(x - \mu)^2}{2 \sigma^2}}$
+
+                $F(x) = \Phi(x)$ dla N(0,1)
+                &
+                $\mu$
+                &
+                $\sigma^2$
+                &\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \begin{gather*}
+        T \sim Gamma(\alpha, \lambda), X \sim Poiss(\lambda t), ~~ P(T \leq t) = P( X \geq \alpha) \\
+        Binomial(n, p) = N(np, \sqrt{np(1-p)})
+    \end{gather*}
+
+
+    \section{Łancuchy Markowa. Rozkład stacjonarny.}
+
+    \begin{equation*}
+        P =
+        \begin{bmatrix}
+            p_{1 1} & p_{1 2} & \dots & p_{1 n}\\
+            p_{2 1} & p_{2 2} & \dots & p_{2 n}\\
+            \dots & \dots & \dots & \dots\\
+            p_{n 1} & p_{n 2} & \dots & p_{n n}
+        \end{bmatrix}
+    \end{equation*}
+    \hfill \\
+
+    \textbf{Rozkład w czasie h}: $P_h = P_0 * P^h$
+
+    \textbf{Rozkład stacjonarny}: $\pi P = \pi$, $\sum \pi_i = 1$
+
+
+    \section{Testy statystyczne: test z, test t-Studenta, test chi-kwadrat.}
+
+    \begin{itemize}
+        \item \textbf{Z-testów} używamy do sprawdzenia \textbf{czy} dana \textbf{próba pasuje do} zadanej
+        \textbf{populacji} lub do  \textbf{porównywania dwóch dużych prób} (n $>$ 30).
+        \item \textbf{T-testów} używamy do \textbf{porównywania dwóch małych prób} (n $<$ 30) testowych ze sobą,
+        mogą również służyć do porównywania próby do zadanej wartości (np. średniej).
+        Próby mogą być zależne lub niezależne.
+        \item \textbf{Chi-kwadrat} używamy do ustalania \textbf{goodness of fit} dla próbki względem populacji lub do
+        \textbf{zbadania niezależności}.
+    \end{itemize}
+
+    \textbf{T-testy}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{ p{.2\textwidth} |p{.3\textwidth} |p{.25\textwidth} |p{.25\textwidth}}
+                \toprule
+                Hipoteza zerowa & Warunki & Statystyka & Stopnie swobody\\
+                \toprule
+
+                $\mu = \mu_0$ & Rozmiar próby $n$;
+
+                nieznana $\sigma$ & $t = \frac{\bar{X} - \mu_0}{\frac{s}{\sqrt{n}}}$ & $n-1$\\
+
+                \cmidrule(r){1-4}
+
+                $\mu_X - \mu_Y = D$ & Rozmiary prób $n$, $m$
+                nieznane, równe $\sigma_X = \sigma_Y$ & $t = \frac{\bar{X} - \bar{Y} - D}{s_p\sqrt{\frac{1}{n}+\frac{1}{m}}}$
+                & $n+m-2$\\
+
+                \cmidrule(r){1-4}
+
+                $\mu_X - \mu_Y = D$ & Rozmiary prób $n$, $m$;
+
+                nieznane, różne $\sigma_X \neq \sigma_Y$ & $t = \frac{\bar{X} - \bar{Y} - D}{\sqrt{\frac{s_X^2}{n} + \frac{s_Y^2}{m}}}$
+                & aproksymacja Satterthwaite\\
+
+                \bottomrule
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \newpage
+
+    \textbf{Z-testy}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{ p{2.5cm} |p{2.5cm} |p{1.5cm} |p{4cm} |p{4cm}}
+                \toprule
+                Hipoteza zerowa & Parametr,
+
+                estymator & \multicolumn{2}{c|}{jeśli $H_0$ jest prawdziwa:} & Statystyka \\
+                \toprule
+
+                $H_0$ & $\theta, \hat{\theta}$ & $E(\hat{\theta})$ & $Var(\hat{\theta})$ & $Z = \frac{\hat{\theta} - \theta_0}{\sqrt{Var(\hat{\theta})}}$\\
+
+                \cmidrule(r){1-5}
+
+                $\mu = \mu_0$ & $\mu$, $\bar{X}$ & $\mu_0$ & $\frac{\sigma^2}{n}$ & $Z = \frac{\bar{X} - \mu_0}{\frac{\sigma}{\sqrt{n}}}$\\
+
+                \cmidrule(r){1-5}
+
+                $p = p_0$ & $p$, $\hat{p}$ & $p_0$ & $\frac{p_0(1-p_0)}{n}$ & $Z = \frac{\hat{p} - p_0}{\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}}$\\
+
+                \cmidrule(r){1-5}
+
+                $\mu_X - \mu_Y = D$ &
+                $\mu_X - \mu_Y$,
+
+                $\bar{X} - \bar{Y}$
+                & $D$ & $\frac{\sigma_X^2}{n} + \frac{\sigma_Y^2}{n}$ & $Z = \frac{\bar{X} + \bar{Y} - D}{\sqrt{\frac{\sigma_X^2}{n} + \frac{\sigma_Y^2}{m}}}$\\
+
+                \cmidrule(r){1-5}
+
+                $p_1 - p_2 = D$ & $p_1 - p_2$,
+
+                $\hat{p_1} - \hat{p_2}$
+                & $D$ & $\frac{p_1(1-p_1)}{n} + \frac{p_2(1-p_2)}{m}$ &
+                $Z = \frac{\hat{p_1} - \hat{p_2} - D}{\sqrt{\frac{\hat{p_1}(1-\hat{p_1})}{n} + \frac{\hat{p_2}(1-\hat{p_2})}{m}}}$\\
+
+                \cmidrule(r){1-5}
+
+                $p_1 = p_2$ & $p_1 - p_2$,
+
+                $\hat{p_1} - \hat{p_2}$ & $0$ & $p(1-p)\left(\frac{1}{n} + \frac{1}{m}\right)$
+
+                gdzie $p = p_1 = p_2$ & $Z = \frac{\hat{p_1} - \hat{p_2}}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n} + \frac{1}{m}\right)}}$
+
+                gdzie $\hat{p} = \frac{n\hat{p_1} + m\hat{p_2}}{n + m}$\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \textbf{Rozkład obserwacji o rozkładzie normalnym i wspólnej wariancji $\sigma^2$}
+    \begin{equation*}
+        \frac{(n-1)s^2}{\sigma^2} = \sum_{i=1}^{n} \left ( \frac{X_i - \bar{X}}{\sigma} \right )^2 \sim Chi-square(n-1) \sim Gamma \left ( \frac{n-1}{2}, \frac{1}{2} \right )
+    \end{equation*}
+
+    Zatem przedział ufności:
+    \begin{equation*}
+        \left [ \frac{(n-1)s^2}{\chi^2_{\frac{\alpha}{2}}}, \frac{(n-1)s^2}{\chi_{1 - \frac{\alpha}{2}}^2} \right ]
+    \end{equation*}
+
+    \textbf{Testy Chi kwadrat}
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{ p{.1\textwidth} |p{.2\textwidth} |p{.2\textwidth} |p{.2\textwidth} | p{0.3\textwidth}}
+                \toprule
+                $H_0$ &  $H_A$ & Test statistic & Rejection region & P-value \\
+                \toprule
+                \multirow{3}{*}{$\sigma^2 = \sigma_0^2$} & $\sigma^2 > \sigma_0^2$
+                & \multirow{3}{*}{$\frac{(n-1)s^2}{\sigma_0^2}$} & $\chi_{obs}^2 > \chi_{\alpha}^2$ & $P{\chi^2 \geq \chi_{obs}^2}$\\
+                & $\sigma^2 < \sigma_0^2$ & & $\chi_{obs}^2 < \chi_{\alpha}^2$ & $P{\chi^2 \leq \chi_{obs}^2}$\\
+                & $\sigma^2 \neq \sigma_0^2$ & & $\chi_{obs}^2 \geq \chi_{\frac{\alpha}{2}}^2$
+                or $\chi_{obs}^2 \leq \chi_{\frac{\alpha}{2}}^2$
+                & $2\min(P{\chi^2 \geq \chi_{obs}^2}, P{\chi^2 \leq \chi_{obs}^2})$\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \textbf{Statystyka Chi-kwadrat}
+    \begin{equation*}
+        \chi^2 = \sum_{k=1}^{N} \frac{(Obs(k) - Exp(k))^2}{Exp(k)}, R = [\chi_{\alpha}^2, +\infty], P = P{\chi^2 \geq \chi_{obs}^2}
+    \end{equation*}
+    Rule of thumb: $Exp(k) \geq 5 \text{ for all }k = 1, \dots, N$.\\
+
+    \textbf{Test Chi-kwadrat niezależności A i B}
+    \begin{equation*}
+        \chi_{obs}^2 = \sum_{i=1}^k \sum_{j=1}^m \frac{(Obs(i,j) - \hat{Exp}(i,j))^2}{\hat{Exp}(i,j)}, \hat{Exp}(i,j) = \frac{(n_{i.})(n_{.j})}{n}
+    \end{equation*}
+
+
+    \section{Wzór Bayesa i jego interpretacja.}
+
+
+    \begin{gather*}
+        P(E|F) = \frac{P(E \cap F)}{P(F)} = \frac{P(F|E) P(E)}{P(F)} \\
+        P(E_1 \cap \dots \cap E_n) = \prod_{i=1}^{n} P(X_i | X_1, \dots, X_{i-1}) \\
+        P(E) = \sum_{i=1}^{n} P(E|F_i)P(F_i) \text{ dla } \bigcap_{i=1}^{n} F_i = \Omega
+    \end{gather*}
+
+
+    %    TODO - interpretacja?
+
+
+    \section{Istnienie elementów odwrotnych względem mnożenia w strukturze $(Z_m, +, *)$ w zależności od liczby
+    naturalnej $m$. Rozszerzony algorytm Euklidesa.}
+
+    \begin{theorem}
+        \textbf{Tożsamość Bézouta}
+
+        Dla niezerowych liczb całkowitych $a$ oraz $b$ o największym wspólnym dzielniku d, istnieją liczby całkowite $x$ oraz $y$, nazywane współczynnikami Bézouta, które spełniają równanie
+        \[ax + by = d\]
+    \end{theorem}
+
+    \begin{definition}
+        \textbf{Elementy odwrotne modulo}
+
+        W strukturze $(Z_m, +, *)$ element odwrotny względem mnożenia dla $x$ to taki $x^{-1}$, że:
+        \[ x \cdot x^{-1} = 1 \  mod \  m \]
+        Element odwrotny istnieje, jeśli $NWD(x, m) = 1$\\
+
+
+        Aby obliczyć element odwrotny do $x$ w $Z_{m}$ należy użyć rozszerzonego algorytmu Euklidesa.
+    \end{definition}
+    \subsection{Algorytm Euklidesa}
+    Oblicza największy wspólny dzielnik $a, b$:
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{| p{0.5\textwidth} | p{0.5\textwidth} |}
+                \hline
+                z modulo: & z odejmowaniem:\\
+                \hline
+                while b != 0:
+                \begin{itemize}
+                    \item $r = a \% b$
+                    \item $a, b = b, r$
+                \end{itemize}
+                return a
+
+                &
+                while a != b:
+                \begin{itemize}
+                    \item if a > b: a = a - b
+                    \item else: b = b - a
+                \end{itemize}
+                return a\\
+                \hline
+            \end{tabular}
+        \end{center}
+
+    \end{table}
+
+
+    \subsection{Rozszerzony algorytm Euklidesa}
+    Oprócz obliczenia największego wspólnego dzielnika, algorytm znajduje także współczynniki Bézouta. \\
+    Mamy następujące ciągi:
+    \begin{gather*}
+        r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}\\
+        x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}\\
+        y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}
+    \end{gather*}
+    gdzie $q_{i}$ oznacza wynik całkowitego dzielenia $r_{i - 1}$ przez $r_i$. Możemy zauważyć, że $r_i = x_i * a + y_i * b$.
+
+    \newpage
+
+
+    \section{Ortogonalność wektorów w przestrzeni $\mathbb{R}_n$; związki z liniową niezależnością. Metoda ortonormalizacji Grama-Schmidta}
+
+    \begin{definition}
+        \textbf{Ortogonalność.}
+
+        Dla wektorów $x, y$ w przestrzeni $\mathbb{R}_n$ z zadanym iloczynem skalarnym $\cdot$
+        \[x \bot y \Leftrightarrow x \cdot y = 0 \]
+
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Liniowa niezależność}
+
+        Wektory $x_1, x_2 ,\dots, x_n$ w przestrzeni $\mathbb{R}^n$ nazywamy \textbf{liniowo niezależnymi} jeśli
+        \[a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0\]
+
+        W przestrzeni $R_n$ zbiór liniowo niezależnych nie może zawierać więcej niż $n$ wektorów.\\
+        Każdy układ ortogonalny wektorów w przestrzeni $\mathbb{R}^n$ jest liniowo niezależny.
+
+    \end{definition}
+
+    \begin{definition}
+
+        \textbf{Baza przestrzeni $\mathbf{\mathbb{R}^n}$}
+
+        Zbiór wektorów $B \subset \mathbb{R}^n$ nazywamy \textbf{bazą przestrzeni} $\mathbb{R}^n$ jeśli:
+
+        \begin{enumerate}
+            \item Jest liniowo niezależny
+            \item Generuje przestrzeń $\mathbb{R}^n$ tzn. każdy wektor $\in \mathbb{R}^n$ można zapisać jako kombinację liniową wektorów z $B$
+        \end{enumerate}
+
+        Każdy ortogonalny układ $n$ wektorów w $\mathbb{R}^n$ jest bazą.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Ortonormalność}
+
+        Zbiór wektorów $A$ przestrzeni $\mathbb{R}^n$ z zadanym iloczynem skalarnym $\cdot$ jest ortonormalny, jeśli
+        \[ \forall x,y \in A  \quad   x \cdot y =  \begin{cases}
+                                                       0, & x \ne y \\
+                                                       1, & x = y
+        \end{cases}\]
+
+        Zatem wektory należące do $A$ są \textbf{wersorami}.
+    \end{definition}
+
+    \newpage
+    \subsection{Ortonormalizacja Grama-Schmidta}
+
+    Ortonormalizacja to proces przekształcenia układu niezależnych liniowo wektorów w układ wektorów ortonormalnych.
+
+    \noindent \textbf{Projekcję wektora} $\mathbf{v}$ na wektor $\mathbf{u}$ definiujemy jako:
+    \[\mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}\]
+
+    \begin{enumerate}
+        \item Dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz
+        $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ gdzie
+        \[\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i, ~~~~~~ \text{tzn:} ~~~
+        \mathbf{u}_1 = \mathbf{v}_1, ~~ \mathbf{u}_2 = \mathbf{v}_2 - \mathrm{proj}_\mathbf{u_1} \mathbf{v}_2 ~~ \text{itd.}
+        \]
+
+        \item Wektory $\{{\mathbf{u}_1, \ldots, \mathbf{u}_n}\}$ podziel przez ich normy, uzyskując
+        $\{{\mathbf{e}_1, \ldots, \mathbf{e}_n}\}$ - układ wektorów ortonormalnych.
+    \end{enumerate}
+
+
+    \section{Liczby Stirlinga I i II rodzaju i ich interpretacja.}
+
+    \begin{definition}
+        \textbf{Liczby Stirlinga I rodzaju}.\\
+        Przez $c(n,k)$ ($[^n_k]$) oznaczamy \textbf{liczbę permutacji zbioru n-elementowego}, które mają \textbf{rozkład}
+        na dokładnie \textbf{k cykli rozłącznych}.
+
+        Dla dowolnego $n \geq 1$ mamy:
+        \begin{enumerate}
+            \item $c(0,0) = 1$
+            \item $c(n,0) = c(0,n) = 0$
+            \item $c(n,k) = c(n-1, k-1) + (n-1) * c(n-1, k)$
+        \end{enumerate}
+        W szczególności: $c(n,n) = 1, c(n,1) = (n-1)!, \sum^n_{k=0} c(n,k) = n!$.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Liczby Stirlinga II rodzaju}.\\
+        Przez $S(n,k)$ ($\{^n_k\}$) oznaczamy \textbf{liczbę rozmieszczeń n rozróżnialnych kul na k nierozróżnialnych
+        stosach} w taki sposób, aby żaden \textbf{stos nie} był \textbf{pusty}.
+
+        Dla dowolnego $n \geq 1$ mamy:
+        \begin{enumerate}
+            \item $S(0,0) = 1$,
+            \item $S(n,0) = S(0,n) = 0$,
+            \item $S(n,k) = S(n-1, k-1) + k \times S(n-1, k)$.
+        \end{enumerate}
+        w szczególności  $S(n,n) = S(n,1) = 1$.\\
+    \end{definition}
+
+
+    \section{Twierdzenia Eulera i Fermata; funkcja Eulera.}
+    \begin{definition}
+        \textbf{Funkcja Eulera (Tocjent)}
+
+        Funkcja przypisująca każdej \textbf{liczbie naturalnej liczbę mniejszych liczb względnie pierwszych z nią}.
+        \[\sum_{m|n}^{} \varphi(m) = n\]
+    \end{definition}
+
+    \textbf{Własności}
+    \begin{enumerate}
+        \item $\varphi (n) \leq n - 1$  dla każdego $n>1$
+        \item $\varphi (p) \leq p - 1$ dla każdego p będącego liczbą pierwszą
+        \item $\varphi (mn) = \varphi (m)\varphi(n)$ jeśli NWD(m,n) = 1 (m i n względnie pierwsze)
+        \item $\varphi(p^{k}) = p^{k-1} \cdot (p-1)$ jeśli p jest liczbą pierwszą
+        \item $\varphi(n) = n
+        \left (  1 - \frac{1}{p_1}\right)
+        \left (  1 - \frac{1}{p_2}\right)
+        \cdots
+        \left (  1 - \frac{1}{p_n}\right)$
+        gdzie $p_1, p_2, \dots, p_n$ są czynnikami pierwszymi liczby n
+        \item jeżeli $n = \prod_{i=1}^{k} p_i^{k_i}$ jest rozkładem liczby n na czynniki pierwsze $\varphi (n) = \prod_{i=1}^{k} \varphi \left( p_i^{k_i} \right )$
+    \end{enumerate}
+
+    \begin{definition}
+        \textbf{Małe Twierdzenie Fermata}
+        jeżeli p - pierwsza, to:
+
+        \begin{enumerate}
+            \item $a^{p-a} \equiv 0 \pmod p ~~ \forall a \in \mathbb{Z}$,
+            \item $a^{p-1} \equiv 1 \pmod p ~~ \forall a : a, p ~ \text{względnie pierwsze}$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Twierdzenie Eulera}
+
+        dla $m \in \mathbb{Z_{+}}$, $a \in \mathbb{Z}$ względnie pierwszych:
+        \[ a^{\varphi (m)} \equiv 1 \pmod m \]
+    \end{definition}
+
+
+    \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
+
+    \begin{definition}
+        \textbf{Konfiuracją kombinatoryczną} $B$ o parametrach $\mathbf{(n,k,r)}$ nazywamy \textbf{rodzinę k-elementowych
+        podzbiorów} w X, jeżeli \textbf{każdy element} $x \in X$ występuje w dokładnie \textbf{r podbiorach}.
+        \begin{enumerate}
+            \item $n = |X|$
+            \item $|B_i|=k \quad \forall i=1, \dots, b$
+            \item $n \cdot r = b \cdot k ~~ \Rightarrow k | n\cdot r$
+        \end{enumerate}
+        Konfiguracja istnieje wtw. $\frac{n\cdot r}{k}\leq {n\choose k}$.
+
+
+    \end{definition}
+
+    \begin{definition}
+        \textbf{T-konfiguracja} używa $r_t$ oznaczające ilość wystąpień t-elementowych podzbiorów X.
+        \[r_{t-1} = r_t \cdot \frac{n-t+1}{k-t+1}\]
+
+        Jeśli $B$ jest $t$-konfiguracją kombinatoryczną, to
+        $B$ jest $s$-konfiguracją kombinatoryczną dla $s = 1, 2,\dots$ $t-1$.
+        \[r_s = r_t \cdot \frac{(n-s)(n-s-1)\dots(n-t+1)}{(k-s)(k-s-1)\dots(k-t+1)}\]
+
+        \textbf{Warunek konieczny} (nie wystarczający) dla istnienia t-konfiguracji ($t \geq 2$):
+        \[(k-s)(k-s-1)\dots(k-t+1)|r_t(n-s)(n-s-1)\dots(n-t+1) \\ dla\  0\leq s \leq (t-1)\]
+    \end{definition}
+
+
+    \section{Cykl Hamiltona, obwód Eulera, liczba chromatyczna - definicje i twierdzenia.}
+
+    \subsection{Cykl Hamiltona}
+    \begin{itemize}
+        \item \textbf{Ścieżka Hamiltona} to ścieżka przechodząca przez wszystkie wierzchołki.
+
+        \item \textbf{Cykl Hamiltona} to nim cykl przechodzący przez wszystkie wierzchołki. Taki \textbf{graf}
+        nazwyamy \textbf{hamiltonowski}m.
+
+        \item Jeśli dla dowolonych \textbf{różnych, niesąsiednich} wierzchołków $u, v \in V$ zachodzi:
+        \begin{itemize}
+            \item $d(u) + d(v) \geq n$, to G jest \textbf{hamiltonowski} ($|V_G| \geq 3$).
+            \item $d(u) + d(v) \geq n-1$, to G ma \textbf{ścieżkę hamiltona} ($|V_G| \geq 2$).
+        \end{itemize}
+        \item Jeśli \textbf{minimalny stopień} wierzchołka wynosi co najmniej $\mathbf{\frac{n}{2}}$, to G jest
+        \textbf{hamiltonowski} ($|V_G| \geq 3$).
+    \end{itemize}
+
+    \subsection{Obwód Eulera}
+    \begin{itemize}
+        \item \textbf{Droga Eulera} to droga w której każda krawędź użyta jest dokładnie raz.
+
+        \item \textbf{Obwód Eulera} to droga Eulera w której pierwszy i ostatni wierzchołek są identyczne.
+        Graf ten nazywamy wtedy \textbf{eulerowskim}.
+
+        \item Jeśli $G$ spójny to:
+        \begin{gather*}
+            \text{ G jest grafem \textbf{eurelowskim}} \Leftrightarrow \text{stopień każdego wierzchołka w G jest \textbf{parzysty}}\\
+            \text{  G ma \textbf{drogę} Eulera } \Leftrightarrow \text {G ma dokładnie \textbf{0 lub 2} wierzchołki
+            stopnia \textbf{nieparzystego}}
+        \end{gather*}
+    \end{itemize}
+
+    \subsection{Liczba chromatyczna}
+
+    \begin{itemize}
+        \item \textbf{Kolorowanie wierchołkowe} grafu $G = (V, E)$ przy użyciu (co najwyżej) $k$
+        kolorów to funkcja $c: V \rightarrow \{1, \dots, k\}$ spełniająca warunek
+        \[c(u) \neq c(v) ~~ \forall u, v \in V : uv \in E\]
+
+        \item \textbf{Liczba chromatyczna} to najmniejsza liczba kolorów dla
+        której istnieje kolorwanie wierzchołkowe $G$. Oznaczamy $\chi(G)$.
+        \begin{enumerate}
+            \item $\chi(G) \leq d_{\max}(G) + 1$.
+            \item $\chi(G) = 1 \Leftrightarrow |E(G)| = 0$
+            \item $\chi(T) = 2$ dla każdego drzewa T o przynajmniej dwóch wierzchołkach
+            \item $\chi(C_{2k}) = 2, \chi(C_{2k+1}) = 3$ dla grafu cyklicznego
+            \item $\chi(K_n) = n$ dla grafu pełnego
+        \end{enumerate}
+
+        \item G spójny $\Rightarrow \chi(G) \leq d_{\max}(G)$, o ile G nie jest grafem pełnym ani cyklem o
+        nieparzystej liczbie wierzchołków.
+    \end{itemize}
+
+
+    \section{Algorytm Forda-Fulkersona wyznaczania maksymalnego przepływu.}
+
+    \begin{itemize}
+        \item \textbf{Siecią przepływową} nazywamy graf skierowany z wyróżnionym \textbf{źródłem} i \textbf{ujściem} oraz
+        \textbf{funkcją pojemności krawędzi}.
+
+        \item \textbf{Przepływem} nazywamy funkcję $f$ spełniającą następujące warunki:
+        \begin{enumerate}
+            \item $\forall \vec{uv} \in \vec{E}: ~~ f(\vec{uv}) \leq c(\vec{uv})$,
+            \item $\forall v \in V \backslash \{s, t\}: ~~ \sum_{\vec{uv} \in \vec{E}} ~ f(\vec{uv}) = \sum_{\vec{vw} \in \vec{E}} ~ f(\vec{vw})$.
+        \end{enumerate}
+
+        \item \textbf{Wartość przepływu} -- $|f| =  \sum_{\vec{su}  \in \vec{E}} f(\vec{su}) = \sum_{\vec{wt} \in \vec{E}} f(\vec{wt})$
+
+        \item \textbf{Sieć rezydualna} to sieć zawierająca również krawędzie przeciwne do krawędzi w $\vec{E}$ z funkcją
+        pojemności określoną wzorem:
+        \begin{gather*}
+            c_f(\vec{uv}) = c(\vec{uv}) - f(\vec{uv}) ~~ \text{dla} ~ \vec{uv} \in  \vec{E} ~  \text{t. że} ~ c(\vec{uv}) > 0\\
+            c_f(\vec{uv}) = f(\vec{uv}) ~~ \text{dla} ~ \vec{uv} \notin  \vec{E} ~  \text{t. że} ~ \vec{vu} \in \vec{E} \text{i} f(\vec{uv}) > 0
+        \end{gather*}
+        oraz $c_f(\vec{uv}) = 0$ w pozostałych przypadkach (ile jeszcze może płynąć w przód/ile płynie wstecz).
+
+        \item \textbf{Ścieżka rozszerzająca} dla przepływu f to dowolna ścieżkę skierowana łączącą wierzchołki
+        źródło z ujściem krawędziami z niepełną pojemnością.
+
+        \item \textbf{Algorytm Forda-Fulkersona} znajduje \textbf{maksymalny przepływ} w sieci:
+        \begin{enumerate}
+            \item przyjmujemy początkowo dowolny (np. zerowy) przepływ $f$,
+            \item budujemy sieć rezydualną $G_f$,
+            \item dopóki w $G_f$ istnieje ścieżka rozszerzająca $P$ określamy jej przepływ $c_p$ i uaktualniamy wartości
+            funkcji $c_f$ sieci rezydualnej.
+        \end{enumerate}
+
+        \item \textbf{Przekrój} sieci przepływowej to para rozłącznych zbiorów $(S, T)$ dzielących $V$ na podzbiór z
+        źródłem i podzbiór z ujściem. \textbf{Pojemność przekroju}:
+        \[c(S, T) = \sum_{(u,v) \in \vec{E} \cap (S \times T)} c(\vec{uv})\]
+
+        \item \textbf{Maksymalna wartość przepływu jest jest równa minimalnej pojemności przekroju}.
+    \end{itemize}
+
+
+    \section{Rozwiązywanie równań rekurencyjnych przy użyciu funkcji tworzących (generujących) oraz przy użyciu
+    równania charakterystycznego.}
+
+    \begin{definition}
+        \textbf{Liniowym równaniem rekurencyjnym rzędu r} (o stałych współczynnikach) nazywamy równanie postaci:
+        \begin{align*}
+            x_{n+r} = c_1 x_{n+r-1} +  \cdots + c_r x_n + f(n), ~~~ c_i  \in \mathbb{R}, c_r \neq 0, f:  \mathbb{N} \rightarrow \mathbb{R}
+        \end{align*}
+        Jeśli funkcja $\forall n ~ f(n) = 0$, to powyższe równanie nazywamy \textbf{jednorodnym}.
+
+        \textbf{Rozwiązani szczególne} to dowolny ciąg spełniający zależność rekurencyjną.
+
+        \textbf{Rozwiązanie ogólne} to wzór ogólny pozwalający wyznaczyć wszystkie rozwiązania szczególne.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Funkcja tworząca} (generujaca) ciągu $(a_n)$ to szereg
+        \begin{align*}
+            \sum_{n=0}^{\infty} a_n x^n.
+        \end{align*}
+        Jest to tylko inny zapis ciągu (wyraz $a_n$ to współczynnik przy $x^n$).
+    \end{definition}
+
+    \textbf{Operacje na funkcjach tworzących}.
+    \begin{enumerate}
+        \item Funkcje tworzące można \textbf{dodawać, odejmować i mnożyć przez liczbę}.
+        \item \textbf{Mnożeniu dwóch funkcji tworzących} odpowiada operacja "splotu", tzn. jeśli
+        $A(x) =  \sum_{n=0}^{\infty} a_n x^n$ i $B(x) = \sum_{n=0}^{\infty} b_n x^n$, to
+        $A(x) * B(x) = \sum_{n=0}^{\infty} c_n x^n$, gdzie $c_n = \sum_{k=0}^n a_k b_{n-k}$.
+        \item Jeśli funkcja tworząca A(x) ma "element odwrotny", tzn. taką funkcję tworzącą B(x) dla której
+        $A(x) * B(x) = 1$, to mówimy że A(x) jest \textbf{odwracalna} i piszemy $\frac{1}{A(x)} = B(x)$.
+        \item Funkcje tworzące można \textbf{różniczkować} według wzoru:
+        \begin{align*}
+            (\sum_{n=0}^{\infty} a_n x^n)' = \sum_{n=1}^{\infty} n a_n x^{n-1} = \sum_{n=0}^{\infty} (n+1) a_{n+1} x^n
+        \end{align*}
+        \item Zachodzą wzory na \textbf{pochodne} znane z analizy, np. $(A(x) * B(x))' = A'(x)B(x) + A(x)B'(x)$.
+        \item Operacja \textbf{"całkowania"} (odwrotna do różniczkowania):
+        \begin{align*}
+            \int (\sum_{n=0}^{\infty} a_n x^n) = \sum_{n=0}^{\infty} \frac{a_n}{n+1} x^{n+1} = \sum_{n=0}^{\infty} \frac{a_n - 1}{n} x^n
+        \end{align*}
+        Wyraz $a_n$ można "odzyskać" z funkcji tworzącej A(x) wykonując jej n-krotne różniczkowanie.
+    \end{enumerate}
+
+    \begin{theorem}
+        Zachodzi:
+        Dla dowolnej liczby naturalnej $m \geq 1$ zachodzi wzór:
+        \begin{gather*}
+            \frac{1}{(1-x)^m} ~ = ~ \sum_{n=0}^{\infty} \binom{n+m-1}{n} x^n ~~~~ \forall m \in \mathbb{N}\\
+            (1+x)^{\alpha} ~ = ~ \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n ~~~~~~~~ \forall \alpha \in \mathbb{R}, |x| < 1
+        \end{gather*}
+    \end{theorem}
+
+    \begin{definition}
+        \textbf{Równanie charakterystyczne} równania rekurencyjnego. Weźmy równanie rekurencyjne jednorodne z danymi A, B:
+        \begin{align*}
+            a_n = A a_{n-1} + B a_{n-2}
+        \end{align*}
+        Załóżmy, że ma ono rozwiązanie postaci $a_n = t^n$. Podstawiając otrzymujemy:
+        \begin{gather*}
+            t^n = A t^{n-1} + B t^{n-2}\\
+            t^2 = A t^1 + B\\
+            t^2 - A t^1 - B = 0
+        \end{gather*}
+        Jest to równanie charakterystyczne. $r_1, r_2$ -- pierwiastki równania, $C, D$ -- stałe:
+
+        \begin{align*}
+            a_n = \left\{\begin{matrix}
+                             C r_1^n + D r_2^n, ~~ r_1 \neq r_2\\
+                             (C + Dn) r_1^n, ~~ r_1 = r_2
+            \end{matrix}\right.
+        \end{align*}
+    \end{definition}
+
+
+    \section{Ciąg i granica ciągu liczbowego, granica funkcji.}
+
+    \subsection{Ciągi.}
+
+    \begin{definition}
+        \textbf{Ciąg liczbowy} -- funkcja $\mathbb{N} \rightarrow \mathbb{R}$, oznaczamy przez $(a_n)$, zbiór wartości
+        $\{a_n\}$, n-ty wyraz $a_n$.
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Granice}.\\
+        Granica \textbf{właściwa} ciągu: $lim_{n  \rightarrow \infty} ~ a_n = a, ~~ a \in \mathbb{R} \Leftrightarrow$
+        \begin{gather*}
+            \forall \varepsilon > 0 ~~ \exists  n_0 \in \mathbb{N} ~~ \forall n \in \mathbb{N} ~~~ [(n > n_0) \Rightarrow (|a_n - a| < \varepsilon)]
+        \end{gather*}
+
+        Granica \textbf{niewłaściwa} ciągu: $lim_{n \rightarrow \infty} ~ a_n = + (-) \infty \Leftrightarrow$
+        \begin{align*}
+            \forall \varepsilon > (<) 0 ~~ \exists  n_0 \in \mathbb{N} ~~ \forall n \in \mathbb{N} ~~~ [(n > n_0) \Rightarrow (a_n > (<) \varepsilon)]
+        \end{align*}
+    \end{definition}
+
+
+    \begin{theorem}
+        \textbf{Twierdzenia}.
+        \begin{enumerate}
+            \item \textbf{O ograniczoności ciągu zbieżnego}. Jeśli ciąg jest zbieżny do granicy właściwej, to jest ograniczony.
+
+            \item \textbf{O równoważności granic:}
+            $~~ lim_{n \rightarrow \infty} ~ a_n = 0 ~~ \Leftrightarrow ~~ lim_{n \rightarrow \infty} ~ |a_n| = 0.$
+
+            \item \textbf{O dwóch ciągach}. Weźmy ciągi $(a_n), (b_n): a_n \leq b_n \forall n \geq n_0$, wtedy:
+            \begin{gather*}
+                lim_{n \rightarrow \infty} a_n = \infty ~~~ \Rightarrow lim_{n \rightarrow \infty} ~ b_n = \infty\\
+                lim_{n \rightarrow \infty} b_n = -\infty ~~~ \Rightarrow lim_{n \rightarrow \infty} ~ a_n = -\infty
+            \end{gather*}
+
+            \item \textbf{O trzech ciągach}. Weźmy ciągi $(a_n), (b_n), (c_n): a_n \leq b_n \leq c_n \forall n \geq n_0$:
+            \[lim_{n  \rightarrow \infty} a_n = lim_{n \rightarrow \infty} c_n = b \Rightarrow a_n \leq b_n \leq c_n ~~~ \forall n \geq n_0\]
+
+            \item \textbf{O ciągu monotonicznym i ograniczonym}. Jeżeli ciąg $(a_n)$ jest niemalejący dla $n \geq n_0$ oraz
+            ograniczony z góry, to jest zbieżny do granicy właściwej $\sup\{a_n : n \geq n_0\}$. Nierosnący analogicznie.
+        \end{enumerate}
+    \end{theorem}
+
+    \subsection{Funkcje.}
+
+    \begin{definition}
+        \textbf{Heinego granicy właściwej funkcji w punkcie}. $x_0 \in \mathbb{R}$, $f$ -- określona na sąsiedztwie
+        $S(x_0)$:
+        \begin{gather*}
+            lim_{x \rightarrow x_0} ~ f(x) = g\\
+            \Leftrightarrow\\
+            \forall_{(x_n): ~ \{x_n\} \subset S(x_0)} ~~ [(lim_{n \rightarrow \infty} x_n = x_0) \Rightarrow (lim_{n \rightarrow \infty} f(x_n) = g)].
+        \end{gather*}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Cauchy'ego granicy właściwej funkcji w punkcie}. $x_0 \in \mathbb{R}$, $f$
+        określona przynajmniej na sąsiedztwie $S(x_0)$:
+        \begin{gather*}
+            lim_{x \rightarrow x_0} ~ f(x)  = g\\
+            \Leftrightarrow\\
+            \forall \varepsilon > 0 ~~ \exists \delta > 0 ~~ \forall  x \in S(x_0)  ~~~ [(|x - x_0| <  \delta) \Rightarrow (|f(x) - g| < \varepsilon)].
+        \end{gather*}
+
+        Granica niewłaściwa:
+        \begin{gather*}
+            lim_{x \rightarrow x_0} ~ f(x)  = \infty\\
+            \Leftrightarrow\\
+            \forall \varepsilon > 0 ~~ \exists \delta > 0 ~~ \forall  x \in S(x_0)  ~~~ [(|x - x_0| <  \delta) \Rightarrow (f(x) > \varepsilon)].
+        \end{gather*}
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Warunek konieczny i wystarczajacy istnienia granicy}.
+        \begin{align*}
+            lim_{x \rightarrow x^{-}_0}  ~ f(x) ~ = ~ lim_{x \rightarrow x^{+}_0}  ~ f(x)
+        \end{align*}
+    \end{theorem}
+
+
+    \begin{theorem}
+        \textbf{O nieistnieniu granicy funkcji w punkcie}. Jeśli istnieją ciągi $(x'_n)$, $(x''_n)$ spełniające warunki:
+        \begin{enumerate}
+            \item $lim_{n \rightarrow \infty} x'_n = x_0$, przy czym $x'_n \neq x_0 ~~ \forall n \in \mathbb{N}$
+            oraz $lim_{n \rightarrow \infty}  ~ f(x'_n) = g'$,
+            \item $lim_{n \rightarrow \infty} x''_n = x_0$, przy czym $x''_n \neq x_0 ~~ \forall n \in \mathbb{N}$
+            oraz $lim_{n \rightarrow \infty}  ~ f(x''_n) = g''$,
+            \item $g' \neq g''$,
+        \end{enumerate}
+        to granica $lim_{x \rightarrow x_0} ~ f(x)$ nie istnieje (właściwa ani niewłaściwa).
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{O niesitnieniu granicy funkcji w nieskończoności}. Jeżeli istnieją ciągi $(x'_n)$, $(x''_n)$
+        spełniające warunki:
+        \begin{enumerate}
+            \item $lim_{n \rightarrow \infty} ~ x'_n = \infty $ oraz $ lim_{n \rightarrow \infty} ~ f(x'_n) = g'$,
+            \item $lim_{n \rightarrow \infty} ~ x''_n = \infty $ oraz $ lim_{n \rightarrow \infty} ~ f(x''_n) = g''$,
+            \item $g' \neq g''$,
+        \end{enumerate}
+        to nie istnieeje granica $lim_{x \rightarrow x_0} ~ f(x)$ (właściwa ani niewłaściwa).
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{O dwóch funkcjach}. Weźmy $f, g: f(x) \leq g(x) ~~ \forall x \in S(x_0)$, wtedy:
+        \begin{gather*}
+            lim_{x \rightarrow x_0} ~ f(x) = \infty \Rightarrow lim_{x \infty x_0} ~ g(x) = \infty
+        \end{gather*}
+    \end{theorem}
+
+    \textbf{Granice specjalne}
+    \setlength{\jot}{10pt}
+    \begin{align*}
+        &\lim_{x \to +\infty} a^{x} x^{\alpha} \stackrel{[0 \cdot \infty]}{=}  \text{0 dla a} \in (0, 1), \alpha \geq 0 \\
+        &\lim_{x \to 0} \frac{\sin{x}}{x} \stackrel{[\frac{0}{0}]}{=} \text{1 oraz}    \lim_{x \to 0} \frac{\arcsin{x}}{x} \stackrel{[\frac{0}{0}]}{=} 1\\
+        &\lim_{x \to 0} (1 + x)^{\frac{1}{x}} \stackrel{1^{\infty}}{=} \text{e oraz}   \lim_{x \to \infty} (1 + x)^{\frac{1}{x}} \stackrel{\infty^{0}}{=} 1 \\
+        &\lim_{x \to 0} \frac{a^x -1}{x} \stackrel{[\frac{0}{0}]}{=} \ln{a} \text{ dla a $>$ 0, w szczególności } \lim_{x \to 0} \frac{e^x -1}{x} \stackrel{[\frac{0}{0}]}{=} 1 \\
+        &\lim_{x \to 0} \frac{\log_{a}(1 + x)}{x} \stackrel{[\frac{0}{0}]}{=} \frac{1}{\ln{a}} \text{, w szczególności } \lim_{x \to 0} \frac{\ln(1 + x)}{x} \stackrel{[\frac{0}{0}]}{=} 1 \\
+        &\lim_{x \to \pm \infty} (1 + \frac{a}{x})^{x} \stackrel{[1^{\infty}]}{=} e^{a} \text{, dla a} \in \mathbb{R} \\
+        &\lim_{x \to 0} \frac{(1 + x)^a - 1}{x} \stackrel{[\frac{0}{0}]}{=} \text{a, dla a} \in \mathbb{R}
+    \end{align*}
+
+    \begin{theorem}
+        \textbf{Reguła de L'Hostpiala}. Jeżeli funkcja $f$ i  $g$ spełniają warunki:
+        \begin{enumerate}
+            \item $lim_{x \rightarrow x_0} f(x) = lim_{x \rightarrow x_0} g(x) = 0 ~~ (\infty)$, przy czym $g(x) \neq 0$ dla $x \in S(x_0)$
+            \item istnieje granica $lim_{x \rightarrow x_0} \frac{f'(x)}{g'(x)}$ (właściwa lub niewłaściwa),
+        \end{enumerate}
+        to
+        \begin{align*}
+            lim_{x \rightarrow x_0} \frac{f(x)}{g(x)} = lim_{x \rightarrow x_0} \frac{f'(x)}{g'(x)}
+        \end{align*}
+    \end{theorem}
+
+
+    \section{Ciągłość i pochodna funkcji. Definicja i podstawowe twierdzenia.}
+
+    \subsection{Ciągłość.}
+
+    \begin{definition}
+        \textbf{Funkcja ciągła w punkcie}. $x_0 \in \mathbb{R}$, $f$ określona przynajmniej na otoczeniu $O(x_0)$.
+        \begin{align*}
+            f \text{ciągła w }x_0 ~ \Leftrightarrow ~ lim_{x \rightarrow x_0} ~ f(x) = f(x_0).
+        \end{align*}
+
+        \textbf{Funkcja jest ciągła na zbiorze}, jeżeli jest ciągła w każdym punkcie tego zbioru.
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Warunek konieczny i wystarczający ciągłości funkcji}. Funckja jest ciągła w punkcie wtw,
+        gdy jest w tym punkcie ciągła lewostronnie i prawostronnie.
+    \end{theorem}
+
+    \begin{definition}
+        \textbf{Nieciągłość funkcji}. $x_0 \in \mathbb{R}$, $f$ określona przynajmniej na otoczeniu $O(x_0)$.
+        Funkcja $f$ jest nieciągła w punkcie $x_0$ wtedy i tylko wtedy, gdy nie istnieje
+        granica $lim_{x \rightarrow x_0} ~ f(x)$ albo gdy $lim_{x \rightarrow x_0} ~ f(x) \neq f(x_0)$.
+        \hfill \\
+
+        \textbf{Nieciągłość pierwszego rodzaju}:
+        \begin{align*}
+            lim_{x \rightarrow x^{-}_0} ~ f(x) \neq  f(x_0) ~~~ \text{lub} ~~~ lim_{x \rightarrow x^{+}_0} ~ f(x) \neq f(x_0).
+        \end{align*}
+        \begin{enumerate}
+            \item typu "skok": $lim_{x \rightarrow x^{-}_0} ~ f(x) ~ \neq ~ lim_{x \rightarrow x^{+}_0} ~ f(x)$.
+            \item typu "luka": $lim_{x \rightarrow x^{-}_0} ~ f(x) ~ = ~ lim_{x \rightarrow x^{+}_0} ~ f(x) ~ \neq ~ f(x_0)$.
+        \end{enumerate}
+
+        \textbf{Nieciągłość drugiego rodzaju}. Jeżeli co najmniej jedna z granic
+        \begin{align*}
+            lim_{x \rightarrow x^{-}_0} ~ f(x), ~~ lim_{x \rightarrow x^{+}_0} ~ f(x)
+        \end{align*}
+        nie istnieje lub jest niewłaściwa.
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Twierdzenia}
+        \begin{enumerate}
+            \item \textbf{Weierstrassa o ograniczoności funkcji ciągłej}. Jeżeli funkcja jest ciągła na przedziale domkniętym
+            i ograniczonym, to jest na nim ograniczona.
+
+            \item \textbf{Weierstrassa o osiąganiu kresów}. Jeżeli funkcja $f$ jest ciągła na przedziale domkniętym $[a, b]$,to
+            \begin{align*}
+                \exists c \in [a,b] ~~ f(c) = ~ inf_{x \in [a,b]} ~ f(x) ~~ \text{oraz} ~~ \exists d \in [a,b] ~~ f(d) = ~ sup_{x \in [a,b]} ~ f(x)
+            \end{align*}
+
+            \item \textbf{Darboux o przyjmowaniu wartości pośrednich}. Jeżeli funkcja $f$ jest ciągła na przedziale $[a,b]$ oraz
+            spełnia warunek $f(a) < f(b)$, to
+            \begin{align*}
+                \forall w \in (f(a), f(b)) ~ \exists c \in (a,b) ~~ f(c) = w.
+            \end{align*}
+        \end{enumerate}
+    \end{theorem}
+
+
+    \subsection{Pochodna.}
+
+    \begin{definition}
+        \textbf{Iloraz różnicowy}. $x_0 \in \mathbb{R}$, $f$ określona przynajmniej na otoczeniu $O(x_0, r)$,
+        gdzie $r > 0$. Ilorazem różnicowym odpowiadającym przyrostowi $0 < |\Delta x| < r$ nazywamy:
+        \begin{align*}
+            \frac{\Delta f}{\Delta x} \stackrel{def}{=} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+        \end{align*}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Pochodna właściwa funkcji}. $x_0 \in \mathbb{R}$, $f$ określona przynajmniej na $O(x_0)$. Pochodna
+        właściwa funkcji $f$ w punkcie $x_0$:
+        \begin{gather*}
+            f'(x_0) ~ \stackrel{def}{=} ~ lim_{x \rightarrow x_0} ~ \frac{f(x) - f(x_0)}{x - x_0}\\
+            f'(x_0) ~ \stackrel{def}{=} ~ lim_{\Delta x \rightarrow 0} ~ \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+        \end{gather*}
+        Pochodne jednostronne definiuje się anlogiczne na jednostronnym otoczeniu.
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Warunek konieczny istnienia pochodnej właściwej funkcji}. Jeżeli funkcja ma pochodną właściwą w punkcie,
+        to jest ciągła w tym punkcie. Implikacja odwrotna nie jest prawdziwa.
+    \end{theorem}
+
+    \begin{definition}
+        \textbf{Pochodna funkcji na zbiorze}. Funkcja ma pochodną właściwą na zbiorze wtedy i tylko wtedy, gdy ma pochodną
+        właściwą w każdym punkcie tego zbioru.
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Zastosowanie różniczki do obliczeń przybliżonych}. Jeżeli funkcja $f$ ma pochodną właściwą w punkcie
+        $x_0$, to
+        \begin{align*}
+            f(x_0 + \Delta x) \approx f(x_0) + f'(x_0)\Delta x
+        \end{align*}
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{Rolle'a}. Jeśli funkcja $f$ spełnia warunki:
+        \begin{enumerate}
+            \item jest ciągła na $[a,b]$
+            \item ma pochodną właściwą lub niewłaściwą na $(a,b)$,
+            \item $f(a) = f(b)$,
+        \end{enumerate}
+        to istnieje punkt $c \in (a,b)$ taki, że:
+        \begin{align*}
+            f'(c) = 0.
+        \end{align*}
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{Lagrange'a}. Jeżeli funkcja $f$ spełnia warunki:
+        \begin{enumerate}
+            \item jest ciągła na $[a,b]$,
+            \item ma pochodną właściwą lub niewłaściwą na $(a,b)$,
+        \end{enumerate}
+        to istnieje punkt $c \in (a,b)$ taki, że
+        \begin{align*}
+            f'(c) = \frac{f(b)-f(a)}{b-a}
+        \end{align*}
+    \end{theorem}
+
+
+    \section{Ekstrema funkcji jednej zmiennej. Definicje i twierdzenia.}
+
+    \begin{definition}
+        \textbf{Minimum lokalne funkcji}. Funkcja $f$ ma w punkcie $x_0 \in \mathbb{R}$ minimum lokalne, jeżeli:
+        \begin{align*}
+            \exists \delta > 0 ~ \forall x \in S(x_0, \delta) ~~ f(x) \geq f(x_0).
+        \end{align*}
+
+        \textbf{Minimum lokalne jest właściwe}, jeżeli:
+        \begin{align*}
+            \exists \delta > 0 ~ \forall x \in S(x_0, \delta) ~~ f(x) > f(x_0).
+        \end{align*}
+        Analogicznie definiujemy \textbf{maksimum} lokalne (właściwe).
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Fermata, warunek konieczny istnienia ekstremum}. Jeżeli funkcja $f$ ma esktremum lokalne w punkcie $x_0$,
+        oraz istnieje pochodna $f'(x_0)$, to $f'(x_0) = 0$.
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{I warunek wystarczający istnienia ekstremum}. Jeżeli funkcja $f$ spełnia warunki:
+        \begin{enumerate}
+            \item $f'(x_0) = 0$,
+            \item $\exists \delta > 0
+            \left\{\begin{matrix}
+                       f'(x) > 0 ~~ \forall x \in  S(x^{-}_0, \delta), \\
+                       f'(x) < 0 ~~ \forall x \in  S(x^{+}_0, \delta),
+            \end{matrix}\right.$
+        \end{enumerate}
+        to w punkcie $x_0$ ma maksimum lokalne właściwe. Analogicznie dla minimum.
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{II warunek wystarczający istnienia ekstremum}. Jeżeli funkcja $f$ spełnia warunki:
+        \begin{enumerate}
+            \item $f'(x_0) = f''(x_0) = \dots = f^{(n-1)}(x_0) = 0$,
+            \item $f^{(n)}(x_0) < 0$,
+            \item $n$ jest liczbą parzystą, gdzie $n \geq 2$,
+        \end{enumerate}
+        to w punkcie $x_0$ ma maksimum lokalne właściwe. Analogicznie dla minimum,
+    \end{theorem}
+
+
+    \section{Całka Riemanna funkcji jednej zmiennej.}
+
+    \begin{definition}
+        \textbf{Całka oznaczona Riemanna}. Niech funkcja $f$ będzie ograniczona na przedziale $[a,b]$. Całkę oznaczoną
+        Riemanna z funkcji  $f$  na przedziale $[a,b]$ definiujemy wzorem
+        \begin{align*}
+            \int_{a}^{b} f(x) \,dx ~~ \stackrel{def}{=} ~~ lim_{\delta(P)  \rightarrow 0} \sum_{k=1}^{n} f(x^{*}_k) \Delta x_k,
+        \end{align*}
+        o ile po prawej stronie znaku równości granica jest właściwa oraz nie zależy od sposoby podziałów $P$ przedziału
+        $[a,b]$ ani od sposobów wyboru punktów pośrednich $x^{*}_k$, gdzie $1 \leq k \leq n$. Ponadto przyjmujemy
+        \begin{align*}
+            \int_a^a f(x)\,dx ~ \stackrel{def}{=} ~ 0 ~~~~ \text{oraz} ~~~~ \int_b^a f(x)\,dx ~ \stackrel{def}{=} ~ - ~ \int_a^b f(x) \,dx ~~ \text{dla} ~ a < b
+        \end{align*}
+        Funkcję, dla której istnieje całka Riemanna, nazywamy całkowalną.
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Warunek wystarczający całkowalności funkcji}. Jeżeli funkcja $f$ jest ograniczona na przedziale $[a,b]$
+        i ma na tym przedziale skończoną liczbę punktów nieciągłości I rodzaju, to jest na nim całkowalna.
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{Obliczanie całek przy pomocy sumy całkowej podziału równomiernego}. Jeżeli funkcja $f$ jest całkowalna
+        na przedziale $[a,b]$, to
+        \begin{align*}
+            \int_{a}^b f(x) \, dx ~ = ~ lim_{n \rightarrow \infty} [\frac{b - a}{n} \sum_{k=1}^n f (a + k \frac{b - a}{n})]
+        \end{align*}
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{Newtona - Leibniza, główne twierdzenie rachunku całkowego}. Jeżeli funkcja $f$ jest ciągła na przedziale
+        $[a,b]$, to
+        \begin{align*}
+            \int_a^b f(x) \,dx ~ = ~ F(b) - F(a) ~ = ~ [F(x)]_a^b,
+        \end{align*}
+        gdzie F oznacza dowolną funkcję pierwotną funkcji $f$  na tym przedziale.
+    \end{theorem}
+
+
+    \section{Pochodne cząstkowe funkcji wielu zmiennych; różniczkowalność i różniczka funkcji.}
+
+    \begin{definition}
+        \textbf{Pochodne cząstkowe}. Niech funkcja $f$ będzie określona przynajmniej na otoczeniu punktu $(x_0, y_0)$.
+        Pochodną cząstkową pierwszego rzędu funkcji $f$ względem $x$ w punkcie $(x_0, y_0)$ określamy wzorem:
+        \begin{align*}
+            \frac{\partial f}{\partial x}(x_0, y_0)  \stackrel{def}{=} lim_{\Delta x \rightarrow 0} \frac{f(x_0 + \Delta x, y_0) - f(x_0, y_0)}{\Delta x}
+        \end{align*}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Funkcja różniczkowalna w punkcie}. Niech istnieją pochodne cząstkowe $\frac{\partial f}{\partial x}(x_0, y_0)$
+        $\frac{\partial f}{\partial y}(x_0, y_0)$. Funkcja $f$ jest różniczkowalna w punkcie $(x_0, y_0)$  wtw, gdy:
+        \begin{align*}
+            \underset{(\Delta x,  \Delta y) \rightarrow (0,0)}{lim} \frac{f(x_0 + \Delta x, y_0 +  \Delta y) - f(x_0, y_0) - \frac{\partial f}{\partial x}(x_0, y_0)\Delta x - \frac{\partial f}{\partial y}(x_0, y_0) \Delta y}{\sqrt{\Delta x^2 +  \Delta y^2}} = 0
+        \end{align*}
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Różniczka funkcji}. Niech funkcja $f$ ma pochodne cząstkowe pierwszego rzędu w punkcie $(x_0, y_0)$. Różniczką
+        funkcji $f$ w punkcie $(x_0, y_0)$ nazywamy funkcję $df(x_0, y_0)$ zmiennych $\Delta x, \Delta y$ określoną
+        wzorem:
+        \begin{align*}
+            df(x_0, y_0)(\Delta x, \Delta y) \stackrel{def}{=} \frac{\partial f}{\partial x}(x_0, y_0)\Delta x + \frac{\partial f}{\partial y}(x_0, y_0)\Delta y
+        \end{align*}
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Zastosowanie różniczki funkcji do obliczeń przybliżonych}. Niech funkcja $f$ ma ciągłe pochodne cząstkowe
+        pierwszego rzędu w punkcie $(x_0, y_0)$. Wtedy
+        \begin{align*}
+            f(x_0 + \Delta x, y_0 + \Delta y) \approx f(x_0, y_0) + df(x_0, y_0)(\Delta x, \Delta y)
+        \end{align*}
+    \end{theorem}
+
+    \newpage
+
+
+    \section{Ekstrema funkcji wielu zmiennych. Definicje i twierdzenia.}
+
+    \begin{definition}
+        \textbf{Minimum lokalne funkcji dwóch zmiennych}.
+        Funkcja $f$ ma w punkcie $(x_0, y_0)$ minimum lokalne, jeżeli istnieje jego otoczenie
+        $O: \forall x, y \in O$:
+        \begin{align*}
+            f(x,y) \geq f(x_0, y_0)
+        \end{align*}
+        Przy ostrej nierówności mówimy o minimum lokalnym \textbf{właściwym}.
+
+        Analogicznie definijuemy \textbf{maksimum} lokalne (właściwe).
+    \end{definition}
+
+    \begin{theorem}
+        \textbf{Warunek konieczny istnienia ekstremum}. Jeżeli funkcja $f$ ma ekstremum lokalne w punkcie $(x_0, y_0)$
+        i istnieją pochodne cząstkowe w tym punkcie, to:
+        \begin{align*}
+            \frac{\partial f}{\partial x}(x_0, y_0) = 0, ~~ \frac{\partial f}{\partial y}(x_0, y_0) = 0
+        \end{align*}
+
+        Funkcja może mieć ekstrema tylko w punktach, w których wszystkie jej pochodne cząstkowe pierwszego rzędu się
+        zerują albo w punktach, w których choć jedna z nich nie istnieje.
+    \end{theorem}
+
+    \begin{theorem}
+        \textbf{Warunek wystarczający istnienia ekstremum}. Niech funkcja $f$ ma ciągłe pochodne cząstkowe rzędu drugiego
+        na otoczeniu punktu $(x_0, y_0)$ oraz niech
+        \begin{enumerate}
+            \item $\frac{\partial f}{\partial x}(x_0, y_0) = 0, \frac{\partial f}{\partial y}(x_0, y_0) = 0$
+            \item $\det \begin{bmatrix}
+                            \frac{\partial^2 f}{\partial^2 x}(x_0, y_0) & \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \\
+                            \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) & \frac{\partial^2 f}{\partial^2 y}(x_0, y_0)
+            \end{bmatrix} > 0$
+        \end{enumerate}
+        Wtedy w punkcie $(x_0, y_0)$ funkcja $f$ ma ekstremum lokalne i jest to:
+        \begin{enumerate}
+            \item \textbf{minimum}, gdy $\frac{\partial^2 f}{\partial^2 x}(x_0, y_0) > 0$,
+            \item \textbf{maksimum}, gdy $\frac{\partial^2 f}{\partial^2 x}(x_0, y_0) < 0$.
+        \end{enumerate}
+    \end{theorem}
+
+
+    \section{Twierdzenie o zmianie zmiennych w rachunku całkowym; współrzędne walcowe i sferyczne.}
+
+    \begin{definition}
+        \textbf{Twierdzenie o zmianie zmiennych w rachunku całkowym}. Niech
+        \begin{enumerate}
+            \item odwzorowanie $ T: \begin{cases}
+                                        x = \phi(u,v,w) \\
+                                        y = \psi(u,v,w) \\
+                                        z = \chi(u,v,w)
+            \end{cases}$ przekształca różnowartościowo wnętrze obszaru regularnego $\Delta$ na wnętrze obszaru
+            regularnego $V$,
+            \item funkcje $\phi$, $\psi$, $\chi$ mają ciągłe pochodne cząstkowe rzędu pierwszego na pewnym zbiorze
+            otwartym zawierającym obszar $\Delta$,
+            \item funkcja $f$ jest ciągła na obszarze $V$,
+            \item jakobian $J_T$ jest różny od zera wewnątrz obszaru $\Omega$.
+        \end{enumerate}
+        Wtedy
+        \begin{align*}
+            \iiint_V f(x,y,z)\,dx\,dy\,dz = \iiint_{\Omega} f(\phi(u,v,w), \psi(u,v,w), \chi(u,v,w))
+            |J_T| \,du\,dv\,dw
+        \end{align*}
+        gdzie
+        \begin{align*}
+            J_T (u,v, w) \stackrel{def}{=} det \begin{bmatrix}
+                                                \frac{\partial \phi}{\partial u}(u,v,w)  & \frac{\partial \phi}{\partial v}(u,v,w) & \frac{\partial \phi}{\partial w}(u,v,w)\\
+                                                \frac{\partial \psi}{\partial u}(u,v,w)  & \frac{\partial \psi}{\partial v}(u,v,w) & \frac{\partial \psi}{\partial w}(u,v,w)\\
+                                                \frac{\partial \chi}{\partial u}(u,v,w)  & \frac{\partial \chi}{\partial v}(u,v,w) & \frac{\partial \chi}{\partial w}(u,v,w)
+            \end{bmatrix}
+        \end{align*}
+    \end{definition}
+
+    Obszar regularny: złożony z obszarów normalnych, czyli "ogrodzonych" funkcjami ciągłymi.
+
+    \begin{definition}
+        \textbf{Współrzędne walcowe}.
+        \begin{gather*}
+            W: \begin{cases}
+                   x = \varrho cos \varphi \\
+                   y = \varrho sin \varphi \\
+                   z = h
+            \end{cases} ~~~~
+            |J_W| = \varrho
+        \end{gather*}
+
+        $\varphi$ - miara kąta między rzutem promienia wodzącego punktu $P$ na płaszczyznę $xOy$, a dodatnią częścią
+        osi $Ox$, $0 \leq \varphi \leq 2 \pi$ albo $-\pi < \varphi \leq \pi$\\
+
+        $\varrho$ - odległość rzutu punktu na $xOy$ od punktu (0,0,0), $0 \leq \varrho < \infty$\\
+
+        $h$ - oznacza odległość punktu $P$ od płaszczyzny $xOy$, $-\infty < h < \infty$
+    \end{definition}
+
+    \begin{definition}
+        \textbf{Współrzędne sferyczne}.
+        \begin{align*}
+            S: \begin{cases}
+                   x = \varrho cos \varphi cos \psi \\
+                   y = \varrho sin \varphi cos \psi \\
+                   z = \varrho sin \psi
+            \end{cases} ~~~~
+            |J_S| = \varrho^2 cos \psi
+        \end{align*}
+
+        $\varphi$ - oznacza miarę kąta między rzutem promienia wodzącego punktu $P$ na płaszczyznę $xOy$, a dodatnią częścią
+        osi $Ox$, $0 \leq \varphi \leq 2 \pi$ albo $-\pi < \varphi \leq \pi$\\
+
+        $\psi$ - oznacza miarę kąta między promieniem wodzącym punktu $P$, a płaszczyzną $xOy$, $-\frac{\pi}{2} \leq \psi \leq \frac{\pi}{2}$\\
+
+        $\varrho$ - oznacza odległość punktu $P$ od początku układu współrzędnych, $0 \leq \varrho < \infty$
+    \end{definition}
+\end{document}
