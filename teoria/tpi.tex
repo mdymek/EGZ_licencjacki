@@ -163,7 +163,7 @@
     \begin{definition}
         Każdy automat $\mathcal{A}$ = (S, A, f, $s_{0}$, T) wyznacza w wolnym monoidzie $A^{*}$ prawą kongruencję automatową okresloną w następujący sposób: \\
         $\forall$u,v $\in A^{*}$ \\
-        $u \sim A$ v $\Leftrightarrow f(s_{0}, u) = f(s_{0}, v)$
+        $u \sim_\mathcal{A}$ v $\Leftrightarrow f(s_{0}, u) = f(s_{0}, v)$
     \end{definition}
 
     \begin{definition}
@@ -178,7 +178,7 @@
 
     \begin{definition}
         Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
-        $\mathcal{M(A)}$ = $\tau \mathcal{A}(A^*) \subset S^{S}$
+        $\mathcal{M(A)}$ = $\tau_\mathcal{A}(A^*) \subset S^{S}$
     \end{definition}
 
     \begin{definition}
@@ -1784,8 +1784,8 @@
         \textbf{deterministycznym}, jeśli dla każdej konfiguracji
         $(z, q, a) \in A_S^* \times Q \times (A \cup \{1\})$
         \begin{gather*}
-            f(z, q, a) \leq 1 \; \mathrm{oraz}\\
-            f(z, q) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A\\
+            \# f(z, q, a) \leq 1 \; \mathrm{oraz}\\
+            f(z, q, 1) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A\\
         \end{gather*}
         Język akceptowany przez automat deterministyczny nazywamy językiem deterministycznym.
     \end{definition}
