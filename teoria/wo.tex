@@ -265,7 +265,7 @@
 
     \subsubsection{Algorytm kodowania}
 
-    Algorytm kodowania zmiennomozycyjnego obejmuje poniższe kroki:
+    Algorytm kodowania zmiennopozycyjnego obejmuje poniższe kroki:
     \begin{enumerate}
         \item Przedstaw liczbę w systemie o podstawie q.
         \item Zaokrąglij wartość liczby do $w_m$ cyfr.
@@ -274,7 +274,7 @@
         \item Jeżeli cecha jest zbyt duża (zbyt dodatnia) by zmieścić się
         w przewidzianym zakresie $w_c$ to zasygnalizuj błąd przepełnienia i zakończ.
         \item Jeżeli cecha jest zbyt mała (zbyt ujemna) by zmieścić się
-        w zakresie $w_c$ to zakoduj zerową mantysy oraz zerową wartość cechy i zakończ.
+        w zakresie $w_c$ to zakoduj zerową mantysę oraz zerową wartość cechy i zakończ.
         \item Zakoduj stałopozycyjnie mantysę na $w_m + 1$ pozycjach.
         \item Zakoduj stałopozycyjnie cechę na $w_c + 1$ pozycjach.
     \end{enumerate}
@@ -427,7 +427,7 @@
 
     \subsection{Funkcje wirtualne.}
     \begin{itemize}
-        \item \textbf{Wirtualne metody klas} są przydatne polimorfiźmie.
+        \item \textbf{Wirtualne metody klas} są przydatne w polimorfiźmie.
         \item W przypadku zwykłej metody, wywołanie jej dla wskaźnika typu klasy podstawowej zawsze wywoła instancję
         z klasy podstawowej, nawet jeżeli wskaźnik będzie tak naprawdę wskazywał na klasę pochodną.
         \item Słowo kluczowe \texttt{virtual} wymusza dedukcję której metody użyć na podstawie zawartości wskaźnika,
@@ -605,7 +605,7 @@
 
     \begin{definition}
         \textbf{Arytmetyka wskaźników} \\
-        Mając wskaźnik \texttt{int *p} wskazujący na hipotetyczny adres 10, wykonując na nim operację \texttt{p+2} dostajemy wskaźnik wskazujący na adres \texttt{10 + 2*sizeof(int)}
+        Mając wskaźnik \texttt{int *p} wskazujący na hipotetyczny adres 10, wykonując na nim operację \texttt{p+2} dostajemy wskaźnik wskazujący na adres \texttt{10 + 2*sizeof(int)},
         czyli zakładając, że typ \texttt{int} zajmuje w naszym kompilatorze 4 bajty dostajemy \texttt{10 + 2*4} = \texttt{18}. \\
         Jest to przydatne szczególnie przy operowaniu na strukturach, których pola są ułożone po kolei w pamięci, np. tablice:
         \begin{minted}{cpp}
@@ -621,7 +621,7 @@
 
     \begin{definition}
         \textbf{Wskaźnik a referencja} \\
-        Referencję możemy traktować jako dodatkową nazwę na juz istniejący obiekt. Jest to coś w rodzaju stałego wskaźnika.
+        Referencję możemy traktować jako dodatkową nazwę na już istniejący obiekt. Jest to coś w rodzaju stałego wskaźnika.
         Składnia referencji zabrania jednak wykonywania operacji znanych dla wskaźników:
         \begin{itemize}
             \item Dla referencji nie można zmienić referowanego obiektu - raz ustawiony (a musi być ustawiony prawie zawsze podczas jej deklaracji) nie zmienia się przez cały czas jej życia
@@ -763,8 +763,8 @@
     \begin{definition}
         \textbf{Polimorfizm} \\
         Referencje i wskaźniki obiektów mogą dotyczyć obiektów różnego typu, a wywołanie metody dla referencji spowoduje zachowanie
-        odpowiednie dla pełnego typu obiektu wywoływanego. Zazwyczaj można wyróżnić dwa rodzaje polimorfizmu: dynamiczne - wykonywane podczas działania programu,
-        a także statyczne - na etapie kompilacji.
+        odpowiednie dla pełnego typu obiektu wywoływanego. Zazwyczaj można wyróżnić dwa rodzaje polimorfizmu: dynamiczny - wykonywany podczas działania programu,
+        a także statyczny - na etapie kompilacji.
         \begin{minted}{cpp}
             class Point {
             protected:
@@ -850,7 +850,7 @@
         \item Mechanizm zaprzyjaźnienia jest specyficzny dla języka C++
         \item Dowolna ilość klas może deklarować zaprzyjaźnienie jednej funkcji
         \item Funkcje zaprzyjaźnione mogą być przeładowane, zarówno w definiowanej klasie, jak i na zewnątrz
-        \item Funkcje zaprzyjaźnione mogą być definiowane wewnątz klasy, ale
+        \item Funkcje zaprzyjaźnione mogą być definiowane wewnątrz klasy, ale
         nie stanowią metody klasy definiowanej i są szczególną definicją
         zewnętrznej funkcji mimo zapisu w ciele definicji klasy.
     \end{itemize}
@@ -990,13 +990,13 @@
         Implementują posortowane struktury danych, które da się szybko przeszukiwać (złożoność O(log n))
 
 
-        \item Nieuporządkowane Kontenty Asocjacyjne (unordered)
+        \item Nieuporządkowane Kontenery Asocjacyjne (unordered)
 
         Implementują nieposortowane (haszowane) struktury danych, które mogą być szybko przeszukiwane (zamortyzowana złożoność O(1), w najgorszym przypadku O(n))
 
     \end{itemize}
 
-    \begin{table}[]
+    \begin{table}[H]
         \begin{tabular}{|l|l|}
             \hline
             array & statyczna, ciągła tablica      \\ \hline
@@ -1016,7 +1016,7 @@
                                           kolekcja unikalnych kluczy\\ posortowana po kluczach
             \end{tabular}                               \\ \hline
             \begin{tabular}[c]{@{}l@{}}
-                map\\ unordered\_set
+                map\\ unordered\_map
             \end{tabular}           & \begin{tabular}[c]{@{}l@{}}
                                           słownik - kolekcja par klucz-wartość\\ posortowana po kluczach, klucze są unikalne
             \end{tabular} \\ \hline
@@ -1142,7 +1142,7 @@
 
     Sposób pracy z plikami w języku C jest następujący:
     \begin{enumerate}
-        \item Otwarcie pliku o określonym nazwie w określonym trybie (odczyt, zapis, dopisywanie)
+        \item Otwarcie pliku o określonej nazwie w określonym trybie (odczyt, zapis, dopisywanie)
         Funkcja fopen, prototyp:
         \begin{minted}{cpp}
             FILE *fopen(const char *filename, const char *mode);
@@ -1563,7 +1563,7 @@
 
         Teoria SCRUMa opiera się na trzech filarach:
         \begin{itemize}
-            \item \textbf{Przejżystość} - wszystkie istotne aspekty procesu muszą być widoczne dla osób odpowiedzialnych za osiągane rezultaty
+            \item \textbf{Przejrzystość} - wszystkie istotne aspekty procesu muszą być widoczne dla osób odpowiedzialnych za osiągane rezultaty
             \item \textbf{Adaptacja} - powinna być ciągła. Korekta musi być wykonana jak najszybciej, by ograniczyć dalsze następstwa problemów
             \item \textbf{Inspekcja} - poddawane regularnej inspekcji są zarówno scrumowe artefakty jak i postępy prac
         \end{itemize}
@@ -1682,9 +1682,6 @@
     \end{definition}
 
     \newpage
-
-
-
 
     \section{Wymagania w projekcie informatycznym: klasyfikacja, źródła, specyfikacja, analiza.}
 
@@ -2133,7 +2130,7 @@
 
         \item Warstwa logiki biznesowej
 
-        Koordynuje pracę aplikacji, przeytwarza żądania
+        Koordynuje pracę aplikacji, przetwarza żądania
         wartstwy prezentacji, dokonuje obliczeń.
 
         \item Warstwa danych
