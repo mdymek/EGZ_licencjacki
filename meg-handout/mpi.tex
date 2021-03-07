@@ -242,7 +242,7 @@
         $\mathbf{x^{N+1} = A^{N+1} x^0}$.
 
         \begin{enumerate}
-            \item W \textit{i}-tej iteracji: $x_i = Ay_i$, $y_i = \frac{x_i}{||x_i||_2}$
+            \item W \textit{i}-tej iteracji: $x_i = Ay_{i-1}$, $y_i = \frac{x_i}{||x_i||_2}$
             \item \textit{i}-te przybliżenie największej wartości własnej: $\lambda_i = \frac{<x_i, y_{i-1}>}{<y_{i-1}, y_{i-1}>}$
         \end{enumerate}
     \end{definition}
