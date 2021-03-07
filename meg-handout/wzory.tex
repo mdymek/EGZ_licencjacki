@@ -1,0 +1,483 @@
+%! suppress = EncloseWithLeftRight
+%! suppress = FileNotFound
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[MeX]{polski}
+\usepackage{rotating}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{xcolor,colortbl}
+\usepackage{xparse}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{lineno}
+\usepackage{hyperref}
+\usetikzlibrary{shapes,snakes}
+\graphicspath{{../graphics/teoria/}}
+\usepackage{subfiles}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+
+\hypersetup{
+colorlinks=true,
+linkcolor=black,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+
+\NewDocumentCommand{\newframedtheorem}{O{}momo}{%
+\IfNoValueTF{#3}
+{%
+\IfNoValueTF{#5}
+{\newtheorem{#2}{#4}}
+{\newtheorem{#2}{#4}[#5]}%
+}
+{\newtheorem{#2}[#3]{#4}}
+\tcolorboxenvironment{#2}{#1}%
+}
+
+\newframedtheorem{theorem}{Twierdzenie}[section]
+\newframedtheorem{definition}[theorem]{Definicja}
+
+\lstset{
+basicstyle=\ttfamily,
+numbers=left,
+commentstyle=\color{green},
+keywordstyle=\color{blue},
+stringstyle=\color{red},
+mathescape
+}
+
+
+\renewcommand{\figurename}{Załącznik}
+
+\begin{document}
+
+
+    \begin{center}{\LARGE Matematyczne podstawy informatyki}\end{center}
+
+    \begin{enumerate}
+        \item \textbf{Zasada indukcji matematycznej}.
+        Jeżeli (1) zachodzi $T(0)$, (2) $\forall n \in \mathbb{N} ~~ T(n) \Rightarrow T(n+1)$
+        to $T(n)$ jest prawdziwa dla każdego $n \in \mathbb{N}$.
+
+        \item Relacja \textbf{częściowego porządku}: zwrotna, przechodnia, antysymetryczna, \textbf{liniowego} również
+        spójna.
+        \begin{itemize}[noitemsep]
+            \item \textbf{Elementy porównywalne} to takie, które są w relacji ze sobą.
+            \item \textbf{Element maksymalny}, jeśli $~~ \forall a \in A ~~ m \preceq a ~ \Rightarrow  ~ a = m$.
+            \item \textbf{Element minimalny}, jeśli $~~ \forall a \in A ~~ a \preceq m ~ \Rightarrow  ~ a = m$.
+            \item \textbf{Element największy}, jeśli $~~ \forall a \in A ~~ a \preceq m$.
+            \item \textbf{Element najmniejszy}, jeśli $~~ \forall a \in A ~~ m \preceq a$.
+        \end{itemize}
+
+        \item \textbf{Relacja równoważości} jest \textbf{zwrotna}, \textbf{symetryczna} i \textbf{przechodnia}.
+        \textbf{Klasa abstrakcji} to zbiór elementów będących ze sobą w relacji, \textbf{zbiór ilorazowy} to zbiór
+        klas abstrakcji.
+
+        \item Dowody: \textbf{wprost}:  $ p \Rightarrow q$, \textbf{nie wprost}:  $(p \Rightarrow q) \Leftrightarrow (\neg q \Rightarrow \neg p)$,
+        \textbf{przez zaprzeczenie}: $(p \Rightarrow q) ~ \Leftrightarrow ~ \neg(p \wedge \neg q)$.
+
+        \item Metody rozwiązywania równań nieliniowych:
+        \begin{itemize}[noitemsep]
+            \item \textbf{bisekcji}: $f \text{ ciągła w ab, } f(a)f(b)<0 \rightarrow c = \frac{a+b}{2}$
+            \item \textbf{siecznych}: $f  \text{ ciągła w ab, } f(a)f(b)<0, \rightarrow
+            x_{k+1} = x_k - \frac{f(x_k)(x_k - x_{k-1})}{f(x_k) - f(x_{k-1})}, ~~ x_0 = a$, $x_1 = b$.
+            \item \textbf{Newtona}: $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$.
+            \item \textbf{Wielowymiarowa Newtona}: $x^{(i+1)} = x^{(i)} - [Df(x^{(i)})]^{-1} f(x^{(i)})$.
+        \end{itemize}
+
+        \item Rozwiązywanie układów równań liniowych: $(Q - A)x^n + b = \tilde{b}$.
+        \begin{itemize}[noitemsep]
+            \item \textbf{Jacobi}: $Q = D$, korzystamy z $N$
+            \item \textbf{Gauss-Seild}: $Q = L + D$, korzystamy z $N+1$ gdzie się da
+        \end{itemize}
+
+        \item Wektory i wartości własne: $Ax = \lambda x$
+        \begin{itemize}[noitemsep]
+            \item \textbf{Metoda potęgowa}: $x_i = Ay_{i-1}, ~ y_i = \frac{x_i}{||x_i||_2}, ~
+            \lambda_i = \frac{<x_i, y_{i-1}>}{<y_{i-1}, y_{i-1}>}$
+            \item \textbf{Odwrotna metoda potęgowa}:  $Ax_i = x_{i-1}, ~ \frac{1}{\lambda_i} = \frac{<x_i, x_{i-1}>}{<x_{i-1}, x_{i-1}>}$
+            \item \textbf{Metoda QR}: $A_i = Q_i R_i, ~~~~ A_{i+1} = R_i Q_i$, Q -- ortonormalna, R -- górnotrójkątna.
+        \end{itemize}
+
+        \item Interpolacja wielomianowa:
+        \begin{itemize}[noitemsep]
+            \item \textbf{Wzór interpolacyjny Lagrange'a}:
+            $p(x)=\sum _{i=0}^{n}y_{i}\prod _{j=0\land j\neq i}^{n}{\frac {x-x_{j}}{x_{i}-x_{j}}}$
+            \item \textbf{Interpolacja Hermite'a} -- przy użyciu \textbf{różnic dzielonych}
+            $ w(x)=\sum _{i=0}^{m}a_{i}\prod _{j=0}^{i-1}(x-{\bar {x}}_{j}),$ dla $a$ na przekątnych.
+            \item \textbf{Efekt Rungego} - pogorszenie jakości interpolacji mimo zwiększenia liczby węzłów.
+        \end{itemize}
+
+        \item \textbf{Zmienne dyskretne}: $P(X \in A) = \sum_{x \in A} P(x)$,  $F(x) = P(X \leq x) = \sum_{y \leq x}P(y)$
+        $EX = \sum_{x} x P(x)$, $VarX = \sigma^2 = E[ (X - \mu)^2 ]$.
+        \begin{itemize}[noitemsep]
+            \item \textbf{Bernoulli} (próba):
+            $P(x) = \left\{\begin{array}{lr}
+                               p,         & \text{for } x = 1 \\
+                               q = (1-p), & \text{for } x = 0
+            \end{array}\right., EX = p, VarX = pq$
+
+            \item \textbf{Binomial(n,p)} (sukcesy w n próbach):  $P(x) = \binom{n}{x} p^x (1-p)^{n-x} \text{ for } x = 0,1,\dots$,
+            $EX = np$, $VarX = npq$.
+
+            \item \textbf{Geometric(p)} (liczba prób do sukcesu):  $P(x) = q^{x-1}p \text{ for } x \in \mathbb{N}$,
+            $EX = \frac{1}{p}$, $VarX = \frac{q}{p^2}$
+
+            \item \textbf{Poisson($\lambda$)} (rozkład zdarzeń rzadkich): $P(x) = e^{-\lambda} \frac{\lambda^x}{x!} \text{ for } x \in \mathbb{N}$,
+            $EX = VarX = \lambda$
+        \end{itemize}
+
+        \item \textbf{Zmienne ciągłe}: $P(X \in A) = \int_{A} f(x)\,dx$, $F(x) = P(X \leq x) = \int_{-\infty}^{x}f(y)\,dy$,
+        $EX = \int xf(x) dx$, $VarX = \int_{- \infty}^{\infty} (x - \mu)^2 f(x) dx$.
+        \begin{itemize}[noitemsep]
+            \item \textbf{Unif(a,b)} (jednostajny): $f(x) = \frac{1}{b-a} \text{ for } a \leq x \leq b$,
+            $F(x) = \left\{\begin{array}{lr}
+                               0,               & \text{for } x < a        \\
+                               \frac{x-a}{b-a}, & \text{for } a \leq x < b \\
+                               1,               & \text{for } x \geq b
+            \end{array}\right.$, $EX = \frac{a+b}{2}$, $VarX = \frac{(b-a)^2}{12}$.
+            \item \textbf{Exp($\lambda$)} (modelowanie czasu bez pamięci):
+            $f(x) = \lambda e^{-\lambda x} \text{ for } x \geq 0$,
+            $F(x) = 1 - e^{-\lambda x}$, $EX = \frac{1}{\lambda}$, $VarX = \frac{1}{\lambda^2}$.
+            \item \textbf{Gamma($\alpha, \lambda$)} (łączny czas $\alpha$ niezależnych zdarzeń):
+            $f(x) = \frac{\lambda^{\alpha}}{\Gamma (\alpha)} x^{\alpha-1} e^{-\lambda x}$,
+            $F(x) = \frac{\lambda ^{\alpha}}{\Gamma(\alpha)} \int_{0}^{x} t^{\alpha-1} e^{-\lambda t} \,dt$,
+            $EX = \frac{\alpha}{\lambda}$, $VarX = \frac{\alpha}{\lambda ^2}$.
+            \item \textbf{N($\mu, \sigma$)} (normalny):
+            $f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{\frac{-(x - \mu)^2}{2 \sigma^2}}$,
+            $F(x) = \Phi(x)$ dla N(0,1), $EX = \mu$, $VarX = \sigma^2$
+        \end{itemize}
+        $T \sim Gamma(\alpha, \lambda), X \sim Poiss(\lambda t), ~~ P(T \leq t) = P( X \geq \alpha)$
+
+        $Binomial(n, p) = N\left(np, \sqrt{np(1-p)}\right)$
+
+        \item \textbf{Łańuchy Markowa} w czasie h:  $P_h = P_0 * P^h$, rozkład stacjonarny:
+        $\pi P = \pi$, $\sum \pi_i = 1$.
+
+        \item \textbf{Testy statystyczne}:
+        \begin{itemize}[noitemsep]
+            \item \textbf{Test Z} -- porównanie dużych prób, czy próba pasuje do populacji.
+            $Z = \frac{\hat{\theta} - \theta_0}{\sqrt{Var(\hat{\theta})}}$, np.
+            $Z = \frac{\hat{p_1} - \hat{p_2} - D}{\sqrt{\frac{\hat{p_1}(1-\hat{p_1})}{n} + \frac{\hat{p_2}(1-\hat{p_2})}{m}}}$
+
+            \item \textbf{Test T} -- porównanie małych niekoniecznie niezależnych prób, próba do wartości.
+            $t = \frac{\bar{X} - \mu_0}{\frac{s}{\sqrt{n}}}$,
+            $t = \frac{\bar{X} - \bar{Y} - D}{s_p\sqrt{\frac{1}{n}+\frac{1}{m}}}$
+
+            \item \textbf{Test Chi-kwadrat} -- ustalenie goodness of fit, badanie niezależności.
+            $\chi^2 = \sum_{k=1}^{N} \frac{(Obs(k) - Exp(k))^2}{Exp(k)}, R = [\chi_{\alpha}^2, +\infty], P = P{\chi^2 \geq \chi_{obs}^2}$,\\
+            $\chi_{obs}^2 = \sum_{i=1}^k \sum_{j=1}^m \frac{(Obs(i,j) - \hat{Exp}(i,j))^2}{\hat{Exp}(i,j)}, \hat{Exp}(i,j) = \frac{(n_{i.})(n_{.j})}{n}$
+        \end{itemize}
+
+        \item \textbf{Wzór Bayesa}: $   P(E|F) = \frac{P(F|E) P(E)}{P(F)}$
+
+        \item  \textbf{Element odwrotny w $(Z_m, +, *)$}: $x \cdot x^{-1} = 1 \  mod \  m$,
+        \textbf{Tożsamość Bézouta}: $\forall a, b \in \mathbb{Z} : NWD(a,b) = d \exists x, y \in \mathbb{Z}: ax + by = d$.
+        \textbf{Rozszerzony algorym Euklidesa}:
+        $r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}$\\
+        $x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}$\\
+        $y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}$
+
+        \item \textbf{Ortogonalność}: $x \bot y \Leftrightarrow x \cdot y = 0$, \textbf{liniowa niezależność}:\\
+        $a_1 * x_1 + a_2 * x_2 + \ldots + a_n * x_n = 0 \Rightarrow a_1 = a_2 = \ldots = a_n = 0$,\\
+        \textbf{ortonormalność:} $\forall x,y \in A  \quad   x \cdot y =  \begin{cases}
+                                                                              0, & x \ne y \\
+                                                                              1, & x = y
+        \end{cases}$\\
+        \textbf{ortonormalizacja} Gramma-Schmidta:
+        dla zbioru wektorów $A = \{\mathbf{v}_1, \dots,  \mathbf{v}_n\}$ oblicz
+        $\mathbf{u}_i = \mathbf{v}_i - \sum_{j=1}^{i-1} \mathrm{proj}_\mathbf{u_j} \mathbf{v}_i, ~~
+        \mathrm{proj}_\mathbf{u} \mathbf{v} = \frac{\mathbf{v} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$.
+        Wektory u znormalizuj.
+
+        \item \textbf{Liczby Stirlinga I rodzaju} (n-elementowa permutacja o rozkładzie na k cykli rozłącznych):
+        $c(0,0) = 1, ~ c(n,0) = c(0,n) = 0, ~ c(n,k) = c(n-1, k-1) + (n-1) * c(n-1, k)$.\\
+        \textbf{Liczby Stirlinga II rodzaju} (rozmieszczenie n rozróżnialnych kul na k nierozróżnialnych stosach):
+        $S(0,0) = 1, ~ S(n,0) = S(0,n) = 0, ~ S(n,k) = S(n-1, k-1) + k * S(n-1, k)$.
+
+        \item \textbf{Funkcja Eulera}: $\sum_{m|n}^{} \varphi(m) = n$, \textbf{Małe Twierdzenie Fermata}:
+        $a^{p-a} \equiv 0 \pmod p ~~ \forall a \in \mathbb{Z}, a^{p-1} \equiv 1 \pmod p ~~ \forall a : NWD(a,p) = 1$,
+        \textbf{Twierdzenie Eulera}: $\forall m \in \mathbb{Z_+}, ~ a \in \mathbb{Z} ~~ a^{\varphi (m)} \equiv 1 \pmod m$.
+
+        \item \textbf{Konfiguracja} (n, k, r): $n = |X|, ~ |B_i| = k ~ \forall i = 1, \dots, b, ~ n \cdot r = b \cdot k, ~
+        \frac{n\cdot r}{k}\leq {n\choose k}$. \textbf{T-konfiguracja}: $r_{t-1} = r_t \cdot \frac{n-t+1}{k-t+1}$.
+
+        \item Jeśli $\forall u, v \in V: d(u) + d(v) \geq n-1$ to \textbf{ścieżka Hamiltona}, $d(u) + d(v) \geq n$ lub
+        $\min\{d(v) : v \in V\} \geq \mathbf{\frac{n}{2}}$ to \textbf{cykl Hamiltona}. $\forall u, v \in V
+        |\{v: d(v) \% 2 == 1\}| = 0 \vee 2 \leftrightarrow$ \textbf{droga Eulera}, $|\{v: d(v) \% 2 == 1\}| = 0$ --
+        \textbf{obwód Eulera}.
+
+        \item \textbf{Maksymalny przepływ} to wartość pojemności \textbf{minimalnego przekroju}.
+
+        \item \textbf{Funkcje tworzące}:
+        $\frac{1}{(1-x)^m} ~ = ~ \sum_{n=0}^{\infty} \binom{n+m-1}{n} x^n ~~ \forall m \in \mathbb{N}$,\\
+        $(1+x)^{\alpha} ~ = ~ \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n ~~ \forall \alpha \in \mathbb{R}, |x| < 1$
+
+        \item \textbf{Granica ciągu}: $lim_{n  \rightarrow \infty} ~ a_n = a, ~~ a \in \mathbb{R} \Leftrightarrow$\\
+        $  \forall \varepsilon > 0 ~~ \exists  n_0 \in \mathbb{N} ~~ \forall n \in \mathbb{N} ~~~ [(n > n_0) \Rightarrow (|a_n - a| < \varepsilon)]$.
+        Twierdzenia: o ograniczoności, o równoważności (z modułem), o dwóch/trzech ciągach, o ciągu monotonicznym
+        ograniczonym.\\
+        \textbf{Granica funckji}:
+        (Heine) $lim_{x \rightarrow x_0} ~ f(x) = g ~~ \Leftrightarrow$\\
+        $\forall_{(x_n): ~ \{x_n\} \subset S(x_0)} ~~ [(lim_{n \rightarrow \infty} x_n = x_0) \Rightarrow (lim_{n \rightarrow \infty} f(x_n) = g)].$\\
+        (Cauchy)    $lim_{x \rightarrow x_0} ~ f(x)  = g ~~ \Leftrightarrow$\\
+        $\forall \varepsilon > 0 ~~ \exists \delta > 0 ~~ \forall  x \in S(x_0)  ~~~ [(|x - x_0| <  \delta) \Rightarrow (|f(x) - g| < \varepsilon)].$
+        Warunek konieczny i wystarczający: $lim_{x \rightarrow x^{-}_0}  ~ f(x) ~ = ~ lim_{x \rightarrow x^{+}_0}  ~ f(x)$.
+        Twierdzenia: o nieistnieniu granicy w punkcie/nieskończoności (różne granice ciągów zbiegających),
+        o dwóch/trzech funkcjach, reguła \textbf{de L'Hospitala}.
+
+        \item Funkcja \textbf{ciągła} w punkcie $\Leftrightarrow ~ lim_{x \rightarrow x_0} ~ f(x) = f(x_0)$,
+        kon i wys: ciągła lewo i prawostronnie. \textbf{Nieciągłość I rodzaju}:
+        $lim_{x \rightarrow x^{-}_0} ~ f(x) \neq  f(x_0) ~ \text{lub} ~ lim_{x \rightarrow x^{+}_0} ~ f(x) \neq f(x_0)$,
+        \textbf{II rodzaju} -- któraś granica nie istnieje lub jest niewłaściwa.
+        Twierdzenia: Weierstrassa o ograniczoności funkcji ciągłej (ciągła na domkniętym ograniczonym $\rightarrow$ ograniczona),
+        Weierstrassa o osiąganiu kresów, Darboux o przyjmowaniu wartości pośrednich.\\
+        \textbf{Pochodna}: $f'(x_0) ~ \stackrel{def}{=} ~ lim_{\Delta x \rightarrow 0} ~ \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}$.
+        Pochodna w punkcie $\rightarrow$ funkcja ciągła w tym punkcie. \textbf{Przybliżanie}: $f(x_0 + \Delta x) \approx f(x_0) + f'(x_0)\Delta x$.
+        Twierdzenia: Rolle'a (ciągła na ab, $f(a) = f(b)$ $\rightarrow$ $\exists c : f'(c) = 0$),
+        Lagrange'a (ciągła, $\exists c : f'(c) = \frac{f(b)-f(a)}{b-a}$)
+
+        \item \textbf{Minimum lokalne} (właściwe): $\exists \delta > 0 ~ \forall x \in S(x_0, \delta) ~~ f(x) \geq (>) f(x_0)$.
+        Warunek Fermata - jeśli istnieje pochodna, to $f'(x_0) = 0$.
+        I warunek wys -- pochodna się zeruje, otoczenie zbiega.
+        II warunek wys -- wszystkie pochodna aż do n-tej się zerują, n-ta ujemna, n parzyste.
+
+        \item \textbf{Całka Riemanna}: $\int_{a}^{b} f(x) \,dx ~~ \stackrel{def}{=} ~~ lim_{\delta(P)  \rightarrow 0} \sum_{k=1}^{n} f(x^{*}_k) \Delta x_k$.
+        Funkcja całkowalna jeśli ograniczona i skończona liczba nieciągłośći pierwszego rodzaju.\\
+        \textbf{Suma całkowa}: $\int_{a}^b f(x) \, dx ~ = ~ lim_{n \rightarrow \infty} [\frac{b - a}{n} \sum_{k=1}^n f \left(a + k \frac{b - a}{n}\right)]$,\\
+        \textbf{całka Newtona-Leibniza}: $\int_a^b f(x) \,dx ~ = ~ F(b) - F(a) ~ = ~ [F(x)]_a^b$.
+
+        \item \textbf{Pochodna cząstkowa:} $\frac{\partial f}{\partial x}(x_0, y_0)  \stackrel{def}{=} lim_{\Delta x \rightarrow 0} \frac{f(x_0 + \Delta x, y_0) - f(x_0, y_0)}{\Delta x}$.\\
+        \textbf{Różniczkowalność}: $\underset{(\Delta x,  \Delta y) \rightarrow (0,0)}{\lim} \frac{f(x_0 + \Delta x, y_0 +  \Delta y) - f(x_0, y_0) - \frac{\partial f}{\partial x}(x_0, y_0)\Delta x - \frac{\partial f}{\partial y}(x_0, y_0) \Delta y}{\sqrt{\Delta x^2 +  \Delta y^2}} = 0$.\\
+        \textbf{Różniczka}: $df(x_0, y_0)(\Delta x, \Delta y) \stackrel{def}{=} \frac{\partial f}{\partial x}(x_0, y_0)\Delta x + \frac{\partial f}{\partial y}(x_0, y_0)\Delta y$.\\
+        \textbf{Przybliżenie}: $f(x_0 + \Delta x, y_0 + \Delta y) \approx f(x_0, y_0) + df(x_0, y_0)(\Delta x, \Delta y)$.
+
+        \item \textbf{Ekstremum wieelu zmiennych} -- warunek konieczny: wszystkie pochodne cząstkowe zerowe.
+        Warunek wystarczający: konieczny plus wyznacznik Jacobianu > 0.
+        Minimum, gdy $\frac{\partial^2 f}{\partial^2 x}(x_0, y_0) > 0$,
+        maksimum, gdy $\frac{\partial^2 f}{\partial^2 x}(x_0, y_0) < 0$.
+
+        \item \textbf{Zamiana zmiennych w rachunku całkowym}.
+        Dla  $ T: \begin{cases}
+                      x = \phi(u,v,w) \\
+                      y = \psi(u,v,w) \\
+                      z = \chi(u,v,w)
+        \end{cases}$ mamy
+        \begin{align*}
+            \iiint_V f(x,y,z)\,dx\,dy\,dz = \iiint_{\Omega} f(\phi(u,v,w), \psi(u,v,w), \chi(u,v,w))
+            |J_T| \,du\,dv\,dw
+        \end{align*}
+        \begin{itemize}[noitemsep]
+            \item \textbf{walcowe}:  $W: \begin{cases}
+                                             x = \varrho \cos \varphi \\
+                                             y = \varrho \sin \varphi \\
+                                             z = h
+            \end{cases} ~~~~
+            |J_W| = \varrho$
+
+            \item \textbf{sferyczne}: $S: \begin{cases}
+                                              x = \varrho \cos \varphi \cos \psi \\
+                                              y = \varrho \sin \varphi \cos \psi \\
+                                              z = \varrho \sin \psi
+            \end{cases} ~~~~
+            |J_S| = \varrho^2 \cos \psi$
+        \end{itemize}
+    \end{enumerate}
+
+    \newpage
+
+    \begin{center} {\LARGE Teoretyczne podstawy informatyki} \end{center}
+
+    \begin{enumerate}
+        \setcounter{enumi}{28}
+        \item \textbf{Metody dowodzenia poprawności pętli} -- asercje początkowe i końcowe; \textbf{określoność obliczeń}
+        jeżeli dla danych spełniających warunek działanie algorytmu nie zostanie zerwane; \textbf{własność stopu},
+        \textbf{częściowa poprawność} = dla danych spełniających warunek a jeżeli algorytm dojdzie do końca to wyjście
+        spełnia warunek b; \textbf{całkowita poprawność}: określoność + stop + częściowa poprawność.
+
+        \item \textbf{ONP} -- postfiksowa bez nawiasów, jednoznaczna kolejność działań.
+
+        \item \textbf{Maszyna Turinga}: $MT ~ = ~<Q, q_0 \in Q, F \subset Q \setminus \{q_0\}, \tau, b \in \tau, \Sigma \subset \tau, \delta>$
+
+        \item \textbf{Automat skończony deterministyczny}: $\mathcal{A} = (S, A, f, s_{0}, T), f: S\times A \rightarrow S$,
+        \textbf{niedeterministyczny}: $f : S \times A \rightarrow \mathcal{P} (S)$, \textbf{automat ze stosem}:
+        $\mathcal{AS} = (A, A_{S}, Q, f, s_{0}, z_{0}, Q_{F}), f: A_{s} \times Q \times (A \cup \{1\}) \rightarrow \mathcal{P}_{sk}(A^{*}_{S} \times Q)$.
+
+        \item \textbf{Złożoność obliczeniowa} -- notacje:
+        \begin{itemize}[noitemsep]
+            \item $\mathbf{f(n) = O(g(n))}$ -- f jest \textbf{co najwyżej rzędu} g, gdy
+            $\exists c > 0, n_0 \in \mathbb{N} \forall n \geq n_0 f(n) \leq cg(n).$
+            \item $\mathbf{f(n) = \Omega(g(n))}$ -- f jest \textbf{co najmniej rzędu} g, gdy
+            $g(n) = O(f(n))$.
+            \item $\mathbf{f(n) = \Theta(g(n))}$ -- f jest \textbf{dokładnie rzędu} g, gdy
+            $f(n) = O(g(n)) \wedge  f(n) = \Omega(g(n))$.
+        \end{itemize}
+
+        \item \textbf{Złożoność pesumistyczna}: $W(n) = \sup\{t(d) : d \in D_n\}$, \textbf{optymistyczna}:
+        $Opt(n) = \inf\{t(d) : d \in D_n\}$, \textbf{średnia}: $A(n) = ave(X_n) = \sum_{k \geq 0}kp_{nk}$.
+        \textbf{Koszt amortyzowany} -- metoda kosztu sumarycznego, księgowania, potencjału.
+
+        \item \textbf{Dziel i zwyciężaj} -- dziel, zwyciężaj, łącz;
+        rekurencja nieliniowa, redundancja obliczeń.
+
+        \item \textbf{Lista} -- sekwencyjna, uporządkowana, elementy ustalonego typu.
+        Implemenetacja: tablica, lista
+        wiązania (jedno/dwukierunkowa, z głową, cykliczna).
+        Operacje O(n).
+
+        \item \textbf{Kolejka} FIFO - lista z początkiem i końcem, operacje w O(1). \textbf{Kolejka priorytetowa}
+        list z priorytetem, najlepiej na kopcu (O(1) dla wzięcia i O(logn)  dla pozostałych).
+
+        \item \textbf{QuickSort} -- pesymistyczna - $O(n^2)$, średnia i optymistyczna - $O(nlog_2 n)$.
+        \textbf{Sposoby wybrania pivota}: pierwszy, ostatni lub losowy element; \textbf{mediana} z pierwszego,
+        środkowego i ostatniego. \textbf{MergeSort} -- pesymistyczna, średnia, optymistyczna - $O(nlogn)$.
+
+        \item \textbf{CountSort} -- $O(n+k)$, \textbf{BucketSort} -- pesymistyczna -  $O(n^2)$, średnia -
+        $O\left(n + \frac{n^2}{k} + k\right)$, \textbf{RadixSort} -- $O(d(n+k))$, gdzie d jest liczbą cyfr.
+
+        \item Pre- lub postorder + inorder pozwala odtworzyć drzewo.
+
+        \item \textbf{BST} -- binarne drzewo poszukiwań. \textbf{Następnik}: skrajnie lewy w prawym poddrzewie lub pierwszy
+        przodek dla którego jesteś w lewym. \textbf{Poprzednik} na odwrót. \textbf{Usuwanie} - liścia -- nic;
+        z jednym
+        synem -- podstawiamy syna;
+        z dwoma -- podstawiamy następnik.
+
+        \item \textbf{B-drzewo} -- ma ustalony \textbf{rząd K}.
+        Korzeń jest liściem lub ma od 2 do K synów;
+        wszystkie liście na tym samym poziomie;
+        wysokość $\in [\log_{\frac{K}{2}} \frac{n}{\frac{K}{2}}, \log_{K} \frac{n}{K}]$;
+        każdy węzeł wewnętrzny ma  $s \in [\lceil K/2 \rceil, K]$ synów i $s-1$ kluczy. \textbf{Złożoność}
+        operacji -- $O(K \log_{K} n)$.
+        W drzewach \textbf{B+} liście są listą.
+
+        \item \textbf{AVL} to zrównoważona wersja BST. Rotacje RR, LL, RL, LR\@.
+
+        \item \textbf{BFS} -- nawet dla nieskończone zwróci poprawne odpowiedzi (kompletność); \textbf{DFS} niekompletność.
+        \textbf{Złożoność obliczeniowa} -- $\theta(e + v)$, złożoność \textbf{pamięciowa} --  $\theta(v)$.
+
+        \item \textbf{Dijkstra} -- zachłanna, dla wag nieujemnych, najmneijszy wierzchołek i relax na sąsiadów;
+        \textbf{złożoność}: $O(|V|^2)$ na tablicy, $O(|E|\log|V|)$ na kopcu.
+        \textbf{Bellman-Ford} -- działa ok dla ujemnych wag ale bez ujemnych cykli (może je wykryć), używany w RIP;
+        Dla każdego wierzchołka na wszystkich relax jego krawędziach, \textbf{złożoność} -- $O(|V|\cdot|E|)$.
+        \textbf{Floyd-Warshall} -- relax na każdej trójce wierzchołków, $\theta(v^3)$.
+
+        \item \textbf{Programowanie dynamiczne} -- metoda wstępująca i zstępująca;
+        problem ma własność optymalnej
+        podstruktury.
+
+        \item \textbf{Algorytm zachłanny} podejmuje lokalnie optymalne decyzje licząc na globalnie optymalne rozwiązanie.
+
+        \item  \textbf{Kolorowanie grafów} jest \textbf{NP-trudne}.
+        Kolorowanie krawędziowe: zachłanne z BFS\@.
+        Kolorowanie wierzchołkowe: smallest last (zachłanne od wierzchołka o największym stopniu) -- statyczny, $O(|V|+|E|)$;
+        saturated largest first (zachłannie max stopień max nasycenie (kolory sąsiadów)) -- $O(|E|\log |V|)$.
+
+        \item \textbf{Minimalne drzewo rozpinające} -- \textbf{Boruvka} $O(ElogV)$ łączenie drzew min krawędziami;
+        \textbf{Prim} $O(V^2)$ lub $O(ElogV)$ (lista i kopiec) -- losowy wierzchołek, min krawędzie do niepołączonych
+        wierzchołków; \textbf{Kruskal}  $O(ElogE)$ jeśli $E > V$ lub $O(ElogV)$ wpp -- min krawędzie nie tworzące cyklu.
+
+        \item \textbf{Otoczka wypukła} -- \textbf{Graham}  $O(n \log n)$ -- ABC i trójkąty AOC; \textbf{Jarvis}
+        pes $O(n^2)$, średnia $O(kn)$ -- największe kąty od y min; \textbf{Quickhull} pes $O(n^2)$, średnia
+        $O(n \log n)$ -- dwa najdalsze punkty AB, podziel najdalszy punkt C, podziel itd.
+
+        \item Problemy \textbf{P} -- znalezienie rozwiązania w wielomianowym; \textbf{NP} -- zweryfikowanie rozwiązania
+        w wielomianowym; \textbf{NP-zupełny} -- taki do którego da się zredukować wszystkie NP w wielomianowym.
+        Czy istnieje NP który nie jest P?
+
+        \item \textbf{Automat minimalny} -- najmniejsza liczba stanów.
+        Pochodne lub kongruencja
+        ($\mathcal{A}_{P_{L}^{r}} = (A^{*} / P_{L}^{r}, A, f^{*}, [1]_{P_{L}^{r}}, T)$).
+
+        \item \textbf{Lemat o pompowaniu dla języków regularnych}: $\exists N \in \mathbb{N}: ~ \forall w \in L ~ |w| \geq N
+        ~~ w = v_1 u v_2, ~~ v_1, v_2 \in A*, ~ u \in A^+, ~~ |v_1 u| < N \wedge v_1 u* v_2 \in L$.
+
+        \item \textbf{Warunki równoważne definicji języka regularnego L: automat, prawa kongruencja syntaktyczna, wyrażenia regularne.}
+        \begin{itemize}[noitemsep]
+            \item L = L($\mathcal{A}$) dla automatu deterministycznego $\mathcal{A}$
+            \item L = L($\mathcal{A}_{ND}$) dla automatu niedeterministycznego $\mathcal{A}_{ND}$
+            \item L = L($\mathcal{A}_{ND}^p$) dla automatu niedeterministycznego $\mathcal{A}_{ND}^p$ z pustymi przejściami
+            \item L = $\|\alpha\|$ dla wyrażenia regularnego $\alpha$ nad alfabetem A
+            \item L jest sumą wybranych klas równoważności pewnej prawej kongruencji na $A^*$
+            o skończonym indeksie oraz L = $\bigcup\limits_{w \in L}[w]_p$
+        \end{itemize}
+
+        \item \textbf{Automaty deterministyczne i niedeterministyczne}: $\mathcal{A}_D = (P(S), \overline{f}, I, T)$,
+        $\mathcal{A}_{ND} = (S, f, I, F)$.  \textbf{Determinizm automatu ze stosem}: $ \# f(z, q, a) \leq 1 \; \mathrm{oraz} \;
+        f(z, q, 1) \neq \emptyset \Rightarrow f(z, q, a) = \emptyset \; \forall a \in A$.
+
+        \item \textbf{Problemy rozstrzygalne i nierozstrzygalne w teorii języków.}
+        \begin{center}
+            \begin{tabular}{p{8cm} p{8cm}}
+                \begin{tabular}{c | c c c c}
+                    ---                     & 3 & 2 & 1 & 0 \\ [0.5ex]
+                    \hline
+                    Należenie $\in$         & T & T & T & N \\
+                    \hline
+                    Inkluzja $\subset$      & T & N & N & N \\
+                    \hline
+                    Równoważność $\equiv$   & T & N & N & N \\
+                    \hline
+                    Pustość $\emptyset$     & T & T & N & N \\
+                    \hline
+                    Nieskończoność $\infty$ & T & T & N & N \\
+                    \hline
+                    Jednoznaczność          & T & N & - & - \\ [1ex]
+                \end{tabular}
+                &
+                \begin{tabular}{c}
+                    Oznaczenia:       \\
+                    T - rozstrzygalny \\
+                    N - nieroztrzygalny
+                \end{tabular}
+            \end{tabular}
+        \end{center}
+
+        \item \textbf{Klasy języków - Chomsky}
+        \begin{enumerate}[noitemsep, label=\arabic*]
+            \setcounter{enumii}{-1}
+            \item \textbf{Gramatyka} $G=(V_N,V_T,P,v_0)$, $V_N \cap V_T = \emptyset$, $\forall (u,v)\in P$; $\#_{V_N} u >= 1$.
+
+            \item \textbf{Kontekstowa} -- prawa postaci $u_1 v u_2 \rightarrow u_1 x u_2$, gdzie
+            $v$ nieterminal lub $v_0 \rightarrow 1$ dla $v_0$ niewystępującego po prawej stronie w żadnym prawie z $P$.
+
+            \item \textbf{Bezkontekstowa} -- prawa postaci
+            $v \rightarrow x, \text{ gdzie } v \in V_N, x \in (V_N \cup V_T)^\star$
+
+            \item \textbf{Regularna} -- prawa postaci
+            $v \rightarrow v'x \text{ lub } v \rightarrow x, \text{ gdzie } v,v' \in V_N;x \in V_T^\star$
+        \end{enumerate}
+        \begin{center}
+            \begin{tabular}{|c c c c c|}
+                \hline
+                ---         & 3 & 2 & 1 & 0 \\ [0.5ex]
+                \hline\hline
+                $\cup$      & T & T & T & T \\
+                \hline
+                $\cdot$     & T & T & T & T \\
+                \hline
+                $\star$     & T & T & T & T \\
+                \hline
+                $\setminus$ & T & N & T & N \\
+                \hline
+                $\cap $     & T & N & T & T \\ [1ex]
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{enumerate}
+\end{document}
