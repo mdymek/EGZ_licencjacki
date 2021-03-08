@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build document
+    name: Build documents
     runs-on: ubuntu-latest
     steps:
       - name: Chceckout code
@@ -34,6 +34,31 @@ jobs:
           name: teoria
           path: teoria/teoria.pdf
 
+      - name: Compile handout document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: meg-handout
+          root_file: handout.tex
+          args: -pdf -shell-escape
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: handout
+          path: meg-handout/handout.pdf
+
+      - name: Compile wzory document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: meg-handout
+          root_file: wzory.tex
+          args: -pdf -shell-escape
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: wzory
+          path: meg-handout/wzory.pdf
+
   release:
     name: Publish documents
     needs: build
@@ -43,14 +68,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Download praktyka artifact
         uses: actions/download-artifact@v2
         with:
           name: praktyka
+
       - name: Download teoria artifact
         uses: actions/download-artifact@v2
         with:
           name: teoria
+
+      - name: Download handout artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: handout
+
+      - name: Download wzory artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: wzory
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
