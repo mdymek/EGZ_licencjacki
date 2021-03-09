@@ -12,5 +12,17 @@ pdflatex -shell-escape praktyka.tex
 open praktyka.pdf
 ```
 
+```
+cd meg-handout
+pdflatex -shell-escape handout.tex
+open handout.pdf
+```
+
+```
+cd meg-handout
+pdflatex -shell-escape wzory.tex
+open wzory.pdf
+```
+
 Pdfs generated in artifacts of the latest successful [action](https://github.com/mdymek/EGZ_licencjacki/actions).  
 [Releases](https://github.com/mdymek/EGZ_licencjacki/releases).
