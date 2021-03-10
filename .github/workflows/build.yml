@@ -34,22 +34,22 @@ jobs:
           name: teoria
           path: teoria/teoria.pdf
 
-      - name: Compile handout document
+      - name: Compile bryk document
         uses: xu-cheng/latex-action@v2
         with:
-          working_directory: meg-handout
-          root_file: handout.tex
+          working_directory: bryk
+          root_file: bryk.tex
           args: -pdf -shell-escape
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: handout
-          path: meg-handout/handout.pdf
+          name: bryk
+          path: bryk/bryk.pdf
 
       - name: Compile wzory document
         uses: xu-cheng/latex-action@v2
         with:
-          working_directory: meg-handout
+          working_directory: bryk
           root_file: wzory.tex
           args: -pdf -shell-escape
 
@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: wzory
-          path: meg-handout/wzory.pdf
+          path: bryk/wzory.pdf
 
   release:
     name: Publish documents
@@ -79,10 +79,10 @@ jobs:
         with:
           name: teoria
 
-      - name: Download handout artifact
+      - name: Download bryk artifact
         uses: actions/download-artifact@v2
         with:
-          name: handout
+          name: bryk
 
       - name: Download wzory artifact
         uses: actions/download-artifact@v2
