@@ -13,13 +13,13 @@ open praktyka.pdf
 ```
 
 ```
-cd meg-handout
-pdflatex -shell-escape handout.tex
-open handout.pdf
+cd bryk
+pdflatex -shell-escape bryk.tex
+open bryk.pdf
 ```
 
 ```
-cd meg-handout
+cd bryk
 pdflatex -shell-escape wzory.tex
 open wzory.pdf
 ```
