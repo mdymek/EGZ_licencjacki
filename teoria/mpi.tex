@@ -127,8 +127,9 @@
         jest prawdą.
     \end{definition}
 
+
     \begin{definition}
-        \textbf{Dowód nie wprost}. Metoda dowodu nie wprost opiera się na następującej tautologii rachunku
+        \textbf{Dowód przez kontrapozycję}. Metoda dowodu przez kontrapozycję opiera się na następującej tautologii rachunku
         zdań, zwanej prawem kontrapozycji:
         \begin{align*}
             (p \Rightarrow q) \Leftrightarrow (\neg q \Rightarrow \neg p).
@@ -137,16 +138,20 @@
         zdaniem fałszywym.
     \end{definition}
 
+    Dla prawdziwości zdania:
+    \begin{align*}
+        p
+    \end{align*}
+
     \begin{definition}
-        \textbf{Dowód przez zaprzeczenie} Metoda dowodu przez zaprzeczenie opiera się na następującej tautologii rachunku
+        \textbf{Dowód nie wprost} Metoda dowodu nie wprost opiera się na następującej tautologii rachunku
         zdań:
         \begin{align*}
-            (p \Rightarrow q) ~ \Leftrightarrow ~ (\neg p \vee q) ~ \Leftrightarrow ~ \neg(p \wedge \neg q)
+        	p \Leftrightarrow (\neg p \Rightarrow (q \wedge \neg q))
         \end{align*}
-        Stosując to podejście zakładamy, że p jest prawdą a q fałszem i pokazujemy, że prowadzi to do sprzeczności,
-        to znaczy, pokazujemy że $(p \wedge \neg q)$ jest fałszem.
+        Stosując to podejście zakładamy, że p jest fałszem i pokazujemy, że prowadzi to do sprzeczności,
+        to znaczy, pokazujemy że zachodzi $q$ oraz $\neg q$, co jest sprzecznością.
     \end{definition}
-
     \newpage
 
     \section{Metody numeryczne rozwiązywania równań nieliniowych: bisekcji, siecznych, Newtona.}
