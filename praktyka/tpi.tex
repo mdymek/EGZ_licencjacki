@@ -212,7 +212,7 @@
         (A, 1) \mapsto (1, \rightarrow, A)\\
     \end{gather*}
 
-    Kiedy odczytamy znak pusty musimy zawrócić - tworzymy nowy stan (B), który będzie odpowiadałza przejście w lewo.
+    Kiedy odczytamy znak pusty musimy zawrócić - tworzymy nowy stan (B), który będzie odpowiadał za przejście w lewo.
     \[ (A, \_) \mapsto (\_, \leftarrow, B) \]
 
     W stanie B przechodzimy wszystkie jedynki zastępując je zerami aż do natrafienia na 0 lub znak pusty:
@@ -283,7 +283,7 @@
 
     \newpage
 
-    \section{Modele obliczen: automat skończony, automat ze stosem.}
+    \section{Modele obliczeń: automat skończony, automat ze stosem.}
     \subsection{Automat skończeniestanowy deterministyczny}
     \textbf{Zad 1.} \\
 
@@ -298,7 +298,7 @@
     $(abb)^{-1}L = N$ \\
 
     \noindent Jak można zauważyć nie dostaniemy już innych pochodnych, więc nasz automat składa się z 4 stanów: L, $\emptyset$, M, N. \\
-    Stan N jest stanem akceptującym, ponieważ sotał uzyskany przez odjęcie słowa należącego do języka L. L jest stanem początkowym. Przejściami w tym automacie są przejścia między pochodnymi pod wpływem kolejnych liter. \\
+    Stan N jest stanem akceptującym, ponieważ został uzyskany przez odjęcie słowa należącego do języka L. L jest stanem początkowym. Przejściami w tym automacie są przejścia między pochodnymi pod wpływem kolejnych liter. \\
 
     \begin{center}
         \begin{tikzpicture}[scale=0.2]
@@ -390,9 +390,9 @@
         \end{tabular}
     \end{table}
 
-    \noindent Powyższa tabelka przedstawia już wszystkie mozliwe kombinacje stanów do uzyskania dla tego automatu (kolejne słowa dawałyby stan, który już jest w tabelce dla innego słowa) i jest ona reprezentacją naszego automatu. \\
+    \noindent Powyższa tabelka przedstawia już wszystkie możliwe kombinacje stanów do uzyskania dla tego automatu (kolejne słowa dawałyby stan, który już jest w tabelce dla innego słowa) i jest ona reprezentacją naszego automatu. \\
 
-    \noindent Dodatkowo możeby podczas uzupełniania tabelki zauważyć m.in. że: \\
+    \noindent Dodatkowo możemy podczas uzupełniania tabelki zauważyć m.in. że: \\
     $b^2 = b$ \\
     $a^3 = a^2$ \\
     $a^{2}b = a^2$ \\
@@ -1116,9 +1116,9 @@
     \begin{enumerate}
         \item skrajnie lewy element prawego poddrzewa węzła, jeśli posiada on prawe poddrzewo, np:
         \begin{itemize}
-            \item 4 jest nestępnikiem 3,
+            \item 4 jest następnikiem 3,
             \item 10 jest następnikiem 8,
-            \item 13 jest nestępnikiem 10.
+            \item 13 jest następnikiem 10.
         \end{itemize}
         \item pierwszy napotkany przodek węzła, dla którego węzeł jest w lewym poddrzewie, np:
         \begin{itemize}
@@ -1388,7 +1388,7 @@
         \end{forest}
     \end{center}
 
-    Jak widac dla węzła \texttt{2} prawe poddrzewo jest o 2 głębsze niż lewe. Ponieważ na pierwszym poziomie (względem elementu \texttt{2}) mamy głębsze prawe poddrzewo, a na drugim lewe, musimy zastosować rotację RL: \\
+    Jak widać dla węzła \texttt{2} prawe poddrzewo jest o 2 głębsze niż lewe. Ponieważ na pierwszym poziomie (względem elementu \texttt{2}) mamy głębsze prawe poddrzewo, a na drugim lewe, musimy zastosować rotację RL: \\
 
     \noindent Pierwszy krok rotacji RL (doprowadzamy do sytuacji dla rotacji RR): \\
 
@@ -3732,7 +3732,7 @@
         \end{tikzpicture}
     \end{center}
 
-    B nie należy do trójkąta AOC, więc nalezy do otoczki. Doszliśmy do punktu O - mamy otoczkę.
+    B nie należy do trójkąta AOC, więc należy do otoczki. Doszliśmy do punktu O - mamy otoczkę.
 
 
     \begin{center}
@@ -3820,9 +3820,9 @@
         I,II I,II II I,II II II II
     \end{verbatim}
 
-    \noindent Jak widac na powyższym przykładzie ze stanu 0 pod wpływem litery a przechodzimy do stanu 1, który jest aktualnie w zbiorze I,
+    \noindent Jak widać na powyższym przykładzie ze stanu 0 pod wpływem litery a przechodzimy do stanu 1, który jest aktualnie w zbiorze I,
     a pod wpływem litery b przechodzimy do stanu 2, który jest aktualnie w zbiorze II - stąd pod stanem 0 napisaliśmy I,II.
-    Dla odmiany ze stanu 2 pod wpływem a przechodzimy do stanu 2, który aktualnie znajduje sie w zbiorze II,a pod wpływem b przechodzimy do stanu 4,
+    Dla odmiany ze stanu 2 pod wpływem a przechodzimy do stanu 2, który aktualnie znajduje się w zbiorze II,a pod wpływem b przechodzimy do stanu 4,
     który aktualnie również znajduje się w zbiorze II, stąd pod stanem 2 mamy napisane tylko II. \\
 
     \noindent Jak widzimy wszystkie stany ze zbioru I trafiają do tych samych ''grup" zbiorów - wszystkie trafiają do I,II (kolejność nie ma znaczenia),
@@ -4172,7 +4172,7 @@
 
         $L(G_2) = \{ a^n : n = 1,2,\dots \}$
 
-        Gramatyka jset typu (2)
+        Gramatyka jest typu (2)
 
 
         \item Gramatyka $G_3 = (V_N,V_T,P,v_0)$, w której

@@ -117,7 +117,7 @@
             \item $F \subset Q$ - zbiór stanów końcowych,
             \item $\tau$  - skończony zbiór dopuszczalnych symboli,
             \item $b \in \tau$  - symbol pusty,
-            \item $\Sigma \subset \tau \ \{b\} $ - zbiór symboli wiejściowych,
+            \item $\Sigma \subset \tau \ \{b\} $ - zbiór symboli wejściowych,
             \item $\delta$ - funkcja sterująca.
             \begin{itemize}
                 \item W wersji niedeterministycznej postaci maszyny Turinga:
@@ -144,7 +144,7 @@
 
     \newpage
 
-    \section{Modele obliczen: automat skończony, automat ze stosem.}
+    \section{Modele obliczeń: automat skończony, automat ze stosem.}
     \subsection{Automat skończony deterministyczny}
     \begin{definition}
         Automat skończony deterministyczny oznaczamy piątką parametrów: $\mathcal{A}$ = (S, A, f, $s_{0}$, T) gdzie: \\
@@ -161,7 +161,7 @@
     \end{definition}
 
     \begin{definition}
-        Każdy automat $\mathcal{A}$ = (S, A, f, $s_{0}$, T) wyznacza w wolnym monoidzie $A^{*}$ prawą kongruencję automatową okresloną w następujący sposób: \\
+        Każdy automat $\mathcal{A}$ = (S, A, f, $s_{0}$, T) wyznacza w wolnym monoidzie $A^{*}$ prawą kongruencję automatową określoną w następujący sposób: \\
         $\forall$u,v $\in A^{*}$ \\
         $u \sim_\mathcal{A}$ v $\Leftrightarrow f(s_{0}, u) = f(s_{0}, v)$
     \end{definition}
@@ -177,7 +177,7 @@
     \end{definition}
 
     \begin{definition}
-        Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid \\
+        Monoidem przejść automatu $\mathcal{A}$ nazywamy monoid \\
         $\mathcal{M(A)}$ = $\tau_\mathcal{A}(A^*) \subset S^{S}$
     \end{definition}
 
@@ -233,7 +233,7 @@
             \item $D_n$ - zbiór danych rozmiaru n,
             \item $t(d)$ - liczba operacji dominujących,
             \item $X_n$ - zmienna losowa dla $t(d) \in D_n$,
-            \item $p_{kn}$ - rozkład prawdopodbieńdstwa zmiennej $X_n$.
+            \item $p_{kn}$ - rozkład prawdopodobieństwa zmiennej $X_n$.
         \end{itemize}
 
         \textbf{Optymistyczna złożoność czasowa}:
@@ -359,7 +359,7 @@
             \item Przechowuje elementy \textbf{tego samego typu}
             \item Wykorzystuje pamięć w sposób \textbf{dynamiczny lub statyczny}
             \item Dostęp do danych jest \textbf{sekwencyjny}
-            \item Elementy w liście sa \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście
+            \item Elementy w liście są \textbf{liniowo uporządkowane} zgodnie z ich pozycją na liście
             \begin{itemize}
                 \item element $a_i$ znajduje się na pozycji ‘i’
                 \item element $a_i$ poprzedza $a_{i+1}$ dla i=$1,2,\cdots,n-1$
@@ -385,12 +385,12 @@
 
 
     \subsection{Implementacja za pomocą Listy Wiązanej (Linked List)}
-    Rozróznia się dwa podstawowe rodzaje:
+    Rozróżnia się dwa podstawowe rodzaje:
     \begin{enumerate}
         \item Lista wiązana \textbf{jednokierunkowa} \\
         Z każdego elementu możliwe jest przejście do jego następnika NEXT
         \item Lista wiązana \textbf{dwukierunkowa} \\
-        Z każdego elementu możliwe jest przejscie do jego następnika NEXT i poprzednika PREV
+        Z każdego elementu możliwe jest przejście do jego następnika NEXT i poprzednika PREV
     \end{enumerate}
 
     W liście wiązanej wyróżnia się dwie podstawowe zmienne typu Node potrzebne do jej obsługi
@@ -487,7 +487,7 @@
 
         Jest to lista, w której
         \begin{itemize}
-            \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}
+            \item Wstawianie nowego elementu odbywa się na końcu kolejki \textbf{rear}
             \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}\\
             \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki
             \begin{itemize}
@@ -820,15 +820,15 @@
 
     \subsection{Usuwanie}
     Usuwanie rozpoczynamy od znalezienia wartości, którą chcemy usunąć \\
-    \noindent Następnie bierrzemy największą wartość z lewego podrzewa lub najmniejszą wartość z prawego poddrzewa i wstawiamy w miejsce usuwanego elementu \\
-    \noindent Jeżeli w drzewie zostały naruszone warunki dotyczące ilości dozwolonych elementów w węźle, musimy to drzewo zrównoważyć. Proces ten jest generalnie dośc skomplikowany i ciężki do opisania algorytmem ze względu na mnogość możliwych przypadków, dlatego najlepiej spojrzeć na część praktyczną i przykłady.
+    \noindent Następnie bierzemy największą wartość z lewego poddrzewa lub najmniejszą wartość z prawego poddrzewa i wstawiamy w miejsce usuwanego elementu \\
+    \noindent Jeżeli w drzewie zostały naruszone warunki dotyczące ilości dozwolonych elementów w węźle, musimy to drzewo zrównoważyć. Proces ten jest generalnie dość skomplikowany i ciężki do opisania algorytmem ze względu na mnogość możliwych przypadków, dlatego najlepiej spojrzeć na część praktyczną i przykłady.
 
     \newpage
 
 
     \section{Drzewa AVL: rotacje, operacje z wykorzystaniem rotacji i ich złożoność.}
-    Drzewa AVL są odmianą drzew BST, w której dla każdego węzła mamy dodatkowy warunek: różnica między wysokością prawego i lewego poddrzewa danego węzła nie może byc większa niż 1.
-    Spełnienie tego warunku zapewnia nam dobre zrównoważenie drzewa, a co za tym idzie utrzymanie szybkości operacji wywszukiwania w tym drzewie.\\
+    Drzewa AVL są odmianą drzew BST, w której dla każdego węzła mamy dodatkowy warunek: różnica między wysokością prawego i lewego poddrzewa danego węzła nie może być większa niż 1.
+    Spełnienie tego warunku zapewnia nam dobre zrównoważenie drzewa, a co za tym idzie utrzymanie szybkości operacji wyszukiwania w tym drzewie.\\
 
     \noindent Operacja wyszukiwania w drzewie AVL jest identyczna, jak dla zwykłego drzewa BST, natomiast w przypadku operacji wstawiania i usuwania, przebiegają one na początku tak samo jak w zwykłych BST, natomiast potem w razie potrzeby należy drzewo zrównoważyć poprzez rotacje. \\
 
@@ -853,13 +853,13 @@
 
     \includegraphics[width=\linewidth]{avl-trees/lr-rotation.png} \\
 
-    \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbalansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
+    \noindent Gdy \texttt{nierównowaga drzewa} idzie dwa razy na prawo (tzn. gdy dla danego węzła prawe poddrzewo jest głębsze niż lewe i potem dla pierwszego węzła prawego poddrzewa jego prawe poddrzewo jest głębsze) do zbilansowania używamy rotacji RR, natomiast, gdy nierównowaga idzie najpierw na prawo potem na lewo, używamy rotacji RL, itd.
 
     \newpage
 
     \section{Algorytmy przeszukiwania wszerz i w głąb w grafach.}
 
-    Algorymy przeszukiwania grafu polegają na przejściu przez wszystkie osiągalne z wierzchołka
+    Algorytmy przeszukiwania grafu polegają na przejściu przez wszystkie osiągalne z wierzchołka
     startowego $s$ wierzchołki grafu $G$.
 
     \subsection{Przeszukiwanie grafu wszerz (\textit{breadth first search}, BFS)}
@@ -879,7 +879,7 @@
     \subsubsection{Cechy}
 
     \begin{enumerate}
-        \item Zlożoność obliczeniowa: $\theta(e + v)$
+        \item Złożoność obliczeniowa: $\theta(e + v)$
         \item Złożoność pamięciowa: $\theta(v)$
         \item Kompletność: BFS dla nieskończonego grafu zwróci wszystkie poprawne
         odpowiedzi, w przeciwieństwie do DFS.
@@ -888,7 +888,7 @@
     \subsubsection{Wariacje algorytmu}
 
     \begin{itemize}
-        \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest
+        \item Faktyczne "przeszukiwanie": zwracamy wierzchołek, jeśli jego wartość jest
         równa poszukiwanej.
         \item Przypisywanie wierzchołkom odległości od $s$.
         \item Przypisanie wierzchołkom rodzica, w celu znalezienia drogi do $s$
@@ -898,7 +898,7 @@
 
     \begin{itemize}
         \item Garbage collection
-        \item Najkrótsza droga do $s$ (licząć liczbę krawędzi)
+        \item Najkrótsza droga do $s$ (licząc liczbę krawędzi)
         \item Wykrywanie cykli grafu nieskierowanego
         \item Sprawdzanie dwudzielności grafu
         \item Social networking
@@ -938,7 +938,7 @@
     \subsubsection{Cechy}
 
     \begin{enumerate}
-        \item Zlożoność obliczeniowa: $\theta(e + v)$
+        \item Złożoność obliczeniowa: $\theta(e + v)$
         \item Złożoność pamięciowa: $\theta(v)$
         \item Niekompletność dla grafów nieskończonych
     \end{enumerate}
@@ -946,7 +946,7 @@
     \subsubsection{Wariacje algorytmu}
 
     \begin{itemize}
-        \item Faktyczne "przeszukiwanie": zwracamy wieszchołek, jeśli jego wartość jest
+        \item Faktyczne "przeszukiwanie": zwracamy wierzchołek, jeśli jego wartość jest
         równa poszukiwanej.
         \item Przypisywanie wierzchołkom odległości od $s$.
         \item Przypisanie wierzchołkom rodzica, w celu znalezienia drogi do $s$
@@ -1066,14 +1066,14 @@
 
     \subsection{Algorytm Floyda-Warshalla}
 
-    Algorytm Floyda-Warshalla pozwala wyliczyć najkrósze ścieżki pomiędzy wszystkimi
+    Algorytm Floyda-Warshalla pozwala wyliczyć najkrótsze ścieżki pomiędzy wszystkimi
     wierzchołkami w grafie $G$ (nieposiadającym ujemnych cykli).
 
     \subsubsection{Algorytm}
 
     Posługujemy się słownikiem $P = \{\}$, przypisującym parze $(u, w)$ rodzica dla $u$,
     na ścieżce od $u$ do $w$, słownikiem $D$ przypisującym parze $(u, w)$ długość
-    najkrószej (aktualnie) ścieżki od $u$ do $w$.\\
+    najkruszej (aktualnie) ścieżki od $u$ do $w$.\\
     $D[(u, w) : u, w \in V] =
     \begin{cases}
         0, &\text{ jeśli } u = w\\
@@ -1194,7 +1194,7 @@
     \begin{itemize}
         \item Optymalnie
 
-        Pjemność plecaka: 8
+        Pojemność plecaka: 8
 
         Dane wejściowe: 5, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1
 
@@ -1219,12 +1219,12 @@
     \subsection{Kolorowanie krawędziowe grafów}
     Problem kolorowania krawędzi, podobnie jak klasycznego kolorowania wierzchołków, jest NP-trudny – nie istnieją wielomianowe algorytmy kolorujące grafy zawsze w sposób optymalny.
     \\\\
-    Przykład nieopytymalnego algorytmu kolorowania krawędziowego:
+    Przykład nieoptymalnego algorytmu kolorowania krawędziowego:
     \begin{enumerate}
         \item Użyj BFS (Breadth First Search - Przeszukiwanie wszerz) do poruszania się po grafie.
         \item Wybierz wierzchołek i nadaj różne kolory jego krawędziom.
         \item Przejdź do kolejnego wierzchołka.
-        \item Powtarzaj aż wszyskie krawędzie zostaną pokolorowane.
+        \item Powtarzaj aż wszystkie krawędzie zostaną pokolorowane.
     \end{enumerate}
 
     \subsection{Kolorowanie wierzchołkowe grafów planarnych}
@@ -1250,7 +1250,7 @@
     \subsection{Algorytm Boruvki}
     \begin{enumerate}
         \item Weź wszystkie wierzchołki, ale bez krawędzi - każdy wierzchołek jest osobnym drzewem.
-        \item Dla każdego drzewa znajdź krawędź o najmniejszej wadze w oryignalnym grafie, która łączy je z innym drzewem.
+        \item Dla każdego drzewa znajdź krawędź o najmniejszej wadze w oryginalnym grafie, która łączy je z innym drzewem.
         \item Dodaj tę krawędź do MST.
         \item Powtarzaj, dopóki drzewa nie połączyły się w jedno.
     \end{enumerate}
@@ -1275,7 +1275,7 @@
         \item Powtarzaj krok 2 aż otrzymasz $V-1$ krawędzi w MST
     \end{enumerate}
 
-    \textbf{Złożoność:} Sortowanie krawędzi zajmuje $O(ElogE)$. Po sortowaniu, iterujemy po krawędziach i używamy algorytmu find-union który może zająć $O(logV)$. Zatem ogólna złozoność to $O(ElogE+ElogV)$. Wartość E jest mniejsza niż $V^2$, więc $O(logV)$ $=$ $O(logE)$. Złożoność: $O(ElogE)$ lub $O(ElogV)$.
+    \textbf{Złożoność:} Sortowanie krawędzi zajmuje $O(ElogE)$. Po sortowaniu, iterujemy po krawędziach i używamy algorytmu find-union który może zająć $O(logV)$. Zatem ogólna złożoność to $O(ElogE+ElogV)$. Wartość E jest mniejsza niż $V^2$, więc $O(logV)$ $=$ $O(logE)$. Złożoność: $O(ElogE)$ lub $O(ElogV)$.
 
     \newpage
 
@@ -1808,7 +1808,7 @@
         \item Inkluzja $\subset$ - Problem zawierania się języka $L_i$ w języku $L_k$
         \item Równoważność $\equiv$ - Problem równoważności dwóch języków $L_1 \equiv L_2$
         \item Pustość $\emptyset$ - Problem języka pustego czyli nie generującego żadnego słowa
-        \item Nieskończonośc $\infty$ - Problem języka nieskończonego czyli generującego nieskończenie wiele słów
+        \item Nieskończoność $\infty$ - Problem języka nieskończonego czyli generującego nieskończenie wiele słów
         \item Jednoznaczność
     \end{itemize}
 
@@ -1858,7 +1858,7 @@
 
     Oznaczenia\\
     T - rozstrzygalny\\
-    N - nieroztrzygalny
+    N - nierozstrzygalny
 
     \newpage
 
@@ -1896,7 +1896,7 @@
         \begin{itemize}
             \item Gramatyka
 
-            Każdy system spełniajacy definicję 57.1
+            Każdy system spełniający definicję 57.1
             \item Kontekstowa
 
             Gramatyka, w której każde prawo ze zbioru P ma postać $u_1 v u_2 \rightarrow u_1 x u_2$
