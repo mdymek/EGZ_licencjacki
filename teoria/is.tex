@@ -63,7 +63,7 @@
         \item \textbf{Pierwsza postać normalna 1NF}\\
         Relacja jest w pierwszej postaci normalnej jeżeli każdy jej atrybut jest skalarny (atomowy, niepodzielny). Atrybut nie może być strukturą danych (listą, macierzą itp.). Relacja musi mieć zdefiniowany klucz.
         \item \textbf{Druga postać normalna 2NF}\\
-        Relacja jest w drugiej postaci normalnej jeżeli jest w 1NF i żaden atrybut nie będący kluczem nie jest częściowo funkcyjnie zależny od jakiegkolwiek klucza potencjalnego.
+        Relacja jest w drugiej postaci normalnej jeżeli jest w 1NF i żaden atrybut nie będący kluczem nie jest częściowo funkcyjnie zależny od jakiejkolwiek klucza potencjalnego.
         \item \textbf{Trzecia postać normalna 3NF}\\
         Relacja jest trzeciej postaci normalnej jeżeli jest w 2NF i żadna kolumna niekluczowa nie jest zależna funkcyjnie od innych atrybutów niekluczowych.
         \item \textbf{Postać normalna Boyce'a-Codda}\\
@@ -127,7 +127,7 @@
 
         \item \textbf{2NF}\\
         Tabela nieznormalizowana\\
-        Klucz potencjalny składa się z dwóch atrybutów Imię + Nazwisko, atrybut Płeć zalezy tylko od jegnego z atrybutów klucza (Imię) zatem atrybut Płeć zależny jest od podzbioru właściwego klucza.
+        Klucz potencjalny składa się z dwóch atrybutów Imię + Nazwisko, atrybut Płeć zależy tylko od jednego z atrybutów klucza (Imię) zatem atrybut Płeć zależny jest od podzbioru właściwego klucza.
         \begin{table}[H]
             \begin{tabular}{|l|l|l|}
                 \hline
@@ -165,7 +165,7 @@
             \begin{tabular}{|l|l|l|l|}
                 \hline
                 Imię & Nazwisko & Stanowisko & Stawka za godzinę \\ \hline
-                Edward & Sczypka & Żołnież & 15                \\ \hline
+                Edward & Sczypka & Żołnierz & 15                \\ \hline
                 Rafał & Kawa & Pracownik dydaktyczny & 10                \\ \hline
             \end{tabular}
         \end{table}
@@ -177,7 +177,7 @@
             \begin{tabular}{|l|l|l|}
                 \hline
                 Imię & Nazwisko & Stanowisko            \\ \hline
-                Edward & Sczypka & Żołnież               \\ \hline
+                Edward & Sczypka & Żołnierz               \\ \hline
                 Rafał & Kawa & Pracownik dydaktyczny \\ \hline
             \end{tabular}
         \end{table}
@@ -186,7 +186,7 @@
             \begin{tabular}{|l|l|}
                 \hline
                 Stanowisko & Stawka za godzinę \\ \hline
-                Żołnież & 15                \\ \hline
+                Żołnierz & 15                \\ \hline
                 Pracownik dydaktyczny & 10                \\ \hline
             \end{tabular}
         \end{table}
@@ -244,7 +244,7 @@
 
     \textbf{Wady stosowania indeksów}\\
     \begin{itemize}
-        \item Zwiększenie czasu zmiany danych, na których założony jest indeks (zmiana takich danych oznacza zmiane w indeksie)
+        \item Zwiększenie czasu zmiany danych, na których założony jest indeks (zmiana takich danych oznacza zmianę w indeksie)
     \end{itemize}
 
     \subsection{Typy indeksów (dla plików sekwencyjnych)}
@@ -366,7 +366,7 @@
     \begin{itemize}
         \item \textbf{Atomicity} (atomowość, niepodzielność) – transakcja jest niepodzielną jednostką
         przetwarzania; albo jest wykonywana w całości, albo wcale.
-        \item \textbf{Consistency} (spojność) – po zakończeniu transakcji baza musi być w stanie spójnym, tj. muszą
+        \item \textbf{Consistency} (spójność) – po zakończeniu transakcji baza musi być w stanie spójnym, tj. muszą
         być zachowane wszystkie więzy narzucone na dane.
         \item \textbf{Isolation} (separacja, odseparowanie, izolacja) Transakcja powinna wyglądać tak, jakby była
         wykonywana w izolacji od innych transakcji.
@@ -376,7 +376,7 @@
     \end{itemize}
 
     \subsubsection{ACID dla przykładowej transakcji}
-    Co oznaczałyby powyższe warunki w stosunku do wcześniej przedstawionej transakcji (nazwijmyją Ti)?
+    Co oznaczałyby powyższe warunki w stosunku do wcześniej przedstawionej transakcji (nazwijmy ją Ti)?
     \\\\
     \textbf{Atomowość}: Efekt musi być taki, jakby wykonały się wszystkie kroki 1--6, albo żaden.\\
     \textbf{Spójność}: Suma ( A + B ) musi być taka sama przed i po wykonaniu transakcji Ti.\\
@@ -400,7 +400,7 @@
         transakcji (rejestrowane są tu wszystkie operacje rozpoczęcia transakcji, zmiany danych,
         zakończenia transakcji, czasem rejestrowane są też operacje odczytu). Jednak zanim zostanie
         podjęta decyzja o zatwierdzeniu, w zależności od typu systemu (przyjętych rozwiązań) zarządca
-        odtwarzania może teżsprawdzać pewne dodatkowe warunki określające, czy transakcja może być
+        odtwarzania może też sprawdzać pewne dodatkowe warunki określające, czy transakcja może być
         zatwierdzona (np. ze względu na sterowanie wieloma współbieżnymi transakcjami). Jeśli
         sprawdzenie tych warunków dało wynik pozytywny, czyli transakcja może zostać zatwierdzona
         mówi się, że transakcja osiągnęła swój punkt zatwierdzenia.
@@ -466,7 +466,7 @@
     \begin{itemize}
         \item locking READ UNCOMMITTED,
         \item locking READ COMMITTED,
-        \item locking REPETEABLE READ,
+        \item locking REPEATABLE READ,
         \item locking SERIALIZABLE.
     \end{itemize}
 
@@ -737,7 +737,7 @@
     \section{Definicja cyfrowego układu kombinacyjnego - przykłady układów kombinacyjnych i ich implementacje.}
 
     \begin{definition}
-        \textbf{Układ kombinacyjny} to taki układ logiczny, w którym każda kombinacja wartosci zmiennych wejściowych
+        \textbf{Układ kombinacyjny} to taki układ logiczny, w którym każda kombinacja wartości zmiennych wejściowych
         jednoznacznie określa kombinację wartości zmiennych wyjściowych.\\
 
         Układy kombinacyjne opisujemy za pomocą bramek logicznych. Można też za pomocą tablicy prawdy.
@@ -755,7 +755,7 @@
     \subsection{Układy arytmetyczne.}
 
     \subsubsection{Półsumator (Half Adder).}
-    Zmiennymi wejściowymi półsumatora są bity składników sumy \textit{(x, y)}. Zmiennymi wyjsciowymi są bity
+    Zmiennymi wejściowymi półsumatora są bity składników sumy \textit{(x, y)}. Zmiennymi wyjściowymi są bity
     sumy \textit{s} i przeniesienia \textit{c}.
 
     \begin{figure}[H]
@@ -816,8 +816,8 @@
         \includegraphics[width=\linewidth]{uk/mul.png}
     \end{figure}
 
-    Linie wejściowe $(d_0, d_1, d_2, d_3)$ są doprowadzone do bramek AND, których wyjścia sa doprowadzone do bramki
-    OR. W danej chwili tylko jedna linia wejściowa jest połączona z wyjściem \textit{y}. O wyborze wjeścia połączonego
+    Linie wejściowe $(d_0, d_1, d_2, d_3)$ są doprowadzone do bramek AND, których wyjścia są doprowadzone do bramki
+    OR. W danej chwili tylko jedna linia wejściowa jest połączona z wyjściem \textit{y}. O wyborze wejścia połączonego
     decydują linie sterujące $s_0, s_1$.
 
     \begin{figure}[H]
@@ -932,7 +932,7 @@
 
     \subsection{Minimalizacja z wykorzystaniem algebry Boole'a}
     \begin{definition}
-        Minimalizacja z wykorzystaniem algebry Boole'a polega na zapisaniu funkcji w postaci sumy stanów wejść, dla których funkcja przyjmuje wratość 1, a następnie wykorzystując prawa algebry Boole'a uproszczenie jej.
+        Minimalizacja z wykorzystaniem algebry Boole'a polega na zapisaniu funkcji w postaci sumy stanów wejść, dla których funkcja przyjmuje wartość 1, a następnie wykorzystując prawa algebry Boole'a uproszczenie jej.
     \end{definition}
 
     \subsection{Minimalizacja z wykorzystaniem tablic Karnaugha}
@@ -1068,7 +1068,7 @@
     Fragmenty kodu jądra związane z obsługą procesów i zasobów nazywa się zarządcami.
     Wyróżnia się:
     \begin{itemize}
-        \item \textbf{zarządców procesów} (grupują i wykonuja funkcje obsługi procesów)
+        \item \textbf{zarządców procesów} (grupują i wykonują funkcje obsługi procesów)
         \item \textbf{zarządców zasobów} (kontrolują stan zajętości zasobów i realizację żądań procesów)
     \end{itemize}
 
@@ -1210,9 +1210,9 @@
     Operacje:
     \begin{itemize}
         \item lock (mutex\_lock)\\ - zajęcie muteksu jeśli jest wolny
-        \item unlock (mutex\_unlock) \\ - ustawienie zamka na wolny, jesli kolejka oczekujących wątków jest pusta\\
+        \item unlock (mutex\_unlock) \\ - ustawienie zamka na wolny, jeśli kolejka oczekujących wątków jest pusta\\
         - wybranie wątku z niepustej kolejki wątków oczekujących i ustawienie jego stanu na gotowy
-        \item trylock (mutex\_trylock)\\ - zajęcie zamkna lub kontynuacja przetwarzania
+        \item trylock (mutex\_trylock)\\ - zajęcie zamka lub kontynuacja przetwarzania
     \end{itemize}
 
     Cechy
@@ -1545,7 +1545,7 @@
     usługami sieci.
     \begin{itemize}
         \item \textbf{HTTP/HTTPS} (Hypertext Transfer Protocol (Secure)) - protokół przesyłania dokumentów hipertekstowych.
-        \item \textbf{DNS} (Domain Name System) - hierarchiczny rozporszony sytem nazw sieciowych, który odpowiada na zapytania
+        \item \textbf{DNS} (Domain Name System) - hierarchiczny rozproszony system nazw sieciowych, który odpowiada na zapytania
         o nazwy domen.
         \item \textbf{Telnet} - protokół do obsługi odległego terminala w architekturze klient-serwer.
     \end{itemize}
@@ -1553,7 +1553,7 @@
     \noindent \textbf{Warstwa prezentacji} - kompresja, kodowanie i
     translacja między niezgodnymi schematami kodowania oraz szyfrowanie.
     \begin{itemize}
-        \item \textbf{SSL} (Secure Socket Layer) - protokół szyfrowania zapewniający poufność i ingtegralność danych.
+        \item \textbf{SSL} (Secure Socket Layer) - protokół szyfrowania zapewniający poufność i integralność danych.
         Otwarty protokół umożliwiający autoryzację serwerów i klientów, wykorzystuje szyfrowanie symetryczne
         z kluczem publicznym, stosuje sumy kontrolne dla zapewnienia integralności danych.
         \item \textbf{TSL} (Transport Layer Security) - jak wyżej. Ustalenie klucza symetrycznego szyfrowaniem niesymetrycznym,
@@ -1575,7 +1575,7 @@
     \begin{itemize}
         \item \textbf{TCP} (Transmission Control Protocol) - połączeniowy, niezawodny, strumieniowy protokół komunikacyjny
         stosowany do przesyłania danych pomiędzy procesami na różnych maszynach.
-        \item \textbf{UDP} (User Datagram Protocol) - prosty bezpołączeniowo protokół komunikacyjny, nie zapewnia
+        \item \textbf{UDP} (User Datagram Protocol) - prosty bezpołączeniowy protokół komunikacyjny, nie zapewnia
         niezawodności.
     \end{itemize}
 
@@ -1584,7 +1584,7 @@
     \begin{itemize}
         \item \textbf{IP} (Internet Protocol) - protokół internetowy będący zbiorem kroków
         postępowania wykonywanych automatycznie przez urządzenie w celu nawiązania łączności.
-        \item \textbf{IGMP} (Internet Group Managament Protocol) - protokół internetowy służacy do zarządzania
+        \item \textbf{IGMP} (Internet Group Managament Protocol) - protokół internetowy służący do zarządzania
         grupami multicastowymi w sieciach opartych na protokole IP.
     \end{itemize}
 
@@ -1787,7 +1787,7 @@
                 \item Port źródłowy: losowo wybrany spośród wolnych portów na lokalnym komputerze
                 \item Port docelowy: specyficzny dla protokołu (w tym przypadku 80 lub 443 - chyba że w adresie URL podano inaczej)
             \end{itemize}
-            i opakowywuje w ten pakiet zapytanie HTTP
+            i opakowuje w ten pakiet zapytanie HTTP
             \item Komputer na podstawie swojego lokalnego adresu IP i ustawionej maski sprawdza, czy docelowy komputer znajduje się w jego sieci LAN.
             Załóżmy tutaj, że się nie znajduje.
             \item Komputer odczytuje więc ze swojej konfiguracji adres IP swojej bramy domyślnej
@@ -1800,7 +1800,7 @@
                 \item Adres MAC źródłowy: adres MAC naszego komputera
                 \item Adres MAC docelowy: adres MAC naszej bramy
             \end{itemize}
-            i opakowywuje w tę ramkę pakiet IP
+            i opakowuje w tę ramkę pakiet IP
             \item Ramka następnie jest wysyłana (po uprzednim przetworzeniu na sygnały zgodne z medium, którym jest wysyłana - np. sygnały elektryczne) do sieci
         \end{enumerate}
 
@@ -1990,9 +1990,9 @@
     Pożądane cechy protokołów routowania:
     \begin{enumerate}
         \item Wyznaczenie najlepszej trasy do punktu docelowego
-        \item Odporność (robustness) na nieprzewidziane, nieporządanie zdarzenia:
+        \item Odporność (robustness) na nieprzewidziane, niepożądane zdarzenia:
         "kopara", niewłaściwa konfiguracja, obciążenia sieci
-        \item Szybkie osiaganie zbieżności, tj. osiągnięcie stanu w którym
+        \item Szybkie osiąganie zbieżności, tj. osiągnięcie stanu w którym
         routery "widzą" jednakowo topologię sieci.
         \item Dopasowanie do zmian, np.:
         \begin{itemize}
@@ -2030,7 +2030,7 @@
     Liczniki RIP:
     \begin{itemize}
         \item Update timer (30s) – co 30s wysyłany jest wektor odległości (routing update)
-        \item Invalid timer (180s) – za każdym razem, gdy router dostaeje uaktualnienie pewnej trasy, zegar dla tej trasy jest zerowany. Po upłynięciu 180s trasa zaznaczana jest jako nieprawidłowa.
+        \item Invalid timer (180s) – za każdym razem, gdy router dostaje uaktualnienie pewnej trasy, zegar dla tej trasy jest zerowany. Po upłynięciu 180s trasa zaznaczana jest jako nieprawidłowa.
         \item Hold-down timer (180s) – po osiągnięciu wartości progowej przez invalid timer trasa jest ustawiana w stan hold-down.
         \item Flush timer (240s) – zegar ten jest zerowany po otrzymaniu informacji o danej trasie. Po upłynięciu trasa jest usuwana (nawet, jeśli znajduje się w stanie hold-down.
     \end{itemize}
@@ -2084,7 +2084,7 @@
         \item Przesyłane są informacje o zmianach w stanie łączy - nie całe tablice routowania
         \item Na początku pracy sieć jest zalewana informacją o stanie łączy (flooding), późniejsze updaty są szybkie
         \item Ruch w wielodostępnych fragmentach sieci jest ograniczany przez wybranie DR (designated router) i BDR (backup designated router)
-        \item Obliczanie najkrótszych ścieżej Dijiskrą jest zasobożerne, przez co
+        \item Obliczanie najkrótszych ścieżek Dijiskrą jest zasobożerne, przez co
         tworzy się obszary OSPF:
         \begin{itemize}
             \item Każdy obszar ma przypisany numer
@@ -2093,10 +2093,10 @@
             \item Routerem granicznym wprowadzającym do OSPF trasy zewnętrzne (z innych protokołów) nazywamy ASBR (Autonomous System Border Router)
             \item Rodzaje obszarów OSPF:
             \begin{itemize}
-                \item Stub Area - nie ma tras zewnętrzych, sumy tras z innych obszarów są wprowadzane
+                \item Stub Area - nie ma tras zewnętrznych, sumy tras z innych obszarów są wprowadzane
                 \item Totally Stubby Area - nie ma ani tras zewnętrznych, ani sum tras z innych obszarów. Wyjście z takiego obszaru jest przez trasę domyślną
                 \item Not So Stubby Area - Stub Area, do którego wprowadzane są pewne, nieliczne trasy zewnętrzne. Trasy te wprowadzane są do innych obszarów tak jak sumy tras
-                \item Not So Stubby Totally Stubby Area - obszar połąszania NSSA i TSA
+                \item Not So Stubby Totally Stubby Area - obszar połączania NSSA i TSA
             \end{itemize}
         \end{itemize}
         \item W przypadku istnienia kilku tras o jednakowym koszcie realizowane jest równoważenie obciążeń (load balancing).
@@ -2113,8 +2113,8 @@
     \newpage
 
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
-    \subsection{Syfrowanie z kluczem publicznym}
-    Szyfrowanie i odszyfrowanie jest realizowane przy pomocy pary kluczy - \textbf{prywatnego} i \textbf{pubicznego}.
+    \subsection{Szyfrowanie z kluczem publicznym}
+    Szyfrowanie i odszyfrowanie jest realizowane przy pomocy pary kluczy - \textbf{prywatnego} i \textbf{publicznego}.
     Jeśli coś zostanie zaszyfrowane przy pomocy klucza prywatnego, to może być odszyfrowane tylko przy pomocy odpowiadającego mu klucza publicznego i na odwrót.
 
     Jeśli chcemy coś przekazać innej osobie w wersji zaszyfrowanej, to powinniśmy zaszyfrować to kluczem publicznym tej osoby. Ponieważ nikt poza tą osobą nie
@@ -2178,7 +2178,7 @@
 
     \newpage
     \section{Wirtualne sieci prywatne, protokół IPsec.}
-    Wirtualna Sieć Prywatna, zwaną potocznie „siecią VPN” (z ang. Virtual Private Network) jest siecią przekazu danych korzystającą z publicznej infrastruktury telekomunikacyjnej, która dzięki stosowaniu protokołów tunelowania i procedur bezpieczeństwa zachowuje poufność danych. Infrastrukturą może być sieć szkieletowa operatora telekomunikacyjnego (np. Frame Relay lub ATM), a także globalna sieć Internet. Sieci te nazwano „wirtualnymi”, gdyż opierają się one na dynamicznych, wirtualnych połączeniach - wirtualnych obwodach (Virtual Circuit– wirtualny obwód – jest to połączenie zestawiane w sieci pomiędzy nadawcą a odbiorcą, w którym trasy przesyłu danych oraz przepływność pasma dla połączenia są ustawiane dynamicznie) czy też tunelach – nie mających fizycznego bytu i istniejącymi tylko wtedy, gdy jest nimi przenoszony ruch.Połączenia takie mogą być zestawiane między dwoma osobnymi urządzeniami, urządzeniem a siecią oraz między dwoma sieciami.\\
+    Wirtualna Sieć Prywatna, zwaną potocznie „siecią VPN” (z ang. Virtual Private Network) jest siecią przekazu danych korzystającą z publicznej infrastruktury telekomunikacyjnej, która dzięki stosowaniu protokołów tunelowania i procedur bezpieczeństwa zachowuje poufność danych. Infrastrukturą może być sieć szkieletowa operatora telekomunikacyjnego (np. Frame Relay lub ATM), a także globalna sieć Internet. Sieci te nazwano „wirtualnymi”, gdyż opierają się one na dynamicznych, wirtualnych połączeniach - wirtualnych obwodach (Virtual Circuit– wirtualny obwód – jest to połączenie zestawiane w sieci pomiędzy nadawcą a odbiorcą, w którym trasy przesyłu danych oraz przepływność pasma dla połączenia są ustawiane dynamicznie) czy też tunelach – nie mających fizycznego bytu i istniejącymi tylko wtedy, gdy jest nimi przenoszony ruch. Połączenia takie mogą być zestawiane między dwoma osobnymi urządzeniami, urządzeniem a siecią oraz między dwoma sieciami.\\
     Sieć VPN w założeniu powinna zapewniać:
     \begin{itemize}
         \item poufność
@@ -2226,7 +2226,7 @@
         \item Zabezpieczenie przed atakami polegającymi na powtórnym przesłaniu pakietu
         \item Ograniczone zabezpieczenie przed analizą ruchu
         \item Kontrola dostępu
-        \item IPsec jest jednym ze sposobów na bzudowanie VPN
+        \item IPsec jest jednym ze sposobów na zbudowanie VPN
     \end{itemize}
 
     \subsubsection{Składowe standardu IPsec}
@@ -2238,7 +2238,7 @@
 
         AH może być aplikowany zarówno w trybie tunelowym, jak i w trybie transportowym. AH może być stosowany samodzielnie lub w połączeniu z ESP. W takiej kombinacji identyfikacja może być zapewniona między parą komputerów, zapór ogniowych lub między komputerem a zaporą.
 
-        \item ESP (Encapsulating Security Payload) - szyfrowanie oryginalnego pakietu IP i obduowanie w pakiet ESP
+        \item ESP (Encapsulating Security Payload) - szyfrowanie oryginalnego pakietu IP i obudowanie w pakiet ESP
         \begin{itemize}
             \item Tryb transportowy - podmiana zawartości pakietu IP na zaszyfrowaną
             \item Tryb tunelowy - zanurzenie pakietu ESP w nowy pakiet IP
@@ -2259,7 +2259,7 @@
         \item z określonymi aspektami szyfrowania i aktualnym kontekstem
     \end{itemize}
 
-    Idetyfikowany przez
+    Identyfikowany przez
     \begin{itemize}
         \item adres IP odbiorcy (może być unicastowy, broadcastowy lub multicastowy)
         \item liczbę nazywaną Security Parameter Index (SPI)

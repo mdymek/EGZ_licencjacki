@@ -80,7 +80,7 @@
 
     \subsubsection{Przykłady}
     \begin{itemize}
-        \item W systemie dzisiętnym, q=10, c=7, u=5
+        \item W systemie dziesiętnym, q=10, c=7, u=5
         \begin{center}
             \includegraphics[scale=0.4]{number-repr/odw-add-dec.png}
         \end{center}
@@ -155,7 +155,7 @@
     \end{enumerate}
 
 
-    \subsubsection{Deokodowanie}
+    \subsubsection{Dekodowanie}
     \begin{itemize}
         \item Dekodowanie nadmiarowe kodu liczby dodatniej
         (rozpoznawanego po niezerowej cyfrze znaku) polega na wyzerowaniu cyfry znaku.
@@ -395,7 +395,7 @@
     \begin{itemize}
         \item \textbf{Niestatyczne funkcje globalne} są dostępne ze wszystkich plików, które includują zawierające
         je plik źródłowy - trzeba zatem uważać na konflikty nazw.
-        \item \textbf{Nietstatyczne metody klas} wymagają do wywołania instancji klasy - mogą zachowywać się różnie
+        \item \textbf{Niestatyczne metody klas} wymagają do wywołania instancji klasy - mogą zachowywać się różnie
         dla różnych instancji; mogą być oznaczone \texttt{final} i \texttt{override}.
     \end{itemize}
 
@@ -427,7 +427,7 @@
 
     \subsection{Funkcje wirtualne.}
     \begin{itemize}
-        \item \textbf{Wirtualne metody klas} są przydatne w polimorfiźmie.
+        \item \textbf{Wirtualne metody klas} są przydatne w polimorfizmie.
         \item W przypadku zwykłej metody, wywołanie jej dla wskaźnika typu klasy podstawowej zawsze wywoła instancję
         z klasy podstawowej, nawet jeżeli wskaźnik będzie tak naprawdę wskazywał na klasę pochodną.
         \item Słowo kluczowe \texttt{virtual} wymusza dedukcję której metody użyć na podstawie zawartości wskaźnika,
@@ -553,7 +553,7 @@
         \item Zaletą jest nietworzenie niepotrzebnych kopii, możliwość zmiany zmiennej spoza zakresu funkcji (zamiast
         np. zwracania i przypisywania nowej wartości).
         \item Nieprzemyślane użycie może spowodować nieprzewidzianą przez programistę zmianę zawartości zmiennej.
-        \item Brak możliwości użyca wyrażenia jako argumentu funkcji - musimy zapisać jego wynik w zmiennej, by móc
+        \item Brak możliwości użycia wyrażenia jako argumentu funkcji - musimy zapisać jego wynik w zmiennej, by móc
         ją przekazać.
     \end{itemize}
 
@@ -646,7 +646,7 @@
 
         cout << r << endl; // 6
 
-        // Zmiana wartości odwołując się do referncji
+        // Zmiana wartości odwołując się do referencji
         // zmienia tak na prawdę wartość oryginalnego obiektu
         r = 7;
 
@@ -829,8 +829,8 @@
         \end{minted}
 
         Jak widzimy dla obu wskaźników instancjonujemy klasę \texttt{ColoredPoint}. W przypadku wskaźnika \texttt{p} i wywołania metody \texttt{printClassName}
-        została wywołana meteda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na obiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
-        bierzez pod uwagę typ wskaźnika, a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
+        została wywołana metoda z klasy \texttt{Point}, mimo że wskaźnik wskazuje na obiekt typu \texttt{ColoredPoint}. Dzieje się tak, ponieważ kompilator domyślnie
+        bierze pod uwagę typ wskaźnika, a nie wskazywanego obiektu. Aby temu zaradzić musimy oznaczyć wołaną metodę jako \texttt{virtual}. Spowoduje to, że
         kompilator przy wywołaniu tej metody weźmie pod uwagę typ wskazywanego obiektu, a nie typ wskaźnika, czego przykładem jest metoda \texttt{printPoint}
         z powyższego kodu.
     \end{definition}
@@ -1082,7 +1082,7 @@
             empty & Sprawdza czy kontener jest pusty           \\ \hline
             size & Zwraca liczbę elementów                    \\ \hline
             max\_size & Zwraca maksymalną możliwą liczbę elementów \\ \hline
-            fill & Wypełnia kontener wskazaną wartościa       \\ \hline
+            fill & Wypełnia kontener wskazaną wartością       \\ \hline
             swap & Zmienia wartości                           \\ \hline
         \end{tabular}
     \end{table}
@@ -1271,7 +1271,7 @@
         gdy wymagania są jasne i zrozumiałe.
         \item uzyskanie produktu zgodnego z wymaganiami klienta silnie
         zależy od ich stabilności;
-        \item próba adaptacji do zmieniających sie wymagań jest b.
+        \item próba adaptacji do zmieniających się wymagań jest b.
         kosztowna;
         \item bardzo wysoki koszt błędów popełnionych we wstępnych
         etapach;
@@ -1666,12 +1666,12 @@
     \subsection{Artefakty}
 
     \begin{definition}
-        \textbf{Rejestr produktu} - uporządkowana lista tego co może byc potrzebne w produkcie. Jest to jedyne źródło wymaganych zmian, które mają zostać wprowadzone.
+        \textbf{Rejestr produktu} - uporządkowana lista tego co może być potrzebne w produkcie. Jest to jedyne źródło wymaganych zmian, które mają zostać wprowadzone.
         Odpowiedzialny z rejestr produktu jest Product owner.
     \end{definition}
 
     \begin{definition}
-        \textbf{Rejestr sprintu} - podzbiór elementów Rejestru produktu. Jest to lista rzeczy do wykonania w danyc sprincie rozszeżona dodatkowo o plan ich wykonania.
+        \textbf{Rejestr sprintu} - podzbiór elementów Rejestru produktu. Jest to lista rzeczy do wykonania w danym sprincie rozszerzona dodatkowo o plan ich wykonania.
         Rejestr Sprintu definiuje pracę, jaką Zespół Deweloperski wykona by przekształcić elementy Rejestru Produktu w „Ukończony” Przyrost. \\
         Rejestr Sprintu należy tylko i wyłącznie do Zespołu Deweloperskiego.
     \end{definition}
@@ -1786,7 +1786,7 @@
         Wzór: \\
 
         \textbf{jako} - osoba, przypisana rola \\
-        \textbf{chcę} - cacha, funkcjonalność, czynność \\
+        \textbf{chcę} - cecha, funkcjonalność, czynność \\
         \textbf{ponieważ} - uzasadnienie, rezultat, korzyść \\
     \end{definition}
 
@@ -1883,7 +1883,7 @@
         \item Realizacja
 
         Określa zależność między implementacją a interfejsem.
-        Przyład: ArrayList i List.
+        Przykład: ArrayList i List.
 
         \begin{center}
             \includegraphics[scale=0.40]{ooad/realization.png}
@@ -2106,7 +2106,7 @@
 
     \subsubsection{Architektura zamknięta}
 
-    W zamkniętej architekturze warstwa może wywołać tylko wartstwę
+    W zamkniętej architekturze warstwa może wywołać tylko warstwę
     bezpośrednio pod nią
 
     \begin{center}
@@ -2126,7 +2126,7 @@
 
     Warstwy:
     \begin{enumerate}
-        \item Wartwa prezentacji
+        \item Warstwa prezentacji
 
         Interfejs użytkownika. Tłumaczy żądania i wyniki
         do i z języka zrozumiałego dla użytkownika.
@@ -2134,7 +2134,7 @@
         \item Warstwa logiki biznesowej
 
         Koordynuje pracę aplikacji, przetwarza żądania
-        wartstwy prezentacji, dokonuje obliczeń.
+        warstwy prezentacji, dokonuje obliczeń.
 
         \item Warstwa danych
 
@@ -2178,7 +2178,7 @@
 
     Wzorzec Pipeline pozwala na uporządkowanie systemu, która przetwarza
     strumienie danych. Każdy krok przetwarzania jest zamknięty w filtrze
-    Dane przesułane są pomiędzy elementami za pomocą potoków (pipes).
+    Dane przesyłane są pomiędzy elementami za pomocą potoków (pipes).
 
     \begin{center}
         \includegraphics[scale=0.30]{patterns/pipeline.png}

@@ -13,7 +13,7 @@
     \section{Zasada indukcji matematycznej.}
 
     \begin{theorem}
-        \textbf{Zasada indukcji matematycznej.} Niech T(n) - funkcja/forma zdaniowana zmiennej $n \in \mathbb{N}$. Jeżeli:
+        \textbf{Zasada indukcji matematycznej.} Niech T(n) - funkcja/forma zdaniową zmiennej $n \in \mathbb{N}$. Jeżeli:
         \begin{enumerate}
             \item zachodzi $T(0)$
             \item $\forall n \in \mathbb{N} ~~ T(n) \Rightarrow  T(n+1)$
@@ -55,7 +55,7 @@
         \end{enumerate}
         Piszemy: $\leqslant, \preceq, \prec gdy \neq$. \underline{Przykład:} $(\mathbb{R}, \leq)$, gdzie $x \preceq y \Leftrightarrow x \leq y ~ \forall x,y \in \mathbb{R}$.
 
-        Wtedy $(\mathbb{R}, \preceq)$ jest cześciowym porządkiem.\\
+        Wtedy $(\mathbb{R}, \preceq)$ jest częściowym porządkiem.\\
 
         Jeżeli $(X, \mathbb{R})$ jest częściowym porządkiem, to elementy $x, y \in X$ nazywamy  \textbf{porównywalnymi}
         $\Leftrightarrow ~ xRy  \vee yRx$.\\
@@ -90,7 +90,7 @@
     \section{Relacja równoważności i zbiór ilorazowy.}
 
     \begin{definition}
-        Relację $R \subset X \times X$ nazywamy \textbf{relacją równoważości} $\Leftrightarrow$ relacja R jest:
+        Relację $R \subset X \times X$ nazywamy \textbf{relacją równoważności} $\Leftrightarrow$ relacja R jest:
         \begin{enumerate}
             \item \textbf{zwrotna} ($\forall x \in X ~ xRx $),
             \item \textbf{symetryczna} ($\forall x,y \in X ~ xRy \Rightarrow yRx$),
@@ -100,7 +100,7 @@
 
     \begin{definition}
         Niech $R \subset X \times X$ będzie relacją równoważności, $X \neq \varnothing$, $x \in X$. \textbf{Klasą abstrakcji}
-        elementu x (wzgledem relacji R) nazywamy:
+        elementu x (względem relacji R) nazywamy:
 
         $[x]_{R} = \{y \in X: xRy\}$
 
@@ -177,7 +177,7 @@
     \begin{itemize}
         \item Metoda bisekcji jest \textbf{niezawodna}, ale \textbf{wolno zbieżna}.
         \item W każdym kroku szerokość przedziału jest dzielona przez dwa.
-        \item Kryteria zakończednia obliczeń:
+        \item Kryteria zakończenia obliczeń:
         \begin{itemize}
             \item osiągnięto dokładność $\delta: |e_n| < \delta$
             \item wartość funkcji jest bliska 0: $f(c_n) < \epsilon$
@@ -204,7 +204,7 @@
         \item W metodzie siecznych rezygnujemy z założenia, że funkcja na końcach przedziału ma różne znaki.
         \item Należy kontrolować zachowanie otrzymanego ciągu. \textbf{Może się zdarzyć, że metoda wyprodukuje ciąg rozbieżny!}
         \item korzyści płynące ze stosowania tej metody to zdecydowanie \textbf{szybsza zbieżność} ciągu iteracji, jeśli
-        $x_n, x_{n+1}$ juz są dobrymi \textbf{przybliżeniami pierwiastka}.
+        $x_n, x_{n+1}$ już są dobrymi \textbf{przybliżeniami pierwiastka}.
     \end{itemize}
 
     \subsection{Metoda Newtona (stycznych)}
@@ -767,7 +767,7 @@
 
     \newpage
 
-    \section{Łancuchy Markowa. Rozkład stacjonarny.}
+    \section{Łańcuchy Markowa. Rozkład stacjonarny.}
 
     \begin{equation*}
         P =
@@ -1195,7 +1195,7 @@
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
 
     \begin{definition}
-        \textbf{Konfiuracją kombinatoryczną} $B$ o parametrach $(n,k,r)$ nazywamy rodzinę $k$-elementowych podzbiorów w $X$, jeżeli każdy element $x \in X$ występuje w dokładnie $r$ podbiorach. Zachodzą warunki:
+        \textbf{Konfiguracją kombinatoryczną} $B$ o parametrach $(n,k,r)$ nazywamy rodzinę $k$-elementowych podzbiorów w $X$, jeżeli każdy element $x \in X$ występuje w dokładnie $r$ podbiorach. Zachodzą warunki:
         \begin{enumerate}
             \item $n = |X|$
             \item $|B_i|=k \quad \forall i=1, \dots, b$
@@ -1249,11 +1249,11 @@
 
     \begin{definition}
         \textbf{Cykl Hamiltona}. Powiemy, że graf $G$ ma cykl Hamiltona, jeśli istnieje w nim cykl przechodzący przez
-        wszystkie wierzchołki. Taki graf nazwyamy hamiltonowskim.
+        wszystkie wierzchołki. Taki graf nazywamy hamiltonowskim.
     \end{definition}
 
     \begin{theorem}
-        Niech $G = (V, E)$ będzie grafem o $n \geq 3$ wierzchołkach. Jeśli dla dowolonych różnych, niesąsiednich
+        Niech $G = (V, E)$ będzie grafem o $n \geq 3$ wierzchołkach. Jeśli dla dowolnych różnych, niesąsiednich
         wierzchołków $u, v \in V$ zachodzi warunek $d(u) + d(v) \geq n$, to G jest hamiltonowski.
     \end{theorem}
 
@@ -1278,7 +1278,7 @@
     \end{definition}
 
     \begin{theorem}
-        Niech $G$ będzie grafem spójnym. Wówczas następujące warunki są równowaźne:
+        Niech $G$ będzie grafem spójnym. Wówczas następujące warunki są równoważne:
         \begin{enumerate}
             \item G jest grafem eurelowskim,
             \item stopień każdego wierzchołka w G jest parzysty.
@@ -1292,14 +1292,14 @@
 
     \subsection{Liczba chromatyczna}
     \begin{definition}
-        \textbf{Kolorowanie wierchołkowe}. Kolorowaniem wierzchołkowym grafu $G = (V, E)$ przy użyciu (co najwyżej) $k$
+        \textbf{Kolorowanie wierzchołkowe}. Kolorowaniem wierzchołkowym grafu $G = (V, E)$ przy użyciu (co najwyżej) $k$
         kolorów nazywamy funkcję $c: V \rightarrow \{1, \dots, k\}$ spełniającą warunek
         $c(u) \neq c(v) ~~ \forall u, v \in V : uv \in E$.
     \end{definition}
 
     \begin{definition}
         \textbf{Liczba chromatyczna}. Liczbą chromatyczną grafu G nazywamy najmniejszą liczbę $k \in \mathbb{N}$, dla
-        której istnieje kolorwanie wierzchołkowe G przy użyciu k kolorów. Oznaczamy $\chi(G)$.
+        której istnieje kolorowanie wierzchołkowe G przy użyciu k kolorów. Oznaczamy $\chi(G)$.
         \begin{enumerate}
             \item $\chi(G) = 1 \Leftrightarrow |E(G)| = 0$
             \item $\chi(T) = 2$ dla każdego drzewa T o przynajmniej dwóch wierzchołkach
@@ -1420,7 +1420,7 @@
 
     \subsection{Funkcje tworzące.}
     \begin{definition}
-        \textbf{Funkcją tworzącą} (generujacą) ciągu $(a_n)$ nazywamy szereg
+        \textbf{Funkcją tworzącą} (generującą) ciągu $(a_n)$ nazywamy szereg
         \begin{align*}
             \sum_{n=0}^{\infty} a_n x^n.
         \end{align*}
@@ -1442,7 +1442,7 @@
             \item Jeśli funkcja tworząca A(x) ma "element odwrotny", tzn. taką funkcję tworzącą B(x) dla której
             $A(x) * B(x) = 1$, to mówimy że A(x) jest \textbf{odwracalna} i piszemy $\frac{1}{A(x)} = B(x)$.
             \item \textbf{Mnożeniu funkcji} tworzącej \textbf{przez x} odpowiada przesunięcie ciągu (dopisanie na początek
-            wyrazu zerowego). Operajcją odwrotną jest odjęcie wyrazu zerowego i podzielenie przez x.
+            wyrazu zerowego). Operacją odwrotną jest odjęcie wyrazu zerowego i podzielenie przez x.
             \item Funkcje tworzące można \textbf{różniczkować} według wzoru:
             \begin{align*}
                 (\sum_{n=0}^{\infty} a_n x^n)' = \sum_{n=1}^{\infty} n a_n x^{n-1} = \sum_{n=0}^{\infty} (n+1) a_{n+1} x^n
@@ -1508,7 +1508,7 @@
     \begin{definition}
         \textbf{Ciąg liczbowy}. Ciągiem liczbowym nazywamy funkcję $\mathbb{N} \rightarrow \mathbb{R}$. Wartość tej
         funkcji dla liczby naturalnej $n$ nazywamy $n$-tym wyrazem ciągu i oznaczamy przez $a_n$, $b_n$ itp. Ciągi o
-        takich wyrazachoznaczamy odpowiednio przez $(a_n)$, $(b_n)$  itp. Zbiór wyrazów ciągu $(a_n)$, tj.
+        takich wyrazach oznaczamy odpowiednio przez $(a_n)$, $(b_n)$  itp. Zbiór wyrazów ciągu $(a_n)$, tj.
         $\{a_n : n  \in \mathbb{N}\}$ oznaczamy krótko przez  $\{a_n\}$.
     \end{definition}
 
@@ -1637,7 +1637,7 @@
     \end{theorem}
 
     \begin{theorem}
-        \textbf{Warunek konieczny i wystarczajacy istnienia granicy}. Funckja $f$ ma w punkcie $x_0$ granicę
+        \textbf{Warunek konieczny i wystarczający istnienia granicy}. Funkcja $f$ ma w punkcie $x_0$ granicę
         właściwą (niewłaściwą) wtedy i tylko wtedy, gdy
         \begin{align*}
             lim_{x \rightarrow x^{-}_0}  ~ f(x) ~ = ~ lim_{x \rightarrow x^{+}_0}  ~ f(x)
@@ -1646,14 +1646,14 @@
     \end{theorem}
 
     \begin{theorem}
-        \textbf{O niesitnieniu granicy funkcji w nieskończoności}. Jeżeli istnieją ciągi $(x'_n)$, $(x''_n)$
+        \textbf{O nieistnieniu granicy funkcji w nieskończoności}. Jeżeli istnieją ciągi $(x'_n)$, $(x''_n)$
         spełniające warunki:
         \begin{enumerate}
             \item $lim_{n \rightarrow \infty} ~ x'_n = \infty $ oraz $ lim_{n \rightarrow \infty} ~ f(x'_n) = g'$,
             \item $lim_{n \rightarrow \infty} ~ x''_n = \infty $ oraz $ lim_{n \rightarrow \infty} ~ f(x''_n) = g''$,
             \item $g' \neq g''$,
         \end{enumerate}
-        to nie istnieeje granica $lim_{x \rightarrow x_0} ~ f(x)$ (właściwa ani niewłaściwa).
+        to nie istnieje granica $lim_{x \rightarrow x_0} ~ f(x)$ (właściwa ani niewłaściwa).
     \end{theorem}
 
     \begin{theorem}
@@ -1702,7 +1702,7 @@
 
     \begin{definition}
         \textbf{Funkcja ciągła w punkcie}. Niech $x_0 \in \mathbb{R}$ oraz niech funkcja $f$ będzie określona przynajmniej
-        na otoczeniu $O(x_0)$. Funkcja $f$ jest ciągła w ounkcie $x_0$ wtedy i tylko wtedy, gdy
+        na otoczeniu $O(x_0)$. Funkcja $f$ jest ciągła w punkcie $x_0$ wtedy i tylko wtedy, gdy
         \begin{align*}
             lim_{x \rightarrow x_0} ~ f(x) = f(x_0).
         \end{align*}
@@ -1712,7 +1712,7 @@
     \end{definition}
 
     \begin{theorem}
-        \textbf{Warunek konieczny i wystarczający ciągłości funkcji}. Funckja jest ciągła w punkcie wtedy i tylko wtedy,
+        \textbf{Warunek konieczny i wystarczający ciągłości funkcji}. Funkcja jest ciągła w punkcie wtedy i tylko wtedy,
         gdy jest w tym punkcie ciągła lewostronnie i prawostronnie.
     \end{theorem}
 
@@ -1883,7 +1883,7 @@
     \begin{theorem}
         \textbf{Fermata, warunek konieczny istnienia ekstremum}. Jeżeli funkcja $f$ ma:
         \begin{enumerate}
-            \item esktremum lokalne w punkcie $x_0$,
+            \item ekstremum lokalne w punkcie $x_0$,
             \item pochodną $f'(x_0)$,
         \end{enumerate}
         to
