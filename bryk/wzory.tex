@@ -84,7 +84,7 @@ mathescape
             \item \textbf{Element najmniejszy}, jeśli $~~ \forall a \in A ~~ m \preceq a$.
         \end{itemize}
 
-        \item \textbf{Relacja równoważości} jest \textbf{zwrotna}, \textbf{symetryczna} i \textbf{przechodnia}.
+        \item \textbf{Relacja równoważności} jest \textbf{zwrotna}, \textbf{symetryczna} i \textbf{przechodnia}.
         \textbf{Klasa abstrakcji} to zbiór elementów będących ze sobą w relacji, \textbf{zbiór ilorazowy} to zbiór
         klas abstrakcji.
 
@@ -166,7 +166,7 @@ mathescape
 
         $Binomial(n, p) = N\left(np, \sqrt{np(1-p)}\right)$
 
-        \item \textbf{Łańuchy Markowa} w czasie h:  $P_h = P_0 * P^h$, rozkład stacjonarny:
+        \item \textbf{Łańcuchy Markowa} w czasie h:  $P_h = P_0 * P^h$, rozkład stacjonarny:
         $\pi P = \pi$, $\sum \pi_i = 1$.
 
         \item \textbf{Testy statystyczne}:
@@ -188,7 +188,7 @@ mathescape
 
         \item  \textbf{Element odwrotny w $(Z_m, +, *)$}: $x \cdot x^{-1} = 1 \  mod \  m$,
         \textbf{Tożsamość Bézouta}: $\forall a, b \in \mathbb{Z} : NWD(a,b) = d \exists x, y \in \mathbb{Z}: ax + by = d$.
-        \textbf{Rozszerzony algorym Euklidesa}:
+        \textbf{Rozszerzony algorytm Euklidesa}:
         $r_0 = a, r_1 = b \quad r_{i + 1} = r_{i - 1} - q_{i}r_{i}$\\
         $x_0 = 1, x_1 = 0 \quad x_{i + 1} = x_{i - 1} - q_{i}x_{i}$\\
         $y_0 = 0, y_1 = 1 \quad y_{i + 1} = y_{i - 1} - q_{i}y_{i}$
@@ -232,7 +232,7 @@ mathescape
         $  \forall \varepsilon > 0 ~~ \exists  n_0 \in \mathbb{N} ~~ \forall n \in \mathbb{N} ~~~ [(n > n_0) \Rightarrow (|a_n - a| < \varepsilon)]$.
         Twierdzenia: o ograniczoności, o równoważności (z modułem), o dwóch/trzech ciągach, o ciągu monotonicznym
         ograniczonym.\\
-        \textbf{Granica funckji}:
+        \textbf{Granica funkcji}:
         (Heine) $lim_{x \rightarrow x_0} ~ f(x) = g ~~ \Leftrightarrow$\\
         $\forall_{(x_n): ~ \{x_n\} \subset S(x_0)} ~~ [(lim_{n \rightarrow \infty} x_n = x_0) \Rightarrow (lim_{n \rightarrow \infty} f(x_n) = g)].$\\
         (Cauchy)    $lim_{x \rightarrow x_0} ~ f(x)  = g ~~ \Leftrightarrow$\\
@@ -258,7 +258,7 @@ mathescape
         II warunek wys -- wszystkie pochodna aż do n-tej się zerują, n-ta ujemna, n parzyste.
 
         \item \textbf{Całka Riemanna}: $\int_{a}^{b} f(x) \,dx ~~ \stackrel{def}{=} ~~ lim_{\delta(P)  \rightarrow 0} \sum_{k=1}^{n} f(x^{*}_k) \Delta x_k$.
-        Funkcja całkowalna jeśli ograniczona i skończona liczba nieciągłośći pierwszego rodzaju.\\
+        Funkcja całkowalna jeśli ograniczona i skończona liczba nieciągłości pierwszego rodzaju.\\
         \textbf{Suma całkowa}: $\int_{a}^b f(x) \, dx ~ = ~ lim_{n \rightarrow \infty} [\frac{b - a}{n} \sum_{k=1}^n f \left(a + k \frac{b - a}{n}\right)]$,\\
         \textbf{całka Newtona-Leibniza}: $\int_a^b f(x) \,dx ~ = ~ F(b) - F(a) ~ = ~ [F(x)]_a^b$.
 
@@ -267,7 +267,7 @@ mathescape
         \textbf{Różniczka}: $df(x_0, y_0)(\Delta x, \Delta y) \stackrel{def}{=} \frac{\partial f}{\partial x}(x_0, y_0)\Delta x + \frac{\partial f}{\partial y}(x_0, y_0)\Delta y$.\\
         \textbf{Przybliżenie}: $f(x_0 + \Delta x, y_0 + \Delta y) \approx f(x_0, y_0) + df(x_0, y_0)(\Delta x, \Delta y)$.
 
-        \item \textbf{Ekstremum wieelu zmiennych} -- warunek konieczny: wszystkie pochodne cząstkowe zerowe.
+        \item \textbf{Ekstremum wielu zmiennych} -- warunek konieczny: wszystkie pochodne cząstkowe zerowe.
         Warunek wystarczający: konieczny plus wyznacznik Jacobianu > 0.
         Minimum, gdy $\frac{\partial^2 f}{\partial^2 x}(x_0, y_0) > 0$,
         maksimum, gdy $\frac{\partial^2 f}{\partial^2 x}(x_0, y_0) < 0$.
@@ -328,7 +328,7 @@ mathescape
             $f(n) = O(g(n)) \wedge  f(n) = \Omega(g(n))$.
         \end{itemize}
 
-        \item \textbf{Złożoność pesumistyczna}: $W(n) = \sup\{t(d) : d \in D_n\}$, \textbf{optymistyczna}:
+        \item \textbf{Złożoność pesymistyczna}: $W(n) = \sup\{t(d) : d \in D_n\}$, \textbf{optymistyczna}:
         $Opt(n) = \inf\{t(d) : d \in D_n\}$, \textbf{średnia}: $A(n) = ave(X_n) = \sum_{k \geq 0}kp_{nk}$.
         \textbf{Koszt amortyzowany} -- metoda kosztu sumarycznego, księgowania, potencjału.
 
@@ -336,12 +336,12 @@ mathescape
         rekurencja nieliniowa, redundancja obliczeń.
 
         \item \textbf{Lista} -- sekwencyjna, uporządkowana, elementy ustalonego typu.
-        Implemenetacja: tablica, lista
+        Implementacja: tablica, lista
         wiązania (jedno/dwukierunkowa, z głową, cykliczna).
         Operacje O(n).
 
         \item \textbf{Kolejka} FIFO - lista z początkiem i końcem, operacje w O(1). \textbf{Kolejka priorytetowa}
-        list z priorytetem, najlepiej na kopcu (O(1) dla wzięcia i O(logn)  dla pozostałych).
+        list z priorytetem, najlepiej na kopcu (O(1) dla wzięcia i O(log n)  dla pozostałych).
 
         \item \textbf{QuickSort} -- pesymistyczna - $O(n^2)$, średnia i optymistyczna - $O(nlog_2 n)$.
         \textbf{Sposoby wybrania pivota}: pierwszy, ostatni lub losowy element; \textbf{mediana} z pierwszego,
@@ -371,7 +371,7 @@ mathescape
         \item \textbf{BFS} -- nawet dla nieskończone zwróci poprawne odpowiedzi (kompletność); \textbf{DFS} niekompletność.
         \textbf{Złożoność obliczeniowa} -- $\theta(e + v)$, złożoność \textbf{pamięciowa} --  $\theta(v)$.
 
-        \item \textbf{Dijkstra} -- zachłanna, dla wag nieujemnych, najmneijszy wierzchołek i relax na sąsiadów;
+        \item \textbf{Dijkstra} -- zachłanna, dla wag nieujemnych, najmniejszy wierzchołek i relax na sąsiadów;
         \textbf{złożoność}: $O(|V|^2)$ na tablicy, $O(|E|\log|V|)$ na kopcu.
         \textbf{Bellman-Ford} -- działa ok dla ujemnych wag ale bez ujemnych cykli (może je wykryć), używany w RIP;
         Dla każdego wierzchołka na wszystkich relax jego krawędziach, \textbf{złożoność} -- $O(|V|\cdot|E|)$.
@@ -443,7 +443,7 @@ mathescape
                 \begin{tabular}{c}
                     Oznaczenia:       \\
                     T - rozstrzygalny \\
-                    N - nieroztrzygalny
+                    N - nierozstrzygalny
                 \end{tabular}
             \end{tabular}
         \end{center}

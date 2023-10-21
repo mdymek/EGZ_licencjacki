@@ -106,7 +106,7 @@
 
     \begin{itemize}[noitemsep]
         \item \textbf{Zaleta} Zmniejszenie czasu odszukania potrzebnych danych (minimalizowanie liczby odczytów bloków danych z dysku)
-        \item \textbf{Wada}: Zwiększenie czasu zmiany danych, na których założony jest indeks (zmiana takich danych oznacza zmiane w indeksie)
+        \item \textbf{Wada}: Zwiększenie czasu zmiany danych, na których założony jest indeks (zmiana takich danych oznacza zmianę w indeksie)
     \end{itemize}
 
     \noindent \textbf{Implementacje indeksów}: drzewa B+, tablice haszujące, plik uporządkowany z wyszukiwaniem binarnym.\\
@@ -138,7 +138,7 @@
         \item \textbf{Atomicity} (niepodzielność) -- transakcja wykonywana \textbf{w całości albo wcale}.
         \item \textbf{Consistency} (spójność) po zakończeniu transakcji baza musi być w stanie spójnym, tzn muszą być \textbf{zachowane wszystkie więzy} narzucone na dane.
         \item \textbf{Isolation} (izolacja) wykonywana w \textbf{izolacji od innych} transakcji.
-        \item \textbf{Durability} (trwałość) po zakończeniu transacji jej \textbf{efekty} muszą być \textbf{trwałe} w systemie nawet w przypadku awarii.
+        \item \textbf{Durability} (trwałość) po zakończeniu transakcji jej \textbf{efekty} muszą być \textbf{trwałe} w systemie nawet w przypadku awarii.
     \end{itemize}
 
     \noindent \textbf{Stany transakcji}
@@ -327,7 +327,7 @@
             zapisuje Q, to w S' $T_m$ jest ostatnią transakcją, która zapisuje Q.
         \end{itemize}
 
-        \item \textbf{Szeregowalność perpektywiczna}. Harmonogram szeregowalny perspektywicznie jest harmonogramem
+        \item \textbf{Szeregowalność perspektywiczna}. Harmonogram szeregowalny perspektywicznie jest harmonogramem
         \textbf{równoważnym perspektywicznie} jakiemuś harmonogramowi szeregowemu.
 
         Szeregowalność perspektywiczna to \textbf{szeregowalność konfliktowa z dodatkowymi ograniczeniami} operacji zapisów:
@@ -406,7 +406,7 @@
 
     \subsection{Przerzutnik RS (Reset-Set)}
     \begin{itemize}[noitemsep]
-        \item najprostrzy przerzutnik: 2xNOR.
+        \item najprostszy przerzutnik: 2xNOR.
         \item $R \rightarrow \overline{Q}$, $S \rightarrow \overline Q_n$ tylko jeśli na którymś sygnał.
     \end{itemize}
 
@@ -476,7 +476,7 @@
     \section{Minimalizacja funkcji logicznych.}
 
     \textbf{Minimalizacja z wykorzystaniem algebry Boole'a} -- polega na \textbf{zapisaniu funkcji w postaci sumy stanów wejść},
-    dla których funkcja przyjmuje wratość 1, a następnie wykorzystując prawa algebry Boole'a \textbf{uproszczenie} jej.\\
+    dla których funkcja przyjmuje wartość 1, a następnie wykorzystując prawa algebry Boole'a \textbf{uproszczenie} jej.\\
 
     \noindent \textbf{Minimalizacja z wykorzystaniem tablic Karnaugha}\\
     \textbf{Tablica Karnaugha} jest cykliczna; składa się z pól reprezentujących wszystkie kombinacje zmiennych naszej
@@ -568,7 +568,7 @@
 
     \noindent \textbf{Zarządzanie procesami}. Fragmenty kodu jądra związane z obsługą procesów:
     \begin{itemize}[noitemsep]
-        \item \textbf{zarządcy procesów} -- grupują i wykonuja funkcje obsługi procesów.
+        \item \textbf{zarządcy procesów} -- grupują i wykonują funkcje obsługi procesów.
         \item \textbf{zarządcy zasobów} -- kontrolują stan zajętości zasobów i realizację żądań procesów.
     \end{itemize}
 
@@ -594,7 +594,7 @@
 
     \noindent \textbf{Wywłaszczenie} -- przejście Wykonywany $\rightarrow$ Gotowy -- może być następstwem:
     \begin{enumerate}[noitemsep]
-        \item \textbf{Upływu kwantu czasu} -- przy algorytmi rotacyjnym planowania przydziału procesora.
+        \item \textbf{Upływu kwantu czasu} -- przy algorytmie rotacyjnym planowania przydziału procesora.
         \item \textbf{Pojawienia się procesu gotowego z wyższym priorytetem} -- w systemie z \textbf{dynamicznymi
         priorytetami}, które są przeliczane co jakiś czas, przy stosowaniu wywłaszczeniowego podejścia do planowania
         przydziału procesora.
@@ -614,7 +614,7 @@
 
         \item \textbf{Tryb decyzji} -- kiedy są oceniane priorytety oraz dokonywany jest wybór.
         \begin{itemize}[noitemsep]
-            \item zbiórem wytycznych odnośnie uruchamiania ekspedytora,
+            \item zbiorem wytycznych odnośnie uruchamiania ekspedytora,
             \item \textbf{wywłaszczeniowy} lub \textbf{niewywłaszczeniowy} (proces może się zrzec, np. po wejściu w stan oczekiwania).
         \end{itemize}
 
@@ -646,7 +646,7 @@
         \begin{itemize}
             \item preferuje procesy, które mają najmniejsze wymagania odnośnie czasu procesora,
             \item "najpierw zadanie z najkrótszą następną fazą procesora",
-            \item równeiż w systemach masowej obsługi,
+            \item również w systemach masowej obsługi,
             \item problem określenia przyszłego zapotrzebowania na procesor.
         \end{itemize}
     \end{itemize}
@@ -676,13 +676,13 @@
     \begin{itemize}[noitemsep]
         \item \textbf{lock} (mutex\_lock) -- zajęcie muteksu jeśli jest wolny
         \item \textbf{unlock} (mutex\_unlock) -- ustawienie zamka na wolny lub ustawienie wątku z kolejki na gotowy
-        \item \textbf{trylock} (mutex\_trylock) -- zajęcie zamkna lub kontynuacja przetwarzania
+        \item \textbf{trylock} (mutex\_trylock) -- zajęcie zamka lub kontynuacja przetwarzania
     \end{itemize}
 
     \noindent \textbf{Monitor} (zmienna warunkowa) -- zmienne i działające na nich procedury zebrane w jednym module
     (klasie), dostęp do nich tylko za pomocą procedur. W danej chwili tylko jeden proces może wykonywać procedury
     monitora (FIFO); istnieje możliwość wstrzymania i wznowienia procedur za pomocą zmiennych warunkowych.
-    Może to być np. klasa reprezntująca konto w banku i udostępniająca procedury zmiany stanu.
+    Może to być np. klasa reprezentująca konto w banku i udostępniająca procedury zmiany stanu.
 
     \noindent Operacje:
     \begin{itemize}[noitemsep]
@@ -834,7 +834,7 @@
     \end{itemize}
 
 
-    \noindent \textbf{Fizyczna struktura pliku} -- z każdym powiązany jest jeden i-węzeł zawierajacy atrybuty:
+    \noindent \textbf{Fizyczna struktura pliku} -- z każdym powiązany jest jeden i-węzeł zawierający atrybuty:
     \begin{itemize}[noitemsep]
         \item \textbf{identyfikator} właściciela i grupy,
         \item \textbf{typ pliku} — plik zwykły, katalog, dowiązanie symboliczne, łącze nazwane, urządzenie znakowe,
@@ -886,14 +886,14 @@
     usługami sieci.
     \begin{itemize}[noitemsep]
         \item \textbf{HTTP/HTTPS} (Hypertext Transfer Protocol (Secure)) - protokół przesyłania dokumentów hipertekstowych.
-        \item \textbf{DNS} (Domain Name System) - sytem nazw sieciowych (domenowych).
+        \item \textbf{DNS} (Domain Name System) - system nazw sieciowych (domenowych).
         \item \textbf{Telnet} - protokół do obsługi odległego terminala w architekturze klient-serwer.
     \end{itemize}
 
     \noindent \textbf{Warstwa prezentacji} - kompresja, kodowanie i
     translacja między niezgodnymi schematami kodowania oraz szyfrowanie.
     \begin{itemize}[noitemsep]
-        \item \textbf{SSL} (Secure Socket Layer) - protokół szyfrowania zapewniający poufność i ingtegralność danych.
+        \item \textbf{SSL} (Secure Socket Layer) - protokół szyfrowania zapewniający poufność i integralność danych.
         Wykorzystuje szyfrowanie symetryczne z kluczem publicznym, stosuje sumy kontrolne dla zapewnienia integralności danych.
         \item \textbf{TSL} (Transport Layer Security) - jak wyżej. Ustalenie klucza symetrycznego szyfrowaniem niesymetrycznym,
         symetryczne szyfrowanie danych.
@@ -912,7 +912,7 @@
     poza lokalnymi segmentami LAN, protokoły komunikacji procesów na odległych komputerach.
     \begin{itemize}[noitemsep]
         \item \textbf{TCP} (Transmission Control Protocol) - połączeniowy, niezawodny, strumieniowy.
-        \item \textbf{UDP} (User Datagram Protocol) - prosty bezpołączeniowo protokół komunikacyjny, nie zapewnia
+        \item \textbf{UDP} (User Datagram Protocol) - prosty bezpołączeniowy protokół komunikacyjny, nie zapewnia
         niezawodności.
     \end{itemize}
 
@@ -921,7 +921,7 @@
     \begin{itemize}[noitemsep]
         \item \textbf{IP} (Internet Protocol) - protokół internetowy będący zbiorem automatycznych kroków
         nawiązywania łączności.
-        \item \textbf{IGMP} (Internet Group Managament Protocol) - multicast w IP.
+        \item \textbf{IGMP} (Internet Group Management Protocol) - multicast w IP.
     \end{itemize}
 
     \noindent \textbf{Warstwa łącza danych} – grupowanie danych wejściowych (z warstwy fizycznej) w bloki zwane
@@ -1062,7 +1062,7 @@
         \item \textbf{Tworzenie pakietów zgodnie ze stosem TCP/IP}
         \begin{enumerate}[noitemsep]
             \item Komputer z przeglądarką tworzy \textbf{zapytanie HTTP} o stronę \texttt{www.ksi.sh}
-            \item Komputer tworzy \textbf{pakiet IP} i opakowywuje w ten pakiet zapytanie HTTP
+            \item Komputer tworzy \textbf{pakiet IP} i opakowuje w ten pakiet zapytanie HTTP
             \item Komputer na podstawie swojego lokalnego adresu IP i ustawionej maski sprawdza, czy docelowy komputer
             znajduje się w jego sieci LAN; jeśli nie, to odczytuje ze swojej konfiguracji IP bramy domyślnej
             \item Komputer sprawdza, czy nie ma adresu MAC IP bramy zapisanego w pamięci cache u siebie.
@@ -1090,7 +1090,7 @@
     \section{Działanie przełączników Ethernet, sieci VLAN, protokół STP.}
     \textbf{Przełącznik Ethernet'owy (Switch)}
     \begin{enumerate}[noitemsep]
-        \item Gdy switch odbiera na jakimś porcie ramkę, sprawdza on czy adres MAC odbioryc znajduje się w tablicy CAM:
+        \item Gdy switch odbiera na jakimś porcie ramkę, sprawdza on czy adres MAC odbiorcy znajduje się w tablicy CAM:
         \begin{enumerate}[noitemsep]
             \item Jeżeli tak - ramka wysyłana jest tylko na odpowiedni port
             \item Jeżeli nie - Switch postąpi podobnie jak koncentrator sieciowy (hub) - roześle tę ramkę do wszystkich
@@ -1148,7 +1148,7 @@
 
     \noindent\textbf{Działanie STP}:
     \begin{enumerate}[noitemsep]
-        \item \textbf{Wybór korzenia} -- realizowany przez BPDU na podstawie konfiguralnego priorytetu przełącznika.
+        \item \textbf{Wybór korzenia} -- realizowany przez BPDU na podstawie konfigurowalnego priorytetu przełącznika.
         Wygrywa najniższy priorytet, następnie najniższy adres MAC.
 
         \item \textbf{Wybór portów do korzeni} -- do przekazywania ramek do korzenia; bezpośrednio
@@ -1173,9 +1173,9 @@
     \noindent Pożądane cechy protokołów routowania:
     \begin{itemize}[noitemsep]
         \item Wyznaczenie \textbf{najlepszej trasy} do punktu docelowego
-        \item \textbf{Odporność} (robustness) na nieprzewidziane, nieporządanie zdarzenia:
+        \item \textbf{Odporność} (robustness) na nieprzewidziane, niepożądane zdarzenia:
         "kopara", niewłaściwa konfiguracja, obciążenia sieci
-        \item \textbf{Szybkie osiaganie zbieżności}, tj. jednakiej topologii sieci w routerach.
+        \item \textbf{Szybkie osiąganie zbieżności}, tj. jednakiej topologii sieci w routerach.
         \item Dopasowanie do \textbf{zmian}, np. podłączenie, odłączenie danej sieci; zmiana szerokości pasma, opóźnienia.
     \end{itemize}
 
@@ -1229,7 +1229,7 @@
         \textbf{zasobożerne}, więc tworzy się \textbf{obszary OSPF}:
         \begin{itemize}[noitemsep]
             \item Każdy obszar ma przypisany \textbf{numer}, z czego jeśli jeden to ma 0
-            \item \textbf{Stub Area} - nie ma tras zewnętrzych, sumy tras z innych obszarów są wprowadzane
+            \item \textbf{Stub Area} - nie ma tras zewnętrznych, sumy tras z innych obszarów są wprowadzane
             \item \textbf{Totally Stubby Area} - nie ma ani tras zewnętrznych, ani sum tras z innych obszarów.
             Wyjście z takiego obszaru jest przez trasę domyślną
             \item \textbf{Not So Stubby Area} - Stub Area, do którego wprowadzane są pewne, nieliczne trasy
@@ -1260,14 +1260,14 @@
 
     \section{Szyfrowanie z kluczem publicznym, podpis cyfrowy, certyfikaty.}
 
-    \textbf{Syfrowanie z kluczem publicznym (asymetryczne)}
+    \textbf{Szyfrowanie z kluczem publicznym (asymetryczne)}
     \begin{itemize}[noitemsep]
-        \item szyfrowanie i odszyfrowanie jest realizowane przy pomocy pary kluczy - \textbf{prywatnego} i \textbf{pubicznego}.
+        \item szyfrowanie i odszyfrowanie jest realizowane przy pomocy pary kluczy - \textbf{prywatnego} i \textbf{publicznego}.
         \item A wysyła do B zaszyfrowane kluczem publicznym B -- wtedy tylko B może odszyfrować (swoim prywatnym)
         \item A wysyła do B zaszyfrowane swoim kluczem prywatnym -- wtedy B ma pewność, że to A szyfrowało
     \end{itemize}
 
-    \noindent \textbf{Skrót (Hash)} -- skrót wiadomości tworzony za pomocą deterministycznej \textbf{funkcji haszujacej}
+    \noindent \textbf{Skrót (Hash)} -- skrót wiadomości tworzony za pomocą deterministycznej \textbf{funkcji haszującej}
     (MD5, SHA); jeśli w oryginalnej wiadomości zmieniony zostanie chociaż jeden bit, to skrót będzie zupełnie inny;
     odtworzenie oryginały praktycznie niemożliwe.\\
 
@@ -1310,7 +1310,7 @@
             przejęte przez osoby nieupoważnione.
 
             \item \textbf{Bezpieczny VPN} -- bazuje na urządzeniach i oprogramowaniu klienta, transmisja odbywa się
-            przez Internet a do jej ochrony stostu się \textbf{techniki kryptograficzne}; zaszyfrowany ruch jest
+            przez Internet a do jej ochrony stosuje się \textbf{techniki kryptograficzne}; zaszyfrowany ruch jest
             widoczny jako tunel między dwoma sieciami; wykorzystuje zwykłe łącze internetowe -- niski koszt, ale
             też łącza publiczne -- brak gwarancji parametrów sieci na całej drodze transmisji.
 
@@ -1345,7 +1345,7 @@
             \item Zabezpieczenie przed atakami polegającymi na powtórnym przesłaniu pakietu
             \item Ograniczone zabezpieczenie przed analizą ruchu
             \item Kontrola dostępu
-            \item IPsec jest jednym ze sposobów na bzudowanie VPN
+            \item IPsec jest jednym ze sposobów na zbudowanie VPN
         \end{itemize}
 
         \item Przed przesyłaniem danych strony komunikujące się uzgadniają szczegóły takie jak sposób uwierzytelniania,
@@ -1364,7 +1364,7 @@
         \begin{itemize}[noitemsep]
             \item \textbf{Tryb transportowy} - w sieci lokalnej; podmiana zawartości pakietu IP na zaszyfrowaną (szyfrowany
             nagłówek i ładunek)
-            \item \textbf{Tryb tunelowy} - w niezabezpiecznej części sieci, zanurzenie pakietu ESP w nowy pakiet IP
+            \item \textbf{Tryb tunelowy} - w niezabezpieczonej części sieci, zanurzenie pakietu ESP w nowy pakiet IP
             (szyfrowany tylko ładunek)
         \end{itemize}
 

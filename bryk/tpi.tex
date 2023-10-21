@@ -105,7 +105,7 @@
             \item $F \subset Q$ - zbiór stanów końcowych,
             \item $\tau$  - skończony zbiór dopuszczalnych symboli,
             \item $b \in \tau$  - symbol pusty,
-            \item $\Sigma \subset \tau \ \{b\} $ - zbiór symboli wiejściowych,
+            \item $\Sigma \subset \tau \ \{b\} $ - zbiór symboli wejściowych,
             \item $\delta$ - funkcja sterująca.
             \begin{itemize}[noitemsep]
                 \item W wersji niedeterministycznej postaci maszyny Turinga:
@@ -120,7 +120,7 @@
     \end{definition}
 
 
-    \section{Modele obliczen: automat skończony, automat ze stosem.}
+    \section{Modele obliczeń: automat skończony, automat ze stosem.}
     \subsection{Automat skończony deterministyczny}
     \begin{definition}
         \textbf{Automat skończony deterministyczny} oznaczamy piątką parametrów:
@@ -138,7 +138,7 @@
 
     \begin{definition}
         Każdy automat $\mathcal{A}$ = (S, A, f, $s_{0}$, T) wyznacza w wolnym monoidzie $A^{*}$ \textbf{prawą kongruencję
-        automatową} okresloną w następujący sposób:
+        automatową} określoną w następujący sposób:
         \[\forall u,v \in A^{*}, u \sim_\mathcal{A} v \Leftrightarrow f(s_{0}, u) = f(s_{0}, v)\]
 
         Automat ilorazowy to automat, w którym stanami są klasy równoważności.
@@ -151,9 +151,9 @@
     \end{definition}
 
     \begin{definition}
-        Monoidem przejśc automatu $\mathcal{A}$ nazywamy monoid:
+        Monoidem przejść automatu $\mathcal{A}$ nazywamy monoid:
         \[\mathcal{M(A)} = \tau_\mathcal{A}(A^*) \subset S^{S} = \{tau_\mathcal{A}(a) : a \in A^*\}\]
-        bedący zbiorem generatorów (unikalnych reprezentacji) automatu $\mathcal{A}$.
+        będący zbiorem generatorów (unikalnych reprezentacji) automatu $\mathcal{A}$.
     \end{definition}
 
     \subsection{Automat skończony niedeterministyczny}
@@ -196,7 +196,7 @@
         $D_n$ - zbiór danych rozmiaru n,\\
         $t(d)$ - liczba operacji dominujących,\\
         $X_n$ - zmienna losowa dla $t(d) \in D_n$,\\
-        $p_{kn}$ - rozkład prawdopodbieńdstwa zmiennej $X_n$.
+        $p_{kn}$ - rozkład prawdopodobieństwa zmiennej $X_n$.
 
         \textbf{Optymistyczna złożoność czasowa}:
         \[Opt(n) = inf\{t(d) : d \in D_n\}\]
@@ -276,14 +276,14 @@
     \begin{definition}
         \textbf{Kolejka FIFO} (First In First Out) to lista, w której:
         \begin{itemize}[noitemsep]
-            \item Wstawianie nowego elementu odbyca się na końcu kolejki \textbf{rear}.
+            \item Wstawianie nowego elementu odbywa się na końcu kolejki \textbf{rear}.
             \item Usuwanie elementu odbywa się na początku kolejki \textbf{front}.
             \item Wyróżnia się dwa podstawowe sposoby implementacji kolejki:
             \begin{itemize}
                 \item Tablica cykliczna,
                 \item Lista wiązana.
             \end{itemize}
-            \item Wszystkie operacj w czasie stałym.
+            \item Wszystkie operacji w czasie stałym.
         \end{itemize}
     \end{definition}
 
@@ -635,7 +635,7 @@
 
     \subsection{Algorytm Floyda-Warshalla}
 
-    Pozwala wyliczyć najkrósze ścieżki pomiędzy wszystkimi wierzchołkami w grafie $G$ (nieposiadającym ujemnych cykli).
+    Pozwala wyliczyć najkrótsze ścieżki pomiędzy wszystkimi wierzchołkami w grafie $G$ (nieposiadającym ujemnych cykli).
     Inicjujemy słownik odległości jak poniżej:
 
     $D[(u, w) : u, w \in V] =
@@ -733,7 +733,7 @@
 
     \subsection{Kolorowanie grafów}
     \begin{itemize}
-        \item Klasyczny roblem kolorowania (krawędziowego i wierzchołkowego) jest \textbf{NP-trudny} – nie istnieją
+        \item Klasyczny problem kolorowania (krawędziowego i wierzchołkowego) jest \textbf{NP-trudny} – nie istnieją
         wielomianowe algorytmy kolorujące grafy zawsze w sposób optymalny.
     \end{itemize}
 
@@ -742,7 +742,7 @@
         \item Użyj BFS do poruszania się po grafie.
         \item Wybierz wierzchołek i nadaj różne kolory jego krawędziom.
         \item Przejdź do kolejnego wierzchołka.
-        \item Powtarzaj aż wszyskie krawędzie zostaną pokolorowane.
+        \item Powtarzaj aż wszystkie krawędzie zostaną pokolorowane.
     \end{enumerate}
 
     \noindent \textbf{Algorytmy kolorowania wierzchołkowego}:
@@ -782,7 +782,7 @@
     \textbf{Algorytm Boruvki} - $O(ElogV)$.
     \begin{enumerate}[noitemsep]
         \item Weź wszystkie wierzchołki, ale bez krawędzi - każdy wierzchołek jest osobnym drzewem.
-        \item Dla każdego drzewa znajdź krawędź o najmniejszej wadze w oryignalnym grafie, która łączy je z innym drzewem.
+        \item Dla każdego drzewa znajdź krawędź o najmniejszej wadze w oryginalnym grafie, która łączy je z innym drzewem.
         \item Dodaj tę krawędź do MST.
         \item Powtarzaj, dopóki drzewa nie połączyły się w jedno.
     \end{enumerate}
@@ -801,7 +801,7 @@
         \item Powtarzaj krok 2 aż otrzymasz $V-1$ krawędzi w MST.
     \end{enumerate}
     \textbf{Złożoność:} Sortowanie krawędzi zajmuje $O(ElogE)$. Po sortowaniu, iterujemy po krawędziach i używamy
-    algorytmu find-union który może zająć $O(logV)$. Zatem ogólna złozoność to $O(ElogE+ElogV)$. Wartość E jest
+    algorytmu find-union który może zająć $O(logV)$. Zatem ogólna złożoność to $O(ElogE+ElogV)$. Wartość E jest
     mniejsza niż $V^2$, więc $O(logV)$ $=$ $O(logE)$.
 
 
