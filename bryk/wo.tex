@@ -17,7 +17,7 @@
         \begin{itemize}[noitemsep]
             \item Sygnalizacja znaku poprzez najwyższą pozycję,
             \item Cyfra 0 na pozycji znaku oznacza dodatniość,
-            \item Brak kodowania cyfr wyrażajacych wartość.
+            \item Brak kodowania cyfr wyrażających wartość.
         \end{itemize}
         \item \textbf{Przykład}: $q = 10, c = 5, u = 2, n = 8$
         \[[+216.7]_{zmp} = 0|00216.70, ~~ [-216.7]_{zmp} = 1|00216.70\]
@@ -178,13 +178,13 @@
     \begin{itemize}
         \item \textbf{Niestatyczne funkcje globalne} są dostępne ze wszystkich plików, które includują zawierające
         je plik źródłowy - trzeba zatem uważać na konflikty nazw.
-        \item \textbf{Nietstatyczne metody klas} wymagają do wywołania instancji klasy - mogą zachowywać się różnie
+        \item \textbf{Niestatyczne metody klas} wymagają do wywołania instancji klasy - mogą zachowywać się różnie
         dla różnych instancji; mogą być oznaczone \texttt{final} i \texttt{override}.
     \end{itemize}
 
     \subsection{Funkcje wirtualne.}
     \begin{itemize}
-        \item \textbf{Wirtualne metody klas} są przydatne w polimorfiźmie.
+        \item \textbf{Wirtualne metody klas} są przydatne w polimorfizmie.
         \item W przypadku zwykłej metody, wywołanie jej dla wskaźnika typu klasy podstawowej zawsze wywoła instancję
         z klasy podstawowej, nawet jeżeli wskaźnik będzie tak naprawdę wskazywał na klasę pochodną.
         \item Słowo kluczowe \texttt{virtual} \textbf{wymusza dedukcję} której metody użyć \textbf{na podstawie zawartości
@@ -211,7 +211,7 @@
         \item Zaletą jest \textbf{nietworzenie niepotrzebnych kopii}, możliwość zmiany zmiennej spoza zakresu funkcji (zamiast
         np. zwracania i przypisywania nowej wartości).
         \item Nieprzemyślane użycie może spowodować \textbf{nieprzewidzianą} przez programistę \textbf{zmianę zawartości} zmiennej.
-        \item \textbf{Brak możliwości użyca wyrażenia} jako argumentu funkcji - musimy zapisać jego wynik w zmiennej, by móc
+        \item \textbf{Brak możliwości użycia wyrażenia} jako argumentu funkcji - musimy zapisać jego wynik w zmiennej, by móc
         ją przekazać.
     \end{itemize}
 
@@ -365,9 +365,9 @@
 
     \noindent Przykładowy kontener: \textbf{\texttt{std::array}}:
     \begin{itemize}[noitemsep]
-        \item wyraża tablicę o \textbf{stałej ilości} elementów, ustalonejw czasie kompilacji przez argument
+        \item wyraża tablicę o \textbf{stałej ilości} elementów, ustalonej w czasie kompilacji przez argument
         \textbf{templatki},
-        \item dostęp \textbf{sekwencyjny} do elemenów -- pewien ustalony porządek,
+        \item dostęp \textbf{sekwencyjny} do elementów -- pewien ustalony porządek,
         \item \textbf{statyczny przydział pamięci} -- nie mogą zmienić rozmiaru,
         \item mogą być traktowane jako \textbf{krotki},
         \item swap dwóch tablic wymaga ich przepisania w czasie liniowym -- za to iteratory odnoszą się ciągle
@@ -591,7 +591,7 @@
             \item \textbf{top-down} -- najpierw moduł wywołujący, potem wywoływane,
             \item \textbf{bottom-up} -- najpierw moduły wywoływany, potem wywołujący,
             \item \textbf{funkcjonalne} -- top-down wewnątrz danej funkcjonalności,
-            \item \textbf{sekwencyja} przeprowadzania \textbf{transakcji},
+            \item \textbf{sekwencja} przeprowadzania \textbf{transakcji},
             \item \textbf{big-bang} -- wszystko integrowane i testowane naraz.
         \end{itemize}
     \end{itemize}
@@ -705,7 +705,7 @@
             \end{itemize}
         \end{itemize}
 
-        \item \textbf{Zespoł deweloperski}
+        \item \textbf{Zespół deweloperski}
         \begin{itemize}[noitemsep]
             \item złożony z równych \textbf{profesjonalistów} -- "Deweloperów" (3-9 os); \textbf{samoorganizujący} się, wielofunkcyjny.
             \item ma za zadanie dostarczenie (na zakończenie każdego Sprintu), gotowego do wydania \textbf{Przyrostu}
@@ -892,7 +892,7 @@
             \includegraphics[scale=0.40]{ooad/generalization.png}
         \end{center}
 
-        \item \textbf{Realizacja} -- zależność między implementacją a interfejsem. Przyład: ArrayList i List.
+        \item \textbf{Realizacja} -- zależność między implementacją a interfejsem. Przykład: ArrayList i List.
 
         \begin{center}
             \includegraphics[scale=0.40]{ooad/realization.png}
@@ -917,7 +917,7 @@
     \begin{itemize}
         \item \textbf{Diagram sekwencji} -- interakcje pomiędzy częściami systemu w postaci sekwencji
         komunikatów wymienianych między nimi; dynamiczne aspekty realizacji scenariuszy, rozdział~\ref{sec:uml}.
-        \item \textbf{Diagram stanów} -- graficznareprezentacja stanów, przejść, zdarzeń i akcji maszyny stanów
+        \item \textbf{Diagram stanów} -- graficzna reprezentacja stanów, przejść, zdarzeń i akcji maszyny stanów
         modelującej dynamiczne aspekty systemu.
     \end{itemize}
 
@@ -982,16 +982,16 @@
         \item \textbf{Architektura otwarta} -- warstwa może wywołać dowolną z warstw poniżej niej.
         Przykłady: Serverless, Swing.
 
-        \item \textbf{Architektura zamknięta} -- warstwa może wywołać tylko wartstwę bezpośrednio pod nią.
+        \item \textbf{Architektura zamknięta} -- warstwa może wywołać tylko warstwę bezpośrednio pod nią.
         Przykłady: ISO/OSI, TCP/IP.
     \end{itemize}
 
     \noindent \textbf{Architektura trójwarstwowa} -- architektura typu klient-serwer,
     często stosowana przy tworzeniu aplikacji internetowych.
     \begin{enumerate}[noitemsep]
-        \item Wartwa \textbf{prezentacji} -- interfejs użytkownika, tłumaczy żądania i wyniki.
+        \item Warstwa \textbf{prezentacji} -- interfejs użytkownika, tłumaczy żądania i wyniki.
         \item Warstwa \textbf{logiki biznesowej} -- koordynuje pracę aplikacji, przetwarza żądania
-        wartstwy prezentacji, dokonuje obliczeń.
+        warstwy prezentacji, dokonuje obliczeń.
         \item Warstwa \textbf{danych} -- mechanizmy persystencji danych oraz dostępu do nich.
     \end{enumerate}
 

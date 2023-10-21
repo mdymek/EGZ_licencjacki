@@ -46,9 +46,9 @@
     \section{Relacja równoważności i zbiór ilorazowy.}
 
     \begin{itemize}
-        \item \textbf{Relacja równoważości} jest \textbf{zwrotna}, \textbf{symetryczna} i \textbf{przechodnia}.
+        \item \textbf{Relacja równoważności} jest \textbf{zwrotna}, \textbf{symetryczna} i \textbf{przechodnia}.
 
-        \item \textbf{Klasa abstrakcji} elementu x (wzgledem relacji R) to: $[x]_{R} = \{y \in X: xRy\}$. Element x to
+        \item \textbf{Klasa abstrakcji} elementu x (względem relacji R) to: $[x]_{R} = \{y \in X: xRy\}$. Element x to
         reprezentant klasy abstrakcji $[x]_{R}$.
 
         \item \textbf{Zbiór ilorazowy} zbioru X przez relację R to zbiór wszystkich klas abstrakcji.
@@ -88,7 +88,7 @@
     \end{definition}
     \begin{itemize}
         \item Metoda bisekcji jest \textbf{niezawodna}, ale \textbf{wolno zbieżna}.
-        \item Kryteria zakończednia obliczeń: osiągnięta \textbf{dokładność}, \textbf{bliskość} wartości funkcji do 0,
+        \item Kryteria zakończenia obliczeń: osiągnięta \textbf{dokładność}, \textbf{bliskość} wartości funkcji do 0,
         ilość \textbf{iteracji}.
         \item \textbf{dokładność} przybliżenia w k-tej iteracji: $|x_k - \alpha| \leq \frac{|b - a|}{2^k}$.
     \end{itemize}
@@ -277,7 +277,7 @@
     \subsection{Interpolacja wielomianowa}
 
     Interpolacja wielomianowa jest numeryczną \textbf{metodą przybliżania funkcji}.
-    Wielomian $p$ o możliwie najniższym stopniu interpoluje wartości $y_k$ w węzłach $x_k$ gdy przyjmuje porządane wartości
+    Wielomian $p$ o możliwie najniższym stopniu interpoluje wartości $y_k$ w węzłach $x_k$ gdy przyjmuje pożądane wartości
     w odpowiednich punktach. Jeśli są to wartości pewnej funkcji $f$ to mówimy też że $p$ interpoluje $f$.
 
     \subsection{Wzór interpolacyjny Lagrange'a}
@@ -314,7 +314,7 @@
     de facto, nie można obliczyć różnicy dzielonej, podstawia się $\frac{f^{(k)}(x_i)}{k!}$. (W tabeli przedstawiony jest
     $3$-krotny węzeł $x_{1}$).\\
 
-    \textbf{Różnica dzielona} jest zdefiniowana rekurencyjnie:
+    \textbf{Różnica dzielona} jest zdefiniowana rekurencyjne:
     \begin{gather*}
         f[x_{i}]=f(x_{i}), ~~~
         f[x_{i},\ldots ,x_{i+j+1}]= \frac {f[x_{i+1},\ldots ,x_{i+j+1}]-f[x_{i},\ldots ,x_{i+j}]}{x_{i+j+1}-x_{i}}\\
@@ -563,7 +563,7 @@
     \end{gather*}
 
 
-    \section{Łancuchy Markowa. Rozkład stacjonarny.}
+    \section{Łańcuchy Markowa. Rozkład stacjonarny.}
 
     \begin{equation*}
         P =
@@ -935,7 +935,7 @@
     \section{Konfiguracje i t-konfiguracje kombinatoryczne.}
 
     \begin{definition}
-        \textbf{Konfiuracją kombinatoryczną} $B$ o parametrach $\mathbf{(n,k,r)}$ nazywamy \textbf{rodzinę k-elementowych
+        \textbf{Konfiguracją kombinatoryczną} $B$ o parametrach $\mathbf{(n,k,r)}$ nazywamy \textbf{rodzinę k-elementowych
         podzbiorów} w X, jeżeli \textbf{każdy element} $x \in X$ występuje w dokładnie \textbf{r podbiorach}.
         \begin{enumerate}
             \item $n = |X|$
@@ -967,12 +967,12 @@
         \item \textbf{Ścieżka Hamiltona} to ścieżka przechodząca przez wszystkie wierzchołki.
 
         \item \textbf{Cykl Hamiltona} to nim cykl przechodzący przez wszystkie wierzchołki. Taki \textbf{graf}
-        nazwyamy \textbf{hamiltonowski}m.
+        nazywamy \textbf{hamiltonowskim}.
 
-        \item Jeśli dla dowolonych \textbf{różnych, niesąsiednich} wierzchołków $u, v \in V$ zachodzi:
+        \item Jeśli dla dowolnych \textbf{różnych, niesąsiednich} wierzchołków $u, v \in V$ zachodzi:
         \begin{itemize}
             \item $d(u) + d(v) \geq n$, to G jest \textbf{hamiltonowski} ($|V_G| \geq 3$).
-            \item $d(u) + d(v) \geq n-1$, to G ma \textbf{ścieżkę hamiltona} ($|V_G| \geq 2$).
+            \item $d(u) + d(v) \geq n-1$, to G ma \textbf{ścieżkę Hamiltona} ($|V_G| \geq 2$).
         \end{itemize}
         \item Jeśli \textbf{minimalny stopień} wierzchołka wynosi co najmniej $\mathbf{\frac{n}{2}}$, to G jest
         \textbf{hamiltonowski} ($|V_G| \geq 3$).
@@ -996,12 +996,12 @@
     \subsection{Liczba chromatyczna}
 
     \begin{itemize}
-        \item \textbf{Kolorowanie wierchołkowe} grafu $G = (V, E)$ przy użyciu (co najwyżej) $k$
+        \item \textbf{Kolorowanie wierzchołkowe} grafu $G = (V, E)$ przy użyciu (co najwyżej) $k$
         kolorów to funkcja $c: V \rightarrow \{1, \dots, k\}$ spełniająca warunek
         \[c(u) \neq c(v) ~~ \forall u, v \in V : uv \in E\]
 
         \item \textbf{Liczba chromatyczna} to najmniejsza liczba kolorów dla
-        której istnieje kolorwanie wierzchołkowe $G$. Oznaczamy $\chi(G)$.
+        której istnieje kolorowanie wierzchołkowe $G$. Oznaczamy $\chi(G)$.
         \begin{enumerate}
             \item $\chi(G) \leq d_{\max}(G) + 1$.
             \item $\chi(G) = 1 \Leftrightarrow |E(G)| = 0$
@@ -1072,7 +1072,7 @@
     \end{definition}
 
     \begin{definition}
-        \textbf{Funkcja tworząca} (generujaca) ciągu $(a_n)$ to szereg
+        \textbf{Funkcja tworząca} (generująca) ciągu $(a_n)$ to szereg
         \begin{align*}
             \sum_{n=0}^{\infty} a_n x^n.
         \end{align*}
@@ -1205,7 +1205,7 @@
     \end{definition}
 
     \begin{theorem}
-        \textbf{Warunek konieczny i wystarczajacy istnienia granicy}.
+        \textbf{Warunek konieczny i wystarczający istnienia granicy}.
         \begin{align*}
             lim_{x \rightarrow x^{-}_0}  ~ f(x) ~ = ~ lim_{x \rightarrow x^{+}_0}  ~ f(x)
         \end{align*}
@@ -1225,14 +1225,14 @@
     \end{theorem}
 
     \begin{theorem}
-        \textbf{O niesitnieniu granicy funkcji w nieskończoności}. Jeżeli istnieją ciągi $(x'_n)$, $(x''_n)$
+        \textbf{O nieistnieniu granicy funkcji w nieskończoności}. Jeżeli istnieją ciągi $(x'_n)$, $(x''_n)$
         spełniające warunki:
         \begin{enumerate}
             \item $lim_{n \rightarrow \infty} ~ x'_n = \infty $ oraz $ lim_{n \rightarrow \infty} ~ f(x'_n) = g'$,
             \item $lim_{n \rightarrow \infty} ~ x''_n = \infty $ oraz $ lim_{n \rightarrow \infty} ~ f(x''_n) = g''$,
             \item $g' \neq g''$,
         \end{enumerate}
-        to nie istnieeje granica $lim_{x \rightarrow x_0} ~ f(x)$ (właściwa ani niewłaściwa).
+        to nie istnieje granica $lim_{x \rightarrow x_0} ~ f(x)$ (właściwa ani niewłaściwa).
     \end{theorem}
 
     \begin{theorem}
@@ -1281,7 +1281,7 @@
     \end{definition}
 
     \begin{theorem}
-        \textbf{Warunek konieczny i wystarczający ciągłości funkcji}. Funckja jest ciągła w punkcie wtw,
+        \textbf{Warunek konieczny i wystarczający ciągłości funkcji}. Funkcja jest ciągła w punkcie wtw,
         gdy jest w tym punkcie ciągła lewostronnie i prawostronnie.
     \end{theorem}
 
@@ -1344,7 +1344,7 @@
             f'(x_0) ~ \stackrel{def}{=} ~ lim_{x \rightarrow x_0} ~ \frac{f(x) - f(x_0)}{x - x_0}\\
             f'(x_0) ~ \stackrel{def}{=} ~ lim_{\Delta x \rightarrow 0} ~ \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
         \end{gather*}
-        Pochodne jednostronne definiuje się anlogiczne na jednostronnym otoczeniu.
+        Pochodne jednostronne definiuje się alogicznie na jednostronnym otoczeniu.
     \end{definition}
 
     \begin{theorem}
@@ -1407,7 +1407,7 @@
     \end{definition}
 
     \begin{theorem}
-        \textbf{Fermata, warunek konieczny istnienia ekstremum}. Jeżeli funkcja $f$ ma esktremum lokalne w punkcie $x_0$,
+        \textbf{Fermata, warunek konieczny istnienia ekstremum}. Jeżeli funkcja $f$ ma ekstremum lokalne w punkcie $x_0$,
         oraz istnieje pochodna $f'(x_0)$, to $f'(x_0) = 0$.
     \end{theorem}
 
@@ -1523,7 +1523,7 @@
         \end{align*}
         Przy ostrej nierówności mówimy o minimum lokalnym \textbf{właściwym}.
 
-        Analogicznie definijuemy \textbf{maksimum} lokalne (właściwe).
+        Analogicznie definiujemy \textbf{maksimum} lokalne (właściwe).
     \end{definition}
 
     \begin{theorem}
