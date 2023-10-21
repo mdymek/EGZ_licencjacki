@@ -232,7 +232,7 @@
     \begin{gather*}
         x_0 = 2, ~~ x_1 = 4\\
         f(2) = 2*4 - 3*2 - 10 = 8 - 6 - 10 = -8, ~~ f(4) = 2*16 - 3*4 - 10 = 32 - 12 - 10 = 10\\
-        x_2 = 2 - \frac{f(4)(4-2)}{f(4) - f(2)} = 2 - \frac{10*2}{10 + 8} = 2 - \frac{20}{18} = \frac{8}{9}\\
+        x_2 = 4 - \frac{f(4)(4-2)}{f(4) - f(2)} = 4 - \frac{10*2}{10 + 8} = 4 - \frac{20}{18} = 2 \frac{8}{9}\\
     \end{gather*}
     itd.
 
@@ -827,8 +827,8 @@
                 \path
                 (S) edge[loop left]     node{$0.7$}         (S)
                 edge[bend left,above]      node{$0.3$}      (D)
-                (D) edge[loop right]    node{$0.4$}     (D)
-                edge[bend left,below]     node{$0.6$}         (S);
+                (D) edge[loop right]    node{$0.6$}     (D)
+                edge[bend left,below]     node{$0.4$}         (S);
             \end{tikzpicture}
 
             Macierz przejść:
